@@ -91,7 +91,7 @@
                 <h4 class="modal-title">Register</h4>
             </div>
             <div class="modal-body">
-                <form id="contact-form">
+                <form id="contact-form" action="/user/register">
                     <fieldset>
                         <div class="form-group">
                             <label for="username">First Name:</label>

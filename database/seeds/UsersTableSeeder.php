@@ -17,8 +17,8 @@ class UsersTableSeeder extends Seeder
                 'id'            =>  '1',
                 'first_name'    =>  'admin',
                 'last_name'     =>  'osm',
-                'username'      =>  'admin',
-                'email'         =>  'admin@wkndtrp.com',
+//                'username'      =>  'admin',
+                'email'         =>  'admin@osm.com',
                 'password'      =>  bcrypt('secret'),
                 'role_id'       =>  1,
                 'status'        =>  1
