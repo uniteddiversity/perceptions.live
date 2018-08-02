@@ -12,5 +12,8 @@
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('user/home');
 });
+
+Route::get('/user/login', array('uses' => 'LoginController@login'));
+Route::get('/user/register', array('uses' => 'RegisterController@create'));
