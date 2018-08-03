@@ -5,7 +5,7 @@
                 <a href="#" class="navbar-icon pull-right visible-xs" id="nav-btn"><i class="fa fa-bars fa-lg white"></i></a>
                 <a href="#" class="navbar-icon pull-right visible-xs" id="sidebar-toggle-btn"><i class="fa fa-search fa-lg white"></i></a>
             </div>
-            <a data-toggle="collapse" data-target=".navbar-collapse.in" class="navbar-brand" href="#">OSM</a>
+            <a data-toggle="collapse" data-target=".navbar-collapse.in" class="navbar-brand" href="/">OSM</a>
         </div>
         <div class="navbar-collapse collapse">
             <form class="navbar-form navbar-right" role="search">

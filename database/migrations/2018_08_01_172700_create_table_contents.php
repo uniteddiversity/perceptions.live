@@ -19,7 +19,8 @@ class CreateTableContents extends Migration
             $table->string('name', 20);
             $table->string('access_level_id', 150);
             $table->string('type', 150);
-            $table->text('content', 150);
+            $table->text('content');
+            $table->string('url', 450);
             $table->string('lat')->nullable(true);
             $table->string('long')->nullable(true);
             $table->integer('user_id')->nullable(true);

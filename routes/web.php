@@ -19,13 +19,12 @@ Route::post('/', function(){
 
 })->name('login');
 
-Route::get('/', function () {
-    return view('user/home');
-})->name('home');
-
+Route::get('/', array('uses' => '\App\Controllers\HomeController@home'))->name('home');
+Route::get('/ajax-available-videos', array('uses' => '\App\Controllers\HomeController@ajaxVideos'))->name('home');
 
 Route::group(['prefix' => 'user', 'middleware' => ['auth', 'web', 'admin']], function () {
     Route::get('/profile', '\App\Controllers\User\UserController@profile');
     Route::get('/upload-video', '\App\Controllers\User\UserController@uploadVideo');
+    Route::post('/post-upload-video', '\App\Controllers\User\UserController@postUploadVideo');
     Route::get('/logout', '\App\Http\Controllers\Auth\LoginController@userLogout');
 });

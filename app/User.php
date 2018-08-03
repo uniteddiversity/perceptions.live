@@ -4,7 +4,7 @@ namespace App;
 
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
-use Models\Role;
+use App\Role;
 
 class User extends Authenticatable
 {
@@ -44,5 +44,10 @@ class User extends Authenticatable
     public function role()
     {
         return $this->belongsTo('App\Role');
+    }
+
+    public function content()
+    {
+        return $this->hasMany('App\Content')->where('contents.is_deleted', '<>', 1);
     }
 }

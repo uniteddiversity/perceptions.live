@@ -16,7 +16,7 @@ input[type="radio"], input[type="checkbox"] {
   max-width: 100%;
   float: left;
 }
-#map {
+#map, #container-rest {
   width: auto;
   height: 100%;
   box-shadow: 0 0 10px rgba(0,0,0,0.5);

@@ -101,18 +101,18 @@ function syncSidebar() {
   theaters.eachLayer(function (layer) {
     if (map.hasLayer(theaterLayer)) {
       if (map.getBounds().contains(layer.getLatLng())) {
-        $("#feature-list tbody").append('<tr class="feature-row" id="' + L.stamp(layer) + '" lat="' + layer.getLatLng().lat + '" lng="' + layer.getLatLng().lng + '"><td style="vertical-align: middle;"><img width="16" height="18" src="assets/img/theater.png"></td><td class="feature-name">' + layer.feature.properties.NAME + '</td><td style="vertical-align: middle;"><i class="fa fa-chevron-right pull-right"></i></td></tr>');
+        // $("#feature-list tbody").append('<tr class="feature-row" id="' + L.stamp(layer) + '" lat="' + layer.getLatLng().lat + '" lng="' + layer.getLatLng().lng + '"><td style="vertical-align: middle;"><img width="16" height="18" src="assets/img/theater.png"></td><td class="feature-name">' + layer.feature.properties.NAME + '</td><td style="vertical-align: middle;"><i class="fa fa-chevron-right pull-right"></i></td></tr>');
       }
     }
   });
   /* Loop through museums layer and add only features which are in the map bounds */
-  museums.eachLayer(function (layer) {
-    if (map.hasLayer(museumLayer)) {
-      if (map.getBounds().contains(layer.getLatLng())) {
-        $("#feature-list tbody").append('<tr class="feature-row" id="' + L.stamp(layer) + '" lat="' + layer.getLatLng().lat + '" lng="' + layer.getLatLng().lng + '"><td style="vertical-align: middle;"><img width="16" height="18" src="assets/img/museum.png"></td><td class="feature-name">' + layer.feature.properties.NAME + '</td><td style="vertical-align: middle;"><i class="fa fa-chevron-right pull-right"></i></td></tr>');
-      }
-    }
-  });
+  // museums.eachLayer(function (layer) {
+  //   if (map.hasLayer(museumLayer)) {
+  //     if (map.getBounds().contains(layer.getLatLng())) {
+  //       $("#feature-list tbody").append('<tr class="feature-row" id="' + L.stamp(layer) + '" lat="' + layer.getLatLng().lat + '" lng="' + layer.getLatLng().lng + '"><td style="vertical-align: middle;"><img width="16" height="18" src="assets/img/museum.png"></td><td class="feature-name">' + layer.feature.properties.NAME + '</td><td style="vertical-align: middle;"><i class="fa fa-chevron-right pull-right"></i></td></tr>');
+  //     }
+  //   }
+  // });
   /* Update list.js featureList */
   featureList = new List("features", {
     valueNames: ["feature-name"]
@@ -165,9 +165,9 @@ var boroughs = L.geoJson(null, {
     });
   }
 });
-$.getJSON("data/boroughs.geojson", function (data) {
-  boroughs.addData(data);
-});
+// $.getJSON("data/boroughs.geojson", function (data) {
+//   boroughs.addData(data);
+// });
 
 //Create a color dictionary based off of subway route_id
 var subwayColors = {"1":"#ff3135", "2":"#ff3135", "3":"ff3135", "4":"#009b2e",
@@ -215,9 +215,9 @@ var subwayLines = L.geoJson(null, {
     });
   }
 });
-$.getJSON("data/subways.geojson", function (data) {
-  subwayLines.addData(data);
-});
+// $.getJSON("data/subways.geojson", function (data) {
+//   subwayLines.addData(data);
+// });
 
 /* Single marker cluster layer to hold all clusters */
 var markerClusters = new L.MarkerClusterGroup({
@@ -265,10 +265,10 @@ var theaters = L.geoJson(null, {
     }
   }
 });
-$.getJSON("data/DOITT_THEATER_01_13SEPT2010.geojson", function (data) {
-  theaters.addData(data);
-  map.addLayer(theaterLayer);
-});
+// $.getJSON("data/DOITT_THEATER_01_13SEPT2010.geojson", function (data) {
+//   theaters.addData(data);
+//   map.addLayer(theaterLayer);
+// });
 
 /* Empty layer placeholder to add to layer control for listening when to add/remove museums to markerClusters layer */
 var museumLayer = L.geoJson(null);
@@ -308,8 +308,14 @@ var museums = L.geoJson(null, {
     }
   }
 });
-$.getJSON("data/DOITT_MUSEUM_01_13SEPT2010.geojson", function (data) {
-  museums.addData(data);
+// $.getJSON("data/DOITT_MUSEUM_01_13SEPT2010.geojson", function (data) {
+//   museums.addData(data);
+// });
+
+$.getJSON("http://osm.lk/ajax-available-videos", function (data) {
+    console.log(data);
+    theaters.addData(data);
+    map.addLayer(theaterLayer);
 });
 
 map = L.map("map", {
@@ -621,10 +627,10 @@ function userLogin(){
         $.each(response, function(key, val){
             if(key == 'error'){
                 $.each(val, function(key2, val2){
-                    $('#login-form #messages').html('<div class="alert alert-danger" role="alert">'+val2+'</div>');
+                    $('#register-form #messages').html('<div class="alert alert-danger" role="alert">'+val2+'</div>');
                 })
             }else{
-                $('#login-form #messages').html('<div class="alert alert-success" role="alert">'+val+'</div>');
+                $('#register-form #messages').html('<div class="alert alert-success" role="alert">'+val+'</div>');
                 window.location.href = "/user/profile";
             }
         })

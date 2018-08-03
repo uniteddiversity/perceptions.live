@@ -1,4 +1,4 @@
-<div id="sidebar">
+<div id="sidebar" class="xxcol-md-5">
     <div class="sidebar-wrapper">
         <div class="panel panel-default" id="features">
             <div class="panel-heading">
@@ -30,6 +30,17 @@
                     </thead>
                     <tbody class="list"></tbody>
                 </table>
+
+                <table class="table table-hover" id="feature-list">
+                    <?php if(isset($uploaded_list)){ ?>
+                        @foreach ($uploaded_list as $upload)
+                            <div><iframe width="230" height="200" src="<?php echo ( $upload['video']) ?>" frameborder="0" allowfullscreen></iframe></div>
+                        <hr/>
+                        @endforeach
+                    <?php } ?>
+
+                </table>
+
             </div>
         </div>
     </div>
