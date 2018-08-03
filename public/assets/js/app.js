@@ -627,10 +627,10 @@ function userLogin(){
         $.each(response, function(key, val){
             if(key == 'error'){
                 $.each(val, function(key2, val2){
-                    $('#register-form #messages').html('<div class="alert alert-danger" role="alert">'+val2+'</div>');
+                    $('#login-form #messages').html('<div class="alert alert-danger" role="alert">'+val2+'</div>');
                 })
             }else{
-                $('#register-form #messages').html('<div class="alert alert-success" role="alert">'+val+'</div>');
+                $('#login-form #messages').html('<div class="alert alert-success" role="alert">'+val+'</div>');
                 window.location.href = "/user/profile";
             }
         })
