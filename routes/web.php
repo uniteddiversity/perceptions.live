@@ -11,9 +11,21 @@
 |
 */
 
+
+Route::post('user/login', array('uses' => '\App\Http\Controllers\Auth\LoginController@userLogin'));
+Route::post('user/register', array('uses' => '\App\Http\Controllers\Auth\RegisterController@createUser'));
+
+Route::post('/', function(){
+
+})->name('login');
+
 Route::get('/', function () {
     return view('user/home');
-});
+})->name('home');
 
-Route::get('/user/login', array('uses' => 'LoginController@login'));
-Route::get('/user/register', array('uses' => 'RegisterController@create'));
+
+Route::group(['prefix' => 'user', 'middleware' => ['auth', 'web', 'admin']], function () {
+    Route::get('/profile', '\App\Controllers\User\UserController@profile');
+    Route::get('/upload-video', '\App\Controllers\User\UserController@uploadVideo');
+    Route::get('/logout', '\App\Http\Controllers\Auth\LoginController@userLogout');
+});

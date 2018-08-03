@@ -610,3 +610,49 @@ if (!L.Browser.touch) {
 } else {
   L.DomEvent.disableClickPropagation(container);
 }
+
+
+function userLogin(){
+    jQuery.ajax({
+        url: 'user/login',
+        method: 'POST',
+        data: $('#login-form').serialize()
+    }).done(function (response) {
+        $.each(response, function(key, val){
+            if(key == 'error'){
+                $.each(val, function(key2, val2){
+                    $('#login-form #messages').html('<div class="alert alert-danger" role="alert">'+val2+'</div>');
+                })
+            }else{
+                $('#login-form #messages').html('<div class="alert alert-success" role="alert">'+val+'</div>');
+                window.location.href = "/user/profile";
+            }
+        })
+        // Do something with the response
+    }).fail(function () {
+        // Whoops; show an error.
+    });
+}
+
+function userRegister(){
+    jQuery.ajax({
+        url: '/user/register',
+        method: 'POST',
+        data: $('#register-form').serialize()
+    }).done(function (response) {
+        $.each(response, function(key, val){
+            if(key == 'error'){
+                $.each(val, function(key2, val2){
+                    $('#register-form #messages').html('<div class="alert alert-danger" role="alert">'+val2+'</div>');
+                })
+            }else{
+                $('#register-form #messages').html('<div class="alert alert-success" role="alert">'+val+'</div>');
+                window.location.href = "/user/profile";
+            }
+        })
+
+        // Do something with the response
+    }).fail(function () {
+        // Whoops; show an error.
+    });
+}

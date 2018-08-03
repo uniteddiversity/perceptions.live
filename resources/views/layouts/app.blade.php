@@ -56,28 +56,31 @@
 <div class="modal fade" id="loginModal" tabindex="-1" role="dialog">
     <div class="modal-dialog modal-sm">
         <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                <h4 class="modal-title">Login</h4>
-            </div>
-            <div class="modal-body">
-                <form id="contact-form">
+            <form id="login-form" action="/user/login" method="post">
+                <input type="hidden" name="_token" id="csrf-token" value="{{ Session::token() }}" />
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    <h4 class="modal-title">Login</h4>
+                </div>
+                <div class="modal-body">
+                    <div id="messages"></div>
                     <fieldset>
                         <div class="form-group">
                             <label for="username">Email:</label>
-                            <input type="text" class="form-control" id="username" name="username">
+                            <input type="text" class="form-control" id="email" name="email">
                         </div>
                         <div class="form-group">
                             <label for="password">Password:</label>
                             <input type="password" class="form-control" id="password" name="password">
                         </div>
                     </fieldset>
-                </form>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
-                <button type="submit" class="btn btn-primary" data-dismiss="modal">Login</button>
-            </div>
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                    <input type="button"  onclick="userLogin()" class="btn btn-primary" value="Login" />
+                </div>
+            </form>
         </div>
     </div>
 </div>
@@ -86,24 +89,26 @@
 <div class="modal fade" id="registerModal" tabindex="-1" role="dialog">
     <div class="modal-dialog modal-sm">
         <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                <h4 class="modal-title">Register</h4>
-            </div>
-            <div class="modal-body">
-                <form id="contact-form" action="/user/register">
+            <form id="register-form" action="/user/register" method="post">
+                <input type="hidden" name="_token" id="csrf-token" value="{{ Session::token() }}" />
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    <h4 class="modal-title">Register</h4>
+                </div>
+                <div class="modal-body">
+                    <div id="messages"></div>
                     <fieldset>
                         <div class="form-group">
                             <label for="username">First Name:</label>
-                            <input type="text" class="form-control" id="username" name="last_name">
+                            <input type="text" class="form-control" id="first_name" name="first_name">
                         </div>
                         <div class="form-group">
                             <label for="username">Last Name:</label>
-                            <input type="text" class="form-control" id="username" name="first_name">
+                            <input type="text" class="form-control" id="last_name" name="last_name">
                         </div>
                         <div class="form-group">
                             <label for="username">Email:</label>
-                            <input type="text" class="form-control" id="username" name="email">
+                            <input type="text" class="form-control" id="email" name="email">
                         </div>
                         <div class="form-group">
                             <label for="password">Password:</label>
@@ -111,19 +116,20 @@
                         </div>
                         <div class="form-group">
                             <label for="password">Retype Password:</label>
-                            <input type="password" class="form-control" id="password" name="cpassword">
+                            <input type="password" class="form-control" id="password_confirmation" name="password_confirmation">
                         </div>
                         <div class="form-group">
                             <label for="password">Web:</label>
-                            <input type="password" class="form-control" id="password" name="web">
+                            <input type="input" class="form-control" id="web" name="web">
                         </div>
                     </fieldset>
-                </form>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
-                <button type="submit" class="btn btn-primary" data-dismiss="modal">Login</button>
-            </div>
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                    <input type="button" onclick="userRegister()" class="btn btn-primary" value="Register" />
+                </div>
+            </form>
         </div>
     </div>
 </div>
