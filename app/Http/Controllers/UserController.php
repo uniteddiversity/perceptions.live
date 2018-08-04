@@ -53,7 +53,8 @@ class UserController extends Controller
             'access_level_id' => 'required',
             'type' => 'required',
             'lat' => 'required',
-            'long' => 'required'
+            'long' => 'required',
+            'content' => 'required'
         ]);
 
         if ($validator->fails()) {
