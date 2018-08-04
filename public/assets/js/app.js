@@ -313,7 +313,7 @@ var museums = L.geoJson(null, {
 //   museums.addData(data);
 // });
 
-$.getJSON("http://osm.lk/ajax-available-videos", function (data) {
+$.getJSON("/ajax-available-videos", function (data) {
     console.log(data);
     theaters.addData(data);
     map.addLayer(theaterLayer);
