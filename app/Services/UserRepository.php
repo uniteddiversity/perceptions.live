@@ -122,7 +122,7 @@ class UserRepository
                 $r->whereIn('users.id', array($user_id))->orWhere('contents.access_level_id', '1');
             });
         })->where('contents.is_deleted', '<>', 1)
-            ->select('contents.id', 'contents.content', 'contents.lat', 'contents.long', 'contents.name')->groupBy('contents.id')->get();
+            ->select('contents.id', 'contents.content', 'contents.lat', 'contents.long', 'contents.name', 'contents.url')->groupBy('contents.id')->get();
         $r = array(); $i = 0;
         foreach($contents as $c){
             $r[$i] = $c;
