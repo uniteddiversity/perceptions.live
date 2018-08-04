@@ -26,7 +26,6 @@
                 <div class="form-group">
                     <label for="exampleInputEmail1">Title</label>
                     <input type="text" class="form-control" aria-describedby="nameHelp" name="name" placeholder="Title" value="{{ old('name') }}">
-                    <small id="nameHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
                 </div>
                 <div class="form-group">
                     <label for="exampleSelect1">Access Level</label>
@@ -47,7 +46,11 @@
                     <label for="exampleTextarea">Youtube Video</label>
                     <textarea name="content" class="form-control" id="exampleTextarea" rows="3">{{ old('content') }}</textarea>
                 </div>
-
+                <div class="form-group">
+                    <label for="exampleInputEmail1">Youtube URL</label>
+                    <input type="text" class="form-control" aria-describedby="nameHelp" name="url" placeholder="URL" value="{{ old('url') }}">
+                    <small id="nameHelp" class="form-text text-muted">Youtube URL</small>
+                </div>
                 <fieldset class="form-group">
                     <legend>Location</legend>
                     <div class="form-check">

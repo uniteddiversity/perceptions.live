@@ -67,7 +67,7 @@ class UserController extends Controller
                 'access_level_id' => $r['access_level_id'],
                 'type' => $r['type'],
                 'content' => $r['content'],
-                'url' => '',
+                'url' => $r['url'],
                 'lat' => $r['lat'],
                 'long' => $r['long'],
                 'user_id' => Auth::user()->id,
