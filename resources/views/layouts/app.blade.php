@@ -22,7 +22,7 @@
 
 
 <div id="container">
-    @include('partials.left-side-bar')
+    {{--@include('partials.left-side-bar')--}}
     @yield('content')
 </div>
 
