@@ -165,7 +165,7 @@
 <script src="/assets/js/typeahead.bundle.min.js"></script>
 <script src="/assets/js/handlebars.min.js"></script>
 <script src="/assets/js/list.min.js"></script>
-<script src="/assets/js/@leaflet.js"></script>
+<script src="/assets/js/leaflet_0.7.js"></script>
 <script src="/assets/js/leaflet.markercluster.js"></script>
 <script src="/assets/js/L.Control.Locate.min.js"></script>
 <script src="/assets/leaflet-groupedlayercontrol/leaflet.groupedlayercontrol.js"></script>
