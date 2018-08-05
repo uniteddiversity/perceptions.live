@@ -21,6 +21,7 @@ Route::post('/', function(){
 
 Route::get('/', array('uses' => '\App\Controllers\HomeController@home'))->name('home');
 Route::get('/ajax-available-videos', array('uses' => '\App\Controllers\HomeController@ajaxVideos'))->name('home');
+Route::get('/home/ajax-video-info/{_video_id}', '\App\Controllers\HomeController@getVideoInfo');
 
 Route::group(['prefix' => 'user', 'middleware' => ['auth', 'web', 'admin']], function () {
     Route::get('/profile', '\App\Controllers\User\UserController@profile');

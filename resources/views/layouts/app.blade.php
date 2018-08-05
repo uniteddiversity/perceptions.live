@@ -8,8 +8,9 @@
 
     <link rel="stylesheet" href="/assets/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
-    <link rel="stylesheet" href="/assets/css/leaflet.css">
-    <link rel="stylesheet" href="/assets/css/MarkerCluster.css">
+    <link rel="stylesheet" type="text/css" href="/assets/css/leaflet_0.7.css" />
+    {{--<link rel="stylesheet" href="/assets/css/leaflet.css">--}}
+    {{--<link rel="stylesheet" href="/assets/css/MarkerCluster.css">--}}
     <link rel="stylesheet" href="/assets/css/MarkerCluster.Default.css">
     <link rel="stylesheet" href="/assets/css/L.Control.Locate.css">
     <link rel="stylesheet" href="/assets/leaflet-groupedlayercontrol/leaflet.groupedlayercontrol.css">
@@ -164,7 +165,7 @@
 <script src="/assets/js/typeahead.bundle.min.js"></script>
 <script src="/assets/js/handlebars.min.js"></script>
 <script src="/assets/js/list.min.js"></script>
-<script src="/assets/js/leaflet.js"></script>
+<script src="/assets/js/@leaflet.js"></script>
 <script src="/assets/js/leaflet.markercluster.js"></script>
 <script src="/assets/js/L.Control.Locate.min.js"></script>
 <script src="/assets/leaflet-groupedlayercontrol/leaflet.groupedlayercontrol.js"></script>

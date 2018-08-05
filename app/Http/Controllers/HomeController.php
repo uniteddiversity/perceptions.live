@@ -62,24 +62,38 @@ class HomeController extends Controller
 ';
         $ret = array(); $i = 0;
         foreach($uploaded_list as $u){
-            $ret[$i]['type'] = "Feature";
-            $ret[$i]['id'] = $i;
-//            $ret[$i]['type'] = array('properties' => array('name' => $u["name"]));
-//            $ret[$i]['type'] = array('properties' => array('name' => $u["name"]));
-            $ret[$i]['properties']['NAME'] = $u['title'];
-            $ret[$i]['properties']['TEL'] = '';
-            $ret[$i]['properties']['URL'] = '';
-            $ret[$i]['properties']['ADDRESS1'] = '';
-            $ret[$i]['properties']['ADDRES2'] = '';
-            $ret[$i]['properties']['CITY'] = '';
-            $ret[$i]['properties']['ZIP'] = '';
-            $ret[$i]["geometry"]['type'] = 'Point';
-            $ret[$i]["geometry"]['coordinates'][0] = floatval($u['lat']);
-            $ret[$i]["geometry"]['coordinates'][1] = floatval($u['long']);
+//            $ret[$i]['type'] = "Feature";
+//            $ret[$i]['id'] = $i;
+////            $ret[$i]['type'] = array('properties' => array('name' => $u["name"]));
+////            $ret[$i]['type'] = array('properties' => array('name' => $u["name"]));
+//            $ret[$i]['properties']['NAME'] = $u['title'];
+//            $ret[$i]['properties']['TEL'] = '';
+//            $ret[$i]['properties']['URL'] = '';
+//            $ret[$i]['properties']['ADDRESS1'] = '';
+//            $ret[$i]['properties']['ADDRES2'] = '';
+//            $ret[$i]['properties']['CITY'] = '';
+//            $ret[$i]['properties']['ZIP'] = '';
+//            $ret[$i]["geometry"]['type'] = 'Point';
+//            $ret[$i]["geometry"]['coordinates'][0] = floatval($u['lat']);
+//            $ret[$i]["geometry"]['coordinates'][1] = floatval($u['long']);
+
+            $ret[$i]['id'] = $u['id'];
+            $ret[$i]['lng'] = floatval($u['long']);
+            $ret[$i]['lat'] = floatval($u['lat']);
+            $ret[$i]['name'] = $u['title'];
+//            $ret[$i]['city'] = $u['city'];
             $i++;
         }
 //        return $uploaded_list_json;
-        return response()->json(array('type' => 'FeatureCollection', 'features' => $ret), 200);
+//        return response()->json(array('type' => 'FeatureCollection', 'features' => $ret), 200);
+        return response()->json($ret, 200);
     }
 
+    public function getVideoInfo($video_id)
+    {
+        $user_id = (!isset(Auth::user()->id))? 0 : Auth::user()->id;
+        $info = $this->userRepository->getContentsInfo($user_id, $video_id);
+        return view('partials.video-info')
+            ->with(compact('info'));
+    }
 }

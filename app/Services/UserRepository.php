@@ -2,7 +2,9 @@
 
 namespace User\Services;
 
+use App\Content;
 use App\User;
+use Content\Services\ContentService;
 use Illuminate\Support\Facades\URL;
 
 class UserRepository
@@ -13,10 +15,15 @@ class UserRepository
      * @var UserFollowing
      */
     private $userFollowing;
+    /**
+     * @var Content
+     */
+    private $content;
 
-    public function __construct(User $user)
+    public function __construct(User $user, Content $content)
     {
         $this->user = $user;
+        $this->content = $content;
     }
 
 //    public function getUserInfo($id){
@@ -112,6 +119,23 @@ class UserRepository
         }
 
         return $r;
+    }
+
+    public function getContentsInfo($user_id, $id)
+    {
+        $contents = $this->content->with('user')
+            ->where('contents.id',$id)
+                ->where('contents.is_deleted', '<>', 1)
+                ->leftJoin('users', 'contents.user_id', 'users.id')->where(function($q) use ($user_id){
+            $q->where(function($r) use ($user_id){
+                $r->whereIn('users.id', array($user_id))->orWhere('contents.access_level_id', '1');
+            });
+        })
+            ->select('contents.*', 'users.first_name', 'users.last_name')
+            ->get();
+
+        $contents = isset($contents[0])?$contents[0] : array();
+        return $contents;
     }
 }
 
