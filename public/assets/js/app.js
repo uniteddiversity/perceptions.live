@@ -18,8 +18,8 @@ var markerClusters = L.markerClusterGroup();
 
 $.getJSON("/ajax-available-videos", function (markers) {
     var myIcon = L.icon({
-        iconUrl: myURL + 'assets/img/theater.png',
-        iconRetinaUrl: myURL + 'assets/img/theater.png',
+        iconUrl: myURL + '/assets/img/museum.png',
+        iconRetinaUrl: myURL + '/assets/img/museum.png',
         iconSize: [29, 24],
         iconAnchor: [9, 21],
         popupAnchor: [0, -14]
