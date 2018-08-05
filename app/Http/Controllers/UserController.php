@@ -77,7 +77,9 @@ class UserController extends Controller
             'lat' => 'required',
             'long' => 'required',
             'description' => 'required',
-            'url' => 'required'
+            'url' => 'required',
+            'captured_date' => 'required',
+            'video_date' => 'required'
         ]);
 
         if ($validator->fails()) {
