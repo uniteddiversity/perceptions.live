@@ -60,8 +60,12 @@ class UserController extends Controller
     public function uploadVideo()
     {
         $uploaded_list = $this->userRepository->getMyContents(Auth::user()->id);
+
+        $categories = $this->category->get();
+        $meta_array = $this->contentService->getMetaListByKey();
+
         return view('user.upload-video')
-            ->with(compact('uploaded_list'));
+            ->with(compact('uploaded_list','categories','meta_array'));
     }
 
     public function postUploadVideo(Request $request)
