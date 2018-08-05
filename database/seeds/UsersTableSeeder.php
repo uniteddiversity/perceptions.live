@@ -21,7 +21,7 @@ class UsersTableSeeder extends Seeder
                 'email'         =>  'admin@osm.com',
                 'password'      =>  bcrypt('secret'),
                 'role_id'       =>  1,
-                'status'        =>  1
+                'status_id'        =>  1
             ]
         ]);
         DB::statement('SET FOREIGN_KEY_CHECKS=1;');

@@ -27,4 +27,13 @@ Route::group(['prefix' => 'user', 'middleware' => ['auth', 'web', 'admin']], fun
     Route::get('/upload-video', '\App\Controllers\User\UserController@uploadVideo');
     Route::post('/post-upload-video', '\App\Controllers\User\UserController@postUploadVideo');
     Route::get('/logout', '\App\Http\Controllers\Auth\LoginController@userLogout');
+
+    Route::get('/admin/user-list', '\App\Controllers\User\UserController@userList');
+    Route::get('/admin/user-add', '\App\Controllers\User\UserController@userAdd');
+    Route::get('/admin/user-edit/{_user_id}', '\App\Controllers\User\UserController@adminUserEdit');
+    Route::get('/admin/video-edit/{_user_id}', '\App\Controllers\User\UserController@contentEdit');
+    Route::post('/admin/post-user-add', '\App\Controllers\User\UserController@adminUserAdd');
+    Route::get('/admin/content-list', '\App\Controllers\User\UserController@contentList');
+    Route::get('/admin/content-add', '\App\Controllers\User\UserController@contentAdd');
+    Route::post('/admin/post-content-add', '\App\Controllers\User\UserController@contentAdd');
 });

@@ -66,9 +66,13 @@ class HomeController extends Controller
             $ret[$i]['id'] = $i;
 //            $ret[$i]['type'] = array('properties' => array('name' => $u["name"]));
 //            $ret[$i]['type'] = array('properties' => array('name' => $u["name"]));
-            $ret[$i]['properties']['NAME'] = $u['name'];
+            $ret[$i]['properties']['NAME'] = $u['title'];
             $ret[$i]['properties']['TEL'] = '';
-            $ret[$i]['properties']['TEL'] = '';
+            $ret[$i]['properties']['URL'] = '';
+            $ret[$i]['properties']['ADDRESS1'] = '';
+            $ret[$i]['properties']['ADDRES2'] = '';
+            $ret[$i]['properties']['CITY'] = '';
+            $ret[$i]['properties']['ZIP'] = '';
             $ret[$i]["geometry"]['type'] = 'Point';
             $ret[$i]["geometry"]['coordinates'][0] = floatval($u['lat']);
             $ret[$i]["geometry"]['coordinates'][1] = floatval($u['long']);

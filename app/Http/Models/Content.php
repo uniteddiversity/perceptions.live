@@ -11,5 +11,23 @@ class Content extends Model
     /**
      * @var array
      */
-    protected $fillable = ['name', 'access_level_id', 'type', 'content', 'lat', 'long', 'user_id', 'is_deleted','user_ip', 'url'];
+    protected $fillable = ['title', 'access_level_id', 'description', 'lat', 'long', 'user_id', 'is_deleted','user_ip', 'url',
+        'captured_date','video_date','video_producer','onscreen','learn_more_url','co_creators','category_id','grater_community_intention_id',
+        'primary_subject_tag_id','secondary_subject_tag_id','submitted_footage','brief_description','location','url_split','full_embed_code',
+        'video_id','video_id_old'];
+
+//    public function role()
+//    {
+//        return $this->belongsTo('App\Role');
+//    }
+//
+//    public function content()
+//    {
+//        return $this->hasMany('App\Content')->where('contents.is_deleted', '<>', 1);
+//    }
+
+    public function user()
+    {
+        return $this->belongsTo('App\User','user_id');
+    }
 }

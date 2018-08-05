@@ -16,7 +16,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'first_name', 'last_name', 'email', 'password', 'web', 'role_id',
+        'first_name', 'last_name', 'email', 'password', 'web', 'role_id', 'status_id',
     ];
 
     /**
@@ -49,5 +49,10 @@ class User extends Authenticatable
     public function content()
     {
         return $this->hasMany('App\Content')->where('contents.is_deleted', '<>', 1);
+    }
+
+    public function status()
+    {
+        return $this->belongsTo('App\UserStatus','status_id');
     }
 }

@@ -34,37 +34,11 @@ class UserRepository
 //        return $user;
 //    }
 //
-//    public function getUsers($filter, $user_id)
-//    {
-//        $r = array();
-//        $page = isset($filter['page'])? $filter['page']: 0;
-//        $offset = ($page) * $this->page_size;
-//        $list = isset($filter['list'])? $filter['list']: '';
-//        switch($list){
-//            case 'follower':
-//                $ids = $this->userFollowing->select('follower_user_id')->where('following_user_id', $user_id)->where('allow', '1')->limit(300)->pluck('follower_user_id')->toArray();
-//                break;
-//            case 'following':
-//                $ids = $this->userFollowing->select('following_user_id')->where('follower_user_id', $user_id)->where('allow', '1')->limit(300)->pluck('following_user_id')->toArray();
-//                break;
-//            case 'search':
-//                $ids = $this->user;
-//
-//                if(isset($filter['name'])){
-//                    $ids = $ids->where('name', 'LIKE', '%'.$filter['name'].'%');
-//                }
-//
-//                $ids = $ids->where('private','<>', 1)
-//                    ->where('id','<>', $user_id)
-//                    ->offset($offset)
-//                    ->limit($this->page_size)
-//                    ->pluck('id')->toArray();
-//                break;
-//        }
-//
-//        $r = $this->getUsersById($ids);
-//        return $r;
-//    }
+    public function getUsers($filter = array(), $user_id = null)
+    {
+        $r = $this->user->with('role')->get();
+        return $r;
+    }
 //
 //    public function searchUsers($filter, $user_id)
 //    {
@@ -103,11 +77,12 @@ class UserRepository
         $r = array(); $i = 0;
         foreach($contents->content as $c){
             $r[$i] = $c;
-            if(empty($c['url'])){
-                $r[$i]['video'] = $c['content'];
-            }else{
-                $r[$i]['video'] = $c['url'];
-            }
+//            if(empty($c['url'])){
+//                $r[$i]['video'] = $c['description'];
+//            }else{
+//                $r[$i]['video'] = $c['url'];
+//            }
+            $r[$i]['video'] = $c['url'];
 
             $i++;
         }
@@ -122,15 +97,16 @@ class UserRepository
                 $r->whereIn('users.id', array($user_id))->orWhere('contents.access_level_id', '1');
             });
         })->where('contents.is_deleted', '<>', 1)
-            ->select('contents.id', 'contents.content', 'contents.lat', 'contents.long', 'contents.name', 'contents.url')->groupBy('contents.id')->get();
+            ->select('contents.id', 'contents.description', 'contents.lat', 'contents.long', 'contents.title', 'contents.url')->groupBy('contents.id')->get();
         $r = array(); $i = 0;
         foreach($contents as $c){
             $r[$i] = $c;
-            if(empty($c['url'])){
-                $r[$i]['video'] = $c['content'];
-            }else{
-                $r[$i]['video'] = $c['url'];
-            }
+//            if(empty($c['url'])){
+//                $r[$i]['video'] = $c['content'];
+//            }else{
+//                $r[$i]['video'] = $c['url'];
+//            }
+            $r[$i]['video'] = $c['url'];
 
             $i++;
         }
