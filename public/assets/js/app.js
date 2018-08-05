@@ -69,7 +69,17 @@ map.addLayer( markerClusters );
 
 
 /////////////////////////////////////////////////////////
+$("#login-btn").click(function() {
+    $("#loginModal").modal("show");
+    $(".navbar-collapse.in").collapse("hide");
+    return false;
+});
 
+$("#register-btn").click(function() {
+    $("#registerModal").modal("show");
+    $(".navbar-collapse.in").collapse("hide");
+    return false;
+});
 
 function userLogin(){
     jQuery.ajax({

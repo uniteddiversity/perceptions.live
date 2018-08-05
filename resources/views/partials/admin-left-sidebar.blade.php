@@ -43,7 +43,7 @@
         <li class="nav-item">
             <a class="nav-link" data-toggle="collapse" href="#auth" aria-expanded="false" aria-controls="auth">
                 <i class="menu-icon mdi mdi-restart"></i>
-                <span class="menu-title">User Pages</span>
+                <span class="menu-title">User Manage</span>
                 <i class="menu-arrow"></i>
             </a>
             <div class="collapse" id="auth">

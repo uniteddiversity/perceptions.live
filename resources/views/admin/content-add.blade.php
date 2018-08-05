@@ -157,12 +157,12 @@
 
                             <div class="form-group">
                                 <label for="video_id">Captured Date</label>
-                                <input type="text" class="form-control datepicker" aria-describedby="nameHelp" name="captured_date" placeholder="Captured Date" value="{{ old('captured_date') }}">
+                                <input type="text" class="form-control datepicker" aria-describedby="nameHelp" name="captured_date" placeholder="Captured Date" value="{{ old('captured_date','2018-01-01') }}">
                             </div>
 
                             <div class="form-group">
                                 <label for="video_id">Video Date</label>
-                                <input type="text" class="form-control datepicker" aria-describedby="nameHelp" name="video_date" placeholder="Video Date" value="{{ old('video_date') }}">
+                                <input type="text" class="form-control datepicker" aria-describedby="nameHelp" name="video_date" placeholder="Video Date" value="{{ old('video_date','2018-01-01') }}">
                             </div>
 
                             {{--<div class="form-group">--}}
