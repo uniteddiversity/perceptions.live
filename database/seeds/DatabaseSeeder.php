@@ -16,6 +16,7 @@ class DatabaseSeeder extends Seeder
         $this->call(MetaDataTableSeeder::class);
         $this->call(CategoriesTableSeeder::class);
         $this->call(StatusTableSeeder::class);
+        $this->call(UserAssociationTagTableSeeder::class);
 
         $this->call(UsersTableSeeder::class);
     }

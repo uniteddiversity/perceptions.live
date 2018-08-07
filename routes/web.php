@@ -37,4 +37,9 @@ Route::group(['prefix' => 'user', 'middleware' => ['auth', 'web', 'admin']], fun
     Route::get('/admin/content-list', '\App\Controllers\User\UserController@contentList');
     Route::get('/admin/content-add', '\App\Controllers\User\UserController@contentAdd');
     Route::post('/admin/post-content-add', '\App\Controllers\User\UserController@contentAdd');
+    Route::get('admin/user-group-add', '\App\Controllers\User\UserController@groupAdd');
+    Route::get('admin/user-to-group-add', '\App\Controllers\User\UserController@userToGroupAdd');
+
+    Route::post('admin/post-group-add', '\App\Controllers\User\UserController@postGroupAdd');
+    Route::post('admin/post-user-group-add', '\App\Controllers\User\UserController@postUserToGroupAdd');
 });

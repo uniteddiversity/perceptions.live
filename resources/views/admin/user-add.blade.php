@@ -21,7 +21,7 @@
                             {{ session()->get('message') }}
                         </div>
                         @endif
-                        <form action="/user/admin/post-user-add" method="post">
+                        <form action="/user/admin/post-user-add" method="post" enctype='multipart/form-data'>
                             <input type="hidden" name="_token" id="csrf-token" value="{{ Session::token() }}" />
                             <div class="form-group">
                                 <label for="exampleInputEmail1">Email</label>
@@ -50,8 +50,22 @@
                             <div class="form-group">
                                 <label for="exampleSelect1">Role</label>
                                 <select class="form-control" id="exampleSelect1" name="role_id">
-                                    <option value="4">User</option>
-                                    <option value="1">Admin</option>
+                                    @foreach($user_roles as $role)
+                                    <option value="{{$role->id}}">{{$role->name}}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="user_avatar">User Avatar</label>
+                                <input class="form-control" type="file" name="user_avatar" />
+                            </div>
+                            <div class="form-group">
+                                <label for="exampleSelect1">Role</label>
+                                <select class="form-control" id="exampleSelect1" name="group_id">
+                                    <option value="">Select Group</option>
+                                    @foreach($user_groups as $group)
+                                    <option value="{{$group->id}}">{{$group->name}} ({{$group->email}})</option>
+                                    @endforeach
                                 </select>
                             </div>
 

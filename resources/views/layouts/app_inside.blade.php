@@ -4,11 +4,14 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>Star Admin Free Bootstrap Admin Dashboard Template</title>
+    <title>OSM</title>
     <link rel="stylesheet" href="/assets/admin-temp/vendors/iconfonts/mdi/css/materialdesignicons.min.css">
     <link rel="stylesheet" href="/assets/admin-temp/vendors/css/vendor.bundle.base.css">
-    <link rel="stylesheet" href="/assets/admin-temp/vendors/css/vendor.bundle.addons.css">
     <link rel="stylesheet" href="/assets/admin-temp/css/style.css">
+    <link rel="stylesheet" href="/assets/admin-temp/vendors/css/vendor.bundle.addons.css">
+    <link rel="stylesheet" href="/js/dist/css/select2.min.css" />
+
+    {{--<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">--}}
     <link rel="shortcut icon" href="/assets/admin-temp/images/favicon.png" />
 </head>
 
@@ -21,7 +24,7 @@
                 {{--<img src="images/logo.svg" alt="logo" />--}}
             </a>
             <a class="navbar-brand brand-logo-mini" href="index.html">
-                <img src="images/logo-mini.svg" alt="logo" />
+                {{--<img src="images/logo-mini.svg" alt="logo" />--}}
             </a>
         </div>
         <div class="navbar-menu-wrapper d-flex align-items-center">
@@ -202,6 +205,9 @@
 <!-- container-scroller -->
 
 <!-- plugins:js -->
+
+    {{--<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>--}}
+
 <script src="/assets/admin-temp/vendors/js/vendor.bundle.base.js"></script>
 <script src="/assets/admin-temp/vendors/js/vendor.bundle.addons.js"></script>
 <script src="/assets/admin-temp/js/off-canvas.js"></script>
@@ -210,16 +216,39 @@
 <!-- Custom js for this page-->
 <script src="/assets/admin-temp/js/dashboard.js"></script>
 
+<script src="/js//dist/js/select2.full.min.js"></script>
+
 <script>
     $(document).ready(function() {
         $('#users_llist').DataTable();
         $('.datepicker').datepicker({
             format: 'yyyy-mm-dd',
-            startDate: '-3d'
+            startDate: '-3d',
+            autoclose: true,
+            keepOpen: false,
         });
+//        $('.datepicker').on('changeDate', function(ev){
+//            $(this).datepicker('hide');
+//        });
     } );
+
+    $(document).ready(function() {
+        $('.multi-select2').select2();
+    });
 </script>
 <!-- End custom js for this page-->
 </body>
+<style>
+    .datepicker > div {
+        display: block !important;
+    }
 
+    .select2-container--default .select2-selection--single{
+        border: 1px solid #f2f2f2;
+    }
+
+    .select2-container--default .select2-selection--single .select2-selection__rendered {
+        /*color: #ccc;*/
+    }
+</style>
 </html>

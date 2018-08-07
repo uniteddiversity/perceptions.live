@@ -4,6 +4,7 @@ namespace App\Controllers\User;
 
 use App\Category;
 use App\Content;
+use App\Group;
 use App\Http\Controllers\Controller;
 use App\MetaData;
 use App\User;
@@ -40,8 +41,13 @@ class UserController extends Controller
      * @var ContentService
      */
     private $contentService;
+    /**
+     * @var Group
+     */
+    private $group;
 
-    public function __construct(Content $content, User $user, UserRepository $userRepository, Category $category, MetaData $metaData, ContentService $contentService)
+    public function __construct(Content $content, User $user, UserRepository $userRepository,
+                                Category $category, MetaData $metaData, ContentService $contentService, Group $group)
     {
         $this->content = $content;
         $this->user = $user;
@@ -49,6 +55,7 @@ class UserController extends Controller
         $this->category = $category;
         $this->metaData = $metaData;
         $this->contentService = $contentService;
+        $this->group = $group;
     }
 
     public function profile()
@@ -63,9 +70,10 @@ class UserController extends Controller
 
         $categories = $this->category->get();
         $meta_array = $this->contentService->getMetaListByKey();
-
+        $user_id = (!isset(Auth::user()->id))? 0 : Auth::user()->id;
+        $user_list = $this->userRepository->getUsers(array(),$user_id);
         return view('user.upload-video')
-            ->with(compact('uploaded_list','categories','meta_array'));
+            ->with(compact('uploaded_list','categories','meta_array','user_list'));
     }
 
     public function postUploadVideo(Request $request)
@@ -87,7 +95,7 @@ class UserController extends Controller
         }
 
         $r = $request->toArray();
-        $this->content->create(
+        $new_content = $this->content->create(
             array(
                 'title' => $r['title'],
                 'access_level_id' => $r['access_level_id'],
@@ -99,13 +107,16 @@ class UserController extends Controller
                 'long' => $r['long'],
                 'user_id' => Auth::user()->id,
                 'user_ip' => $request->ip(),
-                'is_deleted' => 0,
+                'status' => 2,
 
-                'video_producer' => $r['video_producer'],
-                'onscreen' => $r['onscreen'],
+//                'video_producer' => $r['video_producer'],
+//                'onscreen' => $r['onscreen'],
+//                'co_creators' => $r['co_creators'],
                 'organization' => $r['organization'],
                 'learn_more_url' => $r['learn_more_url'],
-                'co_creators' => $r['co_creators'],
+                'co_creators' => '',
+                'video_producer' => '',
+                'onscreen' => '',
 
                 'grater_community_intention_id' => $r['grater_community_intention_id'],
                 'primary_subject_tag_id' => $r['primary_subject_tag_id'],
@@ -120,6 +131,24 @@ class UserController extends Controller
             )
         );
 
+        //user associations with content
+        if(isset($new_content->id)){
+            $this->userRepository->deleteUserContentAssociations(0, $new_content->id, 'co-cr');
+            $this->userRepository->deleteUserContentAssociations(0, $new_content->id, 'on-s');
+            $this->userRepository->deleteUserContentAssociations(0, $new_content->id, 'vd-p');
+            foreach($r['co_creators'] as $user_id){
+                $this->userRepository->updateUserContentAssociations($user_id, $new_content->id, 'co-cr');
+            }
+            foreach($r['onscreen'] as $user_id){
+                $this->userRepository->updateUserContentAssociations($user_id, $new_content->id, 'on-s');
+            }
+            foreach($r['video_producer'] as $user_id){
+                $this->userRepository->updateUserContentAssociations($user_id, $new_content->id, 'vd-p');
+            }
+        }
+
+
+
         return redirect()->back()->with('message', 'Successfully Added!');
     }
 
@@ -132,8 +161,12 @@ class UserController extends Controller
 
     public function userAdd()
     {
+        $user_id = (!isset(Auth::user()->id))? 0 : Auth::user()->id;
+        $user_groups = $this->userRepository->groupList($user_id);
+        $user_roles = $this->userRepository->getUserRoles($user_id);
+
         return view('admin.user-add')
-            ->with(compact('uploaded_list'));
+            ->with(compact('user_groups', 'user_roles'));
     }
 
     public function contentList()
@@ -145,11 +178,12 @@ class UserController extends Controller
 
     public function contentAdd()
     {
+        $user_id = (!isset(Auth::user()->id))? 0 : Auth::user()->id;
         $categories = $this->category->get();
         $meta_array = $this->contentService->getMetaListByKey();
-
+        $user_list = $this->userRepository->getUsers(array(),$user_id);
         return view('admin.content-add')
-            ->with(compact('categories','meta_array'));
+            ->with(compact('categories','meta_array','user_list'));
     }
 
     public function contentEdit(Request $request)
@@ -166,7 +200,7 @@ class UserController extends Controller
         $validator = Validator::make($request->all(), [
             'first_name' => 'required',
 //            'last_name' => 'required',
-            'password' => 'required|min:6',
+//            'password' => 'required|min:6',
             'email' => 'required|email|unique:users'
         ]);
 
@@ -174,8 +208,12 @@ class UserController extends Controller
             return Redirect::back()->withErrors($validator->messages())->withInput();
         }
 
+        if(empty($r['password'])){//if empty will create a random password
+            $r['password'] = $this->userRepository->randomPassword();
+        }
+
         $r = $request->toArray();
-        $this->user->create(
+        $new_user = $this->user->create(
             array(
                 'first_name' => $r['first_name'],
                 'last_name' => $r['last_name'],
@@ -185,6 +223,20 @@ class UserController extends Controller
                 'password' => bcrypt($r['password'])
             )
         );
+
+        $this->userRepository->deleteAttachmentByFkId(Auth::user()->id, $new_user->id, 'avatar', 'users');
+        if(isset($new_user->id) && isset($r['user_avatar'])){
+            $this->userRepository->uploadAttachment($r['user_avatar'],Auth::user()->id, $new_user->id,
+                'avatar', 'users',1);
+        }
+
+        //add to user group
+        //delete existing group involvement
+        if(isset($new_user->id) && !empty($r['group_id'])){
+            $this->userRepository->deleteUserFromGroup($new_user->id, $r['group_id']);
+            $user_group = $this->userRepository->addUserToGroup($new_user->id, $r['group_id']);
+        }
+
         return redirect()->back()->with('message', 'Successfully Added!');
     }
 
@@ -192,5 +244,74 @@ class UserController extends Controller
     {
         return view('admin.user-add')
             ->with(compact('user_data'));
+    }
+
+    public function userToGroupAdd()
+    {
+        $user_id = (!isset(Auth::user()->id))? 0 : Auth::user()->id;
+        $groups = $this->userRepository->groupList($user_id);
+        $user_list = $this->userRepository->getUsers(array(),$user_id);
+        return view('admin.user-group-add')
+            ->with(compact('user_list','groups'));
+    }
+
+    public function groupAdd()
+    {
+        $categories = $this->category->get();
+        $user_id = (!isset(Auth::user()->id))? 0 : Auth::user()->id;
+        $user_list = $this->userRepository->getUsers(array(),$user_id);
+        return view('admin.group-add')
+            ->with(compact('categories','user_list'));
+    }
+
+    public function postUserToGroupAdd()
+    {
+        return view('admin.user-add')
+            ->with(compact('user_data'));
+    }
+
+    public function postGroupAdd(Request $request)
+    {
+        $validator = Validator::make($request->all(), [
+            'name' => 'required',
+            'description' => 'required',
+            'category_id' => 'required'
+        ]);
+
+        if ($validator->fails()) {
+            return Redirect::back()->withErrors($validator->messages())->withInput();
+        }
+
+        $r = $request->toArray();
+        $new_group = $this->group->create(
+            array(
+                'name' => $r['name'],
+                'description' => $r['description'],
+                'current_mission' => $r['current_mission'],
+                'experience_knowledge_interests' => $r['experience_knowledge_interests'],
+                'default_location' => $r['default_location'],
+                'learn_more_url' =>  $r['learn_more_url'],
+                'category_id' => $r['category_id'],
+                'contact_user_id' => $r['contact_user_id'],
+                'accept_tos' => isset($r['accept_tos'])? 1 : 0,
+                'created_by' => Auth::user()->id,
+            )
+        );
+
+        $this->userRepository->deleteAttachmentByFkId(Auth::user()->id, $new_group->id, 'proof-of-group-in', 'groups');
+        $this->userRepository->deleteAttachmentByFkId(Auth::user()->id, $new_group->id, 'group-avatar', 'groups');
+        if(isset($r['proof_of_group'])){
+            foreach($r['proof_of_group'] as $file){//dd($request['proof_of_group'][0]['name']);
+                $this->userRepository->uploadAttachment($file,Auth::user()->id, $new_group->id,
+                    'proof-of-group-in', 'groups',1);
+            }
+        }
+
+        if(isset($r['group_avatar'])){
+            $this->userRepository->uploadAttachment($r['group_avatar'],Auth::user()->id, $new_group->id,
+                'group-avatar', 'groups',1);
+        }
+
+        return redirect()->back()->with('message', 'Successfully Added!');
     }
 }

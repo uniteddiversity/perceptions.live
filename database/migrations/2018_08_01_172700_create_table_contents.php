@@ -40,11 +40,12 @@ class CreateTableContents extends Migration
             $table->string('video_id')->nullable(true);
             $table->string('video_id_old')->nullable(true);
 
+            $table->text('user_comment')->nullable(true);//comment add by user at the time submits
             $table->string('access_level_id', 150);
 //            $table->string('type', 150);
 
             $table->integer('user_id')->nullable(true);
-            $table->integer('is_deleted')->nullable(true);
+            $table->integer('status')->default(2)->nullable(true);//1-published/2-un published/3-deleted
             $table->string('user_ip')->nullable(true);
             $table->timestamps();
         });

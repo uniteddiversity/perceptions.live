@@ -48,7 +48,7 @@ class User extends Authenticatable
 
     public function content()
     {
-        return $this->hasMany('App\Content')->where('contents.is_deleted', '<>', 1);
+        return $this->hasMany('App\Content')->where('contents.status', '<>', 1);
     }
 
     public function status()

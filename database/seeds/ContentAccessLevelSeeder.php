@@ -17,17 +17,17 @@ class ContentAccessLevelSeeder extends Seeder
             [
                 'id' => '1',
                 'name' => 'Public',
-                'slug' => 'Public'
+                'slug' => 'public'
             ],
             [
                 'id' => '2',
                 'name' => 'Only Logged',
-                'slug' => 'Only Logged'
+                'slug' => 'only-logged'
             ],
             [
                 'id' => '3',
                 'name' => 'Private',
-                'slug' => 'Private'
+                'slug' => 'private'
             ]
         ]);
     }

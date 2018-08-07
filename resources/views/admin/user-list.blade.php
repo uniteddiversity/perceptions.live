@@ -49,7 +49,7 @@
                                         {{ $user->last_name }}
                                     </td>
                                     <td>
-                                        {{ $user->role->name }}
+                                        {{--{{ $user->role->name }}--}}
                                     </td>
                                     <td>
                                         {{ $user->status->name }}

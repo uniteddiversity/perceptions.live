@@ -21,7 +21,7 @@
                             {{ session()->get('message') }}
                         </div>
                         @endif
-                        <form action="/user/post-upload-video" method="post">
+                        <form action="/user/post-upload-video" method="post" enctype='multipart/form-data'>
                             <input type="hidden" name="_token" id="csrf-token" value="{{ Session::token() }}" />
                             <div class="form-group">
                                 <label for="exampleInputEmail1">Title</label>
@@ -52,13 +52,33 @@
                                 <textarea name="description" class="form-control" id="description" rows="3">{{ old('description') }}</textarea>
                             </div>
 
+
                             <div class="form-group">
                                 <label for="exampleTextarea">Video Producer</label>
-                                <input type="text" class="form-control" aria-describedby="nameHelp" name="video_producer" placeholder="Video Producer" value="{{ old('video_producer') }}">
+                                {{--<input type="text" class="form-control" aria-describedby="nameHelp" name="video_producer" placeholder="Video Producer" value="{{ old('video_producer') }}">--}}
+                                <select class="form-control multi-select2" multiple searchable="Search here.." name="video_producer[]" >
+                                    @foreach($user_list as $user)
+                                    <option value="{{$user->id}}">{{$user->first_name}} ({{$user->email}})</option>
+                                    @endforeach
+                                </select>
                             </div>
                             <div class="form-group">
                                 <label for="exampleTextarea">Onscreen</label>
-                                <input type="text" class="form-control" aria-describedby="nameHelp" name="onscreen" placeholder="Onscreen" value="{{ old('onscreen') }}">
+                                {{--<input type="text" class="form-control" aria-describedby="nameHelp" name="onscreen" placeholder="Onscreen" value="{{ old('onscreen') }}">--}}
+                                <select class="form-control multi-select2" multiple searchable="Search here.." name="onscreen[]" >
+                                    @foreach($user_list as $user)
+                                    <option value="{{$user->id}}">{{$user->first_name}} ({{$user->email}})</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="exampleTextarea">Co Creators</label>
+                                {{--<input type="text" class="form-control" aria-describedby="nameHelp" name="co_creators" placeholder="Co Creators" value="{{ old('co_creators') }}">--}}
+                                <select class="form-control multi-select2" multiple searchable="Search here.." name="co_creators[]" >
+                                    @foreach($user_list as $user)
+                                    <option value="{{$user->id}}">{{$user->first_name}} ({{$user->email}})</option>
+                                    @endforeach
+                                </select>
                             </div>
                             <div class="form-group">
                                 <label for="exampleTextarea">Organization</label>
@@ -68,10 +88,7 @@
                                 <label for="exampleTextarea">Learn More Url</label>
                                 <input type="text" class="form-control" aria-describedby="nameHelp" name="learn_more_url" placeholder="Learn More Url" value="{{ old('learn_more_url') }}">
                             </div>
-                            <div class="form-group">
-                                <label for="exampleTextarea">Co Creators</label>
-                                <input type="text" class="form-control" aria-describedby="nameHelp" name="co_creators" placeholder="Co Creators" value="{{ old('co_creators') }}">
-                            </div>
+
 
 
 
@@ -193,6 +210,6 @@
 
     @endsection
     <script>
-        var el = document.getElementById('loading');
-        el.remove(); // Removes the div with the 'div-02' id
+//        var el = document.getElementById('loading');
+//        el.remove(); // Removes the div with the 'div-02' id
     </script>
