@@ -25,7 +25,7 @@
                             <input type="hidden" name="_token" id="csrf-token" value="{{ Session::token() }}" />
                             <div class="form-group">
                                 <label for="exampleInputEmail1">Greeting Message to PRCPTION community</label>
-                                <input type="text" class="form-control" aria-describedby="nameHelp" name="name" placeholder="greeting_message_to_community" value="{{ old('greeting_message_to_community') }}">
+                                <input type="text" class="form-control" aria-describedby="nameHelp" name="greeting_message_to_community" placeholder="Greeting Message to PRCPTION community" value="{{ old('greeting_message_to_community') }}">
                             </div>
                             <div class="form-group">
                                 <label for="exampleInputEmail1">Name</label>
