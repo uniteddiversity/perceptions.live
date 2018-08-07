@@ -285,6 +285,7 @@ class UserController extends Controller
         $r = $request->toArray();
         $new_group = $this->group->create(
             array(
+                'greeting_message_to_community' => 'greeting_message_to_community',
                 'name' => $r['name'],
                 'description' => $r['description'],
                 'current_mission' => $r['current_mission'],

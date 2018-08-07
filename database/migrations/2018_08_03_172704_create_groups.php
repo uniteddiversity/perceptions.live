@@ -16,6 +16,7 @@ class CreateGroups extends Migration
         Schema::create('groups', function (Blueprint $table) {
             $table->engine = 'InnoDB';
             $table->increments('id');
+            $table->string('greeting_message_to_community', 800);
             $table->string('name', 600);
             $table->text('description')->nullable(true);
             $table->text('current_mission')->nullable(true);

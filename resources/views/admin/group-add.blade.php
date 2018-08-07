@@ -24,6 +24,10 @@
                         <form action="/user/admin/post-group-add" method="post" enctype='multipart/form-data'>
                             <input type="hidden" name="_token" id="csrf-token" value="{{ Session::token() }}" />
                             <div class="form-group">
+                                <label for="exampleInputEmail1">Greeting Message to PRCPTION community</label>
+                                <input type="text" class="form-control" aria-describedby="nameHelp" name="name" placeholder="greeting_message_to_community" value="{{ old('greeting_message_to_community') }}">
+                            </div>
+                            <div class="form-group">
                                 <label for="exampleInputEmail1">Name</label>
                                 <input type="text" class="form-control" aria-describedby="nameHelp" name="name" placeholder="Name" value="{{ old('name') }}">
                             </div>
