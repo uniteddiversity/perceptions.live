@@ -40,7 +40,7 @@
                             <hr/>
                             @foreach($existing_tags as $tag)
                                 <?php if($tag->group_id == 0){?>
-                                    <span class="label label-info">@ {{$tag->tag}}</span>
+                                    <span class="label label-info">@ {{$tag->tag}}</span> ,
                                 <?php }?>
                             @endforeach
                         </div>
@@ -50,7 +50,7 @@
                             <hr/>
                             @foreach($existing_tags as $tag)
                                 <?php if($tag->group_id <> 0){?>
-                                <span class="label label-warning">@ {{$tag->tag}}</span>
+                                <span class="label label-warning">@ {{$tag->tag}}</span> ,
                                 <?php }?>
                             @endforeach
                         </div>

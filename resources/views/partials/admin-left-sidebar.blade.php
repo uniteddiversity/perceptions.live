@@ -26,7 +26,7 @@
         <li class="nav-item">
             <a class="nav-link" data-toggle="collapse" href="#contnet-sub" aria-expanded="false" aria-controls="contnet-sub">
                 <i class="menu-icon mdi mdi-table"></i>
-                <span class="menu-title">Tables</span>
+                <span class="menu-title">Video</span>
                 <i class="menu-arrow"></i>
             </a>
             <div class="collapse" id="contnet-sub">
