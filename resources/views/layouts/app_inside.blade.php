@@ -234,6 +234,18 @@
 
     $(document).ready(function() {
         $('.multi-select2').select2();
+
+        $('#user-assign-group').change(function(){console.log('vl '+$(this).val());
+             document.location.href = '/user/admin/user-to-group-add/'+$(this).val();
+        })
+
+        $("#is_exchange").change(function(){ console.log('changing..');
+            if($(this).is(':checked')){console.log('checked..');
+                $('#exchange_enabled').css('visibility','visible');
+            }else{
+                $('#exchange_enabled').css('visibility','hidden');
+            }
+        })
     });
 </script>
 <!-- End custom js for this page-->

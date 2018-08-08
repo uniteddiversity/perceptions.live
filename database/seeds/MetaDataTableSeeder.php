@@ -66,35 +66,48 @@ class MetaDataTableSeeder extends Seeder
             ],
 
 
-            //Primary Subject Tag
+            //Content Role s
             [
-//                'id' => '2',
-                'type' => 'pst',
-                'value' => 'Festival'
+//                'id' => '100',
+                'type' => 'c-role',
+                'value' => 'Audience'
             ],
             [
-//                'id' => '2',
-                'type' => 'pst',
-                'value' => 'Live Music Performance'
+//                'id' => '101',
+                'type' => 'c-role',
+                'value' => 'Ideas'
             ],
             [
-//                'id' => '2',
-                'type' => 'pst',
-                'value' => 'Living Room Creativity Salons'
+//                'id' => '102',
+                'type' => 'c-role',
+                'value' => 'Video'
+            ],
+            [
+//                'id' => '103',
+                'type' => 'c-role',
+                'value' => 'Photos'
+            ],
+            [
+//                'id' => '104',
+                'type' => 'c-role',
+                'value' => 'Music & Sampling'
+            ],
+            [
+//                'id' => '105',
+                'type' => 'c-role',
+                'value' => 'Video Editing'
+            ],
+            [
+//                'id' => '106',
+                'type' => 'c-role',
+                'value' => 'Music/Audio Production'
+            ],
+            [
+//                'id' => '107',
+                'type' => 'c-role',
+                'value' => 'Donor'
             ],
 
-
-            //Secondary Subject Tag
-            [
-//                'id' => '2',
-                'type' => 'sst',
-                'value' => 'test1'
-            ],
-            [
-//                'id' => '2',
-                'type' => 'sst',
-                'value' => 'test2'
-            ]
         ]);
     }
 }

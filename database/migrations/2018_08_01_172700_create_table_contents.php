@@ -26,8 +26,8 @@ class CreateTableContents extends Migration
             $table->text('co_creators')->nullable(true);
             $table->integer('category_id')->default(0)->nullable(true);
             $table->integer('grater_community_intention_id')->default(0)->nullable(true);
-            $table->integer('primary_subject_tag_id')->default(0)->nullable(true);
-            $table->integer('secondary_subject_tag_id')->default(0)->nullable(true);
+            $table->string('primary_subject_tag_id')->default('')->nullable(true);
+            $table->string('secondary_subject_tag_id')->default('')->nullable(true);
             $table->string('submitted_footage');//yes,no
             $table->text('brief_description')->nullable(true);
             $table->text('description')->nullable(true);

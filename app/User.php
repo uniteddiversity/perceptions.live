@@ -55,4 +55,9 @@ class User extends Authenticatable
     {
         return $this->belongsTo('App\UserStatus','status_id');
     }
+
+    public function groups()
+    {
+        return $this->belongsTo('App\UserGroup','user_id');
+    }
 }

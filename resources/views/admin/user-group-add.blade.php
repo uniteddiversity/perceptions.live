@@ -23,36 +23,67 @@
                         @endif
 
                         <div class="form-group">
-                            <label for="exampleSelect1">Role</label>
-                            <select class="form-control" id="exampleSelect1" name="users_in_groups[]">
+                            <label for="exampleSelect1">Select Group</label>
+                            <select class="form-control" id="user-assign-group" name="users_in_groups[]">
                                 <option value="">Select Group</option>
                                 @foreach($groups as $group)
-                                <option value="{{$group->id}}">{{$group->name}} ({{$group->email}})</option>
+                                <option value="{{$group->id}}" <?php if($group_id == $group->id){ echo 'selected'; } ?> >{{$group->name}} ({{$group->email}})</option>
                                 @endforeach
                             </select>
                         </div>
-                        <form action="/user/admin/post-user-add" method="post" enctype='multipart/form-data'>
+
+                        <form action="/user/admin/post-user-group-add/{{$group_id}}" method="post" enctype='multipart/form-data'>
+                            <input type="hidden" name="_token" id="csrf-token" value="{{ Session::token() }}" />
+                            {{--<div class="row">--}}
+                                {{--<div class="col-sm-5">--}}
+                                    {{--<label for="exampleSelect1">Users</label>--}}
+                                    {{--<select class="form-control multi-select2" id="exampleSelect1" multiple name="users[]" style="height:300px">--}}
+                                        {{--<option value="">Select Group</option>--}}
+                                        {{--@foreach($user_list as $user)--}}
+                                            {{--<option value="{{$user->id}}">{{$user->first_name}} ({{$user->email}})</option>--}}
+                                        {{--@endforeach--}}
+                                    {{--</select>--}}
+                                {{--</div>--}}
+                                {{--<div class="col-sm-1">--}}
+                                    {{--<div class="row">--}}
+                                        {{--<div class="form-group">--}}
+                                            {{--<button class="form-control" type="submit" class="btn btn-primary"> >> </button>--}}
+                                        {{--</div>--}}
+                                    {{--</div>--}}
+                                    {{--<div class="row">--}}
+                                        {{--<div class="form-group">--}}
+                                            {{--<button class="form-control" type="submit" class="btn btn-primary"> << </button>--}}
+                                        {{--</div>--}}
+                                    {{--</div>--}}
+
+                                {{--</div>--}}
+                                {{--<div class="col-sm-5">--}}
+                                    {{--<label for="exampleSelect1">Users in Group</label>--}}
+                                    {{--<select class="form-control multi-select2" id="exampleSelect1" multiple name="users_in_groups[]" style="height:300px">--}}
+                                        {{--@foreach($user_list_in_group as $user)--}}
+                                        {{--<option value="{{$user->id}}" selected>{{$user->first_name}} ({{$user->email}})</option>--}}
+                                        {{--@endforeach--}}
+                                    {{--</select>--}}
+                                {{--</div>--}}
+                            {{--</div>--}}
+
+                            <?php
+
+                            $user_ids = [];
+                            foreach($user_list_in_group as $user){
+                                $user_ids[$user['id']] = $user['id'];
+                            }
+                            ?>
                             <div class="form-group">
-                                <label for="exampleSelect1">Users</label>
-                                <select class="form-control multi-select2" id="exampleSelect1" multiple name="users[]">
-                                    <option value="">Select Group</option>
+                                <label for="exampleSelect1">Users in Group</label>
+                                <select class="form-control multi-select2" id="exampleSelect1" multiple name="users_in_groups[{{$group_id}}][]" style="height:300px">
                                     @foreach($user_list as $user)
-                                    <option value="{{$user->id}}">{{$user->name}} ({{$user->email}})</option>
+                                        <option value="{{$user->id}}" <?php if(isset($user_ids[$user->id])){ echo 'selected'; } ?> >{{$user->first_name}} ({{$user->email}})</option>
                                     @endforeach
                                 </select>
                             </div>
+                            <button type="submit" class="btn btn-primary">Add Selected to Group</button>
 
-                            <div class="form-group">
-                                <label for="exampleSelect1">Users in Group</label>
-                                <select class="form-control multi-select2" id="exampleSelect1" multiple name="users_in_groups[]">
-                                    {{--@foreach($user_groups as $group)--}}
-                                    {{--<option value="{{$group->id}}">{{$group->name}} ({{$group->email}})</option>--}}
-                                    {{--@endforeach--}}
-                                </select>
-                            </div>
-
-                            <button type="submit" class="btn btn-primary">Add to Group</button>
-                            <button type="submit" class="btn btn-primary">Remove from Group</button>
                         </form>
                 </div>
             </div>

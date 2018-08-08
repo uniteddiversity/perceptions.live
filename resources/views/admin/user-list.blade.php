@@ -34,7 +34,7 @@
                             </tr>
                             </thead>
                             <tbody>
-                            @foreach ($users as $user)
+                            @foreach ($users as $user) <?php //dd($user); ?>
                                 <tr>
                                     <td>
                                         {{ $user->id }}
@@ -49,7 +49,7 @@
                                         {{ $user->last_name }}
                                     </td>
                                     <td>
-                                        {{--{{ $user->role->name }}--}}
+                                        <?php if(isset($user->role)){ echo $user->role->name; } ?>
                                     </td>
                                     <td>
                                         {{ $user->status->name }}

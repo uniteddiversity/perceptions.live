@@ -6,6 +6,7 @@ use App\Attachment;
 use App\Content;
 use App\Group;
 use App\Role;
+use App\SortingTag;
 use App\User;
 use App\UserContentAssociation;
 use App\UserGroup;
@@ -45,9 +46,14 @@ class UserRepository
      * @var Attachment
      */
     private $attachment;
+    /**
+     * @var SortingTag
+     */
+    private $sortingTag;
 
     public function __construct(User $user, Content $content,
-                                UserGroup $userGroup, Group $group, Role $role, UserContentAssociation $userContentAssociation, Attachment $attachment)
+                                UserGroup $userGroup, Group $group, Role $role, UserContentAssociation $userContentAssociation,
+                                Attachment $attachment, SortingTag $sortingTag)
     {
         $this->user = $user;
         $this->content = $content;
@@ -56,13 +62,14 @@ class UserRepository
         $this->role = $role;
         $this->userContentAssociation = $userContentAssociation;
         $this->attachment = $attachment;
+        $this->sortingTag = $sortingTag;
     }
 
     public function getUsers($filter = array(), $user_id = null)
     {
         $current_user = $this->getUser($user_id);
 
-        $r = $this->user->with('role')
+        $r = $this->user->with('role', 'groups')
         ->leftJoin('user_groups', 'users.id', 'user_groups.user_id');
 
         if($current_user['role_id'] == 1){
@@ -70,8 +77,14 @@ class UserRepository
         }else{
             $r = $r->where('user_groups.id', $current_user['group_id']);
         }
-        $r->select('users.*','user_groups.id as group_id');
 
+        if(isset($filter['group_id'])){
+            $r->whereIn('user_groups.group_id', array($filter['group_id']));
+        }
+
+//        $r->select('users.id','users.*','user_groups.id as group_id');
+        $r->select('users.id','users.*');
+        $r->groupBy('users.id');
         $r = $r->get();
 
         return $r;
@@ -181,6 +194,11 @@ class UserRepository
         return $user_gr->delete();
     }
 
+    function deleteUsersFromGroup($group_id)
+    {
+        return $this->userGroup->where('group_id', $group_id)->delete();
+    }
+
     function addUserToGroup($user_id, $group_id, $role_id = 0)
     {
         return $this->userGroup->create(
@@ -246,6 +264,36 @@ class UserRepository
     public function deleteAttachmentByFkId($user_id, $fk_id, $submission_type, $table, $delete_hard_copy = false)
     {
         return $this->attachment->where('fk_id',$fk_id)->where('submission_type', $submission_type)->where('table',$table)->delete();
+    }
+
+    public function getSortingTags($user_id, $only_selectable = false)
+    {
+        $current_user = $this->getUser($user_id);
+
+        $tag = $this->sortingTag;
+        if($only_selectable){
+            $tag = $tag->where('not_selectable', '0');
+        }
+        if($current_user['role_id'] != 1){
+            $tag = $tag->where(function($q) use($current_user){
+                $q->where('group_id', $current_user['group_id'])
+                    ->orWhere('created_by', $current_user['id'])
+                    ->orWhere('group_id', '0');
+            });
+        }
+        $tag = $tag->where('status', 1);
+
+        return $tag->get();
+    }
+
+    public function addSortingTag($user_id, $group_id = 0, $data)
+    {
+        $current_user = $this->getUser($user_id);
+        if($current_user['role_id'] == 1){
+            return $this->sortingTag->create(array('tag' => $data['tag'], 'description' => $data['description'],
+                'created_by' => $user_id, 'group_id' => $group_id));
+        }
+
     }
 }
 

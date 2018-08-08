@@ -147,8 +147,6 @@ class UserController extends Controller
             }
         }
 
-
-
         return redirect()->back()->with('message', 'Successfully Added!');
     }
 
@@ -182,8 +180,10 @@ class UserController extends Controller
         $categories = $this->category->get();
         $meta_array = $this->contentService->getMetaListByKey();
         $user_list = $this->userRepository->getUsers(array(),$user_id);
+        $sorting_tags = $this->userRepository->getSortingTags($user_id, true);
+        $groups = $this->userRepository->groupList($user_id);
         return view('admin.content-add')
-            ->with(compact('categories','meta_array','user_list'));
+            ->with(compact('categories','meta_array','user_list','sorting_tags','groups'));
     }
 
     public function contentEdit(Request $request)
@@ -246,13 +246,14 @@ class UserController extends Controller
             ->with(compact('user_data'));
     }
 
-    public function userToGroupAdd()
+    public function userToGroupAdd($group_id = 0)
     {
         $user_id = (!isset(Auth::user()->id))? 0 : Auth::user()->id;
         $groups = $this->userRepository->groupList($user_id);
         $user_list = $this->userRepository->getUsers(array(),$user_id);
+        $user_list_in_group = $this->userRepository->getUsers(array('group_id' => $group_id),$user_id);
         return view('admin.user-group-add')
-            ->with(compact('user_list','groups'));
+            ->with(compact('user_list','groups','user_list_in_group','group_id'));
     }
 
     public function groupAdd()
@@ -264,10 +265,24 @@ class UserController extends Controller
             ->with(compact('categories','user_list'));
     }
 
-    public function postUserToGroupAdd()
+    public function postUserToGroupAdd(Request $request, $group_id)
     {
-        return view('admin.user-add')
-            ->with(compact('user_data'));
+        $r = $request->toArray();
+
+        if(is_array($r['users_in_groups']) && isset($group_id) && intVal($group_id) > 0){
+            $this->userRepository->deleteUsersFromGroup($group_id);
+            $user_ids = array();
+            foreach($r['users_in_groups'][$group_id] as $user_id){
+                $user_ids[$user_id] = $user_id;
+            }
+
+            foreach($user_ids as $user_id){
+                $user_group = $this->userRepository->addUserToGroup($user_id, $group_id);
+            }
+        }
+
+
+        return redirect()->back()->with('message', 'Successfully Added!');
     }
 
     public function postGroupAdd(Request $request)
@@ -313,6 +328,22 @@ class UserController extends Controller
                 'group-avatar', 'groups',1);
         }
 
+        return redirect()->back()->with('message', 'Successfully Added!');
+    }
+
+    public function sortingTagAdd()
+    {
+        $user_id = (!isset(Auth::user()->id))? 0 : Auth::user()->id;
+        $existing_tags = $this->userRepository->getSortingTags($user_id, true);
+        return view('admin.user-sorting-tags')
+            ->with(compact('existing_tags'));
+    }
+
+    public function postSortingTagAdd(Request $request)
+    {
+        $r = $request->toArray();
+        $user_id = (!isset(Auth::user()->id))? 0 : Auth::user()->id;
+        $this->userRepository->addSortingTag($user_id, 0, array('tag' => $r['tag'], 'description' => $r['description']));
         return redirect()->back()->with('message', 'Successfully Added!');
     }
 }

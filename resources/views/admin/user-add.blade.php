@@ -60,7 +60,7 @@
                                 <input class="form-control" type="file" name="user_avatar" />
                             </div>
                             <div class="form-group">
-                                <label for="exampleSelect1">Role</label>
+                                <label for="exampleSelect1">Group</label>
                                 <select class="form-control" id="exampleSelect1" name="group_id">
                                     <option value="">Select Group</option>
                                     @foreach($user_groups as $group)

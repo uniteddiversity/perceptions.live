@@ -54,7 +54,7 @@
 
 
                             <div class="form-group">
-                                <label for="exampleTextarea">Video Producer</label>
+                                <label for="exampleTextarea">Video Producer(s)</label>
                                 {{--<input type="text" class="form-control" aria-describedby="nameHelp" name="video_producer" placeholder="Video Producer" value="{{ old('video_producer') }}">--}}
                                 <select class="form-control multi-select2" multiple searchable="Search here.." name="video_producer[]" >
                                     @foreach($user_list as $user)
@@ -72,7 +72,7 @@
                                 </select>
                             </div>
                             <div class="form-group">
-                                <label for="exampleTextarea">Co Creators</label>
+                                <label for="exampleTextarea">Co Creator(s)</label>
                                 {{--<input type="text" class="form-control" aria-describedby="nameHelp" name="co_creators" placeholder="Co Creators" value="{{ old('co_creators') }}">--}}
                                 <select class="form-control multi-select2" multiple searchable="Search here.." name="co_creators[]" >
                                     @foreach($user_list as $user)
@@ -81,7 +81,12 @@
                                 </select>
                             </div>
                             <div class="form-group">
-                                <label for="exampleTextarea">Organization</label>
+                                <label for="exampleTextarea">Organization(s)/Group(s)</label>
+                                <select class="form-control multi-select2" multiple searchable="Search here.." name="groups[]" >
+                                    @foreach($groups as $group)
+                                        <option value="{{$group->id}}">{{$group->name}} ({{$group->email}})</option>
+                                    @endforeach
+                                </select>
                                 <input type="text" class="form-control" aria-describedby="nameHelp" name="organization" placeholder="Organization" value="{{ old('organization') }}">
                             </div>
                             <div class="form-group">
@@ -103,7 +108,7 @@
                             </div>
 
                             <div class="form-group">
-                                <label for="exampleSelect1">Grater Community Intention</label>
+                                <label for="exampleSelect1">Greater Community Intention</label>
                                 <select class="form-control" id="grater_community_intention_id" name="grater_community_intention_id">
                                     <option value="0">Select</option>
                                     @foreach($meta_array['gci'] as $m)
@@ -112,24 +117,20 @@
                                 </select>
                             </div>
                             <div class="form-group">
-                                <label for="exampleSelect1">Primary Subject Tag</label>
-                                <select class="form-control" id="primary_subject_tag_id" name="primary_subject_tag_id">
-                                    <option value="0">Select</option>
-                                    @foreach($meta_array['pst'] as $m)
-                                    <option value="{{$m['id']}}">{{$m['value']}}</option>
-                                    @endforeach
-                                </select>
+                                <label for="exampleSelect1">Primary Subject Tag (40 max)</label>
+                                <input type="text" class="form-control" aria-describedby="nameHelp" name="primary_subject_tag_id" placeholder="Primary Subject Tag" value="{{ old('primary_subject_tag_id') }}">
                             </div>
 
-                            <div class="form-group">
-                                <label for="exampleSelect1">Secondary Subject Tag</label>
-                                <select class="form-control" id="secondary_subject_tag_id" name="secondary_subject_tag_id">
-                                    <option value="0">Select</option>
-                                    @foreach($meta_array['sst'] as $m)
-                                    <option value="{{$m['id']}}">{{$m['value']}}</option>
-                                    @endforeach
-                                </select>
-                            </div>
+                            {{--<div class="form-group">--}}
+                                {{--<label for="exampleSelect1">Secondary Subject Tag</label>--}}
+                                {{--<select class="form-control" id="secondary_subject_tag_id" name="secondary_subject_tag_id">--}}
+                                    {{--<option value="0">Select</option>--}}
+                                    {{--@foreach($meta_array['sst'] as $m)--}}
+                                    {{--<option value="{{$m['id']}}">{{$m['value']}}</option>--}}
+                                    {{--@endforeach--}}
+                                {{--</select>--}}
+                            {{--</div>--}}
+
                             <div class="form-group">
                                 <label for="exampleSelect1">Submitted Footage</label>
                                 <select class="form-control" id="submitted_footage" name="submitted_footage">
@@ -155,22 +156,22 @@
                                 <input type="text" class="form-control" aria-describedby="nameHelp" name="url" placeholder="URL" value="{{ old('url') }}">
                             </div>
 
-                            <div class="form-group">
-                                <label for="exampleTextarea">Url Split</label>
-                                <input type="text" class="form-control" aria-describedby="nameHelp" name="url_split" placeholder="Url Split" value="{{ old('url_split') }}">
-                            </div>
-                            <div class="form-group">
-                                <label for="exampleTextarea">Full Embed Code</label>
-                                <textarea name="full_embed_code" class="form-control" id="full_embed_code" rows="3">{{ old('full_embed_code') }}</textarea>
-                            </div>
-                            <div class="form-group">
-                                <label for="video_id">Video Id</label>
-                                <input type="text" class="form-control" aria-describedby="nameHelp" name="video_id" placeholder="Video Id" value="{{ old('video_id') }}">
-                            </div>
-                            <div class="form-group">
-                                <label for="video_id">Video Id Old</label>
-                                <input type="text" class="form-control" aria-describedby="nameHelp" name="video_id_old" placeholder="Video Id Old" value="{{ old('video_id_old') }}">
-                            </div>
+                            {{--<div class="form-group">--}}
+                                {{--<label for="exampleTextarea">Url Split</label>--}}
+                                {{--<input type="text" class="form-control" aria-describedby="nameHelp" name="url_split" placeholder="Url Split" value="{{ old('url_split') }}">--}}
+                            {{--</div>--}}
+                            {{--<div class="form-group">--}}
+                                {{--<label for="exampleTextarea">Full Embed Code</label>--}}
+                                {{--<textarea name="full_embed_code" class="form-control" id="full_embed_code" rows="3">{{ old('full_embed_code') }}</textarea>--}}
+                            {{--</div>--}}
+                            {{--<div class="form-group">--}}
+                                {{--<label for="video_id">Video Id</label>--}}
+                                {{--<input type="text" class="form-control" aria-describedby="nameHelp" name="video_id" placeholder="Video Id" value="{{ old('video_id') }}">--}}
+                            {{--</div>--}}
+                            {{--<div class="form-group">--}}
+                                {{--<label for="video_id">Video Id Old</label>--}}
+                                {{--<input type="text" class="form-control" aria-describedby="nameHelp" name="video_id_old" placeholder="Video Id Old" value="{{ old('video_id_old') }}">--}}
+                            {{--</div>--}}
 
                             <div class="form-group">
                                 <label for="video_id">Captured Date</label>
@@ -200,6 +201,53 @@
                                     {{--</label>--}}
                                 {{--</div>--}}
                             {{--</fieldset>--}}
+                            <div class="form-group">
+                                <label for="is_exchange">Exchange (Y/N)</label>
+                                <input class="form-control" type="checkbox" id="is_exchange" value="{{ old('exchange') }}" name="exchange" style="width: 50px;"/>
+                            </div>
+                            <div class="form-group" id="exchange_enabled" <?php if(empty(old('exchange'))){ ?> style="visibility: hidden;" <?php } ?> >
+                                <label for="is_exchange">If Exchange Yes, Service / Opportunity?</label>
+                                <select class="form-control multi-select2" id="service_or_opportunity" name="service_or_opportunity">
+                                    <option value="0">Select</option>
+                                    <option value="1">Service</option>
+                                    <option value="2">Opportunity</option>
+                                </select>
+                            </div>
+
+
+                            <div class="form-group">
+                                <label for="exampleSelect1">Sorting Tags</label>
+                                <select class="form-control multi-select2" id="secondary_subject_tag_id" multiple name="video_role">
+                                    <option value="0">Select</option>
+                                    @foreach($sorting_tags as $tag)
+                                        <option value="{{$tag['id']}}">{{$tag['tag']}}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+
+                            {{--users only items--}}
+                            <div class="form-group">
+                                <label for="exampleSelect1">Roles</label>
+                                <select class="form-control multi-select2" multiple id="c_roles" name="c_roles[]">
+                                    <option value="0">Select</option>
+                                    @foreach($meta_array['c-role'] as $m)
+                                        <option value="{{$m['id']}}">{{$m['value']}}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="accept_tos">Video Content</label>
+                                <input class="form-control" type="file" name="content_set1[]" /> Content Set 1
+                                <input class="form-control" type="file" name="content_set2[]" /> Content Set 2
+                                <input class="form-control" type="file" name="content_set3[]" /> Content Set 3
+                            </div>
+
+                            <div class="form-group">
+                                <label for="exampleTextarea">Additional Comments</label>
+                                <textarea type="text" class="form-control" aria-describedby="nameHelp" name="user_comment" placeholder="Additional Comments" rows="4">{{ old('user_comment') }}</textarea>
+                            </div>
+
                             <button type="submit" class="btn btn-primary">Submit</button>
                         </form>
                 </div>

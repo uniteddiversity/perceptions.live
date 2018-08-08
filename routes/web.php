@@ -39,7 +39,11 @@ Route::group(['prefix' => 'user', 'middleware' => ['auth', 'web', 'admin']], fun
     Route::post('/admin/post-content-add', '\App\Controllers\User\UserController@contentAdd');
     Route::get('admin/user-group-add', '\App\Controllers\User\UserController@groupAdd');
     Route::get('admin/user-to-group-add', '\App\Controllers\User\UserController@userToGroupAdd');
+    Route::get('admin/user-to-group-add/{_group_id}', '\App\Controllers\User\UserController@userToGroupAdd');
 
     Route::post('admin/post-group-add', '\App\Controllers\User\UserController@postGroupAdd');
-    Route::post('admin/post-user-group-add', '\App\Controllers\User\UserController@postUserToGroupAdd');
+    Route::post('admin/post-user-group-add/{_group_id}', '\App\Controllers\User\UserController@postUserToGroupAdd');
+
+    Route::get('admin/sorting-tag-add', '\App\Controllers\User\UserController@sortingTagAdd');
+    Route::post('admin/post-sorting-tag-add', '\App\Controllers\User\UserController@postSortingTagAdd');
 });
