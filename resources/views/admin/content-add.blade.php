@@ -226,15 +226,15 @@
                             </div>
 
                             {{--users only items--}}
-                            <div class="form-group">
-                                <label for="exampleSelect1">Roles</label>
-                                <select class="form-control multi-select2" multiple id="c_roles" name="c_roles[]">
-                                    <option value="0">Select</option>
-                                    @foreach($meta_array['c-role'] as $m)
-                                        <option value="{{$m['id']}}">{{$m['value']}}</option>
-                                    @endforeach
-                                </select>
-                            </div>
+                            {{--<div class="form-group">--}}
+                                {{--<label for="exampleSelect1">Roles</label>--}}
+                                {{--<select class="form-control multi-select2" multiple id="c_roles" name="c_roles[]">--}}
+                                    {{--<option value="0">Select</option>--}}
+                                    {{--@foreach($meta_array['c-role'] as $m)--}}
+                                        {{--<option value="{{$m['id']}}">{{$m['value']}}</option>--}}
+                                    {{--@endforeach--}}
+                                {{--</select>--}}
+                            {{--</div>--}}
 
                             <div class="form-group">
                                 <label for="accept_tos">Video Content</label>
