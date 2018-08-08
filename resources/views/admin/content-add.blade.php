@@ -87,7 +87,7 @@
                                         <option value="{{$group->id}}">{{$group->name}} ({{$group->email}})</option>
                                     @endforeach
                                 </select>
-                                <input type="text" class="form-control" aria-describedby="nameHelp" name="organization" placeholder="Organization" value="{{ old('organization') }}">
+                                {{--<input type="text" class="form-control" aria-describedby="nameHelp" name="organization" placeholder="Organization" value="{{ old('organization') }}">--}}
                             </div>
                             <div class="form-group">
                                 <label for="exampleTextarea">Learn More Url</label>
