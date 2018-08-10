@@ -5,25 +5,28 @@
         <div class="col-lg-12 grid-margin stretch-card">
             <div class="card">
                 <div class="card-body">
-                    <h4 class="card-title">Uploaded Videos</h4>
+                    <h4 class="card-title">Group List</h4>
                     <div class="table-responsive">
                         <table class="table" id="users_llist">
                             <thead>
                             <tr>
                                 <th>
-                                    Title
+                                    Id
                                 </th>
                                 <th>
-                                    Date
+                                    Name
                                 </th>
                                 <th>
-                                    URL
+                                    Default Location
                                 </th>
                                 <th>
-                                    Email
+                                    Category
                                 </th>
                                 <th>
-                                    Location
+                                    Active Status
+                                </th>
+                                <th>
+                                    Users in Group
                                 </th>
                                 <th>
                                     Action
@@ -31,30 +34,31 @@
                             </tr>
                             </thead>
                             <tbody>
-                            @foreach ($videos as $video)
+                            @foreach ($groups as $group)
                                 <tr>
                                     <td>
-                                        {{ $video->title }}
+                                        {{ $group->id }}
                                     </td>
                                     <td>
-                                        {{ $video->date }}
+                                        {{ $group->name }}
                                     </td>
                                     <td>
-                                        {{ $video->url }}
+                                        {{ $group->category }}
                                     </td>
                                     <td>
-                                        {{ $video->user->email }}
+                                        {{ $group->location }}
                                     </td>
                                     <td>
-                                        {{ $video->location }}
+                                        {{ $group->groupStatus->name }}
                                     </td>
                                     <td>
-                                        <a href="/user/admin/video-edit/{{ ($video->id) }}" >Edit</a>
+                                        {{ (empty($group->users_count))? 0:$group->users_count }}
+                                    </td>
+                                    <td>
+                                        <a href="/user/admin/group-edit/{{ uid($group->id) }}" >Edit</a>
                                     </td>
                                 </tr>
                             @endforeach
-
-
                             </tbody>
                         </table>
                     </div>

@@ -11,7 +11,7 @@ class SortingTag extends Model
     /**
      * @var array
      */
-    protected $fillable = ['id','tag','tag_color','description','created_by','group_id'];
+    protected $fillable = ['id','tag','tag_color','description','created_by','group_id','tag_for'];
 
 //    public function role()
 //    {

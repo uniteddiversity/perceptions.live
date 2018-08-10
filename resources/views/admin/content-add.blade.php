@@ -21,7 +21,7 @@
                             {{ session()->get('message') }}
                         </div>
                         @endif
-                        <form action="/user/post-upload-video" method="post" enctype='multipart/form-data'>
+                        <form action="/user/post-upload-video" method="post" id="submit_content" enctype='multipart/form-data'>
                             <input type="hidden" name="_token" id="csrf-token" value="{{ Session::token() }}" />
                             <div class="form-group">
                                 <label for="exampleInputEmail1">Title</label>
@@ -47,50 +47,50 @@
                                 <label for="exampleTextarea">Brief Description</label>
                                 <textarea name="brief_description" class="form-control" id="exampleTextarea" rows="3">{{ old('brief_description') }}</textarea>
                             </div>
-                            <div class="form-group">
-                                <label for="description">Description</label>
-                                <textarea name="description" class="form-control" id="description" rows="3">{{ old('description') }}</textarea>
-                            </div>
+                            {{--<div class="form-group">--}}
+                                {{--<label for="description">Description</label>--}}
+                                {{--<textarea name="description" class="form-control" id="description" rows="3">{{ old('description') }}</textarea>--}}
+                            {{--</div>--}}
 
 
                             <div class="form-group">
-                                <label for="exampleTextarea">Video Producer(s)</label>
+                                <label for="exampleTextarea">Video Producer(s) (If not exist, add email's)</label>
                                 {{--<input type="text" class="form-control" aria-describedby="nameHelp" name="video_producer" placeholder="Video Producer" value="{{ old('video_producer') }}">--}}
-                                <select class="form-control multi-select2" multiple searchable="Search here.." name="video_producer[]" >
+                                <select class="form-control multi-select2-with-tags" multiple searchable="Search here.." name="video_producer[]" >
                                     @foreach($user_list as $user)
-                                    <option value="{{$user->id}}">{{$user->first_name}} ({{$user->email}})</option>
+                                    <option value="{{base64_encode($user->id)}}">{{$user->first_name}} ({{$user->email}})</option>
                                     @endforeach
                                 </select>
                             </div>
                             <div class="form-group">
-                                <label for="exampleTextarea">Onscreen</label>
+                                <label for="exampleTextarea">Onscreen (If not exist, add email's)</label>
                                 {{--<input type="text" class="form-control" aria-describedby="nameHelp" name="onscreen" placeholder="Onscreen" value="{{ old('onscreen') }}">--}}
-                                <select class="form-control multi-select2" multiple searchable="Search here.." name="onscreen[]" >
+                                <select class="form-control multi-select2-with-tags" multiple searchable="Search here.." name="onscreen[]" >
                                     @foreach($user_list as $user)
-                                    <option value="{{$user->id}}">{{$user->first_name}} ({{$user->email}})</option>
+                                    <option value="{{base64_encode($user->id)}}">{{$user->first_name}} ({{$user->email}})</option>
                                     @endforeach
                                 </select>
                             </div>
                             <div class="form-group">
-                                <label for="exampleTextarea">Co Creator(s)</label>
+                                <label for="exampleTextarea">Co Creator(s) (If not exist, add email's)</label>
                                 {{--<input type="text" class="form-control" aria-describedby="nameHelp" name="co_creators" placeholder="Co Creators" value="{{ old('co_creators') }}">--}}
-                                <select class="form-control multi-select2" multiple searchable="Search here.." name="co_creators[]" >
+                                <select class="form-control multi-select2-with-tags" multiple searchable="Search here.." name="co_creators[]" >
                                     @foreach($user_list as $user)
-                                    <option value="{{$user->id}}">{{$user->first_name}} ({{$user->email}})</option>
+                                    <option value="{{base64_encode($user->id)}}">{{$user->first_name}} ({{$user->email}})</option>
                                     @endforeach
                                 </select>
                             </div>
                             <div class="form-group">
                                 <label for="exampleTextarea">Organization(s)/Group(s)</label>
-                                <select class="form-control multi-select2" multiple searchable="Search here.." name="groups[]" >
+                                <select class="form-control multi-select2-with-tags" multiple searchable="Search here.." name="groups[]" >
                                     @foreach($groups as $group)
-                                        <option value="{{$group->id}}">{{$group->name}} ({{$group->email}})</option>
+                                        <option value="{{base64_encode($group->id)}}">{{$group->name}} ({{$group->email}})</option>
                                     @endforeach
                                 </select>
                                 {{--<input type="text" class="form-control" aria-describedby="nameHelp" name="organization" placeholder="Organization" value="{{ old('organization') }}">--}}
                             </div>
                             <div class="form-group">
-                                <label for="exampleTextarea">Learn More Url</label>
+                                <label for="exampleTextarea">Learn More Url (If not exist, add Name)</label>
                                 <input type="text" class="form-control" aria-describedby="nameHelp" name="learn_more_url" placeholder="Learn More Url" value="{{ old('learn_more_url') }}">
                             </div>
 
@@ -117,8 +117,8 @@
                                 </select>
                             </div>
                             <div class="form-group">
-                                <label for="exampleSelect1">Primary Subject Tag (40 max)</label>
-                                <input type="text" class="form-control" aria-describedby="nameHelp" name="primary_subject_tag_id" placeholder="Primary Subject Tag" value="{{ old('primary_subject_tag_id') }}">
+                                <label for="primary_subject_tag">Primary Subject Tag (40 max)</label>
+                                <input type="text" class="form-control" aria-describedby="nameHelp" id="primary_subject_tag" name="primary_subject_tag" placeholder="Primary Subject Tag" value="{{ old('primary_subject_tag') }}">
                             </div>
 
                             {{--<div class="form-group">--}}
@@ -140,16 +140,17 @@
                             </div>
                             <div class="form-group">
                                 <label for="exampleTextarea">Location</label>
-                                <input type="text" class="form-control" aria-describedby="nameHelp" name="location" placeholder="Location" value="{{ old('location') }}">
+                                <input type="text" class="form-control" id="leaflet_search_addr" aria-describedby="nameHelp" name="location" placeholder="Location" value="{{ old('location') }}">
                             </div>
-                            <div class="form-group">
-                                <label for="exampleTextarea">Lat/Long</label>
-                                <div class="row">
-                                    <div class="col-2"><input type="text" class="form-control" aria-describedby="nameHelp" name="lat" placeholder="Lat" value="{{ old('lat') }}"></div>
-                                    <div class="col-2"><input type="text" class="form-control" aria-describedby="nameHelp" name="long" placeholder="Long" value="{{ old('long') }}"></div>
-                                </div>
-                            </div>
-
+                            {{--<div class="form-group">--}}
+                                {{--<label for="exampleTextarea">Lat/Long</label>--}}
+                                {{--<div class="row">--}}
+                                    {{--<div class="col-2"><input type="text" class="form-control" aria-describedby="nameHelp" id="lat_val" name="lat" placeholder="Lat" value="{{ old('lat') }}"></div>--}}
+                                    {{--<div class="col-2"><input type="text" class="form-control" aria-describedby="nameHelp" id="long_val" name="long" placeholder="Long" value="{{ old('long') }}"></div>--}}
+                                {{--</div>--}}
+                            {{--</div>--}}
+                            <input type="hidden" value="0" id="lat_val" name="lat" value="{{ old('lat') }}">
+                            <input type="hidden" value="0" id="long_val" name="long" value="{{ old('long') }}">
 
                             <div class="form-group">
                                 <label for="exampleTextarea">URL</label>
@@ -203,7 +204,7 @@
                             {{--</fieldset>--}}
                             <div class="form-group">
                                 <label for="is_exchange">Exchange (Y/N)</label>
-                                <input class="form-control" type="checkbox" id="is_exchange" value="{{ old('exchange') }}" name="exchange" style="width: 50px;"/>
+                                <input class="form-control" type="checkbox" id="is_exchange" value="1" name="exchange" style="width: 50px;"/>
                             </div>
                             <div class="form-group" id="exchange_enabled" <?php if(empty(old('exchange'))){ ?> style="visibility: hidden;" <?php } ?> >
                                 <label for="is_exchange">If Exchange Yes, Service / Opportunity?</label>
@@ -216,11 +217,10 @@
 
 
                             <div class="form-group">
-                                <label for="exampleSelect1">Sorting Tags</label>
-                                <select class="form-control multi-select2" id="secondary_subject_tag_id" multiple name="video_role">
-                                    <option value="0">Select</option>
+                                <label for="sorting_tags">Sorting Tags</label>
+                                <select class="form-control multi-select2-with-tags" id="sorting_tags" multiple name="sorting_tags[]">
                                     @foreach($sorting_tags as $tag)
-                                        <option value="{{$tag['id']}}">{{$tag['tag']}}</option>
+                                        <option value="{{base64_encode($tag['id'])}}">{{$tag['tag']}}</option>
                                     @endforeach
                                 </select>
                             </div>
@@ -248,7 +248,7 @@
                                 <textarea type="text" class="form-control" aria-describedby="nameHelp" name="user_comment" placeholder="Additional Comments" rows="4">{{ old('user_comment') }}</textarea>
                             </div>
 
-                            <button type="submit" class="btn btn-primary">Submit</button>
+                            <button type="button" onclick="submit_content()" class="btn btn-primary">Submit</button>
                         </form>
                 </div>
             </div>

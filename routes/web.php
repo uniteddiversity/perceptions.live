@@ -30,6 +30,7 @@ Route::group(['prefix' => 'user', 'middleware' => ['auth', 'web', 'admin']], fun
     Route::get('/logout', '\App\Http\Controllers\Auth\LoginController@userLogout');
 
     Route::get('/admin/user-list', '\App\Controllers\User\UserController@userList');
+    Route::get('/admin/group-list', '\App\Controllers\User\UserController@groupList');
     Route::get('/admin/user-add', '\App\Controllers\User\UserController@userAdd');
     Route::get('/admin/user-edit/{_user_id}', '\App\Controllers\User\UserController@adminUserEdit');
     Route::get('/admin/video-edit/{_user_id}', '\App\Controllers\User\UserController@contentEdit');
@@ -46,4 +47,6 @@ Route::group(['prefix' => 'user', 'middleware' => ['auth', 'web', 'admin']], fun
 
     Route::get('admin/sorting-tag-add', '\App\Controllers\User\UserController@sortingTagAdd');
     Route::post('admin/post-sorting-tag-add', '\App\Controllers\User\UserController@postSortingTagAdd');
+
+    Route::get('/admin/group-edit/{_group_id}', '\App\Controllers\User\UserController@editGroup');
 });

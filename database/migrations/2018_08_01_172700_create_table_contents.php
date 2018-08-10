@@ -17,8 +17,8 @@ class CreateTableContents extends Migration
             $table->engine = 'InnoDB';
             $table->increments('id');
             $table->string('title', 5000);
-            $table->dateTime('captured_date');
-            $table->dateTime('video_date');
+            $table->dateTime('captured_date')->nullable(true);
+            $table->dateTime('video_date')->nullable(true);
             $table->text('video_producer')->nullable(true);
             $table->text('onscreen')->nullable(true);
             $table->text('organization')->nullable(true);
@@ -26,9 +26,9 @@ class CreateTableContents extends Migration
             $table->text('co_creators')->nullable(true);
             $table->integer('category_id')->default(0)->nullable(true);
             $table->integer('grater_community_intention_id')->default(0)->nullable(true);
-            $table->string('primary_subject_tag_id')->default('')->nullable(true);
+            $table->string('primary_subject_tag')->default('')->nullable(true);
             $table->string('secondary_subject_tag_id')->default('')->nullable(true);
-            $table->string('submitted_footage');//yes,no
+            $table->string('submitted_footage')->default('no')->nullable(true);;//yes,no
             $table->text('brief_description')->nullable(true);
             $table->text('description')->nullable(true);
             $table->string('location')->nullable(true);
@@ -36,7 +36,7 @@ class CreateTableContents extends Migration
             $table->string('long')->nullable(true);
             $table->string('url_split')->nullable(true);
             $table->string('full_embed_code')->nullable(true);
-            $table->string('url', 450);
+            $table->string('url', 650)->nullable(true);
             $table->string('video_id')->nullable(true);
             $table->string('video_id_old')->nullable(true);
 

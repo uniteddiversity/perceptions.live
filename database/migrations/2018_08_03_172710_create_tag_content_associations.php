@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateUserAssociationTags extends Migration
+class CreateTagContentAssociations extends Migration
 {
     /**
      * Run the migrations.
@@ -13,11 +13,11 @@ class CreateUserAssociationTags extends Migration
      */
     public function up()
     {
-        Schema::create('user_sorting_tags', function (Blueprint $table) {
+        Schema::create('tag_content_associations', function (Blueprint $table) {
             $table->engine = 'InnoDB';
             $table->increments('id');
-            $table->string('name', 300);
-            $table->string('slug', 50);
+            $table->integer('content_tag_id');
+            $table->integer('content_id');
         });
     }
 

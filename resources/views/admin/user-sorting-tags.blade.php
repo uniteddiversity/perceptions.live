@@ -4,7 +4,7 @@
     <div class="col-lg-12 grid-margin stretch-card">
         <div class="card">
             <div class="card-body">
-                <h4 class="card-title">Add User</h4>
+                <h4 class="card-title">Add Tag</h4>
                 <div class="table-responsive">
                     @if ($errors->any())
                         <div class="alert alert-danger">

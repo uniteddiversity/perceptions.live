@@ -63,6 +63,9 @@
                     <li class="nav-item">
                         <a class="nav-link" href="/user/admin/user-to-group-add"> Assign User to Group </a>
                     </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/user/admin/group-list"> List Groups </a>
+                    </li>
                 </ul>
             </div>
         </li>

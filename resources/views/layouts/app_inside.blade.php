@@ -202,6 +202,12 @@
     </div>
     <!-- page-body-wrapper ends -->
 </div>
+
+
+
+
+
+
 <!-- container-scroller -->
 
 <!-- plugins:js -->
@@ -235,6 +241,8 @@
     $(document).ready(function() {
         $('.multi-select2').select2();
 
+        $('.multi-select2-with-tags').select2({tags: true});
+
         $('#user-assign-group').change(function(){console.log('vl '+$(this).val());
              document.location.href = '/user/admin/user-to-group-add/'+$(this).val();
         })
@@ -247,6 +255,29 @@
             }
         })
     });
+
+
+    function addr_search() {
+        var inp = document.getElementById("leaflet_search_addr");
+        $.getJSON('http://nominatim.openstreetmap.org/search?format=json&limit=5&q=' + inp.value, function(data) {
+            var items = [];
+
+            $.each(data, function(key, val) {
+                bb = val.boundingbox;
+                console.log(bb[0]+'     '+bb[2]);
+                $('#lat_val').val(bb[0]);
+                $('#long_val').val(bb[2]);
+            });
+            $('#submit_content').submit();
+            return true;
+        });
+    }
+
+    function submit_content(){
+        if(addr_search()){
+
+        }
+    }
 </script>
 <!-- End custom js for this page-->
 </body>

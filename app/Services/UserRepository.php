@@ -5,14 +5,20 @@ namespace User\Services;
 use App\Attachment;
 use App\Content;
 use App\Group;
+use App\GroupContentAssociation;
 use App\Role;
 use App\SortingTag;
+use App\TagContentAssociation;
+use App\TagUserAssociation;
 use App\User;
 use App\UserContentAssociation;
 use App\UserGroup;
+use App\UserStatus;
 use Content\Services\ContentService;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\URL;
+use Illuminate\Support\Facades\Validator;
 
 class UserRepository
 {
@@ -50,10 +56,27 @@ class UserRepository
      * @var SortingTag
      */
     private $sortingTag;
+    /**
+     * @var GroupContentAssociation
+     */
+    private $groupContentAssociation;
+    /**
+     * @var TagContentAssociation
+     */
+    private $tagContentAssociation;
+    /**
+     * @var TagUserAssociation
+     */
+    private $tagUserAssociation;
+    /**
+     * @var UserStatus
+     */
+    private $userStatus;
 
     public function __construct(User $user, Content $content,
                                 UserGroup $userGroup, Group $group, Role $role, UserContentAssociation $userContentAssociation,
-                                Attachment $attachment, SortingTag $sortingTag)
+                                Attachment $attachment, SortingTag $sortingTag, GroupContentAssociation $groupContentAssociation,
+                                TagContentAssociation $tagContentAssociation, TagUserAssociation $tagUserAssociation, UserStatus $userStatus)
     {
         $this->user = $user;
         $this->content = $content;
@@ -63,6 +86,10 @@ class UserRepository
         $this->userContentAssociation = $userContentAssociation;
         $this->attachment = $attachment;
         $this->sortingTag = $sortingTag;
+        $this->groupContentAssociation = $groupContentAssociation;
+        $this->tagContentAssociation = $tagContentAssociation;
+        $this->tagUserAssociation = $tagUserAssociation;
+        $this->userStatus = $userStatus;
     }
 
     public function getUsers($filter = array(), $user_id = null)
@@ -171,7 +198,7 @@ class UserRepository
         return implode($pass); //turn the array into a string
     }
 
-    function groupList($user_id)
+    function groupList($user_id, $full = false, $group_id = 0)
     {
         $user_info = $this->getUser($user_id);
 
@@ -180,7 +207,19 @@ class UserRepository
             $user_group->where('id', $user_id['group_id']);
         }
 
-        $user_group = $user_group->get();
+        if($full){
+            $user_group = $user_group->with('groupStatus');
+            $user_group->leftJoin(DB::raw('(SELECT count(user_id) as users_count, group_id FROM user_groups GROUP BY group_id) as user_groups'), 'id', 'user_groups.group_id');
+        }
+
+        if($group_id <> 0){
+            $user_group = $user_group->where('groups.id', $group_id);
+            $user_group->with('proofOfGroup','groupAvatar');
+            $user_group = $user_group->first();
+        }else{
+            $user_group = $user_group->get();
+        }
+
         return $user_group;
     }
 
@@ -236,7 +275,7 @@ class UserRepository
 
     function deleteUserContentAssociations($user_id, $content_id, $association_tag_slug)
     {
-        return $this->userContentAssociation->where('content_id', $content_id)->where('user_association_tag_slug', $association_tag_slug);
+        return $this->userContentAssociation->where('content_id', $content_id)->where('user_association_tag_slug', $association_tag_slug)->delete();
     }
 
 
@@ -294,6 +333,100 @@ class UserRepository
                 'created_by' => $user_id, 'group_id' => $group_id));
         }
 
+    }
+
+    function updateGroupContentAssociations($user_id, $content_id, $group_id)
+    {
+        return $this->groupContentAssociation->create(
+            array(
+                'content_id' => $content_id,
+                'group_id' => $group_id
+            )
+        );
+    }
+
+    function deleteGroupContentAssociations($user_id, $content_id)
+    {
+        return $this->groupContentAssociation->where('content_id', $content_id)->delete();
+    }
+
+    public function addIfNotExist($value, $type, $user_id = 0)
+    {
+        switch($type){
+            case 'user':
+                $validator = Validator::make(array('email' => $value), [
+                    'email' => 'required|email|unique:users'
+                ]);
+                if (!$validator->fails()) {
+                    return $this->user->create(
+                        array(
+                            'email' => $value,
+                            'first_name' => $value,
+                            'last_name' => $value,
+                            'status_id' => 2,
+                            'role_id' => 120,
+                            'password' => bcrypt($this->randomPassword()),
+                        )
+                    );
+                }else{
+                    return $this->user->where('email', $value)->first();
+                }
+                break;
+            case 'group':
+                return $this->group->create(
+                    array(
+                        'name' => $value,
+                        'status' => 2
+                    )
+                );
+                break;
+            case 'tag':
+                $current_user = $this->getUser($user_id);
+                return $this->sortingTag->create(
+                    array('tag' => $value,
+                        'description' => '',
+                        'created_by' => $user_id,
+                        'tag_for' => 'content',
+                        'group_id' => isset($current_user['group_id'])?$current_user['group_id']: 0
+                    )
+                );
+                break;
+        }
+    }
+
+    public function addTagToContent($tag_id, $content_id)
+    {
+        return $this->tagContentAssociation->create(
+            array(
+                'content_tag_id' => $tag_id,
+                'content_id' => $content_id,
+            )
+        );
+    }
+
+    public function deleteTagsOfContent($content_id,$user_id)
+    {
+        return $this->tagContentAssociation->where('content_tag_id', $content_id)->delete();
+    }
+
+    public function addTagToUser($tag_id, $user_id)
+    {
+        return $this->tagContentAssociation->create(
+            array(
+                'user_tag_id' => $tag_id,
+                'user_id' => $user_id,
+            )
+        );
+    }
+
+    public function deleteTagsOfUser($user_id, $deleting_user_id)
+    {
+        return $this->tagContentAssociation->where('user_tag_id', $user_id)->delete();
+    }
+
+    public function getStatus()
+    {
+        return $this->userStatus->get();
     }
 }
 

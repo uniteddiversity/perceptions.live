@@ -22,6 +22,7 @@ class CreateSortingTags extends Migration
             $table->integer('created_by')->nullable(true);
             $table->integer('group_id')->nullable(true);
             $table->integer('not_selectable')->default(0)->nullable(true);
+            $table->string('tag_for')->default('content')->nullable(true);//content/user
             $table->integer('status')->default(1)->nullable(true);
             $table->timestamps();
         });
