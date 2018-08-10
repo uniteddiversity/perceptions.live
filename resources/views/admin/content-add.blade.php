@@ -154,7 +154,7 @@
                                 <select class="form-control" id="grater_community_intention_id" name="grater_community_intention_id">
                                     <option value="0">Select</option>
                                     @foreach($meta_array['gci'] as $m)
-                                    <option value="{{$m['id']}}" <?php if($group->id == old('grater_community_intention_id',$data['grater_community_intention_id'])){ echo 'selected'; } ?> >{{$m['value']}}</option>
+                                    <option value="{{$m['id']}}" <?php if($m->id == old('grater_community_intention_id',$data['grater_community_intention_id'])){ echo 'selected'; } ?> >{{$m['value']}}</option>
                                     @endforeach
                                 </select>
                             </div>
