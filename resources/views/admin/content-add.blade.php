@@ -144,7 +144,7 @@
                                 <select class="form-control" id="category_id" name="category_id">
                                     <option value="0">Select</option>
                                     @foreach($categories as $cat)
-                                    <option value="{{$cat->id}}" <?php if($group->id == old('category_id',$data['category_id'])){ echo 'selected'; } ?> >{{$cat->name}}</option>
+                                    <option value="{{$cat->id}}" <?php if($cat->id == old('category_id',$data['category_id'])){ echo 'selected'; } ?> >{{$cat->name}}</option>
                                     @endforeach
                                 </select>
                             </div>
