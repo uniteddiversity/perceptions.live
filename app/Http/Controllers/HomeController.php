@@ -5,6 +5,7 @@ namespace App\Controllers;
 use App\Content;
 use App\Http\Controllers\Controller;
 use App\User;
+use Content\Services\ContentService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
@@ -25,12 +26,17 @@ class HomeController extends Controller
      * @var UserRepository
      */
     private $userRepository;
+    /**
+     * @var ContentService
+     */
+    private $contentService;
 
-    public function __construct(Content $content, User $user, UserRepository $userRepository)
+    public function __construct(Content $content, User $user, UserRepository $userRepository, ContentService $contentService)
     {
         $this->content = $content;
         $this->user = $user;
         $this->userRepository = $userRepository;
+        $this->contentService = $contentService;
     }
 
     public function home()
@@ -41,7 +47,7 @@ class HomeController extends Controller
             ->with(compact('uploaded_list'));
     }
 
-    public function ajaxVideos()
+    public function ajaxVideos($id = 0)
     {
         $user_id = (!isset(Auth::user()->id))? 0 : Auth::user()->id;
         $uploaded_list = $this->userRepository->getPublicContents($user_id);
@@ -89,10 +95,60 @@ class HomeController extends Controller
         return response()->json($ret, 200);
     }
 
+    public function ajaxVideosNew($id = 0)
+    {
+        $user_id = (!isset(Auth::user()->id))? 0 : Auth::user()->id;
+        $uploaded_list = $this->userRepository->getAvailableContents($id);
+        $ret = array(); $i = 0;
+        foreach($uploaded_list as $u){
+            $ret[$i]['id'] = $u['id'];
+            $ret[$i]['lng'] = floatval($u['long']);
+            $ret[$i]['lat'] = floatval($u['lat']);
+            $ret[$i]['name'] = $u['title'];
+            $i++;
+        }
+        return response()->json($ret, 200);
+    }
+
     public function getVideoInfo($video_id)
     {
         $user_id = (!isset(Auth::user()->id))? 0 : Auth::user()->id;
         $info = $this->userRepository->getContentsInfo($user_id, $video_id);
+        return view('partials.video-info')
+            ->with(compact('info'));
+    }
+
+    public function location($id)
+    {
+//        $user_id = (!isset(Auth::user()->id))? 0 : Auth::user()->id;
+//        $ret = $this->contentService->getAvailableVideosOnMap($id, $user_id);
+//        $locations = response()->json($ret, 200);
+
+        $user_id = (!isset(Auth::user()->id))? 0 : Auth::user()->id;
+        $uploaded_list = $this->userRepository->getAvailableContents($id);
+        $ret = array(); $i = 0;
+        foreach($uploaded_list as $u){
+            $ret[$i]['id'] = $u['id'];
+            $ret[$i]['lng'] = floatval($u['long']);
+            $ret[$i]['lat'] = floatval($u['lat']);
+            $ret[$i]['name'] = $u['title'];
+//            $ret[$i]['city'] = $u['city'];
+            $i++;
+        }
+
+        $location_id = $id;
+//        $uploaded_list = isset($uploaded_list)? $uploaded_list[0]: array();
+
+        $locations = response()->json($ret, 200);
+//        dd($ret);
+        return view('user.home2')
+            ->with(compact('locations','location_id'));
+    }
+
+    public function videoProfile($id)
+    {
+        $user_id = (!isset(Auth::user()->id))? 0 : Auth::user()->id;
+        $info = $this->contentService->getContentData($id,$user_id);//dd($info);
         return view('partials.video-info')
             ->with(compact('info'));
     }

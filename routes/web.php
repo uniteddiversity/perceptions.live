@@ -20,7 +20,10 @@ Route::post('/', function(){
 })->name('login');
 
 Route::get('/', array('uses' => '\App\Controllers\HomeController@home'))->name('home');
+Route::get('/location/{_video_id}', array('uses' => '\App\Controllers\HomeController@location'));
+Route::get('/profile/video/{_video_id}', array('uses' => '\App\Controllers\HomeController@videoProfile'));
 Route::get('/ajax-available-videos', array('uses' => '\App\Controllers\HomeController@ajaxVideos'))->name('home');
+Route::get('/ajax-available-videos/{_id}', array('uses' => '\App\Controllers\HomeController@ajaxVideosNew'));
 Route::get('/home/ajax-video-info/{_video_id}', '\App\Controllers\HomeController@getVideoInfo');
 
 Route::group(['prefix' => 'user', 'middleware' => ['auth', 'web', 'admin']], function () {

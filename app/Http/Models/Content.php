@@ -30,4 +30,29 @@ class Content extends Model
     {
         return $this->belongsTo('App\User','user_id');
     }
+
+    public function coCreators()
+    {
+        return $this->hasMany('App\UserContentAssociation','content_id')->where('user_association_tag_slug','co-cr');
+    }
+
+    public function onScreen()
+    {
+        return $this->hasMany('App\UserContentAssociation','content_id')->where('user_association_tag_slug','on-s');
+    }
+
+    public function videoProducer()
+    {
+        return $this->hasMany('App\UserContentAssociation','content_id')->where('user_association_tag_slug','vd-p');
+    }
+
+    public function groups()
+    {
+        return $this->hasMany('App\GroupContentAssociation','content_id');
+    }
+
+    public function sortingTags()
+    {
+        return $this->hasMany('App\TagContentAssociation','content_id');
+    }
 }

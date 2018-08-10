@@ -226,7 +226,7 @@
 
 <script>
     $(document).ready(function() {
-        $('#users_llist').DataTable();
+        $('#users_llist').DataTable({"aaSorting": []});
         $('.datepicker').datepicker({
             format: 'yyyy-mm-dd',
             startDate: '-3d',

@@ -1,10 +1,51 @@
 @extends('layouts.app_inside')
 
 @section('content')
+    <?php
+
+    $data = array();
+    $data['title'] = isset($video_data['title'])?$video_data['title']:'';
+    $data['access_level_id'] = isset($video_data['access_level_id'])?$video_data['access_level_id']:'';
+    $data['brief_description'] = isset($video_data['brief_description'])?$video_data['brief_description']:'';
+
+
+    $data['video_producer'] = isset($video_data['video_producer'])?array_column($video_data['video_producer'],'user_id'):array();
+    $data['onscreen'] = isset($video_data['on_screen'])?array_column($video_data['on_screen'],'user_id'):array();
+    $data['co_creators'] = isset($video_data['co_creators'])?array_column($video_data['co_creators'],'user_id'):array();
+    $data['groups'] = isset($video_data['groups'])?array_column($video_data['groups'],'group_id'):array();
+
+    $data['learn_more_url'] = isset($video_data['learn_more_url'])?$video_data['learn_more_url']:'';
+    $data['category_id'] = isset($video_data['category_id'])?$video_data['category_id']:'';
+    $data['grater_community_intention_id'] = isset($video_data['grater_community_intention_id'])?$video_data['grater_community_intention_id']:'';
+    $data['primary_subject_tag'] = isset($video_data['primary_subject_tag'])?$video_data['primary_subject_tag']:'';
+    $data['submitted_footage'] = isset($video_data['submitted_footage'])?$video_data['submitted_footage']:'';
+    $data['location'] = isset($video_data['location'])?$video_data['location']:'';
+    $data['url'] = isset($video_data['url'])?$video_data['url']:'';
+    $data['captured_date'] = isset($video_data['captured_date'])?date_format(date_create($video_data['captured_date']), 'Y-m-d'):'';
+    $data['video_date'] = isset($video_data['video_date'])?date_format(date_create($video_data['video_date']), 'Y-m-d'):'';
+
+
+    $data['exchange'] = isset($video_data['id'])?$video_data['id']:'1';
+
+    $data['service_or_opportunity'] = isset($video_data['service_or_opportunity'])?$video_data['service_or_opportunity']:'';
+    $data['sorting_tags'] = isset($video_data['sorting_tags'])?array_column($video_data['sorting_tags'],'content_tag_id'):array();
+    $data['user_comment'] = isset($video_data['user_comment'])?$video_data['user_comment']:'';
+    $data['lat'] = isset($video_data['lat'])?$video_data['lat']:'';
+    $data['long'] = isset($video_data['long'])?$video_data['long']:'';
+
+    $data['content_set1'] = isset($video_data['content_set1'])?$video_data['content_set1']:array();
+    $data['content_set2'] = isset($video_data['content_set2'])?$video_data['content_set2']:array();
+    $data['content_set3'] = isset($video_data['content_set3'])?$video_data['content_set3']:array();
+
+    $data['id'] = isset($video_data['id'])?$video_data['id']:'';
+
+
+//    dd($data);
+    ?>
     <div class="col-lg-12 grid-margin stretch-card">
         <div class="card">
             <div class="card-body">
-                <h4 class="card-title">Add Video</h4>
+                <h4 class="card-title">Add Video <span style="font-size: 12px;"><?php if(!empty($data['id'])){ ?><a class="btn btn-primary btn-xs" href="/location/<?php echo $data['id'] ?>" target="_blank">View Map</a> <a class="btn btn-primary btn-xs" href="/profile/video/<?php echo $data['id'] ?>" target="_blank">Video Profile</a><?php } ?></span></h4>
                 <div class="table-responsive">
                     @if ($errors->any())
                         <div class="alert alert-danger">
@@ -23,16 +64,17 @@
                         @endif
                         <form action="/user/post-upload-video" method="post" id="submit_content" enctype='multipart/form-data'>
                             <input type="hidden" name="_token" id="csrf-token" value="{{ Session::token() }}" />
+                            <input type="hidden" name="id" id="csrf-token" value="<?php echo uid($data['id']) ?>" />
                             <div class="form-group">
                                 <label for="exampleInputEmail1">Title</label>
-                                <input type="text" class="form-control" aria-describedby="nameHelp" name="title" placeholder="Title" value="{{ old('title') }}">
+                                <input type="text" class="form-control" aria-describedby="nameHelp" name="title" placeholder="Title" value="{{ old('title',$data['title']) }}">
                             </div>
                             <div class="form-group">
                                 <label for="exampleSelect1">Access Level</label>
                                 <select class="form-control" id="exampleSelect1" name="access_level_id">
-                                    <option value="1">Public</option>
-                                    <option value="2">Only Registered</option>
-                                    <option value="3">Private</option>
+                                    <?php foreach($access_levels as $access){ ?>
+                                        <option value="{{$access->id}}" <?php if(old('access_level_id',$data['access_level_id']) == $access->id){ echo 'selected'; } ?> >{{$access->name}}</option>
+                                    <?php }?>
                                 </select>
                             </div>
                             {{--<div class="form-group">--}}
@@ -45,7 +87,7 @@
 
                             <div class="form-group">
                                 <label for="exampleTextarea">Brief Description</label>
-                                <textarea name="brief_description" class="form-control" id="exampleTextarea" rows="3">{{ old('brief_description') }}</textarea>
+                                <textarea name="brief_description" class="form-control" id="exampleTextarea" rows="3">{{ old('brief_description',$data['brief_description']) }}</textarea>
                             </div>
                             {{--<div class="form-group">--}}
                                 {{--<label for="description">Description</label>--}}
@@ -54,55 +96,55 @@
 
 
                             <div class="form-group">
-                                <label for="exampleTextarea">Video Producer(s) (If not exist, add email's)</label>
+                                <label for="video_producer">Video Producer(s) (If not exist, add email's)</label>
                                 {{--<input type="text" class="form-control" aria-describedby="nameHelp" name="video_producer" placeholder="Video Producer" value="{{ old('video_producer') }}">--}}
-                                <select class="form-control multi-select2-with-tags" multiple searchable="Search here.." name="video_producer[]" >
+                                <select class="form-control multi-select2-with-tags" id="video_producer" multiple searchable="Search here.." name="video_producer[]" >
                                     @foreach($user_list as $user)
-                                    <option value="{{base64_encode($user->id)}}">{{$user->first_name}} ({{$user->email}})</option>
+                                    <option value="{{base64_encode($user->id)}}" <?php if(in_array($user->id, old('video_producer',$data['video_producer']))){ echo 'selected'; } ?> >{{$user->first_name}} ({{$user->email}})</option>
                                     @endforeach
                                 </select>
                             </div>
                             <div class="form-group">
-                                <label for="exampleTextarea">Onscreen (If not exist, add email's)</label>
+                                <label for="onscreen">Onscreen (If not exist, add email's)</label>
                                 {{--<input type="text" class="form-control" aria-describedby="nameHelp" name="onscreen" placeholder="Onscreen" value="{{ old('onscreen') }}">--}}
-                                <select class="form-control multi-select2-with-tags" multiple searchable="Search here.." name="onscreen[]" >
+                                <select class="form-control multi-select2-with-tags" id="onscreen" multiple searchable="Search here.." name="onscreen[]" >
                                     @foreach($user_list as $user)
-                                    <option value="{{base64_encode($user->id)}}">{{$user->first_name}} ({{$user->email}})</option>
+                                    <option value="{{base64_encode($user->id)}}" <?php if(in_array($user->id, old('onscreen',$data['onscreen']))){ echo 'selected'; } ?> >{{$user->first_name}} ({{$user->email}})</option>
                                     @endforeach
                                 </select>
                             </div>
                             <div class="form-group">
-                                <label for="exampleTextarea">Co Creator(s) (If not exist, add email's)</label>
+                                <label for="co_creators">Co Creator(s) (If not exist, add email's)</label>
                                 {{--<input type="text" class="form-control" aria-describedby="nameHelp" name="co_creators" placeholder="Co Creators" value="{{ old('co_creators') }}">--}}
-                                <select class="form-control multi-select2-with-tags" multiple searchable="Search here.." name="co_creators[]" >
+                                <select class="form-control multi-select2-with-tags" multiple id="co_creators" searchable="Search here.." name="co_creators[]" >
                                     @foreach($user_list as $user)
-                                    <option value="{{base64_encode($user->id)}}">{{$user->first_name}} ({{$user->email}})</option>
+                                    <option value="{{base64_encode($user->id)}}" <?php if(in_array($user->id, old('co_creators',$data['co_creators']))){ echo 'selected'; } ?> >{{$user->first_name}} ({{$user->email}})</option>
                                     @endforeach
                                 </select>
                             </div>
                             <div class="form-group">
-                                <label for="exampleTextarea">Organization(s)/Group(s)</label>
-                                <select class="form-control multi-select2-with-tags" multiple searchable="Search here.." name="groups[]" >
+                                <label for="groups">Organization(s)/Group(s)</label>
+                                <select class="form-control multi-select2-with-tags" id="groups" multiple searchable="Search here.." name="groups[]" >
                                     @foreach($groups as $group)
-                                        <option value="{{base64_encode($group->id)}}">{{$group->name}} ({{$group->email}})</option>
+                                        <option value="{{base64_encode($group->id)}}" <?php if(in_array($group->id, old('groups',$data['groups']))){ echo 'selected'; } ?> >{{$group->name}} ({{$group->email}})</option>
                                     @endforeach
                                 </select>
                                 {{--<input type="text" class="form-control" aria-describedby="nameHelp" name="organization" placeholder="Organization" value="{{ old('organization') }}">--}}
                             </div>
                             <div class="form-group">
-                                <label for="exampleTextarea">Learn More Url (If not exist, add Name)</label>
-                                <input type="text" class="form-control" aria-describedby="nameHelp" name="learn_more_url" placeholder="Learn More Url" value="{{ old('learn_more_url') }}">
+                                <label for="learn_more_url">Learn More Url (If not exist, add Name)</label>
+                                <input type="text" class="form-control" aria-describedby="nameHelp" id="learn_more_url" name="learn_more_url" placeholder="Learn More Url" value="{{ old('learn_more_url',$data['learn_more_url']) }}">
                             </div>
 
 
 
 
                             <div class="form-group">
-                                <label for="exampleSelect1">Category</label>
+                                <label for="category_id">Category</label>
                                 <select class="form-control" id="category_id" name="category_id">
                                     <option value="0">Select</option>
                                     @foreach($categories as $cat)
-                                    <option value="{{$cat->id}}">{{$cat->name}}</option>
+                                    <option value="{{$cat->id}}" <?php if($group->id == old('category_id',$data['category_id'])){ echo 'selected'; } ?> >{{$cat->name}}</option>
                                     @endforeach
                                 </select>
                             </div>
@@ -112,13 +154,13 @@
                                 <select class="form-control" id="grater_community_intention_id" name="grater_community_intention_id">
                                     <option value="0">Select</option>
                                     @foreach($meta_array['gci'] as $m)
-                                    <option value="{{$m['id']}}">{{$m['value']}}</option>
+                                    <option value="{{$m['id']}}" <?php if($group->id == old('grater_community_intention_id',$data['grater_community_intention_id'])){ echo 'selected'; } ?> >{{$m['value']}}</option>
                                     @endforeach
                                 </select>
                             </div>
                             <div class="form-group">
                                 <label for="primary_subject_tag">Primary Subject Tag (40 max)</label>
-                                <input type="text" class="form-control" aria-describedby="nameHelp" id="primary_subject_tag" name="primary_subject_tag" placeholder="Primary Subject Tag" value="{{ old('primary_subject_tag') }}">
+                                <input type="text" class="form-control" aria-describedby="nameHelp" id="primary_subject_tag" name="primary_subject_tag" placeholder="Primary Subject Tag" value="{{ old('primary_subject_tag',$data['primary_subject_tag']) }}">
                             </div>
 
                             {{--<div class="form-group">--}}
@@ -134,13 +176,13 @@
                             <div class="form-group">
                                 <label for="exampleSelect1">Submitted Footage</label>
                                 <select class="form-control" id="submitted_footage" name="submitted_footage">
-                                    <option value="yes">Yes</option>
-                                    <option value="no">No</option>
+                                    <option value="yes" <?php if(old('submitted_footage',$data['submitted_footage']) == 'yes'){ echo 'selected'; } ?> >Yes</option>
+                                    <option value="no" <?php if(old('submitted_footage',$data['submitted_footage']) == 'no'){ echo 'selected'; } ?> >No</option>
                                 </select>
                             </div>
                             <div class="form-group">
                                 <label for="exampleTextarea">Location</label>
-                                <input type="text" class="form-control" id="leaflet_search_addr" aria-describedby="nameHelp" name="location" placeholder="Location" value="{{ old('location') }}">
+                                <input type="text" class="form-control" id="leaflet_search_addr" aria-describedby="nameHelp" name="location" placeholder="Location" value="{{ old('location',$data['location']) }}">
                             </div>
                             {{--<div class="form-group">--}}
                                 {{--<label for="exampleTextarea">Lat/Long</label>--}}
@@ -149,12 +191,27 @@
                                     {{--<div class="col-2"><input type="text" class="form-control" aria-describedby="nameHelp" id="long_val" name="long" placeholder="Long" value="{{ old('long') }}"></div>--}}
                                 {{--</div>--}}
                             {{--</div>--}}
-                            <input type="hidden" value="0" id="lat_val" name="lat" value="{{ old('lat') }}">
-                            <input type="hidden" value="0" id="long_val" name="long" value="{{ old('long') }}">
+
+                            <?php if(!empty($data['id']) && !Auth::user()->is('Admin')){?>
+                                <input type="hidden" value="0" id="lat_val" name="lat" value="{{ old('lat',$data['lat']) }}">
+                                <input type="hidden" value="0" id="long_val" name="long" value="{{ old('long',$data['long']) }}">
+                            <?php }elseif(Auth::user()->is('Admin')){?>
+                            <div class="form-group">
+                                <label for="exampleTextarea">Lat/Long</label>
+                                <div class="row">
+                                    <div class="col-2"><input type="text" class="form-control" aria-describedby="nameHelp" id="lat_val" name="lat" placeholder="Lat" value="{{ old('lat',$data['lat']) }}"></div>
+                                    <div class="col-2"><input type="text" class="form-control" aria-describedby="nameHelp" id="long_val" name="long" placeholder="Long" value="{{ old('long',$data['long']) }}"></div>
+                                </div>
+                            </div>
+                            <?php }else{?>
+                                <input type="hidden" value="0" id="lat_val" name="lat" value="{{ old('lat',$data['lat']) }}">
+                                <input type="hidden" value="0" id="long_val" name="long" value="{{ old('long',$data['long']) }}">
+                            <?php } ?>
+
 
                             <div class="form-group">
                                 <label for="exampleTextarea">URL</label>
-                                <input type="text" class="form-control" aria-describedby="nameHelp" name="url" placeholder="URL" value="{{ old('url') }}">
+                                <input type="text" class="form-control" aria-describedby="nameHelp" name="url" placeholder="URL" value="{{ old('url',$data['url']) }}">
                             </div>
 
                             {{--<div class="form-group">--}}
@@ -176,12 +233,12 @@
 
                             <div class="form-group">
                                 <label for="video_id">Captured Date</label>
-                                <input type="text" class="form-control datepicker" aria-describedby="nameHelp" name="captured_date" placeholder="Captured Date" value="{{ old('captured_date','2018-01-01') }}">
+                                <input type="text" class="form-control datepicker" aria-describedby="nameHelp" name="captured_date" placeholder="Captured Date" value="{{ old('captured_date',$data['captured_date']) }}">
                             </div>
 
                             <div class="form-group">
                                 <label for="video_id">Video Date</label>
-                                <input type="text" class="form-control datepicker" aria-describedby="nameHelp" name="video_date" placeholder="Video Date" value="{{ old('video_date','2018-01-01') }}">
+                                <input type="text" class="form-control datepicker" aria-describedby="nameHelp" name="video_date" placeholder="Video Date" value="{{ old('video_date',$data['video_date']) }}">
                             </div>
 
                             {{--<div class="form-group">--}}
@@ -206,12 +263,12 @@
                                 <label for="is_exchange">Exchange (Y/N)</label>
                                 <input class="form-control" type="checkbox" id="is_exchange" value="1" name="exchange" style="width: 50px;"/>
                             </div>
-                            <div class="form-group" id="exchange_enabled" <?php if(empty(old('exchange'))){ ?> style="visibility: hidden;" <?php } ?> >
+                            <div class="form-group" id="exchange_enabled" <?php if(empty(old('exchange',$data['exchange']))){ ?> style="visibility: hidden;" <?php } ?> >
                                 <label for="is_exchange">If Exchange Yes, Service / Opportunity?</label>
                                 <select class="form-control multi-select2" id="service_or_opportunity" name="service_or_opportunity">
                                     <option value="0">Select</option>
-                                    <option value="1">Service</option>
-                                    <option value="2">Opportunity</option>
+                                    <option value="1" <?php if(old('service_or_opportunity',$data['service_or_opportunity']) == '1'){ echo 'selected'; } ?> >Service</option>
+                                    <option value="2" <?php if(old('service_or_opportunity',$data['service_or_opportunity']) == '2'){ echo 'selected'; } ?> >Opportunity</option>
                                 </select>
                             </div>
 
@@ -220,7 +277,7 @@
                                 <label for="sorting_tags">Sorting Tags</label>
                                 <select class="form-control multi-select2-with-tags" id="sorting_tags" multiple name="sorting_tags[]">
                                     @foreach($sorting_tags as $tag)
-                                        <option value="{{base64_encode($tag['id'])}}">{{$tag['tag']}}</option>
+                                        <option value="{{base64_encode($tag['id'])}}" <?php if(in_array($tag->id, old('sorting_tags',$data['sorting_tags']))){ echo 'selected'; } ?> >{{$tag['tag']}}</option>
                                     @endforeach
                                 </select>
                             </div>
@@ -245,7 +302,7 @@
 
                             <div class="form-group">
                                 <label for="exampleTextarea">Additional Comments</label>
-                                <textarea type="text" class="form-control" aria-describedby="nameHelp" name="user_comment" placeholder="Additional Comments" rows="4">{{ old('user_comment') }}</textarea>
+                                <textarea type="text" class="form-control" aria-describedby="nameHelp" name="user_comment" placeholder="Additional Comments" rows="4">{{ old('user_comment',$data['user_comment']) }}</textarea>
                             </div>
 
                             <button type="button" onclick="submit_content()" class="btn btn-primary">Submit</button>

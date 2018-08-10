@@ -40,7 +40,7 @@
                         @endif
                         <form action="/user/admin/post-group-add" method="post" enctype='multipart/form-data'>
                             <input type="hidden" name="_token" id="csrf-token" value="{{ Session::token() }}" />
-                            <input type="hidden" name="id" id="id" value="{{ $data['id'] }}" />
+                            <input type="hidden" name="id" id="id" value="{{ uid($data['id']) }}" />
                             <div class="form-group">
                                 <label for="exampleInputEmail1">Greeting Message to PRCPTION community</label>
                                 <input type="text" class="form-control" aria-describedby="nameHelp" name="greeting_message_to_community" placeholder="Greeting Message to PRCPTION community" value="{{ old('greeting_message_to_community',$data['greeting_message_to_community']) }}">

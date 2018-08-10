@@ -4,6 +4,7 @@ namespace User\Services;
 
 use App\Attachment;
 use App\Content;
+use App\ContentAccessLevels;
 use App\Group;
 use App\GroupContentAssociation;
 use App\Role;
@@ -72,11 +73,16 @@ class UserRepository
      * @var UserStatus
      */
     private $userStatus;
+    /**
+     * @var ContentAccessLevels
+     */
+    private $contentAccessLevels;
 
     public function __construct(User $user, Content $content,
                                 UserGroup $userGroup, Group $group, Role $role, UserContentAssociation $userContentAssociation,
                                 Attachment $attachment, SortingTag $sortingTag, GroupContentAssociation $groupContentAssociation,
-                                TagContentAssociation $tagContentAssociation, TagUserAssociation $tagUserAssociation, UserStatus $userStatus)
+                                TagContentAssociation $tagContentAssociation, TagUserAssociation $tagUserAssociation, UserStatus $userStatus,
+                                ContentAccessLevels $contentAccessLevels)
     {
         $this->user = $user;
         $this->content = $content;
@@ -90,6 +96,7 @@ class UserRepository
         $this->tagContentAssociation = $tagContentAssociation;
         $this->tagUserAssociation = $tagUserAssociation;
         $this->userStatus = $userStatus;
+        $this->contentAccessLevels = $contentAccessLevels;
     }
 
     public function getUsers($filter = array(), $user_id = null)
@@ -169,6 +176,27 @@ class UserRepository
         return $r;
     }
 
+    public function getAvailableContents($id)
+    {
+        $contents = $this->content->where('id', $id)
+            ->select('contents.id', 'contents.description', 'contents.lat', 'contents.long', 'contents.title', 'contents.url')->groupBy('contents.id')->get();
+        $r = array(); $i = 0;
+        foreach($contents as $c){
+            $r[$i] = $c;
+//            if(empty($c['url'])){
+//                $r[$i]['video'] = $c['content'];
+//            }else{
+//                $r[$i]['video'] = $c['url'];
+//            }
+            $r[$i]['video'] = $c['url'];
+
+            $i++;
+        }
+
+        return $r;
+    }
+
+
     public function getContentsInfo($user_id, $id)
     {
         $contents = $this->content->with('user')
@@ -212,12 +240,13 @@ class UserRepository
             $user_group->leftJoin(DB::raw('(SELECT count(user_id) as users_count, group_id FROM user_groups GROUP BY group_id) as user_groups'), 'id', 'user_groups.group_id');
         }
 
+//        $user_group->orderBy('groups.updated_at','DESC');
         if($group_id <> 0){
             $user_group = $user_group->where('groups.id', $group_id);
             $user_group->with('proofOfGroup','groupAvatar');
             $user_group = $user_group->first();
         }else{
-            $user_group = $user_group->get();
+            $user_group = $user_group->orderBy('groups.updated_at','DESC')->get();
         }
 
         return $user_group;
@@ -406,7 +435,7 @@ class UserRepository
 
     public function deleteTagsOfContent($content_id,$user_id)
     {
-        return $this->tagContentAssociation->where('content_tag_id', $content_id)->delete();
+        return $this->tagContentAssociation->where('content_id', $content_id)->delete();
     }
 
     public function addTagToUser($tag_id, $user_id)
@@ -427,6 +456,11 @@ class UserRepository
     public function getStatus()
     {
         return $this->userStatus->get();
+    }
+
+    public function getAccessLevels()
+    {
+        return $this->contentAccessLevels->get();
     }
 }
 

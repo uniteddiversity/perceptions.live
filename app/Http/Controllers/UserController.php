@@ -99,8 +99,12 @@ class UserController extends Controller
         }
 
         $r = $request->toArray();
-        $new_content = $this->content->create(
-            array(
+
+        $new_content = $this->content->updateOrCreate(
+            [
+                'id'   => (isset($r['id']))?UID::translator($r['id']):0,
+            ],
+            [
                 'title' => $r['title'],
                 'access_level_id' => $r['access_level_id'],
                 'category_id' => $r['category_id'],
@@ -134,13 +138,16 @@ class UserController extends Controller
 //                'video_date' => date('Y-m-d'),
                 'created_by' => $user_id,
                 'user_comment' => $r['user_comment']
-            )
+            ]
         );
 
 
+        if(isset($r['id'])){
+            $this->userRepository->deleteTagsOfContent($new_content->id,$user_id);
+        }
         //tag related to exchange should goes here//
 
-
+//dd('updating '.$new_content->id);
         //user associations with content
         if(isset($new_content->id)){
             $this->userRepository->deleteUserContentAssociations($user_id, $new_content->id, 'co-cr');
@@ -205,7 +212,7 @@ class UserController extends Controller
             }
 
             if(isset($r['sorting_tags'])){
-                //$this->userRepository->deleteTagsOfContent($new_content->id,$user_id);
+
                 foreach($r['sorting_tags'] as $sorting_tags_id){
                     $tag_id = base64_decode($sorting_tags_id);
                     if(is_numeric($tag_id)){
@@ -264,7 +271,8 @@ class UserController extends Controller
 
     public function contentList()
     {
-        $videos = $this->content->with('user')->get();
+        $user_id = (!isset(Auth::user()->id))? 0 : Auth::user()->id;
+        $videos = $this->contentService->getContentList($user_id);
         return view('admin.content-list')
             ->with(compact('videos'));
     }
@@ -277,17 +285,24 @@ class UserController extends Controller
         $user_list = $this->userRepository->getUsers(array(),$user_id);
         $sorting_tags = $this->userRepository->getSortingTags($user_id, true);
         $groups = $this->userRepository->groupList($user_id);
+        $access_levels = $this->userRepository->getAccessLevels();
         return view('admin.content-add')
-            ->with(compact('categories','meta_array','user_list','sorting_tags','groups'));
+            ->with(compact('categories','meta_array','user_list','sorting_tags','groups','access_levels'));
     }
 
-    public function contentEdit(Request $request)
+    public function contentEdit($id)
     {
+        $id = UID::translator($id);
+        $video_data = $this->contentService->getContentData($id);
+        $user_id = (!isset(Auth::user()->id))? 0 : Auth::user()->id;
         $categories = $this->category->get();
         $meta_array = $this->contentService->getMetaListByKey();
-
+        $user_list = $this->userRepository->getUsers(array(),$user_id);
+        $sorting_tags = $this->userRepository->getSortingTags($user_id, true);
+        $groups = $this->userRepository->groupList($user_id);
+        $access_levels = $this->userRepository->getAccessLevels();
         return view('admin.content-add')
-            ->with(compact('categories','meta_array'));
+            ->with(compact('categories','meta_array','user_list','sorting_tags','groups','access_levels','video_data'));
     }
 
     public function adminUserAdd(Request $request)
@@ -397,7 +412,7 @@ class UserController extends Controller
 
         $new_group = $this->group->updateOrCreate(
             [
-                'id'   => (isset($r['id']))?$r['id']:0,
+                'id'   => (isset($r['id']))?UID::translator($r['id']):0,
             ],
             [
                 'greeting_message_to_community' => $r['greeting_message_to_community'],

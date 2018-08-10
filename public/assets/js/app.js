@@ -16,6 +16,36 @@ myURL = '';
 
 var markerClusters = L.markerClusterGroup();
 
+function updateMap($id){
+    $.getJSON("/ajax-available-videos/"+$id, function (markers) {
+        var myIcon = L.icon({
+            iconUrl: myURL + '/assets/img/museum.png',
+            iconRetinaUrl: myURL + '/assets/img/museum.png',
+            iconSize: [29, 24],
+            iconAnchor: [9, 21],
+            popupAnchor: [0, -14]
+        });
+
+        var all_b = [];
+        for ( var i = 0; i < markers.length; ++i )
+        {
+            var popup = 'abc'+markers[i].name;
+            // var m = L.marker( [markers[i].lat, markers[i].lng], {icon: myIcon} )
+            //     .bindPopup( popup );
+            var m = L.marker( [markers[i].lat, markers[i].lng], {icon: myIcon, id: markers[i].id} );
+            m.on('click', onMarkerClick);
+            markerClusters.addLayer( m );
+            all_b.push(m);
+            console.log(markers[i]);
+        }
+
+        var group = new L.featureGroup(all_b);
+        map.fitBounds(group.getBounds());
+
+        $("#loading").hide();
+    });
+}
+
 $.getJSON("/ajax-available-videos", function (markers) {
     var myIcon = L.icon({
         iconUrl: myURL + '/assets/img/museum.png',
@@ -69,6 +99,11 @@ map.addLayer( markerClusters );
 
 
 /////////////////////////////////////////////////////////
+$(document).ready(function(){
+    if($('#_location_id').val() !== ''){
+        updateMap($('#_location_id').val());
+    }
+})
 $("#login-btn").click(function() {
     $("#loginModal").modal("show");
     $(".navbar-collapse.in").collapse("hide");
