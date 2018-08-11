@@ -16546,3 +16546,12 @@ ul {
     border-left: 3px solid rgba(255, 255, 255, 0.2); } }
 
 /*# sourceMappingURL=maps/style.css.map */
+
+
+/*custom styles*/
+.avatar {
+  vertical-align: middle;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+}

@@ -118,7 +118,7 @@ class UserRepository
 
 //        $r->select('users.id','users.*','user_groups.id as group_id');
         $r->select('users.id','users.*');
-        $r->groupBy('users.id');
+        $r->groupBy('users.id')->orderBy('updated_at', 'DESC');
         $r = $r->get();
 
         return $r;
@@ -195,7 +195,6 @@ class UserRepository
 
         return $r;
     }
-
 
     public function getContentsInfo($user_id, $id)
     {
@@ -287,7 +286,7 @@ class UserRepository
             $user_roles->where('id','<=', $user_id['role_id']);//must have equal or less powers
         }
 
-        $user_group = $user_roles->get();
+        $user_group = $user_roles->orderBy('id', 'DESC')->get();
         return $user_group;
     }
 

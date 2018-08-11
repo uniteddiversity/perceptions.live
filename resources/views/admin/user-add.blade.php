@@ -36,7 +36,10 @@
                         @endif
                         <form action="/user/admin/post-user-add" method="post" enctype='multipart/form-data'>
                             <input type="hidden" name="_token" id="csrf-token" value="{{ Session::token() }}" />
+                            <?php if(!empty($data['id'])){?>
                             <input type="hidden" name="id" id="id" value="{{ uid($data['id']) }}" />
+                            <?php }?>
+
                             <div class="form-group">
                                 <label for="exampleInputEmail1">Email</label>
                                 <input <?php if(!empty($data['id'])){ echo 'disabled'; } ?> type="text" class="form-control" aria-describedby="nameHelp" name="email" placeholder="Email" value="{{ old('email',$data['email']) }}">
@@ -75,10 +78,11 @@
                             <div class="form-group">
                                 <label for="user_avatar">User Avatar</label>
                                 <input class="form-control" type="file" name="user_avatar" />
-                            </div>
-                            <?php foreach($data['image'] as $img){ ?>
-                            <li><a target="_blank" href="/storage/<?php echo $img['url'] ?>"><?php echo $img['name'] ?></a> </li>
+                                <?php foreach($data['image'] as $img){ ?>
+                                <a target="_blank" href="/storage/<?php echo $img['url'] ?>"><img src="/storage/<?php echo $img['url'] ?>" alt="Avatar" class="avatar"></a>
                             <?php } ?>
+                            </div>
+
 
                             <?php if(Auth::user()->is('Admin')){ ?>
                             <div class="form-group">

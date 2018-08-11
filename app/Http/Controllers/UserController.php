@@ -253,7 +253,8 @@ class UserController extends Controller
 
     public function userList()
     {
-        $users = $this->userRepository->getUsers();
+        $user_id = (!isset(Auth::user()->id))? 0 : Auth::user()->id;
+        $users = $this->userRepository->getUsers(array(),$user_id);
         return view('admin.user-list')
             ->with(compact('users'));
     }
@@ -263,9 +264,10 @@ class UserController extends Controller
         $user_id = (!isset(Auth::user()->id))? 0 : Auth::user()->id;
         $user_groups = $this->userRepository->groupList($user_id);
         $user_roles = $this->userRepository->getUserRoles($user_id);
+        $status = $this->userRepository->getStatus();
 
         return view('admin.user-add')
-            ->with(compact('user_groups', 'user_roles'));
+            ->with(compact('user_groups', 'user_roles','status'));
     }
 
     public function contentList()
@@ -307,13 +309,13 @@ class UserController extends Controller
     public function adminUserAdd(Request $request)
     {
         $r = $request->toArray();
-        $id = UID::translator($r['id']);
+        $id = isset($r['id'])?UID::translator($r['id']):'';
 
         if(empty($r['id'])){
             $validator = Validator::make($request->all(), [
                 'first_name' => 'required',
 //            'last_name' => 'required',
-//            'password' => 'required|min:6',
+                'password' => 'required|min:6',
                 'email' => 'required|email|unique:users'
             ]);
             if(empty($r['password'])){//if empty will create a random password
@@ -332,23 +334,37 @@ class UserController extends Controller
             return Redirect::back()->withErrors($validator->messages())->withInput();
         }
 
-
-
-        $new_user = $this->user->updateOrCreate(
-            [
-                'id'   => (isset($r['id']))?UID::translator($r['id']):0,
-            ],
-            [
-                'first_name' => $r['first_name'],
-                'last_name' => $r['last_name'],
-                'email' => $r['email'],
-                'status_id' => $r['status_id'],
-                'role_id' => $r['role_id'],
+        if(empty($id)){//create new
+//            die('new addxx'.$r['email']);
+            $new_user = $this->user->updateOrCreate(
+                ['id' => ''],
+                [
+                    'first_name' => $r['first_name'],
+                    'last_name' => $r['last_name'],
+                    'email' => $r['email'],
+                    'status_id' => $r['status_id'],
+                    'role_id' => $r['role_id'],
+                    'password' => bcrypt($r['password'])
+                ]
+            );
+        }else{//update existing
+            $new_user = $this->user->updateOrCreate(
+                [
+                    'id'   => (isset($r['id']))?UID::translator($r['id']):0,
+                ],
+                [
+                    'first_name' => $r['first_name'],
+                    'last_name' => $r['last_name'],
+                    'email' => $r['email'],
+                    'status_id' => $r['status_id'],
+                    'role_id' => $r['role_id'],
 //                'password' => bcrypt($r['password'])
-            ]
-        );
+                ]
+            );
+        }
 
-        if(!empty($r['password'])){
+
+        if(!empty($r['password']) && !empty($id)){
             $new_user = $this->user->updateOrCreate(
                 [
                     'id'   => (isset($r['id']))?UID::translator($r['id']):0,
@@ -359,10 +375,14 @@ class UserController extends Controller
             );
         }
 
-        $this->userRepository->deleteAttachmentByFkId(Auth::user()->id, $new_user->id, 'avatar', 'users');
         if(isset($new_user->id) && isset($r['user_avatar'])){
+            $this->userRepository->deleteAttachmentByFkId(Auth::user()->id, $new_user->id, 'avatar', 'users');
             $this->userRepository->uploadAttachment($r['user_avatar'],Auth::user()->id, $new_user->id,
                 'avatar', 'users',1);
+
+//            echo 'new user'.$new_user->id;
+//            dd($r['user_avatar']);
+//            die('image exist');
         }
 
         //add to user group
