@@ -58,6 +58,13 @@ class User extends Authenticatable
 
     public function groups()
     {
-        return $this->belongsTo('App\UserGroup','user_id');
+        return $this->hasMany('App\UserGroup','user_id');
+    }
+
+    public function image()
+    {
+        return $this->hasMany('App\Attachment', 'fk_id')->where('table','users')
+            ->where('status','=','1')
+            ->where('submission_type','=','avatar');
     }
 }

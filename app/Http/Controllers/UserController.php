@@ -147,7 +147,6 @@ class UserController extends Controller
         }
         //tag related to exchange should goes here//
 
-//dd('updating '.$new_content->id);
         //user associations with content
         if(isset($new_content->id)){
             $this->userRepository->deleteUserContentAssociations($user_id, $new_content->id, 'co-cr');
@@ -307,32 +306,58 @@ class UserController extends Controller
 
     public function adminUserAdd(Request $request)
     {
-        $validator = Validator::make($request->all(), [
-            'first_name' => 'required',
+        $r = $request->toArray();
+        $id = UID::translator($r['id']);
+
+        if(empty($r['id'])){
+            $validator = Validator::make($request->all(), [
+                'first_name' => 'required',
 //            'last_name' => 'required',
 //            'password' => 'required|min:6',
-            'email' => 'required|email|unique:users'
-        ]);
+                'email' => 'required|email|unique:users'
+            ]);
+            if(empty($r['password'])){//if empty will create a random password
+                $r['password'] = $this->userRepository->randomPassword();
+            }
+        }else{
+            $user_data = $this->userRepository->getUser($id);
+            $r['email'] = $user_data['email'];
+            $validator = Validator::make($request->all(), [
+                'first_name' => 'required',
+//                'password' => 'required|min:6',
+            ]);
+        }
 
         if ($validator->fails()) {
             return Redirect::back()->withErrors($validator->messages())->withInput();
         }
 
-        if(empty($r['password'])){//if empty will create a random password
-            $r['password'] = $this->userRepository->randomPassword();
-        }
 
-        $r = $request->toArray();
-        $new_user = $this->user->create(
-            array(
+
+        $new_user = $this->user->updateOrCreate(
+            [
+                'id'   => (isset($r['id']))?UID::translator($r['id']):0,
+            ],
+            [
                 'first_name' => $r['first_name'],
                 'last_name' => $r['last_name'],
                 'email' => $r['email'],
                 'status_id' => $r['status_id'],
                 'role_id' => $r['role_id'],
-                'password' => bcrypt($r['password'])
-            )
+//                'password' => bcrypt($r['password'])
+            ]
         );
+
+        if(!empty($r['password'])){
+            $new_user = $this->user->updateOrCreate(
+                [
+                    'id'   => (isset($r['id']))?UID::translator($r['id']):0,
+                ],
+                [
+                    'password' => bcrypt($r['password'])
+                ]
+            );
+        }
 
         $this->userRepository->deleteAttachmentByFkId(Auth::user()->id, $new_user->id, 'avatar', 'users');
         if(isset($new_user->id) && isset($r['user_avatar'])){
@@ -343,17 +368,25 @@ class UserController extends Controller
         //add to user group
         //delete existing group involvement
         if(isset($new_user->id) && !empty($r['group_id'])){
-            $this->userRepository->deleteUserFromGroup($new_user->id, $r['group_id']);
+            $this->userRepository->deleteUserFromGroup($new_user->id);
             $user_group = $this->userRepository->addUserToGroup($new_user->id, $r['group_id']);
+//            dd($new_user->id.'-'.$r['group_id']);
         }
 
         return redirect()->back()->with('message', 'Successfully Added!');
     }
 
-    public function adminUserEdit($user_id)
+    public function adminUserEdit($id)
     {
+        $user_id = (!isset(Auth::user()->id))? 0 : Auth::user()->id;
+        $id = UID::translator($id);
+
+        $user_groups = $this->userRepository->groupList($user_id);
+        $user_roles = $this->userRepository->getUserRoles($user_id);
+        $user_data = $this->userRepository->getUser($id)->toArray();
+        $status = $this->userRepository->getStatus();
         return view('admin.user-add')
-            ->with(compact('user_data'));
+            ->with(compact('user_data','user_groups','user_roles','status'));
     }
 
     public function userToGroupAdd($group_id = 0)

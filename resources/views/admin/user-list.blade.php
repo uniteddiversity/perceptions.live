@@ -55,7 +55,7 @@
                                         {{ $user->status->name }}
                                     </td>
                                     <td>
-                                        <a href="/user/admin/user-edit/{{ $user->id }}" >Edit</a>
+                                        <a href="/user/admin/user-edit/{{ uid($user->id) }}" >Edit</a>
                                     </td>
                                 </tr>
                             @endforeach

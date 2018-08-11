@@ -126,7 +126,7 @@ class UserRepository
 
     public function getUser($user_id)
     {
-        return $this->user->where('users.id', $user_id)
+        return $this->user->where('users.id', $user_id)->with('image','groups')
             ->leftJoin('user_groups', 'users.id', 'user_groups.user_id')
             ->select('users.*', 'user_groups.group_id', 'user_groups.role_id as group_role_id')
             ->first();
@@ -252,7 +252,7 @@ class UserRepository
         return $user_group;
     }
 
-    function deleteUserFromGroup($user_id, $group_id)
+    function deleteUserFromGroup($user_id, $group_id = 0)
     {
         $user_gr = $this->userGroup->where('user_id', $user_id);
         if($group_id){
@@ -273,7 +273,7 @@ class UserRepository
             array(
                 'user_id' => $user_id,
                 'group_id' => $group_id,
-                'role_id' => $role_id
+                'role_id' => 120
             )
         );
     }
