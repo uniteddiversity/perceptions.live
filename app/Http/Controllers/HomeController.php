@@ -43,8 +43,9 @@ class HomeController extends Controller
     {
         $user_id = (!isset(Auth::user()->id))? 0 : Auth::user()->id;
         $uploaded_list = $this->userRepository->getPublicContents($user_id);
+        $user_acting_role = $this->userRepository->getUserActingRoles();
         return view('user.home')
-            ->with(compact('uploaded_list'));
+            ->with(compact('uploaded_list','user_acting_role'));
     }
 
     public function ajaxVideos($id = 0)

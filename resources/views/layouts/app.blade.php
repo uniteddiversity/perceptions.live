@@ -14,6 +14,7 @@
     <link rel="stylesheet" href="/assets/css/MarkerCluster.Default.css">
     <link rel="stylesheet" href="/assets/css/L.Control.Locate.css">
     <link rel="stylesheet" href="/assets/leaflet-groupedlayercontrol/leaflet.groupedlayercontrol.css">
+    <link rel="stylesheet" href="/js/dist/css/select2.min.css" />
     <link rel="stylesheet" href="/assets/css/app.css">
 </head>
 
@@ -43,9 +44,9 @@
 
 <div class="container">
     <div class="row">
-        <div class="col-md-2 no-float col-md-3half"><div class="info-box-left">Navigation</div></div>
+        @include('partials.home-left-side-bar')
         @yield('content')
-        <div class="col-md-2 no-float col-md-3half"><div class="info-box-right">Navigation</div></div>
+        @include('partials.home-right-side-bar')
     </div>
 </div>
 
@@ -113,16 +114,25 @@
                     <div id="messages"></div>
                     <fieldset>
                         <div class="form-group">
-                            <label for="username">First Name:</label>
-                            <input type="text" class="form-control" id="first_name" name="first_name">
-                        </div>
-                        <div class="form-group">
                             <label for="username">Display Name:</label>
                             <input type="text" class="form-control" id="display_name" name="display_name">
                         </div>
                         <div class="form-group">
                             <label for="username">Email:</label>
                             <input type="text" class="form-control" id="email" name="email">
+                        </div>
+                        <div class="form-group">
+                            <label for="username">Location:</label>
+                            <input type="text" class="form-control" id="email" name="location">
+                        </div>
+                        <div class="form-group">
+                            <label for="video_producer">User Roles</label>
+                            {{--<input type="text" class="form-control" aria-describedby="nameHelp" name="video_producer" placeholder="Video Producer" value="{{ old('video_producer') }}">--}}
+                            <select class="form-control multi-select2" id="video_producer" multiple searchable="Search here.." name="user_acting_roles[]" style="width: 100%;" >
+                                @foreach($user_acting_role as $role)
+                                    <option value="{{$role->id}}" >{{$role->name}}</option>
+                                @endforeach
+                            </select>
                         </div>
                         <div class="form-group">
                             <label for="password">Password:</label>
@@ -133,8 +143,8 @@
                             <input type="password" class="form-control" id="password_confirmation" name="password_confirmation">
                         </div>
                         <div class="form-group">
-                            <label for="password">Web:</label>
-                            <input type="input" class="form-control" id="web" name="web">
+                            <label for="password">Terms of Service:</label>
+                            <input type="checkbox" name="accept_tos" id="accept_tos" value="1" checked />
                         </div>
                     </fieldset>
 
@@ -234,7 +244,27 @@
 <script src="/assets/js/leaflet.markercluster.js"></script>
 <script src="/assets/js/L.Control.Locate.min.js"></script>
 <script src="/assets/leaflet-groupedlayercontrol/leaflet.groupedlayercontrol.js"></script>
-
+<script src="/js//dist/js/select2.full.min.js"></script>
 <script src="/assets/js/app.js"></script>
+
+<script>
+    $(document).ready(function() {
+        $('.multi-select2').select2();
+
+        $('.multi-select2-with-tags').select2({tags: true});
+
+        $('#user-assign-group').change(function(){console.log('vl '+$(this).val());
+            document.location.href = '/user/admin/user-to-group-add/'+$(this).val();
+        })
+
+        $("#is_exchange").change(function(){ console.log('changing..');
+            if($(this).is(':checked')){console.log('checked..');
+                $('#exchange_enabled').css('visibility','visible');
+            }else{
+                $('#exchange_enabled').css('visibility','hidden');
+            }
+        })
+    });
+</script>
 </body>
 </html>
