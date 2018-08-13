@@ -7,7 +7,7 @@
     <title>OSM</title>
 
     <link rel="stylesheet" href="/assets/css/bootstrap.min.css">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/assets/fontawesome/css/all.css">
     <link rel="stylesheet" type="text/css" href="/assets/css/leaflet_0.7.css" />
     {{--<link rel="stylesheet" href="/assets/css/leaflet.css">--}}
     {{--<link rel="stylesheet" href="/assets/css/MarkerCluster.css">--}}
@@ -21,14 +21,33 @@
 @include('partials.nav-bar')
 
 
-<div id="container">
-    {{--@include('partials.left-side-bar')--}}
-    @yield('content')
+{{--<div id="container">--}}
+{{--    @include('partials.left-side-bar')--}}
+    {{--@yield('content')--}}
+{{--</div>--}}
+
+
+{{--<div class="container">--}}
+    {{--<div class="col-lg-3  no-floa" style="padding: 0px;margin: 0px;">--}}
+        {{--<h4><br><br><br>Uferstrasse 90, 4057 Basel</h4>--}}
+    {{--</div>--}}
+    {{--<div class="col-lg-6  no-floa"  id="map" style="padding: 0px;margin: 0px;">--}}
+        {{--@yield('content')--}}
+    {{--</div>--}}
+    {{--<div class="col-lg-3 no-float destra" style="padding: 0px;margin: 0px;">--}}
+        {{--ddddddddddd--}}
+    {{--</div>--}}
+    {{--<!-- /.row -->--}}
+{{--</div>--}}
+<!-- /.container -->
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-2 no-float col-md-3half"><div class="info-box-left">Navigation</div></div>
+        @yield('content')
+        <div class="col-md-2 no-float col-md-3half"><div class="info-box-right">Navigation</div></div>
+    </div>
 </div>
-
-
-
-
 
 
 {{--<div class="modal fade" id="legendModal" tabindex="-1" role="dialog">--}}
@@ -98,8 +117,8 @@
                             <input type="text" class="form-control" id="first_name" name="first_name">
                         </div>
                         <div class="form-group">
-                            <label for="username">Last Name:</label>
-                            <input type="text" class="form-control" id="last_name" name="last_name">
+                            <label for="username">Display Name:</label>
+                            <input type="text" class="form-control" id="display_name" name="display_name">
                         </div>
                         <div class="form-group">
                             <label for="username">Email:</label>
@@ -159,7 +178,53 @@
         {{--</div>--}}
     {{--</div>--}}
 {{--</div>--}}
+<style>
+    html,body,.container {
+        height:100%;
+    }
+    .container {
+        display:table;
+        width: 100%;
+        /*margin-top: -50px;*/
+        padding: 0 0 0 0; /*set left/right padding according to needs*/
+        /*box-sizing: border-box;*/
+    }
 
+    .row {
+        height: 100%;
+        display: table-row;
+    }
+
+    .col-md-2 {
+        background: pink;
+        /*padding-left: -10px;*/
+        padding: 0px;
+    }
+    .col-md-9 {
+        background: yellow;
+    }
+
+    .row .no-float {
+        display: table-cell;
+        float: none;
+    }
+</style>
+<style>
+    .info-box-left {
+        background-color: white;
+        margin-right: -20px;
+        position: relative;
+        z-index: 10000;
+        height: 100%;
+    }
+    .info-box-right {
+        background-color: white;
+        margin-left: -20px;
+        position: relative;
+        z-index: 10000;
+        height: 100%;
+    }
+</style>
 <script src="/assets/js/jquery-2.1.4.min.js"></script>
 <script src="/assets/js/bootstrap.min.js"></script>
 <script src="/assets/js/typeahead.bundle.min.js"></script>

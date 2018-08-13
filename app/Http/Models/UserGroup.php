@@ -14,4 +14,9 @@ class UserGroup extends Model
      * @var array
      */
     protected $fillable = ['id', 'group_id', 'user_id', 'role_id'];
+
+    public function group()
+    {
+        return $this->hasOne('App\Group', 'id','group_id');
+    }
 }

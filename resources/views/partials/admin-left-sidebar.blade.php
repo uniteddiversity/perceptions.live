@@ -40,6 +40,9 @@
                     <li class="nav-item">
                         <a class="nav-link" href="/user/admin/sorting-tag-add"> Tags </a>
                     </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/user/admin/location-list"> Location List </a>
+                    </li>
                 </ul>
             </div>
         </li>
@@ -69,6 +72,7 @@
                 </ul>
             </div>
         </li>
+
         <li class="nav-item">
             <a href="/user/logout" class="nav-link" aria-expanded="false" aria-controls="">
                 <i class="menu-icon mdi mdi-logout"></i>

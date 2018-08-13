@@ -52,4 +52,5 @@ Route::group(['prefix' => 'user', 'middleware' => ['auth', 'web', 'admin']], fun
     Route::post('admin/post-sorting-tag-add', '\App\Controllers\User\UserController@postSortingTagAdd');
 
     Route::get('/admin/group-edit/{_group_id}', '\App\Controllers\User\UserController@editGroup');
+    Route::get('/admin/location-list', '\App\Controllers\ContentController@adminLocationList');
 });

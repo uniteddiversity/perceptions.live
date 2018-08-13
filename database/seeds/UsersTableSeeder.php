@@ -16,7 +16,7 @@ class UsersTableSeeder extends Seeder
             [
                 'id'            =>  '1',
                 'first_name'    =>  'admin',
-                'last_name'     =>  'osm',
+                'display_name'     =>  'admin',
 //                'username'      =>  'admin',
                 'email'         =>  'admin@osm.com',
                 'password'      =>  bcrypt('secret'),

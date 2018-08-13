@@ -16,7 +16,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'first_name', 'last_name', 'email', 'password', 'web', 'role_id', 'status_id',
+        'first_name', 'display_name', 'email', 'password', 'web', 'role_id', 'status_id',
     ];
 
     /**
@@ -66,5 +66,10 @@ class User extends Authenticatable
         return $this->hasMany('App\Attachment', 'fk_id')->where('table','users')
             ->where('status','=','1')
             ->where('submission_type','=','avatar');
+    }
+
+    public function actingRoles()
+    {
+        return $this->hasMany('App\TagUserAssociation','user_id')->where('slug','role');
     }
 }

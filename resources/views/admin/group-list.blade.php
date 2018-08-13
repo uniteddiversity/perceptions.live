@@ -11,19 +11,25 @@
                             <thead>
                             <tr>
                                 <th>
-                                    Id
+                                    Date Created
                                 </th>
                                 <th>
                                     Name
                                 </th>
                                 <th>
+                                    Active Status
+                                </th>
+                                <th>
                                     Default Location
                                 </th>
+                                {{--<th>--}}
+                                    {{--Category--}}
+                                {{--</th>--}}
                                 <th>
-                                    Category
+                                    Admin
                                 </th>
                                 <th>
-                                    Active Status
+                                    Videos(open)
                                 </th>
                                 <th>
                                     Users in Group
@@ -37,20 +43,27 @@
                             @foreach ($groups as $group)
                                 <tr>
                                     <td>
-                                        {{ $group->id }}
+                                        {{ date('Y-m-d', strtotime($group->created_at)) }}
                                     </td>
                                     <td>
                                         {{ $group->name }}
                                     </td>
                                     <td>
-                                        {{ $group->category }}
-                                    </td>
-                                    <td>
-                                        {{ $group->location }}
-                                    </td>
-                                    <td>
                                         {{ $group->groupStatus->name }}
                                     </td>
+                                    {{--<td>--}}
+                                        {{--{{ $group->category }}--}}
+                                    {{--</td>--}}
+                                    <td>
+                                        {{ $group->default_location }}
+                                    </td>
+                                    <td>
+                                        {{ $group->group_admin }}
+                                    </td>
+                                    <td>
+                                        {{ $group->active_video_count }}
+                                    </td>
+
                                     <td>
                                         {{ (empty($group->users_count))? 0:$group->users_count }}
                                     </td>

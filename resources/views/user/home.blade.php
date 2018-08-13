@@ -8,5 +8,5 @@
             </div>
         </div>
     </div>
-    <div id="map"></div>
+    <div class="col-md-8 no-float col-sm-8half" id="map">Loading..</div>
 @endsection

@@ -7,6 +7,7 @@ use App\Content;
 use App\ContentAccessLevels;
 use App\Group;
 use App\GroupContentAssociation;
+use App\MetaData;
 use App\Role;
 use App\SortingTag;
 use App\TagContentAssociation;
@@ -14,6 +15,7 @@ use App\TagUserAssociation;
 use App\User;
 use App\UserContentAssociation;
 use App\UserGroup;
+use App\UserSortingTag;
 use App\UserStatus;
 use Content\Services\ContentService;
 use Illuminate\Support\Facades\DB;
@@ -77,12 +79,20 @@ class UserRepository
      * @var ContentAccessLevels
      */
     private $contentAccessLevels;
+    /**
+     * @var MetaData
+     */
+    private $metaData;
+    /**
+     * @var UserSortingTag
+     */
+    private $userSortingTag;
 
     public function __construct(User $user, Content $content,
                                 UserGroup $userGroup, Group $group, Role $role, UserContentAssociation $userContentAssociation,
                                 Attachment $attachment, SortingTag $sortingTag, GroupContentAssociation $groupContentAssociation,
                                 TagContentAssociation $tagContentAssociation, TagUserAssociation $tagUserAssociation, UserStatus $userStatus,
-                                ContentAccessLevels $contentAccessLevels)
+                                ContentAccessLevels $contentAccessLevels, MetaData $metaData, UserSortingTag $userSortingTag)
     {
         $this->user = $user;
         $this->content = $content;
@@ -97,14 +107,22 @@ class UserRepository
         $this->tagUserAssociation = $tagUserAssociation;
         $this->userStatus = $userStatus;
         $this->contentAccessLevels = $contentAccessLevels;
+        $this->metaData = $metaData;
+        $this->userSortingTag = $userSortingTag;
     }
 
     public function getUsers($filter = array(), $user_id = null)
     {
         $current_user = $this->getUser($user_id);
 
-        $r = $this->user->with('role', 'groups')
-        ->leftJoin('user_groups', 'users.id', 'user_groups.user_id');
+        $r = $this->user->with(['role', 'groups' => function($q){
+            $q->with('group');
+        }])
+        ->leftJoin('user_groups', 'users.id', 'user_groups.user_id')
+        ->leftJoin('contents', function($q){
+            $q->on('users.id', 'contents.user_id')
+                ->where('contents.status', '1');
+        });
 
         if($current_user['role_id'] == 1){
 
@@ -117,7 +135,8 @@ class UserRepository
         }
 
 //        $r->select('users.id','users.*','user_groups.id as group_id');
-        $r->select('users.id','users.*');
+        $r->select('users.id','users.*',
+            DB::Raw("COUNT(contents.id) as no_submission"));
         $r->groupBy('users.id')->orderBy('updated_at', 'DESC');
         $r = $r->get();
 
@@ -126,7 +145,7 @@ class UserRepository
 
     public function getUser($user_id)
     {
-        return $this->user->where('users.id', $user_id)->with('image','groups')
+        return $this->user->where('users.id', $user_id)->with('image','groups','actingRoles')
             ->leftJoin('user_groups', 'users.id', 'user_groups.user_id')
             ->select('users.*', 'user_groups.group_id', 'user_groups.role_id as group_role_id')
             ->first();
@@ -206,7 +225,7 @@ class UserRepository
                 $r->whereIn('users.id', array($user_id))->orWhere('contents.access_level_id', '1');
             });
         })
-            ->select('contents.*', 'users.first_name', 'users.last_name')
+            ->select('contents.*', 'users.first_name', 'users.display_name')
             ->get();
 
         $contents = isset($contents[0])?$contents[0] : array();
@@ -236,16 +255,33 @@ class UserRepository
 
         if($full){
             $user_group = $user_group->with('groupStatus');
-            $user_group->leftJoin(DB::raw('(SELECT count(user_id) as users_count, group_id FROM user_groups GROUP BY group_id) as user_groups'), 'id', 'user_groups.group_id');
+            $user_group = $user_group->leftJoin(DB::raw('(SELECT count(user_id) as users_count, group_id FROM user_groups GROUP BY group_id) as user_groups'), 'id', 'user_groups.group_id')
+            ->leftJoin('group_content_associations', 'group_content_associations.group_id', 'groups.id')
+            ->leftJoin('contents', function($q){
+                $q->on('group_content_associations.content_id', 'contents.id')
+                    ->where('contents.status', '1');
+            })
+
+            ->leftJoin('user_groups as user_groups2', 'user_groups2.group_id', 'groups.id')
+            ->leftJoin('users as users_in_group', function($q){
+                $q->on('user_groups2.user_id', 'users_in_group.id')
+                    ->where('users_in_group.role_id', '100');
+            });
+
+            $user_group->select('groups.*', DB::Raw('users_in_group.display_name as group_admin'), DB::Raw("count(contents.id) as active_video_count"));
         }
 
 //        $user_group->orderBy('groups.updated_at','DESC');
         if($group_id <> 0){
             $user_group = $user_group->where('groups.id', $group_id);
             $user_group->with('proofOfGroup','groupAvatar');
-            $user_group = $user_group->first();
+            $user_group = $user_group->groupBy('groups.id')->first();
         }else{
-            $user_group = $user_group->orderBy('groups.updated_at','DESC')->get();
+            if($full){
+                $user_group = $user_group->groupBy('groups.id')->groupBy('users_in_group.id')->orderBy('groups.updated_at','DESC')->get();
+            }else{
+                $user_group = $user_group->groupBy('groups.id')->orderBy('groups.updated_at','DESC')->get();
+            }
         }
 
         return $user_group;
@@ -259,6 +295,23 @@ class UserRepository
         }
 
         return $user_gr->delete();
+    }
+
+    function deleteUserFromTag($user_id, $slug)
+    {
+        $user_gr = $this->tagUserAssociation->where('user_id', $user_id)->where('slug', $slug);
+        return $user_gr->delete();
+    }
+
+    function addTagToUser($user_id, $tag_id, $slug)
+    {
+        return $this->tagUserAssociation->create(
+            array(
+                'user_id' => $user_id,
+                'user_tag_id' => $tag_id,
+                'slug' => $slug
+            )
+        );
     }
 
     function deleteUsersFromGroup($group_id)
@@ -382,22 +435,24 @@ class UserRepository
     {
         switch($type){
             case 'user':
-                $validator = Validator::make(array('email' => $value), [
-                    'email' => 'required|email|unique:users'
+                $email = $this->getAutoGeneratedEmail($value);
+                $validator = Validator::make(array('email' => $email, 'display_name' => $value), [
+                    'email' => 'required|email|unique:users',
+                    'display_name' => 'required|unique:users'
                 ]);
                 if (!$validator->fails()) {
                     return $this->user->create(
                         array(
-                            'email' => $value,
+                            'email' => $email,
                             'first_name' => $value,
-                            'last_name' => $value,
+                            'display_name' => $value,
                             'status_id' => 2,
                             'role_id' => 120,
                             'password' => bcrypt($this->randomPassword()),
                         )
                     );
                 }else{
-                    return $this->user->where('email', $value)->first();
+                    return $this->user->where('display_name', $value)->first();
                 }
                 break;
             case 'group':
@@ -437,15 +492,15 @@ class UserRepository
         return $this->tagContentAssociation->where('content_id', $content_id)->delete();
     }
 
-    public function addTagToUser($tag_id, $user_id)
-    {
-        return $this->tagContentAssociation->create(
-            array(
-                'user_tag_id' => $tag_id,
-                'user_id' => $user_id,
-            )
-        );
-    }
+//    public function addTagToUser($tag_id, $user_id)
+//    {
+//        return $this->tagContentAssociation->create(
+//            array(
+//                'user_tag_id' => $tag_id,
+//                'user_id' => $user_id,
+//            )
+//        );
+//    }
 
     public function deleteTagsOfUser($user_id, $deleting_user_id)
     {
@@ -460,6 +515,16 @@ class UserRepository
     public function getAccessLevels()
     {
         return $this->contentAccessLevels->get();
+    }
+
+    public function getAutoGeneratedEmail($input)
+    {
+        return str_replace('@','',$input).rand(10,100).'@'.env('AUTO_GENERATED_EMAIL_DOMAIN', 'osm.com');
+    }
+
+    public function getUserActingRoles()
+    {
+        return $this->userSortingTag->where('slug', 'role')->get();
     }
 }
 

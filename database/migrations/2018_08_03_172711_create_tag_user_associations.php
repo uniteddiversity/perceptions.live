@@ -18,6 +18,7 @@ class CreateTagUserAssociations extends Migration
             $table->increments('id');
             $table->integer('user_tag_id');
             $table->integer('user_id');
+            $table->string('slug', 15);
         });
     }
 

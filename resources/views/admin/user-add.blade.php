@@ -7,11 +7,11 @@
     $data['id'] = isset($user_data['id'])?$user_data['id']:'';
     $data['email'] = isset($user_data['email'])?$user_data['email']:'';
     $data['first_name'] = isset($user_data['first_name'])?$user_data['first_name']:'';
-    $data['last_name'] = isset($user_data['last_name'])?$user_data['last_name']:'';
+    $data['display_name'] = isset($user_data['display_name'])?$user_data['display_name']:'';
     $data['status_id'] = isset($user_data['status_id'])?$user_data['status_id']:'';
     $data['image'] = isset($user_data['image'])?$user_data['image']:array();
     $data['group'] = isset($user_data['groups'])?array_column($user_data['groups'],'group_id'):array();
-
+    $data['user_acting_roles'] = isset($user_data['acting_roles'])?array_column($user_data['acting_roles'],'user_tag_id'):array();
 //    dd($data);
     ?>
     <div class="col-lg-12 grid-margin stretch-card">
@@ -35,26 +35,36 @@
                         </div>
                         @endif
                         <form action="/user/admin/post-user-add" method="post" enctype='multipart/form-data'>
-                            <input type="hidden" name="_token" id="csrf-token" value="{{ Session::token() }}" />
                             <?php if(!empty($data['id'])){?>
                             <input type="hidden" name="id" id="id" value="{{ uid($data['id']) }}" />
                             <?php }?>
-
+                            <div class="form-group">
+                                <label for="exampleInputEmail1">Display Name</label>
+                                <input <?php if(!empty($data['id'])){ echo 'disabled'; } ?> type="text" class="form-control" aria-describedby="nameHelp" name="display_name" placeholder="Display Name" value="{{ old('display_name',$data['display_name']) }}">
+                            </div>
+                            <input type="hidden" name="_token" id="csrf-token" value="{{ Session::token() }}" />
                             <div class="form-group">
                                 <label for="exampleInputEmail1">Email</label>
-                                <input <?php if(!empty($data['id'])){ echo 'disabled'; } ?> type="text" class="form-control" aria-describedby="nameHelp" name="email" placeholder="Email" value="{{ old('email',$data['email']) }}">
+                                <input type="text" class="form-control" aria-describedby="nameHelp" name="email" placeholder="Email" value="{{ old('email',$data['email']) }}">
                             </div>
                             <div class="form-group">
                                 <label for="exampleInputEmail1">First Name</label>
                                 <input type="text" class="form-control" aria-describedby="nameHelp" name="first_name" placeholder="First Name" value="{{ old('first_name',$data['first_name']) }}">
                             </div>
-                            <div class="form-group">
-                                <label for="exampleInputEmail1">Last Name</label>
-                                <input type="text" class="form-control" aria-describedby="nameHelp" name="last_name" placeholder="Last Name" value="{{ old('last_name',$data['last_name']) }}">
-                            </div>
+
                             <div class="form-group">
                                 <label for="exampleInputEmail1">Password</label>
                                 <input type="text" class="form-control" aria-describedby="nameHelp" name="password" placeholder="Password" value="{{ old('password') }}">
+                            </div>
+
+                            <div class="form-group">
+                                <label for="video_producer">User Roles</label>
+                                {{--<input type="text" class="form-control" aria-describedby="nameHelp" name="video_producer" placeholder="Video Producer" value="{{ old('video_producer') }}">--}}
+                                <select class="form-control multi-select2" id="video_producer" multiple searchable="Search here.." name="user_acting_roles[]" >
+                                    @foreach($user_acting_role as $role)
+                                        <option value="{{$role->id}}" <?php if(in_array($role->id, old('user_acting_roles',$data['user_acting_roles']))){ echo 'selected'; } ?> >{{$role->name}}</option>
+                                    @endforeach
+                                </select>
                             </div>
 
                             <div class="form-group">

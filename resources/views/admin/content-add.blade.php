@@ -36,6 +36,7 @@
     $data['content_set1'] = isset($video_data['content_set1'])?$video_data['content_set1']:array();
     $data['content_set2'] = isset($video_data['content_set2'])?$video_data['content_set2']:array();
     $data['content_set3'] = isset($video_data['content_set3'])?$video_data['content_set3']:array();
+    $data['status'] = isset($video_data['status'])?$video_data['status']:'';
 
     $data['id'] = isset($video_data['id'])?$video_data['id']:'';
 
@@ -303,6 +304,17 @@
                             <div class="form-group">
                                 <label for="exampleTextarea">Additional Comments</label>
                                 <textarea type="text" class="form-control" aria-describedby="nameHelp" name="user_comment" placeholder="Additional Comments" rows="4">{{ old('user_comment',$data['user_comment']) }}</textarea>
+                            </div>
+
+                            <div class="form-group">
+                                <?php if(Auth::user()->is('Admin')){ ?>
+                                <label for="status">Status</label>
+                                <select class="form-control" id="status" name="status">
+                                    @foreach($status as $st)
+                                        <option value="{{$st->id}}" <?php if(old('status',$data['status']) == $st->id){ echo 'selected'; } ?> >{{$st->name}}</option>
+                                    @endforeach
+                                </select>
+                                <?php } ?>
                             </div>
 
                             <button type="button" onclick="submit_content()" class="btn btn-primary">Submit</button>

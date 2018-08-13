@@ -17,9 +17,10 @@ input[type="radio"], input[type="checkbox"] {
   float: left;
 }
 #map, #container-rest {
-  width: auto;
-  height: 100%;
-  box-shadow: 0 0 10px rgba(0,0,0,0.5);
+  /*width: auto;*/
+  /*height: 100%;*/
+  /*box-shadow: 0 0 10px rgba(0,0,0,0.5);*/
+  height: 100px;
 }
 #loading {
   position: absolute;

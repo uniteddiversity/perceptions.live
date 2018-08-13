@@ -11,22 +11,28 @@
                             <thead>
                             <tr>
                                 <th>
-                                    Id
+                                    Joined Date
                                 </th>
                                 <th>
                                     Email
                                 </th>
                                 <th>
+                                    Display name
+                                </th>
+                                <th>
+                                    Active Status
+                                </th>
+                                <th>
                                     First name
                                 </th>
                                 <th>
-                                    Last name
+                                    Groups
                                 </th>
                                 <th>
                                     Role
                                 </th>
                                 <th>
-                                    Active Status
+                                    Finished Submissions (Open)
                                 </th>
                                 <th>
                                     Action
@@ -37,22 +43,32 @@
                             @foreach ($users as $user) <?php //dd($user); ?>
                                 <tr>
                                     <td>
-                                        {{ $user->id }}
+                                        {{ date('Y-m-d', strtotime($user->created_at)) }}
                                     </td>
                                     <td>
                                         {{ $user->email }}
                                     </td>
                                     <td>
+                                        {{ $user->display_name }}
+                                    </td>
+                                    <td>
+                                        <?php if($user->status_id == '1'){ echo '<i class="menu-icon mdi mdi-check"></i>'; }else{ echo '<i class="menu-icon mdi mdi-close"></i>'; } ?>
+                                    </td>
+
+
+                                    <td>
                                         {{ $user->first_name }}
                                     </td>
                                     <td>
-                                        {{ $user->last_name }}
+                                        <?php foreach($user->groups as $group){
+                                            echo isset($group->group)?$group->group->name.', ':'';
+                                        }?>
                                     </td>
                                     <td>
                                         <?php if(isset($user->role)){ echo $user->role->name; } ?>
                                     </td>
                                     <td>
-                                        {{ $user->status->name }}
+                                        {{ $user->no_submission }}
                                     </td>
                                     <td>
                                         <a href="/user/admin/user-edit/{{ uid($user->id) }}" >Edit</a>
