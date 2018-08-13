@@ -63,8 +63,9 @@ class UserController extends Controller
 
     public function profile()
     {
+        $user_acting_role = $this->userRepository->getUserActingRoles();
         return view('user.home')
-            ->with(compact('users_data'));
+            ->with(compact('users_data','user_acting_role'));
     }
 
     public function uploadVideo()
