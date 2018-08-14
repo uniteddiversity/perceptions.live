@@ -1,5 +1,5 @@
 <div class="col-md-3 no-float col-md-3half">
-    <div class="info-box-left" style="margin:10px 10px 10px 10px;">
+    <div class="info-box-left" style="margin:10px 10px 10px 10px;overflow: scroll;">
         <h2>Feed {{env('APP_NAME', '')}}</h2>
 
         <div class="form-group">
