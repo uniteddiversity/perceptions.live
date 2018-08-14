@@ -1,4 +1,4 @@
-<div class="col-md-3 no-float col-md-3half">
+<div class="col-md-3 no-float col-md-3half" style="padding-right: 0px;">
     <div class="info-box-left" style="margin:10px 10px 10px 10px;overflow: scroll;">
         <h2>Feed {{env('APP_NAME', '')}}</h2>
 
