@@ -14,5 +14,5 @@ class TagContentAssociation extends Model
     /**
      * @var array
      */
-    protected $fillable = ['content_id', 'content_tag_id'];
+    protected $fillable = ['content_id', 'content_tag_id', 'tag_for'];
 }

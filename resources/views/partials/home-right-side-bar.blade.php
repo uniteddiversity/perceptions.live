@@ -1,5 +1,5 @@
-<div class="col-md-2 no-float col-md-3half">
+<div class="col-md-3 no-float col-md-3half">
     <div class="info-box-left">
-        Right Navigation
+        <h2>&nbsp;</h2>
     </div>
 </div>

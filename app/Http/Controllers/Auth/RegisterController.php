@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Foundation\Auth\RegistersUsers;
+use User\Services\UserRepository;
 
 class RegisterController extends Controller
 {
@@ -29,15 +30,20 @@ class RegisterController extends Controller
      * @var string
      */
     protected $redirectTo = '/home';
+    /**
+     * @var UserRepository
+     */
+    private $userRepository;
 
     /**
      * Create a new controller instance.
      *
      * @return void
      */
-    public function __construct()
+    public function __construct(UserRepository $userRepository)
     {
         $this->middleware('guest');
+        $this->userRepository = $userRepository;
     }
 
     /**
@@ -63,25 +69,40 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
-        return User::create([
-            'first_name' => $data['first_name'],
+        $new_user = User::create([
+//            'first_name' => $data['first_name'],
             'display_name' => $data['display_name'],
             'email' => $data['email'],
+            'location' => $data['location'],
             'password' => bcrypt($data['password']),
 //            'cpassword' => $data['cpassword'],
-            'web' => $data['web'],
-            'role_id' => '4'
+//            'web' => $data['web'],
+            'role_id' => '120' //normal user
         ]);
+
+        if($new_user->id)
+        {
+            //add role tag to user
+            if(isset($new_user->id) && !empty($data['user_acting_roles'])){
+                $this->userRepository->deleteUserFromTag($new_user->id,'role');
+                foreach($data['user_acting_roles'] as $tag){
+                    $this->userRepository->addTagToUser($new_user->id, $tag,'role');
+                }
+            }
+        }
+
+        return $new_user;
     }
 
 
     public function createUser(Request $request)
     {
         $validator = Validator::make($request->all(), [
-            'first_name' => 'required',
-//            'display_name' => 'required',
+//            'first_name' => 'required',
+            'display_name' => 'required|unique:users',
             'password' => 'required|confirmed|min:6',
-            'email' => 'required|email|unique:users'
+            'email' => 'required|email|unique:users',
+            'accept_tos' => 'required',
         ]);
 
         if ($validator->fails()) {

@@ -85,6 +85,12 @@
                                     @endforeach
                                 </select>
                             </div>
+
+                                <div class="form-group">
+                                    <label for="location">Location</label>
+                                    <input type="text" class="form-control" aria-describedby="nameHelp" name="location" placeholder="Location" value="{{ old('location') }}">
+                                </div>
+
                             <div class="form-group">
                                 <label for="user_avatar">User Avatar</label>
                                 <input class="form-control" type="file" name="user_avatar" />

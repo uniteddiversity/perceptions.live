@@ -53,6 +53,11 @@ class Content extends Model
 
     public function sortingTags()
     {
-        return $this->hasMany('App\TagContentAssociation','content_id');
+        return $this->hasMany('App\TagContentAssociation','content_id')->where('tag_for', 'contents');
+    }
+
+    public function gciTags()
+    {
+        return $this->hasMany('App\TagContentAssociation','content_id')->where('tag_for', 'gci');
     }
 }

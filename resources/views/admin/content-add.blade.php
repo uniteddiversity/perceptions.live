@@ -16,7 +16,7 @@
 
     $data['learn_more_url'] = isset($video_data['learn_more_url'])?$video_data['learn_more_url']:'';
     $data['category_id'] = isset($video_data['category_id'])?$video_data['category_id']:'';
-    $data['grater_community_intention_id'] = isset($video_data['grater_community_intention_id'])?$video_data['grater_community_intention_id']:'';
+//    $data['grater_community_intention_id'] = isset($video_data['grater_community_intention_id'])?$video_data['grater_community_intention_id']:'';
     $data['primary_subject_tag'] = isset($video_data['primary_subject_tag'])?$video_data['primary_subject_tag']:'';
     $data['submitted_footage'] = isset($video_data['submitted_footage'])?$video_data['submitted_footage']:'';
     $data['location'] = isset($video_data['location'])?$video_data['location']:'';
@@ -29,6 +29,8 @@
 
     $data['service_or_opportunity'] = isset($video_data['service_or_opportunity'])?$video_data['service_or_opportunity']:'';
     $data['sorting_tags'] = isset($video_data['sorting_tags'])?array_column($video_data['sorting_tags'],'content_tag_id'):array();
+    $data['grater_community_intention_ids'] = isset($video_data['gci_tags'])?array_column($video_data['gci_tags'],'content_tag_id'):array();
+
     $data['user_comment'] = isset($video_data['user_comment'])?$video_data['user_comment']:'';
     $data['lat'] = isset($video_data['lat'])?$video_data['lat']:'';
     $data['long'] = isset($video_data['long'])?$video_data['long']:'';
@@ -97,7 +99,7 @@
 
 
                             <div class="form-group">
-                                <label for="video_producer">Video Producer(s) (If not exist, add email's)</label>
+                                <label for="video_producer">Video Producer(s) (If not exist, add unique display name's)</label>
                                 {{--<input type="text" class="form-control" aria-describedby="nameHelp" name="video_producer" placeholder="Video Producer" value="{{ old('video_producer') }}">--}}
                                 <select class="form-control multi-select2-with-tags" id="video_producer" multiple searchable="Search here.." name="video_producer[]" >
                                     @foreach($user_list as $user)
@@ -106,7 +108,7 @@
                                 </select>
                             </div>
                             <div class="form-group">
-                                <label for="onscreen">Onscreen (If not exist, add email's)</label>
+                                <label for="onscreen">Onscreen (If not exist, add unique display name's)</label>
                                 {{--<input type="text" class="form-control" aria-describedby="nameHelp" name="onscreen" placeholder="Onscreen" value="{{ old('onscreen') }}">--}}
                                 <select class="form-control multi-select2-with-tags" id="onscreen" multiple searchable="Search here.." name="onscreen[]" >
                                     @foreach($user_list as $user)
@@ -115,7 +117,7 @@
                                 </select>
                             </div>
                             <div class="form-group">
-                                <label for="co_creators">Co Creator(s) (If not exist, add email's)</label>
+                                <label for="co_creators">Co Creator(s) (If not exist, add unique display name's)</label>
                                 {{--<input type="text" class="form-control" aria-describedby="nameHelp" name="co_creators" placeholder="Co Creators" value="{{ old('co_creators') }}">--}}
                                 <select class="form-control multi-select2-with-tags" multiple id="co_creators" searchable="Search here.." name="co_creators[]" >
                                     @foreach($user_list as $user)
@@ -152,10 +154,9 @@
 
                             <div class="form-group">
                                 <label for="exampleSelect1">Greater Community Intention</label>
-                                <select class="form-control" id="grater_community_intention_id" name="grater_community_intention_id">
-                                    <option value="0">Select</option>
-                                    @foreach($meta_array['gci'] as $m)
-                                    <option value="{{$m['id']}}" <?php if($m['id'] == old('grater_community_intention_id',$data['grater_community_intention_id'])){ echo 'selected'; } ?> >{{$m['value']}}</option>
+                                <select class="form-control multi-select2-max3" id="grater_community_intention_id" multiple name="grater_community_intention_ids[]">
+                                    @foreach($gci_tags as $m)
+                                    <option value="{{$m['id']}}" <?php if(in_array($m['id'], old('grater_community_intention_ids',$data['grater_community_intention_ids']))){ echo 'selected'; } ?> >{{$m['tag']}}</option>
                                     @endforeach
                                 </select>
                             </div>

@@ -25,6 +25,7 @@ Route::get('/profile/video/{_video_id}', array('uses' => '\App\Controllers\HomeC
 Route::get('/ajax-available-videos', array('uses' => '\App\Controllers\HomeController@ajaxVideos'))->name('home');
 Route::get('/ajax-available-videos/{_id}', array('uses' => '\App\Controllers\HomeController@ajaxVideosNew'));
 Route::get('/home/ajax-video-info/{_video_id}', '\App\Controllers\HomeController@getVideoInfo');
+Route::get('/home/ajax/video-search/', '\App\Controllers\HomeController@searchVideos');
 
 Route::group(['prefix' => 'user', 'middleware' => ['auth', 'web', 'admin']], function () {
     Route::get('/profile', '\App\Controllers\User\UserController@profile');

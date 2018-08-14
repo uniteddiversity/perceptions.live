@@ -64,8 +64,9 @@ class UserController extends Controller
     public function profile()
     {
         $user_acting_role = $this->userRepository->getUserActingRoles();
+        $categories = $this->category->get();
         return view('user.home')
-            ->with(compact('users_data','user_acting_role'));
+            ->with(compact('users_data','user_acting_role','categories'));
     }
 
     public function uploadVideo()
@@ -76,6 +77,7 @@ class UserController extends Controller
         $meta_array = $this->contentService->getMetaListByKey();
         $user_id = (!isset(Auth::user()->id))? 0 : Auth::user()->id;
         $user_list = $this->userRepository->getUsers(array(),$user_id);
+
         return view('user.upload-video')
             ->with(compact('uploaded_list','categories','meta_array','user_list','status'));
     }
@@ -127,7 +129,7 @@ class UserController extends Controller
                 'video_producer' => '',
                 'onscreen' => '',
 
-                'grater_community_intention_id' => $r['grater_community_intention_id'],
+//                'grater_community_intention_id' => $r['grater_community_intention_id'],
                 'primary_subject_tag' => $r['primary_subject_tag'],
 //                'secondary_subject_tag_id' => $r['secondary_subject_tag_id'],
                 'submitted_footage' => $r['submitted_footage'],
@@ -145,6 +147,7 @@ class UserController extends Controller
 
         if(isset($r['id'])){
             $this->userRepository->deleteTagsOfContent($new_content->id,$user_id);
+            $this->userRepository->deleteTagsOfContent($new_content->id,$user_id,'gci');
         }
         //tag related to exchange should goes here//
 
@@ -224,6 +227,14 @@ class UserController extends Controller
                     }
                 }
             }
+
+            if(isset($r['grater_community_intention_ids']))
+            {
+                //remove existing gci tags
+                foreach($r['grater_community_intention_ids'] as $gci_id){
+                    $this->userRepository->addTagToContent($gci_id,  $new_content->id,'gci');
+                }
+            }
         }
 
         if(isset($r['exchange'])){
@@ -266,9 +277,9 @@ class UserController extends Controller
         $user_groups = $this->userRepository->groupList($user_id);
         $user_roles = $this->userRepository->getUserRoles($user_id);
         $status = $this->userRepository->getStatus();
-
+        $user_acting_role = $this->userRepository->getUserActingRoles();
         return view('admin.user-add')
-            ->with(compact('user_groups', 'user_roles','status'));
+            ->with(compact('user_groups', 'user_roles','status','user_acting_role'));
     }
 
     public function contentList()
@@ -286,11 +297,13 @@ class UserController extends Controller
         $meta_array = $this->contentService->getMetaListByKey();
         $user_list = $this->userRepository->getUsers(array(),$user_id);
         $sorting_tags = $this->userRepository->getSortingTags($user_id, true);
+        $gci_tags = $this->userRepository->getGreaterCommunityIntentionTag();
         $groups = $this->userRepository->groupList($user_id);
         $access_levels = $this->userRepository->getAccessLevels();
         $status = $this->userRepository->getStatus();
+
         return view('admin.content-add')
-            ->with(compact('categories','meta_array','user_list','sorting_tags','groups','access_levels','status'));
+            ->with(compact('categories','meta_array','user_list','sorting_tags','groups','access_levels','status', 'gci_tags'));
     }
 
     public function contentEdit($id)
@@ -302,11 +315,12 @@ class UserController extends Controller
         $meta_array = $this->contentService->getMetaListByKey();
         $user_list = $this->userRepository->getUsers(array(),$user_id);
         $sorting_tags = $this->userRepository->getSortingTags($user_id, true);
+        $gci_tags = $this->userRepository->getGreaterCommunityIntentionTag();
         $groups = $this->userRepository->groupList($user_id);
         $access_levels = $this->userRepository->getAccessLevels();
         $status = $this->userRepository->getStatus();
         return view('admin.content-add')
-            ->with(compact('categories','meta_array','user_list','sorting_tags','groups','access_levels','video_data','status'));
+            ->with(compact('categories','meta_array','user_list','sorting_tags','groups','access_levels','video_data','status', 'gci_tags'));
     }
 
     public function adminUserAdd(Request $request)
@@ -316,9 +330,9 @@ class UserController extends Controller
 
         if(empty($r['id'])){
             $validator = Validator::make($request->all(), [
-                'first_name' => 'required',
+//                'first_name' => 'required',
                 'display_name' => 'required|unique:users',
-                'password' => 'required|min:6',
+//                'password' => 'required|min:6',
                 'email' => 'required|email|unique:users'
             ]);
             if(empty($r['password'])){//if empty will create a random password
@@ -341,13 +355,15 @@ class UserController extends Controller
 
         if(empty($id)){//create new
             $new_user = $this->user->updateOrCreate(
-                ['id' => ''],
+                [
+                    'id' => ''],
                 [
                     'first_name' => $r['first_name'],
                     'display_name' => $r['display_name'],
                     'email' => $r['email'],
                     'status_id' => $r['status_id'],
                     'role_id' => $r['role_id'],
+                    'location' => $r['location'],
                     'password' => bcrypt($r['password'])
                 ]
             );
@@ -362,6 +378,7 @@ class UserController extends Controller
                     'email' => $r['email'],
                     'status_id' => $r['status_id'],
                     'role_id' => $r['role_id'],
+                    'location' => $r['location'],
 //                'password' => bcrypt($r['password'])
                 ]
             );

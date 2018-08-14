@@ -178,17 +178,13 @@ class UserRepository
                 $r->whereIn('users.id', array($user_id))->orWhere('contents.access_level_id', '1');
             });
         })->where('contents.status', '=', 1)
-            ->select('contents.id', 'contents.description', 'contents.lat', 'contents.long', 'contents.title', 'contents.url')->groupBy('contents.id')->get();
+            ->select('contents.id', 'contents.description', 'contents.lat', 'contents.long', 'contents.title', 'contents.url',
+                'users.display_name','contents.created_at','contents.location')
+            ->groupBy('contents.id')->get();
         $r = array(); $i = 0;
         foreach($contents as $c){
             $r[$i] = $c;
-//            if(empty($c['url'])){
-//                $r[$i]['video'] = $c['content'];
-//            }else{
-//                $r[$i]['video'] = $c['url'];
-//            }
             $r[$i]['video'] = $c['url'];
-
             $i++;
         }
 
@@ -406,6 +402,12 @@ class UserRepository
         return $tag->get();
     }
 
+    public function getGreaterCommunityIntentionTag()
+    {
+        $tag = $this->sortingTag->where('tag_for', 'gci');
+        return $tag->get();
+    }
+
     public function addSortingTag($user_id, $group_id = 0, $data)
     {
         $current_user = $this->getUser($user_id);
@@ -477,19 +479,20 @@ class UserRepository
         }
     }
 
-    public function addTagToContent($tag_id, $content_id)
+    public function addTagToContent($tag_id, $content_id, $tag_for = 'contents')
     {
         return $this->tagContentAssociation->create(
             array(
                 'content_tag_id' => $tag_id,
                 'content_id' => $content_id,
+                'tag_for' => $tag_for,
             )
         );
     }
 
-    public function deleteTagsOfContent($content_id,$user_id)
+    public function deleteTagsOfContent($content_id,$user_id, $tag_for = 'contents')
     {
-        return $this->tagContentAssociation->where('content_id', $content_id)->delete();
+        return $this->tagContentAssociation->where('content_id', $content_id)->where('tag_for', $tag_for)->delete();
     }
 
 //    public function addTagToUser($tag_id, $user_id)

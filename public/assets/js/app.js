@@ -99,10 +99,25 @@ map.addLayer( markerClusters );
 
 
 /////////////////////////////////////////////////////////
+function searchVideo(){
+    $('#video_search_res').html('<i class="fa fa-circle-o-notch"></i>');
+    $.get( "/home/ajax/video-search/", function( data ) {
+        console.log(data);
+        $('#video_search_res').html(data);
+    });
+}
+
 $(document).ready(function(){
+    $("#content_search_cat").change(function(){
+        console.log('searching');
+        searchVideo();
+    });
+
     if($('#_location_id').val() !== ''){
         updateMap($('#_location_id').val());
     }
+
+    searchVideo();
 })
 $("#login-btn").click(function() {
     $("#loginModal").modal("show");

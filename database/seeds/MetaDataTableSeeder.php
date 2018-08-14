@@ -14,56 +14,56 @@ class MetaDataTableSeeder extends Seeder
         DB::statement('SET FOREIGN_KEY_CHECKS=0;');
         DB::table('meta_data')->truncate();
         DB::table('meta_data')->insert([
-            [
-//                'id' => '1',
-                'type' => 'gci',//Grater Community Intention
-                'value' => 'Coming Together'
-            ],
-            [
-//                'id' => '2',
-                'type' => 'gci',
-                'value' => 'Artists & Musicians'
-            ],
-            [
-//                'id' => '2',
-                'type' => 'gci',
-                'value' => 'Co-Creation'
-            ],
-            [
-//                'id' => '2',
-                'type' => 'gci',
-                'value' => 'Travel & Adventure'
-            ],
-            [
-//                'id' => '2',
-                'type' => 'gci',
-                'value' => 'Sharing & Experiencing'
-            ],
-            [
-//                'id' => '2',
-                'type' => 'gci',
-                'value' => 'Reprogramming & Transformation'
-            ],
-            [
-//                'id' => '2',
-                'type' => 'gci',
-                'value' => 'Party & Celebration'
-            ],
-            [
-//                'id' => '2',
-                'type' => 'gci',
-                'value' => 'Permaculture'
-            ],
-            [
-//                'id' => '2',
-                'type' => 'gci',
-                'value' => 'Supportive Economies'
-            ],
-            [
-//                'id' => '2',
-                'type' => 'gci',
-                'value' => 'Reprogramming & Transformation'
-            ],
+//            [
+////                'id' => '1',
+//                'type' => 'gci',//Grater Community Intention
+//                'value' => 'Coming Together'
+//            ],
+//            [
+////                'id' => '2',
+//                'type' => 'gci',
+//                'value' => 'Artists & Musicians'
+//            ],
+//            [
+////                'id' => '2',
+//                'type' => 'gci',
+//                'value' => 'Co-Creation'
+//            ],
+//            [
+////                'id' => '2',
+//                'type' => 'gci',
+//                'value' => 'Travel & Adventure'
+//            ],
+//            [
+////                'id' => '2',
+//                'type' => 'gci',
+//                'value' => 'Sharing & Experiencing'
+//            ],
+//            [
+////                'id' => '2',
+//                'type' => 'gci',
+//                'value' => 'Reprogramming & Transformation'
+//            ],
+//            [
+////                'id' => '2',
+//                'type' => 'gci',
+//                'value' => 'Party & Celebration'
+//            ],
+//            [
+////                'id' => '2',
+//                'type' => 'gci',
+//                'value' => 'Permaculture'
+//            ],
+//            [
+////                'id' => '2',
+//                'type' => 'gci',
+//                'value' => 'Supportive Economies'
+//            ],
+//            [
+////                'id' => '2',
+//                'type' => 'gci',
+//                'value' => 'Reprogramming & Transformation'
+//            ],
 
 
             //Content Role s

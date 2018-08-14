@@ -144,7 +144,7 @@
                         </div>
                         <div class="form-group">
                             <label for="password">Terms of Service:</label>
-                            <input type="checkbox" name="accept_tos" id="accept_tos" value="1" checked />
+                            <input type="checkbox" name="accept_tos" id="accept_tos" value="1" />
                         </div>
                     </fieldset>
 
@@ -222,16 +222,17 @@
 <style>
     .info-box-left {
         background-color: white;
-        margin-right: -20px;
+        margin-left: 0px !important;
+        margin-right: 0px !important;
         position: relative;
-        z-index: 10000;
+        /*z-index: 10000;*/
         height: 100%;
     }
     .info-box-right {
         background-color: white;
-        margin-left: -20px;
+        margin-left: 0px;
         position: relative;
-        z-index: 10000;
+        /*z-index: 10000;*/
         height: 100%;
     }
 </style>
@@ -252,6 +253,8 @@
         $('.multi-select2').select2();
 
         $('.multi-select2-with-tags').select2({tags: true});
+
+        $('.multi-select2-max3').select2({maximumSelectionLength: 3});
 
         $('#user-assign-group').change(function(){console.log('vl '+$(this).val());
             document.location.href = '/user/admin/user-to-group-add/'+$(this).val();
