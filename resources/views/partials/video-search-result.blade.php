@@ -1,6 +1,6 @@
 
 <?php foreach($uploaded_list as $info){?>
-<div class="row" style="display: block;margin: 0px;">
+<div class="row" style="display: block;margin: 0px;height: auto;">
     <div class="col-md-6" style="margin:0px;padding: 0px;">
         <iframe style="width: 100%;" src="<?php echo str_replace( 'watch?v=', 'embed/',$info['url']) ?>" frameborder="0" allowfullscreen></iframe>
     </div>
