@@ -46,7 +46,9 @@
     <div class="row">
         @include('partials.home-left-side-bar')
         @yield('content')
-        @include('partials.home-right-side-bar')
+        @if($user = Auth::user())
+            @include('partials.home-right-side-bar')
+        @endif
     </div>
 </div>
 
@@ -211,7 +213,7 @@
         padding: 0px;
     }
     .col-md-9 {
-        background: yellow;
+        /*background: yellow;*/
     }
 
     .row .no-float {

@@ -158,10 +158,15 @@ class HomeController extends Controller
         $filter['category'] = isset($r['category'])?$r['category']: array();
         $filter['keyword'] = isset($r['keyword'])?$r['keyword']: array();
         $user_id = (!isset(Auth::user()->id))? 0 : Auth::user()->id;
-        $uploaded_list = $this->userRepository->getPublicContents($user_id, $filter);
 
-        return view('partials.video-search-result')
+        $filter['category_id'] = isset($_GET['category_id'])?($_GET['category_id']):'';
+        $filter['keyword'] = isset($_GET['keyword'])?($_GET['keyword']):'';
+        $uploaded_list = $this->userRepository->getPublicContents($user_id, $filter);
+        $json_output = $this->getSearchListInJson($uploaded_list);
+        $content = view('partials.video-search-result')
             ->with(compact('uploaded_list'));
+        $content = (string)$content;
+        return array('content' => $content, 'json' => $json_output);
     }
 
     public function getSearchListInJson($uploaded_list)

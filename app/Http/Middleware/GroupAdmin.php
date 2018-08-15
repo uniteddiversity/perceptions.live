@@ -5,7 +5,7 @@ namespace App\Http\Middleware;
 use Closure;
 use Illuminate\Support\Facades\Auth;
 
-class Admin
+class GroupAdmin
 {
     /**
      * Handle an incoming request.
@@ -18,7 +18,7 @@ class Admin
 
     public function handle($request, Closure $next)
     {
-        if(!Auth::user()->is('admin')){
+        if(!Auth::user()->is('group-admin')){
             Auth::logout();
             return redirect('/');
         }

@@ -4,9 +4,15 @@ var map = L.map( 'map', {
     zoom: 2
 });
 
-L.tileLayer( 'http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+// L.tileLayer( 'http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+//     attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>',
+//     subdomains: ['a','b','c']
+// }).addTo( map );
+
+L.tileLayer( 'https://stamen-tiles-{s}.a.ssl.fastly.net/watercolor/{z}/{x}/{y}.{ext}', {
     attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>',
-    subdomains: ['a','b','c']
+    subdomains: ['a','b','c'],
+    ext: 'png'
 }).addTo( map );
 
 // var myURL = jQuery( 'script[src$="leaf-demo.js"]' ).attr( 'src' ).replace( 'leaf-demo.js', '' );
@@ -47,6 +53,10 @@ function updateMap($id){
 }
 
 $.getJSON("/ajax-available-videos", function (markers) {
+    updateMarkers(markers);
+});
+
+function updateMarkers(markers){
     var myIcon = L.icon({
         iconUrl: myURL + '/assets/img/museum.png',
         iconRetinaUrl: myURL + '/assets/img/museum.png',
@@ -72,7 +82,7 @@ $.getJSON("/ajax-available-videos", function (markers) {
     map.fitBounds(group.getBounds());
 
     $("#loading").hide();
-});
+}
 
 var onMarkerClick = function(e){
     $("#feature-info").html('test');
@@ -96,14 +106,15 @@ var onMarkerClick = function(e){
 map.addLayer( markerClusters );
 
 
-
-
 /////////////////////////////////////////////////////////
 function searchVideo(){
-    $('#video_search_res').html('<i class="fa fa-circle-o-notch"></i>');
-    $.get( "/home/ajax/video-search/", function( data ) {
-        console.log(data);
-        $('#video_search_res').html(data);
+    $('#video_search_res').html('<i class="fa fa-spinner"></i> loading.....');
+    $.get( "/home/ajax/video-search/?keyword="+$('#search_text').val()+"&category_id="+$('#content_search_cat').val(), function( data ) {
+        console.log(data.json.original);
+        updateMarkers(data.json.original);
+        $('#video_search_res').html(data.content);
+        if(data == '')
+            $('#video_search_res').html('No result!');
     });
 }
 

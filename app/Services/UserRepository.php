@@ -171,17 +171,37 @@ class UserRepository
         return $r;
     }
 
-    public function getPublicContents($user_id)
+    public function getPublicContents($user_id, $filter = array())
     {
-        $contents = $this->user->leftJoin('contents', 'contents.user_id', 'users.id')->where(function($q) use ($user_id){
-            $q->where(function($r) use ($user_id){
-                $r->whereIn('users.id', array($user_id))->orWhere('contents.access_level_id', '1');
-            });
-        })->where('contents.status', '=', 1)
-            ->select('contents.id', 'contents.description', 'contents.lat', 'contents.long', 'contents.title', 'contents.url',
-                'users.display_name','contents.created_at','contents.location')
-            ->groupBy('contents.id')->get();
+        $contents = $this->user
+            ->leftJoin('contents', 'contents.user_id', 'users.id')->where(function($q) use ($user_id){
+                $q->where(function($r) use ($user_id){
+                    $r->whereIn('users.id', array($user_id))->orWhere('contents.access_level_id', '1');
+                });
+            })->leftJoin('tag_content_associations', function($q){
+                $q->on( 'contents.id', 'tag_content_associations.content_id');
+                $q->where( 'tag_content_associations.tag_for', 'gci');
+            })
+            ->leftJoin('sorting_tags', function($q){
+                $q->on('sorting_tags.id', 'tag_content_associations.content_tag_id');
+            })
+            ->where('contents.status', '=', 1);
+
+        if(isset($filter['keyword']) && !empty($filter['keyword'])){
+            $contents = $contents->where('title', 'like', '%'.$filter['keyword'].'%');
+        }
+
+        if(isset($filter['category_id']) && !empty($filter['category_id'])){
+            $contents = $contents->where('category_id', $filter['category_id']);
+        }
+
+
+        $contents = $contents->select('contents.id', 'contents.description', 'contents.lat', 'contents.long', 'contents.title', 'contents.url',
+                'users.display_name','contents.created_at','contents.location',
+                DB::Raw("GROUP_CONCAT(DISTINCT (concat(sorting_tags.tag_color,'-',sorting_tags.tag)) SEPARATOR ', ') as tag_colors") )
+            ->groupBy('contents.id')->limit(500)->get();
         $r = array(); $i = 0;
+
         foreach($contents as $c){
             $r[$i] = $c;
             $r[$i]['video'] = $c['url'];

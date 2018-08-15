@@ -4,11 +4,11 @@
 
         <div class="form-group">
             <div class="col-md-5" style="margin:0px;padding: 0px;">
-                <input type="text" class="form-control" aria-describedby="nameHelp" name="search_text" placeholder="Search">
+                <input type="text" class="form-control" aria-describedby="nameHelp" name="search_text" id="search_text" placeholder="Search">
             </div>
             <div class="col-md-7" style="padding-right: 0px;">
                 <select class="form-control" id="content_search_cat">
-                    <option value="0">Select</option>
+                    <option value="">All Categories</option>
                     @foreach($categories as $cat)
                         <option value="{{$cat->id}}" >{{$cat->name}}</option>
                     @endforeach
@@ -30,3 +30,12 @@
         </div>
     </div>
 </div>
+<style>
+    .dot {
+        height: 10px;
+        width: 10px;
+        border-radius: 50%;
+        display: inline-block;
+        margin: 2px;
+    }
+</style>

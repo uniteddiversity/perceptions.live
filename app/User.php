@@ -32,7 +32,7 @@ class User extends Authenticatable
     {
         foreach ($this->role()->get() as $role)
         {
-            if ($role->name == $roleName)
+            if ($role->slug == $roleName)
             {
                 return true;
             }
