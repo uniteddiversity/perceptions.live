@@ -8,21 +8,32 @@
             <a data-toggle="collapse" data-target=".navbar-collapse.in" class="navbar-brand" href="/">OSM</a>
         </div>
         <div class="navbar-collapse collapse">
-            <form class="navbar-form navbar-right" role="search">
-                <div class="form-group has-feedback">
-                    <input id="searchbox" type="text" placeholder="Search" class="form-control">
-                    <span id="searchicon" class="fa fa-search form-control-feedback"></span>
-                </div>
-            </form>
+            {{--<form class="navbar-form navbar-right" role="search">--}}
+                {{--<div class="form-group has-feedback">--}}
+                    {{--<input id="searchbox" type="text" placeholder="Search" class="form-control">--}}
+                    {{--<span id="searchicon" class="fa fa-search form-control-feedback"></span>--}}
+                {{--</div>--}}
+            {{--</form>--}}
             <ul class="nav navbar-nav">
                 <!--<li class="hidden-xs"><a href="#" data-toggle="collapse" data-target=".navbar-collapse.in" id="list-btn"><i class="fa fa-list white"></i>&nbsp;</a></li>-->
-                <?php if(empty(Auth::user()->email)){ ?>
-                <li><a href="#" data-toggle="collapse" data-target=".navbar-collapse.in" id="login-btn"><i class="fa fa-user white"></i>&nbspLogin</a></li>
-                <li><a href="#" data-toggle="collapse" data-target=".navbar-collapse.in" id="register-btn"><i class="fa fa-registered white"></i>&nbspRegister</a></li>
-                <?php }else{ ?>
-                <li><a href="/user/admin/content-add" data-toggle="collapse" data-target=".navbar-collapse.in"><i class="fa fa-upload white"></i>&nbspUpload a Video</a></li>
-                <li><a href="/user/logout" data-toggle="collapse" data-target=".navbar-collapse.in"><i class="fa fa-sign-out white"></i>&nbspLogout {{Auth::user()->first_name}}</a></li>
-                <?php } ?>
+                @if (Route::has('login'))
+
+                        @auth
+                        <?php if(Auth::user()->is('admin')){ ?>
+                            <li><a href="/user/admin/content-add" data-toggle="collapse" data-target=".navbar-collapse.in"><i class="fa fa-upload white"></i>&nbspUpload a Video</a></li>
+                        <?php }else{ ?>
+                            <li><a href="/user/content-add" data-toggle="collapse" data-target=".navbar-collapse.in"><i class="fa fa-upload white"></i>&nbspUpload a Video</a></li>
+                        <?php } ?>
+
+                            <li><a href="/user/logout" data-toggle="collapse" data-target=".navbar-collapse.in"><i class="fa fa-sign-out white"></i>&nbspLogout {{Auth::user()->first_name}}</a></li>
+                        @else
+                            <li><a href="#" data-toggle="collapse" data-target=".navbar-collapse.in" id="login-btn"><i class="fa fa-user white"></i>&nbspLogin</a></li>
+                            <li><a href="#" data-toggle="collapse" data-target=".navbar-collapse.in" id="register-btn"><i class="fa fa-registered white"></i>&nbspRegister</a></li>
+                        @endauth
+
+                @endif
+
+
                 {{--<li class="dropdown">--}}
                 {{--<a id="toolsDrop" href="#" role="button" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-globe white"></i>&nbsp;&nbsp;Tools <b class="caret"></b></a>--}}
                 {{--<ul class="dropdown-menu">--}}

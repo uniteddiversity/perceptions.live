@@ -4,8 +4,8 @@
             <div class="nav-link">
                 <div class="user-wrapper">
                     <div class="profile-image">
-                    <?php $user_img = Auth::user()->image; ?>
-                    <img src="<?php if(isset($user_img[0])){ echo '/storage/'.$user_img[0]->url; }else{ ?>/assets/img/face1.png<?php } ?>" alt="profile image">
+                        <?php $user_img = Auth::user()->image; ?>
+                        <img src="<?php if(isset($user_img[0])){ echo '/storage/'.$user_img[0]->url; }else{ ?>/assets/img/face1.png<?php } ?>" alt="profile image">
                     </div>
                     <div class="text-wrapper">
                         <p class="profile-name">{{Auth::user()->email}}</p>
@@ -17,7 +17,6 @@
                 </div>
             </div>
         </li>
-
         {{--<li class="nav-item">--}}
         {{--<a class="nav-link" href="index.html">--}}
         {{--<i class="menu-icon mdi mdi-television"></i>--}}
@@ -34,42 +33,10 @@
             <div class="collapse" id="contnet-sub">
                 <ul class="nav flex-column sub-menu">
                     <li class="nav-item">
-                        <a class="nav-link" href="/user/admin/content-list"> List Videos </a>
+                        <a class="nav-link" href="/user/user/content-list"> List Videos </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="/user/admin/content-add"> Add Video </a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="/user/admin/sorting-tag-add"> Tags </a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="/user/admin/location-list"> Location List </a>
-                    </li>
-                </ul>
-            </div>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link" data-toggle="collapse" href="#auth" aria-expanded="false" aria-controls="auth">
-                <i class="menu-icon mdi mdi-restart"></i>
-                <span class="menu-title">User Manage</span>
-                <i class="menu-arrow"></i>
-            </a>
-            <div class="collapse" id="auth">
-                <ul class="nav flex-column sub-menu">
-                    <li class="nav-item">
-                        <a class="nav-link" href="/user/admin/user-list"> List Users </a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="/user/admin/user-add"> Create User </a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="/user/admin/user-group-add"> Create Group </a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="/user/admin/user-to-group-add"> Assign User to Group </a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="/user/admin/group-list"> List Groups </a>
+                        <a class="nav-link" href="/user/content-add"> Add Video </a>
                     </li>
                 </ul>
             </div>

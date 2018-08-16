@@ -19,7 +19,7 @@ class User
     public function handle($request, Closure $next)
     {
         if(!Auth::user()->is('user')){
-            Auth::logout();
+//            Auth::logout();
             return redirect('/');
         }
         $response = $next($request);

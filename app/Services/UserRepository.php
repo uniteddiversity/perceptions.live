@@ -146,7 +146,7 @@ class UserRepository
     public function getUser($user_id)
     {
         return $this->user->where('users.id', $user_id)->with('image','groups','actingRoles')
-            ->leftJoin('user_groups', 'users.id', 'user_groups.user_id')
+            ->leftJoin('user_groups', 'users.id', 'users.location', 'user_groups.user_id')
             ->select('users.*', 'user_groups.group_id', 'user_groups.role_id as group_role_id')
             ->first();
     }
@@ -265,10 +265,6 @@ class UserRepository
         $user_info = $this->getUser($user_id);
 
         $user_group = $this->group;
-        if($user_info['role_id'] <> '1'){
-            $user_group->where('id', $user_id['group_id']);
-        }
-
         if($full){
             $user_group = $user_group->with('groupStatus');
             $user_group = $user_group->leftJoin(DB::raw('(SELECT count(user_id) as users_count, group_id FROM user_groups GROUP BY group_id) as user_groups'), 'id', 'user_groups.group_id')
@@ -284,7 +280,11 @@ class UserRepository
                     ->where('users_in_group.role_id', '100');
             });
 
-            $user_group->select('groups.*', DB::Raw('users_in_group.display_name as group_admin'), DB::Raw("count(contents.id) as active_video_count"));
+            $user_group = $user_group->select('groups.*', DB::Raw('GROUP_CONCAT(DISTINCT users_in_group.display_name SEPARATOR ", ") as group_admin'),
+                DB::Raw("count(DISTINCT contents.id) as active_video_count"), 'user_groups.users_count');
+//            $user_group->select('groups.*', DB::Raw("count(contents.id) as active_video_count"));
+
+
         }
 
 //        $user_group->orderBy('groups.updated_at','DESC');
@@ -294,9 +294,15 @@ class UserRepository
             $user_group = $user_group->groupBy('groups.id')->first();
         }else{
             if($full){
-                $user_group = $user_group->groupBy('groups.id')->groupBy('users_in_group.id')->orderBy('groups.updated_at','DESC')->get();
-            }else{
                 $user_group = $user_group->groupBy('groups.id')->orderBy('groups.updated_at','DESC')->get();
+            }else{
+                $user_group = $user_group->select('groups.*');
+                if($user_info['role_id'] <> '1'){
+                    $user_group = $user_group->leftJoin('user_groups', 'user_groups.group_id', 'groups.id');
+                    $user_group = $user_group->where('user_groups.user_id', $user_info['id']);
+                }
+                $user_group = $user_group->groupBy('groups.id')->orderBy('groups.updated_at','DESC')->get();
+
             }
         }
 
@@ -349,10 +355,9 @@ class UserRepository
     function getUserRoles($user_id)
     {
         $user_info = $this->getUser($user_id);
-
         $user_roles = $this->role;
         if($user_info['role_id'] <> '1'){
-            $user_roles->where('id','<=', $user_id['role_id']);//must have equal or less powers
+            $user_roles = $user_roles->where('id','>=', ($user_info['role_id']));//must have equal or less powers
         }
 
         $user_group = $user_roles->orderBy('id', 'DESC')->get();
@@ -431,10 +436,11 @@ class UserRepository
     public function addSortingTag($user_id, $group_id = 0, $data)
     {
         $current_user = $this->getUser($user_id);
-        if($current_user['role_id'] == 1){
+        //anyone can add sorting tag for now.
+//        if($current_user['role_id'] == 1){
             return $this->sortingTag->create(array('tag' => $data['tag'], 'description' => $data['description'],
                 'created_by' => $user_id, 'group_id' => $group_id));
-        }
+//        }
 
     }
 

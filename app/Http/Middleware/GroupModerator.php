@@ -19,7 +19,7 @@ class GroupModerator
     public function handle($request, Closure $next)
     {
         if(!Auth::user()->is('group-moderato')){
-            Auth::logout();
+//            Auth::logout();
             return redirect('/');
         }
         $response = $next($request);

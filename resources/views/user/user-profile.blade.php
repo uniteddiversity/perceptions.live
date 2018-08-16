@@ -9,20 +9,19 @@
     $data['first_name'] = isset($user_data['first_name'])?$user_data['first_name']:'';
     $data['display_name'] = isset($user_data['display_name'])?$user_data['display_name']:'';
     $data['status_id'] = isset($user_data['status_id'])?$user_data['status_id']:'';
+    $data['location'] = isset($user_data['location'])?$user_data['location']:'';
     $data['image'] = isset($user_data['image'])?$user_data['image']:array();
     $data['group'] = isset($user_data['groups'])?array_column($user_data['groups'],'group_id'):array();
     $data['user_acting_roles'] = isset($user_data['acting_roles'])?array_column($user_data['acting_roles'],'user_tag_id'):array();
-    $data['location'] = isset($user_data['location'])?$user_data['location']:'';
     ?>
     <div class="col-lg-12 grid-margin stretch-card">
         <div class="card">
             <div class="card-body">
-                <h4 class="card-title">Add User</h4>
+                <h4 class="card-title">Profile Settings</h4>
                 <div class="table-responsive">
                     @if ($errors->any())
                         <div class="alert alert-danger">
                             <ul>
-                                <?php //dd($errors) ?>
                                 @foreach ($errors->all() as $error)
                                 <li>{{ $error }}</li>
                                 @endforeach
@@ -34,7 +33,7 @@
                             {{ session()->get('message') }}
                         </div>
                         @endif
-                        <form action="/user/admin/post-user-add" method="post" enctype='multipart/form-data'>
+                        <form action="/user/user-profile-post" method="post" enctype='multipart/form-data'>
                             <?php if(!empty($data['id'])){?>
                             <input type="hidden" name="id" id="id" value="{{ uid($data['id']) }}" />
                             <?php }?>
@@ -67,24 +66,27 @@
                                 </select>
                             </div>
 
+                            <?php if(Auth::user()->is('admin')){ ?>
                             <div class="form-group">
-                                <?php if(Auth::user()->is('admin')){ ?>
                                 <label for="status_id">Status</label>
                                 <select class="form-control" id="status_id" name="status_id">
                                     @foreach($status as $st)
                                         <option value="{{$st->id}}" <?php if(old('status_id',$data['status_id']) == $st->id){ echo 'selected'; } ?> >{{$st->name}}</option>
                                     @endforeach
                                 </select>
-                                <?php } ?>
                             </div>
-                            <div class="form-group">
-                                <label for="exampleSelect1">Role</label>
-                                <select class="form-control" id="exampleSelect1" name="role_id">
-                                    @foreach($user_roles as $role)
-                                    <option value="{{$role->id}}">{{$role->name}}</option>
-                                    @endforeach
-                                </select>
-                            </div>
+                            <?php } ?>
+
+                            <?php if(Auth::user()->is('admin')){ ?>
+                            {{--<div class="form-group">--}}
+                                {{--<label for="exampleSelect1">Role</label>--}}
+                                {{--<select class="form-control" id="exampleSelect1" name="role_id">--}}
+                                    {{--@foreach($user_roles as $role)--}}
+                                    {{--<option value="{{$role->id}}">{{$role->name}}</option>--}}
+                                    {{--@endforeach--}}
+                                {{--</select>--}}
+                            {{--</div>--}}
+                            <?php } ?>
 
                                 <div class="form-group">
                                     <label for="location">Location</label>

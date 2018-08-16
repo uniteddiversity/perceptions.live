@@ -19,7 +19,7 @@ class GroupAdmin
     public function handle($request, Closure $next)
     {
         if(!Auth::user()->is('group-admin')){
-            Auth::logout();
+//            Auth::logout();
             return redirect('/');
         }
         $response = $next($request);

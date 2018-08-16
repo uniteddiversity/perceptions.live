@@ -40,7 +40,10 @@
                         @endif
                         <form action="/user/admin/post-group-add" method="post" enctype='multipart/form-data'>
                             <input type="hidden" name="_token" id="csrf-token" value="{{ Session::token() }}" />
+                            <?php if(!empty($data['id'])){ ?>
                             <input type="hidden" name="id" id="id" value="{{ uid($data['id']) }}" />
+                            <?php } ?>
+
                             <div class="form-group">
                                 <label for="exampleInputEmail1">Greeting Message to PRCPTION community</label>
                                 <input type="text" class="form-control" aria-describedby="nameHelp" name="greeting_message_to_community" placeholder="Greeting Message to PRCPTION community" value="{{ old('greeting_message_to_community',$data['greeting_message_to_community']) }}">
@@ -115,7 +118,7 @@
 
 
                             <div class="form-group">
-                                <?php if(Auth::user()->is('Admin')){ ?>
+                                <?php if(Auth::user()->is('admin')){ ?>
                                 <label for="status">Change Status</label>
                                 <select class="form-control" id="status" name="status">
                                     @foreach($status as $st)

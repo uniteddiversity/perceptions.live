@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="/assets/admin-temp/vendors/iconfonts/mdi/css/materialdesignicons.min.css">
     <link rel="stylesheet" href="/assets/admin-temp/vendors/css/vendor.bundle.base.css">
     <link rel="stylesheet" href="/assets/admin-temp/css/style.css">
-    <link rel="stylesheet" href="/assets/admin-temp/vendors/css/vendor.bundle.addons.css">
+    {{--<link rel="stylesheet" href="/assets/admin-temp/vendors/css/vendor.bundle.addons.css">--}}
     <link rel="stylesheet" href="/js/dist/css/select2.min.css" />
 
     {{--<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">--}}
@@ -20,12 +20,12 @@
     <!-- partial:partials/_navbar.html -->
     <nav class="navbar default-layout col-lg-12 col-12 p-0 fixed-top d-flex flex-row">
         <div class="text-center navbar-brand-wrapper d-flex align-items-top justify-content-center">
-            <a class="navbar-brand brand-logo" href="index.html">
+            {{--<a class="navbar-brand brand-logo" href="index.html">--}}
                 {{--<img src="images/logo.svg" alt="logo" />--}}
-            </a>
-            <a class="navbar-brand brand-logo-mini" href="index.html">
+            {{--</a>--}}
+            {{--<a class="navbar-brand brand-logo-mini" href="index.html">--}}
                 {{--<img src="images/logo-mini.svg" alt="logo" />--}}
-            </a>
+            {{--</a>--}}
         </div>
         <div class="navbar-menu-wrapper d-flex align-items-center">
             @include('partials.admin-nav-bar')
@@ -182,8 +182,16 @@
     <!-- partial -->
     <div class="container-fluid page-body-wrapper">
 
+    <?php if(Auth::user()->is('admin')){ ?>
+        @include('partials.admin-left-sidebar')
+    <?php }elseif(Auth::user()->is('group-admin')){ ?>
+        @include('partials.group-admin-left-sidebar')
+    <?php }elseif(Auth::user()->is('moderator')){ ?>
+        @include('partials.moderator-left-sidebar')
+    <?php }else{ ?>
+        @include('partials.user-left-sidebar')
+    <?php } ?>
 
-    @include('partials.admin-left-sidebar')
 
 
         <!-- partial -->
@@ -249,6 +257,10 @@
              document.location.href = '/user/admin/user-to-group-add/'+$(this).val();
         })
 
+        $('#user-assign-group-groupadmin').change(function(){console.log('vl '+$(this).val());
+            document.location.href = '/user/group-admin/user-to-group-add/'+$(this).val();
+        })
+
         $("#is_exchange").change(function(){ console.log('changing..');
             if($(this).is(':checked')){console.log('checked..');
                 $('#exchange_enabled').css('visibility','visible');
@@ -261,7 +273,7 @@
 
     function addr_search() {
         var inp = document.getElementById("leaflet_search_addr");
-        $.getJSON('http://nominatim.openstreetmap.org/search?format=json&limit=5&q=' + inp.value, function(data) {
+        $.getJSON('https://nominatim.openstreetmap.org/search?format=json&limit=5&q=' + inp.value, function(data) {
             var items = [];
 
             $.each(data, function(key, val) {
@@ -284,13 +296,13 @@
 <!-- End custom js for this page-->
 </body>
 <style>
-    .datepicker > div {
-        display: block !important;
-    }
+    /*.datepicker > div {*/
+        /*display: block !important;*/
+    /*}*/
 
-    .select2-container--default .select2-selection--single{
-        border: 1px solid #f2f2f2;
-    }
+    /*.select2-container--default .select2-selection--single{*/
+        /*border: 1px solid #f2f2f2;*/
+    /*}*/
 
     .select2-container--default .select2-selection--single .select2-selection__rendered {
         /*color: #ccc;*/

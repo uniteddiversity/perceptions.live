@@ -65,7 +65,7 @@
                             {{ session()->get('message') }}
                         </div>
                         @endif
-                        <form action="/user/post-upload-video" method="post" id="submit_content" enctype='multipart/form-data'>
+                        <form action="/user/admin/post-upload-video" method="post" id="submit_content" enctype='multipart/form-data'>
                             <input type="hidden" name="_token" id="csrf-token" value="{{ Session::token() }}" />
                             <input type="hidden" name="id" id="csrf-token" value="<?php echo uid($data['id']) ?>" />
                             <div class="form-group">
@@ -194,10 +194,10 @@
                                 {{--</div>--}}
                             {{--</div>--}}
 
-                            <?php if(!empty($data['id']) && !Auth::user()->is('Admin')){?>
+                            <?php if(!empty($data['id']) && !Auth::user()->is('admin')){?>
                                 <input type="hidden" value="0" id="lat_val" name="lat" value="{{ old('lat',$data['lat']) }}">
                                 <input type="hidden" value="0" id="long_val" name="long" value="{{ old('long',$data['long']) }}">
-                            <?php }elseif(Auth::user()->is('Admin')){?>
+                            <?php }elseif(Auth::user()->is('admin')){?>
                             <div class="form-group">
                                 <label for="exampleTextarea">Lat/Long</label>
                                 <div class="row">
@@ -308,7 +308,7 @@
                             </div>
 
                             <div class="form-group">
-                                <?php if(Auth::user()->is('Admin')){ ?>
+                                <?php if(Auth::user()->is('admin') || Auth::user()->is('group-admin') || Auth::user()->is('moderator')){ ?>
                                 <label for="status">Status</label>
                                 <select class="form-control" id="status" name="status">
                                     @foreach($status as $st)

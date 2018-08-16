@@ -25,9 +25,9 @@ var markerClusters = L.markerClusterGroup();
 function updateMap($id){
     $.getJSON("/ajax-available-videos/"+$id, function (markers) {
         var myIcon = L.icon({
-            iconUrl: myURL + '/assets/img/museum.png',
-            iconRetinaUrl: myURL + '/assets/img/museum.png',
-            iconSize: [29, 24],
+            iconUrl: myURL + '/assets/img/globe_new.png',
+            iconRetinaUrl: myURL + '/assets/img/globe_new.png',
+            iconSize: [29, 29],
             iconAnchor: [9, 21],
             popupAnchor: [0, -14]
         });
@@ -58,9 +58,9 @@ $.getJSON("/ajax-available-videos", function (markers) {
 
 function updateMarkers(markers){
     var myIcon = L.icon({
-        iconUrl: myURL + '/assets/img/museum.png',
-        iconRetinaUrl: myURL + '/assets/img/museum.png',
-        iconSize: [29, 24],
+        iconUrl: myURL + '/assets/img/globe_new.png',
+        iconRetinaUrl: myURL + '/assets/img/globe_new.png',
+        iconSize: [29, 29],
         iconAnchor: [9, 21],
         popupAnchor: [0, -14]
     });
