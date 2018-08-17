@@ -60,4 +60,9 @@ class Content extends Model
     {
         return $this->hasMany('App\TagContentAssociation','content_id')->where('tag_for', 'gci');
     }
+
+    public function category()
+    {
+        return $this->hasOne('App\Category','id','category_id');
+    }
 }

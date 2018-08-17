@@ -164,14 +164,14 @@
 <div class="modal fade" id="featureModal" tabindex="-1" role="dialog">
     <div class="modal-dialog">
         <div class="modal-content">
-            <div class="modal-header">
+            <div class="modal-header" style="border-bottom: 0px solid #e5e5e5;">
                 <button class="close" type="button" data-dismiss="modal" aria-hidden="true">&times;</button>
-                <h4 class="modal-title text-primary" id="feature-title"></h4>
+                {{--<h4 class="modal-title text-primary" id="feature-title"></h4>--}}
             </div>
             <div class="modal-body" id="feature-info"></div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-            </div>
+            {{--<div class="modal-footer">--}}
+                {{--<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>--}}
+            {{--</div>--}}
         </div>
     </div>
 </div>
@@ -236,6 +236,10 @@
         position: relative;
         /*z-index: 10000;*/
         height: 100%;
+    }
+
+    #featureModal .modal-dialog{
+        width: 950px;
     }
 </style>
 <script src="/assets/js/jquery-2.1.4.min.js"></script>

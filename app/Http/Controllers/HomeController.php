@@ -111,7 +111,8 @@ class HomeController extends Controller
     {
         $user_id = (!isset(Auth::user()->id))? 0 : Auth::user()->id;
         $info = $this->userRepository->getContentsInfo($user_id, $video_id);
-        return view('partials.video-info')
+
+        return view('partials.video-info-popup')
             ->with(compact('info'));
     }
 
@@ -165,7 +166,7 @@ class HomeController extends Controller
         $json_output = $this->getSearchListInJson($uploaded_list);
         $content = view('partials.video-search-result')
             ->with(compact('uploaded_list'));
-        $content = (string)$content;
+        $content = (string)htmlspecialchars($content);
         return array('content' => $content, 'json' => $json_output);
     }
 
@@ -173,6 +174,9 @@ class HomeController extends Controller
     {
         $ret = array(); $i = 0;
         foreach($uploaded_list as $u){
+            if(empty($u['lat']) || empty($u['long']))
+                continue;
+
             $ret[$i]['id'] = $u['id'];
             $ret[$i]['lng'] = floatval($u['long']);
             $ret[$i]['lat'] = floatval($u['lat']);

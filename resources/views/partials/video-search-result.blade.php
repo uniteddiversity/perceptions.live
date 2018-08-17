@@ -13,7 +13,7 @@
             echo '<span style="background-color: '.$tag_name_n_color[0].'" class="dot"></span>';
         } ?>
         <div></div>
-        <h4 style="margin-top: 0px;font-weight: bold;"><?php echo $info['title'] ?></h4>
+        <h4 style="margin-top: 0px;font-weight: bold;cursor: pointer;" onclick="openVideo('<?php echo $info['id'] ?>')"><?php echo $info['title'] ?></h4>
         <div>@<?php echo $info['display_name'] ?></div>
         <div><?php echo date('d F Y',strtotime($info['created_at'])) ?>, <?php echo $info['location'] ?></div>
     </div>

@@ -22,41 +22,18 @@ myURL = '';
 
 var markerClusters = L.markerClusterGroup();
 
-function updateMap($id){
-    $.getJSON("/ajax-available-videos/"+$id, function (markers) {
-        var myIcon = L.icon({
-            iconUrl: myURL + '/assets/img/globe_new.png',
-            iconRetinaUrl: myURL + '/assets/img/globe_new.png',
-            iconSize: [29, 29],
-            iconAnchor: [9, 21],
-            popupAnchor: [0, -14]
-        });
+// $.getJSON("/ajax-available-videos", function (markers) {
+// //     updateMarkers(markers);
+// // });
+searchVideo();
 
-        var all_b = [];
-        for ( var i = 0; i < markers.length; ++i )
-        {
-            var popup = 'abc'+markers[i].name;
-            // var m = L.marker( [markers[i].lat, markers[i].lng], {icon: myIcon} )
-            //     .bindPopup( popup );
-            var m = L.marker( [markers[i].lat, markers[i].lng], {icon: myIcon, id: markers[i].id} );
-            m.on('click', onMarkerClick);
-            markerClusters.addLayer( m );
-            all_b.push(m);
-            console.log(markers[i]);
-        }
-
-        var group = new L.featureGroup(all_b);
-        map.fitBounds(group.getBounds());
-
-        $("#loading").hide();
-    });
-}
-
-$.getJSON("/ajax-available-videos", function (markers) {
-    updateMarkers(markers);
-});
-
+var m;
 function updateMarkers(markers){
+    map.removeLayer(markerClusters);
+
+    var markerClusters2 = L.markerClusterGroup();
+    map.addLayer( markerClusters2 );
+
     var myIcon = L.icon({
         iconUrl: myURL + '/assets/img/globe_new.png',
         iconRetinaUrl: myURL + '/assets/img/globe_new.png',
@@ -71,9 +48,9 @@ function updateMarkers(markers){
         var popup = 'abc'+markers[i].name;
         // var m = L.marker( [markers[i].lat, markers[i].lng], {icon: myIcon} )
         //     .bindPopup( popup );
-        var m = L.marker( [markers[i].lat, markers[i].lng], {icon: myIcon, id: markers[i].id} );
+        m = L.marker( [markers[i].lat, markers[i].lng], {icon: myIcon, id: markers[i].id} );
         m.on('click', onMarkerClick);
-        markerClusters.addLayer( m );
+        markerClusters2.addLayer( m );
         all_b.push(m);
         console.log(markers[i]);
     }
@@ -81,11 +58,13 @@ function updateMarkers(markers){
     var group = new L.featureGroup(all_b);
     map.fitBounds(group.getBounds());
 
+    // m.clearLayers();
+
     $("#loading").hide();
 }
 
 var onMarkerClick = function(e){
-    $("#feature-info").html('test');
+    $("#feature-info").html('loading...');
     console.log(this);//this.options.id
     jQuery.ajax({
         url: '/home/ajax-video-info/'+this.options.id,
@@ -99,8 +78,23 @@ var onMarkerClick = function(e){
         $("#feature-info").html("Fail to load info");
         $("#featureModal").modal("show");
     });
+}
 
-
+function openVideo(id){
+    $("#feature-info").html('loading...');
+    console.log(this);//this.options.id
+    jQuery.ajax({
+        url: '/home/ajax-video-info/'+id,
+        method: 'GET'
+    }).done(function (content) {
+        $("#feature-title").html("Info:");
+        $("#feature-info").html(content);
+        $("#featureModal").modal("show");
+    }).fail(function () {
+        $("#feature-title").html("Error:");
+        $("#feature-info").html("Fail to load info");
+        $("#featureModal").modal("show");
+    });
 }
 
 map.addLayer( markerClusters );
@@ -111,11 +105,19 @@ function searchVideo(){
     $('#video_search_res').html('<i class="fa fa-spinner"></i> loading.....');
     $.get( "/home/ajax/video-search/?keyword="+$('#search_text').val()+"&category_id="+$('#content_search_cat').val(), function( data ) {
         console.log(data.json.original);
-        updateMarkers(data.json.original);
-        $('#video_search_res').html(data.content);
-        if(data == '')
+        if(data.content == '')
             $('#video_search_res').html('No result!');
+
+        updateMarkers(data.json.original);
+        $('#video_search_res').html(decode(data.content));
+
     });
+}
+
+function decode(str) {
+    var e = document.createElement('div');
+    e.innerHTML = str;
+    return e.childNodes.length === 0 ? "" : e.childNodes[0].nodeValue;
 }
 
 $(document).ready(function(){
