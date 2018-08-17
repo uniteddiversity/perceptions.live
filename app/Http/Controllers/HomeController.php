@@ -62,33 +62,6 @@ class HomeController extends Controller
     {
         $user_id = (!isset(Auth::user()->id))? 0 : Auth::user()->id;
         $uploaded_list = $this->userRepository->getPublicContents($user_id);
-//        $uploaded_list_json = '{
-//"type": "FeatureCollection",
-//
-//"features": [
-//{ "type": "Feature", "id": 0, "properties": { "NAME": "45th Street Theater", "TEL": "(212) 352-3101", "URL": "http:\/\/www.theatermania.com\/new-york\/theaters\/45th-street-theatre_2278\/", "ADDRESS1": "354 West 45th Street", "ADDRES2": null, "CITY": "New York", "ZIP": 10036.0 }, "geometry": { "type": "Point", "coordinates": [ -73.990618, 40.759851 ] } }
-//,
-//{ "type": "Feature", "id": 1, "properties": { "NAME": "47th Street Theater", "TEL": "(800) 775-1617", "URL": "http:\/\/www.bestofoffbroadway.com\/theaters\/47streettheatre.html", "ADDRESS1": "304 West 47th Street", "ADDRES2": null, "CITY": "New York", "ZIP": 10036.0 }, "geometry": { "type": "Point", "coordinates": [ -73.988106, 40.760471 ] } }
-//,
-//{ "type": "Feature", "id": 115, "properties": { "NAME": "York Theatre", "TEL": "(212) 935-5820", "URL": "http:\/\/www.yorktheatre.org\/", "ADDRESS1": "619 Lexington Ave", "ADDRES2": null, "CITY": "New York", "ZIP": 10022.0 }, "geometry": { "type": "Point", "coordinates": [ -73.969979, 40.758357 ] } }
-//,
-//{ "type": "Feature", "id": 116, "properties": { "NAME": "Delacorte Theater", "TEL": "(212) 861-7277", "URL": "http:\/\/www.centralpark.com\/pages\/attractions\/delacorte-theatre.html", "ADDRESS1": "Central Park - Mid-Park at 80th Street", "ADDRES2": "SW corner of the Great Lawn", "CITY": "New York", "ZIP": 0.0 }, "geometry": { "type": "Point", "coordinates": [ -73.968825, 40.780176 ] } }
-//
-//]
-//}
-//';
-//        $ret = array(); $i = 0;
-//        foreach($uploaded_list as $u){
-//            $ret[$i]['id'] = $u['id'];
-//            $ret[$i]['lng'] = floatval($u['long']);
-//            $ret[$i]['lat'] = floatval($u['lat']);
-//            $ret[$i]['name'] = $u['title'];
-////            $ret[$i]['city'] = $u['city'];
-//            $i++;
-//        }
-////        return $uploaded_list_json;
-////        return response()->json(array('type' => 'FeatureCollection', 'features' => $ret), 200);
-//        return response()->json($ret, 200);
         return $this->getSearchListInJson($uploaded_list);
     }
 
@@ -114,6 +87,15 @@ class HomeController extends Controller
 
         return view('partials.video-info-popup')
             ->with(compact('info'));
+    }
+
+    public function getUserInfo($user_id)
+    {
+        $user_associate_videos = $this->userRepository->getAssociatedVideosForUser($user_id);
+//        dd($user_associate_videos);
+        $info = $this->userRepository->getUser($user_id);
+        return view('partials.user-info-popup')
+            ->with(compact('info','user_associate_videos'));
     }
 
     public function location($id)

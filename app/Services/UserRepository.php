@@ -145,7 +145,10 @@ class UserRepository
 
     public function getUser($user_id)
     {
-        return $this->user->where('users.id', $user_id)->with('image','groups','actingRoles')
+        return $this->user->where('users.id', $user_id)->with(['image','groups',
+        'actingRoles' => function($q){
+            $q->with('tag');
+        }])
             ->leftJoin('user_groups', 'users.id', 'users.location', 'user_groups.user_id')
             ->select('users.*', 'user_groups.group_id', 'user_groups.role_id as group_role_id')
             ->first();
@@ -197,7 +200,7 @@ class UserRepository
 
 
         $contents = $contents->select('contents.id', 'contents.description', 'contents.lat', 'contents.long', 'contents.title', 'contents.url',
-                'users.display_name','contents.created_at','contents.location',
+                'users.display_name','contents.created_at','contents.location','contents.user_id',
                 DB::Raw("GROUP_CONCAT(DISTINCT (concat(sorting_tags.tag_color,'-',sorting_tags.tag)) SEPARATOR ', ') as tag_colors") )
             ->groupBy('contents.id')->limit(500)->get();
         $r = array(); $i = 0;
@@ -563,6 +566,16 @@ class UserRepository
     public function getUserActingRoles()
     {
         return $this->userSortingTag->where('slug', 'role')->get();
+    }
+
+    public function getAssociatedVideosForUser($user_id)
+    {
+        return $this->content
+            ->leftJoin('user_content_associations', 'user_content_associations.content_id', 'contents.id')
+            ->where(function($q) use ($user_id){
+                $q->where('user_content_associations.user_id', $user_id)
+                    ->orWhere('contents.user_id', $user_id);
+            })->where('status', '1')->select('contents.*')->groupBy('contents.id')->get();
     }
 }
 

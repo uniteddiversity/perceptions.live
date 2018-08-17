@@ -135,7 +135,7 @@
                             {{--<input type="text" class="form-control" aria-describedby="nameHelp" name="organization" placeholder="Organization" value="{{ old('organization') }}">--}}
                         </div>
                         <div class="form-group">
-                            <label for="learn_more_url">Learn More Url (If not exist, add Name)</label>
+                            <label for="learn_more_url">Learn More Url</label>
                             <input type="text" class="form-control" aria-describedby="nameHelp" id="learn_more_url" name="learn_more_url" placeholder="Learn More Url" value="{{ old('learn_more_url',$data['learn_more_url']) }}">
                         </div>
 

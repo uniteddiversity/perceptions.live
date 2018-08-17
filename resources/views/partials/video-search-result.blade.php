@@ -14,7 +14,7 @@
         } ?>
         <div></div>
         <h4 style="margin-top: 0px;font-weight: bold;cursor: pointer;" onclick="openVideo('<?php echo $info['id'] ?>')"><?php echo $info['title'] ?></h4>
-        <div>@<?php echo $info['display_name'] ?></div>
+            <div><span style="cursor: pointer;" onclick="openProfile('<?php echo $info['user_id'] ?>')">@<?php echo $info['display_name'] ?></span></div>
         <div><?php echo date('d F Y',strtotime($info['created_at'])) ?>, <?php echo $info['location'] ?></div>
     </div>
 </div>

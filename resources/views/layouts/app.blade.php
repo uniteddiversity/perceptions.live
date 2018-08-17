@@ -208,7 +208,7 @@
     }
 
     .col-md-2 {
-        background: pink;
+        /*background: pink;*/
         /*padding-left: -10px;*/
         padding: 0px;
     }

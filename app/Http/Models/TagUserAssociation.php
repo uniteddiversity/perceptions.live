@@ -15,4 +15,9 @@ class TagUserAssociation extends Model
      * @var array
      */
     protected $fillable = ['user_id', 'user_tag_id', 'slug'];
+
+    public function tag()
+    {
+        return $this->belongsTo('App\UserSortingTag','user_tag_id');
+    }
 }

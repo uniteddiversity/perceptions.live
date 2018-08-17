@@ -97,6 +97,23 @@ function openVideo(id){
     });
 }
 
+function openProfile(id){
+    $("#feature-info").html('loading...');
+    console.log(this);//this.options.id
+    jQuery.ajax({
+        url: '/home/ajax-user-info/'+id,
+        method: 'GET'
+    }).done(function (content) {
+        $("#feature-title").html("Info:");
+        $("#feature-info").html(content);
+        $("#featureModal").modal("show");
+    }).fail(function () {
+        $("#feature-title").html("Error:");
+        $("#feature-info").html("Fail to load info");
+        $("#featureModal").modal("show");
+    });
+}
+
 map.addLayer( markerClusters );
 
 
