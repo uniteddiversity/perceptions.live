@@ -6,12 +6,12 @@
                 <h2 class="card-title">{{$info['title']}}</h2>
 
                 <p>{{$info['brief_description']}}</p>
-                <div class="row" style="display: block;">
-                    <div class="col-md-8" style="margin:0px;padding: 0px;padding-left: 10px;">
+                <div class="row" style="display: block;margin: 25px;">
+                    <div class="col-md-4" style="margin:0px;padding: 0px;padding-left: 10px;">
                         Category - <?php if(isset($info->category)){ echo $info->category->name; }; ?>
                         <p>{{$info['description']}}</p>
                     </div>
-                    <div class="col-md-4">
+                    <div class="col-md-6">
                         Submitter: <?php if(isset($info->user)){ echo '@'.$info->user->display_name; }; ?>
                         Producer(s): <?php if(isset($info->videoProducer)){
                             foreach($info->videoProducer as $user){
@@ -30,8 +30,8 @@
                         }; ?>
                     </div>
                 </div>
-                <div class="row" style="display: block;">
-                    <iframe width="500" height="300" src="<?php echo str_replace( 'watch?v=', 'embed/',$info['url']) ?>" frameborder="0" allowfullscreen></iframe>
+                <div class="row" style="display: block;margin: 25px;">
+                    <iframe width="700" height="400" src="<?php echo str_replace( 'watch?v=', 'embed/',$info['url']) ?>" frameborder="0" allowfullscreen></iframe>
                 </div>
                 {{--<p>onscreen: {{$info['onscreen']}}</p>--}}
                 {{--<p>Co Creators: {{$info['co_creators']}}</p>--}}
