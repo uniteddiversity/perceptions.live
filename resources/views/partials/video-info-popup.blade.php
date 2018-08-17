@@ -6,7 +6,7 @@
                 <h2 class="card-title">{{$info['title']}}</h2>
 
                 <p>{{$info['brief_description']}}</p>
-                <div style="display: block;">
+                <div class="row" style="display: block;">
                     <div class="col-md-8" style="margin:0px;padding: 0px;padding-left: 10px;">
                         Category - <?php if(isset($info->category)){ echo $info->category->name; }; ?>
                         <p>{{$info['description']}}</p>
@@ -30,7 +30,9 @@
                         }; ?>
                     </div>
                 </div>
-                <div><iframe width="500" height="300" src="<?php echo str_replace( 'watch?v=', 'embed/',$info['url']) ?>" frameborder="0" allowfullscreen></iframe></div>
+                <div class="row" style="display: block;">
+                    <iframe width="500" height="300" src="<?php echo str_replace( 'watch?v=', 'embed/',$info['url']) ?>" frameborder="0" allowfullscreen></iframe>
+                </div>
                 {{--<p>onscreen: {{$info['onscreen']}}</p>--}}
                 {{--<p>Co Creators: {{$info['co_creators']}}</p>--}}
             </div>
