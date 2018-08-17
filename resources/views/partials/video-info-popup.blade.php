@@ -6,7 +6,7 @@
                 <h2 class="card-title">{{$info['title']}}</h2>
 
                 <p>{{$info['brief_description']}}</p>
-                <div>
+                <div style="display: block;">
                     <div class="col-md-8" style="margin:0px;padding: 0px;padding-left: 10px;">
                         Category - <?php if(isset($info->category)){ echo $info->category->name; }; ?>
                         <p>{{$info['description']}}</p>
