@@ -15,4 +15,9 @@ class GroupContentAssociation extends Model
      * @var array
      */
     protected $fillable = ['content_id', 'group_id'];
+
+    public function group()
+    {
+        return $this->belongsTo('App\Group','group_id');
+    }
 }

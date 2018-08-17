@@ -13,9 +13,19 @@
                     </div>
                     <div class="col-md-4">
                         Submitter: <?php if(isset($info->user)){ echo '@'.$info->user->display_name; }; ?>
+                        Producer(s): <?php if(isset($info->videoProducer)){
+                            foreach($info->videoProducer as $user){
+                                echo '@'.$user->user->display_name.',';
+                            }
+                        }; ?>
+                        On screen(s): <?php if(isset($info->onScreen)){
+                            foreach($info->onScreen as $user){
+                                echo '@'.$user->user->display_name.',';
+                            }
+                        }; ?>
                         Producer(s): <?php if(isset($info->coCreators)){
                             foreach($info->coCreators as $user){
-                                echo '@'.$user->display_name.',';
+                                echo '@'.$user->user->display_name.',';
                             }
                         }; ?>
                     </div>

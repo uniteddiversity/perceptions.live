@@ -233,7 +233,16 @@ class UserRepository
 
     public function getContentsInfo($user_id, $id)
     {
-        $contents = $this->content->with('user','gciTags','coCreators','onScreen','videoProducer','groups','groups','sortingTags','category')
+        $contents = $this->content->with(['user','gciTags',
+        'coCreators'=>function($q){
+            $q->with('user');
+        },'onScreen'=>function($q){
+            $q->with('user');
+        },'videoProducer'=>function($q){
+            $q->with('user');
+        },'groups'=>function($q){
+            $q->with('group');
+        },'sortingTags','category'])
             ->where('contents.id',$id)
                 ->where('contents.status', '=', 1)
                 ->leftJoin('users', 'contents.user_id', 'users.id')->where(function($q) use ($user_id){

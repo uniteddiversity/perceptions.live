@@ -15,4 +15,9 @@ class UserContentAssociation extends Model
      * @var array
      */
     protected $fillable = ['content_id', 'user_id', 'user_association_tag_slug'];
+
+    public function user()
+    {
+        return $this->belongsTo('App\User','user_id');
+    }
 }
