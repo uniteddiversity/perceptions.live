@@ -127,11 +127,12 @@ $(document).ready(function(){
     });
 
     if($('#_location_id').val() !== ''){
-        updateMap($('#_location_id').val());
+        // updateMap($('#_location_id').val());
     }
 
     searchVideo();
 })
+
 $("#login-btn").click(function() {
     $("#loginModal").modal("show");
     $(".navbar-collapse.in").collapse("hide");
