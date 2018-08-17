@@ -2,10 +2,13 @@
     <div class="col-lg-12 grid-margin stretch-card">
         <div class="card">
             <div class="card-body">
-                <div style="text-align: center;">{{date('d-m-Y', strtotime($info['created_at']))}} {{$info['location']}}</div>
-                <h2 class="card-title">{{$info['title']}}</h2>
+                <div class="row" style="display: block;margin: 25px;">
+                    <div style="text-align: center;">{{date('d-m-Y', strtotime($info['created_at']))}} {{$info['location']}}</div>
+                    <h2 class="card-title">{{$info['title']}}</h2>
 
-                <p>{{$info['brief_description']}}</p>
+                    <p>{{$info['brief_description']}}</p>
+                </div>
+
                 <div class="row" style="display: block;margin: 25px;">
                     <div class="col-md-4" style="margin:0px;padding: 0px;padding-left: 10px;">
                         Category - <?php if(isset($info->category)){ echo $info->category->name; }; ?>
