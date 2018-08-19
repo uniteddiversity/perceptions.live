@@ -7,12 +7,15 @@
     <title>OSM</title>
     <link rel="stylesheet" href="/assets/admin-temp/vendors/iconfonts/mdi/css/materialdesignicons.min.css">
     <link rel="stylesheet" href="/assets/admin-temp/vendors/css/vendor.bundle.base.css">
-    <link rel="stylesheet" href="/assets/admin-temp/css/style.css">
+    {{--<link rel="stylesheet" href="/assets/admin-temp/css/style.css">--}}
+    <link rel="stylesheet" href="/assets/admin-temp/css/style2.css" />
+
     {{--<link rel="stylesheet" href="/assets/admin-temp/vendors/css/vendor.bundle.addons.css">--}}
     <link rel="stylesheet" href="/js/dist/css/select2.min.css" />
 
     {{--<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">--}}
     <link rel="shortcut icon" href="/assets/admin-temp/images/favicon.png" />
+    {{--<link rel="stylesheet" href="https://www.bootstrapdash.com/demo/star-admin-pro/jquery/css/style.css" />--}}
 </head>
 
 <body>
@@ -236,8 +239,8 @@
     $(document).ready(function() {
         $('#users_llist').DataTable({"aaSorting": []});
         $('.datepicker').datepicker({
-            format: 'dd-mm-yyyy',
-            startDate: '-3d',
+            format: 'yyyy-mm-dd',
+            // startDate: '-3d',
             autoclose: true,
             keepOpen: false,
         });
@@ -296,6 +299,9 @@
 <!-- End custom js for this page-->
 </body>
 <style>
+    .select2-container .select2-selection--single {
+        height: 38px;
+    }
     /*.datepicker > div {*/
         /*display: block !important;*/
     /*}*/
@@ -304,8 +310,8 @@
         /*border: 1px solid #f2f2f2;*/
     /*}*/
 
-    .select2-container--default .select2-selection--single .select2-selection__rendered {
-        /*color: #ccc;*/
-    }
+    /*.select2-container--default .select2-selection--single .select2-selection__rendered {*/
+        /*!*color: #ccc;*!*/
+    /*}*/
 </style>
 </html>
