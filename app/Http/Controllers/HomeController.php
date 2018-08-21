@@ -140,10 +140,12 @@ class HomeController extends Controller
         $r = $request->all();
         $filter['category'] = isset($r['category'])?$r['category']: array();
         $filter['keyword'] = isset($r['keyword'])?$r['keyword']: array();
+        $filter['gcs'] = isset($r['gcs'])?$r['gcs']: array();//great community service
         $user_id = (!isset(Auth::user()->id))? 0 : Auth::user()->id;
 
         $filter['category_id'] = isset($_GET['category_id'])?($_GET['category_id']):'';
         $filter['keyword'] = isset($_GET['keyword'])?($_GET['keyword']):'';
+        $filter['gcs'] = isset($_GET['gcs'])?($_GET['gcs']):'';
         $uploaded_list = $this->userRepository->getPublicContents($user_id, $filter);
         $json_output = $this->getSearchListInJson($uploaded_list);
         $content = view('partials.video-search-result')

@@ -127,15 +127,15 @@
                             <label for="username">Location:</label>
                             <input type="text" class="form-control" id="email" name="location">
                         </div>
-                        <div class="form-group">
-                            <label for="video_producer">User Roles</label>
+                        {{--<div class="form-group">--}}
+                            {{--<label for="video_producer">User Roles</label>--}}
                             {{--<input type="text" class="form-control" aria-describedby="nameHelp" name="video_producer" placeholder="Video Producer" value="{{ old('video_producer') }}">--}}
-                            <select class="form-control multi-select2" id="video_producer" multiple searchable="Search here.." name="user_acting_roles[]" style="width: 100%;" >
-                                @foreach($user_acting_role as $role)
-                                    <option value="{{$role->id}}" >{{$role->name}}</option>
-                                @endforeach
-                            </select>
-                        </div>
+                            {{--<select class="form-control multi-select2" id="video_producer" multiple searchable="Search here.." name="user_acting_roles[]" style="width: 100%;" >--}}
+                                {{--@foreach($user_acting_role as $role)--}}
+                                    {{--<option value="{{$role->id}}" >{{$role->name}}</option>--}}
+                                {{--@endforeach--}}
+                            {{--</select>--}}
+                        {{--</div>--}}
                         <div class="form-group">
                             <label for="password">Password:</label>
                             <input type="password" class="form-control" id="password" name="password">

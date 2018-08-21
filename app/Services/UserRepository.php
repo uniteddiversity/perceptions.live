@@ -194,6 +194,9 @@ class UserRepository
             })->leftJoin('tag_content_associations', function($q){
                 $q->on( 'contents.id', 'tag_content_associations.content_id');
                 $q->where( 'tag_content_associations.tag_for', 'gci');
+            })->leftJoin('tag_content_associations as search_tag', function($q){
+                $q->on( 'contents.id', 'search_tag.content_id');
+                $q->where( 'search_tag.tag_for', 'gci');
             })
             ->leftJoin('sorting_tags', function($q){
                 $q->on('sorting_tags.id', 'tag_content_associations.content_tag_id');
@@ -204,15 +207,18 @@ class UserRepository
             $contents = $contents->where('title', 'like', '%'.$filter['keyword'].'%');
         }
 
+        if(isset($filter['gcs']) && !empty($filter['gcs'])){
+            $contents = $contents->where('search_tag.content_tag_id', $filter['gcs']);
+        }
+
         if(isset($filter['category_id']) && !empty($filter['category_id'])){
             $contents = $contents->where('category_id', $filter['category_id']);
         }
 
-
         $contents = $contents->select('contents.id', 'contents.description', 'contents.lat', 'contents.long', 'contents.title', 'contents.url',
                 'users.display_name','contents.created_at','contents.location','contents.user_id',
-                DB::Raw("GROUP_CONCAT(DISTINCT (concat(sorting_tags.tag_color,'-',sorting_tags.tag)) SEPARATOR ', ') as tag_colors") )
-            ->groupBy('contents.id')->limit(500)->get();
+                DB::Raw("GROUP_CONCAT(DISTINCT (concat(sorting_tags.tag_color,'-',sorting_tags.id,'-',sorting_tags.tag)) SEPARATOR ', ') as tag_colors") )
+            ->groupBy('contents.id')->orderBy('contents.updated_at', 'DESC')->limit(500)->get();
         $r = array(); $i = 0;
 
         foreach($contents as $c){

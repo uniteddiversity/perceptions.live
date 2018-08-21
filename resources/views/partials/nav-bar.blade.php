@@ -20,7 +20,7 @@
 
                         @auth
                         <?php if(Auth::user()->is('admin')){ ?>
-                            <li><a href="/user/admin/content-add" data-toggle="collapse" data-target=".navbar-collapse.in"><i class="fa fa-upload white"></i>&nbspUpload a Video</a></li>
+                            <li><a href="/user/admin/content-add" data-toggle="collapse" data-target=".navbar-collapse.in"><i class="fa fa-upload white"></i>&nbspControl panel</a></li>
                         <?php }else{ ?>
                             <li><a href="/user/content-add" data-toggle="collapse" data-target=".navbar-collapse.in"><i class="fa fa-upload white"></i>&nbspUpload a Video</a></li>
                         <?php } ?>

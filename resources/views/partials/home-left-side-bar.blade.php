@@ -3,16 +3,19 @@
         <h2>Feed {{env('APP_NAME', '')}}</h2>
 
         <div class="form-group">
-            <div class="col-md-5" style="margin:0px;padding: 0px;">
+            <div class="col-md-4" style="margin:0px;padding: 0px;">
                 <input type="text" class="form-control" aria-describedby="nameHelp" name="search_text" id="search_text" placeholder="Search">
             </div>
-            <div class="col-md-7" style="padding-right: 0px;">
+            <div class="col-md-5" style="padding-right: 0px;">
                 <select class="form-control" id="content_search_cat">
                     <option value="">All Categories</option>
                     @foreach($categories as $cat)
                         <option value="{{$cat->id}}" >{{$cat->name}}</option>
                     @endforeach
                 </select>
+            </div>
+            <div class="col-md-2" style="padding-right: 0px;padding-left: 10px;">
+                <buttonc class="btn btn-primary" onclick="resetSearch()">Reset</buttonc>
             </div>
         </div>
         <div class="form-group">
@@ -37,5 +40,10 @@
         border-radius: 50%;
         display: inline-block;
         margin: 2px;
+        cursor: pointer;
+    }
+
+    .inactive_link{
+        cursor: pointer;
     }
 </style>

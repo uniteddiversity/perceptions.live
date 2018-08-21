@@ -44,7 +44,15 @@ class LoginController extends Controller
         $request = $request->toArray();
         $user_login['email'] = $request['email'];
         $user_login['password'] = $request['password'];
-        if (Auth::attempt($user_login)) {
+        if(filter_var($user_login['email'], FILTER_VALIDATE_EMAIL)) {
+            //user sent their email
+            $success = Auth::attempt(['email' => $user_login['email'], 'password' => $user_login['password']]);
+        } else {
+            //they sent their username instead
+            $success = Auth::attempt(['display_name' => $user_login['email'], 'password' => $user_login['password']]);
+        }
+
+        if ($success) {
             return response()->json(array('success' => 'Logged in!'), 200);
         } else {
             return response()->json(array('error' => array('user' => 'Invalid login!')), 200);

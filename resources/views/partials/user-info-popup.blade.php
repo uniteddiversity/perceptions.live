@@ -9,23 +9,15 @@
                         </div>
                     </div>
                     <div class="col-md-7">
-                        <div>Submitter: <?php if(isset($info->user)){ echo '@'.$info->user->display_name; }; ?></div>
-                        <div>Producer(s): <?php if(isset($info->videoProducer)){
-                            foreach($info->videoProducer as $user){
-                                echo '@'.$user->user->display_name.',';
-                            }
-                        }; ?></div>
-
-                        <div>Organization(s): <?php if(isset($info->groups)){
-                                foreach($info->groups as $group){
-                                    echo '@'.$group->group->name.',';
-                                }
-                            }; ?></div>
+                        <div>
+                         <h3><?php echo '@'.$info['display_name'] ?></h3>
+                         <h3><?php echo $info['description'] ?></h3>
+                        </div>
 
                     </div>
                     <div class="col-md-3">
-                        <div>Date Joined: <?php date('d-m-Y', strtotime($info['created_at'])) ?></div>
-                        <div>Collaboration Roles: <?php
+                        <div><strong>Date Joined: </strong><?php date('d-m-Y', strtotime($info['created_at'])) ?></div>
+                        <div><strong>Collaboration Roles: </strong><?php
                             if(isset($info->actingRoles)){
                                 foreach($info->actingRoles as $role){
                                     if(isset($role->tag)){

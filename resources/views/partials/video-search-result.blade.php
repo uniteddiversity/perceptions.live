@@ -9,8 +9,8 @@
         $tags = explode(',', $info['tag_colors']);
         foreach($tags as $tag){
             $tag_name_n_color = explode('-', $tag);
-
-            echo '<span style="background-color: '.$tag_name_n_color[0].'" class="dot"></span>';
+            $tag_id = isset($tag_name_n_color[1])? $tag_name_n_color[1] : '0';
+            echo '<span onclick="searchByTag(\''.$tag_id.'\')" style="background-color: '.$tag_name_n_color[0].'" class="dot"></span>';
         } ?>
         <div></div>
         <h4 style="margin-top: 0px;font-weight: bold;cursor: pointer;" onclick="openVideo('<?php echo $info['id'] ?>')"><?php echo $info['title'] ?></h4>

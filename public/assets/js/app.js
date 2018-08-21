@@ -114,6 +114,10 @@ function openProfile(id){
     });
 }
 
+function openGroupProfile(id){
+    return true;
+}
+
 map.addLayer( markerClusters );
 
 
@@ -129,6 +133,26 @@ function searchVideo(){
         $('#video_search_res').html(decode(data.content));
 
     });
+}
+
+function searchByTag(id){
+    console.log('search gcs '+id);
+    $('#video_search_res').html('<i class="fa fa-spinner"></i> loading.....');
+    $.get( "/home/ajax/video-search/?gcs="+id, function( data ) {
+        console.log(data.json.original);
+        if(data.content == '')
+            $('#video_search_res').html('No result!');
+
+        updateMarkers(data.json.original);
+        $('#video_search_res').html(decode(data.content));
+
+    });
+}
+
+function resetSearch() {
+    $('#search_text').val('');
+    $('#content_search_cat').val('');
+    searchVideo();
 }
 
 function decode(str) {
