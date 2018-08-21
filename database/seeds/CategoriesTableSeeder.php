@@ -33,6 +33,10 @@ class CategoriesTableSeeder extends Seeder
             [
                 'id' => '5',
                 'name' => 'Education'
+            ],
+            [
+                'id' => '6',
+                'name' => 'Technology'
             ]
         ]);
     }

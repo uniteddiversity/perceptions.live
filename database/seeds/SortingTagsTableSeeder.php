@@ -137,18 +137,7 @@ class SortingTagsTableSeeder extends Seeder
                 'status' => '1',
                 'tag_for' => 'gci',
                 'not_selectable' => '1'
-            ],
-            [
-                'id' => '12',
-                'tag' => 'Reprogramming & Transformation',
-                'tag_color' => '#1d8348',
-                'description' => '',
-                'created_by' => '0',
-                'group_id' => '0',
-                'status' => '1',
-                'tag_for' => 'gci',
-                'not_selectable' => '1'
-            ],
+            ]
         ]);
     }
 }

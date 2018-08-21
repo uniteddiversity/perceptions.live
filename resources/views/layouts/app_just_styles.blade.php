@@ -27,7 +27,7 @@
 
 
         <!-- partial -->
-        <div class="main-panel">
+        <div class="row">
             <div class="content-wrapper">
 
             @yield('content')
@@ -58,6 +58,7 @@
 <script src="/assets/admin-temp/vendors/js/vendor.bundle.addons.js"></script>
 <script src="/assets/admin-temp/js/off-canvas.js"></script>
 <script src="/assets/admin-temp/js/misc.js"></script>
+<script src="/assets/js/custom_common.js"></script>
 <!-- endinject -->
 <!-- Custom js for this page-->
 <script src="/assets/admin-temp/js/dashboard.js"></script>

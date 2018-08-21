@@ -17,7 +17,7 @@ class CreateAttachments extends Migration
             $table->engine = 'InnoDB';
             $table->increments('id');
             $table->integer('fk_id');
-            $table->string('submission_type');//avatar (avatar), Proof of Group Involvement (proof-of-group-in), Group Avatar(group-avatar), Submitting Video(video-s-1/video-s-2/video-s-3)
+            $table->string('submission_type');//avatar (avatar), Proof of Group Involvement (proof-of-group-in), Group Avatar(group-avatar), Submitting Video(video-s-1/video-s-2/video-s-3)/ claim profile attachments (claim-proof)
             $table->string('table');
             $table->string('name');
             $table->string('url');

@@ -28,6 +28,16 @@ class StatusTableSeeder extends Seeder
                 'id'      =>  '3',
                 'name'    =>  'Deleted',
                 'slug'    =>  'Deleted'
+            ],
+            [
+                'id'      =>  '4',
+                'name'    =>  'User Claimed',
+                'slug'    =>  'User-claimed'
+            ],
+            [
+                'id'      =>  '5',
+                'name'    =>  'System Created',
+                'slug'    =>  'System-created'
             ]
         ]);
         DB::statement('SET FOREIGN_KEY_CHECKS=1;');

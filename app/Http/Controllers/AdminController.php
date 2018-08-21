@@ -445,8 +445,9 @@ class AdminController extends Controller
         $status = $this->userRepository->getStatus();
         $user_acting_role = $this->userRepository->getUserActingRoles();
 
+        $claim_request = $this->userRepository->getClaimRequestsForUser($id);
         return view('admin.user-add')
-            ->with(compact('user_data','user_groups','user_roles','status','user_acting_role'));
+            ->with(compact('user_data','user_groups','user_roles','status','user_acting_role','claim_request'));
     }
 
     public function userToGroupAdd($group_id = 0)

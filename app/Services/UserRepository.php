@@ -3,6 +3,7 @@
 namespace User\Services;
 
 use App\Attachment;
+use App\ClaimProfileRequests;
 use App\Content;
 use App\ContentAccessLevels;
 use App\Group;
@@ -87,12 +88,16 @@ class UserRepository
      * @var UserSortingTag
      */
     private $userSortingTag;
+    /**
+     * @var ClaimProfileRequests
+     */
+    private $claimProfileRequests;
 
     public function __construct(User $user, Content $content,
                                 UserGroup $userGroup, Group $group, Role $role, UserContentAssociation $userContentAssociation,
                                 Attachment $attachment, SortingTag $sortingTag, GroupContentAssociation $groupContentAssociation,
                                 TagContentAssociation $tagContentAssociation, TagUserAssociation $tagUserAssociation, UserStatus $userStatus,
-                                ContentAccessLevels $contentAccessLevels, MetaData $metaData, UserSortingTag $userSortingTag)
+                                ContentAccessLevels $contentAccessLevels, MetaData $metaData, UserSortingTag $userSortingTag, ClaimProfileRequests $claimProfileRequests)
     {
         $this->user = $user;
         $this->content = $content;
@@ -109,6 +114,7 @@ class UserRepository
         $this->contentAccessLevels = $contentAccessLevels;
         $this->metaData = $metaData;
         $this->userSortingTag = $userSortingTag;
+        $this->claimProfileRequests = $claimProfileRequests;
     }
 
     public function getUsers($filter = array(), $user_id = null)
@@ -131,7 +137,11 @@ class UserRepository
         }
 
         if(isset($filter['group_id'])){
-            $r->whereIn('user_groups.group_id', array($filter['group_id']));
+            $r = $r->whereIn('user_groups.group_id', array($filter['group_id']));
+        }
+
+        if(isset($filter['filter_system_users'])){
+            $r = $r->where('users.status_id', '5');
         }
 
 //        $r->select('users.id','users.*','user_groups.id as group_id');
@@ -486,7 +496,7 @@ class UserRepository
                             'email' => $email,
                             'first_name' => $value,
                             'display_name' => $value,
-                            'status_id' => 2,
+                            'status_id' => 5,
                             'role_id' => 120,
                             'password' => bcrypt($this->randomPassword()),
                         )
@@ -499,7 +509,7 @@ class UserRepository
                 return $this->group->create(
                     array(
                         'name' => $value,
-                        'status' => 2
+                        'status' => 5
                     )
                 );
                 break;
@@ -576,6 +586,13 @@ class UserRepository
                 $q->where('user_content_associations.user_id', $user_id)
                     ->orWhere('contents.user_id', $user_id);
             })->where('status', '1')->select('contents.*')->groupBy('contents.id')->get();
+    }
+
+    public function getClaimRequestsForUser($user_id)
+    {
+        return $this->claimProfileRequests->with(['proof','associatedContent' => function($q){
+            $q->with('content');
+        },'requestedUser'])->where('fk_id', $user_id)->where('type', 'users')->get();
     }
 }
 

@@ -3,6 +3,8 @@
 namespace App\Controllers\User;
 
 use App\Category;
+use App\ClaimAssociatedContents;
+use App\ClaimProfileRequests;
 use App\Content;
 use App\Group;
 use App\Http\Controllers\Controller;
@@ -48,9 +50,18 @@ class UserController extends Controller
      * @var Group
      */
     private $group;
+    /**
+     * @var ClaimProfileRequests
+     */
+    private $claimProfileRequests;
+    /**
+     * @var ClaimAssociatedContents
+     */
+    private $claimAssociatedContents;
 
     public function __construct(Content $content, User $user, UserRepository $userRepository,
-                                Category $category, MetaData $metaData, ContentService $contentService, Group $group)
+                                Category $category, MetaData $metaData, ContentService $contentService, Group $group,
+                                ClaimProfileRequests $claimProfileRequests, ClaimAssociatedContents $claimAssociatedContents)
     {
         $this->content = $content;
         $this->user = $user;
@@ -59,6 +70,8 @@ class UserController extends Controller
         $this->metaData = $metaData;
         $this->contentService = $contentService;
         $this->group = $group;
+        $this->claimProfileRequests = $claimProfileRequests;
+        $this->claimAssociatedContents = $claimAssociatedContents;
     }
 
     public function profile()
@@ -423,5 +436,64 @@ class UserController extends Controller
         $user_id = (!isset(Auth::user()->id))? 0 : Auth::user()->id;
         $this->userRepository->addSortingTag($user_id, 0, array('tag' => $r['tag'], 'description' => $r['description'], 'tag_for' => 'content'));
         return redirect()->back()->with('message', 'Successfully Added!');
+    }
+
+    public function claimUserProfile()
+    {
+        $user_list = $this->userRepository->getUsers(array('filter_system_users' => true));
+        return view('user.claim-profile-request')
+            ->with(compact('user_list'));
+    }
+
+    public function claimUserProfilePost(Request $request)
+    {
+        $r = $request->toArray();
+        $user_id = (!isset(Auth::user()->id))? 0 : Auth::user()->id;
+
+        $validator = Validator::make($request->all(), [
+            'email' => 'required|email|unique:users',
+            'display_name' => 'required',
+            'claim_video_profile' => 'required',
+            'confirm_selected_content' => 'required',
+            'accept_tos' => 'required'
+        ]);
+
+        if ($validator->fails()) {
+            return Redirect::back()->withErrors($validator->messages())->withInput();
+        }
+
+        $request = $this->claimProfileRequests->create(array(
+            'type' => 'users',
+            'fk_id' => $r['display_name'],
+            'display_name' => '[display_name]',
+            'email' => $r['email'],
+            'comments' => $r['additional_comments'],
+            'user_id' => $user_id
+        ));
+
+        foreach($r['claim_video_profile'] as $relation){
+            $this->claimAssociatedContents->create(array(
+                'attachment_id' => 'users',
+                'type' => 'users',
+                'claim_profile_request_id' => $request->id,
+                'fk_id' => $relation
+            ));
+        }
+
+        if(isset($request->id))
+            $this->user->where('id', $r['display_name'])->update(array('status_id'=>'4'));
+
+        if(isset($r['proof_of_work']))
+            foreach($r['proof_of_work'] as $content){
+                $this->userRepository->uploadAttachment($content,$user_id, $request->id, 'claim-proof', 'claim_profile_requests', 1);
+            }
+
+        return redirect()->back()->with('message', 'Requested!');
+    }
+
+    public function getAssociatedVideosByUserId($user_id)
+    {
+        $content_list = $this->userRepository->getAssociatedVideosForUser($user_id);
+        return response()->json($content_list, 200);
     }
 }

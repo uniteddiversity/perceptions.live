@@ -19,14 +19,23 @@ Route::post('/', function(){
 
 })->name('login');
 
-Route::get('/', array('uses' => '\App\Controllers\HomeController@home'))->name('home');
-Route::get('/location/{_video_id}', array('uses' => '\App\Controllers\HomeController@location'));
-Route::get('/profile/video/{_video_id}', array('uses' => '\App\Controllers\HomeController@videoProfile'));
-Route::get('/ajax-available-videos', array('uses' => '\App\Controllers\HomeController@ajaxVideos'))->name('home');
-Route::get('/ajax-available-videos/{_id}', array('uses' => '\App\Controllers\HomeController@ajaxVideosNew'));
-Route::get('/home/ajax-video-info/{_video_id}', '\App\Controllers\HomeController@getVideoInfo');
-Route::get('/home/ajax-user-info/{_user_id}', '\App\Controllers\HomeController@getUserInfo');
-Route::get('/home/ajax/video-search', '\App\Controllers\HomeController@searchVideos');
+//Route::group(['middleware' => ['guest']], function () {
+    Route::get('/', array('uses' => '\App\Controllers\HomeController@home'))->name('home');
+    Route::get('/location/{_video_id}', array('uses' => '\App\Controllers\HomeController@location'));
+    Route::get('/profile/video/{_video_id}', array('uses' => '\App\Controllers\HomeController@videoProfile'));
+    Route::get('/ajax-available-videos', array('uses' => '\App\Controllers\HomeController@ajaxVideos'))->name('home');
+    Route::get('/ajax-available-videos/{_id}', array('uses' => '\App\Controllers\HomeController@ajaxVideosNew'));
+    Route::get('/home/ajax-video-info/{_video_id}', '\App\Controllers\HomeController@getVideoInfo');
+    Route::get('/home/ajax-user-info/{_user_id}', '\App\Controllers\HomeController@getUserInfo');
+    Route::get('/home/ajax/video-search', '\App\Controllers\HomeController@searchVideos');
+    Route::get('/claim-profile', '\App\Controllers\User\UserController@claimUserProfile');
+    Route::post('/claim-profile-post', '\App\Controllers\User\UserController@claimUserProfilePost');
+
+
+    Route::get('/ajax/associated_videos_by_user_id/{_user_id}', '\App\Controllers\User\UserController@getAssociatedVideosByUserId');
+//});
+
+
 
 /*
 

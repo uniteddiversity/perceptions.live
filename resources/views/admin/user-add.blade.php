@@ -17,7 +17,7 @@
     <div class="col-lg-12 grid-margin stretch-card">
         <div class="card">
             <div class="card-body">
-                <h4 class="card-title">Add User</h4>
+                <h4 class="card-title">Add/Edit User</h4>
                 <div class="table-responsive">
                     @if ($errors->any())
                         <div class="alert alert-danger">
@@ -112,6 +112,50 @@
                             </div>
                             <?php } ?>
 
+
+
+                                <?php if($data['status_id'] == '4'){ ?>
+                                <hr/>
+                                <div class="form-group">
+                                    <label for="profile_claim_request">Profile Claim Request</label>
+                                    <table class="table">
+                                        <tr>
+                                            <th>Email</th>
+                                            <th>Comment</th>
+                                            <th>Requester</th>
+                                            <th>Proof</th>
+                                            <th>Associated Videos</th>
+                                        </tr>
+                                        <?php foreach($claim_request as $request){
+                                        $user_data = isset($request->requestedUser->id)? '@'.$request->requestedUser->display_name:'';
+                                            ?>
+                                        <tr>
+                                            <td><?php echo $request['email'] ?>
+                                            </td>
+                                            <td><?php echo $request['comments'] ?>
+                                            </td>
+                                            <td><?php echo $user_data ?></td>
+                                            <td>
+                                                <?php foreach($request->proof as $proof){
+                                                    if(isset($proof->id)){
+                                                        echo '<br/><a href="/storage/'.$proof->url.'" >'.$proof->name.'</a>';
+                                                    }
+                                                } ?>
+                                            </td>
+                                            <td>
+                                                <?php foreach($request->associatedContent as $content){
+                                                    if(isset($content->content)){
+                                                        echo '<br/><a href="/user/admin/video-edit/'.uid($content->content->id).'" >'.$content->content->title.'</a>';
+                                                    }
+                                                } ?>
+                                            </td>
+                                        </tr>
+
+                                        <?php } ?>
+                                    </table>
+
+                                </div>
+                                <?php } ?>
 
                             <button type="submit" class="btn btn-primary">Submit</button>
                         </form>

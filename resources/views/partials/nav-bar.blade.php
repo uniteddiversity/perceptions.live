@@ -30,7 +30,7 @@
                             <li><a href="#" data-toggle="collapse" data-target=".navbar-collapse.in" id="login-btn"><i class="fa fa-user white"></i>&nbspLogin</a></li>
                             <li><a href="#" data-toggle="collapse" data-target=".navbar-collapse.in" id="register-btn"><i class="fa fa-registered white"></i>&nbspRegister</a></li>
                         @endauth
-
+                            <li><a href="/claim-profile" target="_blank" ><i class="fa fa-registered white"></i>&nbspClaim Your Profile</a></li>
                 @endif
 
 
