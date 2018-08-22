@@ -216,7 +216,20 @@
 
 
 
-
+<div class="modal fade" id="featureModal" tabindex="-1" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header" style="border-bottom: 0px solid #e5e5e5;">
+                <button class="close" type="button" data-dismiss="modal" aria-hidden="true">&times;</button>
+                {{--<h4 class="modal-title text-primary" id="feature-title"></h4>--}}
+            </div>
+            <div class="modal-body" id="feature-info"></div>
+            {{--<div class="modal-footer">--}}
+            {{--<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>--}}
+            {{--</div>--}}
+        </div>
+    </div>
+</div>
 
 
 <!-- container-scroller -->
@@ -235,6 +248,8 @@
 
 <script src="/js//dist/js/select2.full.min.js"></script>
 <script src="/assets/js/custom_common.js"></script>
+
+<script src="/assets/js/app.js"></script>
 
 <script>
     $(document).ready(function() {
@@ -261,6 +276,11 @@
 <!-- End custom js for this page-->
 </body>
 <style>
+    #featureModal .modal-dialog{
+        width: 950px;
+        max-width: 950px;
+    }
+
     .select2-container .select2-selection--single {
         height: 38px;
     }

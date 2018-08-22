@@ -103,45 +103,52 @@ class AdminController extends Controller
 
         $r = $request->toArray();
 
-        $new_content = $this->content->updateOrCreate(
-            [
-                'id'   => (isset($r['id']))?UID::translator($r['id']):0,
-            ],
-            [
-                'title' => $r['title'],
-                'access_level_id' => $r['access_level_id'],
-                'category_id' => $r['category_id'],
+        $update_array = [
+            'title' => $r['title'],
+            'access_level_id' => $r['access_level_id'],
+            'category_id' => $r['category_id'],
 //                'description' => $r['description'],
-                'brief_description' => $r['brief_description'],
-                'url' => $r['url'],
-                'lat' => $r['lat'],
-                'long' => $r['long'],
-                'user_id' => Auth::user()->id,
-                'user_ip' => $request->ip(),
-                'status' => (Auth::user()->is('admin') && isset($r['status']))?$r['status']:2,
+            'brief_description' => $r['brief_description'],
+            'url' => $r['url'],
+            'lat' => $r['lat'],
+            'long' => $r['long'],
+            'user_id' => Auth::user()->id,
+            'user_ip' => $request->ip(),
+            'status' => (Auth::user()->is('admin') && isset($r['status']))?$r['status']:2,
 
 //                'video_producer' => $r['video_producer'],
 //                'onscreen' => $r['onscreen'],
 //                'co_creators' => $r['co_creators'],
 //                'organization' => $r['organization'],
-                'learn_more_url' => $r['learn_more_url'],
-                'co_creators' => '',
-                'video_producer' => '',
-                'onscreen' => '',
+            'learn_more_url' => $r['learn_more_url'],
+            'co_creators' => '',
+            'video_producer' => '',
+            'onscreen' => '',
 
 //                'grater_community_intention_id' => $r['grater_community_intention_id'],
-                'primary_subject_tag' => $r['primary_subject_tag'],
+            'primary_subject_tag' => $r['primary_subject_tag'],
 //                'secondary_subject_tag_id' => $r['secondary_subject_tag_id'],
-                'submitted_footage' => $r['submitted_footage'],
-                'location' => $r['location'],
+            'submitted_footage' => $r['submitted_footage'],
+            'location' => $r['location'],
 
-                'captured_date' => $r['captured_date'],
-                'video_date' => $r['video_date'],
+            'captured_date' => $r['captured_date'],
+            'video_date' => $r['video_date'],
 //                'captured_date' => date('Y-m-d'),
 //                'video_date' => date('Y-m-d'),
-                'created_by' => $user_id,
-                'user_comment' => $r['user_comment']
-            ]
+            'created_by' => $user_id,
+            'user_comment' => $r['user_comment']
+        ];
+        if(isset($r['id'])){//if edit, original creator should remain
+            unset($update_array['created_by']);
+            unset($update_array['user_id']);
+            unset($update_array['user_ip']);
+        }
+
+        $new_content = $this->content->updateOrCreate(
+            [
+                'id'   => (isset($r['id']))?UID::translator($r['id']):0,
+            ],
+            $update_array
         );
 
 

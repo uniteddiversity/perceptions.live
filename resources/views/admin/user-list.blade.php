@@ -71,7 +71,8 @@
                                         {{ $user->no_submission }}
                                     </td>
                                     <td>
-                                        <a href="/user/admin/user-edit/{{ uid($user->id) }}" >Edit</a>
+                                        <a href="/user/admin/user-edit/{{ uid($user->id) }}" >Edit</a>&nbsp;&nbsp;
+                                        <a href="#" onclick="openProfile({{ ($user->id) }})" >View</a>
                                     </td>
                                 </tr>
                             @endforeach
