@@ -19,7 +19,7 @@
                         <?php if(isset($info->videoProducer)){ ?>
                         <div>Producer(s):
                             <?php foreach($info->videoProducer as $user){
-                                echo '@'.'<span class="inactive_link" onclick="openProfile('.$info->user->id.')">'.$user->user->display_name.'</span>'.',';
+                                echo '@'.'<span class="inactive_link" onclick="openProfile('.$user->user->id.')">'.$user->user->display_name.'</span>'.',';
                             } ?>
                         </div>
                         <?php }; ?>
