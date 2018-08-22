@@ -204,7 +204,11 @@ class UserRepository
             ->where('contents.status', '=', 1);
 
         if(isset($filter['keyword']) && !empty($filter['keyword'])){
-            $contents = $contents->where('title', 'like', '%'.$filter['keyword'].'%');
+            $contents = $contents->where(function($q) use($filter){
+                $q->where('title', 'like', '%'.$filter['keyword'].'%');
+                $q->orWhere('brief_description', 'like', '%'.$filter['keyword'].'%');
+                $q->orWhere('primary_subject_tag', 'like', '%'.$filter['keyword'].'%');
+            });
         }
 
         if(isset($filter['gcs']) && !empty($filter['gcs'])){
