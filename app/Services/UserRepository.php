@@ -156,9 +156,15 @@ class UserRepository
     public function getUser($user_id)
     {
         return $this->user->where('users.id', $user_id)->with(['image','groups',
-        'actingRoles' => function($q){
-            $q->with('tag');
-        }])
+            'actingRoles' => function($q){
+                $q->with('tag');
+            },
+            'gci' => function($q){
+                $q->with('tag');
+            },
+            'skill' => function($q){
+                $q->with('tag');
+            }])
             ->leftJoin('user_groups', 'users.id', 'users.location', 'user_groups.user_id')
             ->select('users.*', 'user_groups.group_id', 'user_groups.role_id as group_role_id')
             ->first();
@@ -465,6 +471,12 @@ class UserRepository
         return $tag->get();
     }
 
+    public function getSkillsTag()
+    {
+        $tag = $this->sortingTag->where('tag_for', 'skill');
+        return $tag->get();
+    }
+
     public function addSortingTag($user_id, $group_id = 0, $data)
     {
         $current_user = $this->getUser($user_id);
@@ -534,6 +546,17 @@ class UserRepository
                     )
                 );
                 break;
+            case 'skill':
+                $current_user = $this->getUser($user_id);
+                return $this->sortingTag->create(
+                    array('tag' => $value,
+                        'description' => '',
+                        'created_by' => $user_id,
+                        'tag_for' => 'skill',
+                        'group_id' => isset($current_user['group_id'])?$current_user['group_id']: 0
+                    )
+                );
+                break;
         }
     }
 
@@ -566,6 +589,11 @@ class UserRepository
     public function deleteTagsOfUser($user_id, $deleting_user_id)
     {
         return $this->tagContentAssociation->where('user_tag_id', $user_id)->delete();
+    }
+
+    public function deleteTagsOfUserBySlug($user_id, $deleting_user_id, $slug)
+    {
+        return $this->tagUserAssociation->where('user_id', $user_id)->where('slug', $slug)->delete();
     }
 
     public function getStatus()

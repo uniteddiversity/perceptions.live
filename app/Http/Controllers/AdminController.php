@@ -155,6 +155,7 @@ class AdminController extends Controller
         if(isset($r['id'])){
             $this->userRepository->deleteTagsOfContent($new_content->id,$user_id);
             $this->userRepository->deleteTagsOfContent($new_content->id,$user_id,'gci');
+            $this->userRepository->deleteTagsOfContent($new_content->id,$user_id,'exchange');
         }
         //tag related to exchange should goes here//
 
@@ -246,7 +247,7 @@ class AdminController extends Controller
 
         if(isset($r['exchange'])){
             if(isset($r['service_or_opportunity'])){
-                $this->userRepository->addTagToContent($r['service_or_opportunity'],  $new_content->id);
+                $this->userRepository->addTagToContent($r['service_or_opportunity'],  $new_content->id,'exchange');
             }
         }
 

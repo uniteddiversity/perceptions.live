@@ -82,7 +82,7 @@ class ContentService
 
     public function getContentData($id)
     {
-        $content = $this->content->with('coCreators','onScreen','videoProducer','groups','sortingTags','gciTags');
+        $content = $this->content->with('coCreators','onScreen','videoProducer','groups','sortingTags','gciTags','exchange');
         $content = $content->where('id', $id);
         $content->select('contents.*');
         return $content->first()->toArray();

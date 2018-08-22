@@ -16,7 +16,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'first_name', 'display_name', 'email', 'password', 'web', 'role_id', 'status_id','location',
+        'first_name', 'display_name', 'email', 'password', 'web', 'role_id', 'status_id','location','description','access_level_id',
     ];
 
     /**
@@ -72,4 +72,16 @@ class User extends Authenticatable
     {
         return $this->hasMany('App\TagUserAssociation','user_id')->where('slug','role');
     }
+
+    public function gci()
+    {
+        return $this->hasMany('App\TagUserAssociation','user_id')->where('slug','gci');
+    }
+
+    public function skill()
+    {
+        return $this->hasMany('App\TagUserAssociation','user_id')->where('slug','skill');
+    }
+
+
 }

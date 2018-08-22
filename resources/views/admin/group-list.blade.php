@@ -11,6 +11,9 @@
                             <thead>
                             <tr>
                                 <th>
+                                    Action
+                                </th>
+                                <th>
                                     Date Created
                                 </th>
                                 <th>
@@ -34,14 +37,15 @@
                                 <th>
                                     Users in Group
                                 </th>
-                                <th>
-                                    Action
-                                </th>
+
                             </tr>
                             </thead>
                             <tbody>
                             @foreach ($groups as $group)
                                 <tr>
+                                    <td>
+                                        <a href="/user/admin/group-edit/{{ uid($group->id) }}" >Edit</a>
+                                    </td>
                                     <td>
                                         {{ date('Y-m-d', strtotime($group->created_at)) }}
                                     </td>
@@ -67,9 +71,7 @@
                                     <td>
                                         {{ (empty($group->users_count))? 0:$group->users_count }}
                                     </td>
-                                    <td>
-                                        <a href="/user/admin/group-edit/{{ uid($group->id) }}" >Edit</a>
-                                    </td>
+
                                 </tr>
                             @endforeach
                             </tbody>

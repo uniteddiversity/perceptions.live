@@ -11,10 +11,16 @@
                             <thead>
                             <tr>
                                 <th>
-                                    Id
+                                    Action
                                 </th>
+                                {{--<th>--}}
+                                    {{--Id--}}
+                                {{--</th>--}}
                                 <th>
                                     Title
+                                </th>
+                                <th>
+                                    Approved/Open
                                 </th>
                                 {{--<th>--}}
                                     {{--Date--}}
@@ -31,19 +37,23 @@
                                 <th>
                                     Last Updated Time
                                 </th>
-                                <th>
-                                    Action
-                                </th>
+
                             </tr>
                             </thead>
                             <tbody>
                             @foreach ($videos as $video)
                                 <tr>
                                     <td>
-                                        {{ $video->id }}
+                                        <a href="/user/admin/video-edit/{{ uid($video->id) }}" >Edit</a>
                                     </td>
+                                    {{--<td>--}}
+                                        {{--{{ $video->id }}--}}
+                                    {{--</td>--}}
                                     <td>
                                         {{ $video->title }}
+                                    </td>
+                                    <td>
+                                        <?php if($video->status == '1'){ echo 'Approved'; }else{ echo 'Open'; } ?>
                                     </td>
                                     {{--<td>--}}
                                         {{--{{ $video->date }}--}}
@@ -60,9 +70,7 @@
                                     <td>
                                         {{ $video->updated_at }}
                                     </td>
-                                    <td>
-                                        <a href="/user/admin/video-edit/{{ uid($video->id) }}" >Edit</a>
-                                    </td>
+
                                 </tr>
                             @endforeach
 

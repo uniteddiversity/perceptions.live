@@ -5,7 +5,7 @@
                 <div class="row" style="display: block;margin: 25px;">
                     <div class="col-md-2" style="margin:0px;padding: 0px;padding-left: 0px;">
                         <div class="profile-image">
-                            <img src="<?php if(isset($info['image'][0])){ echo '/storage/'.$info['image'][0]->url; }else{ ?>/assets/img/face1.png<?php } ?>" alt="profile image">
+                            <img class="avatar profile_img_mini" src="<?php if(isset($info['image'][0])){ echo '/storage/'.$info['image'][0]->url; }else{ ?>/assets/img/face1.png<?php } ?>" alt="profile image">
                         </div>
                     </div>
                     <div class="col-md-7">

@@ -16,6 +16,7 @@
     <link rel="stylesheet" href="/assets/leaflet-groupedlayercontrol/leaflet.groupedlayercontrol.css">
     <link rel="stylesheet" href="/js/dist/css/select2.min.css" />
     <link rel="stylesheet" href="/assets/css/app.css">
+    <link rel="stylesheet" href="/assets/css/custom_common_styles.css">
 </head>
 
 <body>
@@ -261,6 +262,8 @@
         $('.multi-select2-with-tags').select2({tags: true});
 
         $('.multi-select2-max3').select2({maximumSelectionLength: 3});
+
+        $('.multi-select2-with-tags-max3').select2({tags: true, maximumSelectionLength: 3});
 
         $('#user-assign-group').change(function(){console.log('vl '+$(this).val());
             document.location.href = '/user/admin/user-to-group-add/'+$(this).val();

@@ -14,6 +14,10 @@
     $data['image'] = isset($user_data['image'])?$user_data['image']:array();
     $data['group'] = isset($user_data['groups'])?array_column($user_data['groups'],'group_id'):array();
     $data['user_acting_roles'] = isset($user_data['acting_roles'])?array_column($user_data['acting_roles'],'user_tag_id'):array();
+    $data['access_level_id'] = isset($user_data['access_level_id'])?$user_data['access_level_id']:'';
+    $data['grater_community_intention_ids'] = isset($user_data['gci'])?array_column($user_data['gci'],'user_tag_id'):array();
+    $data['skills'] = isset($user_data['skill'])?array_column($user_data['skill'],'user_tag_id'):array();
+//    dd($data['skills']);
     ?>
     <div class="col-lg-12 grid-margin stretch-card">
         <div class="card">
@@ -103,10 +107,37 @@
                                 <label for="user_avatar">User Avatar</label>
                                 <input class="form-control" type="file" name="user_avatar" />
                                 <?php foreach($data['image'] as $img){ ?>
-                                <a target="_blank" href="/storage/<?php echo $img['url'] ?>"><img src="/storage/<?php echo $img['url'] ?>" alt="Avatar" class="avatar"></a>
+                                <a target="_blank" href="/storage/<?php echo $img['url'] ?>"><img src="/storage/<?php echo $img['url'] ?>" alt="Avatar" class="avatar profile_img_mini"></a>
                             <?php } ?>
                             </div>
 
+
+                            <div class="form-group">
+                                <label for="exampleSelect1">Privacy settings</label>
+                                <select class="form-control" id="exampleSelect1" name="access_level_id">
+                                    <?php foreach($access_levels as $access){ ?>
+                                    <option value="{{$access->id}}" <?php if(old('access_level_id',$data['access_level_id']) == $access->id){ echo 'selected'; } ?> >{{$access->name}}</option>
+                                    <?php }?>
+                                </select>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="grater_community_intention_id">Greater Community Intention</label>
+                                <select class="form-control multi-select2-max3" id="grater_community_intention_id" multiple name="grater_community_intention_ids[]">
+                                    @foreach($gci_tags as $m)
+                                        <option value="{{$m['id']}}" <?php if(in_array($m['id'], old('grater_community_intention_ids',$data['grater_community_intention_ids']))){ echo 'selected'; } ?> >{{$m['tag']}}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="skills">Skills (add if not exist)</label>
+                                <select class="form-control multi-select2-with-tags-max3" id="skills" multiple name="skills[]">
+                                    @foreach($skill_tags as $m)
+                                        <option value="{{base64_encode($m['id'])}}" <?php if(in_array($m['id'], old('skills',$data['skills']))){ echo 'selected'; } ?> >{{$m['tag']}}</option>
+                                    @endforeach
+                                </select>
+                            </div>
 
                             <?php if(Auth::user()->is('admin')){ ?>
                             <div class="form-group">

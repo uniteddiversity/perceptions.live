@@ -25,7 +25,7 @@
     $data['video_date'] = isset($video_data['video_date'])?date_format(date_create($video_data['video_date']), 'Y-m-d'):'';
 
 
-    $data['exchange'] = isset($video_data['id'])?$video_data['id']:'1';
+    $data['exchange'] = isset($video_data['exchange'][0])?$video_data['exchange'][0]['content_tag_id']:'0';
 
     $data['service_or_opportunity'] = isset($video_data['service_or_opportunity'])?$video_data['service_or_opportunity']:'';
     $data['sorting_tags'] = isset($video_data['sorting_tags'])?array_column($video_data['sorting_tags'],'content_tag_id'):array();
@@ -42,13 +42,13 @@
 
     $data['id'] = isset($video_data['id'])?$video_data['id']:'';
 
-
-//    dd($data);
+//dd($data);
+//    dd($data['service_or_opportunity']);
     ?>
     <div class="col-lg-12 grid-margin stretch-card">
         <div class="card">
             <div class="card-body">
-                <h4 class="card-title">Add Video <span style="font-size: 12px;"><?php if(!empty($data['id'])){ ?><a class="btn btn-primary btn-xs" href="/location/<?php echo $data['id'] ?>" target="_blank">View Map</a> <a class="btn btn-primary btn-xs" href="/profile/video/<?php echo $data['id'] ?>" target="_blank">Video Profile</a><?php } ?></span></h4>
+                <h4 class="card-title">Add Video <span style="font-size: 12px;"><?php if(!empty($data['id'])){ ?><a class="btn btn-primary btn-xs" onclick="openVideo('<?php echo $data['id'] ?>')" href="#" >Video Profile</a><?php } ?></span></h4>
                 <div class="table-responsive">
                     @if ($errors->any())
                         <div class="alert alert-danger">
@@ -71,6 +71,14 @@
                             <div class="form-group">
                                 <label for="exampleInputEmail1">Title</label>
                                 <input type="text" class="form-control" aria-describedby="nameHelp" name="title" placeholder="Title" value="{{ old('title',$data['title']) }}">
+                            </div>
+                            <div class="form-group">
+                                <label for="exampleTextarea">Location</label>
+                                <input type="text" class="form-control" id="leaflet_search_addr" aria-describedby="nameHelp" name="location" placeholder="Location" value="{{ old('location',$data['location']) }}">
+                            </div>
+                            <div class="form-group">
+                                <label for="video_id">Captured Date</label>
+                                <input type="text" class="form-control datepicker" aria-describedby="nameHelp" name="captured_date" placeholder="Captured Date" value="{{ old('captured_date',$data['captured_date']) }}">
                             </div>
                             <div class="form-group">
                                 <label for="exampleSelect1">Access Level</label>
@@ -164,7 +172,14 @@
                                 <label for="primary_subject_tag">Primary Subject Tag (40 max)</label>
                                 <input type="text" class="form-control" aria-describedby="nameHelp" id="primary_subject_tag" name="primary_subject_tag" placeholder="Primary Subject Tag" value="{{ old('primary_subject_tag',$data['primary_subject_tag']) }}">
                             </div>
-
+                            <div class="form-group">
+                                <label for="sorting_tags">Sorting Tags</label>
+                                <select class="form-control multi-select2-with-tags" id="sorting_tags" multiple name="sorting_tags[]">
+                                    @foreach($sorting_tags as $tag)
+                                        <option value="{{base64_encode($tag['id'])}}" <?php if(in_array($tag->id, old('sorting_tags',$data['sorting_tags']))){ echo 'selected'; } ?> >{{$tag['tag']}}</option>
+                                    @endforeach
+                                </select>
+                            </div>
                             {{--<div class="form-group">--}}
                                 {{--<label for="exampleSelect1">Secondary Subject Tag</label>--}}
                                 {{--<select class="form-control" id="secondary_subject_tag_id" name="secondary_subject_tag_id">--}}
@@ -175,17 +190,8 @@
                                 {{--</select>--}}
                             {{--</div>--}}
 
-                            <div class="form-group">
-                                <label for="exampleSelect1">Submitted Footage</label>
-                                <select class="form-control" id="submitted_footage" name="submitted_footage">
-                                    <option value="yes" <?php if(old('submitted_footage',$data['submitted_footage']) == 'yes'){ echo 'selected'; } ?> >Yes</option>
-                                    <option value="no" <?php if(old('submitted_footage',$data['submitted_footage']) == 'no'){ echo 'selected'; } ?> >No</option>
-                                </select>
-                            </div>
-                            <div class="form-group">
-                                <label for="exampleTextarea">Location</label>
-                                <input type="text" class="form-control" id="leaflet_search_addr" aria-describedby="nameHelp" name="location" placeholder="Location" value="{{ old('location',$data['location']) }}">
-                            </div>
+
+
                             {{--<div class="form-group">--}}
                                 {{--<label for="exampleTextarea">Lat/Long</label>--}}
                                 {{--<div class="row">--}}
@@ -233,10 +239,7 @@
                                 {{--<input type="text" class="form-control" aria-describedby="nameHelp" name="video_id_old" placeholder="Video Id Old" value="{{ old('video_id_old') }}">--}}
                             {{--</div>--}}
 
-                            <div class="form-group">
-                                <label for="video_id">Captured Date</label>
-                                <input type="text" class="form-control datepicker" aria-describedby="nameHelp" name="captured_date" placeholder="Captured Date" value="{{ old('captured_date',$data['captured_date']) }}">
-                            </div>
+
 
                             {{--<div class="form-group">--}}
                                 {{--<label for="video_id">Video Date</label>--}}
@@ -264,26 +267,25 @@
                             {{--</fieldset>--}}
                             <div class="form-group">
                                 <label for="is_exchange">Exchange (Y/N)</label>
-                                <input class="form-control" type="checkbox" id="is_exchange" value="1" name="exchange" style="width: 50px;"/>
+                                <input class="form-control" type="checkbox" id="is_exchange" <?php if(!empty(old('exchange',$data['exchange']))){ ?> checked <?php } ?> value="1" name="exchange" style="width: 50px;"/>
                             </div>
                             <div class="form-group" id="exchange_enabled" <?php if(empty(old('exchange',$data['exchange']))){ ?> style="visibility: hidden;" <?php } ?> >
                                 <label for="is_exchange">If Exchange Yes, Service / Opportunity?</label>
                                 <select class="form-control multi-select2" id="service_or_opportunity" name="service_or_opportunity">
                                     <option value="0">Select</option>
-                                    <option value="1" <?php if(old('service_or_opportunity',$data['service_or_opportunity']) == '1'){ echo 'selected'; } ?> >Service</option>
-                                    <option value="2" <?php if(old('service_or_opportunity',$data['service_or_opportunity']) == '2'){ echo 'selected'; } ?> >Opportunity</option>
+                                    <option value="1" <?php if(old('exchange',$data['exchange']) == '1'){ echo 'selected'; } ?> >Service</option>
+                                    <option value="2" <?php if(old('exchange',$data['exchange']) == '2'){ echo 'selected'; } ?> >Opportunity</option>
                                 </select>
                             </div>
-
 
                             <div class="form-group">
-                                <label for="sorting_tags">Sorting Tags</label>
-                                <select class="form-control multi-select2-with-tags" id="sorting_tags" multiple name="sorting_tags[]">
-                                    @foreach($sorting_tags as $tag)
-                                        <option value="{{base64_encode($tag['id'])}}" <?php if(in_array($tag->id, old('sorting_tags',$data['sorting_tags']))){ echo 'selected'; } ?> >{{$tag['tag']}}</option>
-                                    @endforeach
+                                <label for="exampleSelect1">Submitted Footage</label>
+                                <select class="form-control" id="submitted_footage" name="submitted_footage">
+                                    <option value="yes" <?php if(old('submitted_footage',$data['submitted_footage']) == 'yes'){ echo 'selected'; } ?> >Yes</option>
+                                    <option value="no" <?php if(old('submitted_footage',$data['submitted_footage']) == 'no'){ echo 'selected'; } ?> >No</option>
                                 </select>
                             </div>
+
 
                             {{--users only items--}}
                             {{--<div class="form-group">--}}

@@ -12,7 +12,7 @@
 
     {{--<link rel="stylesheet" href="/assets/admin-temp/vendors/css/vendor.bundle.addons.css">--}}
     <link rel="stylesheet" href="/js/dist/css/select2.min.css" />
-
+    <link rel="stylesheet" href="/assets/css/custom_common_styles.css">
     {{--<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">--}}
     <link rel="shortcut icon" href="/assets/admin-temp/images/favicon.png" />
     {{--<link rel="stylesheet" href="https://www.bootstrapdash.com/demo/star-admin-pro/jquery/css/style.css" />--}}

@@ -11,6 +11,9 @@
                             <thead>
                             <tr>
                                 <th>
+                                    Action
+                                </th>
+                                <th>
                                     Joined Date
                                 </th>
                                 <th>
@@ -34,14 +37,16 @@
                                 <th>
                                     Finished Submissions (Open)
                                 </th>
-                                <th>
-                                    Action
-                                </th>
+
                             </tr>
                             </thead>
                             <tbody>
                             @foreach ($users as $user) <?php //dd($user); ?>
                                 <tr>
+                                    <td>
+                                        <a href="/user/admin/user-edit/{{ uid($user->id) }}" >Edit</a>&nbsp;&nbsp;
+                                        <a href="#" onclick="openProfile({{ ($user->id) }})" >View</a>
+                                    </td>
                                     <td>
                                         {{ date('Y-m-d', strtotime($user->created_at)) }}
                                     </td>
@@ -70,10 +75,7 @@
                                     <td>
                                         {{ $user->no_submission }}
                                     </td>
-                                    <td>
-                                        <a href="/user/admin/user-edit/{{ uid($user->id) }}" >Edit</a>&nbsp;&nbsp;
-                                        <a href="#" onclick="openProfile({{ ($user->id) }})" >View</a>
-                                    </td>
+
                                 </tr>
                             @endforeach
 

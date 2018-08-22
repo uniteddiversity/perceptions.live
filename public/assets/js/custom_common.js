@@ -27,6 +27,8 @@ $(document).ready(function() {
 
     $('.multi-select2-max3').select2({maximumSelectionLength: 3});
 
+    $('.multi-select2-with-tags-max3').select2({tags: true, maximumSelectionLength: 3});
+
     $('#user-assign-group').change(function(){console.log('vl '+$(this).val());
         document.location.href = '/user/admin/user-to-group-add/'+$(this).val();
     })

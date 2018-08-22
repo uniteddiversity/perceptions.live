@@ -164,6 +164,7 @@ class UserController extends Controller
         if(isset($r['id'])){
             $this->userRepository->deleteTagsOfContent($new_content->id,$user_id);
             $this->userRepository->deleteTagsOfContent($new_content->id,$user_id,'gci');
+            $this->userRepository->deleteTagsOfContent($new_content->id,$user_id,'exchange');
         }
         //tag related to exchange should goes here//
 
@@ -255,7 +256,7 @@ class UserController extends Controller
 
         if(isset($r['exchange'])){
             if(isset($r['service_or_opportunity'])){
-                $this->userRepository->addTagToContent($r['service_or_opportunity'],  $new_content->id);
+                $this->userRepository->addTagToContent($r['service_or_opportunity'],  $new_content->id,'exchange');
             }
         }
 
@@ -288,9 +289,13 @@ class UserController extends Controller
         $user_data = $this->userRepository->getUser($user_id)->toArray();
         $status = $this->userRepository->getStatus();
         $user_acting_role = $this->userRepository->getUserActingRoles();
+        $access_levels = $this->userRepository->getAccessLevels();
+        $gci_tags = $this->userRepository->getGreaterCommunityIntentionTag();
+        $skill_tags = $this->userRepository->getSkillsTag();
 
         return view('user.user-profile')
-            ->with(compact('user_data','user_groups','user_roles','status','user_acting_role'));
+            ->with(compact('user_data','user_groups','user_roles','status',
+                'user_acting_role','access_levels','gci_tags','skill_tags'));
     }
 
     public function postProfileSettings(Request $request)
@@ -306,25 +311,32 @@ class UserController extends Controller
                 $validator = Validator::make($request->all(), [
                     'display_name' => 'required|unique:users',
 //                'password' => 'required|min:6',
-                    'email' => 'required|email|unique:users'
+                    'email' => 'required|email|unique:users',
+                    'user_avatar' => 'file|max:500',
                 ]);
             }elseif($user_data['email'] != $r['email']){
                 $validator = Validator::make($request->all(), [
 //                    'display_name' => 'required|unique:users',
 //                    'password' => 'required|min:6',
-                    'email' => 'required|email|unique:users'
+                    'email' => 'required|email|unique:users',
+                    'user_avatar' => 'file|max:500',
                 ]);
             }elseif($user_data['display_name'] != $r['display_name']){
                 $validator = Validator::make($request->all(), [
                     'display_name' => 'required|unique:users',
+                    'user_avatar' => 'file|max:500',
                 ]);
             }else{
                 $validator = Validator::make($request->all(), [
+                    'user_avatar' => 'file|max:500'
                 ]);
             }
-
+        }else{
+            $validator = Validator::make($request->all(), [
+                'user_avatar' => 'file|max:500'
+            ]);
         }
-
+//dd($r);
         if ($validator->fails()) {
             return Redirect::back()->withErrors($validator->messages())->withInput();
         }
@@ -341,6 +353,8 @@ class UserController extends Controller
 //                    'status_id' => $r['status_id'],
 //                    'role_id' => $r['role_id'],
                     'location' => $r['location'],
+                    'description' => $r['description'],
+                    'access_level_id' => $r['access_level_id'],
 //                'password' => bcrypt($r['password'])
                 ]
             );
@@ -377,6 +391,31 @@ class UserController extends Controller
                 $user_group = $this->userRepository->addTagToUser($new_user->id, $tag,'role');
             }
         }
+
+        if(isset($r['grater_community_intention_ids']))
+        {
+            //remove existing gci tags
+            $this->userRepository->deleteTagsOfUserBySlug($id, $new_user->id, 'gci');
+            foreach($r['grater_community_intention_ids'] as $gci_id){
+                $this->userRepository->addTagToUser($new_user->id, $gci_id,'gci');
+            }
+        }
+
+        if(isset($r['skills'])){
+            $this->userRepository->deleteTagsOfUserBySlug($id, $new_user->id, 'skill');
+            foreach($r['skills'] as $sorting_tags_id){
+                $tag_id = base64_decode($sorting_tags_id);
+                if(is_numeric($tag_id)){
+                    $this->userRepository->addTagToUser($new_user->id, $tag_id,'skill');
+                }else{
+                    $newly_created_id = $this->userRepository->addIfNotExist($sorting_tags_id,'skill', $id);
+                    if(isset($newly_created_id->id))
+                        $this->userRepository->addTagToUser($new_user->id, $newly_created_id->id,  'skill');
+                }
+            }
+        }
+
+//        dd($r);
 
         return redirect()->back()->with('message', 'Successfully Added!');
     }
