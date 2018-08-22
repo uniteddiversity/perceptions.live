@@ -10,6 +10,7 @@
     $data['display_name'] = isset($user_data['display_name'])?$user_data['display_name']:'';
     $data['status_id'] = isset($user_data['status_id'])?$user_data['status_id']:'';
     $data['location'] = isset($user_data['location'])?$user_data['location']:'';
+    $data['description'] = isset($user_data['description'])?$user_data['description']:'';
     $data['image'] = isset($user_data['image'])?$user_data['image']:array();
     $data['group'] = isset($user_data['groups'])?array_column($user_data['groups'],'group_id'):array();
     $data['user_acting_roles'] = isset($user_data['acting_roles'])?array_column($user_data['acting_roles'],'user_tag_id'):array();
@@ -91,6 +92,11 @@
                                 <div class="form-group">
                                     <label for="location">Location</label>
                                     <input type="text" class="form-control" aria-describedby="nameHelp" name="location" placeholder="Location" value="{{ old('location',$data['location']) }}">
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="location">Description</label>
+                                    <textarea type="text" class="form-control" rows="3" aria-describedby="nameHelp" name="description" placeholder="Description">{{ old('description',$data['description']) }}</textarea>
                                 </div>
 
                             <div class="form-group">
