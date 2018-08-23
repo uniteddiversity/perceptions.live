@@ -267,8 +267,12 @@ class AdminController extends Controller
                 $this->userRepository->uploadAttachment($content,$user_id, $new_content->id, 'video-s-3', 'contents', 1);
             }
         ////////////////////end video upload//////////////////
-
-        return redirect()->back()->with('message', 'Successfully Added!');
+        if(isset($r['id']) && is_numeric(UID::translator($r['id']))){
+            $msg = 'Successfully Edited!';
+        }else{
+            $msg = 'Successfully Added!';
+        }
+        return redirect()->back()->with('message', $msg);
     }
 
     public function userList()

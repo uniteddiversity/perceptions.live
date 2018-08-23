@@ -48,7 +48,7 @@
     <div class="col-lg-12 grid-margin stretch-card">
         <div class="card">
             <div class="card-body">
-                <h4 class="card-title">Add Video <span style="font-size: 12px;"><?php if(!empty($data['id'])){ ?><a class="btn btn-primary btn-xs" onclick="openVideo('<?php echo $data['id'] ?>')" href="#" >Video Profile</a><?php } ?></span></h4>
+                <h4 class="card-title"><?php if(!empty($data['id'])){ ?>Edit Video<?php }else{ ?>Add Video<?php } ?> <span style="font-size: 12px;"><?php if(!empty($data['id'])){ ?><a class="btn btn-primary btn-xs" onclick="openVideo('<?php echo $data['id'] ?>')" href="#" >Video Profile</a><?php } ?></span></h4>
                 <div class="table-responsive">
                     @if ($errors->any())
                         <div class="alert alert-danger">
