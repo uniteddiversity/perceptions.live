@@ -103,6 +103,7 @@ Route::group(['prefix' => 'user', 'middleware' => ['auth', 'web', 'admin']], fun
 
     Route::get('/admin/group-edit/{_group_id}', '\App\Controllers\User\AdminController@editGroup');
     Route::get('/admin/location-list', '\App\Controllers\ContentController@adminLocationList');
+    Route::get('/admin/ajax/approve-content/{_video_id}', '\App\Controllers\User\AdminController@approveContent');
 });
 
 Route::group(['prefix' => 'user', 'middleware' => ['auth', 'web', 'groupadmin']], function () {

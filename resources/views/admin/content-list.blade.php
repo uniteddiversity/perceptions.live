@@ -44,9 +44,9 @@
                             @foreach ($videos as $video)
                                 <tr>
                                     <td>
-                                        <a href="/user/admin/video-edit/{{ uid($video->id) }}" >Edit</a>
+                                        <a href="/user/admin/video-edit/{{ uid($video->id) }}" >Edit</a>&nbsp;&nbsp;
                                         <?php if($video->status != '1'){ ?>
-                                         <a class="approve_video" href="#" >Approve</a>
+                                         <span id="approve_<?php echo $video->id ?>" class="approve-video" data-value="<?php echo $video->id ?>" onclick="testFunction('<?php echo $video->id ?>')" style="cursor: pointer;color: blue;" >Approve</span>
                                         <?php } ?>
                                     </td>
                                     {{--<td>--}}

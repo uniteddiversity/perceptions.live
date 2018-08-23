@@ -614,4 +614,8 @@ class AdminController extends Controller
         return view('admin.group-add')
             ->with(compact('categories','group','user_list','status'));
     }
+
+    public function approveContent($id){
+        return $this->content->where('id', $id)->update(array('status' => '1'));
+    }
 }

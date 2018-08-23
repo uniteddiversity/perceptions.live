@@ -186,6 +186,20 @@ $("#register-btn").click(function() {
     return false;
 });
 
+function testFunction(id){
+    if(confirm('Are you sure you want to approve this?')){
+        $('#approve_'+id).html('updating...');
+        jQuery.ajax({
+            url: "/user/admin/ajax/approve-content/"+id,
+            method: 'GET'
+        }).done(function (content) {
+            $('#approve_'+id).html('Activated!');
+        }).fail(function () {
+        });
+///  /user/admin/ajax/approve-content/"+id
+    }
+}
+
 function userLogin(){
     jQuery.ajax({
         url: 'user/login',
@@ -231,8 +245,4 @@ function userRegister(){
     });
 }
 
-$(".approve_video").click(function() {
-    if(confirm('Are you sure you want to approve this?')){
 
-    }
-});
