@@ -230,3 +230,9 @@ function userRegister(){
         // Whoops; show an error.
     });
 }
+
+$(".approve_video").click(function() {
+    if(confirm('Are you sure you want to approve this?')){
+
+    }
+});

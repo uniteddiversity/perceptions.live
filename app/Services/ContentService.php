@@ -54,7 +54,7 @@ class ContentService
         return $meta_array;
     }
 
-    public function getContentList($user_id)
+    public function getContentList($user_id, $filter = array())
     {
         $user_info = $this->getUser($user_id);
 
@@ -72,6 +72,10 @@ class ContentService
 
         }else{//if user
             $videos->where('user_id', $user_info['id']);
+        }
+
+        if(isset($filter['open_list'])){
+            $videos = $videos->where('status','<>', '1');
         }
 
         $videos = $videos->select('contents.*');

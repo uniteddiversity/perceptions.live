@@ -298,6 +298,14 @@ class AdminController extends Controller
             ->with(compact('videos'));
     }
 
+    public function contentOpenList()
+    {
+        $user_id = (!isset(Auth::user()->id))? 0 : Auth::user()->id;
+        $videos = $this->contentService->getContentList($user_id, array('open_list'=>true));
+        return view('admin.content-list')
+            ->with(compact('videos'));
+    }
+
     public function contentAdd()
     {
         $user_id = (!isset(Auth::user()->id))? 0 : Auth::user()->id;

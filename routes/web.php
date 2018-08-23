@@ -88,6 +88,7 @@ Route::group(['prefix' => 'user', 'middleware' => ['auth', 'web', 'admin']], fun
     Route::get('/admin/video-edit/{_content_id}', '\App\Controllers\User\AdminController@contentEdit');
     Route::post('/admin/post-user-add', '\App\Controllers\User\AdminController@adminUserAdd');
     Route::get('/admin/content-list', '\App\Controllers\User\AdminController@contentList');
+    Route::get('/admin/content-list-open', '\App\Controllers\User\AdminController@contentOpenList');
     Route::get('/admin/content-add', '\App\Controllers\User\AdminController@contentAdd');
     Route::post('/admin/post-content-add', '\App\Controllers\User\AdminController@contentAdd');
     Route::get('/admin/user-group-add', '\App\Controllers\User\AdminController@groupAdd');

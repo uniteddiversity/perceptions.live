@@ -45,6 +45,9 @@
                                 <tr>
                                     <td>
                                         <a href="/user/admin/video-edit/{{ uid($video->id) }}" >Edit</a>
+                                        <?php if($video->status != '1'){ ?>
+                                         <a class="approve_video" href="#" >Approve</a>
+                                        <?php } ?>
                                     </td>
                                     {{--<td>--}}
                                         {{--{{ $video->id }}--}}

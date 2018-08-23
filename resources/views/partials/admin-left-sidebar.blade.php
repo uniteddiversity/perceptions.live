@@ -39,7 +39,10 @@
             <div class="collapse" id="contnet-sub">
                 <ul class="nav flex-column sub-menu">
                     <li class="nav-item">
-                        <a class="nav-link" href="/user/admin/content-list"> List Videos </a>
+                        <a class="nav-link" href="/user/admin/content-list-open"> Open Videos </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/user/admin/content-list"> All Videos </a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="/user/admin/content-add"> Add Video </a>
