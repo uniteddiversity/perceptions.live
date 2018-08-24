@@ -18,23 +18,35 @@
                         <div>Submitter: <?php if(isset($info->user)){ echo '@'.'<span class="inactive_link" onclick="openProfile('.$info->user->id.')">'.$info->user->display_name.'</span>'; }; ?></div>
                         <?php if(isset($info->videoProducer)){ ?>
                         <div>Producer(s):
-                            <?php foreach($info->videoProducer as $user){
-                                echo '@'.'<span class="inactive_link" onclick="openProfile('.$user->user->id.')">'.$user->user->display_name.'</span>'.',';
-                            } ?>
+                            <?php
+                            $datas = array();
+                            foreach($info->videoProducer as $user){
+                                $datas[] = '@'.'<span class="inactive_link" onclick="openProfile('.$user->user->id.')">'.$user->user->display_name.'</span>';
+                            }
+                            echo implode(', ', $datas);
+                            ?>
                         </div>
                         <?php }; ?>
                         <?php if(isset($info->coCreators)){ ?>
                         <div>Co-creators(s):
-                                <?php foreach($info->coCreators as $user){
-                                    echo '@'.'<span class="inactive_link" onclick="openProfile('.$user->user->id.')">'.$user->user->display_name.'</span>'.',';
-                                } ?>
+                                <?php
+                                $datas = array();
+                                foreach($info->coCreators as $user){
+                                    $datas[] = '@'.'<span class="inactive_link" onclick="openProfile('.$user->user->id.')">'.$user->user->display_name.'</span>';
+                                }
+                                echo implode(', ', $datas);
+                                ?>
                             </div>
                         <?php }; ?>
                         <?php if(isset($info->onScreen) && count($info->onScreen) > 0){ ?>
                         <div>On screen(s):
-                            <?php foreach($info->onScreen as $user){
-                                echo '@'.'<span class="inactive_link" onclick="openProfile('.$user->user->id.')">'.$user->user->display_name.'</span>'.',';
-                            } ?>
+                            <?php
+                            $datas = array();
+                            foreach($info->onScreen as $user){
+                                $datas[] = '@'.'<span class="inactive_link" onclick="openProfile('.$user->user->id.')">'.$user->user->display_name.'</span>';
+                            }
+                            echo implode(', ', $datas);
+                            ?>
                         </div>
                         <?php }; ?>
                         <?php if(isset($info->groups) && count($info->groups) > 0){ ?>

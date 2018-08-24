@@ -46,7 +46,7 @@
                                     <td>
                                         <a href="/user/admin/video-edit/{{ uid($video->id) }}" >Edit</a>&nbsp;&nbsp;
                                         <?php if($video->status != '1'){ ?>
-                                         <span id="approve_<?php echo $video->id ?>" class="approve-video" data-value="<?php echo $video->id ?>" onclick="testFunction('<?php echo $video->id ?>')" style="cursor: pointer;color: blue;" >Approve</span>
+                                         <span id="approve_<?php echo $video->id ?>" class="approve-video inactive_link" data-value="<?php echo $video->id ?>" onclick="testFunction('<?php echo $video->id ?>')" >Approve</span>
                                         <?php } ?>
                                     </td>
                                     {{--<td>--}}
@@ -65,7 +65,7 @@
                                         {{ $video->url }}
                                     </td>
                                     <td>
-                                        {{ $video->user->email }}
+                                        {{ isset($video->user)?$video->user->email:'' }}
                                     </td>
                                     <td>
                                         {{ $video->location }}

@@ -21,11 +21,11 @@ class ContentController extends Controller
     public function adminLocationList()
     {
         $location_list = $this->content
-            ->select('contents.location', DB::Raw("GROUP_CONCAT(DISTINCT users.display_name SEPARATOR ', ') as display_names"),
+            ->select('contents.location', DB::Raw("GROUP_CONCAT(DISTINCT concat(users.id,'-',users.display_name) SEPARATOR ', ') as display_names"),
                 DB::Raw('count(DISTINCT contents_active.id) active_videos'),
                 DB::Raw('count(DISTINCT users.id) associate_users'),
                 DB::Raw('count(DISTINCT groups.id) associate_groups')
-                ,DB::Raw("GROUP_CONCAT(DISTINCT moderator_users.display_name SEPARATOR ', ') as moderators")
+                ,DB::Raw("GROUP_CONCAT(DISTINCT concat(users.id,'-',moderator_users.display_name) SEPARATOR ', ') as moderators")
             )
             ->leftJoin('user_content_associations', 'user_content_associations.content_id', 'contents.id')
             ->leftJoin('users', 'users.id', 'user_content_associations.user_id')

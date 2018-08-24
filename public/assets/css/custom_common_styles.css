@@ -2,3 +2,13 @@
     width: 128px;
     /*height: 256px;*/
 }
+
+.inactive_link{
+    cursor: pointer;
+    /*color: #5156ff;*/
+    color: #007bff;
+}
+
+.inactive_link:hover{
+    text-decoration: underline;
+}

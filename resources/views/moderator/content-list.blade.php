@@ -52,7 +52,7 @@
                                         {{ $video->url }}
                                     </td>
                                     <td>
-                                        {{ $video->user->email }}
+                                        {{ isset($video->user)?$video->user->email:'' }}
                                     </td>
                                     <td>
                                         {{ $video->location }}

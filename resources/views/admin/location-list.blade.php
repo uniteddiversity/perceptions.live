@@ -37,7 +37,17 @@
                                         {{ $location['location'] }}
                                     </td>
                                     <td>
-                                        {{ $location['display_names'] }}
+                                        <?php
+                                        $display_names = explode(',', $location['display_names']);
+                                        $links = array();
+                                        foreach($display_names as $name){
+                                            $display_names_p = explode('-', $name);
+                                            $display_name = isset($display_names_p[1])? $display_names_p[1] : '';
+                                            $user_id = isset($display_names_p[0])? $display_names_p[0] : 0;
+                                            $links[] = '<span onclick="openProfile('.$user_id.')" class="inactive_link">'.$display_name.'</span>';
+                                        }
+                                        ?>
+                                        <?php echo implode(', ', $links); ?>
                                     </td>
                                     <td>
                                         {{ $location['active_videos'] }}
@@ -49,7 +59,17 @@
                                         {{ $location['associate_groups'] }}
                                     </td>
                                     <td>
-                                        {{ $location['moderators'] }}
+                                        <?php
+                                        $display_names = explode(',', $location['moderators']);
+                                        $links = array();
+                                        foreach($display_names as $name){
+                                            $display_names_p = explode('-', $name);
+                                            $display_name = isset($display_names_p[1])? $display_names_p[1] : '';
+                                            $user_id = isset($display_names_p[0])? $display_names_p[0] : 0;
+                                            $links[] = '<span onclick="openProfile('.$user_id.')" class="inactive_link">'.$display_name.'</span>';
+                                        }
+                                        ?>
+                                        <?php echo implode(', ', $links); ?>
                                     </td>
                                 </tr>
                             @endforeach
