@@ -151,7 +151,7 @@ class UserController extends Controller
                 'submitted_footage' => $r['submitted_footage'],
                 'location' => $r['location'],
 
-                'captured_date' => $r['captured_date'],
+                'captured_date' => Carbon::createFromFormat('d-m-Y', $r['captured_date'])->format('Y-m-d'),
                 'video_date' => $r['video_date'],
 //                'captured_date' => date('Y-m-d'),
 //                'video_date' => date('Y-m-d'),

@@ -257,7 +257,7 @@
     $(document).ready(function() {
         $('#users_llist').DataTable({"aaSorting": []});
         $('.datepicker').datepicker({
-            format: 'yyyy-mm-dd',
+            format: 'dd-mm-yyyy',
             // startDate: '-3d',
             autoclose: true,
             keepOpen: false,

@@ -10,6 +10,7 @@ use App\MetaData;
 use App\User;
 use Content\Services\ContentService;
 use Illuminate\Http\Request;
+use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Crypt;
 use Illuminate\Support\Facades\Redirect;
@@ -102,7 +103,7 @@ class AdminController extends Controller
         }
 
         $r = $request->toArray();
-
+//dd($r['captured_date']);
         $update_array = [
             'title' => $r['title'],
             'access_level_id' => $r['access_level_id'],
@@ -131,7 +132,7 @@ class AdminController extends Controller
             'submitted_footage' => $r['submitted_footage'],
             'location' => $r['location'],
 
-            'captured_date' => $r['captured_date'],
+            'captured_date' => Carbon::createFromFormat('d-m-Y', $r['captured_date'])->format('Y-m-d'),
             'video_date' => $r['video_date'],
 //                'captured_date' => date('Y-m-d'),
 //                'video_date' => date('Y-m-d'),

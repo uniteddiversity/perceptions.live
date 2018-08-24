@@ -21,7 +21,7 @@
     $data['submitted_footage'] = isset($video_data['submitted_footage'])?$video_data['submitted_footage']:'';
     $data['location'] = isset($video_data['location'])?$video_data['location']:'';
     $data['url'] = isset($video_data['url'])?$video_data['url']:'';
-    $data['captured_date'] = isset($video_data['captured_date'])?date_format(date_create($video_data['captured_date']), 'Y-m-d'):'';
+    $data['captured_date'] = isset($video_data['captured_date'])?date_format(date_create($video_data['captured_date']), 'd-m-Y'):'';
     $data['video_date'] = isset($video_data['video_date'])?date_format(date_create($video_data['video_date']), 'Y-m-d'):'';
 
 

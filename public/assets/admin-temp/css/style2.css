@@ -21410,7 +21410,7 @@ body.avgrund-active {
 .datepicker.datepicker-inline {
   padding: 0 25px;
   width: 30%;
-  max-width: 500px;
+  max-width: 250px;
   min-width: 250px; }
   .datepicker.datepicker-dropdown .datepicker-days,
   .datepicker.datepicker-inline .datepicker-days {
@@ -21465,8 +21465,9 @@ body.avgrund-active {
           text-align: center; }
           .datepicker.datepicker-dropdown .datepicker-days table.table-condensed tbody td.day,
           .datepicker.datepicker-inline .datepicker-days table.table-condensed tbody td.day {
+            cursor: pointer;
             font-size: 0.9375rem;
-            padding: 0.5rem 0;
+            padding: 0.4rem 0;
             color: #6c757d; }
             .datepicker.datepicker-dropdown .datepicker-days table.table-condensed tbody td.day:hover,
             .datepicker.datepicker-inline .datepicker-days table.table-condensed tbody td.day:hover {
