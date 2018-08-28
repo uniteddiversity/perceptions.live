@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>{{ config('app.application_name') }}</title>
+    <title>{{ config('app.name') }}</title>
     <link rel="stylesheet" href="/assets/admin-temp/vendors/iconfonts/mdi/css/materialdesignicons.min.css">
     <link rel="stylesheet" href="/assets/admin-temp/vendors/css/vendor.bundle.base.css">
     {{--<link rel="stylesheet" href="/assets/admin-temp/css/style.css">--}}
@@ -274,6 +274,39 @@
 
         }
     }
+
+    $('.select2-ajax-content').select2({
+        ajax: {
+            url: '/home/ajax/video-search-list',
+            dataType: 'json'
+            // Additional AJAX parameters go here; see the end of this chapter for the full code of this example
+        }
+    });
+
+    $('.select2-ajax-users').select2({
+        ajax: {
+            url: '/home/ajax/user-search-list',
+            dataType: 'json'
+        }
+    });
+
+    $('.select2-ajax-groups').select2({
+        ajax: {
+            url: '/home/ajax/group-search-list',
+            dataType: 'json'
+        }
+    });
+
+    $('.select2-ajax-my-groups-content').select2({
+        ajax: {
+            url: '/home/ajax/video-search-list?only_my_group=yes',
+            dataType: 'json'
+        }
+    });
+
+    $('#shearable_code').click(function(){
+        $(this).select();
+    })
 </script>
 <!-- End custom js for this page-->
 </body>

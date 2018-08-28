@@ -103,7 +103,6 @@ class AdminController extends Controller
         }
 
         $r = $request->toArray();
-//dd($r['captured_date']);
         $update_array = [
             'title' => $r['title'],
             'access_level_id' => $r['access_level_id'],
@@ -157,6 +156,11 @@ class AdminController extends Controller
             $this->userRepository->deleteTagsOfContent($new_content->id,$user_id);
             $this->userRepository->deleteTagsOfContent($new_content->id,$user_id,'gci');
             $this->userRepository->deleteTagsOfContent($new_content->id,$user_id,'exchange');
+        }
+
+        if(!is_numeric(UID::translator($r['id']))){
+            //add creator to association
+            $this->userRepository->updateUserContentAssociations(Auth::user()->id, $new_content->id, 'creator');
         }
         //tag related to exchange should goes here//
 
@@ -622,5 +626,88 @@ class AdminController extends Controller
 
     public function approveContent($id){
         return $this->content->where('id', $id)->update(array('status' => '1'));
+    }
+
+    public function mapGenerate()
+    {
+        $gci_tags = $this->userRepository->getGreaterCommunityIntentionTag();
+        $categories = $this->category->get();
+        return view('admin.generate-map')
+            ->with(compact('gci_tags','categories'));
+    }
+
+    public function editMapGenerate($id)
+    {
+        $id = (isset($id))?UID::translator($id):0;
+        $edit_data = $this->contentService->getGroupShareData($id);
+        $gci_tags = $this->userRepository->getGreaterCommunityIntentionTag();
+        $categories = $this->category->get();
+        return view('admin.generate-map')
+            ->with(compact('gci_tags','categories', 'edit_data'));
+    }
+
+    public function postMapGenerate(Request $request)
+    {
+        $id = (isset($id))?UID::translator($id):0;
+        $user_id = (!isset(Auth::user()->id))? 0 : Auth::user()->id;
+//        $id = UID::translator($id);
+
+        $r = $request->toArray();
+        $validator = Validator::make($request->all(), [
+            'group' => 'required',
+            'domain' => 'required'
+        ]);
+
+        if ($validator->fails()) {
+            return Redirect::back()->withErrors($validator->messages())->withInput();
+        }
+
+
+//        group
+//        domain
+//        grater_community_intention_ids
+//        public_videos
+//        primary_subject_tag
+//        associated_users
+
+        $data['associations']['grater_community_intention_ids'] = isset($r['grater_community_intention_ids'])?$r['grater_community_intention_ids']: array();
+        $data['associations']['public_videos'] = isset($r['public_videos'])?$r['public_videos']: array();
+        $data['associations']['associated_users'] = isset($r['associated_users'])?$r['associated_users']: array();
+        $data['associations']['categories'] = isset($r['categories'])?$r['categories']: array();
+
+        $data['basic'] = array(
+            'group' => $r['group'],
+            'allowed_domain' => $r['domain'],
+            'allowed_ip' => gethostbyname($r['domain']),
+            'primary_subject_tag' => $r['primary_subject_tag'],
+            'created_by' => $user_id,
+            'public_token' => $this->createToken(date('Y-m-d H:i:s')),
+        );
+
+        if(is_numeric($id) && $id != 0){
+            unset($data['basic']['public_token']);
+        }else{
+            $id = 0;
+        }
+
+        $sheared_content = $this->contentService->createGroupShareableContents($user_id, $data, $id);
+        return redirect()->back()->with('message', 'Successfully Added!');
+    }
+
+    public static function createToken($prefix='', $length = 20)
+    {
+        $pool = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+
+        return base64_encode($prefix).substr(str_shuffle(str_repeat($pool, $length)), 0, $length);
+    }
+
+    public function mapGeneratedList()
+    {
+        $user_id = (!isset(Auth::user()->id))? 0 : Auth::user()->id;
+
+        $list = $this->contentService->groupShareableContentsList($user_id);
+        //dd($list);
+        return view('admin.generated-map-list')
+            ->with(compact('list','association'));
     }
 }

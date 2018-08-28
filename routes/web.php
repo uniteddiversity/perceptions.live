@@ -33,6 +33,12 @@ Route::post('/', function(){
 
 
     Route::get('/ajax/associated_videos_by_user_id/{_user_id}', '\App\Controllers\User\UserController@getAssociatedVideosByUserId');
+    Route::get('/home/ajax/video-search-list', '\App\Controllers\HomeController@searchVideosList');
+    Route::get('/home/ajax/user-search-list', '\App\Controllers\HomeController@searchUsersList');
+    Route::get('/home/ajax/group-search-list', '\App\Controllers\HomeController@searchGroupList');
+
+    Route::get('/home/shared/group/{_id}', '\App\Controllers\HomeController@sharedGroup');
+    Route::get('/ajax/home/shared/group/{_id}', '\App\Controllers\HomeController@shearedContentJson');
 //});
 
 
@@ -104,6 +110,11 @@ Route::group(['prefix' => 'user', 'middleware' => ['auth', 'web', 'admin']], fun
     Route::get('/admin/group-edit/{_group_id}', '\App\Controllers\User\AdminController@editGroup');
     Route::get('/admin/location-list', '\App\Controllers\ContentController@adminLocationList');
     Route::get('/admin/ajax/approve-content/{_video_id}', '\App\Controllers\User\AdminController@approveContent');
+
+    Route::get('/admin/map-generate', '\App\Controllers\User\AdminController@mapGenerate');
+    Route::get('/admin/map-generate-list', '\App\Controllers\User\AdminController@mapGeneratedList');
+    Route::post('/admin/post-map-generate', '\App\Controllers\User\AdminController@postMapGenerate');
+    Route::get('/admin/map-generate/{_id}', '\App\Controllers\User\AdminController@editMapGenerate');
 });
 
 Route::group(['prefix' => 'user', 'middleware' => ['auth', 'web', 'groupadmin']], function () {

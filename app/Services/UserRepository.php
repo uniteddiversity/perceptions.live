@@ -632,5 +632,39 @@ class UserRepository
             $q->with('content');
         },'requestedUser'])->where('fk_id', $user_id)->where('type', 'users')->get();
     }
+
+    public function getUsersList($user_id, $filter, $limit = 30)
+    {
+        $users = $this->user;
+
+        if(isset($filter['keyword']) && !empty($filter['keyword'])){
+            $users = $users->where(function($q) use($filter){
+                $q->where('display_name', 'like', '%'.$filter['keyword'].'%');
+                $q->orWhere('first_name', 'like', '%'.$filter['keyword'].'%');
+            });
+        }
+
+        $users = $users->where('access_level_id', '1')->where('status_id','<>','3');//only public and not deleted
+
+        $users = $users->select('users.*')->limit($limit);
+        return $users->get();
+    }
+
+    public function getGroupList($user_id, $filter, $limit = 30)
+    {
+        $groups = $this->group;
+
+        if(isset($filter['keyword']) && !empty($filter['keyword'])){
+            $groups = $groups->where(function($q) use($filter){
+                $q->where('name', 'like', '%'.$filter['keyword'].'%');
+                $q->orWhere('description', 'like', '%'.$filter['keyword'].'%');
+            });
+        }
+
+        $groups = $groups->where('status','=','1');//only public and not deleted
+
+        $groups = $groups->select('groups.*')->limit($limit);
+        return $groups->get();
+    }
 }
 

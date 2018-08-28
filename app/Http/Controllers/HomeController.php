@@ -135,6 +135,63 @@ class HomeController extends Controller
             ->with(compact('info'));
     }
 
+    public function searchVideosList(Request $request)
+    {
+        $r = $request->all();//only_group
+        $filter['category'] = isset($r['category'])?$r['category']: array();
+        $filter['keyword'] = isset($r['q'])?$r['q']: array();
+        $filter['gcs'] = isset($r['gcs'])?$r['gcs']: array();//great community service
+
+        $filter['only_my_group'] = isset($r['only_my_group'])?$r['only_my_group']: null;
+
+        $user_id = (!isset(Auth::user()->id))? 0 : Auth::user()->id;
+
+        $uploaded_list = $this->contentService->getSearchableContents($user_id, $filter);
+
+        $r = array(); $i = 0;
+        foreach($uploaded_list as $val){
+            $r[$i]['text'] = $val['title'];
+            $r[$i]['id'] = $val['id'];
+            $i++;
+        }
+
+        return response()->json(array('total_count' => count($r), 'incomplete_results' => false, 'results' => $r), 200);
+    }
+
+    public function searchUsersList(Request $request)
+    {
+        $r = $request->all();
+        $user_id = (!isset(Auth::user()->id))? 0 : Auth::user()->id;
+        $filter['keyword'] = isset($r['q'])?$r['q']: array();
+        $users_list = $this->userRepository->getUsersList($user_id, $filter);
+
+        $r = array(); $i = 0;
+        foreach($users_list as $val){
+            $r[$i]['text'] = '@'.$val['display_name'];
+            $r[$i]['id'] = $val['id'];
+            $i++;
+        }
+
+        return response()->json(array('total_count' => count($r), 'incomplete_results' => false, 'results' => $r), 200);
+    }
+
+    public function searchGroupList(Request $request)
+    {
+        $r = $request->all();
+        $user_id = (!isset(Auth::user()->id))? 0 : Auth::user()->id;
+        $filter['keyword'] = isset($r['q'])?$r['q']: array();
+        $users_list = $this->userRepository->getGroupList($user_id, $filter);
+
+        $r = array(); $i = 0;
+        foreach($users_list as $val){
+            $r[$i]['text'] = $val['name'];
+            $r[$i]['id'] = $val['id'];
+            $i++;
+        }
+
+        return response()->json(array('total_count' => count($r), 'incomplete_results' => false, 'results' => $r), 200);
+    }
+
     public function searchVideos(Request $request)
     {
         $r = $request->all();
@@ -172,4 +229,19 @@ class HomeController extends Controller
         return response()->json($ret, 200);
     }
 
+    public function sharedGroup($_token)
+    {
+        return view('partials.shared_content')
+            ->with(compact('_token'));
+    }
+
+    public function shearedContentJson($_token)
+    {
+        $uploaded_list = $this->contentService->generateMap($_token);
+        $json_output = $this->getSearchListInJson($uploaded_list);
+        $content = view('partials.shared_video-search-result')
+            ->with(compact('uploaded_list'));
+        $content = (string)htmlspecialchars($content);
+        return array('content' => $content, 'json' => $json_output);
+    }
 }

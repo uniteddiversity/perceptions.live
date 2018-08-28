@@ -166,6 +166,11 @@ class UserController extends Controller
             $this->userRepository->deleteTagsOfContent($new_content->id,$user_id,'gci');
             $this->userRepository->deleteTagsOfContent($new_content->id,$user_id,'exchange');
         }
+
+        if(!is_numeric(UID::translator($r['id']))){
+            //add creator to association
+            $this->userRepository->updateUserContentAssociations(Auth::user()->id, $new_content->id, 'creator');
+        }
         //tag related to exchange should goes here//
 
         //user associations with content
