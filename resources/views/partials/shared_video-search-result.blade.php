@@ -1,10 +1,10 @@
 
 <?php foreach($uploaded_list as $info){?>
 <div class="row" style="margin: 0px;height: auto;">
-    <div class="col-md-6" style="margin:0px;padding: 0px;">
+    <div style="margin:0px;padding: 0px;width: 50%;float: left;">
         <iframe style="width: 100%;" src="<?php echo str_replace( 'watch?v=', 'embed/',$info['url']) ?>" frameborder="0" allowfullscreen></iframe>
     </div>
-    <div class="col-md-6" style="margin:0px;padding: 0px;padding-left: 10px;">
+    <div style="margin:0px;padding: 0px;padding-left: 10px;width: 45%;float: left;">
         <?php
         $tags = explode(',', $info['tag_colors']);
         foreach($tags as $tag){
@@ -17,5 +17,6 @@
             <div><span style="cursor: pointer;" onclick="openProfile('<?php echo $info['user_id'] ?>')">@<?php echo $info['display_name'] ?></span></div>
         <div><?php echo date('d F Y',strtotime($info['created_at'])) ?>, <?php echo $info['location'] ?></div>
     </div>
+    <div style="clear: both;"></div>
 </div>
 <?php } ?>
