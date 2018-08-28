@@ -16,7 +16,7 @@ class CreateShearedContentsTable extends Migration
         Schema::create('shared_contents', function (Blueprint $table) {
             $table->engine = 'InnoDB';
             $table->increments('id');
-            $table->string('group', 20);
+            $table->string('group', 800);
             $table->integer('created_by');
             $table->string('allowed_domain');
             $table->string('allowed_ip')->default('')->nullable();
