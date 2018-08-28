@@ -75,7 +75,7 @@
                             <div class="form-group">
                                 <label for="categories">Categories</label>
                                 <select class="form-control multi-select2-max3" id="categories" multiple name="categories[]">
-                                    @foreach($gci_tags as $m)
+                                    @foreach($categories as $m)
                                         <option value="{{$m['id']}}" <?php if(in_array($m['id'], old('categories',$data['categories']))){ echo 'selected'; } ?> >{{$m['tag']}}</option>
                                     @endforeach
                                 </select>
