@@ -20,11 +20,14 @@
     $data["users"] = array();
     $data["categories"] = array();
 
-    foreach($edit_data as $editd){
-        if(isset($editd['id'])){
-            $data[$editd['table']][] = $editd['fk_id'];
+    if(isset($edit_data)){
+        foreach($edit_data as $editd){
+            if(isset($editd['id'])){
+                $data[$editd['table']][] = $editd['fk_id'];
+            }
         }
     }
+
 //    dd($data['sorting_tags']);
     ?>
     <div class="col-lg-12 grid-margin stretch-card">
