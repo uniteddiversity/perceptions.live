@@ -265,6 +265,11 @@
 //        $('.datepicker').on('changeDate', function(ev){
 //            $(this).datepicker('hide');
 //        });
+
+        $('.select2-ajax-content').trigger('change');
+        $('.select2-ajax-users').trigger('change');
+        $('.select2-ajax-groups').trigger('change');
+        $('.select2-ajax-my-groups-content').trigger('change');
     } );
 
 
@@ -289,6 +294,7 @@
             dataType: 'json'
         }
     });
+
 
     $('.select2-ajax-groups').select2({
         ajax: {

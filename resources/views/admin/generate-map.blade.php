@@ -14,7 +14,7 @@
     $data['domain'] = isset($edit_data[0]['allowed_domain'])?$edit_data[0]['allowed_domain']:'';
     $data['primary_subject_tag'] = isset($edit_data[0]['primary_subject_tag'])?$edit_data[0]['primary_subject_tag']:'';
     $data['_token'] = isset($edit_data[0]['public_token'])?$edit_data[0]['public_token']:'';
-
+//dd($data['_token']);
     $data["sorting_tags"] = array();
     $data["contents"] = array();
     $data["users"] = array();
@@ -52,7 +52,7 @@
                         @endif
                         <form action="/user/admin/post-map-generate" method="post" id="submit_content" enctype='multipart/form-data'>
                             <input type="hidden" name="_token" id="csrf-token" value="{{ Session::token() }}" />
-                            <?php if($data['id']){ ?>
+                            <?php if($data['id']){?>
                                 <input type="hidden" name="id" id="csrf-token" value="<?php echo uid($data['id']) ?>" />
                             <?php } ?>
                             <div class="form-group">
@@ -88,7 +88,11 @@
 
                             <div class="form-group">
                                 <label for="exampleSelect1">Group</label>
-                                <select class="form-control select2-ajax-groups" id="public_videos" multiple name="public_videos[]">
+                                <select class="form-control select2-ajax-groups" id="public_videos" multiple name="groups[]">
+                                    <?php //dd($selected_groups);
+                                    foreach($selected_groups as $int_data){
+                                        echo '<option value="'.$int_data['id'].'" selected >'.$int_data['text'].'</option>';
+                                    } ?>
                                 </select>
                             </div>
                             <div class="form-group">
@@ -100,6 +104,10 @@
                             <div class="form-group">
                                 <label for="associated_users">Associated Users</label>
                                 <select class="form-control select2-ajax-users" id="associated_users" multiple name="associated_users[]">
+                                    <?php foreach($selected_users as $int_data){
+                                        echo '<option value="'.$int_data['id'].'" selected >'.$int_data['text'].'</option>';
+                                    } ?>
+
                                 </select>
                             </div>
 
@@ -111,11 +119,15 @@
                             <div class="form-group">
                                 <label for="my_group_videos">Your Group's Videos</label>
                                 <select class="form-control select2-ajax-my-groups-content" id="my_group_videos" multiple name="my_group_videos[]">
+
                                 </select>
                             </div>
                             <div class="form-group">
                                 <label for="public_videos">All Public Videos</label>
                                 <select class="form-control select2-ajax-content" id="public_videos" multiple name="public_videos[]">
+                                    <?php foreach($selected_videos as $int_data){
+                                        echo '<option value="'.$int_data['id'].'" selected >'.$int_data['text'].'</option>';
+                                    } ?>
                                 </select>
                             </div>
                             <button type="submit" class="btn btn-primary">Submit & Preview</button>

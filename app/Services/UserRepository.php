@@ -644,6 +644,10 @@ class UserRepository
             });
         }
 
+        if(isset($filter['ids'])){
+            $users = $users->whereIn('id', $filter['ids']);
+        }
+
         $users = $users->where('access_level_id', '1')->where('status_id','<>','3');//only public and not deleted
 
         $users = $users->select('users.*')->limit($limit);
@@ -659,6 +663,10 @@ class UserRepository
                 $q->where('name', 'like', '%'.$filter['keyword'].'%');
                 $q->orWhere('description', 'like', '%'.$filter['keyword'].'%');
             });
+        }
+
+        if(isset($filter['ids'])){
+            $groups = $groups->whereIn('groups.id', $filter['ids']);
         }
 
         $groups = $groups->where('status','=','1');//only public and not deleted

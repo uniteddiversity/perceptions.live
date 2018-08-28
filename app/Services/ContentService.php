@@ -223,6 +223,11 @@ class ContentService
                 $this->shearedContentAssociation->create(array('shared_content_id' => $groupShare->id,
                     'table' => 'categories', 'fk_id' => $id, 'slug' => '', 'type' => 'group'));
             }
+
+            foreach($data['associations']['groups'] as $id){
+                $this->shearedContentAssociation->create(array('shared_content_id' => $groupShare->id,
+                    'table' => 'groups', 'fk_id' => $id, 'slug' => '', 'type' => 'group'));
+            }
         }
 
         return $groupShare;

@@ -640,10 +640,57 @@ class AdminController extends Controller
     {
         $id = (isset($id))?UID::translator($id):0;
         $edit_data = $this->contentService->getGroupShareData($id);
+        if(isset($edit_data)){
+            foreach($edit_data as $editd){
+                if(isset($editd['id'])){
+                    $data[$editd['table']][] = $editd['fk_id'];
+                }
+            }
+        }
+
+        $selected_users = array();
+        $selected_videos = array();
+        $selected_groups = array();
+
+        if(isset($data['users'])){
+            $users_list = $this->userRepository->getUsersList(0, array('ids' => $data['users']));
+
+            $i = 0;
+            foreach($users_list as $val){
+                $selected_users[$i]['text'] = '@'.$val['display_name'];
+                $selected_users[$i]['id'] = $val['id'];
+                $i++;
+            }
+        }
+
+        if(isset($data['contents'])){
+            $list = $this->contentService->getSearchableContents(0, array('ids' => $data['contents']));
+
+            $i = 0;
+            foreach($list as $val){
+                $selected_videos[$i]['text'] = $val['title'];
+                $selected_videos[$i]['id'] = $val['id'];
+                $i++;
+            }
+        }
+
+        if(isset($data['groups'])){
+            $list = $this->userRepository->getGroupList(0, array('ids' => $data['groups']));
+
+            $i = 0;
+            foreach($list as $val){
+                $selected_groups[$i]['text'] = $val['name'];
+                $selected_groups[$i]['id'] = $val['id'];
+                $i++;
+            }
+        }
+
+
+//        dd($edit_data);
         $gci_tags = $this->userRepository->getGreaterCommunityIntentionTag();
         $categories = $this->category->get();
         return view('admin.generate-map')
-            ->with(compact('gci_tags','categories', 'edit_data'));
+            ->with(compact('gci_tags','categories', 'edit_data','selected_users','selected_videos','selected_groups'));
     }
 
     public function postMapGenerate(Request $request)
@@ -661,11 +708,12 @@ class AdminController extends Controller
         if ($validator->fails()) {
             return Redirect::back()->withErrors($validator->messages())->withInput();
         }
-
+//dd($r);
         $data['associations']['grater_community_intention_ids'] = isset($r['grater_community_intention_ids'])?$r['grater_community_intention_ids']: array();
         $data['associations']['public_videos'] = isset($r['public_videos'])?$r['public_videos']: array();
         $data['associations']['associated_users'] = isset($r['associated_users'])?$r['associated_users']: array();
         $data['associations']['categories'] = isset($r['categories'])?$r['categories']: array();
+        $data['associations']['groups'] = isset($r['groups'])?$r['groups']: array();
 
         $data['basic'] = array(
             'group' => $r['group'],
