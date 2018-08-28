@@ -2,9 +2,9 @@
 <?php foreach($uploaded_list as $info){?>
 <div class="row" style="margin: 0px;height: auto;">
     <div style="margin:0px;padding: 0px;width: 50%;float: left;">
-        <iframe style="width: 100%;" src="<?php echo str_replace( 'watch?v=', 'embed/',$info['url']) ?>" frameborder="0" allowfullscreen></iframe>
+        <iframe style="width: 100%;height: 200px" src="<?php echo str_replace( 'watch?v=', 'embed/',$info['url']) ?>" frameborder="0" allowfullscreen></iframe>
     </div>
-    <div style="margin:0px;padding: 0px;padding-left: 10px;width: 45%;float: left;">
+    <div style="margin:0px;padding: 0px;padding-left: 10px;width: 48%;float: left;">
         <?php
         $tags = explode(',', $info['tag_colors']);
         foreach($tags as $tag){
@@ -13,7 +13,7 @@
             echo '<span onclick="searchByTag(\''.$tag_id.'\')" style="background-color: '.$tag_name_n_color[0].'" class="dot"></span>';
         } ?>
         <div></div>
-        <h4 style="margin-top: 0px;font-weight: bold;cursor: pointer;" onclick="openVideo('<?php echo $info['id'] ?>')"><?php echo $info['title'] ?></h4>
+        <h5 style="margin-top: 0px;font-weight: bold;cursor: pointer;" onclick="openVideo('<?php echo $info['id'] ?>')"><?php echo $info['title'] ?></h5>
             <div><span style="cursor: pointer;" onclick="openProfile('<?php echo $info['user_id'] ?>')">@<?php echo $info['display_name'] ?></span></div>
         <div><?php echo date('d F Y',strtotime($info['created_at'])) ?>, <?php echo $info['location'] ?></div>
     </div>
