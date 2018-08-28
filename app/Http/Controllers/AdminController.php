@@ -662,14 +662,6 @@ class AdminController extends Controller
             return Redirect::back()->withErrors($validator->messages())->withInput();
         }
 
-
-//        group
-//        domain
-//        grater_community_intention_ids
-//        public_videos
-//        primary_subject_tag
-//        associated_users
-
         $data['associations']['grater_community_intention_ids'] = isset($r['grater_community_intention_ids'])?$r['grater_community_intention_ids']: array();
         $data['associations']['public_videos'] = isset($r['public_videos'])?$r['public_videos']: array();
         $data['associations']['associated_users'] = isset($r['associated_users'])?$r['associated_users']: array();
@@ -691,7 +683,8 @@ class AdminController extends Controller
         }
 
         $sheared_content = $this->contentService->createGroupShareableContents($user_id, $data, $id);
-        return redirect()->back()->with('message', 'Successfully Added!');
+        return Redirect::route('map-sharing.edit', ['_id' => UID($sheared_content->id)])->with('message', 'Successfully Added!');
+//        return redirect()->back()->with('message', 'Successfully Added!');
     }
 
     public static function createToken($prefix='', $length = 20)

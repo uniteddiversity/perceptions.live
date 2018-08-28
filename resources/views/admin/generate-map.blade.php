@@ -118,9 +118,10 @@
                                 <select class="form-control select2-ajax-content" id="public_videos" multiple name="public_videos[]">
                                 </select>
                             </div>
-                            <button type="submit" class="btn btn-primary">Submit</button>
+                            <button type="submit" class="btn btn-primary">Submit & Preview</button>
 
                             <hr/>
+                            <?php if($data['id']){ ?>
                             <div class="form-group">
                                 <label for="public_videos">Shearable Code</label>
                                 <p style="background-color: #cccccc;color: black;">
@@ -133,6 +134,7 @@
                                 <label for="exampleSelect1">Preview Map</label>
                                 <iframe src="<?php echo env('APP_DOMAIN', $_SERVER['SERVER_NAME']) ?>/home/shared/group/<?php echo $data['_token'] ?>" width="100%" height="350"></iframe>
                             </div>
+                            <?php } ?>
                         </form>
                 </div>
             </div>
