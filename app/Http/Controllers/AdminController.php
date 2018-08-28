@@ -630,10 +630,13 @@ class AdminController extends Controller
 
     public function mapGenerate()
     {
+        $selected_users = array();
+        $selected_videos = array();
+        $selected_groups = array();
         $gci_tags = $this->userRepository->getGreaterCommunityIntentionTag();
         $categories = $this->category->get();
         return view('admin.generate-map')
-            ->with(compact('gci_tags','categories'));
+            ->with(compact('gci_tags','categories','selected_users','selected_videos','selected_groups'));
     }
 
     public function editMapGenerate($id)
