@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -58,9 +57,6 @@
 <script src="/assets/js/L.Control.Locate.min.js"></script>
 <script src="/assets/leaflet-groupedlayercontrol/leaflet.groupedlayercontrol.js"></script>
 <script src="/js//dist/js/select2.full.min.js"></script>
-{{--<script src="/assets/js/app.js"></script>--}}
 <script src="/assets/js/app_share.js"></script>
-
-<!-- End custom js for this page-->
 </body>
 </html>
