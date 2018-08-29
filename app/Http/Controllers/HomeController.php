@@ -231,8 +231,9 @@ class HomeController extends Controller
 
     public function sharedGroup($_token)
     {
+        $categories = $this->category->get();
         return view('partials.shared_content')
-            ->with(compact('_token'));
+            ->with(compact('_token', 'categories'));
     }
 
     public function shearedContentJson($_token)
