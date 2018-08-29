@@ -228,6 +228,11 @@ class ContentService
                 $this->shearedContentAssociation->create(array('shared_content_id' => $groupShare->id,
                     'table' => 'groups', 'fk_id' => $id, 'slug' => '', 'type' => 'group'));
             }
+
+            foreach($data['associations']['filter_list'] as $id){
+                $this->shearedContentAssociation->create(array('shared_content_id' => $groupShare->id,
+                    'table' => 'filter_list', 'fk_id' => $id, 'slug' => '', 'type' => 'group'));
+            }
         }
 
         return $groupShare;
@@ -302,6 +307,15 @@ class ContentService
         return $locations;
     }
 
+    public function getSharedMapFiltersListByToken($_token)
+    {
+        $filters = $this->shearedContent
+            ->leftJoin('shared_contents_associations as association', 'association.shared_content_id', 'shared_contents.id')
+            ->where('table', 'filter_list')->select('association.*')->get()->toArray();
+
+        return $filters;
+    }
+
     public function getGroupShareData($id)
     {
         $data = $this->shearedContent->with(['user'])
@@ -311,6 +325,21 @@ class ContentService
             ->select('shared_contents.*','association.table','association.fk_id','association.slug','association.type')
             ->where('shared_contents.id', $id)->get();
 
+        return $data;
+    }
+
+    public function getGroupSearchFilterList()
+    {
+        $data[0]['id'] = '1';
+        $data[0]['filter'] = 'Category';
+        $data[1]['id'] = '2';
+        $data[1]['filter'] = 'Greater Community Intention';
+        $data[2]['id'] = '3';
+        $data[2]['filter'] = 'Primary Subject Tag';
+        $data[3]['id'] = '4';
+        $data[3]['filter'] = 'Associated Users';
+        $data[4]['id'] = '5';
+        $data[4]['filter'] = 'Service/Opportunity';
         return $data;
     }
 }

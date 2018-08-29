@@ -14,6 +14,7 @@
     $data['domain'] = isset($edit_data[0]['allowed_domain'])?$edit_data[0]['allowed_domain']:'';
     $data['primary_subject_tag'] = isset($edit_data[0]['primary_subject_tag'])?$edit_data[0]['primary_subject_tag']:'';
     $data['_token'] = isset($edit_data[0]['public_token'])?$edit_data[0]['public_token']:'';
+    $data['filter_list'] = isset($edit_data['filter_list'])? $edit_data['filter_list']:array();
 //dd($data['_token']);
     $data["sorting_tags"] = array();
     $data["contents"] = array();
@@ -28,7 +29,7 @@
         }
     }
 
-//    dd($data['sorting_tags']);
+//    dd($data);
     ?>
     <div class="col-lg-12 grid-margin stretch-card">
         <div class="card">
@@ -65,7 +66,20 @@
                             </div>
 
                             <div class="form-group">
-                                <label for="exampleSelect1">Filters</label>
+                                <label for="filter_list">Filters</label>
+                                <select class="form-control multi-select2-max3" id="filter_list" multiple name="filter_list[]">
+                                    @foreach($filter_list as $m)
+                                        <option value="{{$m['id']}}" <?php if(in_array($m['id'], old('filter_list',$data['filter_list']))){ echo 'selected'; } ?> >{{$m['filter']}}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+
+                            <hr/>
+                            <div class="form-group">
+                                <label for="exampleSelect1">Content (Select the content you would like to include in your map)</label>
+                            </div>
+                            <div class="form-group">
+                                <label for="grater_community_intention_id">Great Community Intention</label>
                                 <select class="form-control multi-select2-max3" id="grater_community_intention_id" multiple name="grater_community_intention_ids[]">
                                     @foreach($gci_tags as $m)
                                         <option value="{{$m['id']}}" <?php if(in_array($m['id'], old('grater_community_intention_ids',$data['sorting_tags']))){ echo 'selected'; } ?> >{{$m['tag']}}</option>
@@ -81,10 +95,7 @@
                                 </select>
                             </div>
 
-                            <hr/>
-                            <div class="form-group">
-                                <label for="exampleSelect1">Content (Select the content you would like to include in your map)</label>
-                            </div>
+
 
                             <div class="form-group">
                                 <label for="exampleSelect1">Group</label>

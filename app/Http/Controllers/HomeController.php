@@ -232,8 +232,30 @@ class HomeController extends Controller
     public function sharedGroup($_token)
     {
         $categories = $this->category->get();
+        $filters_list = $this->contentService->getSharedMapFiltersListByToken($_token);
+
+        foreach($filters_list as $filter){
+            switch($filter['id']){
+                case 1:
+                    //Category
+                    break;
+                case 2:
+                    //Greater Community Intention
+                    break;
+                case 3:
+                    //Primary Subject Tag
+                    break;
+                case 4:
+                    //Associated Users
+                    break;
+                case 5:
+                    //Service/Opportunity
+                    break;
+            }
+        }
+
         return view('partials.shared_content')
-            ->with(compact('_token', 'categories'));
+            ->with(compact('_token', 'categories', 'filters_list'));
     }
 
     public function shearedContentJson($_token)
