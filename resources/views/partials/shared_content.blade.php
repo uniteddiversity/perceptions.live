@@ -6,7 +6,7 @@
     <div style="float: left;max-width: 320px;">
         @include('partials.shared_left-side-bar')
     </div>
-    <div id="map_position" style="height: 350px;float: left;width: auto;min-width: 625px; position: relative;">
+    <div id="map_position" style="height: 350px;float: left;width: auto;min-width: 510px; position: relative;">
         <div class="col-md-9 no-float col-sm-8half" id="map" style="width: 100%;height: 100%;">Loading..</div>
         <div class="form-groupx" style="position: absolute;z-index: 20000; height: 38px;padding:2px;background-color: white;top: 308px;left: 10px;width: 460px">
             <div style="margin:0px;padding: 0px;width: 155px;float: left;">
