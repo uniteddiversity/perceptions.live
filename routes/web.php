@@ -36,6 +36,7 @@ Route::post('/', function(){
     Route::get('/home/ajax/video-search-list', '\App\Controllers\HomeController@searchVideosList');
     Route::get('/home/ajax/user-search-list', '\App\Controllers\HomeController@searchUsersList');
     Route::get('/home/ajax/group-search-list', '\App\Controllers\HomeController@searchGroupList');
+    Route::get('/home/ajax/primary_subject_tag', '\App\Controllers\HomeController@searchPrimarySubjectTagList');
 
     Route::get('/home/shared/group/{_id}', '\App\Controllers\HomeController@sharedGroup');
     Route::get('/ajax/home/shared/group/{_id}', '\App\Controllers\HomeController@shearedContentJson');

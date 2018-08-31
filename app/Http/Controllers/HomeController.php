@@ -192,6 +192,23 @@ class HomeController extends Controller
         return response()->json(array('total_count' => count($r), 'incomplete_results' => false, 'results' => $r), 200);
     }
 
+    public function searchPrimarySubjectTagList(Request $request)
+    {
+        $r = $request->all();
+        $user_id = (!isset(Auth::user()->id))? 0 : Auth::user()->id;
+        $filter['keyword'] = isset($r['q'])?$r['q']: '';
+        $list = $this->contentService->searchPrimarySubjectTag($user_id, $filter);
+
+        $r = array(); $i = 0;
+        foreach($list as $val){
+            $r[$i]['text'] = $val['tag'];
+            $r[$i]['id'] = $val['tag'];
+            $i++;
+        }
+
+        return response()->json(array('total_count' => count($r), 'incomplete_results' => false, 'results' => $r), 200);
+    }
+
     public function searchVideos(Request $request)
     {
         $r = $request->all();
@@ -231,36 +248,72 @@ class HomeController extends Controller
 
     public function sharedGroup($_token)
     {
-        $categories = $this->category->get();
         $filters_list = $this->contentService->getSharedMapFiltersListByToken($_token);
+        $basic_info = $this->contentService->getSharedMapBasicInfo($_token);
 
+        $search_elements = '';
         foreach($filters_list as $filter){
-            switch($filter['id']){
+            switch($filter['fk_id']){
                 case 1:
                     //Category
+                    $type = 'category';
+                    $categories = $this->category->get();
+                    $search_elements .= view('partials.search-element')
+                        ->with(compact('type','categories'));
                     break;
                 case 2:
                     //Greater Community Intention
+                    $type = 'gci_tags';
+                    $gci_tags = $this->userRepository->getGreaterCommunityIntentionTag();
+                    $search_elements .= view('partials.search-element')
+                        ->with(compact('type','gci_tags'));
                     break;
                 case 3:
                     //Primary Subject Tag
+                    $type = 'primary_sub_tag';
+                    $search_elements .= view('partials.search-element')
+                        ->with(compact('type'));
                     break;
                 case 4:
                     //Associated Users
+                    $type = 'users';
+                    $search_elements .= view('partials.search-element')
+                        ->with(compact('type'));
                     break;
                 case 5:
                     //Service/Opportunity
+//                    $s_o_p = $this->userRepository->getSortingTags(0, true);
+                    $type = 's_o_p';
+                    $s_o_p[0]['id'] = '2';
+                    $s_o_p[0]['tag'] = 'Service';
+                    $s_o_p[1]['id'] = '1';
+                    $s_o_p[1]['tag'] = 'Opportunity';
+                    $search_elements .= view('partials.search-element')
+                        ->with(compact('type','s_o_p'));
                     break;
             }
         }
 
+        if(!empty($search_elements)){
+            $type = 'search_buttons';
+            $search_elements .= view('partials.search-element')
+                ->with(compact('type'));
+        }
+
         return view('partials.shared_content')
-            ->with(compact('_token', 'categories', 'filters_list'));
+            ->with(compact('_token', 'search_elements', 'filters_list','basic_info'));
     }
 
-    public function shearedContentJson($_token)
+    public function shearedContentJson($_token,Request $request)
     {
-        $uploaded_list = $this->contentService->generateMap($_token);
+        $filter = array();
+        $filter['category_id'] = isset($request['categories'])? $request['categories'] : '';
+        $filter['primary_sub_tag'] = isset($request['primary_sub_tag'])? $request['primary_sub_tag'] : '';
+        $filter['service_or_opportunity'] = isset($request['s_o_p'])? $request['s_o_p'] : '';//same table with different relationship name
+        $filter['gcs'] = isset($request['gci'])? $request['gci'] : '';
+        $filter['associate_user_id'] = isset($request['user_id'])? $request['user_id'] : '';
+        $uploaded_list = $this->contentService->generateMap($_token, 0,$filter);
+
         $json_output = $this->getSearchListInJson($uploaded_list);
         $content = view('partials.shared_video-search-result')
             ->with(compact('uploaded_list'));

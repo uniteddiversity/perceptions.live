@@ -728,6 +728,7 @@ class AdminController extends Controller
             'allowed_ip' => gethostbyname($r['domain']),
             'primary_subject_tag' => $r['primary_subject_tag'],
             'created_by' => $user_id,
+            'default_zoom_level' => $r['default_zoom_level'],
             'public_token' => $this->createToken(date('Y-m-d H:i:s')),
         );
 

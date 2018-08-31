@@ -13,6 +13,7 @@
 //    $data['filters'] = isset($video_share['filters'])?$edit_data['filters']:'';
     $data['domain'] = isset($edit_data[0]['allowed_domain'])?$edit_data[0]['allowed_domain']:'';
     $data['primary_subject_tag'] = isset($edit_data[0]['primary_subject_tag'])?$edit_data[0]['primary_subject_tag']:'';
+    $data['default_zoom_level'] = isset($edit_data[0]['default_zoom_level'])?$edit_data[0]['default_zoom_level']:'';
     $data['_token'] = isset($edit_data[0]['public_token'])?$edit_data[0]['public_token']:'';
     $data['filter_list'] = isset($edit_data['filter_list'])? $edit_data['filter_list']:array();
 //dd($data['_token']);
@@ -63,6 +64,10 @@
                             <div class="form-group">
                                 <label for="domain">Domain</label>
                                 <input type="text" class="form-control" id="domain" aria-describedby="nameHelp" name="domain" placeholder="Domain" value="{{ old('domain',$data['domain']) }}">
+                            </div>
+                            <div class="form-group">
+                                <label for="default_zoom_level">Default Zoom Level</label>
+                                <input type="text" class="form-control" id="default_zoom_level" aria-describedby="nameHelp" name="default_zoom_level" placeholder="Default Zoom Level" value="{{ old('default_zoom_level',$data['default_zoom_level']) }}">
                             </div>
 
                             <div class="form-group">

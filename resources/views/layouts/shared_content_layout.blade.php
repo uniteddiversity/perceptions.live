@@ -46,7 +46,23 @@
     #featureModal .modal-dialog{
         width: 950px;
     }
+    .search-form-element{
+        padding-right: 0px;
+        padding-left: 10px;
+        width: 120px;
+        float: left;
+    }
+    .search-form-element-buttons{
+        padding-right: 0px;
+        padding-left: 10px;
+        /*width: 150px;*/
+        float: left;
+    }
+    .search-form-element .select2-selection--single{
+        height: 34px;
+    }
 </style>
+
 <script src="/assets/js/jquery-2.1.4.min.js"></script>
 <script src="/assets/js/bootstrap.min.js"></script>
 <script src="/assets/js/typeahead.bundle.min.js"></script>
@@ -58,5 +74,22 @@
 <script src="/assets/leaflet-groupedlayercontrol/leaflet.groupedlayercontrol.js"></script>
 <script src="/js//dist/js/select2.full.min.js"></script>
 <script src="/assets/js/app_share.js"></script>
+<script>
+    $(document).ready(function(){
+        $('.select2-ajax-primary_sub_tag').select2({
+            ajax: {
+                url: '/home/ajax/primary_subject_tag',
+                dataType: 'json'
+            }
+        });
+
+        $('.select2-ajax-users').select2({
+            ajax: {
+                url: '/home/ajax/user-search-list',
+                dataType: 'json'
+            }
+        });
+    })
+</script>
 </body>
 </html>

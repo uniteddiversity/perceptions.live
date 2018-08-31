@@ -151,6 +151,7 @@ class ContentService
                 $q->on('sorting_tags.id', 'tag_content_associations.content_tag_id');
             })
             ->leftJoin('group_content_associations', 'group_content_associations.content_id','contents.id')
+            ->leftJoin('user_content_associations', 'user_content_associations.content_id','contents.id')
             ->where('contents.status', '=', 1);
 
         if(isset($filter['keyword']) && !empty($filter['keyword'])){
@@ -165,8 +166,21 @@ class ContentService
             $contents = $contents->where('search_tag.content_tag_id', $filter['gcs']);
         }
 
+        //service_or_opportunity
+        if(isset($filter['service_or_opportunity']) && !empty($filter['service_or_opportunity'])){
+            $contents = $contents->where('search_tag.content_tag_id', $filter['service_or_opportunity']);
+        }
+
         if(isset($filter['category_id']) && !empty($filter['category_id'])){
             $contents = $contents->where('category_id', $filter['category_id']);
+        }
+
+        if(isset($filter['associate_user_id']) && !empty($filter['associate_user_id'])){
+            $contents = $contents->where('user_content_associations.user_id', $filter['associate_user_id']);
+        }
+
+        if(isset($filter['primary_sub_tag']) && !empty($filter['primary_sub_tag'])){
+            $contents = $contents->where('contents.primary_subject_tag', $filter['primary_sub_tag']);
         }
 
         if(isset($filter['only_my_group'])){
@@ -249,7 +263,7 @@ class ContentService
     }
 
 
-    public function generateMap($token, $user_id = 0)
+    public function generateMap($token, $user_id = 0, $filter)
     {
         $map = $this->shearedContent->with(['user'])
             ->leftJoin('shared_contents_associations as association', 'association.shared_content_id', 'shared_contents.id')
@@ -279,8 +293,9 @@ class ContentService
                 DB::Raw("GROUP_CONCAT(DISTINCT users_contents.content_id SEPARATOR ',') as user_contents_ids"),
                 DB::Raw("GROUP_CONCAT(DISTINCT contents_d.fk_id SEPARATOR ',') as contents_ids")
                 //,DB::Raw("concat(contents_category_ids,',',user_contents_ids,',',contents_ids) as all_videos")
-                )
-            ->where('shared_contents.public_token', $token)->groupBy('shared_contents.id')->get()->first();
+                );
+
+        $map = $map->where('shared_contents.public_token', $token)->groupBy('shared_contents.id')->get()->first();
 
         $ids = array();
 
@@ -302,8 +317,9 @@ class ContentService
             }
         }
 
+        $filter = array_merge(array('ids' => $ids), $filter);
         //get contents from id
-        $locations = $this->getSearchableContents($user_id, array('ids' => $ids), 300);
+        $locations = $this->getSearchableContents($user_id, $filter, 300);
         return $locations;
     }
 
@@ -311,7 +327,17 @@ class ContentService
     {
         $filters = $this->shearedContent
             ->leftJoin('shared_contents_associations as association', 'association.shared_content_id', 'shared_contents.id')
+            ->where('shared_contents.public_token', $_token)
             ->where('table', 'filter_list')->select('association.*')->get()->toArray();
+
+        return $filters;
+    }
+
+    public function getSharedMapBasicInfo($_token)
+    {
+        $filters = $this->shearedContent
+            ->where('shared_contents.public_token', $_token)
+            ->select('shared_contents.*')->get()->first()->toArray();
 
         return $filters;
     }
@@ -341,5 +367,17 @@ class ContentService
         $data[4]['id'] = '5';
         $data[4]['filter'] = 'Service/Opportunity';
         return $data;
+    }
+
+    public function searchPrimarySubjectTag($user_id, $filter)
+    {
+        $subject_tags = $this->content;
+
+        if(isset($filter['keyword']))
+            $subject_tags = $subject_tags->where('primary_subject_tag','LIKE', '%'.$filter['keyword'].'%');
+
+        $subject_tags = $subject_tags->select('primary_subject_tag as tag')->groupBy('primary_subject_tag')->limit(10)->get();
+
+        return $subject_tags;
     }
 }

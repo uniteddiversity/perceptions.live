@@ -1,7 +1,10 @@
+var default_zoom = $('#default_zoom').val();
+
+console.log('default zoom is '+parseFloat(default_zoom));
 var map = L.map( 'map', {
     center: [10.0, 5.0],
-    minZoom: 3,
-    zoom: 2
+    minZoom: 2,
+    zoom: parseFloat(default_zoom)
 });
 
 L.tileLayer( 'https://stamen-tiles-{s}.a.ssl.fastly.net/watercolor/{z}/{x}/{y}.{ext}', {
@@ -19,8 +22,8 @@ var m;
 function updateMarkers(markers){
     map.removeLayer(markerClusters);
 
-    var markerClusters2 = L.markerClusterGroup();
-    map.addLayer( markerClusters2 );
+    markerClusters = L.markerClusterGroup();
+    map.addLayer( markerClusters );
 
     var myIcon = L.icon({
         iconUrl: myURL + '/assets/img/globe_new.png',
@@ -36,11 +39,13 @@ function updateMarkers(markers){
         var popup = 'abc'+markers[i].name;
         m = L.marker( [markers[i].lat, markers[i].lng], {icon: myIcon, id: markers[i].id} );
         m.on('click', onMarkerClick);
-        markerClusters2.addLayer( m );
+        markerClusters.addLayer( m );
         all_b.push(m);
         console.log(markers[i]);
     }
 
+
+console.log(all_b);
     var group = new L.featureGroup(all_b);
     map.fitBounds(group.getBounds());
     $("#loading").hide();
@@ -116,6 +121,75 @@ function searchVideo(){
         $('#video_search_res').html(decode(data.content));
 
     });
+}
+
+function shareSearchVideo(){
+    var $categories = $('#categories').val();
+    var $primary_sub_tag = $('#primary_sub_tag').val();
+    var $s_o_p = $('#s_o_p').val();
+    var $gci = $('#gci').val();
+    var $user_id = $('#associated_users').val();
+
+    if($categories == 'undefined' || $categories == null){
+        $categories = '';
+    }
+
+    if($primary_sub_tag == 'undefined' || $primary_sub_tag == null){
+        $primary_sub_tag = '';
+    }
+
+    if($s_o_p == 'undefined' || $s_o_p == null){
+        $s_o_p = '';
+    }
+
+    if($gci == 'undefined' || $gci == null){
+        $gci = '';
+    }
+
+    if($user_id == 'undefined' || $user_id == null){
+        $user_id = '';
+    }
+
+    $('#video_search_res').html('<i class="fa fa-spinner"></i> loading.....');
+    $.get('/ajax/home/shared/group/'+$('#_token').val()+'?categories='+$categories+'&primary_sub_tag='+$primary_sub_tag+'&s_o_p='+$s_o_p+'&gci='+$gci+'&user_id='+$user_id, function( data ) {
+        console.log('new content');
+        console.log(data.json.original);
+        if(data.content == '')
+            $('#video_search_res').html('No result!');
+
+        updateMarkers(data.json.original);
+        $('#video_search_res').html(decode(data.content));
+
+    });
+}
+
+$('#categories').change(function(){
+    shareSearchVideo();
+});
+
+$('#primary_sub_tag').change(function(){
+    shareSearchVideo();
+});
+
+$('#s_o_p').change(function(){
+    shareSearchVideo();
+});
+
+$('#gci').change(function(){
+    shareSearchVideo();
+});
+
+$('#associated_users').change(function(){
+    shareSearchVideo();
+});
+
+function shareResetSearch(){
+    $('#categories').val('');
+    $('#primary_sub_tag').val('');
+    $('#s_o_p').val('');
+    $('#gci').val('');
+    $('#associated_users').val('');
+    shareSearchVideo();
 }
 
 function searchByTag(id){
