@@ -52,10 +52,10 @@ class HomeController extends Controller
         $filter = array();
         $uploaded_list = $this->userRepository->getPublicContents($user_id, $filter);
         $user_acting_role = $this->userRepository->getUserActingRoles();
-
+        $gci_tags = $this->userRepository->getGreaterCommunityIntentionTag();
         $categories = $this->category->get();
         return view('user.home')
-            ->with(compact('uploaded_list','user_acting_role','categories'));
+            ->with(compact('uploaded_list','user_acting_role','categories','gci_tags'));
     }
 
     public function ajaxVideos($id = 0)

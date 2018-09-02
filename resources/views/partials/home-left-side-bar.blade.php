@@ -3,6 +3,15 @@
         <h2>Feed {{env('APP_NAME', '')}}</h2>
 
         <div class="form-group">
+            <div class="col-md-5">SORT FEED</div>
+            <div class="col-md-7">
+                <?php
+                foreach($gci_tags as $tag){
+                    echo '<span onclick="searchByTag(\''.$tag['id'].'\')" style="background-color: '.$tag['tag_color'].'" class="dot"></span>';
+                } ?>
+            </div>
+        </div>
+        <div class="form-group">
             <div class="col-md-4" style="margin:0px;padding: 0px;">
                 <input type="text" class="form-control" aria-describedby="nameHelp" name="search_text" id="search_text" placeholder="Search">
             </div>
