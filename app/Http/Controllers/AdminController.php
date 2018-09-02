@@ -730,6 +730,9 @@ class AdminController extends Controller
             'primary_subject_tag' => $r['primary_subject_tag'],
             'created_by' => $user_id,
             'default_zoom_level' => $r['default_zoom_level'],
+            'lat' => $r['lat'],
+            'long' => $r['long'],
+            'default_location' => $r['default_location'],
             'public_token' => $this->createToken(date('Y-m-d H:i:s')),
         );
 

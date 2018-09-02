@@ -62,3 +62,18 @@ function addr_search() {
         return true;
     });
 }
+
+function addr_search_new() {
+    var inp = document.getElementById("leaflet_search_addr");
+    $.getJSON('https://nominatim.openstreetmap.org/search?format=json&limit=5&q=' + inp.value, function(data) {
+        var items = [];
+
+        $.each(data, function(key, val) {
+            bb = val.boundingbox;
+            console.log(bb[0]+'     '+bb[2]);
+            $('#lat_val').val(bb[0]);
+            $('#long_val').val(bb[2]);
+        });
+        return true;
+    });
+}

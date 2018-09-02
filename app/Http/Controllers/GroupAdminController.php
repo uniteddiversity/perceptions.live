@@ -256,7 +256,7 @@ class GroupAdminController extends Controller
         $user_id = (!isset(Auth::user()->id))? 0 : Auth::user()->id;
         $user_list = $this->userRepository->getUsers(array(),$user_id);
         $status = $this->userRepository->getStatus();
-        return view('admin.group-add')
+        return view('group-admin.group-add')
             ->with(compact('categories','user_list','status'));
     }
 
@@ -293,7 +293,7 @@ class GroupAdminController extends Controller
         }
 
         $r = $request->toArray();
-
+        $user_id = (!isset(Auth::user()->id))? 0 : Auth::user()->id;
         $new_group = $this->group->updateOrCreate(
             [
                 'id'   => (isset($r['id']))?UID::translator($r['id']):0,
@@ -348,6 +348,8 @@ class GroupAdminController extends Controller
             $this->userRepository->uploadAttachment($r['group_avatar'],Auth::user()->id, $new_group->id,
                 'group-avatar', 'groups',1);
         }
+
+        $this->userRepository->addUserToGroup($user_id, $new_group->id);//add himself to the group
 
         return redirect()->back()->with('message', 'Successfully Added!');
     }

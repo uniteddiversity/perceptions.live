@@ -13,7 +13,7 @@ class ShearedContent extends Model
     /**
      * @var array
      */
-    protected $fillable = ['id', 'group', 'allowed_domain', 'allowed_ip', 'created_by', 'primary_subject_tag','public_token','default_zoom_level'];
+    protected $fillable = ['id', 'group', 'allowed_domain', 'allowed_ip', 'created_by', 'primary_subject_tag','public_token','default_zoom_level','lat','long','default_location'];
 
     public function user()
     {

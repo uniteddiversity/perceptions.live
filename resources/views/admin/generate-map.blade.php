@@ -15,6 +15,9 @@
     $data['primary_subject_tag'] = isset($edit_data[0]['primary_subject_tag'])?$edit_data[0]['primary_subject_tag']:'';
     $data['default_zoom_level'] = isset($edit_data[0]['default_zoom_level'])?$edit_data[0]['default_zoom_level']:'';
     $data['_token'] = isset($edit_data[0]['public_token'])?$edit_data[0]['public_token']:'';
+    $data['lat'] = isset($edit_data[0]['lat'])?$edit_data[0]['lat']:'';
+    $data['long'] = isset($edit_data[0]['long'])?$edit_data[0]['long']:'';
+    $data['default_location'] = isset($edit_data[0]['default_location'])?$edit_data[0]['default_location']:'';
     $data['filter_list'] = isset($edit_data['filter_list'])? $edit_data['filter_list']:array();
 //dd($data['_token']);
     $data["sorting_tags"] = array();
@@ -58,12 +61,19 @@
                                 <input type="hidden" name="id" id="csrf-token" value="<?php echo uid($data['id']) ?>" />
                             <?php } ?>
                             <div class="form-group">
-                                <label for="group">Group</label>
+                                <label for="group">Title</label>
                                 <input type="text" class="form-control" aria-describedby="nameHelp" name="group" placeholder="Group" value="{{ old('group',$data['group']) }}">
                             </div>
                             <div class="form-group">
                                 <label for="domain">Domain</label>
                                 <input type="text" class="form-control" id="domain" aria-describedby="nameHelp" name="domain" placeholder="Domain" value="{{ old('domain',$data['domain']) }}">
+                            </div>
+                            <div class="form-group">
+                                <label for="leaflet_search_addr">Default Location</label>
+                                <input onkeyup="addr_search_new()" type="text" class="form-control" id="leaflet_search_addr" aria-describedby="nameHelp" name="default_location" placeholder="Default Location" value="{{ old('default_location',$data['default_location']) }}">
+                                <input type="hidden" class="form-control" aria-describedby="nameHelp" id="lat_val" name="lat" placeholder="Lat" value="{{ old('lat',$data['lat']) }}">
+                                <input type="hidden" class="form-control" aria-describedby="nameHelp" id="long_val" name="long" placeholder="Long" value="{{ old('long',$data['long']) }}">
+
                             </div>
                             <div class="form-group">
                                 <label for="default_zoom_level">Default Zoom Level</label>
@@ -83,23 +93,26 @@
                             <div class="form-group">
                                 <label for="exampleSelect1">Content (Select the content you would like to include in your map)</label>
                             </div>
-                            <div class="form-group">
-                                <label for="grater_community_intention_id">Great Community Intention</label>
-                                <select class="form-control multi-select2-max3" id="grater_community_intention_id" multiple name="grater_community_intention_ids[]">
-                                    @foreach($gci_tags as $m)
-                                        <option value="{{$m['id']}}" <?php if(in_array($m['id'], old('grater_community_intention_ids',$data['sorting_tags']))){ echo 'selected'; } ?> >{{$m['tag']}}</option>
-                                    @endforeach
-                                </select>
-                            </div>
-                            <div class="form-group">
-                                <label for="categories">Categories</label>
-                                <select class="form-control multi-select2-max3" id="categories" multiple name="categories[]">
-                                    @foreach($categories as $m)
-                                        <option value="{{$m['id']}}" <?php if(in_array($m['id'], old('categories',$data['categories']))){ echo 'selected'; } ?> >{{$m['name']}}</option>
-                                    @endforeach
-                                </select>
-                            </div>
 
+                            <?php /*
+                            {{--<div class="form-group">--}}
+                                {{--<label for="grater_community_intention_id">Great Community Intention</label>--}}
+                                {{--<select class="form-control multi-select2-max3" id="grater_community_intention_id" multiple name="grater_community_intention_ids[]">--}}
+                                    {{--@foreach($gci_tags as $m)--}}
+                                        {{--<option value="{{$m['id']}}" <?php if(in_array($m['id'], old('grater_community_intention_ids',$data['sorting_tags']))){ echo 'selected'; } ?> >{{$m['tag']}}</option>--}}
+                                    {{--@endforeach--}}
+                                {{--</select>--}}
+                            {{--</div>--}}
+                            {{--<div class="form-group">--}}
+                                {{--<label for="categories">Categories</label>--}}
+                                {{--<select class="form-control multi-select2-max3" id="categories" multiple name="categories[]">--}}
+                                    {{--@foreach($categories as $m)--}}
+                                        {{--<option value="{{$m['id']}}" <?php if(in_array($m['id'], old('categories',$data['categories']))){ echo 'selected'; } ?> >{{$m['name']}}</option>--}}
+                                    {{--@endforeach--}}
+                                {{--</select>--}}
+                            {{--</div>--}}
+
+                            */ ?>
 
 
                             <div class="form-group">
@@ -128,25 +141,27 @@
                             </div>
 
 
-                            <hr/>
-                            <div class="form-group">
-                                <label for="exampleSelect1">Additional Videos</label>
-                            </div>
-                            <div class="form-group">
-                                <label for="my_group_videos">Your Group's Videos</label>
-                                <select class="form-control select2-ajax-my-groups-content" id="my_group_videos" multiple name="my_group_videos[]">
+    <?php /*
+                            {{--<hr/>--}}
+                            {{--<div class="form-group">--}}
+                                {{--<label for="exampleSelect1">Additional Videos</label>--}}
+                            {{--</div>--}}
+                            {{--<div class="form-group">--}}
+                                {{--<label for="my_group_videos">Your Group's Videos</label>--}}
+                                {{--<select class="form-control select2-ajax-my-groups-content" id="my_group_videos" multiple name="my_group_videos[]">--}}
 
-                                </select>
-                            </div>
-                            <div class="form-group">
-                                <label for="public_videos">All Public Videos</label>
-                                <select class="form-control select2-ajax-content" id="public_videos" multiple name="public_videos[]">
-                                    <?php foreach($selected_videos as $int_data){
-                                        echo '<option value="'.$int_data['id'].'" selected >'.$int_data['text'].'</option>';
-                                    } ?>
-                                </select>
-                            </div>
-                            <button type="submit" class="btn btn-primary">Submit & Preview</button>
+                                {{--</select>--}}
+                            {{--</div>--}}
+                            {{--<div class="form-group">--}}
+                                {{--<label for="public_videos">All Public Videos</label>--}}
+                                {{--<select class="form-control select2-ajax-content" id="public_videos" multiple name="public_videos[]">--}}
+                                    {{--<?php foreach($selected_videos as $int_data){--}}
+                                        {{--echo '<option value="'.$int_data['id'].'" selected >'.$int_data['text'].'</option>';--}}
+                                    {{--} ?>--}}
+                                {{--</select>--}}
+                            {{--</div>--}}
+ */ ?>
+                            <button type="submit" class="btn btn-primary" >Submit & Preview</button>
 
                             <hr/>
                             <?php if($data['id']){ ?>

@@ -66,9 +66,9 @@
                     <li class="nav-item">
                         <a class="nav-link" href="/user/group-admin/user-add"> Create User </a>
                     </li>
-                    {{--<li class="nav-item">--}}
-                        {{--<a class="nav-link" href="/user/group-admin/user-group-add"> Create Group </a>--}}
-                    {{--</li>--}}
+                    <li class="nav-item">
+                        <a class="nav-link" href="/user/group-admin/user-group-add"> Create Group </a>
+                    </li>
                     <li class="nav-item">
                         <a class="nav-link" href="/user/group-admin/user-to-group-add"> Assign User to Group </a>
                     </li>
