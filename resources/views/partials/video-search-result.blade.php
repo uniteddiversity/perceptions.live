@@ -2,7 +2,7 @@
 <?php foreach($uploaded_list as $info){?>
 <div class="row" style="display: block;margin: 0px;height: auto;">
     <div class="col-md-6" style="margin:0px;padding: 0px;">
-        <iframe style="width: 100%;" src="<?php echo str_replace( 'watch?v=', 'embed/',$info['url']) ?>" frameborder="0" allowfullscreen></iframe>
+        <iframe frameborder="0" showinfo="0" controls="0" autohide="1" style="width: 100%;" src="<?php echo str_replace( 'watch?v=', 'embed/',$info['url']) ?>" frameborder="0" allowfullscreen></iframe>
     </div>
     <div class="col-md-6" style="margin:0px;padding: 0px;padding-left: 10px;">
         <?php
