@@ -94,8 +94,9 @@ class HomeController extends Controller
         $user_associate_videos = $this->userRepository->getAssociatedVideosForUser($user_id);
 //        dd($user_associate_videos);
         $info = $this->userRepository->getUser($user_id);
+        $gci_tags = $this->userRepository->getGreaterCommunityIntentionTag();
         return view('partials.user-info-popup')
-            ->with(compact('info','user_associate_videos'));
+            ->with(compact('info','user_associate_videos','gci_tags'));
     }
 
     public function location($id)

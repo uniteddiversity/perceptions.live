@@ -11,19 +11,35 @@
                     <div class="col-md-7">
                         <div>
                          <h3><?php echo '@'.$info['display_name'] ?></h3>
-                         <h3><?php echo $info['description'] ?></h3>
+                         <p><?php echo $info['description'] ?></p>
                         </div>
 
                     </div>
                     <div class="col-md-3">
-                        <div><strong>Date Joined: </strong><?php date('d-m-Y', strtotime($info['created_at'])) ?></div>
+                        <div><strong>User since: </strong><?php echo date('d-m-Y', strtotime($info['created_at'])) ?></div>
                         <div><strong>Collaboration Roles: </strong><?php
                             if(isset($info->actingRoles)){
+                                $datas = array();
                                 foreach($info->actingRoles as $role){
                                     if(isset($role->tag)){
-                                        echo $role->tag->name.',<br/>';
+                                        $datas[] = $role->tag->name;
                                     }
                                 }
+                                echo implode(', ', $datas);
+                            } ?></div>
+                        <div><strong>Primary Intentions: </strong><?php
+                            if(isset($info['gci'])){
+                                $datas = array();$tag_in = array();
+                                foreach($info['gci'] as $tag){
+                                    $tag_in[] = $tag['user_tag_id'];
+                                }
+
+                                foreach($gci_tags as $tag){
+                                    if(in_array($tag['id'], $tag_in)){
+                                        echo '<span style="background-color: '.$tag['tag_color'].'" class="dot"></span>';
+                                    }
+                                }
+
                             } ?></div>
                     </div>
                 </div>
@@ -40,11 +56,13 @@
                         <h4>Associated Users/Groups</h4>
                         <?php
                         if(isset($info->groups)){
+                            $datas = array();
                             foreach($info->groups as $group){
                                 if(isset($group->group)){
-                                    echo $group->group->name.',<br/>';
+                                    $datas[] = $group->group->name;
                                 }
                             }
+                            echo implode(', ', $datas);
                         } ?>
 
                     </div>
@@ -55,3 +73,17 @@
         </div>
     </div>
 </div>
+<style>
+    .dot {
+        height: 10px;
+        width: 10px;
+        border-radius: 50%;
+        display: inline-block;
+        margin: 2px;
+        cursor: pointer;
+    }
+
+    .inactive_link{
+        cursor: pointer;
+    }
+</style>

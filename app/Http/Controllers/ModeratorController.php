@@ -65,8 +65,9 @@ class ModeratorController extends Controller
     {
         $user_acting_role = $this->userRepository->getUserActingRoles();
         $categories = $this->category->get();
+        $gci_tags = $this->userRepository->getGreaterCommunityIntentionTag();
         return view('user.home')
-            ->with(compact('users_data','user_acting_role','categories'));
+            ->with(compact('users_data','user_acting_role','categories','gci_tags'));
     }
 
     public function userList()

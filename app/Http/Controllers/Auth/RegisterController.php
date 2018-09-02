@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Auth;
 use App\User;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use User\Services\UserRepository;
@@ -90,6 +91,9 @@ class RegisterController extends Controller
                 }
             }
         }
+
+//        $post = array('password' => $pass_for_auth, 'email' => ($new_user->email);
+        Auth::loginUsingId($new_user->id);
 
         return $new_user;
     }

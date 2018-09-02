@@ -65,9 +65,10 @@ class AdminController extends Controller
     public function profile()
     {
         $user_acting_role = $this->userRepository->getUserActingRoles();
+        $gci_tags = $this->userRepository->getGreaterCommunityIntentionTag();
         $categories = $this->category->get();
         return view('user.home')
-            ->with(compact('users_data','user_acting_role','categories'));
+            ->with(compact('users_data','user_acting_role','categories','gci_tags'));
     }
 
     public function uploadVideo()

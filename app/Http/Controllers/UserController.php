@@ -12,6 +12,7 @@ use App\MetaData;
 use App\User;
 use Content\Services\ContentService;
 use Illuminate\Http\Request;
+use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Crypt;
 use Illuminate\Support\Facades\Redirect;
@@ -77,9 +78,10 @@ class UserController extends Controller
     public function profile()
     {
         $user_acting_role = $this->userRepository->getUserActingRoles();
+        $gci_tags = $this->userRepository->getGreaterCommunityIntentionTag();
         $categories = $this->category->get();
         return view('user.home')
-            ->with(compact('users_data','user_acting_role','categories'));
+            ->with(compact('users_data','user_acting_role','categories','gci_tags'));
     }
 
     public function uploadVideo()

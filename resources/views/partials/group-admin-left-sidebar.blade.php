@@ -23,7 +23,12 @@
         {{--<span class="menu-title">Dashboard</span>--}}
         {{--</a>--}}
         {{--</li>--}}
-
+        <li class="nav-item">
+            <a href="/" class="nav-link" aria-expanded="false" aria-controls="">
+                <i class="menu-icon mdi mdi-face-profile"></i>
+                <span class="menu-title">Home/Map</span>
+            </a>
+        </li>
         <li class="nav-item">
             <a class="nav-link" data-toggle="collapse" href="#contnet-sub" aria-expanded="false" aria-controls="contnet-sub">
                 <i class="menu-icon mdi mdi-table"></i>
