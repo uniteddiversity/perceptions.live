@@ -16,47 +16,69 @@
                     </div>
                     <div class="col-md-7">
                         <div>Submitter: <?php if(isset($info->user)){ echo '@'.'<span class="inactive_link" onclick="openProfile('.$info->user->id.')">'.$info->user->display_name.'</span>'; }; ?></div>
-                        <?php if(isset($info->videoProducer)){ ?>
-                        <div>Producer(s):
-                            <?php
+                        <?php if(isset($info->videoProducer)){
                             $datas = array();
                             foreach($info->videoProducer as $user){
                                 $datas[] = '@'.'<span class="inactive_link" onclick="openProfile('.$user->user->id.')">'.$user->user->display_name.'</span>';
                             }
+
+                            if(!empty($datas)){
+                            ?>
+                        <div>Producer(s):
+                            <?php
                             echo implode(', ', $datas);
                             ?>
                         </div>
-                        <?php }; ?>
-                        <?php if(isset($info->coCreators)){ ?>
+                        <?php }
+                        }; ?>
+                        <?php if(isset($info->coCreators)){
+
+                            $datas = array();
+                            foreach($info->coCreators as $user){
+                                $datas[] = '@'.'<span class="inactive_link" onclick="openProfile('.$user->user->id.')">'.$user->user->display_name.'</span>';
+                            }
+
+                            if(!empty($datas)){
+                            ?>
+
                         <div>Co-creators(s):
                                 <?php
-                                $datas = array();
-                                foreach($info->coCreators as $user){
-                                    $datas[] = '@'.'<span class="inactive_link" onclick="openProfile('.$user->user->id.')">'.$user->user->display_name.'</span>';
-                                }
                                 echo implode(', ', $datas);
                                 ?>
                             </div>
-                        <?php }; ?>
-                        <?php if(isset($info->onScreen) && count($info->onScreen) > 0){ ?>
-                        <div>On screen(s):
-                            <?php
+
+                        <?php }
+                        }; ?>
+                        <?php if(isset($info->onScreen) && count($info->onScreen) > 0){
                             $datas = array();
                             foreach($info->onScreen as $user){
                                 $datas[] = '@'.'<span class="inactive_link" onclick="openProfile('.$user->user->id.')">'.$user->user->display_name.'</span>';
                             }
+
+                            if(!empty($datas)){
+                            ?>
+                        <div>On screen(s):
+                            <?php
                             echo implode(', ', $datas);
                             ?>
                         </div>
-                        <?php }; ?>
-                        <?php if(isset($info->groups) && count($info->groups) > 0){ ?>
+                        <?php }
+                        }; ?>
+                        <?php if(isset($info->groups) && count($info->groups) > 0){
+                            $datas = array();
+                            foreach($info->groups as $group){
+                                $datas[] = '@'.'<span class="inactive_link" onclick="openGroupProfile('.$group->group->id.')">'.$group->group->name.'</span>';
+                            }
+
+                            if(!empty($datas)){
+                            ?>
                             <div>Organization(s):
                                 <?php
-                                foreach($info->groups as $group){
-                                    echo '@'.'<span class="inactive_link" onclick="openGroupProfile('.$group->group->id.')">'.$group->group->name.'</span>'.',';
-                                } ?>
+                                echo implode(', ', $datas);
+                                ?>
                             </div>
-                        <?php }; ?>
+                        <?php }
+                        }; ?>
 
                     </div>
                 </div>

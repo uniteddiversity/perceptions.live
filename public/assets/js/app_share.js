@@ -1,8 +1,10 @@
 var default_zoom = $('#default_zoom').val();
-
+var default_lat = parseFloat($('#default_lat').val());
+var default_long = parseFloat($('#default_long').val());
+console.log('lat: '+default_lat+'   , long : '+default_long)
 console.log('default zoom is '+parseFloat(default_zoom));
 var map = L.map( 'map', {
-    center: [10.0, 5.0],
+    center: [default_lat, default_long],
     minZoom: 2,
     zoom: parseFloat(default_zoom)
 });
@@ -36,7 +38,7 @@ function updateMarkers(markers){
     var all_b = [];
     for ( var i = 0; i < markers.length; ++i )
     {
-        var popup = 'abc'+markers[i].name;
+        var popup = markers[i].name;
         m = L.marker( [markers[i].lat, markers[i].lng], {icon: myIcon, id: markers[i].id} );
         m.on('click', onMarkerClick);
         markerClusters.addLayer( m );
@@ -47,7 +49,7 @@ function updateMarkers(markers){
 
 console.log(all_b);
     var group = new L.featureGroup(all_b);
-    map.fitBounds(group.getBounds());
+    // map.fitBounds(group.getBounds());
     $("#loading").hide();
 }
 

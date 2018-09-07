@@ -76,7 +76,7 @@
 
                             </div>
                             <div class="form-group">
-                                <label for="default_zoom_level">Default Zoom Level</label>
+                                <label for="default_zoom_level">Default Zoom Level ( < 15 )</label>
                                 <input type="text" class="form-control" id="default_zoom_level" aria-describedby="nameHelp" name="default_zoom_level" placeholder="Default Zoom Level" value="{{ old('default_zoom_level',$data['default_zoom_level']) }}">
                             </div>
 

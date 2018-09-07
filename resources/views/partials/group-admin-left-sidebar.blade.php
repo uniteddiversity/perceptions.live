@@ -87,6 +87,24 @@
         </li>
 
         <li class="nav-item">
+            <a class="nav-link" data-toggle="collapse" href="#share" aria-expanded="false" aria-controls="share">
+                <i class="menu-icon mdi mdi-restart"></i>
+                <span class="menu-title">Shearing</span>
+                <i class="menu-arrow"></i>
+            </a>
+            <div class="collapse" id="share">
+                <ul class="nav flex-column sub-menu">
+                    <li class="nav-item">
+                        <a class="nav-link" href="/user/group-admin/map-generate-list"> Sheared List </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/user/group-admin/map-generate"> Map Generate </a>
+                    </li>
+                </ul>
+            </div>
+        </li>
+
+        <li class="nav-item">
             <a href="/user/logout" class="nav-link" aria-expanded="false" aria-controls="">
                 <i class="menu-icon mdi mdi-logout"></i>
                 <span class="menu-title">Log Out</span>

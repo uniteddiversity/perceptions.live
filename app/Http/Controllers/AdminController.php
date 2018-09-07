@@ -702,14 +702,14 @@ class AdminController extends Controller
 
     public function postMapGenerate(Request $request)
     {
-        $id = (isset($id))?UID::translator($id):0;
-        $user_id = (!isset(Auth::user()->id))? 0 : Auth::user()->id;
-//        $id = UID::translator($id);
-
         $r = $request->toArray();
+        $id = (isset($r['id']))?UID::translator($r['id']):0;
+        $user_id = (!isset(Auth::user()->id))? 0 : Auth::user()->id;
+
         $validator = Validator::make($request->all(), [
             'group' => 'required',
-            'domain' => 'required'
+            'domain' => 'required',
+            'default_zoom_level' => 'integer|between:1,15'
         ]);
 
         if ($validator->fails()) {

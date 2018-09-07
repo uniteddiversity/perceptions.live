@@ -360,8 +360,8 @@ class ContentService
         $data[0]['filter'] = 'Category';
         $data[1]['id'] = '2';
         $data[1]['filter'] = 'Greater Community Intention';
-        $data[2]['id'] = '3';
-        $data[2]['filter'] = 'Primary Subject Tag';
+//        $data[2]['id'] = '3';
+//        $data[2]['filter'] = 'Primary Subject Tag';
         $data[3]['id'] = '4';
         $data[3]['filter'] = 'Associated Users';
         $data[4]['id'] = '5';
