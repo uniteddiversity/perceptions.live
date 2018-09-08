@@ -78,7 +78,7 @@
                             </div>
                             <div class="form-group">
                                 <label for="video_id">Captured Date</label>
-                                <input type="text" class="form-control datepicker" aria-describedby="nameHelp" name="captured_date" placeholder="Captured Date" value="{{ old('captured_date',$data['captured_date']) }}">
+                                <input type="text" autocomplete="off" class="form-control datepicker" aria-describedby="nameHelp" name="captured_date" placeholder="Captured Date" value="{{ old('captured_date',$data['captured_date']) }}">
                             </div>
                             <div class="form-group">
                                 <label for="exampleSelect1">Access Level</label>

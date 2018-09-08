@@ -1,31 +1,30 @@
-var map = L.map( 'map', {
-    center: [10.0, 5.0],
-    minZoom: 3,
-    zoom: 2
-});
+
+if(typeof(L) != "undefined"){
+    var map = L.map( 'map', {
+        center: [10.0, 5.0],
+        minZoom: 3,
+        zoom: 2
+    });
+
 
 // L.tileLayer( 'http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
 //     attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>',
 //     subdomains: ['a','b','c']
 // }).addTo( map );
 
-L.tileLayer( 'https://stamen-tiles-{s}.a.ssl.fastly.net/watercolor/{z}/{x}/{y}.{ext}', {
-    attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>',
-    subdomains: ['a','b','c'],
-    ext: 'png'
-}).addTo( map );
+    L.tileLayer( 'https://stamen-tiles-{s}.a.ssl.fastly.net/watercolor/{z}/{x}/{y}.{ext}', {
+        attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>',
+        subdomains: ['a','b','c'],
+        ext: 'png'
+    }).addTo( map );
 
-// var myURL = jQuery( 'script[src$="leaf-demo.js"]' ).attr( 'src' ).replace( 'leaf-demo.js', '' );
-myURL = '';
+    myURL = '';
+    var markerClusters = L.markerClusterGroup();
+
+    searchVideo();
+}
 
 
-
-var markerClusters = L.markerClusterGroup();
-
-// $.getJSON("/ajax-available-videos", function (markers) {
-// //     updateMarkers(markers);
-// // });
-searchVideo();
 
 var m;
 function updateMarkers(markers){
@@ -61,6 +60,8 @@ function updateMarkers(markers){
     // m.clearLayers();
 
     $("#loading").hide();
+
+    map.addLayer( markerClusters );
 }
 
 var onMarkerClick = function(e){
@@ -115,10 +116,24 @@ function openProfile(id){
 }
 
 function openGroupProfile(id){
-    return true;
+    console.log('group loading');
+    $("#feature-info").html('loading...');
+    console.log(this);//this.options.id
+    jQuery.ajax({
+        url: '/home/ajax-group-info/'+id,
+        method: 'GET'
+    }).done(function (content) {
+        $("#feature-title").html("Info:");
+        $("#feature-info").html(content);
+        $("#featureModal").modal("show");
+    }).fail(function () {
+        $("#feature-title").html("Error:");
+        $("#feature-info").html("Fail to load info");
+        $("#featureModal").modal("show");
+    });
 }
 
-map.addLayer( markerClusters );
+
 
 
 /////////////////////////////////////////////////////////
@@ -171,8 +186,9 @@ $(document).ready(function(){
         // updateMap($('#_location_id').val());
     }
 
-    searchVideo();
-
+    if(typeof(L) != "undefined"){
+        searchVideo();
+    }
 })
 
 $("#login-btn").click(function() {

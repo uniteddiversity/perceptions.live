@@ -92,11 +92,17 @@ class HomeController extends Controller
     public function getUserInfo($user_id)
     {
         $user_associate_videos = $this->userRepository->getAssociatedVideosForUser($user_id);
-//        dd($user_associate_videos);
         $info = $this->userRepository->getUser($user_id);
         $gci_tags = $this->userRepository->getGreaterCommunityIntentionTag();
         return view('partials.user-info-popup')
             ->with(compact('info','user_associate_videos','gci_tags'));
+    }
+
+    public function getGroupInfo($group_id)
+    {
+        $info = $this->userRepository->getGroupInfo($group_id, true);
+        return view('partials.group-info-popup')
+            ->with(compact('info'));
     }
 
     public function location($id)

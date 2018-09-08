@@ -27,6 +27,8 @@ Route::post('/', function(){
     Route::get('/ajax-available-videos/{_id}', array('uses' => '\App\Controllers\HomeController@ajaxVideosNew'));
     Route::get('/home/ajax-video-info/{_video_id}', '\App\Controllers\HomeController@getVideoInfo');
     Route::get('/home/ajax-user-info/{_user_id}', '\App\Controllers\HomeController@getUserInfo');
+    Route::get('/home/ajax-group-info/{_group_id}', '\App\Controllers\HomeController@getGroupInfo');
+
     Route::get('/home/ajax/video-search', '\App\Controllers\HomeController@searchVideos');
     Route::get('/claim-profile', '\App\Controllers\User\UserController@claimUserProfile');
     Route::post('/claim-profile-post', '\App\Controllers\User\UserController@claimUserProfilePost');

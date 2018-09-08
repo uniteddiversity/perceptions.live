@@ -111,7 +111,7 @@ class UserController extends Controller
             'long' => 'required',
 //            'description' => 'required',
 //            'url' => 'required',
-//            'captured_date' => 'required',
+            'captured_date' => 'date_format:"d-m-Y"',
 //            'video_date' => 'required'
         ]);
 
@@ -153,7 +153,7 @@ class UserController extends Controller
                 'submitted_footage' => $r['submitted_footage'],
                 'location' => $r['location'],
 
-                'captured_date' => Carbon::createFromFormat('d-m-Y', $r['captured_date'])->format('Y-m-d'),
+                'captured_date' => (!empty($r['captured_date']))?Carbon::createFromFormat('d-m-Y', $r['captured_date'])->format('Y-m-d'):'',
                 'video_date' => $r['video_date'],
 //                'captured_date' => date('Y-m-d'),
 //                'video_date' => date('Y-m-d'),

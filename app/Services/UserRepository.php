@@ -170,6 +170,31 @@ class UserRepository
             ->first();
     }
 
+    public function getGroupInfo($group_id, $full = false)
+    {
+        $group_info = $this->group->where('groups.id', $group_id)->with(['proofOfGroup','groupAvatar'])
+            ->first()->toArray();
+
+        if($full){
+            if(isset($group_info['id'])){
+                $group_info['users'] = $this->user->leftJoin('user_groups','users.id', 'user_groups.user_id')
+                    ->select('users.*')
+                    ->where('user_groups.group_id', $group_info['id'])
+                    ->get()->toArray();
+                $group_info['videos'] = $this->content
+                    ->leftJoin('group_content_associations','group_content_associations.content_id', 'contents.id')
+                    ->where('group_content_associations.group_id', $group_info['id'])
+                    ->where('contents.status', 1)
+                    ->select('contents.*')
+                    ->groupBy('contents.id')
+                    ->get()->toArray();
+            }
+        }
+
+
+        return $group_info;
+    }
+
     public function getMyContents($user_id)
     {
         $contents = $this->user->with('content')->whereIn('users.id', array($user_id))

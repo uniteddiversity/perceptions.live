@@ -52,10 +52,10 @@
                                         {{ date('Y-m-d', strtotime($group->created_at)) }}
                                     </td>
                                     <td>
-                                        {{ $group->name }}
+                                        <span class="inactive_link" onclick="openGroupProfile('<?php echo $group->id ?>')">{{ $group->name }}</span>
                                     </td>
                                     <td>
-                                        {{ $group->groupStatus->name }}
+                                        {{ (isset($group->groupStatus))? $group->groupStatus->name:'' }}
                                     </td>
                                     {{--<td>--}}
                                         {{--{{ $group->category }}--}}
