@@ -39,7 +39,7 @@
                         <h3>Submitted/associated video profiles</h3>
                         <div>
                             <?php foreach($info['videos'] as $video){ ?>
-                                <h4 style="margin-top: 0px;font-weight: bold;cursor: pointer;" onclick="openVideo('<?php echo $video['id'] ?>')"><?php echo $video['title'] ?></h4>
+                                <h6 style="margin-top: 0px;font-weight: bold;cursor: pointer;" onclick="openVideo('<?php echo $video['id'] ?>')"><?php echo $video['title'] ?></h6>
                                 <iframe width="300" height="150" src="<?php echo str_replace( 'watch?v=', 'embed/',$video['url']) ?>" frameborder="0" allowfullscreen></iframe>
                             <?php } ?>
                         </div>
