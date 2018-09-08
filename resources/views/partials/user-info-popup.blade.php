@@ -59,7 +59,7 @@
                             $datas = array();
                             foreach($info->groups as $group){
                                 if(isset($group->group)){
-                                    $datas[] = $group->group->name;
+                                    $datas[] = '<span class="inactive_link" onclick="openGroupProfile('.$group->group->id.')">'.$group->group->name.'</span>';
                                 }
                             }
                             echo implode(', ', $datas);
