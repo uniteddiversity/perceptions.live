@@ -1,3 +1,66 @@
+<div style="padding-left: 30px; padding-top: 12px; padding-bottom: 30px;">
+    <input type="text" placeholder="Looking for something? Someone, somewhere?" name="search_text" id="search_text" />
+    <div class="mlfield s2">
+        <select class="selectbox" id="content_search_cat">
+            <option value="">All Categories</option>
+            @foreach($categories as $cat)
+                <option value="{{$cat->id}}" >{{$cat->name}}</option>
+            @endforeach
+        </select>
+    </div>
+    {{--<img src="/assets/findgo/images/dotselection.png">--}}
+    <?php
+    foreach($gci_tags as $tag){
+        echo '<span onclick="searchByTag(\''.$tag['id'].'\')" style="background-color: '.$tag['tag_color'].'" class="dot"></span>';
+    } ?>
+    {{--<div class="prices-dropsec">--}}
+        {{--<div class="prices-drop">--}}
+            {{--<p>What is the price range?</p>--}}
+            {{--<span><i>Prices</i>$</span><span><i>Prices</i>$$</span><span><i>Prices</i>$$$</span><span><i>Prices</i>$$$$</span>--}}
+        {{--</div>--}}
+    {{--</div>--}}
+</div>
+<div class="ml-filterbar">
+    <ul>
+        <li><a id="finddo-geolocate" class="theme-btn2" href="#"><em class="fa fa-crosshairs"></em> Geolocate</a></li>
+        <li><a id="finddo-target" class="theme-btn2" href="#"><i class="fa fa-bullseye"></i> Target </a></i></span></li>
+    </ul>
+    <h3><i class="flaticon-eye"></i>14 Results Found</h3>
+    <ul>
+        <li class="singleplaces active"><span><i class="fa fa-exchange"></i></span></li>
+        <li class="doubleplaces"><span><i class="fa fa-th-large"></i></span></li>
+        <li class="listingplaces"><span><i class="fa fa-th-list"></i></span></li>
+    </ul>
+</div>
+<div class="ml-placessec">
+    <div class="row" id="video_search_res" >
+        yyyyyyyyyyyyyyyyyyyyy
+    </div>
+</div>
+
+
+<style>
+    .dot {
+        height: 22px;
+        width: 22px;
+        border-radius: 50%;
+        display: inline-block;
+        margin: 2px;
+        cursor: pointer;
+    }
+
+    .inactive_link{
+        cursor: pointer;
+    }
+
+    .SumoSelect{
+        width: 96%;
+    }
+</style>
+
+
+<?php /*
+
 <div class="col-md-3 no-float col-md-3half" style="padding-right: 0px;">
     <div class="info-box-left" style="margin:10px 10px 10px 10px;overflow: scroll;">
         <h2>Feed {{env('APP_NAME', '')}}</h2>
@@ -31,14 +94,7 @@
         <div class="form-group">
             RECENT
         </div>
-        {{--<div class="form-group">--}}
-            {{--<div class="col-md-7" style="margin:0px;padding: 0px;">--}}
-                {{--video here--}}
-            {{--</div>--}}
-            {{--<div class="col-md-5 video_text">--}}
-                {{--video goes here--}}
-            {{--</div>--}}
-        {{--</div>--}}
+
         <div class="form-group" style="height: 100%; " id="video_search_res">
         </div>
     </div>
@@ -57,3 +113,5 @@
         cursor: pointer;
     }
 </style>
+
+ */ ?>
