@@ -77,14 +77,14 @@
                 <div class="accountform" id="one">
                 <form class="loginform" id="login-form" action="/user/login" >
                 <div id="messages"></div>
-                <input type="hidden" name="_token" id="csrf-token" value="{{ Session::token() }}" />
+                <input type="hidden" name="_token" value="{{ Session::token() }}" />
                 <div class="accountformfield">
                 <label>Username or Email Address *</label>
-                <input type="text" placeholder="Email" id="email" name="email" />
+                <input type="text" placeholder="Email" name="email" />
                 </div>
                 <div class="accountformfield">
                 <label>Password</label>
-                <input type="password" placeholder="Password" id="password" name="password" />
+                <input type="password" placeholder="Password" name="password" />
                 </div>
                 <button type="button" onclick="userLogin()" >Sign In</button>
                 </form>
@@ -149,6 +149,31 @@
 <script src="/assets/js/L.Control.Locate.min.js"></script>
 <script src="/assets/leaflet-groupedlayercontrol/leaflet.groupedlayercontrol.js"></script>
 <script src="/assets/js/app.js"></script>
+
+
+{{--<script>--}}
+    {{--$(document).ready(function() {--}}
+        {{--$('.multi-select2').select2();--}}
+
+        {{--$('.multi-select2-with-tags').select2({tags: true});--}}
+
+        {{--$('.multi-select2-max3').select2({maximumSelectionLength: 3});--}}
+
+        {{--$('.multi-select2-with-tags-max3').select2({tags: true, maximumSelectionLength: 3});--}}
+
+        {{--$('#user-assign-group').change(function(){console.log('vl '+$(this).val());--}}
+            {{--document.location.href = '/user/admin/user-to-group-add/'+$(this).val();--}}
+        {{--})--}}
+
+        {{--$("#is_exchange").change(function(){ console.log('changing..');--}}
+            {{--if($(this).is(':checked')){console.log('checked..');--}}
+                {{--$('#exchange_enabled').css('visibility','visible');--}}
+            {{--}else{--}}
+                {{--$('#exchange_enabled').css('visibility','hidden');--}}
+            {{--}--}}
+        {{--})--}}
+    {{--});--}}
+{{--</script>--}}
 </body>
 </html>
 

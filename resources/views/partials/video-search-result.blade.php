@@ -7,7 +7,7 @@
                 <span class="pull-left"> <i class="flaticon-eye"></i> Watch </span>
                 <span class="pull-right"> <i class="flaticon-note"></i> More Info </span>
             </div>
-            <span class="datebox""><small><em>19 August, 2018</small></em></span>
+            <span class="datebox"><small><em>19 August, 2018</em></small></span>
         </div>
         <div class="boxplaces">
             <div class="placeinfos">
@@ -21,7 +21,7 @@
                     } ?>
                 </span>
                 <h3><a href="#" title="" onclick="openVideo('<?php echo $info['id'] ?>')"><?php echo $info['title'] ?></a></h3>
-                <span style="padding-bottom: 6px;"><small><em><?php echo date('d F Y',strtotime($info['created_at'])) ?></small></em></span>
+                <span style="padding-bottom: 6px;"><small><em><?php echo date('d F Y',strtotime($info['created_at'])) ?></em></small></span>
                 <span style="font-size: .8em;">First 128 characters of video description [...]</span>
                 <ul class="listmetas">
                     <li><span class="rated">3</span>interactions</li>

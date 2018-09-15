@@ -257,9 +257,11 @@ class UserRepository
         $r = array(); $i = 0;
 
         foreach($contents as $c){
-            $r[$i] = $c;
-            $r[$i]['video'] = $c['url'];
-            $i++;
+            if(isset($c['lat']) && isset($c['long'])){
+                $r[$i] = $c;
+                $r[$i]['video'] = $c['url'];
+                $i++;
+            }
         }
 
         return $r;

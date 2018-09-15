@@ -233,6 +233,7 @@ class HomeController extends Controller
             ->with(compact('uploaded_list'));
         $content = (string)htmlspecialchars($content);
         return array('content' => $content, 'json' => $json_output);
+        return array('json' => $json_output);
     }
 
     public function getSearchListInJson($uploaded_list)
