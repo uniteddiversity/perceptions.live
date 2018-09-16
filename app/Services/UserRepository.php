@@ -217,8 +217,10 @@ class UserRepository
 
     public function getPublicContents($user_id, $filter = array())
     {
-        $contents = $this->user
-            ->leftJoin('contents', 'contents.user_id', 'users.id')->where(function($q) use ($user_id){
+        $contents = $this->content->with(['videoProducer' => function($q){
+            $q->with('user');
+        }])
+            ->leftJoin('users', 'contents.user_id', 'users.id')->where(function($q) use ($user_id){
                 $q->where(function($r) use ($user_id){
                     $r->whereIn('users.id', array($user_id))->orWhere('contents.access_level_id', '1');
                 });
@@ -250,8 +252,8 @@ class UserRepository
             $contents = $contents->where('category_id', $filter['category_id']);
         }
 
-        $contents = $contents->select('contents.id', 'contents.description', 'contents.lat', 'contents.long', 'contents.title', 'contents.url',
-                'users.display_name','contents.created_at','contents.location','contents.user_id',
+        $contents = $contents->select('contents.id', DB::Raw("SUBSTRING(contents.brief_description, 1, 128) as trim_description"), 'contents.lat', 'contents.long', 'contents.title', 'contents.url',
+                'users.display_name','contents.created_at','contents.location','contents.user_id','contents.primary_subject_tag',
                 DB::Raw("GROUP_CONCAT(DISTINCT (concat(sorting_tags.tag_color,'-',sorting_tags.id,'-',sorting_tags.tag)) SEPARATOR ', ') as tag_colors") )
             ->groupBy('contents.id')->orderBy('contents.updated_at', 'DESC')->limit(500)->get();
         $r = array(); $i = 0;

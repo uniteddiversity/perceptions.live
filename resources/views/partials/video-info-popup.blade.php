@@ -10,11 +10,11 @@
                 </div>
 
                 <div class="row" style="display: block;margin: 25px;">
-                    <div class="col-md-5" style="margin:0px;padding: 0px;padding-left: 0px;">
+                    <div class="col-lg-5 column" style="margin:0px;padding: 0px;padding-left: 0px;">
                         <div>Category - <?php if(isset($info->category)){ echo $info->category->name; }; ?></div>
                         <div><?php if(!empty($info->learn_more_url)){ echo '<a target="_blank" href="'.$info->learn_more_url.'">Learn more..</a>'; }; ?></div>
                     </div>
-                    <div class="col-md-7">
+                    <div class="col-lg-7 column">
                         <div>Submitter: <?php if(isset($info->user)){ echo '@'.'<span class="inactive_link" onclick="openProfile('.$info->user->id.')">'.$info->user->display_name.'</span>'; }; ?></div>
                         <?php if(isset($info->videoProducer)){
                             $datas = array();

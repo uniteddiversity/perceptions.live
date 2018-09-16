@@ -62,7 +62,23 @@
 
 
 
-
+{{--<div class="popupsecs">--}}
+    {{--<div class="popup">--}}
+        {{--<div class="info_content">--}}
+            {{--testtt--}}
+        {{--</div>--}}
+    {{--</div>--}}
+{{--</div>--}}
+<div class="modal fade" id="featureModal" tabindex="-1" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header" style="border-bottom: 0px solid #e5e5e5;">
+                <button class="close" type="button" data-dismiss="modal" aria-hidden="true">&times;</button>
+            </div>
+            <div class="modal-body" id="feature-info"></div>
+        </div>
+    </div>
+</div>
 
 
 
@@ -150,7 +166,43 @@
 <script src="/assets/leaflet-groupedlayercontrol/leaflet.groupedlayercontrol.js"></script>
 <script src="/assets/js/app.js"></script>
 
+<style>
+    #featureModal {
+        position: fixed;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        z-index: 3;
+        background: rgba(36,35,35,0.8);
+        overflow-x: hidden;
+        overflow-y: scroll;
+        display: none;
+    }
 
+    .modal-dialog{
+        background: white;
+        width: 950px;
+        margin: auto;
+    }
+
+    .modal-content{
+        padding-top: 10px;
+        padding-bottom: 10px;
+    }
+
+    .avatar{
+        width: 150px;
+    }
+
+    .inactive_link{
+        cursor: pointer;
+    }
+
+    .inactive_link:hover{
+        text-decoration: underline;
+    }
+</style>
 {{--<script>--}}
     {{--$(document).ready(function() {--}}
         {{--$('.multi-select2').select2();--}}

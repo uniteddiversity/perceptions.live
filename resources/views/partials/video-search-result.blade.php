@@ -7,7 +7,7 @@
                 <span class="pull-left"> <i class="flaticon-eye"></i> Watch </span>
                 <span class="pull-right"> <i class="flaticon-note"></i> More Info </span>
             </div>
-            <span class="datebox"><small><em>19 August, 2018</em></small></span>
+            <span class="datebox"><small><em><?php echo date('d F Y',strtotime($info['created_at'])) ?></em></small></span>
         </div>
         <div class="boxplaces">
             <div class="placeinfos">
@@ -22,15 +22,18 @@
                 </span>
                 <h3><a href="#" title="" onclick="openVideo('<?php echo $info['id'] ?>')"><?php echo $info['title'] ?></a></h3>
                 <span style="padding-bottom: 6px;"><small><em><?php echo date('d F Y',strtotime($info['created_at'])) ?></em></small></span>
-                <span style="font-size: .8em;">First 128 characters of video description [...]</span>
+                <?php if(!empty($info['trim_description'])){ ?>
+                    <span style="font-size: .8em;"><?php echo $info['trim_description'] ?> [...]</span>
+                <?php } ?>
+
                 <ul class="listmetas">
                     <li><span class="rated">3</span>interactions</li>
-                    <li><a href="#" title=""><i class="flaticon-chef"></i> Primary Subject Tag</a></li>
+                    <li><a href="#" title=""><i class="flaticon-chef"></i> <?php echo $info['primary_subject_tag'] ?></a></li>
                 </ul>
             </div>
             <div class="placedetails">
-                <span class="pull-left"><i class="flaticon-pin"></i>Adelaide, Australia</span>
-                <span class="pull-right"><i class="flaticon-avatar"></i>@videoproducer</span>
+                <span class="pull-left"><i class="flaticon-pin"></i> <?php echo $info['location'] ?></span>
+                <span class="pull-right"><i class="flaticon-avatar"></i> <?php foreach($info->videoProducer as $key => $users){ if(isset($info->videoProducer[$key])){ echo '<span class="inactive_link" onclick="openProfile(\''. $info->videoProducer[$key]->user->id .'\')">@'.$info->videoProducer[$key]->user->display_name.'</span>'; break; } }?></span>
             </div>
         </div>
     </div>
