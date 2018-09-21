@@ -1,4 +1,4 @@
-<div class="row" style="display: block;">
+<?php /* <div class="row" style="display: block;">
     <div class="col-lg-12 grid-margin stretch-card">
         <div class="card">
             <div class="card-body">
@@ -85,9 +85,25 @@
                 <div class="row" style="display: block;margin: 25px;">
                     <iframe width="800" height="400" src="<?php echo str_replace( 'watch?v=', 'embed/',$info['url']) ?>" frameborder="0" allowfullscreen></iframe>
                 </div>
-                {{--<p>onscreen: {{$info['onscreen']}}</p>--}}
-                {{--<p>Co Creators: {{$info['co_creators']}}</p>--}}
             </div>
         </div>
     </div>
+</div>
+*/ ?>
+
+<iframe width="200" height="100" src="<?php echo str_replace( 'watch?v=', 'embed/',$info['url']) ?>" frameborder="0" allowfullscreen></iframe>
+<div class="row" style="display: block;margin: 5px;">
+        <div style="font-size: 16px;margin-top: 6px;margin-bottom: 6px;">{{$info['title']}}
+            <span style="padding-bottom: 6px;float: right;">
+                <?php foreach($info->gciTags as $tag){
+                    if(isset($tag->tag) && isset($tag->tag->tag))
+//                    echo '<br/> tag '.$tag->tag->tag;
+                    echo '<span style="background-color: '.$tag->tag->tag_color.'" class="dot-small"></span>';
+                }
+                ?>
+                </span>
+        </div>
+        <div><i class="flaticon-pin"> {{$info['location']}}</i></div>
+        <div><a href="/home/ajax-video-more-info/{{$info['id']}}" target="_blank"><i class="flaticon-eye"> View More</i></a></div>
+
 </div>

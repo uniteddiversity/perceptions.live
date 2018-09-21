@@ -15,7 +15,7 @@
 
             @auth
                 <div class="extras">
-                    <a href="/user/content-add" title=""><img src="/assets/findgo/images/icon1.png" alt="" /> Add Listing</a>
+                    <a href="/user/content-add" title=""><img src="/assets/findgo/images/icon1.png" alt="" /> Submit Video</a>
                 </div>
             @else
                 <div class="extras">
@@ -42,7 +42,7 @@
 
             @auth
                 <div class="extras">
-                    <a href="/user/content-add" title=""><img src="/assets/findgo/images/icon1.png" alt="" /> Add Listing</a>
+                    <a href="/user/content-add" title=""><img src="/assets/findgo/images/icon1.png" alt="" /> Submit Video</a>
                 </div>
             @else
                 <div class="extras">

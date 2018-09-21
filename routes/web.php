@@ -42,6 +42,8 @@ Route::post('/', function(){
 
     Route::get('/home/shared/group/{_id}', '\App\Controllers\HomeController@sharedGroup');
     Route::get('/ajax/home/shared/group/{_id}', '\App\Controllers\HomeController@shearedContentJson');
+
+    Route::get('/home/ajax-video-more-info/{_video_id}', '\App\Controllers\HomeController@getVideoMoreInfo');
 //});
 
 

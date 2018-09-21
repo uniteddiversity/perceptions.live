@@ -21,10 +21,20 @@ if(typeof(L) != "undefined"){
     myURL = '';
     var markerClusters = L.markerClusterGroup();
 
+    // L.marker([51.5, -0.09]).addTo(map)
+    //     .bindPopup("<b>Hello world!</b><br />I am a popup.").openPopup();
+
+    // map.on('click', onMapClick);
+    var popup = L.popup();
     searchVideo();
 }
 
-
+// function onMapClick(e) {
+//     popup
+//         .setLatLng(e.latlng)
+//         .setContent("You clicked the map at " + e.latlng.toString())
+//         .openOn(map);
+// }
 
 var m;
 function updateMarkers(markers){
@@ -65,20 +75,41 @@ function updateMarkers(markers){
 }
 
 var onMarkerClick = function(e){
+    // $("#feature-info").html('loading...');
+    //     // console.log(this);//this.options.id
+    //     // jQuery.ajax({
+    //     //     url: '/home/ajax-video-info/'+this.options.id,
+    //     //     method: 'GET'
+    //     // }).done(function (content) {
+    //     //     $("#feature-title").html("Info:");
+    //     //     $("#feature-info").html(content);
+    //     //     $("#featureModal").modal("show");
+    //     // }).fail(function () {
+    //     //     $("#feature-title").html("Error:");
+    //     //     $("#feature-info").html("Fail to load info");
+    //     //     $("#featureModal").modal("show");
+    //     // });
+
     $("#feature-info").html('loading...');
-    console.log(this);//this.options.id
-    jQuery.ajax({
-        url: '/home/ajax-video-info/'+this.options.id,
-        method: 'GET'
-    }).done(function (content) {
-        $("#feature-title").html("Info:");
-        $("#feature-info").html(content);
-        $("#featureModal").modal("show");
-    }).fail(function () {
-        $("#feature-title").html("Error:");
-        $("#feature-info").html("Fail to load info");
-        $("#featureModal").modal("show");
-    });
+        console.log(this);//this.options.id
+        jQuery.ajax({
+            url: '/home/ajax-video-info/'+this.options.id,
+            method: 'GET'
+        }).done(function (content) {
+            popup
+                .setLatLng(e.latlng)
+                .setContent(content)
+                .openOn(map);
+        }).fail(function () {
+            popup
+                .setLatLng(e.latlng)
+                .setContent("Error with loading...")
+                .openOn(map);
+        });
+    // popup
+    //     .setLatLng(e.latlng)
+    //     .setContent("You clicked the map atxxxxxxxxxx " + e.latlng.toString())
+    //     .openOn(map);
 }
 
 function openVideo(id){

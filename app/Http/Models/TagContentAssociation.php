@@ -15,4 +15,9 @@ class TagContentAssociation extends Model
      * @var array
      */
     protected $fillable = ['content_id', 'content_tag_id', 'tag_for'];
+
+    public function tag()
+    {
+        return $this->hasOne('App\SortingTag','id','content_tag_id');
+    }
 }

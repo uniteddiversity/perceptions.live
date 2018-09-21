@@ -13,7 +13,10 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        //
+//        view()->composer('partials.home-left-advance-search-bar', function ($view) {
+////            die('view');
+////            view()->share('gci', array('a','b','c'));
+//        });
     }
 
     /**

@@ -11,20 +11,32 @@
     {{--<img src="/assets/findgo/images/dotselection.png">--}}
     <?php
     foreach($gci_tags as $tag){
-        echo '<span onclick="searchByTag(\''.$tag['id'].'\')" style="background-color: '.$tag['tag_color'].'" class="dot"></span>';
+        echo '<span data-toggle="tooltip" title="'.$tag['tag'].'" onclick="searchByTag(\''.$tag['id'].'\')" style="background-color: '.$tag['tag_color'].'" class="dot"></span>';
     } ?>
-    {{--<div class="prices-dropsec">--}}
-        {{--<div class="prices-drop">--}}
-            {{--<p>What is the price range?</p>--}}
-            {{--<span><i>Prices</i>$</span><span><i>Prices</i>$$</span><span><i>Prices</i>$$$</span><span><i>Prices</i>$$$$</span>--}}
-        {{--</div>--}}
-    {{--</div>--}}
 </div>
+
+
 <div class="ml-filterbar">
     <ul>
         <li><a id="finddo-geolocate" class="theme-btn2" href="#"><em class="fa fa-crosshairs"></em> Geolocate</a></li>
         <li><a id="finddo-target" class="theme-btn2" href="#"><i class="fa fa-bullseye"></i> Target </a></i></span></li>
     </ul>
+</div>
+<div class="col-lg-12">
+    <div class="mlradius">
+        <span>Radius :</span>
+        <div class="mlfield s2">
+            <select class="selectbox">
+                <option>Kilometer</option>
+                <option>Miles</option>
+            </select>
+        </div>
+        <div class="rslider">
+            <amino-slider class="slider" data-min="0" data-max="100" data-value="10"></amino-slider>
+        </div>
+    </div>
+</div>
+<div class="ml-filterbar">
     <h3><i class="flaticon-eye"></i>14 Results Found</h3>
     <ul>
         <li class="singleplaces active"><span><i class="fa fa-exchange"></i></span></li>
@@ -34,7 +46,7 @@
 </div>
 <div class="ml-placessec">
     <div class="row" id="video_search_res" >
-        yyyyyyyyyyyyyyyyyyyyy
+        ...
     </div>
 </div>
 
@@ -43,6 +55,15 @@
     .dot {
         height: 22px;
         width: 22px;
+        border-radius: 50%;
+        display: inline-block;
+        margin: 2px;
+        cursor: pointer;
+    }
+
+    .dot-small {
+        height: 10px;
+        width: 10px;
         border-radius: 50%;
         display: inline-block;
         margin: 2px;

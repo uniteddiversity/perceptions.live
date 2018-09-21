@@ -34,7 +34,22 @@
 </div>
 
 <div class="theme-layout">
-    @yield('content')
+    @include('partials.nav-bar')
+
+    <section>
+        <div class="block no-padding">
+            <div class="container fluid">
+                <div class="row">
+                    <div class="col-lg-12">
+                        @yield('content')
+
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
 </div>
 
 

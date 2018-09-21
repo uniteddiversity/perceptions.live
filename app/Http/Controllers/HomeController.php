@@ -53,9 +53,10 @@ class HomeController extends Controller
         $uploaded_list = $this->userRepository->getPublicContents($user_id, $filter);
         $user_acting_role = $this->userRepository->getUserActingRoles();
         $gci_tags = $this->userRepository->getGreaterCommunityIntentionTag();
+        $sorting_tags = $this->userRepository->getSortingTags($user_id, true);
         $categories = $this->category->get();
         return view('user.home')
-            ->with(compact('uploaded_list','user_acting_role','categories','gci_tags'));
+            ->with(compact('uploaded_list','user_acting_role','categories','gci_tags','sorting_tags'));
     }
 
     public function ajaxVideos($id = 0)
@@ -86,6 +87,15 @@ class HomeController extends Controller
         $info = $this->userRepository->getContentsInfo($user_id, $video_id);
 
         return view('partials.video-info-popup')
+            ->with(compact('info'));
+    }
+
+    public function getVideoMoreInfo($video_id)
+    {
+        $user_id = (!isset(Auth::user()->id))? 0 : Auth::user()->id;
+        $info = $this->userRepository->getContentsInfo($user_id, $video_id);
+
+        return view('user.video-info')
             ->with(compact('info'));
     }
 

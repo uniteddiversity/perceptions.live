@@ -1,0 +1,320 @@
+@extends('layouts.app')
+
+@section('content')
+<?php
+preg_match("/^(?:http(?:s)?:\/\/)?(?:www\.)?(?:m\.)?(?:youtu\.be\/|youtube\.com\/(?:(?:watch)?\?(?:.*&)?v(?:i)?=|(?:embed|v|vi|user)\/))([^\?&\"'>]+)/", $info['url'], $matches);
+$video_id = isset($matches[1])?$matches[1]:'';
+?>
+
+
+    @include('partials.nav-bar')
+
+    <section>
+        <div class="block no-padding">
+            <div class="container fluid">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="sl-slider s2" id="makesliderfull">
+                            <div class="slg-box"> <img src="https://img.youtube.com/vi/<?php echo $video_id ?>/maxresdefault.jpg" alt="" /> </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section>
+        <div class="block no-padding">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="slhead overlape">
+                            <div class="row">
+                                <div class="col-lg-6">
+                                    <div class="sltitle light">
+                                        <h1>{{$info['title']}}</h1>
+                                        <span><i class="flaticon-heart"></i> Greater Community Intention 1, Greater Community Intention 2, etc</span>
+                                        <span><i class="flaticon-eye"></i> Sorting Tag, Sorting Tag, Sorting Tag</span>
+                                        <div class="slbtnsspans">
+                                            <span><i class="flaticon-map"></i> {{$info['location']}}</span>
+                                            <span><i class="flaticon-avatar"></i>
+
+                                                <?php
+                                                if(isset($info->videoProducer)){
+                                                    $datas = array();
+                                                    foreach($info->videoProducer as $user){
+                                                        $datas[] = '<span class="inactive_link" style="float:left" onclick="openProfile('.$user->user->id.')">'.'@'.$user->user->display_name.'</span>';
+                                                    }
+
+                                                    if(!empty($datas)){
+                                                        echo implode(' ', $datas);
+                                                    }
+                                                }
+                                                ?>
+
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-6">
+                                    <div class="slbtnsspans light">
+                                        <ul class="listmetas">
+                                            <li><span class="rated">3.5</span>3 interactions</li>
+                                            <li><a href="#" title=""><i class="flaticon-magnifying-glass"></i> Primary Subject Tag</a></li>
+                                            <li><div class="currency">community intention dots</div></li>
+                                        </ul>
+                                        <div class="slbtns">
+                                            <div class="sharelisting">
+                                                <a href="#" title=""><i class="flaticon-share"></i>Share</a>
+                                                <div class="sharebtns">
+                                                    <a href="#" title=""><i class="fa fa-facebook"></i></a>
+                                                    <a href="#" title=""><i class="fa fa-twitter"></i></a>
+                                                    <a href="#" title=""><i class="fa fa-instagram"></i></a>
+                                                    <a href="#" title=""><i class="fa fa-pinterest"></i></a>
+                                                    <a href="#" title=""><i class="fa fa-dribbble"></i></a>
+                                                    <a href="#" title=""><i class="fa fa-google"></i></a>
+                                                </div>
+                                            </div>
+                                            <a href="#" title=""><i class="flaticon-heart"></i>Save</a>
+                                            <a href="#" title=""><i class="flaticon-note"></i>Add comment</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section>
+        <div class="block">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-8 column">
+                        <div class="bbox" id="sc1">
+                            <h3>Description</h3>
+                            <div class="ldesc">
+                                <p>{{$info['brief_description']}}</p>
+                            </div>
+                        </div>
+
+                        <div class="bbox" id="sc4">
+                            <h3>1 Interaction for Video Title</h3>
+                            <div class="reviewssec">
+                                <div class="reviewthumb"> <img src="http://placehold.it/60x60" alt="" /> </div>
+                                <div class="reviewinfo">
+                                    <h3>@commenter displayname</h3>
+                                    <span>December 12, 2017 at 8:18 am</span>
+                                    <ul class="listmetas justrate"><li><span class="rated">3.5</span>3 Ratings</li></ul>
+                                    <p>I visited here once and met the community. This video captured the essence of this place and people just great.</p>
+                                    <div class="rgallery">
+                                        <a href="#" title=""><img src="http://placehold.it/180x115" alt="" /></a>
+                                        <a href="#" title=""><img src="http://placehold.it/180x115" alt="" /></a>
+                                        <a href="#" title=""><img src="http://placehold.it/180x115" alt="" /></a>
+                                    </div>
+                                    <div class="wasreview">
+                                        <span><strong>Rate this interaction:</strong></span>
+                                        <div class="wasreviewbtn">
+                                            <a href="#" title="" class="c1"><i class="flaticon-smile"></i>Helpful 85</a>
+                                            <a href="#" title="" class="c2"><i class="flaticon-thumb-up"></i>Neutral 45</a>
+                                            <a href="#" title="" class="c3"><i class="flaticon-sad"></i>Wasteful :( 87</a>
+                                        </div>
+                                    </div>
+                                    <div class="reviewaction">
+                                        <a href="#" title=""><i class="flaticon-back"></i> Reply</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="listingcomment">
+                            <div class="leavecomment">
+                                <h3>Interact With This Video <em>(coming soon!)</em></h3>
+                                <div class="upimg">
+                                    <span>Upload images</span>
+                                    <a href="#" title=""><img src="images/cloud.png" alt="" /></a>
+                                    <input type="file" />
+                                </div>
+                                <div class="urrating">
+                                    <span>Your Rating For This Video</span>
+                                    <strong>Very Good</strong>
+                                    <b>
+                                        <i class="fa fa-star"></i>
+                                        <i class="fa fa-star"></i>
+                                        <i class="fa fa-star"></i>
+                                        <i class="fa fa-star-o"></i>
+                                        <i class="fa fa-star-o"></i>
+                                    </b>
+
+                                </div>
+                                <form>
+                                    <input placeholder="your@mail.com" type="Email">
+                                    <input placeholder="Title" type="text">
+                                    <textarea placeholder="Review"></textarea>
+                                    <input value="Submit Review" type="submit">
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 column">
+                        <div class="amenties listing">
+                            <h3>Collaborative Networking</h3>
+                            <span><i class="flaticon-arrows"> (if exists) Exchange: Service/Opportunity</i></span>
+                            <span><i class="flaticon-booked"> User-Submitted ('User Submitted Collaboration' or 'Sponsored')</i></span>
+                            <span><i class="flaticon-avatar"> 3 Associated Users </i></span>
+                            <span><br></span>
+                        </div>
+
+                        <div class="cbusiness">
+                            <h3>Contact Video Users</h3>
+                            <form>
+                                <label>Your Name *</label>
+                                <input type="text" placeholder="Ali TUF..." />
+                                <label>Your Email Address*</label>
+                                <input type="text" placeholder="demo@demo.com" />
+                                <label>Your Message</label>
+                                <textarea placeholder="demo@demo.com"></textarea>
+                                <button type="submit">Send Message</button>
+                            </form>
+                        </div>
+                        <div class="cad">
+                            <div class="ad"><img src="http://placehold.it/360x220" alt="" /></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="block">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="footersec">
+                            <div class="flogo"><a href="#" title=""><img src="http://placehold.it/175x40" alt="" /></a></div>
+                            <ul>
+                                <li><a href="#" title="">Home</a></li>
+                                <li><a href="#" title="">Explore</a></li>
+                                <li><a href="#" title="">Listings</a></li>
+                                <li><a href="#" title="">Destinations</a></li>
+                                <li><a href="#" title="">Pages</a></li>
+                            </ul>
+                            <span>Collins Street West, Victoria 8007, Australia.</span>
+                            <span>+1 246-345-0695</span>
+                            <span>info@example.com</span>
+                            <div class="social">
+                                <a href="#" title=""><i class="fa fa-facebook"></i></a>
+                                <a href="#" title=""><i class="fa fa-twitter"></i></a>
+                                <a href="#" title=""><i class="fa fa-instagram"></i></a>
+                                <a href="#" title=""><i class="fa fa-pinterest"></i></a>
+                                <a href="#" title=""><i class="fa fa-dribbble"></i></a>
+                                <a href="#" title=""><i class="fa fa-google"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="bottomline">
+            <a href="#scrollup" class="scrollup" title=""><i class="fa fa-angle-up"></i></a>
+            <span>© 2018 Find&Go All rights reserved. Design by Creative Layers</span>
+        </div>
+    </footer>
+
+
+
+
+<div class="row" style="display: block;">
+    <div class="col-lg-12 grid-margin stretch-card">
+        <div class="card">
+            <div class="card-body">
+                <div class="row" style="display: block;margin: 25px;">
+                    <div style="text-align: center;">{{date('d-m-Y', strtotime($info['created_at']))}} {{$info['location']}}</div>
+                    <h2 class="card-title">{{$info['title']}}</h2>
+
+                    <p style="padding-left: 0px;">{{$info['brief_description']}}</p>
+                </div>
+
+                <div class="row" style="display: block;margin: 25px;">
+                    <div class="col-lg-5 column" style="margin:0px;padding: 0px;padding-left: 0px;">
+                        <div>Category - <?php if(isset($info->category)){ echo $info->category->name; }; ?></div>
+                        <div><?php if(!empty($info->learn_more_url)){ echo '<a target="_blank" href="'.$info->learn_more_url.'">Learn more..</a>'; }; ?></div>
+                    </div>
+                    <div class="col-lg-7 column">
+                        <div>Submitter: <?php if(isset($info->user)){ echo '@'.'<span class="inactive_link" onclick="openProfile('.$info->user->id.')">'.$info->user->display_name.'</span>'; }; ?></div>
+                        <?php if(isset($info->videoProducer)){
+                        $datas = array();
+                        foreach($info->videoProducer as $user){
+                            $datas[] = '@'.'<span class="inactive_link" onclick="openProfile('.$user->user->id.')">'.$user->user->display_name.'</span>';
+                        }
+
+                        if(!empty($datas)){
+                        ?>
+                        <div>Producer(s):
+                            <?php
+                            echo implode(', ', $datas);
+                            ?>
+                        </div>
+                        <?php }
+                        }; ?>
+                        <?php if(isset($info->coCreators)){
+
+                        $datas = array();
+                        foreach($info->coCreators as $user){
+                            $datas[] = '@'.'<span class="inactive_link" onclick="openProfile('.$user->user->id.')">'.$user->user->display_name.'</span>';
+                        }
+
+                        if(!empty($datas)){
+                        ?>
+
+                        <div>Co-creators(s):
+                            <?php
+                            echo implode(', ', $datas);
+                            ?>
+                        </div>
+
+                        <?php }
+                        }; ?>
+                        <?php if(isset($info->onScreen) && count($info->onScreen) > 0){
+                        $datas = array();
+                        foreach($info->onScreen as $user){
+                            $datas[] = '@'.'<span class="inactive_link" onclick="openProfile('.$user->user->id.')">'.$user->user->display_name.'</span>';
+                        }
+
+                        if(!empty($datas)){
+                        ?>
+                        <div>On screen(s):
+                            <?php
+                            echo implode(', ', $datas);
+                            ?>
+                        </div>
+                        <?php }
+                        }; ?>
+                        <?php if(isset($info->groups) && count($info->groups) > 0){
+                        $datas = array();
+                        foreach($info->groups as $group){
+                            $datas[] = '@'.'<span class="inactive_link" onclick="openGroupProfile('.$group->group->id.')">'.$group->group->name.'</span>';
+                        }
+
+                        if(!empty($datas)){
+                        ?>
+                        <div>Organization(s):
+                            <?php
+                            echo implode(', ', $datas);
+                            ?>
+                        </div>
+                        <?php }
+                        }; ?>
+
+                    </div>
+                </div>
+                <div class="row" style="display: block;margin: 25px;">
+                    <iframe width="800" height="400" src="<?php echo str_replace( 'watch?v=', 'embed/',$info['url']) ?>" frameborder="0" allowfullscreen></iframe>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+@endsection
