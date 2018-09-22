@@ -116,7 +116,7 @@ $video_id = isset($matches[1])?$matches[1]:'';
                                         </div>
                                         <a href="#" title=""><i class="flaticon-heart"></i>Save</a>
                                         <a href="#" title=""><i class="flaticon-note"></i>Add comment</a>
-                                        <div class="watchvideo" onclick="openVideoOnly()" data-videolink="<?php echo $info['url'] ?>">
+                                        <div class="watchvideo" onclick="openVideoOnly()" data-videolink="<?php echo str_replace( 'watch?v=', 'embed/',$info['url']) ?>">
                                             <a href="#" title=""><img src="/assets/findgo/images/play2.png" alt="">Watch Video</a>
                                         </div>
                                     </div>
