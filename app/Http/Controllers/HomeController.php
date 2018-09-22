@@ -237,6 +237,8 @@ class HomeController extends Controller
         $filter['category_id'] = isset($_GET['category_id'])?($_GET['category_id']):'';
         $filter['keyword'] = isset($_GET['keyword'])?($_GET['keyword']):'';
         $filter['gcs'] = isset($_GET['gcs'])?($_GET['gcs']):'';
+        $filter['video_id'] = isset($_GET['video_id'])?($_GET['video_id']):'';
+
         $uploaded_list = $this->userRepository->getPublicContents($user_id, $filter);
         $json_output = $this->getSearchListInJson($uploaded_list);
         $content = view('partials.video-search-result')

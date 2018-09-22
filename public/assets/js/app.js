@@ -1,10 +1,22 @@
-
 if(typeof(L) != "undefined"){
-    var map = L.map( 'map', {
-        center: [10.0, 5.0],
-        minZoom: 3,
-        zoom: 2
-    });
+    if($('#video_id').val() != undefined){
+        var lat = $('#video_lat').val();
+        var long = $('#video_long').val();
+        lat = parseFloat(lat);
+        long = parseFloat(long);
+        var map = L.map( 'map', {
+            center: [lat, long],
+            minZoom: 4,
+            zoom: 4
+        });
+    }else{
+        var map = L.map( 'map', {
+            center: [10.0, 5.0],
+            minZoom: 3,
+            zoom: 2
+        });
+    }
+
 
 
 // L.tileLayer( 'http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
@@ -65,8 +77,10 @@ function updateMarkers(markers){
     }
 
     var group = new L.featureGroup(all_b);
-    map.fitBounds(group.getBounds());
-
+    // map.fitBounds(group.getBounds());
+    if($('#video_id').val() == undefined){
+        map.fitBounds(group.getBounds());
+    }
     // m.clearLayers();
 
     $("#loading").hide();
@@ -170,7 +184,19 @@ function openGroupProfile(id){
 /////////////////////////////////////////////////////////
 function searchVideo(){
     $('#video_search_res').html('<i class="fa fa-spinner"></i> loading.....');
-    $.get( "/home/ajax/video-search/?keyword="+$('#search_text').val()+"&category_id="+$('#content_search_cat').val(), function( data ) {
+
+    var $search_text = $('#search_text').val();
+    var $search_cat = $('#content_search_cat').val();
+    var $video_id = $('#video_id').val();
+    if($search_text == undefined)
+        $search_text = '';
+    if($search_cat == undefined)
+        $search_cat = '';
+    if($video_id == undefined)
+        $video_id = '';
+
+    $.get( "/home/ajax/video-search/?keyword="+$search_text+"&category_id="+$search_cat
+        +"&video_id="+$video_id, function( data ) {
         console.log(data.json.original);
         if(data.content == '')
             $('#video_search_res').html('No result!');
@@ -293,4 +319,11 @@ function userRegister(){
     });
 }
 
-
+function openVideoOnly(){
+    var video_id = $('.watchvideo').data("videolink");
+    console.log('working:'+video_id);
+    $("#feature-info").html('loading...');
+    var content = '<iframe style="width: 100%;height: 600px" frameborder="0" allowfullscreen src="'+video_id+'"></iframe>';
+    $("#feature-info").html(content);
+    $("#featureModal").modal("show");
+}

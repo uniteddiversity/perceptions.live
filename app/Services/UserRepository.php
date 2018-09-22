@@ -252,6 +252,10 @@ class UserRepository
             $contents = $contents->where('category_id', $filter['category_id']);
         }
 
+        if(isset($filter['video_id']) && !empty($filter['video_id'])){
+            $contents = $contents->where('contents.id', $filter['video_id']);
+        }
+
         $contents = $contents->select('contents.id', DB::Raw("SUBSTRING(contents.brief_description, 1, 128) as trim_description"), 'contents.lat', 'contents.long', 'contents.title', 'contents.url',
                 'users.display_name','contents.created_at','contents.location','contents.user_id','contents.primary_subject_tag',
                 DB::Raw("GROUP_CONCAT(DISTINCT (concat(sorting_tags.tag_color,'-',sorting_tags.id,'-',sorting_tags.tag)) SEPARATOR ', ') as tag_colors") )
@@ -291,8 +295,10 @@ class UserRepository
 
     public function getContentsInfo($user_id, $id)
     {
-        $contents = $this->content->with(['user','gciTags',
-        'coCreators'=>function($q){
+        $contents = $this->content->with(['user',
+        'gciTags'=>function($q){
+            $q->with('tag');
+        },'coCreators'=>function($q){
             $q->with('user');
         },'onScreen'=>function($q){
             $q->with('user');
@@ -300,7 +306,9 @@ class UserRepository
             $q->with('user');
         },'groups'=>function($q){
             $q->with('group');
-        },'sortingTags','category'])
+        },'sortingTags'=>function($q){
+                $q->with('tag');
+        },'category'])
             ->where('contents.id',$id)
                 ->where('contents.status', '=', 1)
                 ->leftJoin('users', 'contents.user_id', 'users.id')->where(function($q) use ($user_id){

@@ -4,228 +4,255 @@
 <?php
 preg_match("/^(?:http(?:s)?:\/\/)?(?:www\.)?(?:m\.)?(?:youtu\.be\/|youtube\.com\/(?:(?:watch)?\?(?:.*&)?v(?:i)?=|(?:embed|v|vi|user)\/))([^\?&\"'>]+)/", $info['url'], $matches);
 $video_id = isset($matches[1])?$matches[1]:'';
+//dd($info->gciTags);
 ?>
 
 
     @include('partials.nav-bar')
-
-    <section>
-        <div class="block no-padding">
-            <div class="container fluid">
-                <div class="row">
-                    <div class="col-lg-12">
-                        <div class="sl-slider s2" id="makesliderfull">
-                            <div class="slg-box"> <img src="https://img.youtube.com/vi/<?php echo $video_id ?>/maxresdefault.jpg" alt="" /> </div>
-                        </div>
+<input type="hidden" id="video_id" value="<?php echo $info['id'] ?>" />
+<input type="hidden" id="video_lat" value="<?php echo $info['lat'] ?>" />
+<input type="hidden" id="video_long" value="<?php echo $info['long'] ?>" />
+<section>
+    <div class="block no-padding">
+        <div class="container fluid">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="sl-slider s2" id="makesliderfull">
+                        <div class="slg-box"> <img src="https://img.youtube.com/vi/<?php echo $video_id ?>/maxresdefault.jpg" alt="" /> </div>
                     </div>
                 </div>
             </div>
         </div>
-    </section>
+    </div>
+</section>
 
-    <section>
-        <div class="block no-padding">
-            <div class="container">
-                <div class="row">
-                    <div class="col-lg-12">
-                        <div class="slhead overlape">
-                            <div class="row">
-                                <div class="col-lg-6">
-                                    <div class="sltitle light">
-                                        <h1>{{$info['title']}}</h1>
-                                        <span><i class="flaticon-heart"></i> Greater Community Intention 1, Greater Community Intention 2, etc</span>
-                                        <span><i class="flaticon-eye"></i> Sorting Tag, Sorting Tag, Sorting Tag</span>
-                                        <div class="slbtnsspans">
-                                            <span><i class="flaticon-map"></i> {{$info['location']}}</span>
-                                            <span><i class="flaticon-avatar"></i>
+<section>
+    <div class="block no-padding">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="slhead overlape">
+                        <div class="row">
 
-                                                <?php
-                                                if(isset($info->videoProducer)){
-                                                    $datas = array();
-                                                    foreach($info->videoProducer as $user){
-                                                        $datas[] = '<span class="inactive_link" style="float:left" onclick="openProfile('.$user->user->id.')">'.'@'.$user->user->display_name.'</span>';
-                                                    }
+                            <div class="col-lg-5">
+                                <div class="sltitle light">
+                                    {{--<div class="row">--}}
+                                        {{--<h1 style="float: left;">{{$info['title']}}</h1>--}}
+                                        {{--<div class="col-lg-5" style="float: left;">--}}
+                                            {{--<div class="watchvideo">--}}
+                                                {{--<a href="#" title=""><img src="images/play2.png" alt="">Watch Video</a>--}}
+                                            {{--</div>--}}
+                                        {{--</div>--}}
+                                    {{--</div>--}}
+                                    <h1 style="float: left;">{{$info['title']}}</h1>
 
-                                                    if(!empty($datas)){
-                                                        echo implode(' ', $datas);
-                                                    }
+
+                                    <span><i class="flaticon-heart"></i>
+                                        <?php
+                                        $datas = [];
+                                        foreach($info->gciTags as $tag){
+                                            if(isset($tag->content_tag_id) && isset($tag->tag->tag)){
+                                                $datas[] = $tag->tag->tag;
+                                            }
+                                        }
+                                        if(!empty($datas)){
+                                            echo implode(' ,', $datas);
+                                        }
+                                        ?>
+
+                                    </span>
+                                    <span><i class="flaticon-eye"></i>
+                                        <?php
+                                        $datas = [];
+                                        foreach($info->sortingTags as $tag){
+                                            if(isset($tag->content_tag_id) && isset($tag->tag->tag)){
+                                                $datas[] = $tag->tag->tag;
+                                            }
+                                        }
+                                        if(!empty($datas)){
+                                            echo implode(' ,', $datas);
+                                        }
+                                        ?>
+                                    </span>
+                                    <div class="slbtnsspans">
+                                        <span><i class="flaticon-map"></i> {{$info['location']}}</span>
+                                        <span><i class="flaticon-avatar"></i>
+
+                                            <?php
+                                            if(isset($info->videoProducer)){
+                                                $datas = array();
+                                                foreach($info->videoProducer as $user){
+                                                    $datas[] = '<span class="inactive_link" style="float:left" onclick="openProfile('.$user->user->id.')">'.'@'.$user->user->display_name.'</span>';
                                                 }
-                                                ?>
 
-                                            </span>
-                                        </div>
+                                                if(!empty($datas)){
+                                                    echo implode(' ', $datas);
+                                                }
+                                            }
+                                            ?>
+
+                                        </span>
                                     </div>
                                 </div>
-                                <div class="col-lg-6">
-                                    <div class="slbtnsspans light">
-                                        <ul class="listmetas">
-                                            <li><span class="rated">3.5</span>3 interactions</li>
-                                            <li><a href="#" title=""><i class="flaticon-magnifying-glass"></i> Primary Subject Tag</a></li>
-                                            <li><div class="currency">community intention dots</div></li>
-                                        </ul>
-                                        <div class="slbtns">
-                                            <div class="sharelisting">
-                                                <a href="#" title=""><i class="flaticon-share"></i>Share</a>
-                                                <div class="sharebtns">
-                                                    <a href="#" title=""><i class="fa fa-facebook"></i></a>
-                                                    <a href="#" title=""><i class="fa fa-twitter"></i></a>
-                                                    <a href="#" title=""><i class="fa fa-instagram"></i></a>
-                                                    <a href="#" title=""><i class="fa fa-pinterest"></i></a>
-                                                    <a href="#" title=""><i class="fa fa-dribbble"></i></a>
-                                                    <a href="#" title=""><i class="fa fa-google"></i></a>
-                                                </div>
+                            </div>
+                            <div class="col-lg-7">
+                                <div class="slbtnsspans light">
+                                    <ul class="listmetas">
+                                        <li><span class="rated">3.5</span>3 interactions</li>
+                                        <li><a href="#" title=""><i class="flaticon-magnifying-glass"></i> Primary Subject Tag</a></li>
+                                        <li><div class="currency">community intention dots</div></li>
+                                    </ul>
+                                    <div class="slbtns">
+                                        <div class="sharelisting">
+                                            <a href="#" title=""><i class="flaticon-share"></i>Share</a>
+                                            <div class="sharebtns">
+                                                <a href="#" title=""><i class="fa fa-facebook"></i></a>
+                                                <a href="#" title=""><i class="fa fa-twitter"></i></a>
+                                                <a href="#" title=""><i class="fa fa-instagram"></i></a>
+                                                <a href="#" title=""><i class="fa fa-pinterest"></i></a>
+                                                <a href="#" title=""><i class="fa fa-dribbble"></i></a>
+                                                <a href="#" title=""><i class="fa fa-google"></i></a>
                                             </div>
-                                            <a href="#" title=""><i class="flaticon-heart"></i>Save</a>
-                                            <a href="#" title=""><i class="flaticon-note"></i>Add comment</a>
+                                        </div>
+                                        <a href="#" title=""><i class="flaticon-heart"></i>Save</a>
+                                        <a href="#" title=""><i class="flaticon-note"></i>Add comment</a>
+                                        <div class="watchvideo" onclick="openVideoOnly()" data-videolink="<?php echo $info['url'] ?>">
+                                            <a href="#" title=""><img src="/assets/findgo/images/play2.png" alt="">Watch Video</a>
                                         </div>
                                     </div>
                                 </div>
                             </div>
+
+
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-    </section>
+    </div>
+</section>
 
-    <section>
-        <div class="block">
-            <div class="container">
-                <div class="row">
-                    <div class="col-lg-8 column">
-                        <div class="bbox" id="sc1">
-                            <h3>Description</h3>
-                            <div class="ldesc">
-                                <p>{{$info['brief_description']}}</p>
-                            </div>
+<section>
+    <div class="block">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 column">
+                    <div class="bbox" id="sc1">
+                        <h3>Description</h3>
+                        <div class="ldesc">
+                            <p>{{$info['brief_description']}}</p>
                         </div>
+                    </div>
 
-                        <div class="bbox" id="sc4">
-                            <h3>1 Interaction for Video Title</h3>
-                            <div class="reviewssec">
-                                <div class="reviewthumb"> <img src="http://placehold.it/60x60" alt="" /> </div>
-                                <div class="reviewinfo">
-                                    <h3>@commenter displayname</h3>
-                                    <span>December 12, 2017 at 8:18 am</span>
-                                    <ul class="listmetas justrate"><li><span class="rated">3.5</span>3 Ratings</li></ul>
-                                    <p>I visited here once and met the community. This video captured the essence of this place and people just great.</p>
-                                    <div class="rgallery">
-                                        <a href="#" title=""><img src="http://placehold.it/180x115" alt="" /></a>
-                                        <a href="#" title=""><img src="http://placehold.it/180x115" alt="" /></a>
-                                        <a href="#" title=""><img src="http://placehold.it/180x115" alt="" /></a>
-                                    </div>
-                                    <div class="wasreview">
-                                        <span><strong>Rate this interaction:</strong></span>
-                                        <div class="wasreviewbtn">
-                                            <a href="#" title="" class="c1"><i class="flaticon-smile"></i>Helpful 85</a>
-                                            <a href="#" title="" class="c2"><i class="flaticon-thumb-up"></i>Neutral 45</a>
-                                            <a href="#" title="" class="c3"><i class="flaticon-sad"></i>Wasteful :( 87</a>
-                                        </div>
-                                    </div>
-                                    <div class="reviewaction">
-                                        <a href="#" title=""><i class="flaticon-back"></i> Reply</a>
+                    <div class="bbox" id="sc4">
+                        <h3>1 Interaction for Video Title</h3>
+                        <div class="reviewssec">
+                            <div class="reviewthumb"> <img src="http://placehold.it/60x60" alt="" /> </div>
+                            <div class="reviewinfo">
+                                <h3>@commenter displayname</h3>
+                                <span>December 12, 2017 at 8:18 am</span>
+                                <ul class="listmetas justrate"><li><span class="rated">3.5</span>3 Ratings</li></ul>
+                                <p>I visited here once and met the community. This video captured the essence of this place and people just great.</p>
+                                <div class="rgallery">
+                                    <a href="#" title=""><img src="http://placehold.it/180x115" alt="" /></a>
+                                    <a href="#" title=""><img src="http://placehold.it/180x115" alt="" /></a>
+                                    <a href="#" title=""><img src="http://placehold.it/180x115" alt="" /></a>
+                                </div>
+                                <div class="wasreview">
+                                    <span><strong>Rate this interaction:</strong></span>
+                                    <div class="wasreviewbtn">
+                                        <a href="#" title="" class="c1"><i class="flaticon-smile"></i>Helpful 85</a>
+                                        <a href="#" title="" class="c2"><i class="flaticon-thumb-up"></i>Neutral 45</a>
+                                        <a href="#" title="" class="c3"><i class="flaticon-sad"></i>Wasteful :( 87</a>
                                     </div>
                                 </div>
-                            </div>
-                        </div>
-                        <div class="listingcomment">
-                            <div class="leavecomment">
-                                <h3>Interact With This Video <em>(coming soon!)</em></h3>
-                                <div class="upimg">
-                                    <span>Upload images</span>
-                                    <a href="#" title=""><img src="images/cloud.png" alt="" /></a>
-                                    <input type="file" />
+                                <div class="reviewaction">
+                                    <a href="#" title=""><i class="flaticon-back"></i> Reply</a>
                                 </div>
-                                <div class="urrating">
-                                    <span>Your Rating For This Video</span>
-                                    <strong>Very Good</strong>
-                                    <b>
-                                        <i class="fa fa-star"></i>
-                                        <i class="fa fa-star"></i>
-                                        <i class="fa fa-star"></i>
-                                        <i class="fa fa-star-o"></i>
-                                        <i class="fa fa-star-o"></i>
-                                    </b>
-
-                                </div>
-                                <form>
-                                    <input placeholder="your@mail.com" type="Email">
-                                    <input placeholder="Title" type="text">
-                                    <textarea placeholder="Review"></textarea>
-                                    <input value="Submit Review" type="submit">
-                                </form>
                             </div>
                         </div>
                     </div>
-                    <div class="col-lg-4 column">
-                        <div class="amenties listing">
-                            <h3>Collaborative Networking</h3>
-                            <span><i class="flaticon-arrows"> (if exists) Exchange: Service/Opportunity</i></span>
-                            <span><i class="flaticon-booked"> User-Submitted ('User Submitted Collaboration' or 'Sponsored')</i></span>
-                            <span><i class="flaticon-avatar"> 3 Associated Users </i></span>
-                            <span><br></span>
-                        </div>
+                    <div class="listingcomment">
+                        <div class="leavecomment">
+                            <h3>Interact With This Video <em>(coming soon!)</em></h3>
+                            <div class="upimg">
+                                <span>Upload images</span>
+                                <a href="#" title=""><img src="images/cloud.png" alt="" /></a>
+                                <input type="file" />
+                            </div>
+                            <div class="urrating">
+                                <span>Your Rating For This Video</span>
+                                <strong>Very Good</strong>
+                                <b>
+                                    <i class="fa fa-star"></i>
+                                    <i class="fa fa-star"></i>
+                                    <i class="fa fa-star"></i>
+                                    <i class="fa fa-star-o"></i>
+                                    <i class="fa fa-star-o"></i>
+                                </b>
 
-                        <div class="cbusiness">
-                            <h3>Contact Video Users</h3>
+                            </div>
                             <form>
-                                <label>Your Name *</label>
-                                <input type="text" placeholder="Ali TUF..." />
-                                <label>Your Email Address*</label>
-                                <input type="text" placeholder="demo@demo.com" />
-                                <label>Your Message</label>
-                                <textarea placeholder="demo@demo.com"></textarea>
-                                <button type="submit">Send Message</button>
+                                <input placeholder="your@mail.com" type="Email">
+                                <input placeholder="Title" type="text">
+                                <textarea placeholder="Review"></textarea>
+                                <input value="Submit Review" type="submit">
                             </form>
                         </div>
-                        <div class="cad">
-                            <div class="ad"><img src="http://placehold.it/360x220" alt="" /></div>
-                        </div>
                     </div>
+                </div>
+                <div class="col-lg-4 column">
+                    <div class="amenties listing">
+                        <h3>Collaborative Networking</h3>
+                        <span><i class="flaticon-arrows"> (if exists) Exchange: Service/Opportunity</i></span>
+                        <span><i class="flaticon-booked"> User-Submitted ('User Submitted Collaboration' or 'Sponsored')</i></span>
+                        <span><i class="flaticon-avatar"> 3 Associated Users </i></span>
+                        <span><br></span>
+                    </div>
+
+                    <div class="single_map">
+                        <div class="ad map" id="map" style="height: 250px">...</div>
+                        {{--<div class="ad"><img src="http://placehold.it/360x220" alt="" /></div>--}}
+                    </div>
+
+                    <div class="cbusiness">
+                        <h3>Contact Video Users</h3>
+                        <form>
+                            <label>Your Name *</label>
+                            <input type="text" placeholder="Ali TUF..." />
+                            <label>Your Email Address*</label>
+                            <input type="text" placeholder="demo@demo.com" />
+                            <label>Your Message</label>
+                            <textarea placeholder="demo@demo.com"></textarea>
+                            <button type="submit">Send Message</button>
+                        </form>
+                    </div>
+
                 </div>
             </div>
         </div>
-    </section>
-
-    <footer>
-        <div class="block">
-            <div class="container">
-                <div class="row">
-                    <div class="col-lg-12">
-                        <div class="footersec">
-                            <div class="flogo"><a href="#" title=""><img src="http://placehold.it/175x40" alt="" /></a></div>
-                            <ul>
-                                <li><a href="#" title="">Home</a></li>
-                                <li><a href="#" title="">Explore</a></li>
-                                <li><a href="#" title="">Listings</a></li>
-                                <li><a href="#" title="">Destinations</a></li>
-                                <li><a href="#" title="">Pages</a></li>
-                            </ul>
-                            <span>Collins Street West, Victoria 8007, Australia.</span>
-                            <span>+1 246-345-0695</span>
-                            <span>info@example.com</span>
-                            <div class="social">
-                                <a href="#" title=""><i class="fa fa-facebook"></i></a>
-                                <a href="#" title=""><i class="fa fa-twitter"></i></a>
-                                <a href="#" title=""><i class="fa fa-instagram"></i></a>
-                                <a href="#" title=""><i class="fa fa-pinterest"></i></a>
-                                <a href="#" title=""><i class="fa fa-dribbble"></i></a>
-                                <a href="#" title=""><i class="fa fa-google"></i></a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+    </div>
+</section>
+<div class="modal fade" id="featureModal" tabindex="-1" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header" style="border-bottom: 0px solid #e5e5e5;">
+                <button class="close" type="button" data-dismiss="modal" aria-hidden="true">&times;</button>
+                {{--<h4 class="modal-title text-primary" id="feature-title"></h4>--}}
             </div>
+            <div class="modal-body" id="feature-info"></div>
         </div>
-        <div class="bottomline">
-            <a href="#scrollup" class="scrollup" title=""><i class="fa fa-angle-up"></i></a>
-            <span>© 2018 Find&Go All rights reserved. Design by Creative Layers</span>
-        </div>
-    </footer>
+    </div>
+</div>
 
+<script>
+    $(document).ready(function(){
+        searchVideo();
+    })
 
+</script>
 
-
+<?php /*
 <div class="row" style="display: block;">
     <div class="col-lg-12 grid-margin stretch-card">
         <div class="card">
@@ -317,4 +344,23 @@ $video_id = isset($matches[1])?$matches[1]:'';
         </div>
     </div>
 </div>
+ */ ?>
+
+
+<style>
+    .slick-slide{
+        overflow: hidden;
+        max-height: 500px;
+    }
+
+    .modal-content{
+        padding: 0px !important;
+        position: relative;
+    }
+
+    .modal-header{
+        position: absolute;
+        right: 0px;
+    }
+</style>
 @endsection

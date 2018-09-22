@@ -24,6 +24,8 @@
     <link rel="stylesheet" href="/assets/css/L.Control.Locate.css">
     <link rel="stylesheet" href="/assets/leaflet-groupedlayercontrol/leaflet.groupedlayercontrol.css">
     <link rel="stylesheet" href="/js/dist/css/select2.min.css" />
+    <link rel="stylesheet" href="/css/custom.css" />
+    <script src="/assets/js/jquery-2.1.4.min.js"></script>
     {{--<link rel="stylesheet" href="/assets/css/app.css">--}}
 </head>
 <body class="full-height" id="scrollup">
@@ -126,7 +128,7 @@
 
 
 {{--<script src="/assets/findgo/js/jquery.min.js" type="text/javascript"></script>--}}
-<script src="/assets/js/jquery-2.1.4.min.js"></script>
+
 <script src="/assets/findgo/js/modernizr.js" type="text/javascript"></script>
 <script src="/assets/findgo/js/script.js" type="text/javascript"></script>
 <script src="/assets/findgo/js/bootstrap.min.js" type="text/javascript"></script>
