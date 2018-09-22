@@ -99,8 +99,17 @@ $video_id = isset($matches[1])?$matches[1]:'';
                                 <div class="slbtnsspans light">
                                     <ul class="listmetas">
                                         <li><span class="rated">3.5</span>3 interactions</li>
-                                        <li><a href="#" title=""><i class="flaticon-magnifying-glass"></i> Primary Subject Tag</a></li>
-                                        <li><div class="currency">community intention dots</div></li>
+                                        <li><a href="#" title=""><i class="flaticon-magnifying-glass"></i> {{$info['primary_subject_tag']}}</a></li>
+                                        <li><div class="currency gci_dot_container">
+                                                <span style="padding-bottom: 6px;float: right;">
+                                                    <?php foreach($info->gciTags as $tag){
+                                                        if(isset($tag->tag) && isset($tag->tag->tag)){
+                                                            echo '<span data-toggle="tooltip" data-original-title="'.$tag->tag->tag.'" style="background-color: '.$tag->tag->tag_color.'" class="dot"></span>';
+                                                        }
+                                                    }
+                                                    ?>
+                                                </span>
+                                            </div></li>
                                     </ul>
                                     <div class="slbtns">
                                         <div class="sharelisting">

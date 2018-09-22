@@ -24,7 +24,7 @@
     <link rel="stylesheet" href="/assets/css/L.Control.Locate.css">
     <link rel="stylesheet" href="/assets/leaflet-groupedlayercontrol/leaflet.groupedlayercontrol.css">
     <link rel="stylesheet" href="/js/dist/css/select2.min.css" />
-    <link rel="stylesheet" href="/css/custom.css" />
+    <link rel="stylesheet" href="/assets/css/custom.css" />
     <script src="/assets/js/jquery-2.1.4.min.js"></script>
     {{--<link rel="stylesheet" href="/assets/css/app.css">--}}
 </head>
