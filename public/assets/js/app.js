@@ -276,7 +276,7 @@ function testFunction(id){
 
 function userLogin(){
     jQuery.ajax({
-        url: 'user/login',
+        url: '/user/login',
         method: 'POST',
         data: $('#login-form').serialize()
     }).done(function (response) {
@@ -318,7 +318,7 @@ function userRegister(){
         // Whoops; show an error.
     });
 }
-
+console.log('w');
 function openVideoOnly(){
     var video_id = $('.watchvideo').data("videolink");
     console.log('working:'+video_id);

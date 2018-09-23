@@ -77,11 +77,16 @@ class UserController extends Controller
 
     public function profile()
     {
+        $user_id = (!isset(Auth::user()->id))? 0 : Auth::user()->id;
+//        $user_acting_role = $this->userRepository->getUserActingRoles();
+//        $gci_tags = $this->userRepository->getGreaterCommunityIntentionTag();
+        $categories = $this->category->get();
         $user_acting_role = $this->userRepository->getUserActingRoles();
         $gci_tags = $this->userRepository->getGreaterCommunityIntentionTag();
-        $categories = $this->category->get();
+        $sorting_tags = $this->userRepository->getSortingTags($user_id, true);
+
         return view('user.home')
-            ->with(compact('users_data','user_acting_role','categories','gci_tags'));
+            ->with(compact('users_data','user_acting_role','categories','gci_tags','sorting_tags'));
     }
 
     public function uploadVideo()
