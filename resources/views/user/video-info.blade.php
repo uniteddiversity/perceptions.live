@@ -44,7 +44,14 @@ $video_id = isset($matches[1])?$matches[1]:'';
                                             {{--</div>--}}
                                         {{--</div>--}}
                                     {{--</div>--}}
-                                    <h1 style="float: left;">{{$info['title']}}</h1>
+
+                                    <div class="slbtns">
+                                        <h1 style="float: left;color: white;width: auto;">{{$info['title']}}&nbsp;&nbsp;</h1>
+                                        <div style="float: left;" class="watchvideo" onclick="openVideoOnly()" data-videolink="<?php echo str_replace( 'watch?v=', 'embed/',$info['url']) ?>">
+                                            <a href="#" title=""><img src="/assets/findgo/images/play2.png" alt="">Watch Video</a>
+                                        </div>
+                                    </div>
+
 
 
                                     <span><i class="flaticon-heart"></i>
@@ -125,9 +132,9 @@ $video_id = isset($matches[1])?$matches[1]:'';
                                         </div>
                                         <a href="#" title=""><i class="flaticon-heart"></i>Save</a>
                                         <a href="#" title=""><i class="flaticon-note"></i>Add comment</a>
-                                        <div class="watchvideo" onclick="openVideoOnly()" data-videolink="<?php echo str_replace( 'watch?v=', 'embed/',$info['url']) ?>">
+                                        <?php /*<div class="watchvideo" onclick="openVideoOnly()" data-videolink="<?php echo str_replace( 'watch?v=', 'embed/',$info['url']) ?>">
                                             <a href="#" title=""><img src="/assets/findgo/images/play2.png" alt="">Watch Video</a>
-                                        </div>
+                                        </div>*/?>
                                     </div>
                                 </div>
                             </div>
@@ -213,7 +220,7 @@ $video_id = isset($matches[1])?$matches[1]:'';
                 <div class="col-lg-4 column">
                     <div class="amenties listing">
                         <h3>Collaborative Networking</h3>
-                        <span><i class="flaticon-arrows"> (if exists) Exchange: Service/Opportunity</i></span>
+                        <span><i class="fa fa-exchange"> (if exists) Exchange: Service/Opportunity</i></span>
                         <span><i class="flaticon-booked"> User-Submitted ('User Submitted Collaboration' or 'Sponsored')</i></span>
                         <span><i class="flaticon-avatar"> 3 Associated Users </i></span>
                         <span><br></span>
