@@ -1,8 +1,23 @@
-<?php foreach($uploaded_list as $info){ ?>
+<input type="hidden" id="result_count" value="{{$result_count}}" />
+<div class="ml-filterbar" style="margin-left: 18px;margin-right: 10px;">
+    <h3><i class="flaticon-eye"></i>{{$result_count}} Results Found</h3>
+    <ul>
+        <li class="singleplaces active"><span><i class="fa fa-exchange"></i></span></li>
+        <li class="doubleplaces"><span><i class="fa fa-th-large"></i></span></li>
+        <li class="listingplaces"><span><i class="fa fa-th-list"></i></span></li>
+    </ul>
+</div>
+<?php foreach($uploaded_list as $info){
+
+preg_match("/^(?:http(?:s)?:\/\/)?(?:www\.)?(?:m\.)?(?:youtu\.be\/|youtube\.com\/(?:(?:watch)?\?(?:.*&)?v(?:i)?=|(?:embed|v|vi|user)\/))([^\?&\"'>]+)/", $info['url'], $matches);
+$video_id = isset($matches[1])?$matches[1]:'';
+?>
+
 <div class="col-lg-12">
     <div class="places s2">
         <div class="placethumb">
-            <iframe frameborder="0" showinfo="0" controls="0" autohide="1" style="width: 100%;" src="<?php echo str_replace( 'watch?v=', 'embed/',$info['url']) ?>" frameborder="0" allowfullscreen></iframe>
+            <img src="https://img.youtube.com/vi/<?php echo $video_id ?>/mqdefault.jpg">
+            <?php /*<iframe frameborder="0" showinfo="0" controls="0" autohide="1" style="width: 100%;" src="<?php echo str_replace( 'watch?v=', 'embed/',$info['url']) ?>" frameborder="0" allowfullscreen></iframe> */ ?>
             <div class="placeoptions">
                 <span class="pull-left"> <i class="flaticon-eye"></i> Watch </span>
                 <span class="pull-right"> <i class="flaticon-note"></i> More Info </span>
@@ -31,7 +46,7 @@
                 </ul>
             </div>
             <div class="placedetails">
-                <span class="pull-left"><i class="flaticon-pin"></i> <?php echo $info['location'] ?></span>
+                <span class="pull-left" onclick="navigateOnMap('<?php echo $info['lat'] ?>','<?php echo $info['long'] ?>');" style="cursor: pointer;"><i class="flaticon-pin"></i> <?php echo $info['location'] ?></span>
                 <span class="pull-right"><i class="flaticon-avatar"></i> <?php foreach($info->videoProducer as $key => $users){ if(isset($info->videoProducer[$key])){ echo '<span class="inactive_link" onclick="openProfile(\''. $info->videoProducer[$key]->user->id .'\')">@'.$info->videoProducer[$key]->user->display_name.'</span>'; break; } }?></span>
             </div>
         </div>

@@ -1,5 +1,9 @@
 <div style="padding-left: 30px; padding-top: 12px; padding-bottom: 30px;">
-    <input type="text" placeholder="Looking for something? Someone, somewhere?" name="search_text" id="search_text" />
+    <div class="rfield">
+        <input type="text" placeholder="Looking for something?" name="search_text" id="search_text" />
+        <i class="flaticon-magnifying-glass" style="cursor:pointer" onclick="searchVideo()" ></i>
+    </div>
+
     <div class="mlfield s2">
         <select class="selectbox" id="content_search_cat">
             <option value="">All Categories</option>
@@ -22,28 +26,28 @@
         <li><a id="finddo-target" class="theme-btn2" href="#"><i class="fa fa-bullseye"></i> Target </a></i></span></li>
     </ul>
 </div>
-<div class="col-lg-12">
-    <div class="mlradius">
-        <span>Radius :</span>
-        <div class="mlfield s2">
-            <select class="selectbox">
-                <option>Kilometer</option>
-                <option>Miles</option>
-            </select>
-        </div>
-        <div class="rslider">
-            <amino-slider class="slider" data-min="0" data-max="100" data-value="10"></amino-slider>
-        </div>
-    </div>
-</div>
-<div class="ml-filterbar">
-    <h3><i class="flaticon-eye"></i>14 Results Found</h3>
-    <ul>
-        <li class="singleplaces active"><span><i class="fa fa-exchange"></i></span></li>
-        <li class="doubleplaces"><span><i class="fa fa-th-large"></i></span></li>
-        <li class="listingplaces"><span><i class="fa fa-th-list"></i></span></li>
-    </ul>
-</div>
+{{--<div class="col-lg-12">--}}
+    {{--<div class="mlradius">--}}
+        {{--<span>Radius :</span>--}}
+        {{--<div class="mlfield s2">--}}
+            {{--<select class="selectbox">--}}
+                {{--<option>Kilometer</option>--}}
+                {{--<option>Miles</option>--}}
+            {{--</select>--}}
+        {{--</div>--}}
+        {{--<div class="rslider">--}}
+            {{--<amino-slider class="slider" data-min="0" data-max="100" data-value="10"></amino-slider>--}}
+        {{--</div>--}}
+    {{--</div>--}}
+{{--</div>--}}
+{{--<div class="ml-filterbar">--}}
+    {{--<h3><i class="flaticon-eye"></i>14 Results Found</h3>--}}
+    {{--<ul>--}}
+        {{--<li class="singleplaces active"><span><i class="fa fa-exchange"></i></span></li>--}}
+        {{--<li class="doubleplaces"><span><i class="fa fa-th-large"></i></span></li>--}}
+        {{--<li class="listingplaces"><span><i class="fa fa-th-list"></i></span></li>--}}
+    {{--</ul>--}}
+{{--</div>--}}
 <div class="ml-placessec">
     <div class="row" id="video_search_res" >
         ...

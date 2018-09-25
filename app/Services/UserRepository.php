@@ -215,7 +215,7 @@ class UserRepository
         return $r;
     }
 
-    public function getPublicContents($user_id, $filter = array())
+    public function getPublicContents($user_id, $filter = array(), &$count = 0)
     {
         $contents = $this->content->with(['videoProducer' => function($q){
             $q->with('user');
@@ -270,6 +270,7 @@ class UserRepository
             }
         }
 
+        $count = $i;
         return $r;
     }
 

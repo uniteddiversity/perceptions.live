@@ -194,7 +194,7 @@ $video_id = isset($matches[1])?$matches[1]:'';
                             <div class="upimg">
                                 <span>Upload images</span>
                                 <a href="#" title=""><img src="images/cloud.png" alt="" /></a>
-                                <input type="file" />
+                                <input type="file" disabled="disabled" />
                             </div>
                             <div class="urrating">
                                 <span>Your Rating For This Video</span>
@@ -209,10 +209,10 @@ $video_id = isset($matches[1])?$matches[1]:'';
 
                             </div>
                             <form>
-                                <input placeholder="your@mail.com" type="Email">
-                                <input placeholder="Title" type="text">
-                                <textarea placeholder="Review"></textarea>
-                                <input value="Submit Review" type="submit">
+                                <input disabled="disabled" placeholder="your@mail.com" type="Email">
+                                <input disabled="disabled" placeholder="Title" type="text">
+                                <textarea disabled="disabled" placeholder="Review"></textarea>
+                                <input disabled="disabled" value="Submit Review" type="submit" style="background: #ccc;color: black;border: #2b3d51">
                             </form>
                         </div>
                     </div>

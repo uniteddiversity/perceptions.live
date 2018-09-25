@@ -188,7 +188,8 @@ html.no-scoll {
     overflow:hidden;
     position:relative;
     width:100%;
-    min-height: 420px;
+    min-height: 720px;
+    height: 100%;
 }
 .theme-layout.boxed{
     float:none;
@@ -3857,7 +3858,7 @@ body.fakescroll-grabbed{
 .ml-listings {
     width: 510px;
     background: #fafafa;
-    padding-left: 115px !important;
+    padding-left: 105px !important;
     position: fixed;
     left: 0;
     top: 0;

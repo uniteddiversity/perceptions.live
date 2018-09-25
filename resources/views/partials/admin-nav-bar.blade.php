@@ -8,8 +8,8 @@
             <a class="mobile-search morphsearch-search" href="#">
                 <i class="ti-search"></i>
             </a>
-            <a href="index.html">
-                <img class="img-fluid" src="assets/images/logo.png" alt="{{ config('app.name') }}" />
+            <a href="/">
+                <img class="img-fluid" src="/assets/img/logo_1.png" alt="{{ config('app.name') }}" />
             </a>
             <a class="mobile-options">
                 <i class="ti-more"></i>
@@ -81,6 +81,11 @@
                             <i class="ti-angle-down"></i>
                         </a>
                         <ul class="show-notification profile-notification">
+                            <li>
+                                <a href="/">
+                                    <i class="ti-home"></i> Home
+                                </a>
+                            </li>
                             <li>
                                 <a href="/user/user-profile">
                                     <i class="ti-user"></i> Profile

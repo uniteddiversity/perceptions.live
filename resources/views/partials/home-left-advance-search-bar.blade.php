@@ -24,6 +24,19 @@
                     </div>
                 </div>
             </div>
+
+            <div class="row">
+                <div class="col-lg-6">
+                    <div class="mlfield">
+                        <input id="docalendar" type="text" placeholder="Start Date" />
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="mlfield">
+                        <input id="docalendar2" type="text" placeholder="End Date" />
+                    </div>
+                </div>
+            </div>
         </form>
     </div>
     <div class="mfilterform2">

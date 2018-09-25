@@ -229,6 +229,7 @@ class HomeController extends Controller
     public function searchVideos(Request $request)
     {
         $r = $request->all();
+        $result_count = 0;
         $filter['category'] = isset($r['category'])?$r['category']: array();
         $filter['keyword'] = isset($r['keyword'])?$r['keyword']: array();
         $filter['gcs'] = isset($r['gcs'])?$r['gcs']: array();//great community service
@@ -239,10 +240,10 @@ class HomeController extends Controller
         $filter['gcs'] = isset($_GET['gcs'])?($_GET['gcs']):'';
         $filter['video_id'] = isset($_GET['video_id'])?($_GET['video_id']):'';
 
-        $uploaded_list = $this->userRepository->getPublicContents($user_id, $filter);
+        $uploaded_list = $this->userRepository->getPublicContents($user_id, $filter, $result_count);
         $json_output = $this->getSearchListInJson($uploaded_list);
         $content = view('partials.video-search-result')
-            ->with(compact('uploaded_list'));
+            ->with(compact('uploaded_list','result_count'));
         $content = (string)htmlspecialchars($content);
         return array('content' => $content, 'json' => $json_output);
         return array('json' => $json_output);

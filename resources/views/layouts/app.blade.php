@@ -137,6 +137,7 @@
 <script src="/assets/findgo/js/sumoselect.js" type="text/javascript"></script>
 <script src="/assets/findgo/js/isotop.js" type="text/javascript"></script>
 <script src="/assets/findgo/js/jquery.nicescroll.min.js" type="text/javascript"></script>
+<script src="/assets/findgo/js/date-time-picker.min.js" type="text/javascript"></script>
 {{--<script src="http://maps.googleapis.com/maps/api/js?key=AIzaSyCYc537bQom7ajFpWE5sQaVyz1SQa9_tuY&sensor=true&libraries=places"></script><!-- Maps -->--}}
 {{--<script type="text/javascript" src="/assets/findgo/js/map1.js"></script>--}}
 <script type="text/javascript" src="/assets/findgo/js/jq.aminoSlider.js"></script>

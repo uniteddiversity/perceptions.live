@@ -179,7 +179,10 @@ function openGroupProfile(id){
 }
 
 
-
+function navigateOnMap(lat, long){
+    console.log("lat "+lat+"   Long  "+long);
+    map.panTo(new L.LatLng(parseFloat(lat), parseFloat(long)));
+}
 
 /////////////////////////////////////////////////////////
 function searchVideo(){
