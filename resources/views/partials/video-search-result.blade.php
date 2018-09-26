@@ -18,10 +18,8 @@ $video_id = isset($matches[1])?$matches[1]:'';
         <div class="placethumb">
             <img src="https://img.youtube.com/vi/<?php echo $video_id ?>/mqdefault.jpg">
             <?php /*<iframe frameborder="0" showinfo="0" controls="0" autohide="1" style="width: 100%;" src="<?php echo str_replace( 'watch?v=', 'embed/',$info['url']) ?>" frameborder="0" allowfullscreen></iframe> */ ?>
-            <div class="placeoptions">
-                <span class="pull-left"> <i class="flaticon-eye"></i> Watch </span>
-                <span class="pull-right"> <i class="flaticon-note"></i> More Info </span>
-            </div>
+            <div class="watchicon2" onclick="openVideo('<?php echo $info['id'] ?>')""> <a href="#" title=""><img src="/assets/findgo/images/play3.png" alt=""> </a>
+				</div>
         </div>
         <div class="boxplaces">
             <div class="placeinfos">
@@ -41,8 +39,8 @@ $video_id = isset($matches[1])?$matches[1]:'';
                 <?php } ?>
 
                 <ul class="listmetas">
-                    <li><span class="rated">3</span>interactions</li>
-                    <li><a href="#" title=""><i class="flaticon-chef"></i> <?php echo $info['primary_subject_tag'] ?></a></li>
+					<li><i class="fa fa-exchange"></i><?php echo $info['exchange'] ?></li>
+                    <li><a href="#" title=""><i class="flaticon-magnifying-glass"></i> <?php echo $info['primary_subject_tag'] ?></a></li>
                 </ul>
             </div>
             <div class="placedetails">

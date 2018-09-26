@@ -12,20 +12,21 @@
             @endforeach
         </select>
     </div>
-    {{--<img src="/assets/findgo/images/dotselection.png">--}}
+	<div style="width=100%; padding-left: 30px;">
     <?php
     foreach($gci_tags as $tag){
         echo '<span data-toggle="tooltip" title="'.$tag['tag'].'" onclick="searchByTag(\''.$tag['id'].'\')" style="background-color: '.$tag['tag_color'].'" class="dot"></span>';
     } ?>
+		</div>
 </div>
 
 
-<div class="ml-filterbar">
-    <ul>
-        <li><a id="finddo-geolocate" class="theme-btn2" href="#"><em class="fa fa-crosshairs"></em> Geolocate</a></li>
-        <li><a id="finddo-target" class="theme-btn2" href="#"><i class="fa fa-bullseye"></i> Target </a></i></span></li>
-    </ul>
-</div>
+{{--<div class="ml-filterbar">--}}
+    {{--<ul>--}}
+        {{--<li><a id="finddo-geolocate" class="theme-btn2" href="#"><em class="fa fa-crosshairs"></em> Geolocate</a></li>--}}
+        {{--<li><a id="finddo-target" class="theme-btn2" href="#"><i class="fa fa-bullseye"></i> Target </a></i></span></li>--}}
+    {{--</ul>--}}
+{{--</div>--}}
 {{--<div class="col-lg-12">--}}
     {{--<div class="mlradius">--}}
         {{--<span>Radius :</span>--}}

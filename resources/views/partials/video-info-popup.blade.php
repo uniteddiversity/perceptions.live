@@ -104,6 +104,8 @@
                 </span>
         </div>
         <div><i class="flaticon-pin"> {{$info['location']}}</i></div>
-        <div><a href="/home/ajax-video-more-info/{{$info['id']}}" target="_blank"><i class="flaticon-eye"> View More</i></a></div>
+                <div><i class="flaticon-avatar"></i> <?php foreach($info->videoProducer as $key => $users){ if(isset($info->videoProducer[$key])){ echo '<span class="inactive_link" onclick="openProfile(\''. $info->videoProducer[$key]->user->id .'\')">@'.$info->videoProducer[$key]->user->display_name.'</span>'; break; } }?></div>
+
+        <div><a href="#" onclick="openVideo('<?php echo $info['id'] ?>')"><i class="flaticon-eye"> Watch / View More Info</i></a></div>
 
 </div>
