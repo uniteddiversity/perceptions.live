@@ -2,7 +2,7 @@
     <div class="rheader">
         <span><img src="/assets/findgo/images/ricon.png" alt="" /></span>
         <div class="logo">
-            <a href="#" title=""><img src="/assets/findgo/images/horizontal-white.png" height="40" width="175" alt="" /></a>
+            <a href="#" title=""><img style="width: 175px;" src="/assets/findgo/images/horizontal-white.png" alt=""></a>
         </div>
         <div class="extras">
             <span class="accountbtn"><i class="flaticon-avatar"></i></span>
@@ -37,7 +37,11 @@
 
 </div>
 <header class="s4 dark">
+
     <div class="container fluid">
+        <div class="logo">
+            <a href="#" title=""><img style="width: 170px;" src="/assets/findgo/images/horizontal-white.png" alt=""></a>
+        </div>
         @if (Route::has('login'))
 
             @auth
