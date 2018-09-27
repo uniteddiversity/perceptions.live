@@ -68,7 +68,7 @@ Author:         CreativeLayers
 */
 
 @font-face {
-    font-family:'questrialregularregular' !important;
+    font-family:'questrial' !important;
     src: url('fonts/questrial-regular-webfont.woff2') format('woff2'),
          url('fonts/questrial-regular-webfont.woff') format('woff');
     font-weight: normal;
@@ -149,7 +149,7 @@ table{
 html{overflow-x:hidden}
 body{
     color:#555555;
-    font-family:'questrialregularregular', sans-serif;
+    font-family:'questrial', sans-serif;
     overflow-x:hidden;
     position:relative;
     
