@@ -69,8 +69,8 @@ Author:         CreativeLayers
 
 @font-face {
     font-family: 'questrialregularregular' !important;
-    src: url('fonts/questrialregular-regular-webfont.woff2') format('woff2'),
-         url('fonts/questrialregular-regular-webfont.woff2') format('woff');
+    src: url('fonts/questrial-regular-webfont.woff2') format('woff2'),
+         url('fonts/questrial-regular-webfont.woff2') format('woff');
     font-weight: normal;
     font-style: normal;
 
@@ -78,8 +78,8 @@ Author:         CreativeLayers
 
 @font-face {
     font-family: 'ralewaybold';
-    src: url('/fonts/ralewayregular-bold-webfont.woff2') format('woff2'),
-         url('fonts/ralewayregular-bold-webfont.woff') format('woff');
+    src: url('fonts/raleway-bold-webfont.woff2') format('woff2'),
+         url('fonts/raleway-bold-webfont.woff') format('woff');
     font-weight: normal;
     font-style: normal;
 
@@ -87,8 +87,8 @@ Author:         CreativeLayers
 
 @font-face {
     font-family: 'ralewaylight';
-    src: url('fonts/ralewayregular-light-webfont.woff2') format('woff2'),
-         url('fonts/ralewayregular-light-webfont.woff') format('woff');
+    src: url('fonts/ralewaylight-webfont.woff2') format('woff2'),
+         url('fonts/raleway-light-webfont.woff') format('woff');
     font-weight: normal;
     font-style: normal;
 
@@ -96,8 +96,8 @@ Author:         CreativeLayers
 
 @font-face {
     font-family: 'ralewaymedium';
-    src: url('fonts/ralewayregular-medium-webfont.woff2') format('woff2'),
-         url('fonts/ralewayregular-medium-webfont.woff') format('woff');
+    src: url('fonts/raleway-medium-webfont.woff2') format('woff2'),
+         url('fonts/raleway-medium-webfont.woff') format('woff');
     font-weight: normal;
     font-style: normal;
 
@@ -105,8 +105,8 @@ Author:         CreativeLayers
 
 @font-face {
     font-family: 'ralewayregular' !important;
-    src: url('fonts/ralewayregular-regular-webfont.woff2') format('woff2'),
-         url('fonts/ralewayregular-regular-webfont.woff') format('woff');
+    src: url('fonts/raleway-regular-webfont.woff2') format('woff2'),
+         url('fonts/raleway-regular-webfont.woff') format('woff');
     font-weight: normal;
     font-style: normal;
 
@@ -149,7 +149,6 @@ table{
 html{overflow-x:hidden}
 body{
     color:#555555;
-    
     font-family:'questrialregularregular', sans-serif;
     overflow-x:hidden;
     position:relative;
@@ -182,35 +181,24 @@ html.no-scoll {
     overflow: hidden;
 }
 
-<style>
-     /* Tooltip container */
- .tooltip {
-     position: relative;
-     display: inline-block;
-     border-bottom: 1px dotted black; /* If you want dots under the hoverable text */
- }
-
-/* Tooltip text */
-.tooltip .tooltiptext {
-    visibility: hidden;
-    width: 120px;
-    top: 100%;
-    left: 50%;
-    margin-left: -60px;
-    background-color: black;
-    color: #fff;
-    text-align: center;
-    padding: 5px 0;
-    border-radius: 6px;
-    position: absolute;
-    z-index: 1;
+.dot {
+    height: 22px;
+    width: 22px;
+    border-radius: 50%;
+    display: inline-block;
+    margin: 2px;
+    cursor: pointer;
 }
 
-/* Show the tooltip text when you mouse over the tooltip container */
-.tooltip:hover .tooltiptext {
-    visibility: visible;
+.dot-small {
+    height: 10px;
+    width: 10px;
+    border-radius: 50%;
+    display: inline-block;
+    margin: 2px;
+    cursor: pointer;
 }
-<
+
 
 /* Theme Layout */
 .theme-layout{
