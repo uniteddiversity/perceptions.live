@@ -87,8 +87,8 @@ Author:         CreativeLayers
 
 @font-face {
     font-family: 'ralewaylight';
-    src: url('/public/assets/findgo/css/fonts/ralewayregular-light-webfont.woff2') format('woff2'),
-         url('/public/assets/findgo/css/fonts/ralewayregular-light-webfont.woff') format('woff');
+    src: url('fonts/ralewayregular-light-webfont.woff2') format('woff2'),
+         url('fonts/ralewayregular-light-webfont.woff') format('woff');
     font-weight: normal;
     font-style: normal;
 
@@ -96,8 +96,8 @@ Author:         CreativeLayers
 
 @font-face {
     font-family: 'ralewaymedium';
-    src: url('/public/assets/findgo/css/fonts/ralewayregular-medium-webfont.woff2') format('woff2'),
-         url('/public/assets/findgo/css/fonts/ralewayregular-medium-webfont.woff') format('woff');
+    src: url('fonts/ralewayregular-medium-webfont.woff2') format('woff2'),
+         url('fonts/ralewayregular-medium-webfont.woff') format('woff');
     font-weight: normal;
     font-style: normal;
 
@@ -105,8 +105,8 @@ Author:         CreativeLayers
 
 @font-face {
     font-family: 'ralewayregular' !important;
-    src: url('/public/assets/findgo/css/fonts/ralewayregular-regular-webfont.woff2') format('woff2'),
-         url('/public/assets/findgo/css/fonts/ralewayregular-regular-webfont.woff') format('woff');
+    src: url('fonts/ralewayregular-regular-webfont.woff2') format('woff2'),
+         url('fonts/ralewayregular-regular-webfont.woff') format('woff');
     font-weight: normal;
     font-style: normal;
 
