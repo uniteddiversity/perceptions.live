@@ -77,7 +77,7 @@ Author:         CreativeLayers
 }
 
 @font-face {
-    font-family: 'ralewaybold';
+    font-family:'ralewaybold';
     src: url('fonts/raleway-bold-webfont.woff2') format('woff2'),
          url('fonts/raleway-bold-webfont.woff') format('woff');
     font-weight: normal;
@@ -86,7 +86,7 @@ Author:         CreativeLayers
 }
 
 @font-face {
-    font-family: 'ralewaylight';
+    font-family:'ralewaylight';
     src: url('fonts/raleway-light-webfont.woff2') format('woff2'),
          url('fonts/raleway-light-webfont.woff') format('woff');
     font-weight: normal;
@@ -95,7 +95,7 @@ Author:         CreativeLayers
 }
 
 @font-face {
-    font-family: 'ralewaymedium';
+    font-family:'ralewaymedium' !important;
     src: url('fonts/raleway-medium-webfont.woff2') format('woff2'),
          url('fonts/raleway-medium-webfont.woff') format('woff');
     font-weight: normal;
