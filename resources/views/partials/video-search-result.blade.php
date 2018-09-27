@@ -33,7 +33,7 @@ $video_id = isset($matches[1])?$matches[1]:'';
                     } ?>
                 </span>
                 <h3><a href="#" title="" onclick="openVideo('<?php echo $info['id'] ?>')"><?php echo $info['title'] ?></a></h3>
-		<span style="padding-bottom: 6px;"><small>DATE: <em><?php echo date('d F Y',strtotime($info['created_at'])) ?></em></small></span>
+		<span style="padding-bottom: 6px;"><small><em><?php echo date('d F Y',strtotime($info['created_at'])) ?></em></small></span>
                 <?php if(!empty($info['trim_description'])){ ?>
                     <span style="font-size: .8em;"><?php echo $info['trim_description'] ?> [...]</span>
                 <?php } ?>
@@ -51,3 +51,5 @@ $video_id = isset($matches[1])?$matches[1]:'';
     </div>
 </div>
 <?php } ?>
+
+

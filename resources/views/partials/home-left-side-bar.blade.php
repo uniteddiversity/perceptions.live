@@ -56,6 +56,25 @@
 </div>
 
 
+<style>
+.dot {
+height: 22px;
+width: 22px;
+border-radius: 50%;
+display: inline-block;
+margin: 2px;
+cursor: pointer;
+}
+
+.dot-small {
+height: 10px;
+width: 10px;
+border-radius: 50%;
+display: inline-block;
+margin: 2px;
+cursor: pointer;
+}
+</style>
 <?php /*
 
 <div class="col-md-3 no-float col-md-3half" style="padding-right: 0px;">
@@ -112,3 +131,5 @@
 </style>
 
  */ ?>
+
+

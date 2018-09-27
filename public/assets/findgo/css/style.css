@@ -1459,12 +1459,12 @@ nav > ul > li.menu-item-has-children:hover > ul {
 
 .watchicon2 {
     position: absolute;
-    width: 96px;
-    height: 96px;
+    width: 64px;
+    height: 64px;
     left: 50%;
     top: 50%;
-    margin-left: -48px; /*half of the width */
-    margin-top: -48px;
+    margin-left: -36px; /*half of the width */
+    margin-top: -36px;
 }
 .watchicon2 span {
     color: #ffffff;
