@@ -181,6 +181,37 @@ input:hover,input:focus{outline:none}
 html.no-scoll {
     overflow: hidden;
 }
+
+<style>
+     /* Tooltip container */
+ .tooltip {
+     position: relative;
+     display: inline-block;
+     border-bottom: 1px dotted black; /* If you want dots under the hoverable text */
+ }
+
+/* Tooltip text */
+.tooltip .tooltiptext {
+    visibility: hidden;
+    width: 120px;
+    top: 100%;
+    left: 50%;
+    margin-left: -60px;
+    background-color: black;
+    color: #fff;
+    text-align: center;
+    padding: 5px 0;
+    border-radius: 6px;
+    position: absolute;
+    z-index: 1;
+}
+
+/* Show the tooltip text when you mouse over the tooltip container */
+.tooltip:hover .tooltiptext {
+    visibility: visible;
+}
+<
+
 /* Theme Layout */
 .theme-layout{
     float:left;
@@ -1459,15 +1490,12 @@ nav > ul > li.menu-item-has-children:hover > ul {
 
 ..watchicon2 {
     position: absolute;
-	vertical-align: middle;
-    left: 0;
-    bottom: 0;
-    width: 100%;
-    z-index: 1;
-    padding: 0 25px;
-    padding-bottom: 0px;
-    padding-bottom: 0px;
-    z-index: 1;
+    width: 96px;
+    height: 96px;
+    left: 50%;
+    top: 50%;
+    margin-left: -48px; /*half of the width */
+    margin-top: -48px;
 }
 ..watchicon2 span {
     color: #ffffff;
