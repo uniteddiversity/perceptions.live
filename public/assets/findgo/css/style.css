@@ -69,8 +69,8 @@ Author:         CreativeLayers
 
 @font-face {
     font-family: 'questrialregularregular' !important;
-    src: url('/public/assets/findgo/css/fonts/questrialregular-regular-webfont.woff2') format('woff2'),
-         url('/public/assets/findgo/css/fonts/questrialregular-regular-webfont.woff') format('woff');
+    src: url('fonts/questrialregular-regular-webfont.woff2') format('woff2'),
+         url('fonts/questrialregular-regular-webfont.woff2') format('woff');
     font-weight: normal;
     font-style: normal;
 
@@ -78,8 +78,8 @@ Author:         CreativeLayers
 
 @font-face {
     font-family: 'ralewaybold';
-    src: url('/public/assets/findgo/css/fonts/ralewayregular-bold-webfont.woff2') format('woff2'),
-         url('/public/assets/findgo/css/fonts/ralewayregular-bold-webfont.woff') format('woff');
+    src: url('/fonts/ralewayregular-bold-webfont.woff2') format('woff2'),
+         url('fonts/ralewayregular-bold-webfont.woff') format('woff');
     font-weight: normal;
     font-style: normal;
 
@@ -1463,7 +1463,7 @@ nav > ul > li.menu-item-has-children:hover > ul {
     left: 0;
     bottom: 0;
     width: 100%;
-    z-index: 0;
+    z-index: 1;
     padding: 0 25px;
     padding-bottom: 0px;
     padding-bottom: 0px;
@@ -1473,7 +1473,7 @@ nav > ul > li.menu-item-has-children:hover > ul {
     color: #ffffff;
     font-size: 26px;
     font-family: ralewayregular;
-    line-height: 70px;
+    line-height: 40px;
     cursor: pointer;
 	text-align: center;
 }
@@ -1481,6 +1481,7 @@ nav > ul > li.menu-item-has-children:hover > ul {
     font-size: 21px;
     float: left;
     margin-right: 10px;
+	margin-top:-40px;
 }
 
 .placeoptions {
