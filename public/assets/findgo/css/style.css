@@ -68,45 +68,60 @@ Author:         CreativeLayers
 */
 
 @font-face {
-    font-family:'questrial' !important;
-    src: url('fonts/questrial-regular-webfont.woff2') format('woff2'),
-         url('fonts/questrial-regular-webfont.woff') format('woff');
+    font-family: 'ralewaybold';
+    src: url('fonts/raleway-bold-webfont.eot');
+    src: url('fonts/raleway-bold-webfont.eot?#iefix') format('embedded-opentype'),
+    url('fonts/raleway-bold-webfont.woff2') format('woff2'),
+    url('fonts/raleway-bold-webfont.woff') format('woff'),
+    url('fonts/raleway-bold-webfont.ttf') format('truetype');
     font-weight: normal;
     font-style: normal;
 
 }
 
 @font-face {
-    font-family:'ralewaybold';
-    src: url('fonts/raleway-bold-webfont.woff2') format('woff2'),
-         url('fonts/raleway-bold-webfont.woff') format('woff');
+    font-family: 'ralewaylight';
+    src: url('fonts/raleway-light-webfont.eot');
+    src: url('fonts/raleway-light-webfont.eot?#iefix') format('embedded-opentype'),
+    url('fonts/raleway-light-webfont.woff2') format('woff2'),
+    url('fonts/raleway-light-webfont.woff') format('woff'),
+    url('fonts/raleway-light-webfont.ttf') format('truetype');
     font-weight: normal;
     font-style: normal;
 
 }
 
 @font-face {
-    font-family:'ralewaylight';
-    src: url('fonts/raleway-light-webfont.woff2') format('woff2'),
-         url('fonts/raleway-light-webfont.woff') format('woff');
+    font-family: 'ralewaymedium';
+    src: url('fonts/raleway-medium-webfont.eot');
+    src: url('fonts/raleway-medium-webfont.eot?#iefix') format('embedded-opentype'),
+    url('fonts/raleway-medium-webfont.woff2') format('woff2'),
+    url('fonts/raleway-medium-webfont.woff') format('woff'),
+    url('fonts/raleway-medium-webfont.ttf') format('truetype');
     font-weight: normal;
     font-style: normal;
 
 }
 
 @font-face {
-    font-family:'ralewaymedium' !important;
-    src: url('fonts/raleway-medium-webfont.woff2') format('woff2'),
-         url('fonts/raleway-medium-webfont.woff') format('woff');
+    font-family: 'ralewayregular';
+    src: url('fonts/raleway-regular-webfont.eot');
+    src: url('fonts/raleway-regular-webfont.eot?#iefix') format('embedded-opentype'),
+    url('fonts/raleway-regular-webfont.woff2') format('woff2'),
+    url('fonts/raleway-regular-webfont.woff') format('woff'),
+    url('fonts/raleway-regular-webfont.ttf') format('truetype');
     font-weight: normal;
     font-style: normal;
 
 }
 
 @font-face {
-    font-family: 'ralewayregular' !important;
-    src: url('fonts/raleway-regular-webfont.woff2') format('woff2'),
-         url('fonts/raleway-regular-webfont.woff') format('woff');
+    font-family: 'questrial';
+    src: url('fonts/questrial-regular-webfont.eot');
+    src: url('fonts/questrial-regular-webfont.eot?#iefix') format('embedded-opentype'),
+    url('fonts/questrial-regular-webfont.woff2') format('woff2'),
+    url('fonts/questrial-regular-webfont.woff') format('woff'),
+    url('fonts/questrial-regular-webfont.ttf') format('truetype');
     font-weight: normal;
     font-style: normal;
 
