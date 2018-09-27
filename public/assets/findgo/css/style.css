@@ -1457,7 +1457,7 @@ nav > ul > li.menu-item-has-children:hover > ul {
     z-index: 1;
 }
 
-..watchicon2 {
+.watchicon2 {
     position: absolute;
     width: 96px;
     height: 96px;
@@ -1466,15 +1466,14 @@ nav > ul > li.menu-item-has-children:hover > ul {
     margin-left: -48px; /*half of the width */
     margin-top: -48px;
 }
-..watchicon2 span {
+.watchicon2 span {
     color: #ffffff;
     font-size: 26px;
-    font-family: ralewayregular;
     line-height: 40px;
     cursor: pointer;
 	text-align: center;
 }
-..watchicon2 span i {
+.watchicon2 span i {
     font-size: 21px;
     float: left;
     margin-right: 10px;
