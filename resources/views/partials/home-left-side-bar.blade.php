@@ -12,7 +12,7 @@
             @endforeach
         </select>
     </div>
-	<div style="width=100%; padding-left: 20px; float: left;>
+	<div style="width=100%; padding-left: 20px; float: left;">
     <?php
     foreach($gci_tags as $tag){
         echo '<span data-toggle="tooltip" data-placement="bottom" title="'.$tag['tag'].'" onclick="searchByTag(\''.$tag['id'].'\')" style="background-color: '.$tag['tag_color'].'" class="dot"></span></div>';
