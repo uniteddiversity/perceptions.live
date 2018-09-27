@@ -20,8 +20,6 @@
 		</div>
 </div>
 
-<div class="tooltip" role="tooltip"><div class="arrow"></div><div class="tooltip-inner"></div></div>
-
 {{--<div class="ml-filterbar">--}}
     {{--<ul>--}}
         {{--<li><a id="finddo-geolocate" class="theme-btn2" href="#"><em class="fa fa-crosshairs"></em> Geolocate</a></li>--}}

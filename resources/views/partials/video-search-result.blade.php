@@ -1,11 +1,7 @@
 <input type="hidden" id="result_count" value="{{$result_count}}" />
 <div class="ml-filterbar" style="margin-left: 18px;margin-right: 10px;">
-    <h3><i class="flaticon-eye"></i>{{$result_count}} Results Found</h3>
-    <ul>
-        <li class="singleplaces active"><span><i class="fa fa-exchange"></i></span></li>
-        <li class="doubleplaces"><span><i class="fa fa-th-large"></i></span></li>
-        <li class="listingplaces"><span><i class="fa fa-th-list"></i></span></li>
-    </ul>
+    <h3><i class="flaticon-eye"></i>{{$result_count}} PRCPTIONs available</h3>
+
 </div>
 <?php foreach($uploaded_list as $info){
 
@@ -33,14 +29,14 @@ $video_id = isset($matches[1])?$matches[1]:'';
                     } ?>
                 </span>
                 <h3><a href="#" title="" onclick="openVideo('<?php echo $info['id'] ?>')"><?php echo $info['title'] ?></a></h3>
-		<span style="padding-bottom: 6px;"><small><em><?php echo date('d F Y',strtotime($info['created_at'])) ?></em></small></span>
+		<span style="padding-bottom: 6px;"><small><i class="fa fa-calendar-alt"></i><em><?php echo date('d F Y',strtotime($info['created_at'])) ?></em></small></span>
                 <?php if(!empty($info['trim_description'])){ ?>
                     <span style="font-size: .8em;"><?php echo $info['trim_description'] ?> [...]</span>
                 <?php } ?>
 
                 <ul class="listmetas">
 					<li><i class="fa fa-exchange"></i><?php echo $info['exchange'] ?></li>
-                    <li><a href="#" title=""><i class="flaticon-magnifying-glass"></i> <?php echo $info['primary_subject_tag'] ?></a></li>
+                    <li><a href="#" title=""><i class="fa fa-tag"></i><?php echo $info['primary_subject_tag'] ?></a></li>
                 </ul>
             </div>
             <div class="placedetails">
