@@ -68,9 +68,9 @@ Author:         CreativeLayers
 */
 
 @font-face {
-    font-family: 'questrialregularregular' !important;
+    font-family:'questrialregularregular' !important;
     src: url('fonts/questrial-regular-webfont.woff2') format('woff2'),
-         url('fonts/questrial-regular-webfont.woff2') format('woff');
+         url('fonts/questrial-regular-webfont.woff') format('woff');
     font-weight: normal;
     font-style: normal;
 
@@ -87,7 +87,7 @@ Author:         CreativeLayers
 
 @font-face {
     font-family: 'ralewaylight';
-    src: url('fonts/ralewaylight-webfont.woff2') format('woff2'),
+    src: url('fonts/raleway-light-webfont.woff2') format('woff2'),
          url('fonts/raleway-light-webfont.woff') format('woff');
     font-weight: normal;
     font-style: normal;

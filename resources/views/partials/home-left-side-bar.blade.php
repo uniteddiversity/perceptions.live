@@ -15,11 +15,12 @@
 	<div style="width=100%; padding-left: 20px; float: left;">
     <?php
     foreach($gci_tags as $tag){
-        echo '<span data-toggle="tooltip" data-placement="bottom" title="'.$tag['tag'].'" onclick="searchByTag(\''.$tag['id'].'\')" style="background-color: '.$tag['tag_color'].'" class="dot"></span>';
+        echo '<span data-toggle="tooltip" data-animation="true" data-placement="bottom" title="'.$tag['tag'].'" onclick="searchByTag(\''.$tag['id'].'\')" style="background-color: '.$tag['tag_color'].'" class="dot"></span>';
     } ?>
 		</div>
 </div>
 
+<div class="tooltip" role="tooltip"><div class="arrow"></div><div class="tooltip-inner"></div></div>
 
 {{--<div class="ml-filterbar">--}}
     {{--<ul>--}}
