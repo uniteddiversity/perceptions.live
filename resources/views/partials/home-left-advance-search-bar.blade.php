@@ -84,7 +84,7 @@
                                 </div>
                                 <div class="col-lg-6">
                                     <p class="c-label"><input name="cb" id="4" type="checkbox"><label for="4">Sponsored</label></p>
-                                    <p class="c-label"><input name="cb" id="3" type="checkbox"><label for="3">User-Submitted Collaborations</label></p>
+                                    <p class="c-label"><input name="cb" id="3" type="checkbox"><label for="3">User-Submitted</label></p>
                                 </div>
                             </div>
                         </div>

@@ -1551,7 +1551,7 @@ nav > ul > li.menu-item-has-children:hover > ul {
     width: 100%;
     margin: 0;
         margin-top: 0px;
-    margin-top: 12px;
+    margin-top: 2px;
 }
 .listmetas li {
     float: left;
@@ -1599,7 +1599,7 @@ nav > ul > li.menu-item-has-children:hover > ul {
 .placedetails span {
     font-size: 13px;
     color: #8d8d8d;
-    padding: 12px 0;
+    padding: 0px 0;
     line-height: 25px;
 }
 .placedetails span i {
@@ -3188,7 +3188,7 @@ header.s5 .extras > a {
     -o-border-radius: 4px;
     border-radius: 4px;
     right: 10px;
-    top: 50%;
+    top: 60%;
     z-index: 1;
     line-height: 18px;
     cursor: pointer;
@@ -3621,6 +3621,7 @@ max-height: 250px;
     height          : 100%;
     width           : 100%;
     padding         : 0;
+    padding-right: 20px;
     position        : relative;
     right           : -16px;
     overflow        : auto;
@@ -3945,13 +3946,11 @@ body.fakescroll-grabbed{
     position: relative;
     z-index: 1;
 }
-.ml-listings.active {
-    padding-left: 570px !important;
-    width: 1040px;
+
 }
 .ml-listings.active {
-    padding-left: 470px !important;
-    width: 870px;
+    padding-left: 360px !important;
+    width: 700px;
 }
 .ml-filterbar > ul > li.active span {
     color: #56bcdd;
