@@ -15,7 +15,7 @@
 	<div style="width=100%; padding-left: 20px; float: left;">
     <?php
     foreach($gci_tags as $tag){
-        echo '<span data-toggle="tooltip" data-placement="bottom" title="'.$tag['tag'].'" onclick="searchByTag(\''.$tag['id'].'\')" style="background-color: '.$tag['tag_color'].'" class="dot"></span></div>';
+        echo '<span data-toggle="tooltip" data-placement="bottom" title="'.$tag['tag'].'" onclick="searchByTag(\''.$tag['id'].'\')" style="background-color: '.$tag['tag_color'].'" class="dot"></span>';
     } ?>
 		</div>
 </div>
@@ -54,35 +54,6 @@
         ...
     </div>
 </div>
-
-
-<style>
-    .dot {
-        height: 22px;
-        width: 22px;
-        border-radius: 50%;
-        display: inline-block;
-        margin: 2px;
-        cursor: pointer;
-    }
-
-    .dot-small {
-        height: 10px;
-        width: 10px;
-        border-radius: 50%;
-        display: inline-block;
-        margin: 2px;
-        cursor: pointer;
-    }
-
-    .inactive_link{
-        cursor: pointer;
-    }
-
-    .SumoSelect{
-        width: 96%;
-    }
-</style>
 
 
 <?php /*
