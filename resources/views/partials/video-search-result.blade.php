@@ -11,10 +11,9 @@ $video_id = isset($matches[1])?$matches[1]:'';
 
 <div class="col-lg-12">
     <div class="places s2">
-        <div class="placedetails">
-            <span class="pull-left" onclick="navigateOnMap('<?php echo $info['lat'] ?>','<?php echo $info['long'] ?>');" style="cursor: pointer;"><i class="flaticon-pin"></i> <?php echo $info['location'] ?></span>
-            <span class="pull-right"><i class="flaticon-avatar"></i> <?php foreach($info->videoProducer as $key => $users){ if(isset($info->videoProducer[$key])){ echo '<span class="inactive_link" onclick="openProfile(\''. $info->videoProducer[$key]->user->id .'\')">@'.$info->videoProducer[$key]->user->display_name.'</span>'; break; } }?></span>
-        </div>
+        <ul class="listmetas">
+            <li><a href="#" title=""><i class="fa fa-tag"></i><?php echo $info['primary_subject_tag'] ?></a></li>
+        </ul>
         <div class="placethumb">
             <img src="https://img.youtube.com/vi/<?php echo $video_id ?>/mqdefault.jpg">
             <?php /*<iframe frameborder="0" showinfo="0" controls="0" autohide="1" style="width: 100%;" src="<?php echo str_replace( 'watch?v=', 'embed/',$info['url']) ?>" frameborder="0" allowfullscreen></iframe> */ ?>
@@ -41,13 +40,11 @@ $video_id = isset($matches[1])?$matches[1]:'';
                 <?php if(!empty($info['trim_description'])){ ?>
                     <span style="font-size: .8em;"><?php echo $info['trim_description'] ?> [ <a href="#" onclick="openVideo('<?php echo $info['id'] ?>')">more...</i></a> ]</div> </span>
                 <?php } ?>
-
-                <ul class="listmetas">
-					<li><i class="fa fa-exchange"></i> EXCHANGE <?php echo $info['exchange'] ?></li>
-                    <li><a href="#" title=""><i class="fa fa-tag"></i><?php echo $info['primary_subject_tag'] ?></a></li>
-                </ul>
             </div>
-
+<div class="placedetails">
+    <span class="pull-left" onclick="navigateOnMap('<?php echo $info['lat'] ?>','<?php echo $info['long'] ?>');" style="cursor: pointer;"><i class="flaticon-pin"></i> <?php echo $info['location'] ?></span>
+    <span class="pull-right"><i class="flaticon-avatar"></i> <?php foreach($info->videoProducer as $key => $users){ if(isset($info->videoProducer[$key])){ echo '<span class="inactive_link" onclick="openProfile(\''. $info->videoProducer[$key]->user->id .'\')">@'.$info->videoProducer[$key]->user->display_name.'</span>'; break; } }?></span>
+</div>
         </div>
     </div>
 </div>
