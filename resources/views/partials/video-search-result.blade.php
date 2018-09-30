@@ -43,7 +43,7 @@ $video_id = isset($matches[1])?$matches[1]:'';
                 <?php } ?>
 
                 <ul class="listmetas">
-					<li><i class="fa fa-exchange"></i><?php echo $info['exchange'] ?></li>
+					<li><i class="fa fa-exchange"></i> EXCHANGE <?php echo $info['exchange'] ?></li>
                     <li><a href="#" title=""><i class="fa fa-tag"></i><?php echo $info['primary_subject_tag'] ?></a></li>
                 </ul>
             </div>

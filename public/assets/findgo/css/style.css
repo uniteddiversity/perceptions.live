@@ -1474,12 +1474,12 @@ nav > ul > li.menu-item-has-children:hover > ul {
 
 .watchicon2 {
     position: absolute;
-    width: 40px;
-    height: 40px;
+    width: 36px;
+    height: 36px;
     left: 50%;
     top: 50%;
-    margin-left: -36px; /*half of the width */
-    margin-top: -36px;
+    margin-left: -18px;
+    margin-top: -18px;
 }
 .watchicon2 span {
     color: #ffffff;
@@ -1530,10 +1530,10 @@ nav > ul > li.menu-item-has-children:hover > ul {
 .placeinfos h3 {
     float: left;
     width: 100%;
-    font-family: ralewaymedium;
-    font-size: 18px;
+    font-family: ralewaybold;
+    font-size: 1em;
     color: #2B2B47;
-    margin-bottom: 6px;
+    margin-bottom: 5px;
 }
 .placeinfosdesc {
     float: left;

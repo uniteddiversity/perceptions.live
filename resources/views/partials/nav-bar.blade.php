@@ -150,7 +150,6 @@
         display: block;
         width: 40%;
         margin-left: 30%;
-        margin-top: -20px;
         background-color: #transparent;
         z-index:50;
     }
