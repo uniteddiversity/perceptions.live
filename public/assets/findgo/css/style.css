@@ -249,7 +249,7 @@ html.no-scroll {
     padding:60px 0;
     position:relative;
 }
-.container.fluid{ position: absolute; top: 0; z-index: 1; left: 0; max-width: 100%; width: 100%; }
+.container.fluid{ position: relative; top: 0; z-index: 1; left: 0; max-width: 100%; width: 100%; }
 .block .container{padding:0}
 .container{padding:0}
 .block.remove-top{padding-top:0}
