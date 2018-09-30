@@ -1538,7 +1538,7 @@ nav > ul > li.menu-item-has-children:hover > ul {
 .placeinfosdesc {
     float: left;
     width: 100%;
-    border: 1px solid #e8ecec;
+    border: 0px solid #e8ecec;
     margin-top: -1px;
     padding-left: 10px;
     padding-bottom: 5px;
@@ -2204,7 +2204,7 @@ header.s2 {
     border-top: transparent;
     border-left: transparent;
     border-right: transparent;
-    border-bottom: 1px solid #e8ecec;
+    border-bottom: 0px solid #e8ecec;
 }
 .places.s2 .placedetails {
     border: none;
@@ -8630,7 +8630,7 @@ header.s3 .extras > a:hover {
     border-left-color: #ffffff;
 }
 .places.s2.makelist .placedetails {
-    border-top: 1px solid #e8ecec;
+    border-top: 0px solid #e8ecec;
 }
 .places.s2.makelist .boxplaces {
     border: none;
