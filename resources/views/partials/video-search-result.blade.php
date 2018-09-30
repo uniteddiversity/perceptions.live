@@ -35,6 +35,7 @@ $video_id = isset($matches[1])?$matches[1]:'';
                     } ?>
                 </span>
 		<span style="padding-bottom: 6px;"><small><i class="fa fa-calendar"></i> <em><?php echo date('d F Y',strtotime($info['created_at'])) ?></em></small></span>
+            </div><div class="placeinfosdesc">
                 <?php if(!empty($info['trim_description'])){ ?>
                     <span style="font-size: .8em;"><?php echo $info['trim_description'] ?> [...]</span>
                 <?php } ?>

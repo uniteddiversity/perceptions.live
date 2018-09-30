@@ -1446,7 +1446,7 @@ nav > ul > li.menu-item-has-children:hover > ul {
 }
 .placethumb {
     float: left;
-    width: 100%;
+    width: 50%;
     position: relative;
     overflow: hidden;
 }
@@ -1474,8 +1474,8 @@ nav > ul > li.menu-item-has-children:hover > ul {
 
 .watchicon2 {
     position: absolute;
-    width: 64px;
-    height: 64px;
+    width: 40px;
+    height: 40px;
     left: 50%;
     top: 50%;
     margin-left: -36px; /*half of the width */
@@ -1523,20 +1523,34 @@ nav > ul > li.menu-item-has-children:hover > ul {
     width: 100%;
     border: 1px solid #e8ecec;
     margin-top: -1px;
-    padding: 0 20px;
-    padding-bottom: 15px;
-    padding-top: 20px;
+    padding-left: 10px;
+    padding-bottom: 5px;
+    padding-top: 5px;
 }
 .placeinfos h3 {
     float: left;
     width: 100%;
-    font-family: ralewayregular;
+    font-family: ralewaymedium;
     font-size: 18px;
     color: #2B2B47;
-    font-weight: bold;
-    
     margin-bottom: 6px;
 }
+.placeinfosdesc {
+    float: left;
+    width: 100%;
+    border: 1px solid #e8ecec;
+    margin-top: -1px;
+    padding-left: 10px;
+    padding-bottom: 5px;
+    padding-top: 5px;
+}
+.placeinfosdesc > span {
+    float: left;
+    width: 100%;
+    font-size: 13px;
+    color: #8d8d8d;
+}
+
 .placeinfos h3 a{
     color: #1C1C8E;
 }
@@ -1595,6 +1609,8 @@ nav > ul > li.menu-item-has-children:hover > ul {
     border: 1px solid #e8ecec;
     margin-top: -1px;
     padding: 0 20px;
+    padding-top: 10px;
+    padding-bottom: 5px;
 }
 .placedetails span {
     font-size: 13px;
