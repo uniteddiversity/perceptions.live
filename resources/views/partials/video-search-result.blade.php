@@ -22,7 +22,7 @@ $video_id = isset($matches[1])?$matches[1]:'';
 				</div>
         </div>
         <div class="boxplaces">
-            <div class="placeinfos">
+            <div class="placeinfos" style="display: block;">
 
                 <h3><a href="#" title="" onclick="openVideo('<?php echo $info['id'] ?>')"><?php echo $info['title'] ?></a></h3>
                 <span style="padding-bottom: 6px; float: right;">
@@ -39,7 +39,7 @@ $video_id = isset($matches[1])?$matches[1]:'';
             </div>
         </div><div class="placeinfosdesc">
                 <?php if(!empty($info['trim_description'])){ ?>
-                    <span style="font-size: .8em;"><?php echo $info['trim_description'] ?> [<a href="#" onclick="openVideo('<?php echo $info['id'] ?>')"><i class="fa-info-circle"> more</i></a></div>]</span>
+                    <span style="font-size: .8em;"><?php echo $info['trim_description'] ?> [ <a href="#" onclick="openVideo('<?php echo $info['id'] ?>')">more...</i></a></div> ]</span>
                 <?php } ?>
 
                 <ul class="listmetas">
