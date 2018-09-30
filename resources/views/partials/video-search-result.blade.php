@@ -12,7 +12,7 @@ $video_id = isset($matches[1])?$matches[1]:'';
 <div class="col-lg-12">
     <div class="places s2">
         <ul class="listmetas">
-            <li><a href="#" title=""><i class="fa fa-tag"></i><?php echo $info['primary_subject_tag'] ?></a></li>
+            <li><a href="#" title=""><i class="fa fa-tag"></i> <?php echo $info['primary_subject_tag'] ?></a></li>
         </ul>
         <div class="placethumb">
             <img src="https://img.youtube.com/vi/<?php echo $video_id ?>/mqdefault.jpg">
