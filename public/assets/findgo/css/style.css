@@ -249,7 +249,7 @@ html.no-scroll {
     padding:60px 0;
     position:relative;
 }
-.container.fluid{ max-width: 100%; width: 100%; }
+.container.fluid{ position: absolute; top: 0; z-index: 1; left: 0; max-width: 100%; width: 100%; }
 .block .container{padding:0}
 .container{padding:0}
 .block.remove-top{padding-top:0}
@@ -3218,7 +3218,7 @@ header.s5 .extras > a {
     top: 0;
     width: 350px;
     padding-left: 0px;
-    padding-right: 30;
+    padding-right: 30px;
     -webkit-box-shadow: 0px 0px 30px rgba(0,0,0,0.1);
     -moz-box-shadow: 0px 0px 30px rgba(0,0,0,0.1);
     -ms-box-shadow: 0px 0px 30px rgba(0,0,0,0.1);

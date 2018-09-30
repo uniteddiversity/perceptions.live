@@ -1,6 +1,5 @@
 <div class="responsiveheader">
     <div class="rheader">
-        <div id="logo_overlay"><img src="/assets/findgo/images/live-perceptions-logo.png"></div>
         <span><img src="/assets/findgo/images/ricon.png" alt="" /></span>
         <div class="logo">
             <a href="#" title=""><img src="/assets/findgo/images/horizontal-white.png" height="40" width="175" alt="" /></a>
@@ -146,15 +145,14 @@
 </header>
 
 
-<style>CSS
+<style>
     #logo_overlay {
-        margin: auto;
         position: absolute;
         top: 0px; left: 50px;
-        bottom: 50px; right: 50px;
         background-color: #transparent;
-        z-index:5;
-    }</style>
+        z-index:50;
+    }
+</style>
 
 
 
