@@ -27,6 +27,7 @@ $video_id = isset($matches[1])?$matches[1]:'';
                 <h3><a href="#" title="" onclick="openVideo('<?php echo $info['id'] ?>')"><?php echo $info['title'] ?></a></h3>
                 <span style="padding-bottom: 6px; float: right;">
                     <?php
+
                     $tags = explode(',', $info['tag_colors']);
                     foreach($tags as $tag){
                         $tag_name_n_color = explode('-', $tag);
@@ -35,7 +36,8 @@ $video_id = isset($matches[1])?$matches[1]:'';
                     } ?>
                 </span>
 		<span style="padding-bottom: 6px;"><small><i class="fa fa-calendar"></i> <em><?php echo date('d F Y',strtotime($info['created_at'])) ?></em></small></span>
-            </div><div class="placeinfosdesc">
+            </div>
+        </div><div class="placeinfosdesc">
                 <?php if(!empty($info['trim_description'])){ ?>
                     <span style="font-size: .8em;"><?php echo $info['trim_description'] ?> [...]</span>
                 <?php } ?>

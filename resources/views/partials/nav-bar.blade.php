@@ -2,7 +2,7 @@
     <div class="rheader">
         <span><img src="/assets/findgo/images/ricon.png" alt="" /></span>
         <div class="logo">
-            <a href="#" title=""><img src="/assets/findgo/images/live-perceptions-logo.png" height="40" width="175" alt="" /></a>
+            <a href="#" title=""><img src="/assets/findgo/images/live-prcptions-beta-small.png" alt="" /></a>
         </div>
         <div class="extras">
             <span class="accountbtn"><i class="flaticon-avatar"></i></span>
@@ -10,7 +10,7 @@
     </div>
     <div class="rnaver">
         <span class="closeresmenu"><i>x</i>Close</span>
-        <div class="logo"><a href="#" title=""><img src="/assets/findgo/images/live-perceptions-logo.png" height="40" width="175" alt="" /></a></div>
+        <div class="logo"><a href="#" title=""><img src="/assets/findgo/images/live-prcptions-beta-small.png" alt="" /></a></div>
         @if (Route::has('login'))
 
             @auth
@@ -38,7 +38,7 @@
 </div>
 <header class="s4 dark">
     <div class="container fluid">
-        <div id="logo_overlay"><img src="/assets/findgo/images/live-perceptions-logo.png" width="600" height="122"></div>
+        <div id="logo_overlay"><img src="/assets/findgo/images/live-perceptions-logo.png" width="740" height="150"></div>
         @if (Route::has('login'))
 
             @auth
@@ -150,8 +150,8 @@
         position: absolute;
         display: block;
         width: 40%;
-        margin-left: auto;
-        margin-right: auto;
+        margin-left: 30%;
+        margin-top: -20px;
         background-color: #transparent;
         z-index:50;
     }
