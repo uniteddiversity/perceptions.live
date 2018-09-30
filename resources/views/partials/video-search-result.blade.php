@@ -1,6 +1,6 @@
 <input type="hidden" id="result_count" value="{{$result_count}}" />
 <div class="ml-filterbar" style="margin-left: 18px;margin-right: 10px;">
-    <h3><i class="flaticon-eye"></i>{{$result_count}} PRCPTIONs available</h3>
+    <h3><i class="flaticon-eye"></i>{{$result_count}} PRCPTIONs</h3>
 
 </div>
 <?php foreach($uploaded_list as $info){
@@ -11,9 +11,9 @@ $video_id = isset($matches[1])?$matches[1]:'';
 
 <div class="col-lg-12">
     <div class="places s2">
-        <ul class="listmetas">
+        <div style="text-align: right;"><ul class="listmetas">
             <li><a href="#" title=""><i class="fa fa-tag"></i> <?php echo $info['primary_subject_tag'] ?></a></li>
-        </ul>
+        </ul></div>
         <div class="placethumb">
             <img src="https://img.youtube.com/vi/<?php echo $video_id ?>/mqdefault.jpg">
             <?php /*<iframe frameborder="0" showinfo="0" controls="0" autohide="1" style="width: 100%;" src="<?php echo str_replace( 'watch?v=', 'embed/',$info['url']) ?>" frameborder="0" allowfullscreen></iframe> */ ?>
