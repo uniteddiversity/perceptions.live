@@ -3214,8 +3214,9 @@ header.s5 .extras > a {
 }
 .mlfilter-sec {
     position: fixed;
-    left: -350px;
+    left: -450px;
     top: 0;
+    width: 450px;
     width: 350px;
     padding-left: 0;
     padding-right: 0;
@@ -4307,6 +4308,7 @@ header.s4 .listingform {
 .mlfilter-sec.static .mltitle {
     padding-top: 27px;
     padding-bottom: 28px;
+	width: 
 }
 .ml-placessec.golist .row > div {
     float: left;
