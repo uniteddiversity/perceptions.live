@@ -38,7 +38,6 @@
 </div>
 <header class="s4 dark">
     <div class="container fluid">
-        <div id="logo_overlay"><img src="/assets/findgo/images/live-perceptions-logo.png" width="740" height="150"></div>
         @if (Route::has('login'))
 
             @auth
