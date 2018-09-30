@@ -1,6 +1,6 @@
 <?php $user_img = Auth::user()->image; ?>
 <nav class="navbar header-navbar pcoded-header" >
-    <div id="logo_overlay"><img src="assets/img/live-perceptions-logo.png"></div>
+
     <div class="navbar-wrapper">
         <div class="navbar-logo" data-navbar-theme="theme4">
             <a class="mobile-menu" id="mobile-collapse" href="#!">
@@ -10,7 +10,7 @@
                 <i class="ti-search"></i>
             </a>
             <a href="/">
-                <img class="img-fluid" src="/assets/img/horizontal-white.png" alt="{{ config('app.name') }}" />
+                <img class="img-fluid" src="/assets/img/logo_1.png" alt="{{ config('app.name') }}" />
             </a>
             <a class="mobile-options">
                 <i class="ti-more"></i>
@@ -74,6 +74,7 @@
                         </a>
                     </li>
                     */ ?>
+
                     <li class="user-profile header-notification">
                         <a href="#!">
                             <img src="<?php if(isset($user_img[0])){ echo '/storage/'.$user_img[0]->url; }else{ ?>/assets/img/face1.png<?php } ?>" alt="profile image">
@@ -150,14 +151,3 @@
         </div>
     </div>
 </nav>
-
-<style>
-#logo_overlay {
-margin: auto;
-position: absolute;
-top: 0px; left: 50px;
-bottom: 50px; right: 50px;
-background-color: #000;
-color: #FFF;
-}
-</style>

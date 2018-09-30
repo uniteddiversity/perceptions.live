@@ -3217,8 +3217,8 @@ header.s5 .extras > a {
     left: -350px;
     top: 0;
     width: 350px;
-    padding-left: 30px;
-    padding-right: 0;
+    padding-left: 0px;
+    padding-right: 30;
     -webkit-box-shadow: 0px 0px 30px rgba(0,0,0,0.1);
     -moz-box-shadow: 0px 0px 30px rgba(0,0,0,0.1);
     -ms-box-shadow: 0px 0px 30px rgba(0,0,0,0.1);

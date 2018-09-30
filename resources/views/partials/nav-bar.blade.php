@@ -1,5 +1,6 @@
 <div class="responsiveheader">
     <div class="rheader">
+        <div id="logo_overlay"><img src="/assets/findgo/images/live-perceptions-logo.png"></div>
         <span><img src="/assets/findgo/images/ricon.png" alt="" /></span>
         <div class="logo">
             <a href="#" title=""><img src="/assets/findgo/images/horizontal-white.png" height="40" width="175" alt="" /></a>
@@ -38,6 +39,7 @@
 </div>
 <header class="s4 dark">
     <div class="container fluid">
+        <div id="logo_overlay"><img src="/assets/findgo/images/live-perceptions-logo.png"></div>
         @if (Route::has('login'))
 
             @auth
@@ -51,9 +53,9 @@
             @endif
         @endif
 
-            {{--<div class="logo">--}}
-                {{--<a href="#" title=""><img src="/assets/findgo/images/horizontal-white.png" height="40" width="175" alt="" /></a>--}}
-            {{--</div>--}}
+            <div class="logo">
+                <a href="#" title=""><img src="/assets/findgo/images/horizontal-white.png" height="40" width="175" alt="" /></a>
+            </div>
         <nav>
             <ul>
             @if (Route::has('login'))
@@ -62,7 +64,7 @@
                 @else
 
                 @endauth
-                <li><a href="/claim-profile" target="_blank" ><i class="fa fa-registered white"></i>&nbspClaim Your Profile</a></li>
+                <li><a href="/claim-profile" target="_blank" ><i class="fa fa-registered white"></i>&nbsp;Claim Your Profile</a></li>
             @endif
             </ul>
             {{--<ul>--}}
@@ -144,7 +146,15 @@
 </header>
 
 
-
+<style>CSS
+    #logo_overlay {
+        margin: auto;
+        position: absolute;
+        top: 0px; left: 50px;
+        bottom: 50px; right: 50px;
+        background-color: #transparent;
+        z-index:5;
+    }</style>
 
 
 
