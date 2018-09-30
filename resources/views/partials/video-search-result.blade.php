@@ -40,10 +40,10 @@ $video_id = isset($matches[1])?$matches[1]:'';
                 <?php if(!empty($info['trim_description'])){ ?>
                     <span style="font-size: .8em;"><?php echo $info['trim_description'] ?> [ <a href="#" onclick="openVideo('<?php echo $info['id'] ?>')">more...</i></a> ]</div> </span>
                 <?php } ?>
-            </div>
 <div class="placedetails">
     <span class="pull-left" onclick="navigateOnMap('<?php echo $info['lat'] ?>','<?php echo $info['long'] ?>');" style="cursor: pointer;"><i class="flaticon-pin"></i> <?php echo $info['location'] ?></span>
     <span class="pull-right"><i class="flaticon-avatar"></i> <?php foreach($info->videoProducer as $key => $users){ if(isset($info->videoProducer[$key])){ echo '<span class="inactive_link" onclick="openProfile(\''. $info->videoProducer[$key]->user->id .'\')">@'.$info->videoProducer[$key]->user->display_name.'</span>'; break; } }?></span>
+</div>
 </div>
         </div>
     </div>
