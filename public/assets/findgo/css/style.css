@@ -1564,7 +1564,7 @@ nav > ul > li.menu-item-has-children:hover > ul {
     float: right;
     width: 100%;
     margin: 0;
-        margin-top: 0px;
+    padding-left: 40%;
     margin-top: 2px;
 }
 .listmetas li {
@@ -1575,15 +1575,61 @@ nav > ul > li.menu-item-has-children:hover > ul {
     font-family: ralewayregular;
     font-size: 13px;
     color: #2B2B47;
-    line-height: 20px;
+    line-height: 12px;
 }
 .listmetas li a{
     color: #6060D5;
-    font-weight: 300px;
+    font-weight: 300;
 }
 .listmetas li:first-child {
     padding-left: 0 !important;
 }
+
+.listmetas2 {
+    margin: 0;
+    z-index:0;
+}
+
+.listmetas2 li {
+    float: right;
+    margin: 0;
+    padding: 0px 3px !important;
+    font-family: ralewayregular;
+    font-size: 12px;
+    color: #2B2B47;
+    line-height: 16px;
+}
+.listmetas2 li a{
+    color: #6060D5;
+    font-weight: 300;
+}
+.listmetas2 li:first-child {
+    padding-right: 0 !important;
+}
+
+
+.usersmetas2 {
+    margin: 0;
+    z-index:0;
+}
+
+.usersmetas2 li {
+    float: left;
+    margin: 0;
+    padding: 0px 3px !important;
+    font-family: ralewayregular;
+    font-size: 12px;
+    color: #2B2B47;
+    line-height: 16px;
+}
+.usersmetas2 li a{
+    color: #6060D5;
+    font-weight: 300;
+}
+.usersmetas2 li:first-child {
+    padding-left: 0 !important;
+}
+
 .rated {
     float: left;
     color: #120029;

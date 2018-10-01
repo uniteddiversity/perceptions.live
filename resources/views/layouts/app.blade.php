@@ -32,7 +32,7 @@
 
 <div class="page-loading">
     <img src="/assets/findgo/images/loader.gif" alt="" />
-    <span>Skip Loader</span>
+    <span>Skip Loading?</span>
 </div>
 
 <div class="theme-layout">
@@ -168,12 +168,13 @@
     .modal-dialog{
         background: white;
         width: 950px;
+        height: 75%
+        padding-top: 50px;
         margin: auto;
     }
 
     .modal-content{
-        padding-top: 10px;
-        padding-bottom: 10px;
+        padding: 10px;
     }
 
     .avatar{
