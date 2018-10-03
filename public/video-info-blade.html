@@ -3,11 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
-    <link rel="stylesheet" type="text/css" href="/assets/findgo/css/bootstrap-grid.css" />
-    <link rel="stylesheet" href="/assets/findgo/css/icons.css">
+    <link rel="stylesheet" type="text/css" href="assets/findgo/css/bootstrap-grid.css" />
+    <link rel="stylesheet" href="assets/findgo/css/icons.css">
     <link rel="stylesheet" href="/assets/findgo/css/animate.min.css">
     <link rel="stylesheet" type="text/css" href="assets/findgo/css/style.css" />
-    <link rel="stylesheet" type="text/css" href="/assets/findgo/css/responsive.css" />
+    <link rel="stylesheet" type="text/css" href="assets/findgo/css/responsive.css" />
     <link rel="stylesheet" type="text/css" href="/assets/css/leaflet_0.7.css" />
     {{--<link rel="stylesheet" href="/assets/css/leaflet.css">--}}
     {{--<link rel="stylesheet" href="/assets/css/MarkerCluster.css">--}}
@@ -37,12 +37,15 @@
     </div>
                 <div><img width=100% height=100% src="kalani.jpg"></div>
 
-    <?php /* this div is only present if there is a group associated with video */ ?>
 
-    <div class="placedetails">
-        <span><i class="fa fa-users"></i> Group (if exists)</span>
-    </div>
         <div class="placedetails">
+
+            <?php /* ### div with class "groupdet' is only present if there is a group associated with video ### can we align icon with text? */ ?>
+
+            <div>
+                <span class="fa-align-center"><i class="fa fa-users"></i> Group (if exists)</span>
+            </div>
+
             <span class="pull-left" ><i class="fa fa-tag"></i> Primary Subject Tag</span>
             <span class="pull-right"><i class="flaticon-avatar"></i> <span class="inactive_link">Video Producer</span></span>
         </div>
@@ -57,7 +60,7 @@
                      </ul>
                      <ul class="usersmetas2">
                          <li><a href="#" title=""><i class="fa fa-user-circle"></i> Onscreen</a></li>
-                         <li><a href="#" title=""><i class="fa fa-user-circle-o"></i> Co-Creators</a></li>
+                         <li><a href="#" title=""><i class="fa fa-user"></i> Co-Creators</a></li>
                      </ul>
 
                  </div>

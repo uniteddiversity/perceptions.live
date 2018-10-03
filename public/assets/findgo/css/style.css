@@ -1657,20 +1657,21 @@ nav > ul > li.menu-item-has-children:hover > ul {
     padding: 0 20px;
     padding-top: 10px;
     padding-bottom: 5px;
+    text-align: center;
 }
 .placedetails span {
     font-size: 13px;
     color: #8d8d8d;
     padding: 0px 0;
     line-height: 25px;
-
+    text-align: center;
 }
 .placedetails span i {
     font-size: 21px;
     margin-right: 8px;
     float: left;
     color: #b5b5b5;
-}
+
 .singleline {
     float: left;
     width: 100%;
