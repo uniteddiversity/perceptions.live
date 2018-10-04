@@ -91,7 +91,7 @@
 </div>
 */ ?>
 
-<iframe width="200" height="100" src="<?php echo str_replace( 'watch?v=', 'embed/',$info['url']) ?>" frameborder="0" allowfullscreen></iframe>
+<img width=200 height=100 src="https://img.youtube.com/vi/<?php echo $video_id ?>/mqdefault.jpg">
 <div class="row" style="display: block;margin: 5px;">
         <div style="font-size: 16px;margin-top: 6px;margin-bottom: 6px;">{{$info['title']}}
             <span style="padding-bottom: 6px;float: right;">
@@ -104,6 +104,8 @@
                 </span>
         </div>
         <div><i class="flaticon-pin"> {{$info['location']}}</i></div>
-        <div><a href="/home/ajax-video-more-info/{{$info['id']}}" target="_blank"><i class="flaticon-eye"> View More</i></a></div>
+                <div><i class="flaticon-avatar"></i> <?php foreach($info->videoProducer as $key => $users){ if(isset($info->videoProducer[$key])){ echo '<span class="inactive_link" onclick="openProfile(\''. $info->videoProducer[$key]->user->id .'\')">@'.$info->videoProducer[$key]->user->display_name.'</span>'; break; } }?></div>
+
+        <div><a href="#" onclick="openVideo('<?php echo $info['id'] ?>')"><i class="flaticon-eye"> Open Video</i></a></div>
 
 </div>

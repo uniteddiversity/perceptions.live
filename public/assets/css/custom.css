@@ -1,6 +1,7 @@
+
 .dot {
-    height: 22px;
-    width: 22px;
+    height: 20px;
+    width: 20px;
     border-radius: 50%;
     display: inline-block;
     margin: 2px;
@@ -15,6 +16,7 @@
     margin: 2px;
     cursor: pointer;
 }
+
 
 .inactive_link{
     cursor: pointer;

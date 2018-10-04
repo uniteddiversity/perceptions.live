@@ -61,7 +61,6 @@ Author:         CreativeLayers
 -------------------------------------------------------------------*/
 
 /*=============== Fonts ===================*/
-@import url('https://fonts.googleapis.com/css?family=Raleway:100,100i,300,300i,400,400i,500,500i,700,700i,900,900i&amp;subset=cyrillic,cyrillic-ext,greek,greek-ext,latin-ext,vietnamese');
 /*=============== General Styling ===================*/
 /* http://meyerweb.com/eric/tools/css/reset/ 
    v2.0 | 20110126
@@ -69,18 +68,12 @@ Author:         CreativeLayers
 */
 
 @font-face {
-    /*font-family: 'questrialregularregular';*/
-    src: url('questrialregular-regular-webfont.woff2') format('woff2'),
-         url('questrialregular-regular-webfont.woff') format('woff');
-    font-weight: normal;
-    font-style: normal;
-
-}
-
-@font-face {
     font-family: 'ralewaybold';
-    src: url('raleway-bold-webfont.woff2') format('woff2'),
-         url('raleway-bold-webfont.woff') format('woff');
+    src: url('fonts/raleway-bold-webfont.eot');
+    src: url('fonts/raleway-bold-webfont.eot?#iefix') format('embedded-opentype'),
+    url('fonts/raleway-bold-webfont.woff2') format('woff2'),
+    url('fonts/raleway-bold-webfont.woff') format('woff'),
+    url('fonts/raleway-bold-webfont.ttf') format('truetype');
     font-weight: normal;
     font-style: normal;
 
@@ -88,8 +81,11 @@ Author:         CreativeLayers
 
 @font-face {
     font-family: 'ralewaylight';
-    src: url('raleway-light-webfont.woff2') format('woff2'),
-         url('raleway-light-webfont.woff') format('woff');
+    src: url('fonts/raleway-light-webfont.eot');
+    src: url('fonts/raleway-light-webfont.eot?#iefix') format('embedded-opentype'),
+    url('fonts/raleway-light-webfont.woff2') format('woff2'),
+    url('fonts/raleway-light-webfont.woff') format('woff'),
+    url('fonts/raleway-light-webfont.ttf') format('truetype');
     font-weight: normal;
     font-style: normal;
 
@@ -97,8 +93,11 @@ Author:         CreativeLayers
 
 @font-face {
     font-family: 'ralewaymedium';
-    src: url('raleway-medium-webfont.woff2') format('woff2'),
-         url('raleway-medium-webfont.woff') format('woff');
+    src: url('fonts/raleway-medium-webfont.eot');
+    src: url('fonts/raleway-medium-webfont.eot?#iefix') format('embedded-opentype'),
+    url('fonts/raleway-medium-webfont.woff2') format('woff2'),
+    url('fonts/raleway-medium-webfont.woff') format('woff'),
+    url('fonts/raleway-medium-webfont.ttf') format('truetype');
     font-weight: normal;
     font-style: normal;
 
@@ -106,8 +105,23 @@ Author:         CreativeLayers
 
 @font-face {
     font-family: 'ralewayregular';
-    src: url('raleway-regular-webfont.woff2') format('woff2'),
-         url('raleway-regular-webfont.woff') format('woff');
+    src: url('fonts/raleway-regular-webfont.eot');
+    src: url('fonts/raleway-regular-webfont.eot?#iefix') format('embedded-opentype'),
+    url('fonts/raleway-regular-webfont.woff2') format('woff2'),
+    url('fonts/raleway-regular-webfont.woff') format('woff'),
+    url('fonts/raleway-regular-webfont.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+
+}
+
+@font-face {
+    font-family: 'questrial';
+    src: url('fonts/questrial-regular-webfont.eot');
+    src: url('fonts/questrial-regular-webfont.eot?#iefix') format('embedded-opentype'),
+    url('fonts/questrial-regular-webfont.woff2') format('woff2'),
+    url('fonts/questrial-regular-webfont.woff') format('woff'),
+    url('fonts/questrial-regular-webfont.ttf') format('truetype');
     font-weight: normal;
     font-style: normal;
 
@@ -150,8 +164,7 @@ table{
 html{overflow-x:hidden}
 body{
     color:#555555;
-    
-    /*font-family:'questrialregular-Regular', sans-serif;;*/
+    font-family:'questrial', sans-serif;
     overflow-x:hidden;
     position:relative;
     
@@ -159,7 +172,7 @@ body{
 body *{outline:none !important;}
 h1, h2, h3, h4, h5, h6{
     margin-bottom:20px;
-    font-family: 'Raleway', sans-serif;
+    font-family: 'ralewaymedium', sans-serif;
 }
 h1{font-size:36px}
 h2{font-size:32px}
@@ -182,6 +195,7 @@ input:hover,input:focus{outline:none}
 html.no-scoll {
     overflow: hidden;
 }
+
 /* Theme Layout */
 .theme-layout{
     float:left;
@@ -235,7 +249,7 @@ html.no-scroll {
     padding:60px 0;
     position:relative;
 }
-.container.fluid{ max-width: 100%; width: 100%; }
+.container.fluid{ position: relative; top: 0; z-index: 1; left: 0; max-width: 100%; width: 100%; }
 .block .container{padding:0}
 .container{padding:0}
 .block.remove-top{padding-top:0}
@@ -310,7 +324,7 @@ input[type="email"], textarea {
     margin-bottom: 20px;
     padding: 19px 28px;
     width: 100%;
-    font-family: Raleway;
+    font-family: ralewayregular;
 }
 textarea{
     max-width:100%;
@@ -650,7 +664,7 @@ nav > ul > li {
 nav > ul > li > a {
     float: left;
     color: #ffffff;
-    font-family: Raleway;
+    font-family: ralewayregular;
     font-size: 14px;
     padding: 35px 14px;
 }
@@ -688,7 +702,7 @@ nav > ul > li.menu-item-has-children > a::before {
 
     font-size: 15px;
     color: #ffffff;
-    font-family: Raleway;
+    font-family: ralewayregular;
     padding: 11px 26px;
 }
 .extras a img {
@@ -755,7 +769,7 @@ nav > ul > li.menu-item-has-children ul li a {
     width: 100%;
     font-size: 13px;
     color: #8d8d8d;
-    font-family: Raleway;
+    font-family: ralewayregular;
     
     position: relative;
 }
@@ -875,7 +889,7 @@ nav > ul > li.menu-item-has-children:hover > ul {
 .ctabs.group li a {
     float: left;
     width: 100%;
-    font-family: Raleway;
+    font-family: ralewayregular;
     font-size: 20px;
     color: #242423;
     font-weight: 500;
@@ -908,7 +922,7 @@ nav > ul > li.menu-item-has-children:hover > ul {
     text-align: left;
     padding: 0;
     font-size: 15px;
-    font-family: Raleway;
+    font-family: ralewayregular;
     color: #242423;
     margin: 0;
         margin-bottom: 0px;
@@ -924,7 +938,7 @@ nav > ul > li.menu-item-has-children:hover > ul {
     background: #ffffff;
     border: 1px solid #e8ecec;
     height: 50px;
-    font-family: Raleway;
+    font-family: ralewayregular;
     
     
     -webkit-border-radius: 2px;
@@ -943,14 +957,14 @@ nav > ul > li.menu-item-has-children:hover > ul {
 .accountform form > a {
     float: right;
     font-size: 13px;
-    font-family: Raleway;
+    font-family: ralewayregular;
     color: #28b8dc;
     margin: 7px 0;
 }
 .accountform form button {
     float: left;
     width: 100%;
-    font-family: Raleway;
+    font-family: ralewayregular;
     font-size: 17px;
     background: #28b8dc;
     
@@ -1065,7 +1079,7 @@ nav > ul > li.menu-item-has-children:hover > ul {
     font-size: 43px;
     line-height: 44px;
     font-weight: lighter;
-    font-family: Raleway;
+    font-family: ralewayregular;
     
     -webkit-transform: rotate(45deg);
     -moz-transform: rotate(45deg);
@@ -1085,7 +1099,7 @@ nav > ul > li.menu-item-has-children:hover > ul {
 .listingsf > h3 {
     float: left;
     width: 100%;
-    font-family: Raleway;
+    font-family: ralewayregular;
     font-size: 45px;
     color: #ffffff;
     font-weight: bold;
@@ -1095,7 +1109,7 @@ nav > ul > li.menu-item-has-children:hover > ul {
 .listingsf > p {
     float: left;
     width: 100%;
-    font-family: Raleway;
+    font-family: ralewayregular;
     font-size: 17px;
     color: #ffffff;
     font-weight: lighter;
@@ -1145,7 +1159,7 @@ nav > ul > li.menu-item-has-children:hover > ul {
     float: left;
     width: 100%;
     text-align: left;
-    font-family: Raleway;
+    font-family: ralewayregular;
     font-size: 13px;
     color: #67676f;
     min-height: 37px;
@@ -1171,7 +1185,7 @@ nav > ul > li.menu-item-has-children:hover > ul {
     float: left;
     width: 100%;
     padding: 6px 30px;
-    font-family: Raleway;
+    font-family: ralewayregular;
     font-size: 13px;
     color: #67676f;
     
@@ -1239,7 +1253,7 @@ nav > ul > li.menu-item-has-children:hover > ul {
     -o-border-radius: 2px;
     border-radius: 2px;
 
-    font-family: Raleway;
+    font-family: ralewayregular;
     font-size: 17px;
     font-weight: 100;
     
@@ -1256,7 +1270,7 @@ nav > ul > li.menu-item-has-children:hover > ul {
     float: none;
     display: inline-block;
     color: #ffffff;
-    font-family: Raleway;
+    font-family: ralewayregular;
     font-size: 15px;
     line-height: 29px;
     margin-right: 16px;
@@ -1276,7 +1290,7 @@ nav > ul > li.menu-item-has-children:hover > ul {
 .formcat a {
     float: none;
     display: inline-block;
-    font-family: Raleway;
+    font-family: ralewayregular;
     font-size: 13px;
     color: #ffffff;
     padding: 6px 16px;
@@ -1367,14 +1381,14 @@ nav > ul > li.menu-item-has-children:hover > ul {
     font-size: 22px;
     font-weight: 500;
     color: #ffffff;
-    font-family: Raleway;
+    font-family: ralewayregular;
 }
 .cattitle h3 a{
     color: #ffffff;
 }
 .cattitle span {
     color: #ffffff;
-    font-family: Raleway;
+    font-family: ralewayregular;
     font-size: 15px;
     margin-top: 7px;
     float: left;
@@ -1432,7 +1446,7 @@ nav > ul > li.menu-item-has-children:hover > ul {
 }
 .placethumb {
     float: left;
-    width: 100%;
+    width: 50%;
     position: relative;
     overflow: hidden;
 }
@@ -1457,6 +1471,30 @@ nav > ul > li.menu-item-has-children:hover > ul {
     height: 70px;
     z-index: 1;
 }
+
+.watchicon2 {
+    position: absolute;
+    width: 36px;
+    height: 36px;
+    left: 50%;
+    top: 50%;
+    margin-left: -18px;
+    margin-top: -18px;
+}
+.watchicon2 span {
+    color: #ffffff;
+    font-size: 26px;
+    line-height: 40px;
+    cursor: pointer;
+	text-align: center;
+}
+.watchicon2 span i {
+    font-size: 21px;
+    float: left;
+    margin-right: 10px;
+	margin-top:-40px;
+}
+
 .placeoptions {
     position: absolute;
     left: 0;
@@ -1471,7 +1509,7 @@ nav > ul > li.menu-item-has-children:hover > ul {
 .placeoptions span {
     color: #ffffff;
     font-size: 13px;
-    font-family: Raleway;
+    font-family: ralewayregular;
     line-height: 16px;
     cursor: pointer;
 }
@@ -1485,20 +1523,34 @@ nav > ul > li.menu-item-has-children:hover > ul {
     width: 100%;
     border: 1px solid #e8ecec;
     margin-top: -1px;
-    padding: 0 20px;
-    padding-bottom: 15px;
-    padding-top: 20px;
+    padding-left: 10px;
+    padding-bottom: 5px;
+    padding-top: 5px;
 }
 .placeinfos h3 {
     float: left;
     width: 100%;
-    font-family: Raleway;
-    font-size: 18px;
+    font-family: ralewaybold;
+    font-size: 1em;
     color: #2B2B47;
-    font-weight: bold;
-    
-    margin-bottom: 6px;
+    margin-bottom: 5px;
 }
+.placeinfosdesc {
+    float: left;
+    width: 100%;
+    border: 0px solid #e8ecec;
+    margin-top: -1px;
+    padding-left: 10px;
+    padding-bottom: 5px;
+    padding-top: 5px;
+}
+.placeinfosdesc > span {
+    float: left;
+    width: 100%;
+    font-size: 13px;
+    color: #8d8d8d;
+}
+
 .placeinfos h3 a{
     color: #1C1C8E;
 }
@@ -1509,29 +1561,75 @@ nav > ul > li.menu-item-has-children:hover > ul {
     color: #8d8d8d;
 }
 .listmetas {
-    float: left;
+    float: right;
     width: 100%;
     margin: 0;
-        margin-top: 0px;
-    margin-top: 12px;
+    padding-left: 40%;
+    margin-top: 2px;
 }
 .listmetas li {
     float: left;
     margin: 0;
     padding: 5px 15px !important;
     border-right: 1px solid #e8ecec;
-    font-family: Raleway;
+    font-family: ralewayregular;
     font-size: 13px;
     color: #2B2B47;
-    line-height: 20px;
+    line-height: 12px;
 }
 .listmetas li a{
     color: #6060D5;
-    font-weight: 300px;
+    font-weight: 300;
 }
 .listmetas li:first-child {
     padding-left: 0 !important;
 }
+
+.listmetas2 {
+    margin: 0;
+    z-index:0;
+}
+
+.listmetas2 li {
+    float: right;
+    margin: 0;
+    padding: 0px 3px !important;
+    font-family: ralewayregular;
+    font-size: 12px;
+    color: #2B2B47;
+    line-height: 16px;
+}
+.listmetas2 li a{
+    color: #6060D5;
+    font-weight: 300;
+}
+.listmetas2 li:first-child {
+    padding-right: 0 !important;
+}
+
+
+.usersmetas2 {
+    margin: 0;
+    z-index:0;
+}
+
+.usersmetas2 li {
+    float: left;
+    margin: 0;
+    padding: 0px 3px !important;
+    font-family: ralewayregular;
+    font-size: 12px;
+    color: #2B2B47;
+    line-height: 16px;
+}
+.usersmetas2 li a{
+    color: #6060D5;
+    font-weight: 300;
+}
+.usersmetas2 li:first-child {
+    padding-left: 0 !important;
+}
+
 .rated {
     float: left;
     color: #120029;
@@ -1557,19 +1655,23 @@ nav > ul > li.menu-item-has-children:hover > ul {
     border: 1px solid #e8ecec;
     margin-top: -1px;
     padding: 0 20px;
+    padding-top: 10px;
+    padding-bottom: 5px;
+    text-align: center;
 }
 .placedetails span {
     font-size: 13px;
     color: #8d8d8d;
-    padding: 12px 0;
+    padding: 0px 0;
     line-height: 25px;
+    text-align: center;
 }
 .placedetails span i {
     font-size: 21px;
     margin-right: 8px;
     float: left;
     color: #b5b5b5;
-}
+
 .singleline {
     float: left;
     width: 100%;
@@ -1621,7 +1723,7 @@ nav > ul > li.menu-item-has-children:hover > ul {
     width: 100%;
     font-size: 13px;
     color: #8d8d8d;
-    font-family: Raleway;
+    font-family: ralewayregular;
     margin: 0;
         margin-top: 0px;
     line-height: 26px;
@@ -1687,7 +1789,7 @@ nav > ul > li.menu-item-has-children:hover > ul {
     width: 100%;
     font-size: 15px;
     color: #ffffff;
-    font-family: Raleway;
+    font-family: ralewayregular;
     margin-top: 15px;
     opacity: 0;
 }
@@ -1817,7 +1919,7 @@ nav > ul > li.menu-item-has-children:hover > ul {
     width: 100%;
     margin: 0;
         margin-bottom: 0px;
-    font-family: Raleway;
+    font-family: ralewayregular;
     font-size: 20px;
     font-weight: bold;
     color: #242423;
@@ -1947,7 +2049,7 @@ nav > ul > li.menu-item-has-children:hover > ul {
     float: left;
     width: 100%;
     color: #ffffff;
-    font-family: Raleway;
+    font-family: ralewayregular;
     font-weight: 500;
     font-size: 18px;
     margin: 10px 0;
@@ -1993,7 +2095,7 @@ footer {
 }
 .footersec > ul li a {
     color: #323031;
-    font-family: Raleway;
+    font-family: ralewayregular;
     font-size: 15px;
 }
 .footersec > ul li::before {
@@ -2150,7 +2252,7 @@ header.s2 {
     border-top: transparent;
     border-left: transparent;
     border-right: transparent;
-    border-bottom: 1px solid #e8ecec;
+    border-bottom: 0px solid #e8ecec;
 }
 .places.s2 .placedetails {
     border: none;
@@ -2332,7 +2434,7 @@ header.s3::before {
     -o-transform: translateX(-50%);
     transform: translateX(-50%);
 
-    font-family: Raleway;
+    font-family: ralewayregular;
     font-size: 17px;
     font-weight: 100;
     color: #fb3640;
@@ -2431,7 +2533,7 @@ header.s3::before {
     width: 100%;
     padding-top: 50px;
     padding-bottom: 30px;
-    font-family: Raleway;
+    font-family: ralewayregular;
     font-size: 18px;
     color: #242423;
     position: relative;
@@ -2534,7 +2636,7 @@ header.s3::before {
 .hpftitle h3 {
     float: left;
     width: 100%;
-    font-family: Raleway;
+    font-family: ralewayregular;
     font-size: 21px;
     font-weight: 500;
     color: #212121;
@@ -2571,7 +2673,7 @@ header.s3::before {
     position: relative;
     padding-left: 20px;
     margin: 0 5px;
-    font-family: Raleway;
+    font-family: ralewayregular;
     font-size: 13px;
     color: #8d8d8d;
 }
@@ -2703,7 +2805,7 @@ header.s4 {
 .fcsec.widely .fc > span {
     float: none;
     font-size: 50px;
-    font-family: Raleway;
+    font-family: ralewayregular;
     font-weight: 100;
     color: #f8fafa;
     
@@ -2884,7 +2986,7 @@ header.s5 .extras > a {
     position: fixed;
     right: 0;
     top: 0;
-    padding-left: 510px;
+    padding-left: 410px;
 }
 .ml-box {
     float: left;
@@ -2921,7 +3023,7 @@ header.s5 .extras > a {
 }
 .ml-thumb > span {
     width: auto;
-    font-family: Raleway;
+    font-family: ralewayregular;
     font-size: 13px;
     color: #ffffff;
     z-index: 1;
@@ -2936,7 +3038,7 @@ header.s5 .extras > a {
     color: #ffffff;
     bottom: 0;
     margin: 0;
-    font-family: Raleway;
+    font-family: ralewayregular;
     font-size: 11px;
     padding: 7px 20px;
     line-height: 30px;
@@ -2960,7 +3062,7 @@ header.s5 .extras > a {
     color: #242423;
     font-weight: 500;
     margin: 0;
-    font-family: Raleway;
+    font-family: ralewayregular;
 }
 .ml-title > h3 a{
     color: #242423;
@@ -3098,7 +3200,7 @@ header.s5 .extras > a {
     position: fixed;
     left: 0;
     top: 0;
-    width: 90px;
+    width: 45px;
     height: 100%;
     background: #d5d5ed;
     
@@ -3117,17 +3219,15 @@ header.s5 .extras > a {
     float: left;
     display: inline-block;
     width: 100%;
-    padding: 0 32px;
+    padding: 0 12px;
     margin-top: 40px;
 }
 .openfilters span {
     float: left;
     width: 100%;
-    font-family: Raleway;
+    font-family: ralewaybold;
     text-transform: uppercase;
     font-size: 16px;
-    font-weight: 700;
-    
     
     -webkit-transform: rotate(-90deg);
     -moz-transform: rotate(-90deg);
@@ -3137,26 +3237,24 @@ header.s5 .extras > a {
 
     width: 130px;
     text-align: center;
-    margin-left: -22px;
+    margin-left: -42px;
     margin-top: 70px;
     color: #2B2B47;
 }
 .closefilter {
     position: absolute;
-    width: 28px;
-    height: 28px;
+    width: 18px;
+    height: 18px;
     background: #1C1C8E;
-    
     -webkit-border-radius: 4px;
     -moz-border-radius: 4px;
     -ms-border-radius: 4px;
     -o-border-radius: 4px;
     border-radius: 4px;
-
-    right: 5px;
-    top: 50%;
+    right: 10px;
+    top: 60%;
     z-index: 1;
-    line-height: 28px;
+    line-height: 18px;
     cursor: pointer;
     margin-top: -20px;
 }
@@ -3166,10 +3264,10 @@ header.s5 .extras > a {
     text-align: center;
     color: #ffffff;
     font-style: normal;
-    font-size: 34px;
-    line-height: 30px;
+    font-size: 24px;
+    line-height: 18px;
     font-weight: 300;
-    font-family: Raleway;
+    font-family: ralewayregular;
     
     -webkit-transform: rotate(45deg);
     -moz-transform: rotate(45deg);
@@ -3180,24 +3278,22 @@ header.s5 .extras > a {
 }
 .mlfilter-sec {
     position: fixed;
-    left: -450px;
+    left: -350px;
     top: 0;
-    width: 450px;
-    padding-left: 30px;
+    width: 350px;
+    padding-left: 0px;
     padding-right: 30px;
-    
     -webkit-box-shadow: 0px 0px 30px rgba(0,0,0,0.1);
     -moz-box-shadow: 0px 0px 30px rgba(0,0,0,0.1);
     -ms-box-shadow: 0px 0px 30px rgba(0,0,0,0.1);
     -o-box-shadow: 0px 0px 30px rgba(0,0,0,0.1);
     box-shadow: 0px 0px 30px rgba(0,0,0,0.1);
-
     height: 100%;
     opacity: 0;
     padding-bottom: 40px;
     z-index: 1;
     background: #ffffff;
-    margin-left: -10p;
+    margin-left: 0px;
 }
 .openfilters.active {
     left: -90px;
@@ -3212,15 +3308,12 @@ header.s5 .extras > a {
     width: 100%;
     position: relative;
     padding: 40px 0;
-    border-bottom: 1px solid #e8ecec;
 }
 .mltitle h3 {
     float: left;
     width: 100%;
-    font-family: Raleway;
+    font-family: ralewaybold;
     font-size: 20px;
-    font-weight: 500;
-   
     margin: 0;
 }
 .mltitle p {
@@ -3253,7 +3346,8 @@ header.s5 .extras > a {
     border: 1px solid #eaeaea;
     position: relative;
     background: #fafafa;
-    margin-bottom: 10px;
+    margin-bottom: 5px;
+       margin-left: -5px;
 }
 .mlfield > input {
     float: left;
@@ -3261,9 +3355,9 @@ header.s5 .extras > a {
     background: none;
     margin: 0;
     color: #2B2B47;
-    font-family: Raleway;
+    font-family: ralewayregular;
     font-size: 13px;
-    padding: 14px 20px;
+    padding: 8px 12px;
 }
 .mlfield > i {
     position: absolute;
@@ -3271,7 +3365,7 @@ header.s5 .extras > a {
     top: 0;
     font-size: 21px;
     color: #2B2B47;
-    padding: 12px 15px;
+    padding: 7px 15px;
 }
 .prices-drop {
     width: 100%;
@@ -3299,7 +3393,7 @@ header.s5 .extras > a {
 .prices-drop > p {
     float: left;
     width: 100%;
-    font-family: Raleway;
+    font-family: ralewayregular;
     font-size: 13px;
     color: #ffffff;
     
@@ -3309,7 +3403,7 @@ header.s5 .extras > a {
 .prices-drop > span {
     float: left;
     position: relative;
-    font-family: Raleway;
+    font-family: ralewayregular;
     font-size: 13px;
     color: #ffffff;
     margin-right: 19px;
@@ -3319,7 +3413,7 @@ header.s5 .extras > a {
     position: absolute;
     opacity: 0;
     visibility: hidden;
-    font-family: Raleway;
+    font-family: ralewayregular;
     font-size: 12px;
     background: #151519;
     font-style: normal;
@@ -3395,7 +3489,7 @@ header.s5 .extras > a {
 .intention-drop > p {
     float: left;
     width: 100%;
-    font-family: Raleway;
+    font-family: ralewayregular;
     font-size: 13px;
     color: #ffffff;
     
@@ -3405,7 +3499,7 @@ header.s5 .extras > a {
 .intention-drop > span {
     float: left;
     position: relative;
-    font-family: Raleway;
+    font-family: ralewayregular;
     font-size: 13px;
     color: #ffffff;
     margin-right: 19px;
@@ -3415,7 +3509,7 @@ header.s5 .extras > a {
     position: absolute;
     opacity: 0;
     visibility: hidden;
-    font-family: Raleway;
+    font-family: ralewayregular;
     font-size: 12px;
     background: #151519;
     font-style: normal;
@@ -3476,8 +3570,8 @@ header.s5 .extras > a {
 .SumoSelect > .optWrapper > .options  li.opt label, .SumoSelect > .CaptionCont,.SumoSelect .select-all > label { user-select: none; -o-user-select: none; -moz-user-select: none; -khtml-user-select: none; -webkit-user-select: none; }
 
 .SumoSelect { display: inline-block; position: relative;outline:none;float: left;width: 100%;}
-.SumoSelect > .CaptionCont { position: relative;  min-height: 14px; background-color: #fff;border-radius:2px;margin:0;background: #fafafa;padding: 8px 20px;}
-.SumoSelect > .CaptionCont > span { display: block; padding-right: 30px; text-overflow: ellipsis; white-space: nowrap; overflow: hidden;cursor:default;font-family: Raleway;font-size: 13px;color: #7d7d7d;}
+.SumoSelect > .CaptionCont { position: relative;  min-height: 14px; background-color: #fff;border-radius:2px;margin:0;background: #fafafa;padding: 2px 12px;}
+.SumoSelect > .CaptionCont > span { display: block; padding-right: 30px; text-overflow: ellipsis; white-space: nowrap; overflow: hidden;cursor:default;font-family: ralewayregular;font-size: 13px;color: #7d7d7d;}
 /*placeholder style*/
 .SumoSelect > .CaptionCont > span.placeholder { color: #ccc; font-style: italic; }
 
@@ -3565,7 +3659,7 @@ max-height: 250px;
 .mfilterform2 {
     float: left;
     width: 100%;
-    padding-top: 35px;
+    padding-top: 0px;
 }
 .mfilterform2 > form {
     float: left;
@@ -3591,12 +3685,13 @@ max-height: 250px;
     height          : 100%;
     width           : 100%;
     padding         : 0;
+    padding-right: 20px;
     position        : relative;
     right           : -16px;
     overflow        : auto;
     -moz-box-sizing : border-box;
     box-sizing      : border-box;
-    padding-right: 0;
+    padding-right: 10px;
     float: left;
     overflow-x: hidden;
 }
@@ -3604,9 +3699,9 @@ max-height: 250px;
 .fakeScrollBar{
     position            : absolute;
     background          : #2B2B47;
-    width               : 3px;
+    width               : 10px;
     border-radius       : 0;
-    right               : 14px;
+    right               : 0px;
     top                 : 0;
     z-index             : 0;
     cursor              : -moz-grab;
@@ -3639,8 +3734,8 @@ body.fakescroll-grabbed{
 .mltags {
     float: left;
     width: 100%;
-    margin-top: 10px;
-    padding-right: 0px;
+    margin-top: 0px;
+    padding-right: 10px;
 }
 .mltags .c-label {
     float: left;
@@ -3654,7 +3749,7 @@ body.fakescroll-grabbed{
 }
 .mlradius > span {
     float: left;
-    font-family: Raleway;
+    font-family: ralewayregular;
     font-size: 15px;
     color: #242423;
     font-weight: 500;
@@ -3676,7 +3771,7 @@ body.fakescroll-grabbed{
     font-size: 12px;
     text-transform: uppercase;
     font-weight: 600;
-    font-family: Raleway;
+    font-family: ralewayregular;
     padding-bottom: 20px;
 }
 
@@ -3838,14 +3933,12 @@ body.fakescroll-grabbed{
 }
 .mfilterform2 > form > button {
     float: left;
-	margin-left: 40px;
-    width: 80%;
-    font-family: Raleway;
+	margin-left: 30px;
+    width: 60%;
+    font-family: ralewaybold;
     text-transform: uppercase;
     font-size: 16px;
-    font-weight: 300;
     background: #2B2B47;
-    padding: 15px 5px;
     
     -webkit-border-radius: 2px;
     -moz-border-radius: 2px;
@@ -3856,14 +3949,15 @@ body.fakescroll-grabbed{
     margin-top: 20px;
 }
 .ml-listings {
-    width: 510px;
+    width: 410px;
     background: #fafafa;
-    padding-left: 105px !important;
+    padding-left: 45px !important;
     position: fixed;
     left: 0;
     top: 0;
     height: 100%;
-    padding: 30px;
+    padding: 10px;
+    filter: drop-shadow(1px 25px 5px #13054D);
 }
 .ml-filterbar {
     float: left;
@@ -3873,7 +3967,7 @@ body.fakescroll-grabbed{
 .ml-filterbar > h3 {
     float: left;
     width: 50%;
-    font-family: Raleway;
+    font-family: ralewayregular;
     font-size: 13px;
     color: #120029;
     line-height: 20px;
@@ -3912,17 +4006,15 @@ body.fakescroll-grabbed{
 }
 .ml-filterslide {
     float: left;
-    width: 510px;
+    width: 410px;
     position: relative;
     z-index: 1;
 }
-.ml-listings.active {
-    padding-left: 570px !important;
-    width: 1040px;
+
 }
 .ml-listings.active {
-    padding-left: 470px !important;
-    width: 870px;
+    padding-left: 360px !important;
+    width: 700px;
 }
 .ml-filterbar > ul > li.active span {
     color: #56bcdd;
@@ -4040,6 +4132,7 @@ header.s4 .listingform {
 }
 .mlfilter-sec .scrollContent > div {
     padding-right: 6px;
+    padding-left: 16px;
 }
 .customdrops::before {
     position: absolute;
@@ -4079,7 +4172,7 @@ header.s4 .listingform {
 }
 .rangedrops > a {
     float: left;
-    font-family: Raleway;
+    font-family: ralewayregular;
     font-size: 15px;
     color: #ffffff;
     background: #28b8dc;
@@ -4125,7 +4218,7 @@ header.s4 .listingform {
 .innertitle h2 {
     float: left;
     width: 100%;
-    font-family: Raleway;
+    font-family: ralewayregular;
     font-weight: 500;
     font-size: 25px;
     margin: 0;
@@ -4151,7 +4244,7 @@ header.s4 .listingform {
 }
 .breadcrumbs li a {
     float: left;
-    font-family: Raleway;
+    font-family: ralewayregular;
     font-size: 13px;
     color: #8d8d8d;
 }
@@ -4160,7 +4253,7 @@ header.s4 .listingform {
     right: -3px;
     top: 50%;
     content: ">";
-    font-family: Raleway;
+    font-family: ralewayregular;
     font-size: 10px;
     color: #8d8d8d;
     line-height: 10px;
@@ -4179,7 +4272,7 @@ header.s4 .listingform {
 .openfilterbtn {
     float: left;
     margin: 30px 0;
-    font-family: Raleway;
+    font-family: ralewayregular;
     font-size: 13px;
     color: #151519;
     line-height: 17px;
@@ -4191,7 +4284,7 @@ header.s4 .listingform {
 .filterbar2 > span {
     float: right;
     margin: 30px 0;
-    font-family: Raleway;
+    font-family: ralewayregular;
     font-size: 13px;
     color: #8d8d8d;
     line-height: 20px;
@@ -4299,7 +4392,7 @@ header.s4 .listingform {
 .errorsec > span {
     float: left;
     width: 100%;
-    font-family: Raleway;
+    font-family: ralewayregular;
     font-size: 20px;
     color: #8d8d8d;
     margin-top: 40px;
@@ -4331,7 +4424,7 @@ header.s4 .listingform {
     -o-border-radius: 2px;
     border-radius: 2px;
 
-    font-family: Raleway;
+    font-family: ralewayregular;
     font-size: 17px;
     
     font-weight: 100;
@@ -4363,7 +4456,7 @@ header.s4 .listingform {
 .termsec > h3 {
     float: left;
     width: 100%;
-    font-family: Raleway;
+    font-family: ralewayregular;
     font-size: 18px;
     font-weight: 500;
     color: #111111;
@@ -4438,7 +4531,7 @@ header.s4 .listingform {
 .pricetable-head h3 {
     float: left;
     width: 100%;
-    font-family: Raleway;
+    font-family: ralewayregular;
     font-size: 22px;
     color: #202020;
     margin: 0;
@@ -4447,7 +4540,7 @@ header.s4 .listingform {
 .pricetable-head h2 {
     float: left;
     width: 100%;
-    font-family: Raleway;
+    font-family: ralewayregular;
     font-size: 60px;
     font-weight: bold;
     margin: 0;
@@ -4468,7 +4561,7 @@ header.s4 .listingform {
 .pricetable-head span {
     float: left;
     width: 100%;
-    font-family: Raleway;
+    font-family: ralewayregular;
     font-size: 13px;
     color: #8d8d8d;
     margin-top: 2px;
@@ -4482,7 +4575,7 @@ header.s4 .listingform {
 .pricetable ul li {
     float: left;
     width: 100%;
-    font-family: Raleway;
+    font-family: ralewayregular;
     font-size: 13px;
     color: #8d8d8d;
     line-height: 40px;
@@ -4490,7 +4583,7 @@ header.s4 .listingform {
 .pricetable > a {
     float: none;
     display: inline-block;
-    font-family: Raleway;
+    font-family: ralewayregular;
     font-size: 17px;
     color: #ffffff;
     padding: 15px 98px;
@@ -4611,7 +4704,7 @@ header.s4 .listingform {
     padding: 0;
     margin: 0;
         margin-bottom: 0px;
-    font-family: Raleway;
+    font-family: ralewayregular;
     font-size: 15px;
     color: #242423;
     margin-bottom: 7px;
@@ -4631,14 +4724,14 @@ header.s4 .listingform {
     -o-border-radius: 2px;
     border-radius: 2px;
 
-    font-family: Raleway;
+    font-family: ralewayregular;
     color: #777777;
     padding: 18px 30px;
     margin-bottom: 25px;
 }
 .contactformsec form button {
     float: left;
-    font-family: Raleway;
+    font-family: ralewayregular;
     font-size: 15px;
     color: #ffffff;
     border: 1px solid #fb3640;
@@ -4696,7 +4789,7 @@ header.s4 .listingform {
     float: left;
     width: 100%;
     cursor: pointer;
-    font-family: Raleway;
+    font-family: ralewayregular;
     font-size: 18px;
     font-weight: 500;
     color: #242423;
@@ -4743,7 +4836,7 @@ header.s4 .listingform {
     -o-border-radius: 2px;
     border-radius: 2px;
 
-    font-family: Raleway;
+    font-family: ralewayregular;
     font-size: 13px;
     color: #8c8c8c;
     padding: 15px 20px;
@@ -4771,7 +4864,7 @@ header.s4 .listingform {
 .shipingtotal > h3 {
     float: left;
     width: 100%;
-    font-family: Raleway;
+    font-family: ralewayregular;
     font-size: 23px;
     color: #ffffff;
     font-weight: 500;
@@ -4806,7 +4899,7 @@ header.s4 .listingform {
     width: 100%;
     font-size: 13px;
     color: #ffffff;
-    font-family: Raleway;
+    font-family: ralewayregular;
     margin-bottom: 18px;
     margin-top: 9px;
 }
@@ -4816,7 +4909,7 @@ header.s4 .listingform {
 .shipingtotal li h3 {
     float: left;
     width: 100%;
-    font-family: Raleway;
+    font-family: ralewayregular;
     font-size: 19px;
     font-weight: 500;
     color: #ffffff;
@@ -4830,7 +4923,7 @@ header.s4 .listingform {
     width: 100%;
 }
 .cinput label {
-    font-family: Raleway;
+    font-family: ralewayregular;
     font-size: 13px;
     color: #ffffff;
     margin-top: 9px;
@@ -4846,7 +4939,7 @@ header.s4 .listingform {
     width: 100%;
     font-style: normal;
     color: #ffffff;
-    font-family: Raleway;
+    font-family: ralewayregular;
     font-size: 13px;
     text-decoration: underline;
     margin-top: 9px;
@@ -4857,7 +4950,7 @@ header.s4 .listingform {
     margin-top: 30px;
 }
 .choosepaymentopt .cinput label {
-    font-family: Raleway;
+    font-family: ralewayregular;
     font-size: 16px;
     line-height: 27px;
 }
@@ -4869,7 +4962,7 @@ header.s4 .listingform {
     width: 100%;
     margin: 0;
     font-size: 13px;
-    font-family: Raleway;
+    font-family: ralewayregular;
     color: #ffffff;
     line-height: 20px;
     margin: 4px 0;
@@ -4881,7 +4974,7 @@ header.s4 .listingform {
     float: left;
     width: 100%;
     margin-top: 20px;
-    font-family: Raleway;
+    font-family: ralewayregular;
     font-size: 13px;
     color: #ffffff;
 }
@@ -4961,7 +5054,7 @@ header.s4 .listingform {
     font-size: 14px;
     color: #28b8dc;
     font-weight: 400;
-    font-family: Raleway;
+    font-family: ralewayregular;
     margin-top: 20px;
 }
 .billingaddress span {
@@ -4989,7 +5082,7 @@ header.s4 .listingform {
     background: #ffffff;
     text-align: center;
     color: #28b8dc;
-    font-family: Raleway;
+    font-family: ralewayregular;
     font-weight: 100;
     padding: 20px 0;
     
@@ -5030,7 +5123,7 @@ header.s4 .listingform {
     font-style: normal;
     color: #3ebfdf;
     cursor: pointer;
-    font-family: Raleway;
+    font-family: ralewayregular;
     font-size: 18px;
     padding-right: 10px;
     padding-left: 20px;
@@ -5048,7 +5141,7 @@ header.s4 .listingform {
 .cartlist h3 {
     display: table-cell;
     vertical-align: middle;
-    font-family: Raleway;
+    font-family: ralewayregular;
     font-size: 13px;
     color: #8d8d8d;
     font-weight: normal;
@@ -5112,7 +5205,7 @@ header.s4 .listingform {
 .cartextras > form button {
     float: left;
     font-size: 13px;
-    font-family: Raleway;
+    font-family: ralewayregular;
     background: #151519;
     
     -webkit-border-radius: 2px;
@@ -5128,7 +5221,7 @@ header.s4 .listingform {
 }
 .cartextras > a {
     float: right;
-    font-family: Raleway;
+    font-family: ralewayregular;
     font-size: 13px;
     background: #fb3640;
     color: #ffffff;
@@ -5220,7 +5313,7 @@ header.s4 .listingform {
     top: 6px;
     background: none;
     border: none;
-    font-family: Raleway;
+    font-family: ralewayregular;
     font-size: 17px;
     font-weight: 200;
     color: #BFBFBF;
@@ -5351,7 +5444,7 @@ header.s4 .listingform {
     width: 100%;
     font-size: 24px;
     color: #202020;
-    font-family: Raleway;
+    font-family: ralewayregular;
     font-weight: 500;
     margin-bottom: 15px;
     margin-top: 10px;
@@ -5389,7 +5482,7 @@ header.s4 .listingform {
 }
 .extrainput > span {
     float: left;
-    font-family: Raleway;
+    font-family: ralewayregular;
     font-size: 20px;
     color: #212121;
     font-weight: 500;
@@ -5467,7 +5560,7 @@ header.s4 .listingform {
     -o-border-radius: 2px;
     border-radius: 2px;
 
-    font-family: Raleway;
+    font-family: ralewayregular;
     color: #ffffff;
     line-height: 27px;
     font-size: 14px;
@@ -5483,7 +5576,7 @@ header.s4 .listingform {
     color: #8d8d8d;
 }
 .revdes-tabs > ul > li a {
-    font-family: Raleway;
+    font-family: ralewayregular;
     font-size: 18px;
     font-weight: 500;
     color: #212121;
@@ -5510,7 +5603,7 @@ header.s4 .listingform {
     width: 100%;
     font-size: 25px;
     color: #556bff;
-    font-family: Raleway;
+    font-family: ralewayregular;
     font-weight: 500;
     margin-top: 20px;
     margin-bottom: 30px;
@@ -5556,7 +5649,7 @@ header.s4 .listingform {
     float: left;
     width: 100%;
     font-size: 15px;
-    font-family: Raleway;
+    font-family: ralewayregular;
     font-weight: 500;
     color: #212121;
     margin: 0;
@@ -5601,7 +5694,7 @@ header.s4 .listingform {
     width: 100%;
     font-size: 18px;
     color: #212121;
-    font-family: Raleway;
+    font-family: ralewayregular;
     font-weight: 500;
     margin-top: 0px;
     margin-bottom: 30px;
@@ -5624,7 +5717,7 @@ header.s4 .listingform {
     -o-border-radius: 2px;
     border-radius: 2px;
 
-    font-family: Raleway;
+    font-family: ralewayregular;
     padding: 16px 27px;
 }
 .leavecomment form input[type="submit"] {
@@ -5695,7 +5788,7 @@ header.s4 .listingform {
     position: absolute;
     left: 0;
     top: 50%;
-    font-family: Raleway;
+    font-family: ralewayregular;
     font-size: 18px;
     font-weight: 500;
     text-align: center;
@@ -5719,7 +5812,7 @@ header.s4 .listingform {
 }
 .cproductinfo > h3 {
     float: left;
-    font-family: Raleway;
+    font-family: ralewayregular;
     font-weight: 500;
     font-size: 18px;
     color: #121212;
@@ -5945,7 +6038,7 @@ tbody tr td {
 .tablewaqt .SumoSelect .CaptionCont.SelectBox {
     background: #ffffff;
     border: 1px solid #e8ecec;
-    font-family: Raleway;
+    font-family: ralewayregular;
     font-size: 13px;
     padding: 4px 10px;
     line-height: 30px;
@@ -6111,7 +6204,7 @@ tbody tr td {
     display: table;
     color: #ffffff;
     font-size: 13px;
-    font-family: Raleway;
+    font-family: ralewayregular;
     margin-top: 5px;
 }
 .iamuserstats {
@@ -6212,7 +6305,7 @@ tbody tr td {
 .reviewinfo > h3 {
     float: left;
     width: 100%;
-    font-family: Raleway;
+    font-family: ralewayregular;
     font-size: 14px;
     color: #5e5e62;
     margin: 0;
@@ -6341,7 +6434,7 @@ tbody tr td {
     float: left;
     line-height: 50px;
     font-size: 14px;
-    font-family: Raleway;
+    font-family: ralewayregular;
     color: #ffffff;
     margin: 18px 0;
     margin-left: 30px;
@@ -6530,7 +6623,7 @@ tbody tr td {
     width: 100%;
     font-size: 14px;
     color: #242423;
-    font-family: Raleway;
+    font-family: ralewayregular;
     margin: 0;
 }
 .notificationlist span {
@@ -6687,7 +6780,7 @@ tbody tr td {
     width: 100%;
     color: #8b8b8b;
     font-size: 13px;
-    font-family: Raleway;
+    font-family: ralewayregular;
     margin-top: 8px;
     margin-bottom: 8px;
 }
@@ -6696,7 +6789,7 @@ tbody tr td {
     display: inline-block;
     background: #28b8dc;
     color: #ffffff;
-    font-family: Raleway;
+    font-family: ralewayregular;
     font-size: 14px;
     padding: 12px 45px;
     
@@ -6724,7 +6817,7 @@ tbody tr td {
     float: left;
     background: #28b8dc;
     color: #ffffff;
-    font-family: Raleway;
+    font-family: ralewayregular;
     font-size: 15px;
     padding: 15px 60px;
     border: 1px solid #28b8dc;
@@ -6811,7 +6904,7 @@ tbody tr td {
     color: #ffffff;
     font-style: normal;
     font-size: 22px;
-    font-family: Raleway;
+    font-family: ralewayregular;
     font-weight: 500;
 }
 .dashnum > span i::before {
@@ -6837,7 +6930,7 @@ tbody tr td {
     position: relative;
     left: 27px;
     font-size: 18px;
-    font-family: Raleway;
+    font-family: ralewayregular;
 }
 .dashbadge.white {
     background: #ffffff;
@@ -7157,7 +7250,7 @@ blockquote::before {
     width: 100%;
     font-size: 20px;
     font-style: italic;
-    font-family: Raleway;
+    font-family: ralewayregular;
     color: #212121;
     font-weight: 500;
     margin: 0 0;
@@ -7685,7 +7778,7 @@ blockquote span {
     font-size: 13px;
     color: #8d8d8d;
     font-weight: normal;
-    font-family: Raleway;
+    font-family: ralewayregular;
     position: relative;
     padding-right: 20px;
 }
@@ -7718,7 +7811,7 @@ blockquote span {
     font-size: 13px;
     margin: 2px 0px;
     font-weight: normal;
-    font-family: Raleway;
+    font-family: ralewayregular;
     color: #28b8dc;
 }
 .blocation .contact-map #map_div {
@@ -8109,8 +8202,9 @@ blockquote span {
 .rfield {
     float: left;
     width: 100%;
-    margin-bottom: 20px;
+    margin-bottom: 10px;
     position: relative;
+    margin-left: -20px;
 }
 .rfield > label {
     float: left;
@@ -8550,7 +8644,7 @@ header.s3 .extras > a:hover {
 .closeresmenu {
     cursor: pointer;
     color: #8d8d8d;
-    font-family: Raleway;
+    font-family: ralewayregular;
     font-size: 14px;
     line-height: 30px;
     padding-right: 30px;
@@ -8584,7 +8678,7 @@ header.s3 .extras > a:hover {
     border-left-color: #ffffff;
 }
 .places.s2.makelist .placedetails {
-    border-top: 1px solid #e8ecec;
+    border-top: 0px solid #e8ecec;
 }
 .places.s2.makelist .boxplaces {
     border: none;
@@ -8627,7 +8721,7 @@ header.s3 .extras > a:hover {
 
 .datebox {
 
-font-family: Raleway;
+font-family: ralewayregular;
 font-weight: 800;
 }
 

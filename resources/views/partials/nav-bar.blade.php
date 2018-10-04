@@ -2,7 +2,7 @@
     <div class="rheader">
         <span><img src="/assets/findgo/images/ricon.png" alt="" /></span>
         <div class="logo">
-            <a href="#" title=""><img style="width: 175px;" src="/assets/findgo/images/horizontal-white.png" alt=""></a>
+            <a href="#" title=""><img src="/assets/findgo/images/live-prcptions-beta-small.png" width=100 height=388 alt="" /></a>
         </div>
         <div class="extras">
             <span class="accountbtn"><i class="flaticon-avatar"></i></span>
@@ -10,7 +10,7 @@
     </div>
     <div class="rnaver">
         <span class="closeresmenu"><i>x</i>Close</span>
-        <div class="logo"><a href="#" title=""><img src="/assets/findgo/images/horizontal-white.png" height="40" width="175" alt="" /></a></div>
+        <div class="logo"><a href="#" title=""><img src="/assets/findgo/images/live-prcptions-beta-small.png" width=100 height=388 alt="" /></a></div>
         @if (Route::has('login'))
 
             @auth
@@ -39,9 +39,8 @@
 <header class="s4 dark">
 
     <div class="container fluid">
-        <div class="logo">
-            <a href="#" title=""><img style="width: 170px;" src="/assets/findgo/images/horizontal-white.png" alt=""></a>
-        </div>
+        <div id="logo_overlay"><img src="/assets/findgo/images/live-perceptions-logo.png" width="600" height="122"></div>
+
         @if (Route::has('login'))
 
             @auth
@@ -55,9 +54,9 @@
             @endif
         @endif
 
-            {{--<div class="logo">--}}
-                {{--<a href="#" title=""><img src="/assets/findgo/images/horizontal-white.png" height="40" width="175" alt="" /></a>--}}
-            {{--</div>--}}
+            <div class="logo">
+                <a href="#" title=""><img src="/assets/findgo/images/horizontal-white.png" height="40" width="175" alt="" /></a>
+            </div>
         <nav>
             <ul>
             @if (Route::has('login'))
@@ -66,7 +65,7 @@
                 @else
 
                 @endauth
-                <li><a href="/claim-profile" target="_blank" ><i class="fa fa-registered white"></i>&nbspClaim Your Profile</a></li>
+                <li><a href="/claim-profile" target="_blank" ><i class="fa fa-registered white"></i>&nbsp;Claim Your Profile</a></li>
             @endif
             </ul>
             {{--<ul>--}}
@@ -148,7 +147,16 @@
 </header>
 
 
-
+<style>
+    #logo_overlay {
+        position: absolute;
+        display: block;
+        width: 40%;
+        margin-left: 30%;
+        background-color: #transparent;
+        z-index:50;
+    }
+</style>
 
 
 
