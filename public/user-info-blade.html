@@ -3,10 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
-    <link rel="stylesheet" type="text/css" href="assets/findgo/css/bootstrap-grid.css" />
-    <link rel="stylesheet" href="assets/findgo/css/icons.css">
-    <link rel="stylesheet" href="assets/findgo/css/animate.min.css">
-    <link rel="stylesheet" type="text/css" href="assets/findgo/css/style.css" />
+    <link rel="stylesheet" type="text/css" href="/assets/findgo/css/bootstrap-grid.css" />
+    <link rel="stylesheet" href="/assets/findgo/css/icons.css">
+    <link rel="stylesheet" href="/assets/findgo/css/animate.min.css">
+    <link rel="stylesheet" type="text/css" href="/assets/findgo/css/style.css" />
     <link rel="stylesheet" type="text/css" href="/assets/findgo/css/responsive.css" />
     <link rel="stylesheet" type="text/css" href="/assets/css/leaflet_0.7.css" />
     {{--<link rel="stylesheet" href="/assets/css/leaflet.css">--}}
@@ -14,9 +14,9 @@
     <link rel="stylesheet" href="/assets/css/MarkerCluster.Default.css">
     <link rel="stylesheet" href="/assets/css/L.Control.Locate.css">
     <link rel="stylesheet" href="/assets/leaflet-groupedlayercontrol/leaflet.groupedlayercontrol.css">
-    <link rel="stylesheet" href="js/dist/css/select2.min.css" />
-    <link rel="stylesheet" href="assets/css/custom.css" />
-    <script src="assets/js/jquery-2.1.4.min.js"></script>
+    <link rel="stylesheet" href="/js/dist/css/select2.min.css" />
+    <link rel="stylesheet" href="/assets/css/custom.css" />
+    <script src="/assets/js/jquery-2.1.4.min.js"></script>
 </head>
 <body>
 
@@ -24,12 +24,15 @@
 <div style="padding-top: 20px; padding-bottom: 30px; width: 60%; text-align: center; margin: 0 auto;">
     <div style="display: block; width:100%; text-align: left;">
 
-        <div style="width: 30%; padding-right: 20px; border-right: 1px solid #e8ecec; display: block; float: left; margin-left: 5%;">
-            <div style="display: block; width:100%; text-align: left;"><img height="150" width="150" src="profilephoto.png"></div>
+        <div style="width: 30%; padding-right: 20px; border-right: 1px solid #e8ecec; display: block; text-align: center; float: left; margin-left: 5%;">
+            <div style="display: block; width:100%; text-align: center;"><img height="150" width="150" src="profilephoto.png"></div>
 
             <?php /* ### PRIVACY SETTINGS ICON: if public, then fa-eye; if only logged in, then fa-lock; if private, then fa-eye-slash  */ ?>
 
-            <div style="display: block; width:100%; text-align: left;"><h4>Displayname  <i class="fa fa-eye"></i></h4></div>
+            <div style="display: block; width:100%; text-align: center;"><h4>Displayname  <i class="fa fa-eye"></i></h4></div>
+
+            <?php /* ### If profile is inactive, add this div ?>
+            <div style="width:100%; text-align: center; color: #333333; font-style: italic; font-size: 12px; ">claim this profile</div>
 
         </div>
 
@@ -45,7 +48,7 @@
     <span style="font-size: 18px;"> <em>First Name (if available)</em></span>
             </div>
                 <div style="font-size: 14px; text-transform: uppercase; font-family: ralewaymedium; color: #6060D5;"><i class="flaticon-pin"></i> <em>Location</em</div>
-                <div style="padding-top: 20px; font-size: .9em; line-height: 1.3em;"><i class="fa fa-clipboard"></i> SKILLSitem1, <i class="fa fa-clipboard"></i>SKILLSitem2, etc</div>
+                <div style="padding-top: 20px; font-size: .9em; line-height: 1.3em;"><i class="fa fa-clipboard"></i> SKILLSitem1, <i class="fa fa-clipboard"></i> SKILLSitem2, etc</div>
 
 
                 <?php /* ### icons for COLLABORATION ROLES:
@@ -68,6 +71,7 @@ Donor = fa-money
                     <span><i class="fa fa-film"></i> </span>
 
                 </div>
+
         </div>
     </div>
 </div>
