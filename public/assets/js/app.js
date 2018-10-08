@@ -107,7 +107,7 @@ var onMarkerClick = function(e){
     $("#feature-info").html('loading...');
         console.log(this);//this.options.id
         jQuery.ajax({
-            url: '/home/ajax-video-info/'+this.options.id,
+            url: '/home/ajax-video-info-small/'+this.options.id,
             method: 'GET'
         }).done(function (content) {
             popup

@@ -90,6 +90,15 @@ class HomeController extends Controller
             ->with(compact('info'));
     }
 
+    public function getVideoInfoMini($video_id)
+    {
+        $user_id = (!isset(Auth::user()->id))? 0 : Auth::user()->id;
+        $info = $this->userRepository->getContentsInfo($user_id, $video_id);
+
+        return view('partials.video-info-popup-small')
+            ->with(compact('info'));
+    }
+
     public function getVideoMoreInfo($video_id)
     {
         $user_id = (!isset(Auth::user()->id))? 0 : Auth::user()->id;
