@@ -16,6 +16,5 @@ $video_id = isset($matches[1])?$matches[1]:'';
         <div><i class="flaticon-pin"> {{$info['location']}}</i></div>
                 <div><i class="flaticon-avatar"></i> <?php foreach($info->videoProducer as $key => $users){ if(isset($info->videoProducer[$key])){ echo '<span class="inactive_link" onclick="openProfile(\''. $info->videoProducer[$key]->user->id .'\')">@'.$info->videoProducer[$key]->user->display_name.'</span>'; break; } }?></div>
 
-        <div><a href="#" onclick="openVideo('<?php echo $info['id'] ?>')"><i class="flaticon-eye"> Open Video</i></a></div>
-
+        <div><a href="#" onclick="openVideo('<?php echo $info['id'] ?>')"><i class="flaticon-eye"> Open Video</i></a></div>s
 </div>
