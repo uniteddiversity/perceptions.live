@@ -1,17 +1,23 @@
+<?php //dd($group_users) ?>
 <div style="padding-top: 20px; padding-bottom: 30px; width: 60%; text-align: center; margin: 0 auto;">
     <div style="display: block; width:100%; text-align: left;">
 
         <div style="width: 30%; padding-right: 20px; border-right: 1px solid #e8ecec; display: block; text-align: center; float: left; margin-left: 5%;">
-            <div style="display: block; width:100%; text-align: center;"><img height="150" width="150" src="profilephoto.png"></div>
+            <div style="display: block; width:100%; text-align: center;">
+                <img  width="150" src="<?php if(isset($info['group_avatar'][0]) && !empty($info['group_avatar'][0]['url'])){ echo '/storage/'.$info['group_avatar'][0]['url']; }else{ ?>/assets/img/face1.png<?php } ?>" alt="profile image">
+            </div>
 
             <?php /* ### PRIVACY SETTINGS ICON: if public, then fa-eye; if only logged in, then fa-lock; if private, then fa-eye-slash  */ ?>
 
-            <div style="width:100%; text-align: center;"><h4>Group Name  <i class="fa fa-eye"></i></h4></div>
+            <div style="width:100%; text-align: center;"><h4><?php echo $info['name'] ?>  <i class="fa fa-eye"></i></h4></div>
 
-            <div style="width:100%; text-align: center; margin-top:-10px; color: #CCCCCC; font-style: italic; font-size: 12px; ">Active/Inactive</div>
+            <div style="width:100%; text-align: center; margin-top:-10px; color: #CCCCCC; font-style: italic; font-size: 12px; "><?php echo ($info['status'] == '1' )? '<span style="color:green">Active</span>': 'Inactive'; ?></div>
 
             <?php /* ### If Inactive, add link: CLAIM THIS PROFILE */ ?>
-            <div style="width:100%; text-align: center; color: #333333; font-style: italic; font-size: 12px; ">claim this group</div>
+            <?php if($info['status'] == '5' ){ ?>
+            <div style="width:100%; text-align: center; color: #333333; font-style: italic; font-size: 12px; "><a href="/claim-profile" target="_blank">claim this group</a></div>
+            <?php } ?>
+
 
         </div>
 
@@ -24,10 +30,12 @@
 
                 <div style="padding-bottom: 10px;">
                     <div style="font-size: 14px; text-transform: uppercase; line-height: .8em; font-family: ralewaybold;"> Category</div>
-                    <div style="text-transform: none; padding-top: 10px; font-style: italic;">current mission</div>
-            </div>
+                    <div style="text-transform: none; padding-top: 10px; font-style: italic;"><?php echo $info['current_mission'] ?></div>
+                </div>
 
-                <div style="font-size: 12px; text-transform: uppercase; font-family: ralewaymedium; color: #6060D5;"><i class="flaticon-pin"></i> <em>Location</em</div>
+                <div style="font-size: 12px; text-transform: uppercase; font-family: ralewaymedium; color: #6060D5;"><i class="flaticon-pin"></i> <em><?php echo $info['default_location'] ?></em></div>
+
+                <?php /*
                 <div style="padding-top: 20px; font-size: .9em; line-height: 1.3em;"><i class="fa fa-clipboard"></i> SKILLS 1, <i class="fa fa-clipboard"></i> SKILL 2, etc</div>
 
                 <div style="padding-top: 10px; font-size: .9em; line-height: 1.3em;">
@@ -37,47 +45,67 @@
                     <span><i class="fa fa-film"></i> </span>
 
                 </div>
+                */?>
         </div>
         <div style="display: block; position: absolute; top: 15%; right: 30%; width: 10%; padding-left: 5%; z-index: 99;">
-            <span style="font-size: 26px; color: #6060D5;"><i class="fa fa-envelope-o"></i>
+            <span style="font-size: 26px; color: #6060D5;"><i class="fa fa-envelope-o"></i></span>
         </div>
 
     </div>
 </div>
 <div style="display: block; width:100%; border-top: 1px solid #e8ecec;  float: left; padding-top: 20px; padding-bottom: 20px; text-align: center;">
-    <span style="text-transform: none; font-size: 20px; font-family: questrial; font-style: italic;">Greeting message </span>
+    <span style="text-transform: none; font-size: 20px; font-family: questrial; font-style: italic;"><?php echo $info['greeting_message_to_community'] ?></span>
 </div>
 <div style="display: block; width:100%; border-top: 1px solid #e8ecec;  float: left; padding-top: 10px; padding-bottom: 40px; text-align: center;">
-    <span style="text-transform: none; font-style: italic;">Description </span>
+    <span style="text-transform: none; font-style: italic;"><?php echo $info['description'] ?></span>
 </div>
 
-<?php /* ### map of associated videos, zoom to fit ?>
-<div style="display: block; padding-bottom: 40px;"><img width=100% height=100% src="smallmap.png" alt=""></div>
+<?php /* ### map of associated videos, zoom to fit **/ ?>
+{{--<div style="display: block; padding-bottom: 40px;"><img width=100% height=100% src="smallmap.png" alt=""></div>--}}
 
 <div style="display: block; width:100%; text-align: center;">
     <div style="display: block; padding-bottom: 40px; width:65%; padding-top: 40px; padding-right: 20px; float: left; text-align: center;">
         <div><h5><i class="fa fa-film"></i> Media Involvements</h5></div>
         <?php /* ### LIST OF ASSOCIATED VIDEOS - CLICK THUMBNAIL IMAGE TO OPEN VIDEO-INFO-BLADE */ ?>
-            <div><img width=100% height=100% src="kalani.jpg" alt=""></div>
-            <div class="placedetails">
-                <span class="pull-left" ><i class="fa fa-tag"></i> Primary Subject Tag</span>
-                <span class="pull-right"><i class="flaticon-avatar"></i> <span class="inactive_link">Video Producer</span></span>
-            </div>
-        </div>
-        <div style="display: block; text-align: center; padding-bottom: 40px; padding-top: 40px; float: right; width:35%; padding-left: 20px; ">
-            <?php /* ### list of group users that have privacy setting = public (or, if logged in, = logged in)*/ ?>
-            <div><h5><i class="fa fa-users"></i> Users</h5></div>
+        <?php
 
-            <?php /* ### click user name or image to open user-info-blade */ ?>
-
-            <?php /* ### can you please help align these divs to center? */ ?>
-            <div style="display: block; width: 100% text-align: center;">
-                <img height="150" width="150" src="profilephoto.png"></div>
-            <div style="display: block; width: 100% text-align: center;">
-                <span class="pull-right" style="color: #8d8d8d;"><i class="fa fa-user"></i> <span class="inactive_link">User Name</span></span>
-            </div>
+        foreach($group_contents as $content){
+        preg_match("/^(?:http(?:s)?:\/\/)?(?:www\.)?(?:m\.)?(?:youtu\.be\/|youtube\.com\/(?:(?:watch)?\?(?:.*&)?v(?:i)?=|(?:embed|v|vi|user)\/))([^\?&\"'>]+)/", $content['url'], $matches);
+        $video_id = isset($matches[1])?$matches[1]:'';
+        ?>
+        <div><img width=100% src="https://img.youtube.com/vi/<?php echo $video_id ?>/maxresdefault.jpg"></div>
+        <div class="placedetails">
+            <span class="pull-left" ><i class="fa fa-tag"></i> <?php echo $content['primary_subject_tag'] ?></span>
+            <?php foreach($content->videoProducer as $user){ ?>
+                <span class="pull-right"><i class="flaticon-avatar"></i> <span class="inactive_link" onclick="openProfile('<?php echo $user->user->id ?>')" >@<?php echo $user->user->display_name ?></span></span>
+            <?php } ?>
         </div>
+        <?php } ?>
+
     </div>
+    <div style="display: block; text-align: center; padding-bottom: 40px; padding-top: 40px; float: right; width:35%; padding-left: 20px; ">
+        <div><h5><i class="fa fa-users"></i> Users</h5></div>
+        <?php /* ### list of group users that have privacy setting = public (or, if logged in, = logged in)*/
+        foreach($group_users as $user){
+        ?>
+        <?php /* ### click user name or image to open user-info-blade */ ?>
+
+        <?php /* ### can you please help align these divs to center? */ ?>
+        <div style="width: 100%; text-align: center;">
+            <?php if(!isset($user->image[0]->url)){?>
+                <img onclick="openProfile('<?php echo $user->id ?>')" style="margin-left: 25%;" height="150" width="150" src="/profilephoto.png">
+            <?php }else{ ?>
+                <img onclick="openProfile('<?php echo $user->id ?>')" style="margin-left: 25%;" height="150" width="150" src="<?php echo '/storage/'.$user->image[0]->url; ?>">
+            <?php } ?>
+
+            <div style="clear: both"></div>
+        </div>
+        <div style="display: block; width: 100%; text-align: center;">
+            <span style="color: #8d8d8d;"><i class="fa fa-user"></i> <span class="inactive_link" onclick="openProfile('<?php echo $user->id ?>')"><?php echo $user->display_name ?></span></span>
+        </div>
+        <?php } ?>
+    </div>
+</div>
 <div style="clear: both;" ></div>
 <?php /*
   <div class="row" style="display: block;">

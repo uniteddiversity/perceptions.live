@@ -95,7 +95,7 @@
                                 <label for="user_avatar">User Avatar</label>
                                 <input class="form-control" type="file" name="user_avatar" />
                                 <?php foreach($data['image'] as $img){ ?>
-                                <a target="_blank" href="/storage/<?php echo $img['url'] ?>"><img src="/storage/<?php echo $img['url'] ?>" alt="Avatar" class="avatar"></a>
+                                <a target="_blank" href="/storage/<?php echo $img['url'] ?>"><img width="150" src="/storage/<?php echo $img['url'] ?>" alt="Avatar" class="avatar"></a>
                             <?php } ?>
                             </div>
 

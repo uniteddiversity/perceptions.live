@@ -120,8 +120,10 @@ class HomeController extends Controller
     public function getGroupInfo($group_id)
     {
         $info = $this->userRepository->getGroupInfo($group_id, true);
+        $group_contents = $this->contentService->getSearchableContents(0, array('group_id' => $group_id), 10);
+        $group_users = $this->userRepository->getUsers(array('group_id' => $group_id));
         return view('partials.group-info-popup')
-            ->with(compact('info'));
+            ->with(compact('info','group_contents','group_users'));
     }
 
     public function location($id)

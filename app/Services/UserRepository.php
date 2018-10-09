@@ -121,7 +121,7 @@ class UserRepository
     {
         $current_user = $this->getUser($user_id);
 
-        $r = $this->user->with(['role', 'groups' => function($q){
+        $r = $this->user->with(['role','image','groups' => function($q){
             $q->with('group');
         }])
         ->leftJoin('user_groups', 'users.id', 'user_groups.user_id')
@@ -133,7 +133,9 @@ class UserRepository
         if($current_user['role_id'] == 1){
 
         }else{
-            $r = $r->where('user_groups.id', $current_user['group_id']);
+            $r = $r->where('users.access_level_id', '1');
+            //should list only public users
+//            $r = $r->where('user_groups.id', $current_user['group_id']);
         }
 
         if(isset($filter['group_id'])){

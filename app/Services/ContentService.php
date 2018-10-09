@@ -140,8 +140,10 @@ class ContentService
     {
         $user_info = $this->getUser($user_id);
 
-        $contents = $this->user
-            ->leftJoin('contents', 'contents.user_id', 'users.id')
+        $contents = $this->content->with(['videoProducer' => function($q){
+            $q->with('user');
+        }])
+            ->leftJoin('users', 'contents.user_id', 'users.id')
             ->leftJoin('tag_content_associations', function($q){
                 $q->on( 'contents.id', 'tag_content_associations.content_id');
                 $q->where( 'tag_content_associations.tag_for', 'gci');
@@ -191,6 +193,10 @@ class ContentService
 
         if(isset($filter['ids'])){
             $contents = $contents->whereIn('contents.id', $filter['ids']);
+        }
+
+        if(isset($filter['group_id'])){
+            $contents = $contents->where('group_content_associations.group_id', $filter['group_id']);
         }
 
         $contents = $contents->select('contents.id', 'contents.description', 'contents.lat', 'contents.long', 'contents.title', 'contents.url',

@@ -27,7 +27,7 @@
                 <span style="font-size: 18px;"> <em>{{$info['first_name']}}</em></span>
             </div>
             <div style="font-size: 14px; text-transform: uppercase; font-family: ralewaymedium; color: #6060D5;"><i class="flaticon-pin"></i> <em>{{$info['location']}}</em</div>
-            <div style="padding-top: 20px; font-size: .9em; line-height: 1.3em;"><i class="fa fa-clipboard"></i> SKILLSitem1, <i class="fa fa-clipboard"></i> SKILLSitem2, etc</div>
+            <?php /*<div style="padding-top: 20px; font-size: .9em; line-height: 1.3em;"><i class="fa fa-clipboard"></i> SKILLSitem1, <i class="fa fa-clipboard"></i> SKILLSitem2, etc</div> */ ?>
 
 
             <?php /* ### icons for COLLABORATION ROLES:
