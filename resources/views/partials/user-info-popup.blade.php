@@ -42,7 +42,9 @@ $display = ($user_status == 'private' || $user_status == 'only-logged')? false :
             <div>
                 <span style="font-size: 18px;"> <em>{{$info['first_name']}}</em></span>
             </div>
-            <div style="font-size: 14px; text-transform: uppercase; font-family: ralewaymedium; color: #6060D5;"><i class="flaticon-pin"></i> <em>{{$info['location']}}</em</div>
+            <?php if(!empty($info['location'])){ ?>
+            <div style="font-size: 14px; text-transform: uppercase; font-family: ralewaymedium; color: #6060D5;"><i class="flaticon-pin"></i> <em>{{$info['location']}}</em></div>
+            <?php } ?>
             <?php /*<div style="padding-top: 20px; font-size: .9em; line-height: 1.3em;"><i class="fa fa-clipboard"></i> SKILLSitem1, <i class="fa fa-clipboard"></i> SKILLSitem2, etc</div> */ ?>
 
             <?php if(isset($info->actingRoles) && count($info->actingRoles) > 0){ ?>
