@@ -20,13 +20,6 @@
                             <span class="pcoded-mcaret"></span>
                         </a>
                     </li>
-                    {{--<li class="<?php if(in_array(Request::segment(3), array('content-list-open'))){ echo 'active'; } ?>">--}}
-                        {{--<a class="nav-link" href="/user/group-admin/content-list-open">--}}
-                            {{--<span class="pcoded-micon"><i class="ti-angle-right"></i></span>--}}
-                            {{--<span class="pcoded-mtext" data-i18n="nav.dash.default">Open Videos</span>--}}
-                            {{--<span class="pcoded-mcaret"></span>--}}
-                        {{--</a>--}}
-                    {{--</li>--}}
                     <li class="<?php if(in_array(Request::segment(3), array('content-list'))){ echo 'active'; } ?>">
                         <a class="nav-link" href="/user/group-admin/content-list">
                             <span class="pcoded-micon"><i class="ti-angle-right"></i></span>
