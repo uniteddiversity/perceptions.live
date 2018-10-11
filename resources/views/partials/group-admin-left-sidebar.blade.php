@@ -14,7 +14,7 @@
                 </a>
                 <ul class="pcoded-submenu">
                     <li class="<?php if(in_array(Request::segment(3), array('content-add'))){ echo 'active'; } ?>">
-                        <a class="nav-link" href="/user/user/content-add">
+                        <a class="nav-link" href="/user/content-add">
                             <span class="pcoded-micon"><i class="ti-angle-right"></i></span>
                             <span class="pcoded-mtext" data-i18n="nav.dash.default">Add Video</span>
                             <span class="pcoded-mcaret"></span>
