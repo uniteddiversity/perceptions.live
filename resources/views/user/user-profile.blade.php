@@ -103,10 +103,22 @@
                                     <textarea type="text" class="form-control" rows="3" aria-describedby="nameHelp" name="description" placeholder="Description">{{ old('description',$data['description']) }}</textarea>
                                 </div>
 
+
+
+
+
                             <div class="form-group">
+                                {{--<input type="file" id="upload" value="Choose a file">--}}
+                                <div id="upload-profile"></div>
+                                <input type="hidden" id="imagebase64" name="profile_image">
+                                <a href="#" class="upload-result">Send</a>
+
+
+
                                 <label for="user_avatar">User Avatar</label>
-                                <input class="form-control" type="file" name="user_avatar" />
+                                <input id="upload" class="form-control" type="file" name="user_avatar" />
                                 <?php foreach($data['image'] as $img){ ?>
+                                <input type="hidden" value="/storage/<?php echo $img['url'] ?>" id="preset_image_path"/>
                                 <a target="_blank" href="/storage/<?php echo $img['url'] ?>"><img src="/storage/<?php echo $img['url'] ?>" alt="Avatar" class="avatar profile_img_mini"></a>
                             <?php } ?>
                             </div>
@@ -161,8 +173,12 @@
 
 
 
+
+
+
     @endsection
     <script>
         var el = document.getElementById('loading');
         el.remove(); // Removes the div with the 'div-02' id
     </script>
+

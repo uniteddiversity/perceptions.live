@@ -52,6 +52,8 @@
     <link rel="stylesheet" href="/js/dist/css/select2.min.css" />
 
     <link rel="stylesheet" href="/assets/css/custom_common_styles.css" />
+
+    <link rel="stylesheet" href="/assets/croppie/croppie.css" />
 </head>
 
 <body>
@@ -685,6 +687,7 @@
 <script src="/assets/js/custom_common.js"></script>
 <script type="text/javascript" src="/assets/mashable/bower_components/bootstrap-datepicker/js/bootstrap-datepicker.min.js"></script>
 <script src="/assets/js/app.js"></script>
+<script src="/assets/croppie/croppie.js"></script>
 
 <script>
     $(document).ready(function() {
@@ -743,6 +746,69 @@
     $('#shearable_code').click(function(){
         $(this).select();
     })
+</script>
+
+
+
+
+<script type="text/javascript">
+    $( document ).ready(function() {
+        var $uploadCrop;
+
+        function readFile(input) {
+            if (input.files && input.files[0]) {
+                var reader = new FileReader();
+                reader.onload = function (e) {
+                    $uploadCrop.croppie('bind', {
+                        url: e.target.result
+                    });
+                    $('.upload-demo').addClass('ready');
+                }
+                reader.readAsDataURL(input.files[0]);
+            }
+        }
+
+        $uploadCrop = $('#upload-profile').croppie({
+            viewport: {
+                width: 120,
+                height: 120,
+                type: 'circle'
+            },
+            boundary: {
+                width: 200,
+                height: 200
+            }
+        });
+
+        $('#upload').on('change', function () {
+            readFile(this);
+            // updateSource();
+            setInterval(updateSource, 300);
+        });
+
+        function updateSource(){
+            $uploadCrop.croppie('result', {
+                type: 'canvas',
+                size: 'original'
+            }).then(function (resp) {
+                $('#imagebase64').val(resp);
+                // $('#form').submit();
+            });
+        }
+        $('.upload-result').on('click', function (ev) {
+            $uploadCrop.croppie('result', {
+                type: 'canvas',
+                size: 'original'
+            }).then(function (resp) {
+                $('#imagebase64').val(resp);
+                // $('#form').submit();
+            });
+        });
+
+
+        console.log('image path is '+$('#preset_image_path').val());
+        $('.cr-image').attr('src',$('#preset_image_path').val());
+    });
 </script>
 
 </body>

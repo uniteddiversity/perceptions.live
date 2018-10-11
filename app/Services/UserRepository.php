@@ -21,6 +21,7 @@ use App\UserStatus;
 use Content\Services\ContentService;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\URL;
 use Illuminate\Support\Facades\Validator;
 
@@ -464,6 +465,36 @@ class UserRepository
 //        $filename = $file->storeAs('public',$submission_type.'_'.microtime().'_'.$table);
         $filename = $file->store('public');
         $ori_name = File::name($filename);
+
+        if(isset($ori_name)){
+            $extension = File::extension($filename);
+            Attachment::create([
+                'table' => $table,
+                'fk_id' => $fk_id,
+                'name' => $ori_name,
+                'url' => str_replace('public/','',$filename),
+                'submission_type' => $submission_type,
+                'extension' => $extension,
+                'status' => $status,
+                'created_by' => $user_id
+            ]);
+        }
+    }
+
+    public function uploadAttachmentBase64($data,$user_id, $fk_id, $submission_type, $table, $status = 1)
+    {
+        $filename = $submission_type.'_'.microtime().'_'.$table.'.png';
+//        $filename = $file->store('public');
+//        $ori_name = File::name($filename);
+        if(empty($data))
+            return;
+
+        list($type, $data) = explode(';', $data);
+        list(, $data)      = explode(',', $data);
+        $data = base64_decode($data);
+//        file_put_contents('/public/storage/image64.png', $data);
+        $ori_name = $filename;
+        Storage::put('/public/'.$filename, $data);
 
         if(isset($ori_name)){
             $extension = File::extension($filename);
