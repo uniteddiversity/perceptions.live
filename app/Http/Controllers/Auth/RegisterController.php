@@ -4,10 +4,13 @@ namespace App\Http\Controllers\Auth;
 
 use App\User;
 use App\Http\Controllers\Controller;
+use BeyondCode\EmailConfirmation\Events\Confirmed;
+use BeyondCode\EmailConfirmation\Traits\RegistersUsers;
+use Illuminate\Auth\Events\Registered;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
-use Illuminate\Foundation\Auth\RegistersUsers;
+//use Illuminate\Foundation\Auth\RegistersUsers;
 use User\Services\UserRepository;
 
 class RegisterController extends Controller
@@ -78,6 +81,7 @@ class RegisterController extends Controller
             'password' => bcrypt($data['password']),
 //            'cpassword' => $data['cpassword'],
 //            'web' => $data['web'],
+            'status_id' => '2',
             'role_id' => '120' //normal user
         ]);
 
@@ -92,8 +96,7 @@ class RegisterController extends Controller
             }
         }
 
-//        $post = array('password' => $pass_for_auth, 'email' => ($new_user->email);
-        Auth::loginUsingId($new_user->id);
+//        Auth::loginUsingId($new_user->id);
 
         return $new_user;
     }
@@ -113,8 +116,28 @@ class RegisterController extends Controller
             return response()->json(array('error' => $validator->messages()), 200);
         }
 
-        if($this->create($request->toArray())){
-            return response()->json(array('success' => 'User has created'), 200);
-        }
+        event(new Registered($user = $this->create( $request->toArray() )));
+
+        $this->sendConfirmationToUser($user);
+
+//        if($this->create($request->toArray())){
+            return response()->json(array('success' => 'Please check your email for confirmation URL'), 200);
+//        }
+    }
+
+    public function confirm($confirmation_code)
+    {
+        $model = $this->guard()->getProvider()->createModel();
+
+        $user = $model->where('confirmation_code', $confirmation_code)->firstOrFail();
+
+        $user->confirmation_code = null;
+        $user->confirmed_at = now();
+        $user->status_id = 1;
+        $user->save();
+        event(new Confirmed($user));
+        Auth::loginUsingId($user->id);
+        return $this->confirmed($user)
+            ?: redirect($this->redirectAfterConfirmationPath())->with('confirmation', __('confirmation::confirmation.confirmation_successful'));
     }
 }

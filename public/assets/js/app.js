@@ -312,7 +312,7 @@ function userRegister(){
                 })
             }else{
                 $('#register-form #messages').html('<div class="alert alert-success" role="alert">'+val+'</div>');
-                window.location.href = "/user/profile";
+                // window.location.href = "/user/profile";
             }
         })
 

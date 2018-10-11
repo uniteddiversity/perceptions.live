@@ -5,7 +5,7 @@
                 <div class="user-wrapper">
                     <div class="profile-image">
                         <?php $user_img = Auth::user()->image; ?>
-                        <img src="<?php if(isset($user_img[0])){ echo '/storage/'.$user_img[0]->url; }else{ ?>/assets/img/face1.png<?php } ?>" alt="profile image">
+                        <img width="50" src="<?php if(isset($user_img[0])){ echo '/storage/'.$user_img[0]->url; }else{ ?>/assets/img/face1.png<?php } ?>" alt="profile image">
                     </div>
                     <div class="text-wrapper">
                         <p class="profile-name">{{Auth::user()->email}}</p>

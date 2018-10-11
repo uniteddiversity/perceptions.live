@@ -15,6 +15,10 @@
 Route::post('user/login', array('uses' => '\App\Http\Controllers\Auth\LoginController@userLogin'));
 Route::post('user/register', array('uses' => '\App\Http\Controllers\Auth\RegisterController@createUser'));
 
+
+Route::get('/register/confirm/resend', 'Auth\RegisterController@resendConfirmation')->name('auth.resend_confirmation');
+Route::get('/register/confirm/{confirmation_code}', 'Auth\RegisterController@confirm')->name('auth.confirm');
+
 Route::post('/', function(){
 
 })->name('login');
