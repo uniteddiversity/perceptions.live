@@ -12,5 +12,5 @@ class UserSortingTag extends Model
     /**
      * @var array
      */
-    protected $fillable = ['id','name','slug'];
+    protected $fillable = ['id','name','slug','icon'];
 }

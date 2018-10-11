@@ -547,4 +547,11 @@ class UserController extends Controller
         $content_list = $this->userRepository->getAssociatedVideosForUser($user_id);
         return response()->json($content_list, 200);
     }
+
+    public function postLastActive()
+    {
+        $user_id = (!isset(Auth::user()->id))? 0 : Auth::user()->id;
+        $r = $this->userRepository->updateLastActive($user_id);
+        return response()->json($r, 200);
+    }
 }

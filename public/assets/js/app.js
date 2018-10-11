@@ -330,3 +330,15 @@ function openVideoOnly(){
     $("#feature-info").html(content);
     $("#featureModal").modal("show");
 }
+
+setInterval(updateLastActive, 10000); // Time in milliseconds
+
+function updateLastActive(){
+    jQuery.ajax({
+        url: '/user/user-last-active',
+        method: 'GET',
+    }).done(function (response) {
+    }).fail(function () {
+        // Whoops; show an error.
+    });
+}

@@ -1,4 +1,7 @@
-<div style="padding-top: 20px; padding-bottom: 30px; width: 60%; text-align: center; margin: 0 auto;">
+<?php
+$display = ($user_status == 'private' || $user_status == 'only-logged')? false : true;
+?>
+<div style="padding-top: 20px; padding-bottom: 30px; width: 60%; text-align: center; margin: 0 auto;"><?php //dd(date_create()) ?>
     <div style="display: block; width:100%; text-align: left;">
 
         <div style="width: 30%; padding-right: 20px; border-right: 1px solid #e8ecec; display: block; text-align: center; float: left; margin-left: 5%;">
@@ -8,7 +11,18 @@
 
             <?php /* ### PRIVACY SETTINGS ICON: if public, then fa-eye; if only logged in, then fa-lock; if private, then fa-eye-slash  */ ?>
 
-            <div style="display: block; width:100%; text-align: center;"><h4>{{$info['display_name']}}  <i class="fa fa-eye"></i></h4></div>
+            <div style="display: block; width:100%; text-align: center;"><h4>{{$info['display_name']}}
+                    <?php
+                    if($user_status == 'public'){
+                        echo '<i class="fa fa-eye"></i>';
+                    }elseif($user_status == 'private'){
+                        echo '<i class="fa fa-eye-slash"></i>';
+                    }elseif($user_status == 'logged-in' || $user_status == 'only-logged'){
+                        echo '<i class="fa fa-lock"></i>';
+                    }
+                    ?>
+
+                </h4></div>
 
             <?php /* ### If profile is inactive, add this div ?>
             <div style="width:100%; text-align: center; color: #333333; font-style: italic; font-size: 12px; ">claim this profile</div>
@@ -23,37 +37,32 @@
                 </div>
 
                 <?php /* ### HIDE FIRST NAME DIV IF UNAVAILABLE */ ?>
+
+            <?php if($display){ ?>
             <div>
                 <span style="font-size: 18px;"> <em>{{$info['first_name']}}</em></span>
             </div>
             <div style="font-size: 14px; text-transform: uppercase; font-family: ralewaymedium; color: #6060D5;"><i class="flaticon-pin"></i> <em>{{$info['location']}}</em</div>
             <?php /*<div style="padding-top: 20px; font-size: .9em; line-height: 1.3em;"><i class="fa fa-clipboard"></i> SKILLSitem1, <i class="fa fa-clipboard"></i> SKILLSitem2, etc</div> */ ?>
 
-
-            <?php /* ### icons for COLLABORATION ROLES:
-
-Audience only = fa-streetview
-Ideas = fa-lightbulb-o
-Videos = fa-video-camera
-Photos = fa-file-image-o
-Music & Sampling fa-file-audio-o
-Video Editing = fa-film
-Music/Audio Production = fa-music
-Donor = fa-money
-
-
-                 */ ?>
+            <?php if(isset($info->actingRoles) && count($info->actingRoles) > 0){ ?>
             <div style="padding-top: 10px; font-size: .9em; line-height: 1.3em;">
                 <span>COLLABORATION ROLES: </span>
-                <span><i class="fa fa-file-audio-o"></i> </span>
-                <span><i class="fa fa-video-camera"></i> </span>
-                <span><i class="fa fa-film"></i> </span>
+                <?php foreach($info->actingRoles as $tag){ //dd($tag->tag); ?>
+                    <span><i class="fa <?php echo $tag->tag->icon ?>"></i></span>
+                <?php } ?>
 
             </div>
+            <?php } ?>
 
+            <?php } //only visible true ?>
         </div>
     </div>
 </div>
+
+
+
+<?php if($display){ ?>
 <div style="display: block; width:100%; border-top: 1px solid #e8ecec;  float: left; padding-top: 30px; padding-bottom: 40px; text-align: center;">
     <span style="text-transform: none; font-style: italic;"><?php echo $info['description'] ?></span>
 </div>
@@ -81,6 +90,7 @@ Donor = fa-money
         </div>
     </div>
 </div>
+<?php } ?>
 <div style="clear: both;" ></div>
 
 <?php /*

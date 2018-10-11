@@ -112,9 +112,10 @@ class HomeController extends Controller
     {
         $user_associate_videos = $this->userRepository->getAssociatedVideosForUser($user_id);
         $info = $this->userRepository->getUser($user_id);
+        $user_status = $this->userRepository->getUserStatus($user_id);
         $gci_tags = $this->userRepository->getGreaterCommunityIntentionTag();
         return view('partials.user-info-popup')
-            ->with(compact('info','user_associate_videos','gci_tags'));
+            ->with(compact('info','user_associate_videos','gci_tags','user_status'));
     }
 
     public function getGroupInfo($group_id)

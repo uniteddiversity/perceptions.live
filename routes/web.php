@@ -93,6 +93,8 @@ Route::group(['prefix' => 'user', 'middleware' => ['auth', 'web']], function () 
     Route::get('/logout', '\App\Http\Controllers\Auth\LoginController@userLogout');
     Route::get('/user-profile', '\App\Controllers\User\UserController@profileSettings');
     Route::post('/user-profile-post', '\App\Controllers\User\UserController@postProfileSettings');
+
+    Route::get('/user-last-active', '\App\Controllers\User\UserController@postLastActive');
 });
 
 Route::group(['prefix' => 'user', 'middleware' => ['auth', 'web', 'admin']], function () {

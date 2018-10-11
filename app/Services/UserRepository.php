@@ -173,6 +173,36 @@ class UserRepository
             ->first();
     }
 
+    public function getUserStatus($user_id)
+    {
+        $status = '';
+        $user_info = $this->user->where('users.id', $user_id)
+            ->select('users.access_level_id','users.last_active')->first();
+
+        if(!empty($user_info['last_active'])){
+            $start  = date_create($user_info['last_active']);
+            $end 	= date_create(); // Current time and date
+            $diff  	= date_diff( $start, $end );
+            $diff_sec = ((($diff->y * 365.25 + $diff->m * 30 + $diff->d) * 24 + $diff->h) * 60 + $diff->i)*60 + $diff->s;
+        }else{
+            $diff_sec = 10000;
+        }
+
+        if($user_info['access_level_id'] == '1'){//public
+            $status = 'public';
+        }elseif($user_info['access_level_id'] == '2'){//only logged
+            if($diff_sec <= 120){
+                $status = 'logged-in';
+            }else{
+                $status = 'only-logged';
+            }
+        }elseif($user_info['access_level_id'] == '3'){//private
+            $status = 'private';
+        }
+
+        return $status;
+    }
+
     public function getGroupInfo($group_id, $full = false)
     {
         $group_info = $this->group->where('groups.id', $group_id)->with(['proofOfGroup','groupAvatar'])
@@ -744,6 +774,13 @@ class UserRepository
 
         $groups = $groups->select('groups.*')->limit($limit);
         return $groups->get();
+    }
+
+    public function updateLastActive($user_id)
+    {
+        $user = $this->user->where('id',$user_id)->first();
+        $user->last_active = date_create();
+        $user->save();
     }
 }
 
