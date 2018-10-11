@@ -111,7 +111,7 @@
                                 {{--<input type="file" id="upload" value="Choose a file">--}}
                                 <div id="upload-profile"></div>
                                 <input type="hidden" id="imagebase64" name="profile_image">
-                                <a href="#" class="upload-result">Send</a>
+                                {{--<a href="#" class="upload-result">Send</a>--}}
 
 
 
