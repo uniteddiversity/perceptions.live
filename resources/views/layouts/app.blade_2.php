@@ -204,6 +204,8 @@
 
         $('.multi-select2-with-tags-max3').select2({tags: true, maximumSelectionLength: 3});
 
+        $('.multi-select2-with-tags-max5').select2({tags: true, maximumSelectionLength: 5});
+
         $('#user-assign-group').change(function(){console.log('vl '+$(this).val());
             document.location.href = '/user/admin/user-to-group-add/'+$(this).val();
         })

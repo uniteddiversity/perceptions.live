@@ -68,7 +68,7 @@
                             {{--</div>--}}
                             <div class="form-group">
                                 <label for="skills">Experience knowledge interests (add if not exist)</label>
-                                <select class="form-control multi-select2-with-tags-max3" id="experience_kno" multiple name="experience_kno[]">
+                                <select class="form-control multi-select2-with-tags-max5" id="experience_kno" multiple name="experience_kno[]">
                                     @foreach($experience_knowledge_tags as $m)
                                         <option value="{{base64_encode($m['id'])}}" <?php if(in_array($m['id'], old('experience_kno',$data['experience_kno']))){ echo 'selected'; } ?> >{{$m['tag']}}</option>
                                     @endforeach
