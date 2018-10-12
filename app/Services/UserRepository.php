@@ -12,6 +12,7 @@ use App\MetaData;
 use App\Role;
 use App\SortingTag;
 use App\TagContentAssociation;
+use App\TagGroupAssociation;
 use App\TagUserAssociation;
 use App\User;
 use App\UserContentAssociation;
@@ -93,12 +94,17 @@ class UserRepository
      * @var ClaimProfileRequests
      */
     private $claimProfileRequests;
+    /**
+     * @var TagGroupAssociation
+     */
+    private $tagGroupAssociation;
 
     public function __construct(User $user, Content $content,
                                 UserGroup $userGroup, Group $group, Role $role, UserContentAssociation $userContentAssociation,
                                 Attachment $attachment, SortingTag $sortingTag, GroupContentAssociation $groupContentAssociation,
                                 TagContentAssociation $tagContentAssociation, TagUserAssociation $tagUserAssociation, UserStatus $userStatus,
-                                ContentAccessLevels $contentAccessLevels, MetaData $metaData, UserSortingTag $userSortingTag, ClaimProfileRequests $claimProfileRequests)
+                                ContentAccessLevels $contentAccessLevels, MetaData $metaData, UserSortingTag $userSortingTag, ClaimProfileRequests $claimProfileRequests,
+                                TagGroupAssociation $tagGroupAssociation)
     {
         $this->user = $user;
         $this->content = $content;
@@ -116,6 +122,7 @@ class UserRepository
         $this->metaData = $metaData;
         $this->userSortingTag = $userSortingTag;
         $this->claimProfileRequests = $claimProfileRequests;
+        $this->tagGroupAssociation = $tagGroupAssociation;
     }
 
     public function getUsers($filter = array(), $user_id = null)
@@ -399,7 +406,9 @@ class UserRepository
 //        $user_group->orderBy('groups.updated_at','DESC');
         if($group_id <> 0){
             $user_group = $user_group->where('groups.id', $group_id);
-            $user_group->with('proofOfGroup','groupAvatar');
+            $user_group->with(['proofOfGroup','groupAvatar','experienceKnowledge' => function($q){
+                $q->with('tag');
+            }]);
             $user_group = $user_group->groupBy('groups.id')->first();
         }else{
             if($full){
@@ -440,6 +449,17 @@ class UserRepository
             array(
                 'user_id' => $user_id,
                 'user_tag_id' => $tag_id,
+                'slug' => $slug
+            )
+        );
+    }
+
+    function addTagToGroup($user_id, $tag_id, $slug)
+    {
+        return $this->tagGroupAssociation->create(
+            array(
+                'group_id' => $user_id,
+                'group_tag_id' => $tag_id,
                 'slug' => $slug
             )
         );
@@ -695,6 +715,11 @@ class UserRepository
     public function deleteTagsOfUserBySlug($user_id, $deleting_user_id, $slug)
     {
         return $this->tagUserAssociation->where('user_id', $user_id)->where('slug', $slug)->delete();
+    }
+
+    public function deleteTagsOfGroupBySlug($group_id, $slug)
+    {
+        return $this->tagGroupAssociation->where('group_id', $group_id)->where('slug', $slug)->delete();
     }
 
     public function getStatus()

@@ -19,4 +19,9 @@ class UserGroup extends Model
     {
         return $this->hasOne('App\Group', 'id','group_id');
     }
+
+    public function contentsAssociation()
+    {
+        return $this->hasMany('App\GroupContentAssociation', 'group_id','id');
+    }
 }

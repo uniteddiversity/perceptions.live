@@ -16,6 +16,8 @@
     $data['proof_images'] = isset($group['proofOfGroup'])?$group['proofOfGroup']:array();
     $data['avatar_images'] = isset($group['groupAvatar'])?$group['groupAvatar']:array();
     $data['id'] = isset($group['id'])?$group['id']:'';
+    $group['experience_kno'] = isset($group['experienceKnowledge'])?$group['experienceKnowledge']->toArray():[];
+    $data['experience_kno'] = isset($group['experience_kno'])?array_column($group['experience_kno'],'group_tag_id'):array();
 //    dd($data);
     ?>
     <div class="col-lg-12 grid-margin stretch-card">
@@ -60,9 +62,17 @@
                                 <label for="exampleInputEmail1">Current Mission</label>
                                 <textarea class="form-control" placeholder="Current Mission" rows="5" name="current_mission">{{ old('current_mission',$data['current_mission']) }}</textarea>
                             </div>
+                            {{--<div class="form-group">--}}
+                                {{--<label for="exampleInputEmail1">Experience Knowledge Interests</label>--}}
+                                {{--<textarea class="form-control" placeholder="Experience Knowledge Interests" rows="5" name="experience_knowledge_interests">{{ old('experience_knowledge_interests',$data['experience_knowledge_interests']) }}</textarea>--}}
+                            {{--</div>--}}
                             <div class="form-group">
-                                <label for="exampleInputEmail1">Experience Knowledge Interests</label>
-                                <textarea class="form-control" placeholder="Experience Knowledge Interests" rows="5" name="experience_knowledge_interests">{{ old('experience_knowledge_interests',$data['experience_knowledge_interests']) }}</textarea>
+                                <label for="skills">Experience knowledge interests (add if not exist)</label>
+                                <select class="form-control multi-select2-with-tags-max3" id="experience_kno" multiple name="experience_kno[]">
+                                    @foreach($experience_knowledge_tags as $m)
+                                        <option value="{{base64_encode($m['id'])}}" <?php if(in_array($m['id'], old('experience_kno',$data['experience_kno']))){ echo 'selected'; } ?> >{{$m['tag']}}</option>
+                                    @endforeach
+                                </select>
                             </div>
                             <div class="form-group">
                                 <label for="exampleInputEmail1">Default Location</label>
@@ -115,6 +125,7 @@
                                 &nbsp;&nbsp;<input type="checkbox" name="accept_tos" id="accept_tos" value="1" checked />
                             </div>
                             <?php } ?>
+
 
 
                             <div class="form-group">

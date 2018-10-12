@@ -35,4 +35,9 @@ class Group extends Model
             ->where('status','=','1')
             ->where('submission_type','=','group-avatar');
     }
+
+    public function experienceKnowledge()
+    {
+        return $this->hasMany('App\TagGroupAssociation','group_id')->where('slug','experience_kno');
+    }
 }

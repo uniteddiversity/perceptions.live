@@ -493,8 +493,10 @@ class AdminController extends Controller
         $user_id = (!isset(Auth::user()->id))? 0 : Auth::user()->id;
         $user_list = $this->userRepository->getUsers(array(),$user_id);
         $status = $this->userRepository->getStatus();
+
+        $experience_knowledge_tags = $this->userRepository->getSkillsTag();
         return view('admin.group-add')
-            ->with(compact('categories','user_list','status'));
+            ->with(compact('categories','user_list','status','experience_knowledge_tags'));
     }
 
     public function postUserToGroupAdd(Request $request, $group_id)
@@ -540,7 +542,7 @@ class AdminController extends Controller
                 'name' => $r['name'],
                 'description' => $r['description'],
                 'current_mission' => $r['current_mission'],
-                'experience_knowledge_interests' => $r['experience_knowledge_interests'],
+                'experience_knowledge_interests' => isset($r['experience_knowledge_interests'])?$r['experience_knowledge_interests']:'',
                 'default_location' => $r['default_location'],
                 'learn_more_url' =>  $r['learn_more_url'],
                 'category_id' => $r['category_id'],
@@ -586,6 +588,20 @@ class AdminController extends Controller
                 'group-avatar', 'groups',1);
         }
 
+        if(isset($r['experience_kno'])){
+            $this->userRepository->deleteTagsOfGroupBySlug($new_group->id, 'experience_kno');
+            foreach($r['experience_kno'] as $sorting_tags_id){
+                $tag_id = base64_decode($sorting_tags_id);
+                if(is_numeric($tag_id)){
+                    $this->userRepository->addTagToGroup($new_group->id, $tag_id,'experience_kno');
+                }else{
+                    $newly_created_id = $this->userRepository->addIfNotExist($sorting_tags_id,'experience_kno', Auth::user()->id);
+                    if(isset($newly_created_id->id))
+                        $this->userRepository->addTagToGroup($new_group->id, $newly_created_id->id,  'experience_kno');
+                }
+            }
+        }
+
         return redirect()->back()->with('message', 'Successfully Added!');
     }
 
@@ -622,8 +638,9 @@ class AdminController extends Controller
         $user_list = $this->userRepository->getUsers(array(),$user_id);
         $group = $this->userRepository->groupList($user_id, true, $id);
         $status = $this->userRepository->getStatus();
+        $experience_knowledge_tags = $this->userRepository->getSkillsTag();
         return view('admin.group-add')
-            ->with(compact('categories','group','user_list','status'));
+            ->with(compact('categories','group','user_list','status','experience_knowledge_tags'));
     }
 
     public function approveContent($id){

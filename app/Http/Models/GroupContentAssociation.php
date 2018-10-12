@@ -20,4 +20,9 @@ class GroupContentAssociation extends Model
     {
         return $this->belongsTo('App\Group','group_id');
     }
+
+    public function contents()
+    {
+        return $this->hasOne('App\Content', 'id','content_id');
+    }
 }

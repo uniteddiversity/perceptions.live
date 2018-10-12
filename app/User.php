@@ -83,5 +83,8 @@ class User extends Authenticatable
         return $this->hasMany('App\TagUserAssociation','user_id')->where('slug','skill');
     }
 
+    public function userAssociatedContent()
+    {
 
+    }
 }
