@@ -342,3 +342,50 @@ function updateLastActive(){
         // Whoops; show an error.
     });
 }
+
+//lazy loaded table
+$(document).ready(function() {
+    // $('#lazy-loaded-table').DataTable( {
+    //     // serverSide: true,
+    //     // ordering: false,
+    //     // searching: false,
+    //     ajax: '/user/admin/group-content-list-ajax/19',
+    //     scrollY: 300,
+    //     deferRender:true,
+    //     paging: true,
+    //     // scroller:true,
+    //     scroller: {
+    //         loadingIndicator: true
+    //     }
+    // } );
+
+    var data_list_id = $('#data_list_id').val();
+    $("#lazy-loaded-table").dataTable({
+        "scrollCollapse": true,
+        "serverSide": true,
+        // "ordering": true,
+        // "searching": true,
+        "lengthChange": true,
+        "ajax": {
+            "url": '/user/admin/group-content-list-ajax/'+data_list_id,
+            "type": "GET",
+        },
+        "scroller": {
+            "loadingIndicator": true
+        },
+        "deferRender": true,
+        "dom": "rtiS",
+        "scrollY": "600px",
+        "length": 10,
+        "columns": [
+            {"data": "action"},
+            {"data": "title"},
+            {"data": 'submitted_by'},
+            {"data": 'status'},
+            {"data": 'url'},
+            {"data": 'email'},
+            {"data": 'location'},
+            {"data": 'updated_at'}
+        ]
+    });
+} );

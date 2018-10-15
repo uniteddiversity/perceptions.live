@@ -44,9 +44,9 @@
                             @foreach ($groups as $group)
                                 <tr>
                                     <td>
-                                        <a href="/user/admin/group-edit/{{ uid($group->id) }}" >Edit</a>&nbsp;&nbsp;
-                                        <a href="/user/admin/user-to-group-add/{{ ($group->id) }}" target="_blank" >View Users</a>
-
+                                        <a href="/user/admin/group-edit/{{ uid($group->id) }}" data-toggle="tooltip" title="Edit" ><i class="ti-pencil"></i></a>&nbsp;
+                                        <a href="/user/admin/user-to-group-add/{{ ($group->id) }}" target="_blank" data-toggle="tooltip" title="View Users" ><i class="ti-user"></i></a>&nbsp;
+                                        <a href="/user/admin/group-content-list/{{ ($group->id) }}" target="_blank" data-toggle="tooltip" title="View Videos" ><i class="ti-video-clapper"></i></a>
                                     </td>
                                     <td>
                                         {{ date('Y-m-d', strtotime($group->created_at)) }}

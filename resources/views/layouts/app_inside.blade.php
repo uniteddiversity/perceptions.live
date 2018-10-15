@@ -54,6 +54,7 @@
     <link rel="stylesheet" href="/assets/css/custom_common_styles.css" />
 
     <link rel="stylesheet" href="/assets/croppie/croppie.css" />
+    <link rel="stylesheet" href="/assets/js/datatable/datatables.min.css" />
 </head>
 
 <body>
@@ -688,6 +689,7 @@
 <script type="text/javascript" src="/assets/mashable/bower_components/bootstrap-datepicker/js/bootstrap-datepicker.min.js"></script>
 <script src="/assets/js/app.js"></script>
 <script src="/assets/croppie/croppie.js"></script>
+<script src="/assets/js/datatable/datatables.min.js"></script>
 
 <script>
     $(document).ready(function() {
@@ -804,7 +806,6 @@
                 // $('#form').submit();
             });
         });
-
 
         console.log('image path is '+$('#preset_image_path').val());
         $('.cr-image').attr('src',$('#preset_image_path').val());

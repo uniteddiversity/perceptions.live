@@ -25,6 +25,7 @@
     <link rel="stylesheet" href="/assets/leaflet-groupedlayercontrol/leaflet.groupedlayercontrol.css">
     <link rel="stylesheet" href="/js/dist/css/select2.min.css" />
     <link rel="stylesheet" href="/assets/css/custom.css" />
+    {{--<link rel="stylesheet" href="/assets/js/datatable/datatables.min.css" />--}}
     <script src="/assets/js/jquery-2.1.4.min.js"></script>
     {{--<link rel="stylesheet" href="/assets/css/app.css">--}}
 </head>
@@ -150,7 +151,7 @@
 <script src="/assets/js/bootstrap-tooltip.js"></script>
 <script src="/assets/js/app.js"></script>
 
-
+<script src="/assets/js/datatable/datatables.min.js"></script>
 <style>
     #featureModal {
         position: fixed;

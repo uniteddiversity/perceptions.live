@@ -781,4 +781,51 @@ class AdminController extends Controller
         return view('admin.generated-map-list')
             ->with(compact('list','association'));
     }
+
+    public function groupContentList($id)
+    {
+//        $user_id = (!isset(Auth::user()->id))? 0 : Auth::user()->id;
+//        $videos = $this->contentService->getContentList($user_id, array('group_id' => $id));
+        $videos = [];
+        $group_id = $id;
+        return view('admin.group-content-list')
+            ->with(compact('videos','group_id'));
+    }
+
+    public function groupContentListAjax(Request $request, $id)
+    {
+        $r = $request->all();
+        $page_size = isset($r['length'])?intval($r['length']):100;
+        $start_rec = isset($r['start'])?intval($r['start']):0;
+        $user_id = (!isset(Auth::user()->id))? 0 : Auth::user()->id;
+        $page = round($start_rec/$page_size);
+        $videos = $this->contentService->getContentList($user_id, array('group_id' => $id), $page + 1, $page_size)->toArray();
+
+        $processed = [];
+        $i = 0;
+        $processed = $videos;
+        $processed['data'] = [];
+        foreach($videos['data'] as $video){
+            $processed['data'][$i]['action'] = '<a href="/user/admin/video-edit/'.uid($video['id']).'" data-toggle="tooltip" title="Edit"  ><i class="ti-pencil"></i></a>';
+            if($video['status'] != '1')
+                $processed['data'][$i]['action'] .= '<a class="approve-video inactive_link" id="approve_'.uid($video['id']).'" data-value="'.$video['id'].'" onclick="testFunction('.$video['id'].')" >Approve</span>';
+
+            $processed['data'][$i]['title'] = $video['title'];
+            $processed['data'][$i]['submitted_by'] = isset($video['user']['display_name'])?$video['user']['display_name']:'-';
+            $processed['data'][$i]['status'] = ($video['status'] == '1')?'Approved' : 'Open';
+            $processed['data'][$i]['url'] = $video['url'];
+            $processed['data'][$i]['email'] = isset($video['user']['email'])?$video['user']['email']:'-';
+            $processed['data'][$i]['location'] = $video['location'];
+            $processed['data'][$i]['updated_at'] = $video['updated_at'];
+            $i++;
+        }
+        $processed['recordsTotal'] = $videos['total'];
+//        $draw = $r['draw'];
+        $processed['draw'] = intval($r['draw']);
+//        $processed['draw'] = 1;
+        $processed['recordsFiltered'] = $videos['total'];
+
+//        $ret = array('data' => $processed, 'draw' => 5, 'recordsTotal'=>100, 'recordsFiltered' => 100);
+        return response()->json($processed, 200);
+    }
 }

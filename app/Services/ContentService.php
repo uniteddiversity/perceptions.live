@@ -67,7 +67,7 @@ class ContentService
         return $meta_array;
     }
 
-    public function getContentList($user_id, $filter = array())
+    public function getContentList($user_id, $filter = array(), $page = null, $page_size = 20)
     {
         $user_info = $this->getUser($user_id);
 
@@ -82,7 +82,10 @@ class ContentService
 //            $videos->leftJoin('user_groups', 'user_groups.group_id','group_content_associations.group_id');
             $videos->where('user_groups.user_id', $user_id);
         }elseif ($user_info['role_id'] == 1){// if super admin, no filter, show everything
+            $videos->leftJoin('group_content_associations', 'group_content_associations.content_id','contents.id');
+            $videos->leftJoin('user_groups', 'user_groups.group_id','group_content_associations.group_id');
 
+            $videos->leftJoin('user_groups as created_by_user_groups', 'created_by_user_groups.group_id','group_content_associations.group_id');
         }else{//if user
             $videos->where('user_id', $user_info['id']);
         }
@@ -95,7 +98,15 @@ class ContentService
             $videos = $videos->whereIn('contents.id', $filter['ids']);
         }
 
+        if(isset($filter['group_id'])){
+            $videos = $videos->where('user_groups.group_id',$filter['group_id']);
+        }
+
         $videos = $videos->select('contents.*');
+
+        if($page != null){
+            return $videos->groupBy('contents.id')->orderBy('updated_at','DESC')->paginate($page_size, ['*'], 'page', $page);
+        }
         $videos = $videos->groupBy('contents.id')->orderBy('updated_at','DESC')->get();
 //        dd($videos);
         return $videos;
