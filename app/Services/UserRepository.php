@@ -210,17 +210,23 @@ class UserRepository
         return $status;
     }
 
-    public function getGroupInfo($group_id, $full = false)
+    public function getGroupInfo($group_id, $full = false, $public = false)
     {
-        $group_info = $this->group->where('groups.id', $group_id)->with(['proofOfGroup','groupAvatar'])
+        $group_info = $this->group->where('groups.id', $group_id)->with(['proofOfGroup','groupAvatar','actingRoles' => function($q){
+            $q->with('tag');
+        }])
             ->first()->toArray();
 
         if($full){
             if(isset($group_info['id'])){
                 $group_info['users'] = $this->user->leftJoin('user_groups','users.id', 'user_groups.user_id')
                     ->select('users.*')
-                    ->where('user_groups.group_id', $group_info['id'])
-                    ->get()->toArray();
+                    ->where('user_groups.group_id', $group_info['id']);
+
+                if($public)
+                    $group_info['users'] = $group_info['users']->where('users.access_level_id', 1);//visible only public
+
+                $group_info['users'] = $group_info['users']->get()->toArray();
                 $group_info['videos'] = $this->content
                     ->leftJoin('group_content_associations','group_content_associations.content_id', 'contents.id')
                     ->where('group_content_associations.group_id', $group_info['id'])
@@ -274,6 +280,17 @@ class UserRepository
             ->leftJoin('sorting_tags', function($q){
                 $q->on('sorting_tags.id', 'tag_content_associations.content_tag_id');
             })
+            ->leftJoin('user_content_associations',
+                'user_content_associations.content_id', 'contents.id')
+            ->leftJoin('group_content_associations',
+                'group_content_associations.content_id', 'contents.id')
+            ->leftJoin('user_groups',
+                'user_groups.group_id', 'group_content_associations.group_id')
+            ->leftJoin('user_sorting_tags',
+                'user_content_associations.user_association_tag_slug', 'user_sorting_tags.slug')
+            ->leftJoin('groups',
+                'groups.id', 'user_groups.group_id')
+
             ->where('contents.status', '=', 1);
 
         if(isset($filter['keyword']) && !empty($filter['keyword'])){
@@ -296,8 +313,16 @@ class UserRepository
             $contents = $contents->where('contents.id', $filter['video_id']);
         }
 
+        if(isset($filter['user_involvement']) && !empty($filter['user_involvement'])){
+            $contents = $contents->where('user_content_associations.user_id', $filter['user_involvement']);
+        }
+
+        if(isset($filter['group_involvement']) && !empty($filter['group_involvement'])){
+            $contents = $contents->where('user_groups.user_id', $filter['group_involvement']);
+        }
+
         $contents = $contents->select('contents.id', DB::Raw("SUBSTRING(contents.brief_description, 1, 128) as trim_description"), 'contents.lat', 'contents.long', 'contents.title', 'contents.url',
-                'users.display_name','contents.created_at','contents.location','contents.user_id','contents.primary_subject_tag',
+                'users.display_name','contents.created_at','contents.location','contents.user_id','contents.primary_subject_tag',DB::Raw("GROUP_CONCAT(DISTINCT (user_sorting_tags.name) SEPARATOR ', ') as user_association"), DB::Raw("GROUP_CONCAT(DISTINCT (groups.name) SEPARATOR ', ') as group_names"),
                 DB::Raw("GROUP_CONCAT(DISTINCT (concat(sorting_tags.tag_color,'-',sorting_tags.id,'-',sorting_tags.tag)) SEPARATOR ', ') as tag_colors") )
             ->groupBy('contents.id')->orderBy('contents.updated_at', 'DESC')->limit(500)->get();
         $r = array(); $i = 0;

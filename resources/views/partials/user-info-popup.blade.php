@@ -50,7 +50,7 @@ $display = ($user_status == 'private' || $user_status == 'only-logged')? false :
             <?php if(isset($info->actingRoles) && count($info->actingRoles) > 0){ ?>
             <div style="padding-top: 10px; font-size: .9em; line-height: 1.3em;">
                 <span>COLLABORATION ROLES: </span>
-                <?php foreach($info->actingRoles as $tag){ //dd($tag->tag); ?>
+                <?php foreach($info->actingRoles as $tag){ ?>
                     <span><i class="fa <?php echo $tag->tag->icon ?>"></i></span>
                 <?php } ?>
 
@@ -73,23 +73,38 @@ $display = ($user_status == 'private' || $user_status == 'only-logged')? false :
     <div style="display: block; width:50%; padding-right: 20px; float: left; text-align: center;">
         <div><h5><i class="fa fa-film"></i> Media Involvements</h5></div>
         <?php /* ### LIST OF ASSOCIATED VIDEOS - CLICK THUMBNAIL IMAGE TO OPEN VIDEO-INFO-BLADE */ ?>
-        <div><img width=100% height=100% src="kalani.jpg" alt=""></div>
+
+        <?php foreach($info['user_involvement_videos'] as $video){ //dd($video['user_association_tag_slug']);
+            preg_match("/^(?:http(?:s)?:\/\/)?(?:www\.)?(?:m\.)?(?:youtu\.be\/|youtube\.com\/(?:(?:watch)?\?(?:.*&)?v(?:i)?=|(?:embed|v|vi|user)\/))([^\?&\"'>]+)/", $video['url'], $matches);
+            $video_id = isset($matches[1])?$matches[1]:'';
+            ?>
+        <div onclick="openVideo('<?php echo $video['id'] ?>')"><img width=100% height=100% src="https://img.youtube.com/vi/<?php echo $video_id ?>/maxresdefault.jpg"></div>
         <div class="placedetails">
 
             <?php /* ### this is "video producer" or "onscreen" or "co-creator" or "submitter" based on video profile */ ?>
-            <span class="pull-left" ><i class="fa fa-star-o"></i> Role</span>
-            <span class="pull-right"><i class="flaticon-avatar"></i> <span class="inactive_link">Video Producer</span></span>
+            <span class="pull-left" ><i class="fa fa-star-o"></i>
+            Role
+            </span>
+            <span class="pull-right"><i class="flaticon-avatar"></i> <span class="inactive_link"><?php echo $video['user_association'] ?></span></span>
         </div>
+        <?php } ?>
+
     </div>
     <div style="display: block; float: right; width:50%; padding-left: 20px; text-align: center;">
         <div><h5><i class="fa fa-users"></i> Group Associations</h5></div>
         <?php /* ### click group image to open group-info-blade */ ?>
         <?php /* ### this div is only present if there is a group associated with video ### can we align icon with text? */ ?>
-        <div><img width=100% height=100% src="kalani.jpg" alt=""></div>
+
+        <?php foreach($info['group_involvement_videos'] as $video){ //dd($video['location']);
+        preg_match("/^(?:http(?:s)?:\/\/)?(?:www\.)?(?:m\.)?(?:youtu\.be\/|youtube\.com\/(?:(?:watch)?\?(?:.*&)?v(?:i)?=|(?:embed|v|vi|user)\/))([^\?&\"'>]+)/", $video['url'], $matches);
+        $video_id = isset($matches[1])?$matches[1]:'';
+        ?>
+        <div onclick="openVideo('<?php echo $video['id'] ?>')"><img width=100% height=100% src="https://img.youtube.com/vi/<?php echo $video_id ?>/maxresdefault.jpg" alt=""></div>
         <div class="placedetails">
-            <span class="pull-left" ><i class="flaticon-pin"></i> Location </span>
-            <span class="pull-right"><i class="fa fa-users"></i> <span class="inactive_link">Group Name</span></span>
+            <span class="pull-left" ><i class="flaticon-pin"></i> <?php echo $video['location'] ?> </span>
+            <span class="pull-right"><i class="fa fa-users"></i> <span class="inactive_link"><?php echo $video['group_names'] ?></span></span>
         </div>
+        <?php } ?>
     </div>
 </div>
 <?php } ?>

@@ -112,15 +112,19 @@ class HomeController extends Controller
     {
         $user_associate_videos = $this->userRepository->getAssociatedVideosForUser($user_id);
         $info = $this->userRepository->getUser($user_id);
+        $info['user_involvement_videos'] = $this->userRepository->getPublicContents($user_id, array('user_involvement' => $user_id));
+        $info['group_involvement_videos'] = $this->userRepository->getPublicContents($user_id, array('group_involvement' => $user_id));
+
         $user_status = $this->userRepository->getUserStatus($user_id);
         $gci_tags = $this->userRepository->getGreaterCommunityIntentionTag();
+
         return view('partials.user-info-popup')
             ->with(compact('info','user_associate_videos','gci_tags','user_status'));
     }
 
     public function getGroupInfo($group_id)
     {
-        $info = $this->userRepository->getGroupInfo($group_id, true);
+        $info = $this->userRepository->getGroupInfo($group_id, true, true);
         $group_contents = $this->contentService->getSearchableContents(0, array('group_id' => $group_id), 10);
         $group_users = $this->userRepository->getUsers(array('group_id' => $group_id));
         return view('partials.group-info-popup')
