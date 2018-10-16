@@ -18,6 +18,8 @@
     $data['id'] = isset($group['id'])?$group['id']:'';
     $group['experience_kno'] = isset($group['experienceKnowledge'])?$group['experienceKnowledge']->toArray():[];
     $data['experience_kno'] = isset($group['experience_kno'])?array_column($group['experience_kno'],'group_tag_id'):array();
+    $data['group_acting_roles'] = isset($group['actingRoles'])?array_column(($group['actingRoles'])->toArray(),'group_tag_id'):array();
+
 //    dd($data);
     ?>
     <div class="col-lg-12 grid-margin stretch-card">
@@ -66,6 +68,16 @@
                                 {{--<label for="exampleInputEmail1">Experience Knowledge Interests</label>--}}
                                 {{--<textarea class="form-control" placeholder="Experience Knowledge Interests" rows="5" name="experience_knowledge_interests">{{ old('experience_knowledge_interests',$data['experience_knowledge_interests']) }}</textarea>--}}
                             {{--</div>--}}
+                            <div class="form-group">
+                                <label for="video_producer">Group Roles</label>
+                                {{--<input type="text" class="form-control" aria-describedby="nameHelp" name="video_producer" placeholder="Video Producer" value="{{ old('video_producer') }}">--}}
+                                <select class="form-control multi-select2" id="group_roles" multiple searchable="Search here.." name="group_acting_roles[]" >
+                                    @foreach($user_acting_role as $role)
+                                        <option value="{{$role->id}}" <?php if(in_array($role->id, old('group_acting_roles',$data['group_acting_roles']))){ echo 'selected'; } ?> >{{$role->name}}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+
                             <div class="form-group">
                                 <label for="skills">Experience knowledge interests (add if not exist)</label>
                                 <select class="form-control multi-select2-with-tags-max5" id="experience_kno" multiple name="experience_kno[]">

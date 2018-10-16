@@ -483,6 +483,7 @@ class AdminController extends Controller
         $groups = $this->userRepository->groupList($user_id);
         $user_list = $this->userRepository->getUsers(array(),$user_id);
         $user_list_in_group = $this->userRepository->getUsers(array('group_id' => $group_id),$user_id);
+
         return view('admin.user-group-add')
             ->with(compact('user_list','groups','user_list_in_group','group_id'));
     }
@@ -495,8 +496,10 @@ class AdminController extends Controller
         $status = $this->userRepository->getStatus();
 
         $experience_knowledge_tags = $this->userRepository->getSkillsTag();
+        $user_acting_role = $this->userRepository->getUserActingRoles();
+
         return view('admin.group-add')
-            ->with(compact('categories','user_list','status','experience_knowledge_tags'));
+            ->with(compact('categories','user_list','status','experience_knowledge_tags','user_acting_role'));
     }
 
     public function postUserToGroupAdd(Request $request, $group_id)
@@ -602,6 +605,14 @@ class AdminController extends Controller
             }
         }
 
+        //add role tag to user
+        if(isset($new_group->id) && !empty($r['group_acting_roles'])){
+            $this->userRepository->deleteGroupFromTag($new_group->id,'role');
+            foreach($r['group_acting_roles'] as $tag){
+                $user_group = $this->userRepository->addTagToGroup($new_group->id, $tag,'role');
+            }
+        }
+
         return redirect()->back()->with('message', 'Successfully Added!');
     }
 
@@ -639,8 +650,10 @@ class AdminController extends Controller
         $group = $this->userRepository->groupList($user_id, true, $id);
         $status = $this->userRepository->getStatus();
         $experience_knowledge_tags = $this->userRepository->getSkillsTag();
+        $user_acting_role = $this->userRepository->getUserActingRoles();
+
         return view('admin.group-add')
-            ->with(compact('categories','group','user_list','status','experience_knowledge_tags'));
+            ->with(compact('categories','group','user_list','status','experience_knowledge_tags','user_acting_role'));
     }
 
     public function approveContent($id){

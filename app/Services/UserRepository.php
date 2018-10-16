@@ -406,7 +406,7 @@ class UserRepository
 //        $user_group->orderBy('groups.updated_at','DESC');
         if($group_id <> 0){
             $user_group = $user_group->where('groups.id', $group_id);
-            $user_group->with(['proofOfGroup','groupAvatar','experienceKnowledge' => function($q){
+            $user_group->with(['proofOfGroup','groupAvatar','actingRoles','experienceKnowledge' => function($q){
                 $q->with('tag');
             }]);
             $user_group = $user_group->groupBy('groups.id')->first();
@@ -443,6 +443,12 @@ class UserRepository
         return $user_gr->delete();
     }
 
+    function deleteGroupFromTag($group_id, $slug)
+    {
+        $user_gr = $this->tagGroupAssociation->where('group_id', $group_id)->where('slug', $slug);
+        return $user_gr->delete();
+    }
+
     function addTagToUser($user_id, $tag_id, $slug)
     {
         return $this->tagUserAssociation->create(
@@ -454,11 +460,11 @@ class UserRepository
         );
     }
 
-    function addTagToGroup($user_id, $tag_id, $slug)
+    function addTagToGroup($group_id, $tag_id, $slug)
     {
         return $this->tagGroupAssociation->create(
             array(
-                'group_id' => $user_id,
+                'group_id' => $group_id,
                 'group_tag_id' => $tag_id,
                 'slug' => $slug
             )

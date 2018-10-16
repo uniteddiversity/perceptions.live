@@ -1,3 +1,6 @@
+var model_links = [];
+var model_links_current_pos = 0;
+
 if(typeof(L) != "undefined"){
     if($('#video_id').val() != undefined){
         var lat = $('#video_lat').val();
@@ -126,7 +129,10 @@ var onMarkerClick = function(e){
     //     .openOn(map);
 }
 
-function openVideo(id){
+function openVideo(id, no_history){
+    if(no_history !== true)
+        updateModelFunction('openVideo', id);
+
     $("#feature-info").html('loading...');
     console.log(this);//this.options.id
     jQuery.ajax({
@@ -143,7 +149,10 @@ function openVideo(id){
     });
 }
 
-function openProfile(id){
+function openProfile(id, no_history){
+    if(no_history !== true)
+        updateModelFunction('openProfile', id);
+
     $("#feature-info").html('loading...');
     console.log(this);//this.options.id
     jQuery.ajax({
@@ -160,7 +169,10 @@ function openProfile(id){
     });
 }
 
-function openGroupProfile(id){
+function openGroupProfile(id, no_history){
+    if(no_history !== true)
+        updateModelFunction('openGroupProfile', id);
+
     console.log('group loading');
     $("#feature-info").html('loading...');
     console.log(this);//this.options.id
@@ -342,6 +354,63 @@ function updateLastActive(){
         // Whoops; show an error.
     });
 }
+
+
+//bootrap model back and foward buttons
+$("body").on('hidden.bs.modal', function (e) {
+    console.log('close working');
+    model_links = [];
+    model_links_current_pos = 0;
+    // put your default event here
+});
+
+function modalBack() {
+    model_links_current_pos -= 1;
+    invokeModelAction(model_links[model_links_current_pos - 1]);
+    updateModelButtons();
+}
+
+function modalFoward(){
+    model_links_current_pos += 1;
+    invokeModelAction(model_links[model_links_current_pos - 1]);
+    updateModelButtons();
+}
+
+function updateModelFunction(action, value){
+    model_links.push([action, value]);
+    model_links_current_pos++;
+    updateModelButtons();
+}
+
+function updateModelButtons(){
+    if(model_links.length > model_links_current_pos)
+        $('.model-foward').show();
+    else
+        $('.model-foward').hide();
+
+
+    if(model_links_current_pos > 1){
+        $('.model-back').show();
+        // $('.model-foward').hide();
+    }else{
+        $('.model-back').hide();
+    }
+
+    console.log('current pos '+model_links_current_pos+'   model length '+model_links.length)
+    if(model_links_current_pos < 2 && model_links.length < 2){
+        $('.model-back').hide();
+        $('.model-foward').hide();
+    }
+}
+
+function invokeModelAction(actions){
+    window[actions[0]](actions[1], true);
+    console.log(actions[0]+'   '+actions[1]);
+
+    updateModelButtons();
+}
+//bootstrap model back and foward buttons
+
 
 //lazy loaded table
 $(document).ready(function() {
