@@ -51,13 +51,13 @@
     {{--</div>--}}
 {{--</div>--}}
 <div class="modal fade" id="featureModal" tabindex="-1" role="dialog">
-    <div class="modal-dialog">
+    <div class="modal-dialog" style="position: relative;">
         <div class="modal-content">
             <div class="modal-header" style="border-bottom: 0px solid #e5e5e5;">
                 <button class="close" type="button" data-dismiss="modal" aria-hidden="true">&times;</button>
 
-                <button class="model-back" onclick="modalBack()" aria-hidden="true" style="position: absolute;top: 60px;left: 10px;">&lt;</button>
-                <button class="model-foward" onclick="modalFoward()" aria-hidden="true" style="position: absolute;top: 60px;right: 10px;">&gt;</button>
+                <button class="model-back" onclick="modalBack()" aria-hidden="true" style="position: absolute;top: 10px;left: 10px;padding: 4px 15px;">&lt;</button>
+                <button class="model-foward" onclick="modalFoward()" aria-hidden="true" style="position: absolute;top: 10px;left: 60px;padding: 4px 15px;">&gt;</button>
             </div>
             <div class="modal-body" id="feature-info"></div>
         </div>
