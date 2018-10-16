@@ -102,7 +102,7 @@ $display = ($user_status == 'private' || $user_status == 'only-logged')? false :
         <div onclick="openVideo('<?php echo $video['id'] ?>')"><img width=100% height=100% src="https://img.youtube.com/vi/<?php echo $video_id ?>/maxresdefault.jpg" alt=""></div>
         <div class="placedetails">
             <span class="pull-left" ><i class="flaticon-pin"></i> <?php echo $video['location'] ?> </span>
-            <span class="pull-right"><i class="fa fa-users"></i> <span class="inactive_link"><?php echo $video['group_names'] ?></span></span>
+            <span class="pull-right"><i class="fa fa-users"></i> <span class="inactive_link" onclick="openGroupProfile('<?php echo $video['id'] ?>')"><?php echo $video['group_names'] ?></span></span>
         </div>
         <?php } ?>
     </div>
