@@ -323,8 +323,11 @@ function userRegister(){
                     $('#register-form #messages').html('<div class="alert alert-danger" role="alert">'+val2+'</div>');
                 })
             }else{
-                $('#register-form #messages').html('<div class="alert alert-success" role="alert">'+val+'</div>');
-                // window.location.href = "/user/profile";
+                $('.popupsec').hide();
+                $.alert({
+                    title: 'Email has sent!',
+                    content: val,
+                });
             }
         })
 
