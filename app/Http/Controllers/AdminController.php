@@ -439,8 +439,10 @@ class AdminController extends Controller
 
         if(isset($new_user->id) && isset($r['user_avatar'])){
             $this->userRepository->deleteAttachmentByFkId(Auth::user()->id, $new_user->id, 'avatar', 'users');
-            $this->userRepository->uploadAttachment($r['user_avatar'],Auth::user()->id, $new_user->id,
+            $this->userRepository->uploadAttachmentBase64($r['profile_image'],Auth::user()->id, $new_user->id,
                 'avatar', 'users',1);
+//            $this->userRepository->uploadAttachment($r['user_avatar'],Auth::user()->id, $new_user->id,
+//                'avatar', 'users',1);
         }
 
         //add to user group

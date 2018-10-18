@@ -92,8 +92,13 @@
                                 </div>
 
                             <div class="form-group">
+                                {{--<input type="file" id="upload" value="Choose a file">--}}
+                                <div id="upload-profile"></div>
+                                <input type="hidden" id="imagebase64" name="profile_image">
+                                {{--<a href="#" class="upload-result">Send</a>--}}
+
                                 <label for="user_avatar">User Avatar</label>
-                                <input class="form-control" type="file" name="user_avatar" />
+                                <input id="upload" class="form-control" type="file" name="user_avatar" />
                                 <?php foreach($data['image'] as $img){ ?>
                                 <a target="_blank" href="/storage/<?php echo $img['url'] ?>"><img width="150" src="/storage/<?php echo $img['url'] ?>" alt="Avatar" class="avatar"></a>
                             <?php } ?>
