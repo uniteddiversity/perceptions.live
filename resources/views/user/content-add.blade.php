@@ -279,9 +279,10 @@
 
                         <div class="form-group">
                             <label for="exampleSelect1">Submitted Footage</label>
-                            <select class="form-control" id="submitted_footage" name="submitted_footage">
-                                <option value="yes" <?php if(old('submitted_footage',$data['submitted_footage']) == 'yes'){ echo 'selected'; } ?> >Yes</option>
+                            <select class="form-control" id="submitted_footage" name="submitted_footage" onchange="displayVideoContentUpload()">
                                 <option value="no" <?php if(old('submitted_footage',$data['submitted_footage']) == 'no'){ echo 'selected'; } ?> >No</option>
+                                <option value="yes" <?php if(old('submitted_footage',$data['submitted_footage']) == 'yes'){ echo 'selected'; } ?> >Yes</option>
+
                             </select>
                         </div>
 
@@ -297,7 +298,7 @@
                         {{--</select>--}}
                         {{--</div>--}}
 
-                        <div class="form-group">
+                        <div class="form-group" id="submit_footage_form" <?php if(old('submitted_footage',$data['submitted_footage']) == 'yes'){ echo 'style="display:true"'; }else{ echo 'style="display:none"'; } ?> >
                             <label for="accept_tos">Video Content</label>
                             <input class="form-control" type="file" name="content_set1[]" /> Content Set 1
                             <input class="form-control" type="file" name="content_set2[]" /> Content Set 2

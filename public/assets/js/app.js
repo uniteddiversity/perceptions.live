@@ -487,3 +487,10 @@ $(document).ready(function() {
     });
 } );
 
+function displayVideoContentUpload(){
+    if($("#submitted_footage").val() == 'yes'){
+        $('#submit_footage_form').show();
+    }else{
+        $('#submit_footage_form').hide();
+    }
+}
