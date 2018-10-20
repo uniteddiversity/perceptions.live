@@ -18,7 +18,7 @@ class UsersTableSeeder extends Seeder
                 'first_name'    =>  'admin',
                 'display_name'     =>  'admin',
 //                'username'      =>  'admin',
-                'email'         =>  'admin@osm.com',
+                'email'         =>  'Jordan@perceptiontravel.tv',
                 'password'      =>  bcrypt('secret'),
                 'role_id'       =>  1,
                 'status_id'        =>  1
