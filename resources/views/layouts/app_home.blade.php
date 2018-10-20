@@ -24,7 +24,7 @@
     <link rel="stylesheet" href="/assets/leaflet-groupedlayercontrol/leaflet.groupedlayercontrol.css">
     {{--<link rel="stylesheet" href="/assets/css/app.css">--}}
     {{--map related--}}
-
+    <link rel="stylesheet" href="/assets/css/custom.css">
 </head>
 
 <body>

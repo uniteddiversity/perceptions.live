@@ -33,3 +33,26 @@
 .gci_dot_container span{
     margin-left: -5px;
 }
+
+.active_link{
+    cursor: pointer;
+}
+
+.video_thumb{
+    position: relative;
+}
+
+.video_thumb{
+    position: relative;
+}
+
+.video_thumb .watchicon2{
+    margin-top: 50px;
+    margin-left: -50px;
+}
+
+div .tooltip{
+    border-radius: 5px;
+    padding: 5px;
+    font-size: 13px;
+}

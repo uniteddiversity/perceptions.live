@@ -36,6 +36,7 @@ Route::post('/', function(){
 
     Route::get('/home/ajax/video-search', '\App\Controllers\HomeController@searchVideos');
     Route::get('/claim-profile', '\App\Controllers\User\UserController@claimUserProfile');
+    Route::get('/claim-profile-clean', '\App\Controllers\User\UserController@claimUserProfileClean');
     Route::post('/claim-profile-post', '\App\Controllers\User\UserController@claimUserProfilePost');
 
 

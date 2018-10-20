@@ -14,10 +14,10 @@ $video_id = isset($matches[1])?$matches[1]:'';
         <div style="text-align: right;"><ul class="listmetas">
             <li><a href="#" title=""><i class="fa fa-tag"></i> <?php echo $info['primary_subject_tag'] ?></a></li>
         </ul></div>
-        <div class="placethumb">
+        <div class="placethumb active_link" onclick="openVideo('<?php echo $info['id'] ?>')" >
             <img src="https://img.youtube.com/vi/<?php echo $video_id ?>/mqdefault.jpg">
             <?php /*<iframe frameborder="0" showinfo="0" controls="0" autohide="1" style="width: 100%;" src="<?php echo str_replace( 'watch?v=', 'embed/',$info['url']) ?>" frameborder="0" allowfullscreen></iframe> */ ?>
-            <div class="watchicon2" onclick="openVideo('<?php echo $info['id'] ?>')""> <a href="#" title=""><img src="/assets/findgo/images/play3.png" alt=""> </a>
+            <div class="watchicon2" onclick="openVideo('<?php echo $info['id'] ?>')" > <a href="#" title=""><img src="/assets/findgo/images/play3.png" alt=""> </a>
 				</div>
         </div>
         <div class="boxplaces">
@@ -38,7 +38,7 @@ $video_id = isset($matches[1])?$matches[1]:'';
             </div>
         </div><div class="placeinfosdesc">
                 <?php if(!empty($info['trim_description'])){ ?>
-                    <span style="font-size: .8em;"><?php echo $info['trim_description'] ?> [ <a href="#" onclick="openVideo('<?php echo $info['id'] ?>')">more...</i></a> ]</div> </span>
+                    <span style="font-size: .8em;"><?php echo $info['trim_description'] ?> <div>[ <a href="#" onclick="openVideo('<?php echo $info['id'] ?>')">more...</a> ]</div> </span>
                 <?php } ?>
 <div class="placedetails">
     <span class="pull-left" onclick="navigateOnMap('<?php echo $info['lat'] ?>','<?php echo $info['long'] ?>');" style="cursor: pointer;"><i class="flaticon-pin"></i> <?php echo $info['location'] ?></span>

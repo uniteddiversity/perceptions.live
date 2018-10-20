@@ -38,6 +38,7 @@ $display = ($user_status == 'private' || $user_status == 'only-logged')? false :
 
                 <?php /* ### HIDE FIRST NAME DIV IF UNAVAILABLE */ ?>
 
+
             <?php if($display){ ?>
             <div>
                 <span style="font-size: 18px;"> <em>{{$info['first_name']}}</em></span>
@@ -51,13 +52,17 @@ $display = ($user_status == 'private' || $user_status == 'only-logged')? false :
             <div style="padding-top: 10px; font-size: .9em; line-height: 1.3em;">
                 <span>COLLABORATION ROLES: </span>
                 <?php foreach($info->actingRoles as $tag){ ?>
-                    <span><i class="fa <?php echo $tag->tag->icon ?>"></i></span>
+                    <span data-toggle="tooltip" data-animation="true" data-placement="bottom" data-original-title="<?php echo $tag->tag->name ?>"><i class="fa <?php echo $tag->tag->icon ?>"></i></span>
                 <?php } ?>
 
             </div>
             <?php } ?>
 
             <?php } //only visible true ?>
+
+            <?php if($info['status_id'] == '5' ){ ?>
+            <div style="width:100%; text-align: center; color: #333333; font-style: italic; font-size: 12px; "><a href="/claim-profile" target="_blank">claim this profile</a></div>
+            <?php } ?>
         </div>
     </div>
 </div>
@@ -78,14 +83,16 @@ $display = ($user_status == 'private' || $user_status == 'only-logged')? false :
             preg_match("/^(?:http(?:s)?:\/\/)?(?:www\.)?(?:m\.)?(?:youtu\.be\/|youtube\.com\/(?:(?:watch)?\?(?:.*&)?v(?:i)?=|(?:embed|v|vi|user)\/))([^\?&\"'>]+)/", $video['url'], $matches);
             $video_id = isset($matches[1])?$matches[1]:'';
             ?>
-        <div onclick="openVideo('<?php echo $video['id'] ?>')"><img width=100% height=100% src="https://img.youtube.com/vi/<?php echo $video_id ?>/maxresdefault.jpg"></div>
+        <div class="video_thumb active_link" onclick="openVideo('<?php echo $video['id'] ?>')">
+            <img width=100% height=100% src="https://img.youtube.com/vi/<?php echo $video_id ?>/maxresdefault.jpg">
+        </div><div style="clear: both;"></div>
         <div class="placedetails">
 
             <?php /* ### this is "video producer" or "onscreen" or "co-creator" or "submitter" based on video profile */ ?>
             <span class="pull-left" ><i class="fa fa-star-o"></i>
-            Role
+                <?php echo $video['user_association'] ?>
             </span>
-            <span class="pull-right"><i class="flaticon-avatar"></i> <span class="inactive_link"><?php echo $video['user_association'] ?></span></span>
+            <?php /* <span class="pull-right"><i class="flaticon-avatar"></i> <span class="inactive_link" onclick="openProfile('<?php echo $video['user_id'] ?>')"><?php (isset($video['display_name']));echo $video['display_name'] ?></span></span> */ ?>
         </div>
         <?php } ?>
 
@@ -99,10 +106,23 @@ $display = ($user_status == 'private' || $user_status == 'only-logged')? false :
         preg_match("/^(?:http(?:s)?:\/\/)?(?:www\.)?(?:m\.)?(?:youtu\.be\/|youtube\.com\/(?:(?:watch)?\?(?:.*&)?v(?:i)?=|(?:embed|v|vi|user)\/))([^\?&\"'>]+)/", $video['url'], $matches);
         $video_id = isset($matches[1])?$matches[1]:'';
         ?>
-        <div onclick="openVideo('<?php echo $video['id'] ?>')"><img width=100% height=100% src="https://img.youtube.com/vi/<?php echo $video_id ?>/maxresdefault.jpg" alt=""></div>
+        <div class="video_thumb active_link" onclick="openVideo('<?php echo $video['id'] ?>')">
+            <img width=100% height=100% src="https://img.youtube.com/vi/<?php echo $video_id ?>/maxresdefault.jpg" alt="">
+        </div><div style="clear: both;"></div>
         <div class="placedetails">
             <span class="pull-left" ><i class="flaticon-pin"></i> <?php echo $video['location'] ?> </span>
-            <span class="pull-right"><i class="fa fa-users"></i> <span class="inactive_link" onclick="openGroupProfile('<?php echo $video['id'] ?>')"><?php echo $video['group_names'] ?></span></span>
+            <?php
+                $group_names=[];
+            $vid_ids = explode(',',$video['group_names_ids']);
+            foreach($vid_ids as $v){
+                $group_name_id = explode('-',$v);
+                $group_id = isset($group_name_id[1])?$group_name_id[1]:'';
+                $group_name = isset($group_name_id[0])?$group_name_id[0]:'';
+                $group_names[] = '<span class="inactive_link" onclick="openGroupProfile(\''. $group_id .'\')">'. $group_name .'</span>';
+            }
+            ?>
+            <span class="pull-right"><i class="fa fa-users"></i> <?php echo implode(', ', $group_names) ?>
+            <div style="clear: both;"></div>
         </div>
         <?php } ?>
     </div>

@@ -18,7 +18,9 @@ $video_id = isset($matches[1])?$matches[1]:'';
 
         </div>
     </div>
-    <div><img width=100% height=100% src="https://img.youtube.com/vi/<?php echo $video_id ?>/maxresdefault.jpg"></div>
+    <div>
+        <iframe style="width: 100%;height: 350px" src="<?php echo str_replace( 'watch?v=', 'embed/',$info['url']) ?>" frameborder="0" allowfullscreen></iframe>
+    </div>
 
 
     <div class="placedetails">

@@ -21,12 +21,11 @@
             <div style="width:100%; text-align: center; color: #333333; font-style: italic; font-size: 12px; "><a href="/claim-profile" target="_blank">claim this group</a></div>
             <?php } ?>
 
-<?php //dd($info['acting_roles']) ?>
             <?php if(isset($info['acting_roles']) && count($info['acting_roles']) > 0){ ?>
             <div style="padding-top: 10px; font-size: .9em; line-height: 1.3em;">
                 <span>COLLABORATION ROLES: </span>
                 <?php foreach($info['acting_roles'] as $tag){ //dd($tag['tag']['icon']); ?>
-                <span data-toggle="tooltip" data-original-title="<?php echo $tag['tag']['name'] ?>" title="<?php echo $tag['tag']['name'] ?>" ><i class="fa <?php echo $tag['tag']['icon'] ?>"></i></span>
+                <span data-toggle="tooltip" data-animation="true" data-placement="bottom" data-original-title="<?php echo $tag['tag']['name'] ?>" title="<?php echo $tag['tag']['name'] ?>" ><i class="fa <?php echo $tag['tag']['icon'] ?>"></i></span>
                 <?php } ?>
 
             </div>
@@ -86,7 +85,7 @@
         preg_match("/^(?:http(?:s)?:\/\/)?(?:www\.)?(?:m\.)?(?:youtu\.be\/|youtube\.com\/(?:(?:watch)?\?(?:.*&)?v(?:i)?=|(?:embed|v|vi|user)\/))([^\?&\"'>]+)/", $content['url'], $matches);
         $video_id = isset($matches[1])?$matches[1]:'';
         ?>
-        <div onclick="openVideo('<?php echo $content['id'] ?>')"><img width=100% src="https://img.youtube.com/vi/<?php echo $video_id ?>/maxresdefault.jpg"></div>
+        <div class="video_thumb active_link" onclick="openVideo('<?php echo $content['id'] ?>')"><img width=100% src="https://img.youtube.com/vi/<?php echo $video_id ?>/maxresdefault.jpg"></div>
         <div class="placedetails">
             <span class="pull-left" ><i class="fa fa-tag"></i> <?php echo $content['primary_subject_tag'] ?></span>
             <?php foreach($content->videoProducer as $user){ ?>
@@ -106,9 +105,9 @@
         <?php /* ### can you please help align these divs to center? */ ?>
         <div style="width: 100%; text-align: center;">
             <?php if(!isset($user->image[0]->url)){?>
-                <img onclick="openProfile('<?php echo $user->id ?>')" style="margin-left: 25%;" height="150" width="150" src="/profilephoto.png">
+                <img class="active_link" onclick="openProfile('<?php echo $user->id ?>')" style="margin-left: 25%;" height="150" width="150" src="/assets/img/face1.png">
             <?php }else{ ?>
-                <img onclick="openProfile('<?php echo $user->id ?>')" style="margin-left: 25%;" height="150" width="150" src="<?php echo '/storage/'.$user->image[0]->url; ?>">
+                <img class="active_link" onclick="openProfile('<?php echo $user->id ?>')" style="margin-left: 25%;" height="150" width="150" src="<?php echo '/storage/'.$user->image[0]->url; ?>">
             <?php } ?>
 
             <div style="clear: both"></div>

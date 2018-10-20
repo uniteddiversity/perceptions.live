@@ -496,6 +496,13 @@ class UserController extends Controller
             ->with(compact('user_list'));
     }
 
+    public function claimUserProfileClean()
+    {
+        $user_list = $this->userRepository->getUsers(array('filter_system_users' => true));
+        return view('partials.claim-profile-request')
+            ->with(compact('user_list'));
+    }
+
     public function claimUserProfilePost(Request $request)
     {
         $r = $request->toArray();
