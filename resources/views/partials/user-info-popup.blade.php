@@ -9,7 +9,9 @@ $display = ($user_status == 'private' || $user_status == 'only-logged')? false :
                 <img height="150" width="150" class="avatar profile_img_mini" src="<?php if(isset($info['image'][0])){ echo '/storage/'.$info['image'][0]->url; }else{ ?>/assets/img/face1.png<?php } ?>" alt="profile image">
             </div>
 
-            <div style="display: block; padding-top: 5px; width:100%; text-align: center;"><h4>{{$info['display_name']}}
+            <?php /* ### PRIVACY SETTINGS ICON: if public, then fa-eye; if only logged in, then fa-lock; if private, then fa-eye-slash  */ ?>
+
+            <div style="display: block; width:100%; text-align: center;"><h4>{{$info['display_name']}}
                     <?php
                     if($user_status == 'public'){
                         echo '<i class="fa fa-eye"></i>';
@@ -21,11 +23,21 @@ $display = ($user_status == 'private' || $user_status == 'only-logged')? false :
                     ?>
 
                 </h4></div>
-            <?php foreach($info->gciTags as $tag){
-                if(isset($tag->tag) && isset($tag->tag->tag))
-                    echo '<span data-toggle="tooltip" data-animation="true" data-placement="bottom" title="'.$tag['tag'].'" onclick="searchByTag(\''.$tag['id'].'\')" style="background-color: '.$tag['tag_color'].'" class="dot"></span>';
-            }
-            ?>
+
+            <?php /* ### If profile is inactive, add this div ?>
+            <div style="width:100%; text-align: center; color: #333333; font-style: italic; font-size: 12px; ">claim this profile</div>
+
+        </div>
+
+            <div style="display: block; width: 50%; padding-left: 5%; z-index: 99; float: left;">
+                <div style="padding-bottom: 10px;">
+                     <span class="dot" style="background-color: #1c2833;"></span>
+                     <span class="dot" style="background-color: red;"></span>
+                     <span class="dot" style="background-color: orange;"></span>
+                </div>
+
+                <?php /* ### HIDE FIRST NAME DIV IF UNAVAILABLE */ ?>
+
 
             <?php if($display){ ?>
             <div>
@@ -34,37 +46,22 @@ $display = ($user_status == 'private' || $user_status == 'only-logged')? false :
             <?php if(!empty($info['location'])){ ?>
             <div style="font-size: 14px; text-transform: uppercase; font-family: ralewaymedium; color: #6060D5;"><i class="flaticon-pin"></i> <em>{{$info['location']}}</em></div>
             <?php } ?>
+            <?php /*<div style="padding-top: 20px; font-size: .9em; line-height: 1.3em;"><i class="fa fa-clipboard"></i> SKILLSitem1, <i class="fa fa-clipboard"></i> SKILLSitem2, etc</div> */ ?>
+
+            <?php if(isset($info->actingRoles) && count($info->actingRoles) > 0){ ?>
+            <div style="padding-top: 10px; font-size: .9em; line-height: 1.3em;">
+                <span>COLLABORATION ROLES: </span>
+                <?php foreach($info->actingRoles as $tag){ ?>
+                <span data-toggle="tooltip" data-animation="true" data-placement="bottom" data-original-title="<?php echo $tag->tag->name ?>"><i class="fa <?php echo $tag->tag->icon ?>"></i></span>
+                <?php } ?>
+
+            </div>
+            <?php } ?>
 
             <?php } //only visible true ?>
 
             <?php if($info['status_id'] == '5' ){ ?>
             <div style="width:100%; text-align: center; color: #333333; font-style: italic; font-size: 12px; "><a href="/claim-profile" target="_blank">claim this profile</a></div>
-            <?php } ?>
-        </div>
-        <div style="width: 60%; padding-left: 20px; padding-top: 20px; display: block; text-align: center;">
-           <div> <?php
-            if(isset($info['gci'])){
-                $datas = array();$tag_in = array();
-                foreach($info['gci'] as $tag){
-                    $tag_in[] = $tag['user_tag_id'];
-                }
-
-                foreach($gci_tags as $tag){
-                    if(in_array($tag['id'], $tag_in)){
-                        echo '<span style="background-color: '.$tag['tag_color'].'" class="dot"></span>';
-                    }
-                }
-
-            } ?></div>
-            <?php if(isset($info->actingRoles) && count($info->actingRoles) > 0){ ?>
-            <div style="padding-top: 10px; font-size: 1.4em; line-height: 1.3em;">
-                <?php foreach($info->actingRoles as $tag){ ?>
-                <span data-toggle="tooltip" data-animation="true" data-placement="bottom" data-original-title="<?php echo $tag->tag->name ?>"><i class="fa <?php echo $tag->tag->icon ?>"></i></span>
-                <?php } ?>
-            </div>
-                <div style="padding-top:20px;">
-                <span style="text-transform: none; font-style: italic;"><?php echo $info['description'] ?></span>
-                </div>
             <?php } ?>
         </div>
     </div>
@@ -73,6 +70,9 @@ $display = ($user_status == 'private' || $user_status == 'only-logged')? false :
 
 
 <?php if($display){ ?>
+<div style="display: block; width:100%; border-top: 1px solid #e8ecec;  float: left; padding-top: 30px; padding-bottom: 40px; text-align: center;">
+    <span style="text-transform: none; font-style: italic;"><?php echo $info['description'] ?></span>
+</div>
 
 <div style="display: block; width:100%; padding-bottom: 20px; text-align: center;">
     <div style="display: block; width:50%; padding-right: 20px; float: left; text-align: center;">
@@ -80,9 +80,9 @@ $display = ($user_status == 'private' || $user_status == 'only-logged')? false :
         <?php /* ### LIST OF ASSOCIATED VIDEOS - CLICK THUMBNAIL IMAGE TO OPEN VIDEO-INFO-BLADE */ ?>
 
         <?php foreach($info['user_involvement_videos'] as $video){ //dd($video['user_association_tag_slug']);
-            preg_match("/^(?:http(?:s)?:\/\/)?(?:www\.)?(?:m\.)?(?:youtu\.be\/|youtube\.com\/(?:(?:watch)?\?(?:.*&)?v(?:i)?=|(?:embed|v|vi|user)\/))([^\?&\"'>]+)/", $video['url'], $matches);
-            $video_id = isset($matches[1])?$matches[1]:'';
-            ?>
+        preg_match("/^(?:http(?:s)?:\/\/)?(?:www\.)?(?:m\.)?(?:youtu\.be\/|youtube\.com\/(?:(?:watch)?\?(?:.*&)?v(?:i)?=|(?:embed|v|vi|user)\/))([^\?&\"'>]+)/", $video['url'], $matches);
+        $video_id = isset($matches[1])?$matches[1]:'';
+        ?>
         <div class="video_thumb active_link" onclick="openVideo('<?php echo $video['id'] ?>')">
             <img width=100% height=100% src="https://img.youtube.com/vi/<?php echo $video_id ?>/maxresdefault.jpg">
         </div><div style="clear: both;"></div>
@@ -112,7 +112,7 @@ $display = ($user_status == 'private' || $user_status == 'only-logged')? false :
         <div class="placedetails">
             <span class="pull-left" ><i class="flaticon-pin"></i> <?php echo $video['location'] ?> </span>
             <?php
-                $group_names=[];
+            $group_names=[];
             $vid_ids = explode(',',$video['group_names_ids']);
             foreach($vid_ids as $v){
                 $group_name_id = explode('-',$v);
@@ -122,7 +122,7 @@ $display = ($user_status == 'private' || $user_status == 'only-logged')? false :
             }
             ?>
             <span class="pull-right"><i class="fa fa-users"></i> <?php echo implode(', ', $group_names) ?>
-            <div style="clear: both;"></div>
+                <div style="clear: both;"></div>
         </div>
         <?php } ?>
     </div>
