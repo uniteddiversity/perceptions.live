@@ -4,18 +4,18 @@ $video_id = isset($matches[1])?$matches[1]:'';
 ?>
 <div style="padding-top: 20px; padding-bottom: 30px; width: 75%; text-align: center; margin: 0 auto;">
     <div style="display: block; width:100%; text-align: center;">
-        <div style="display: block; font-size: 14px; text-transform: uppercase; font-family: ralewaymedium; color: #6060D5;">
+        <div style="display: block; padding-bottom: 5px; font-size: 14px; text-transform: uppercase; font-family: ralewaymedium; color: #6060D5;">
             <i class="fa fa-tag"></i> {{$info['primary_subject_tag']}}
         </div>
         <div style="display: block; position: relative; width: 100%;">
             <h4>{{$info['title']}}</h4>
         </div>
-        <div style="display: block; width: 100%; padding-top:10px;">
+        <div style="display: block; width: 100%;">
           <div style="margin-top:25px; font-size: 14px; text-transform: uppercase; font-family: ralewaybold;">
             <span style="float: left;">
                 <?php if(isset($info->category)){ echo $info->category->name; }; ?>
             </span>
-            <span style="margin: auto; z-index: 5;">
+            <span style="margin-left: auto; margin-top: -15px; margin-right: auto; z-index: 5;">
                 <?php foreach($info->gciTags as $tag){
                     if(isset($tag->tag) && isset($tag->tag->tag))
                         echo '<span class="dot" data-toggle="tooltip" data-animation="true" data-placement="bottom" style="background-color: '.$tag->tag->tag_color.'" title="'.$tag->tag->tag.'" ></span>';
@@ -32,10 +32,8 @@ $video_id = isset($matches[1])?$matches[1]:'';
         <iframe style="width: 100%;height: 350px" src="<?php echo str_replace( 'watch?v=', 'embed/',$info['url']) ?>" frameborder="0" allowfullscreen></iframe>
     </div>
 
-
     <div class="placedetails">
-
-        <span class="pull-left" ><i class="fa fa-users"></i>
+        <span class="pull-left" style="width:50%; float: left;"><i class="fa fa-users"></i>
 
             <?php if(isset($info->groups) && count($info->groups) > 0){
             $datas = array();
@@ -53,7 +51,7 @@ $video_id = isset($matches[1])?$matches[1]:'';
             <?php }
             }; ?>
 </span>
-        <span class="pull-right"><i class="flaticon-avatar"></i> <span class="inactive_link"><?php foreach($info->videoProducer as $key => $users){ if(isset($info->videoProducer[$key])){ echo '<span class="inactive_link" onclick="openProfile(\''. $info->videoProducer[$key]->user->id .'\')">@'.$info->videoProducer[$key]->user->display_name.'</span>'; break; } }?></span></span>
+        <span class="pull-right" style="width:50%; float: right;><i class="flaticon-avatar"></i> <span class="inactive_link"><?php foreach($info->videoProducer as $key => $users){ if(isset($info->videoProducer[$key])){ echo '<span class="inactive_link" onclick="openProfile(\''. $info->videoProducer[$key]->user->id .'\')">@'.$info->videoProducer[$key]->user->display_name.'</span>'; break; } }?></span></span>
     </div>
     <div width="100%">
     <ul class="listmetas2">
@@ -70,9 +68,13 @@ $video_id = isset($matches[1])?$matches[1]:'';
         ?>
     </ul>
 </div>
-    <span style="display: block; width:100%; float: left; padding: 10px;"><p style="font-size: .9em; line-height: 1.3em;">
-         {{$info['brief_description']}}</p>
-     </span>
+    <div>
+    <span style="display: block; width:100%; float: left; padding: 10px;">
+        <p style="font-size: .9em; line-height: 1.3em;">
+         {{$info['brief_description']}}
+        </p>
+    </span>
+    </div>
     <div style="width:100%; display: block; padding 10px;">
         <div class="usersmetas2">
             <strong><i class="fa fa-user-circle"></i> Onscreen</strong>:

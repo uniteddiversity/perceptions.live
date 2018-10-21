@@ -85,4 +85,4 @@ div .tooltip{
 }
 .aboutgci { padding: 0.8em 1em; }
 * html a:hover { background: transparent; }
-.aboutgci {background: #D2C9F6; border: 0px; text-shadow: none; }
+.aboutgci {background: #D2C9F6; border: 0px; text-shadow: none; color: #000; }
