@@ -1,7 +1,8 @@
 <?php
 $display = ($user_status == 'private' || $user_status == 'only-logged')? false : true;
 ?>
-<div style="padding-top: 20px; padding-bottom: 30px; width: 60%; text-align: center; margin: 0 auto;"><?php //dd(date_create()) ?>
+<div class="modal-body">
+    <?php //dd(date_create()) ?>
     <div style="display: block; width:100%; text-align: left;">
 
         <div style="width: 30%; padding-right: 20px; border-right: 1px solid #e8ecec; display: block; text-align: center; float: left; margin-left: 5%;">

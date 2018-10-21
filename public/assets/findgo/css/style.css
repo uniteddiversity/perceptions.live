@@ -178,7 +178,7 @@ h1{font-size:36px}
 h2{font-size:32px}
 h3{font-size:28px}
 h4{font-size:24px}
-h5{font-size:20px}
+h5{font-size:18px line-height: .8em;}
 h6{font-size:16px}
 p{
     color:#666666;
@@ -344,7 +344,7 @@ button{
     -o-border-radius:2px;
     border-radius:2px;
 
-    background:black;
+    background:#30306a;
     border:0;
 
     cursor: pointer;
@@ -1618,15 +1618,23 @@ nav > ul > li.menu-item-has-children:hover > ul {
 .usersmetas2 {
     margin: auto;
     font-family: ralewayregular;
-    font-size: 12px;
+    font-size: 13px;
     color: #2B2B47;
     line-height: 16px;
-    padding-bottom: 5px;
-    padding-top: 5px;
+    padding-bottom: 7px;
 }
 .usersmetas2 strong {
     color: #6060D5;
     font-weight: 300;
+}
+
+.videosubject {
+    display: block;
+    padding-bottom: 5px;
+    font-size: 14px;
+    text-transform: uppercase;
+    font-family: ralewaymedium;
+    color: #6060D5;
 }
 
 .rated {
@@ -1645,6 +1653,23 @@ nav > ul > li.menu-item-has-children:hover > ul {
     margin-right: 9px;
     line-height: 16px;
 }
+
+.modal-dialog {
+    background: #fff;
+    width: 750px;
+    height: 75% padding-top: 50px;
+    margin: auto;
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+.modal-body {
+    padding-top: 40px;
+    width: 100%;
+    text-align: center;
+    margin: 0 auto;
+}
+
 .listmetas li:last-child {
     border: none;
 }

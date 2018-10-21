@@ -2,9 +2,9 @@
 preg_match("/^(?:http(?:s)?:\/\/)?(?:www\.)?(?:m\.)?(?:youtu\.be\/|youtube\.com\/(?:(?:watch)?\?(?:.*&)?v(?:i)?=|(?:embed|v|vi|user)\/))([^\?&\"'>]+)/", $info['url'], $matches);
 $video_id = isset($matches[1])?$matches[1]:'';
 ?>
-<div style="padding-top: 20px; padding-bottom: 30px; width: 75%; text-align: center; margin: 0 auto;">
+<div class="modal-body">
     <div style="display: block; width:100%; text-align: center;">
-        <div style="display: block; padding-bottom: 5px; font-size: 14px; text-transform: uppercase; font-family: ralewaymedium; color: #6060D5;">
+        <div class="videosubject">
             <i class="fa fa-tag"></i> {{$info['primary_subject_tag']}}
         </div>
         <div style="display: block; position: relative; width: 100%;">
@@ -22,7 +22,7 @@ $video_id = isset($matches[1])?$matches[1]:'';
                 }
                 ?>
             </span>
-            <span style="float: right;" >
+            <span style="float: right;" style="color:#cfcff2;">
                 <i class="flaticon-pin"></i> {{$info['location']}}
             </span>
         </div>
