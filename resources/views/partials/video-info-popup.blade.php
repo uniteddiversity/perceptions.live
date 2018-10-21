@@ -15,14 +15,14 @@ $video_id = isset($matches[1])?$matches[1]:'';
             <span style="float: left;">
                 <?php if(isset($info->category)){ echo $info->category->name; }; ?>
             </span>
-            <span style="margin-left: auto; margin-top: -15px; margin-right: auto; z-index: 5;">
+            <span style="margin-left: auto; margin-right: auto; z-index: 5;">
                 <?php foreach($info->gciTags as $tag){
                     if(isset($tag->tag) && isset($tag->tag->tag))
-                        echo '<span class="dot" data-toggle="tooltip" data-animation="true" data-placement="bottom" style="background-color: '.$tag->tag->tag_color.'" title="'.$tag->tag->tag.'" ></span>';
+                        echo '<span class="dot" data-toggle="tooltip" data-animation="true" data-placement="bottom" style="margin-top:-10px; text-transform: none; background-color: '.$tag->tag->tag_color.'" title="'.$tag->tag->tag.'" ></span>';
                 }
                 ?>
             </span>
-            <span style="float: right; color: #13054D;" >
+            <span style="float: right;" >
                 <i class="flaticon-pin"></i> {{$info['location']}}
             </span>
         </div>
@@ -33,7 +33,7 @@ $video_id = isset($matches[1])?$matches[1]:'';
     </div>
 
     <div class="placedetails">
-        <span class="pull-left" style="width:50%; float: left;"><i class="fa fa-users"></i>
+        <span class="pull-left"><i class="fa fa-users"></i>
 
             <?php if(isset($info->groups) && count($info->groups) > 0){
             $datas = array();
@@ -51,22 +51,25 @@ $video_id = isset($matches[1])?$matches[1]:'';
             <?php }
             }; ?>
 </span>
-        <span class="pull-right" style="width:50%; float: right;"><i class="flaticon-avatar"></i> <span class="inactive_link"><?php foreach($info->videoProducer as $key => $users){ if(isset($info->videoProducer[$key])){ echo '<span class="inactive_link" onclick="openProfile(\''. $info->videoProducer[$key]->user->id .'\')">@'.$info->videoProducer[$key]->user->display_name.'</span>'; break; } }?></span></span>
+        <span class="pull-right"><i class="flaticon-avatar"></i>
+
+                <?php foreach($info->videoProducer as $key => $users){ if(isset($info->videoProducer[$key])){ echo '<span class="inactive_link" onclick="openProfile(\''. $info->videoProducer[$key]->user->id .'\')">@'.$info->videoProducer[$key]->user->display_name.'</span>'; break; } }?>
+            </span>
     </div>
-    <div width="100%" style="padding-top: 10px;">
-    <ul class="listmetas2">
+    <div width="100%" style="padding-top: 20px;">
+    <span class="listmetas2">
         <?php
         $datas = [];
         foreach($info->sortingTags as $tag){
             if(isset($tag->content_tag_id) && isset($tag->tag->tag)){
-                $datas[] = '<li><a href="#" title=""><i class="fa fa-tag"></i> '.$tag->tag->tag.'</a></li>';
+                $datas[] = ' <strong><i class="fa fa-tag"></i> '.$tag->tag->tag.'</strong> ';
             }
         }
         if(!empty($datas)){
             echo implode(' ', $datas);
         }
         ?>
-    </ul>
+    </span>
 </div>
     <div>
     <span style="display: block; width:100%; float: left; padding: 10px;">
@@ -76,7 +79,7 @@ $video_id = isset($matches[1])?$matches[1]:'';
     </span>
     </div>
     <div style="width:100%; text-align: center; display: block;">
-        <strong>Credits</strong>
+        <h5>Credits</h5>
         <div class="usersmetas2">
             <strong><i class="fa fa-user-circle"></i> Onscreen</strong>:<br>
                 <?php if(isset($info->onScreen) && count($info->onScreen) > 0){
