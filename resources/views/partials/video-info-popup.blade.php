@@ -11,7 +11,7 @@ $video_id = isset($matches[1])?$matches[1]:'';
                 <i class="fa fa-tag"></i> {{$info['primary_subject_tag']}}
             </div>
         <div style="display: block; width: 100%; padding-top:10px;">
-            <span style="float: left; margin-top:-10px; font-size: 12px; text-transform: uppercase; font-family: ralewaybold;">
+            <span style="float: left; margin-top:25px; font-size: 12px; text-transform: uppercase; font-family: ralewaybold;">
                 <?php if(isset($info->category)){ echo $info->category->name; }; ?>
             </span>
             <span style="z-index: 5;">
