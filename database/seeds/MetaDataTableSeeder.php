@@ -27,7 +27,7 @@ class MetaDataTableSeeder extends Seeder
 //            [
 ////                'id' => '2',
 //                'type' => 'gci',
-//                'value' => 'Co-Creation'
+//                'value' => 'Co-Create, Collaborate'
 //            ],
 //            [
 ////                'id' => '2',
@@ -42,7 +42,7 @@ class MetaDataTableSeeder extends Seeder
 //            [
 ////                'id' => '2',
 //                'type' => 'gci',
-//                'value' => 'Reprogramming & Transformation'
+//                'value' => 'Smiles :) Files'
 //            ],
 //            [
 ////                'id' => '2',
@@ -52,7 +52,7 @@ class MetaDataTableSeeder extends Seeder
 //            [
 ////                'id' => '2',
 //                'type' => 'gci',
-//                'value' => 'Permaculture'
+//                'value' => 'Permaculture, Farming, Gardening'
 //            ],
 //            [
 ////                'id' => '2',
@@ -62,7 +62,7 @@ class MetaDataTableSeeder extends Seeder
 //            [
 ////                'id' => '2',
 //                'type' => 'gci',
-//                'value' => 'Reprogramming & Transformation'
+//                'value' => 'Healing, Reprogramming, Transformation'
 //            ],
 
 
@@ -100,7 +100,7 @@ class MetaDataTableSeeder extends Seeder
             [
 //                'id' => '106',
                 'type' => 'c-role',
-                'value' => 'Music/Audio Production'
+                'value' => 'Audio Production'
             ],
             [
 //                'id' => '107',

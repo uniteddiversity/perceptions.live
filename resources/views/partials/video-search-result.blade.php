@@ -11,7 +11,7 @@ $video_id = isset($matches[1])?$matches[1]:'';
 
 <div class="col-lg-12">
     <div class="places s2">
-        <div style="text-align: right;"><ul class="listmetas">
+        <div style="text-align: right; width: 100%; text-align: center;"><ul style="margin: auto;" class="listmetas">
             <li><a href="#" title=""><i class="fa fa-tag"></i> <?php echo $info['primary_subject_tag'] ?></a></li>
         </ul></div>
         <div class="placethumb active_link" onclick="openVideo('<?php echo $info['id'] ?>')" >

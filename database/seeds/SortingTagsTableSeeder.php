@@ -63,7 +63,7 @@ class SortingTagsTableSeeder extends Seeder
             ],
             [
                 'id' => '5',
-                'tag' => 'Co-Creation',
+                'tag' => 'Co-Creation & Collaboration',
                 'tag_color' => '#fcf3cf',
                 'description' => '',
                 'created_by' => '0',
@@ -96,7 +96,7 @@ class SortingTagsTableSeeder extends Seeder
             ],
             [
                 'id' => '8',
-                'tag' => 'Reprogramming & Transformation',
+                'tag' => 'Healing, Reprogramming, Transformation',
                 'tag_color' => '#ca6f1e',
                 'description' => '',
                 'created_by' => '0',
@@ -118,7 +118,7 @@ class SortingTagsTableSeeder extends Seeder
             ],
             [
                 'id' => '10',
-                'tag' => 'Permaculture',
+                'tag' => 'Permaculture, Farming, Gardening',
                 'tag_color' => '#1c2833',
                 'description' => '',
                 'created_by' => '0',
@@ -129,7 +129,7 @@ class SortingTagsTableSeeder extends Seeder
             ],
             [
                 'id' => '11',
-                'tag' => 'Supportive Economies',
+                'tag' => 'Supportive Societies',
                 'tag_color' => '#8e44ad',
                 'description' => '',
                 'created_by' => '0',
@@ -138,6 +138,17 @@ class SortingTagsTableSeeder extends Seeder
                 'tag_for' => 'gci',
                 'not_selectable' => '1'
             ]
+            [
+            'id' => '12',
+            'tag' => 'Instructors & Teachers',
+            'tag_color' => '#dcaa0d',
+            'description' => '',
+            'created_by' => '0',
+            'group_id' => '0',
+            'status' => '1',
+            'tag_for' => 'gci',
+            'not_selectable' => '1'
+        ]
         ]);
     }
 }
