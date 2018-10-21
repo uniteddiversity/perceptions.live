@@ -31,7 +31,6 @@ $video_id = isset($matches[1])?$matches[1]:'';
     <div>
         <iframe style="width: 100%;height: 350px" src="<?php echo str_replace( 'watch?v=', 'embed/',$info['url']) ?>" frameborder="0" allowfullscreen></iframe>
     </div>
-
     <div class="placedetails">
         <span class="pull-leftopen"><i class="fa fa-users"></i>
 
@@ -50,30 +49,15 @@ $video_id = isset($matches[1])?$matches[1]:'';
                             </div>
             <?php }
             }; ?>
-</span>
-        <span class="pull-right"><i class="flaticon-avatar"></i>
+        </span>
+        <span class="pull-right"><i class="fa fa-film"></i>
 
                 <?php foreach($info->videoProducer as $key => $users){ if(isset($info->videoProducer[$key])){ echo '<span class="inactive_link" onclick="openProfile(\''. $info->videoProducer[$key]->user->id .'\')">@'.$info->videoProducer[$key]->user->display_name.'</span>'; break; } }?>
             </span>
     </div>
 
-    <div width="100%" style="font-size: 11px; padding-top: 20px;">
-    <span class="listmetas2">
-        <?php
-        $datas = [];
-        foreach($info->sortingTags as $tag){
-            if(isset($tag->content_tag_id) && isset($tag->tag->tag)){
-                $datas[] = ' <strong><i class="fa fa-tag"></i> '.$tag->tag->tag.'</strong> ';
-            }
-        }
-        if(!empty($datas)){
-            echo implode(' ', $datas);
-        }
-        ?>
-    </span>
-</div>
     <div>
-    <span style="display: block; width:100%; float: left; padding: 10px;">
+    <span style="display: block; width:100%; float: left; padding-top: 20px;">
         <p style="font-size: .9em; line-height: 1.3em;">
          {{$info['brief_description']}}
         </p>
@@ -113,6 +97,21 @@ $video_id = isset($matches[1])?$matches[1]:'';
                     }
                 }
                 ?></div>
+    </div>
+    <div width="70%" style="font-size: 11px;">
+    <span class="listmetas2">
+        <?php
+        $datas = [];
+        foreach($info->sortingTags as $tag){
+            if(isset($tag->content_tag_id) && isset($tag->tag->tag)){
+                $datas[] = ' <strong><i class="fa fa-tag"></i> '.$tag->tag->tag.'</strong> ';
+            }
+        }
+        if(!empty($datas)){
+            echo implode(' ', $datas);
+        }
+        ?>
+    </span>
     </div>
 </div>
 <div style="clear: both;" ></div>
