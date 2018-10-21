@@ -1694,6 +1694,9 @@ nav > ul > li.menu-item-has-children:hover > ul {
     color: #b5b5b5;
 }
 
+.pull-leftopen{float: left; margin-right: .3em; width: 50%; text-align: left;}
+.pull-rightopen{float: right; margin-left: .3em; width: 50%; text-align: right;}
+
 .singleline {
     float: left;
     width: 100%;
