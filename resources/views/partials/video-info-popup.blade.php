@@ -7,11 +7,11 @@ $video_id = isset($matches[1])?$matches[1]:'';
         <div style="display: block; position: relative; width: 100%;">
             <h4>{{$info['title']}}</h4>
         </div>
-            <div style="display: block; font-size: 14px; margin-top: -20px; text-transform: uppercase; font-family: ralewaymedium; color: #6060D5;">
+            <div style="display: block; font-size: 14px; margin-top: 0px; text-transform: uppercase; font-family: ralewaymedium; color: #6060D5;">
                 <i class="fa fa-tag"></i> {{$info['primary_subject_tag']}}
             </div>
         <div style="display: block; width: 100%; padding-top:10px;">
-            <span style="float: left; font-size: 12px; text-transform: uppercase; font-family: ralewaybold;">
+            <span style="float: left; margin-top:-10px; font-size: 12px; text-transform: uppercase; font-family: ralewaybold;">
                 <?php if(isset($info->category)){ echo $info->category->name; }; ?>
             </span>
             <span style="z-index: 5;">
@@ -33,6 +33,7 @@ $video_id = isset($matches[1])?$matches[1]:'';
 
 
     <div class="placedetails">
+
 
         <?php /* ### div with class "groupdet' is only present if there is a group associated with video ### can we align icon with text? */ ?>
 
@@ -75,9 +76,8 @@ $video_id = isset($matches[1])?$matches[1]:'';
          {{$info['brief_description']}}</p>
      </span>
     <div style="width:100%; padding-left: 10px; padding-right: 10px;">
-        <div style="margin: auto;">
-        <ul class="usersmetas2">
-            <li style="display: block;"><a href="#" title=""><i class="fa fa-user-circle"></i> Onscreen</a> :
+        <div class="usersmetas2">
+            <strong><i class="fa fa-user-circle"></i> Onscreen</strong> :
                 <?php if(isset($info->onScreen) && count($info->onScreen) > 0){
                 $datas = array();
                 foreach($info->onScreen as $user){
@@ -93,8 +93,9 @@ $video_id = isset($matches[1])?$matches[1]:'';
                 </div>
                 <?php }
                 }; ?>
-            </li>
-            <li style="display: block;"><a href="#" title=""><i class="fa fa-user"></i> Co-Creators</a> :
+        </div>
+            <div class="usersmetas2">
+                <strong><i class="fa fa-user"></i> Co-Creators</strong> :
                 <?php if(isset($info->coCreators)){
 
                     $datas = array();
@@ -106,9 +107,7 @@ $video_id = isset($matches[1])?$matches[1]:'';
                         echo implode(', ', $datas);
                     }
                 }
-                ?></li>
-        </ul>
-        </div>
+                ?></div>
     </div>
 </div>
 <div style="clear: both;" ></div>
