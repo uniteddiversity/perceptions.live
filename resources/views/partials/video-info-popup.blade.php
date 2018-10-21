@@ -32,7 +32,7 @@ $video_id = isset($matches[1])?$matches[1]:'';
         <iframe style="width: 100%;height: 350px" src="<?php echo str_replace( 'watch?v=', 'embed/',$info['url']) ?>" frameborder="0" allowfullscreen></iframe>
     </div>
 
-    <div class="openplacedetails">
+    <div class="placedetails">
         <span class="pull-leftopen"><i class="fa fa-users"></i>
 
             <?php if(isset($info->groups) && count($info->groups) > 0){
