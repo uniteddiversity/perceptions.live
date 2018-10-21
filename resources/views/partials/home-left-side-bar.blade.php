@@ -13,8 +13,8 @@
         </select>
     </div>
     <div style="width=100%; padding-left: 20px; float: left;">
-        <span title="What are Greater Community Intentions?" style="background: rebeccapurple; background: -webkit-linear-gradient(left, orange , yellow, green, cyan, blue, violet); background: -o-linear-gradient(right, orange, yellow, green, cyan, blue, violet); background: -moz-linear-gradient(right, orange, yellow, green, cyan, blue, violet); background: linear-gradient(to right, orange , yellow, green, cyan, blue, violet);" class="dot">
-            <a class="tooltip2" href="#"><strong>?</strong></a>
+        <span title="What are Greater Community Intentions?" style="margin-top:-10px; background: rebeccapurple; background: -webkit-linear-gradient(left, orange , yellow, green, cyan, blue, violet); background: -o-linear-gradient(right, orange, yellow, green, cyan, blue, violet); background: -moz-linear-gradient(right, orange, yellow, green, cyan, blue, violet); background: linear-gradient(to right, orange , yellow, green, cyan, blue, violet);" class="dot">
+            <a class="tooltip2" href="#">?<span class="classic">This is just an example of what you can do using a CSS tooltip, feel free to get creative and produce your own!</span></a>
         </span>
         <?php
         foreach($gci_tags as $tag){
