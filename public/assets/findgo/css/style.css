@@ -178,7 +178,7 @@ h1{font-size:36px}
 h2{font-size:32px}
 h3{font-size:28px}
 h4{font-size:24px}
-h5{font-size:18px line-height: .8em;}
+h5{font-size:18px; line-height: .8em;}
 h6{font-size:16px}
 p{
     color:#666666;
@@ -1664,7 +1664,7 @@ nav > ul > li.menu-item-has-children:hover > ul {
 }
 
 .modal-body {
-    padding: 40px;
+    padding: 20px 40px 20px 40px;
     width: 100%;
     text-align: center;
     margin: 0 auto;
