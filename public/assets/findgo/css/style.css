@@ -1586,8 +1586,10 @@ nav > ul > li.menu-item-has-children:hover > ul {
 }
 
 .listmetas2 {
-    margin: 0;
-    z-index:0;
+    margin: auto;
+    z-index:4;
+    text-align: center;
+    display: block;
 }
 
 .listmetas2 li {

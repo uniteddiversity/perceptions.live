@@ -4,13 +4,13 @@ $video_id = isset($matches[1])?$matches[1]:'';
 ?>
 <div style="padding-top: 20px; padding-bottom: 30px; width: 60%; text-align: center; margin: 0 auto;">
     <div style="display: block; width:100%; text-align: center;">
-        <div style="display: block; position: relative; width: 100%;"><h4>{{$info['title']}}</h4></div>
+        <div style="display: block; position: relative; width: 100%;"><h4>{{$info['title']}}</h4><i class="fa fa-tag"></i> {{$info['primary_subject_tag']}}</div>
         <div style="display: block; width: 100%; margin-top:-10px;">
             <span style="float: left; font-size: 12px; text-transform: uppercase; font-family: ralewaybold;"><?php if(isset($info->category)){ echo $info->category->name; }; ?></span>
             <span style="z-index: 5;">
                 <?php foreach($info->gciTags as $tag){
                     if(isset($tag->tag) && isset($tag->tag->tag))
-                        echo '<span style="background-color: '.$tag->tag->tag_color.'" class="dot" data-toggle="tooltip" data-animation="true" data-placement="bottom" title="'.$tag['tag'].'" ></span>';
+                        echo '<span class="dot" data-toggle="tooltip" data-animation="true" data-placement="bottom" style="background-color: '.$tag->tag->tag_color.'" title="'.$tag['tag'].'" ></span>';
                 }
                 ?>
             </span>
@@ -27,35 +27,46 @@ $video_id = isset($matches[1])?$matches[1]:'';
 
         <?php /* ### div with class "groupdet' is only present if there is a group associated with video ### can we align icon with text? */ ?>
 
-        <div>
-            <span class="fa-align-center"><i class="fa fa-users"></i>
+        <span class="pull-left" ><i class="fa fa-users"></i>
 
-                <?php if(isset($info->groups) && count($info->groups) > 0){
-                $datas = array();
-                foreach($info->groups as $group){
-                    $datas[] = '@'.'<span class="inactive_link" onclick="openGroupProfile('.$group->group->id.')">'.$group->group->name.'</span>';
-                }
+            <?php if(isset($info->groups) && count($info->groups) > 0){
+            $datas = array();
+            foreach($info->groups as $group){
+                $datas[] = '@'.'<span class="inactive_link" onclick="openGroupProfile('.$group->group->id.')">'.$group->group->name.'</span>';
+            }
 
-                if(!empty($datas)){
-                ?>
-                <div>
+            if(!empty($datas)){
+            ?>
+            <div>
                     <?php
-                    echo implode(', ', $datas);
-                    ?>
+                echo implode(', ', $datas);
+                ?>
                             </div>
-                <?php }
-                }; ?>
-
-            </span>
-        </div>
-
-        <span class="pull-left" ><i class="fa fa-tag"></i> {{$info['primary_subject_tag']}}</span>
+            <?php }
+            }; ?>
+</span>
         <span class="pull-right"><i class="flaticon-avatar"></i> <span class="inactive_link"><?php foreach($info->videoProducer as $key => $users){ if(isset($info->videoProducer[$key])){ echo '<span class="inactive_link" onclick="openProfile(\''. $info->videoProducer[$key]->user->id .'\')">@'.$info->videoProducer[$key]->user->display_name.'</span>'; break; } }?></span></span>
     </div>
+    <div width="100%">
+    <ul class="listmetas2">
+        <?php
+        $datas = [];
+        foreach($info->sortingTags as $tag){
+            if(isset($tag->content_tag_id) && isset($tag->tag->tag)){
+                $datas[] = '<li><a href="#" title=""><i class="fa fa-tag"></i> '.$tag->tag->tag.'</a></li>';
+            }
+        }
+        if(!empty($datas)){
+            echo implode(' ', $datas);
+        }
+        ?>
+    </ul>
+</div>
     <span style="display: block; width:100%; float: left; padding: 10px;"><p style="font-size: .9em; line-height: 1.3em;">
          {{$info['brief_description']}}</p>
      </span>
-    <div style="padding-left: 10px; padding-right: 10px;">
+    <div style="width:100%; padding-left: 10px; padding-right: 10px;">
+        <div style="margin: auto;">
         <ul class="listmetas2">
             <?php
             $datas = [];
@@ -68,7 +79,8 @@ $video_id = isset($matches[1])?$matches[1]:'';
                 echo implode(' ', $datas);
             }
             ?>
-        </ul>
+        </ul></div>
+        <div style="margin: auto;">
         <ul class="usersmetas2">
             <li><a href="#" title=""><i class="fa fa-user-circle"></i> Onscreen</a> :
                 <?php if(isset($info->onScreen) && count($info->onScreen) > 0){
@@ -101,7 +113,7 @@ $video_id = isset($matches[1])?$matches[1]:'';
                 }
                 ?></li>
         </ul>
-
+        </div>
     </div>
 </div>
 <div style="clear: both;" ></div>

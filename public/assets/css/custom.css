@@ -57,11 +57,10 @@ div .tooltip{
     font-size: 12px;
 }
 .tooltip2 {
-    border-bottom: 1px dotted #000000; color: #000000; outline: none;
+    color: #ffffff; outline: none;
     cursor: help; text-decoration: none;
     position: relative;
     font-family: ralewaybold;
-    font-color: white;
     font-size: 1.2em;
 }
 .tooltip2 span {

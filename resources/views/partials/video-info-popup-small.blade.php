@@ -2,7 +2,7 @@
 preg_match("/^(?:http(?:s)?:\/\/)?(?:www\.)?(?:m\.)?(?:youtu\.be\/|youtube\.com\/(?:(?:watch)?\?(?:.*&)?v(?:i)?=|(?:embed|v|vi|user)\/))([^\?&\"'>]+)/", $info['url'], $matches);
 $video_id = isset($matches[1])?$matches[1]:'';
 ?>
-<a href="#" onclick="openVideo('<?php echo $info['id'] ?>')"><img width=150 height=75 src="https://img.youtube.com/vi/<?php echo $video_id ?>/mqdefault.jpg" border="0"></a>
+<a href="#" onclick="openVideo('<?php echo $info['id'] ?>')"><img width=200 height=100 src="https://img.youtube.com/vi/<?php echo $video_id ?>/mqdefault.jpg" border="0"></a>
 <div class="row" style="display: block;margin: 5px;">
     <div style="font-size: 16px;margin-top: 6px;margin-bottom: 6px;">{{$info['title']}}
         <span style="padding-bottom: 6px;float: right;">
