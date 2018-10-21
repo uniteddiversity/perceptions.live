@@ -100,7 +100,6 @@ $display = ($user_status == 'private' || $user_status == 'only-logged')? false :
     </div>
     <div style="display: block; float: right; width:40%; padding:0 40px 0 20px; text-align: center;">
         <div><h5><i class="fa fa-users"></i> Group Associations</h5></div>
-        <div class="placedetails">
         <?php
         $group_names=[];
         $vid_ids = explode(',',$video['group_names_ids']);
@@ -113,7 +112,7 @@ $display = ($user_status == 'private' || $user_status == 'only-logged')? false :
         ?>
         <span class="pull-right"><i class="fa fa-users"></i> <?php echo implode(', ', $group_names) ?>
             <div style="clear: both;"></div>
-        </span></div>
+        </span>
         <?php /* ### click group image to open group-info-blade */ ?>
 
         <?php foreach($info['group_involvement_videos'] as $video){ //dd($video['location']);
