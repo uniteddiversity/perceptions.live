@@ -1,9 +1,9 @@
 <div class="responsiveheader">
     <div class="rheader">
         <span><img src="/assets/findgo/images/ricon.png" alt="" /></span>
-    <?php  <div class="logo">
+    <?php /* <div class="logo">
             <a href="#" title=""><img src="/assets/findgo/images/live-prcptions-beta-small.png" width=100 height=388 alt="" /></a>
-        </div> ?>
+        </div> */ ?>
         <div class="extras">
             <span class="accountbtn"><i class="flaticon-avatar"></i></span>
         </div>
