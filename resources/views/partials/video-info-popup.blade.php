@@ -2,29 +2,30 @@
 preg_match("/^(?:http(?:s)?:\/\/)?(?:www\.)?(?:m\.)?(?:youtu\.be\/|youtube\.com\/(?:(?:watch)?\?(?:.*&)?v(?:i)?=|(?:embed|v|vi|user)\/))([^\?&\"'>]+)/", $info['url'], $matches);
 $video_id = isset($matches[1])?$matches[1]:'';
 ?>
-<div style="padding-top: 20px; padding-bottom: 30px; width: 60%; text-align: center; margin: 0 auto;">
+<div style="padding-top: 20px; padding-bottom: 30px; width: 75%; text-align: center; margin: 0 auto;">
     <div style="display: block; width:100%; text-align: center;">
+        <div style="display: block; font-size: 14px; text-transform: uppercase; font-family: ralewaymedium; color: #6060D5;">
+            <i class="fa fa-tag"></i> {{$info['primary_subject_tag']}}
+        </div>
         <div style="display: block; position: relative; width: 100%;">
             <h4>{{$info['title']}}</h4>
         </div>
-            <div style="display: block; font-size: 14px; margin-top: 0px; text-transform: uppercase; font-family: ralewaymedium; color: #6060D5;">
-                <i class="fa fa-tag"></i> {{$info['primary_subject_tag']}}
-            </div>
         <div style="display: block; width: 100%; padding-top:10px;">
-            <span style="float: left; margin-top:25px; font-size: 12px; text-transform: uppercase; font-family: ralewaybold;">
+          <div style="margin-top:25px; font-size: 14px; text-transform: uppercase; font-family: ralewaybold;">
+            <span style="float: left;">
                 <?php if(isset($info->category)){ echo $info->category->name; }; ?>
             </span>
-            <span style="z-index: 5;">
+            <span style="margin: auto; z-index: 5;">
                 <?php foreach($info->gciTags as $tag){
                     if(isset($tag->tag) && isset($tag->tag->tag))
                         echo '<span class="dot" data-toggle="tooltip" data-animation="true" data-placement="bottom" style="background-color: '.$tag->tag->tag_color.'" title="'.$tag->tag->tag.'" ></span>';
                 }
                 ?>
             </span>
-            <span style="margin-top: 10px; float: right; font-size: 12px;  font-family: ralewaymedium; color: #13054D;" >
+            <span style="float: right; color: #13054D;" >
                 <i class="flaticon-pin"></i> {{$info['location']}}
             </span>
-
+        </div>
         </div>
     </div>
     <div>
@@ -33,9 +34,6 @@ $video_id = isset($matches[1])?$matches[1]:'';
 
 
     <div class="placedetails">
-
-
-        <?php /* ### div with class "groupdet' is only present if there is a group associated with video ### can we align icon with text? */ ?>
 
         <span class="pull-left" ><i class="fa fa-users"></i>
 
@@ -75,9 +73,9 @@ $video_id = isset($matches[1])?$matches[1]:'';
     <span style="display: block; width:100%; float: left; padding: 10px;"><p style="font-size: .9em; line-height: 1.3em;">
          {{$info['brief_description']}}</p>
      </span>
-    <div style="width:100%; padding-left: 10px; padding-right: 10px;">
+    <div style="width:100%; display: block; padding 10px;">
         <div class="usersmetas2">
-            <strong><i class="fa fa-user-circle"></i> Onscreen</strong> :
+            <strong><i class="fa fa-user-circle"></i> Onscreen</strong>:
                 <?php if(isset($info->onScreen) && count($info->onScreen) > 0){
                 $datas = array();
                 foreach($info->onScreen as $user){
@@ -95,7 +93,7 @@ $video_id = isset($matches[1])?$matches[1]:'';
                 }; ?>
         </div>
             <div class="usersmetas2">
-                <strong><i class="fa fa-user"></i> Co-Creators</strong> :
+                <strong><i class="fa fa-user"></i> Co-Creators</strong>:
                 <?php if(isset($info->coCreators)){
 
                     $datas = array();
