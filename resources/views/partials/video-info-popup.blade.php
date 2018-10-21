@@ -32,8 +32,8 @@ $video_id = isset($matches[1])?$matches[1]:'';
         <iframe style="width: 100%;height: 350px" src="<?php echo str_replace( 'watch?v=', 'embed/',$info['url']) ?>" frameborder="0" allowfullscreen></iframe>
     </div>
 
-    <div class="placedetails" style="width:100%;">
-        <span class="pull-left"><i class="fa fa-users"></i>
+    <div class="openplacedetails" style="width:100%;">
+        <span class="pull-leftopen"><i class="fa fa-users"></i>
 
             <?php if(isset($info->groups) && count($info->groups) > 0){
             $datas = array();
@@ -51,7 +51,7 @@ $video_id = isset($matches[1])?$matches[1]:'';
             <?php }
             }; ?>
 </span>
-        <span class="pull-right"><i class="flaticon-avatar"></i>
+        <span class="pull-rightopen"><i class="flaticon-avatar"></i>
 
                 <?php foreach($info->videoProducer as $key => $users){ if(isset($info->videoProducer[$key])){ echo '<span class="inactive_link" onclick="openProfile(\''. $info->videoProducer[$key]->user->id .'\')">@'.$info->videoProducer[$key]->user->display_name.'</span>'; break; } }?>
             </span>

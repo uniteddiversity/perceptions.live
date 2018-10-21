@@ -40,9 +40,9 @@ $video_id = isset($matches[1])?$matches[1]:'';
                 <?php if(!empty($info['trim_description'])){ ?>
                     <span style="font-size: .8em;"><?php echo $info['trim_description'] ?>... [ <a href="#" onclick="openVideo('<?php echo $info['id'] ?>')"><i class="flaticon-eye"></i> more</a> ] </span>
                 <?php } ?>
-<div class="openplacedetails">
-    <span class="pull-leftopen" onclick="navigateOnMap('<?php echo $info['lat'] ?>','<?php echo $info['long'] ?>');" style="cursor: pointer;"><i class="flaticon-pin"></i> <?php echo $info['location'] ?></span>
-    <span class="pull-rightopen"><i class="flaticon-avatar"></i> <?php foreach($info->videoProducer as $key => $users){ if(isset($info->videoProducer[$key])){ echo '<span class="inactive_link" onclick="openProfile(\''. $info->videoProducer[$key]->user->id .'\')">@'.$info->videoProducer[$key]->user->display_name.'</span>'; break; } }?></span>
+<div class="placedetails">
+    <span class="pull-left" onclick="navigateOnMap('<?php echo $info['lat'] ?>','<?php echo $info['long'] ?>');" style="cursor: pointer;"><i class="flaticon-pin"></i> <?php echo $info['location'] ?></span>
+    <span class="pull-right"><i class="flaticon-avatar"></i> <?php foreach($info->videoProducer as $key => $users){ if(isset($info->videoProducer[$key])){ echo '<span class="inactive_link" onclick="openProfile(\''. $info->videoProducer[$key]->user->id .'\')">@'.$info->videoProducer[$key]->user->display_name.'</span>'; break; } }?></span>
 </div>
 </div>
         </div>
