@@ -11,7 +11,7 @@ $video_id = isset($matches[1])?$matches[1]:'';
 
 <div class="col-lg-12">
     <div class="places s2">
-        <div style="text-align: right; width: 100%; text-align: center;"><ul style="margin: auto;" class="listmetas">
+        <div style="width: 100%; text-align: center;"><ul class="listmetas">
             <li><a href="#" title=""><i class="fa fa-tag"></i> <?php echo $info['primary_subject_tag'] ?></a></li>
         </ul></div>
         <div class="placethumb active_link" onclick="openVideo('<?php echo $info['id'] ?>')" >
@@ -38,7 +38,7 @@ $video_id = isset($matches[1])?$matches[1]:'';
             </div>
         </div><div class="placeinfosdesc">
                 <?php if(!empty($info['trim_description'])){ ?>
-                    <span style="font-size: .8em;"><?php echo $info['trim_description'] ?>... [ <a href="#" onclick="openVideo('<?php echo $info['id'] ?>')">i class="flaticon-eye"></i> more</a> ] </span>
+                    <span style="font-size: .8em;"><?php echo $info['trim_description'] ?>... [ <a href="#" onclick="openVideo('<?php echo $info['id'] ?>')"><i class="flaticon-eye"></i> more</a> ] </span>
                 <?php } ?>
 <div class="placedetails">
     <span class="pull-left" onclick="navigateOnMap('<?php echo $info['lat'] ?>','<?php echo $info['long'] ?>');" style="cursor: pointer;"><i class="flaticon-pin"></i> <?php echo $info['location'] ?></span>
