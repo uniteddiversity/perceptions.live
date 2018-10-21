@@ -1592,6 +1592,11 @@ nav > ul > li.menu-item-has-children:hover > ul {
     display: block;
 }
 
+.listmetas2 strong {
+    color: #6060D5;
+    font-weight: 300;
+}
+
 .listmetas2 li {
     margin: 0;
     padding: 0px 3px !important;

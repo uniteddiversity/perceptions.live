@@ -18,7 +18,7 @@ $video_id = isset($matches[1])?$matches[1]:'';
             <span style="margin-left: auto; margin-right: auto; z-index: 5;">
                 <?php foreach($info->gciTags as $tag){
                     if(isset($tag->tag) && isset($tag->tag->tag))
-                        echo '<span class="dot" data-toggle="tooltip" data-animation="true" data-placement="bottom" style="margin-top:-10px; text-transform: none; background-color: '.$tag->tag->tag_color.'" title="'.$tag->tag->tag.'" ></span>';
+                        echo '<span class="dot" data-toggle="tooltip" data-animation="true" data-placement="top" style="margin-top:-10px; text-transform: none; background-color: '.$tag->tag->tag_color.'" title="'.$tag->tag->tag.'" ></span>';
                 }
                 ?>
             </span>
@@ -32,7 +32,7 @@ $video_id = isset($matches[1])?$matches[1]:'';
         <iframe style="width: 100%;height: 350px" src="<?php echo str_replace( 'watch?v=', 'embed/',$info['url']) ?>" frameborder="0" allowfullscreen></iframe>
     </div>
 
-    <div class="placedetails">
+    <div class="placedetails" style="width:100%;">
         <span class="pull-left"><i class="fa fa-users"></i>
 
             <?php if(isset($info->groups) && count($info->groups) > 0){

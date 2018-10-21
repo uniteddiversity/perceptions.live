@@ -31,14 +31,14 @@ $video_id = isset($matches[1])?$matches[1]:'';
                     foreach($tags as $tag){
                         $tag_name_n_color = explode('-', $tag);
                         $tag_id = isset($tag_name_n_color[1])? $tag_name_n_color[1] : '0';
-                        echo '<span onclick="searchByTag(\''.$tag_id.'\')" style="background-color: '.$tag_name_n_color[0].'" class="dot-small"></span>';
+                        echo '<span data-toggle="tooltip" data-animation="true" data-placement="right" title="'.$tag->tag->tag.'"onclick="searchByTag(\''.$tag_id.'\')" style="background-color: '.$tag_name_n_color[0].'" class="dot-small"></span>';
                     } ?>
                 </span>
 		<span style="padding-bottom: 6px;"><small><i class="fa fa-calendar"></i> <em><?php echo date('d F Y',strtotime($info['created_at'])) ?></em></small></span>
             </div>
         </div><div class="placeinfosdesc">
                 <?php if(!empty($info['trim_description'])){ ?>
-                    <span style="font-size: .8em;"><?php echo $info['trim_description'] ?> <div>[ <a href="#" onclick="openVideo('<?php echo $info['id'] ?>')">more...</a> ]</div> </span>
+                    <span style="font-size: .8em;"><?php echo $info['trim_description'] ?>... [ <a href="#" onclick="openVideo('<?php echo $info['id'] ?>')">i class="flaticon-eye"></i> more</a> ] </span>
                 <?php } ?>
 <div class="placedetails">
     <span class="pull-left" onclick="navigateOnMap('<?php echo $info['lat'] ?>','<?php echo $info['long'] ?>');" style="cursor: pointer;"><i class="flaticon-pin"></i> <?php echo $info['location'] ?></span>
