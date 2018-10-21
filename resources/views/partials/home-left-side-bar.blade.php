@@ -14,7 +14,7 @@
     </div>
     <div style="width=100%; padding-left: 20px; float: left;">
         <span title="What are Greater Community Intentions?" style="background: rebeccapurple; background: -webkit-linear-gradient(left, orange , yellow, green, cyan, blue, violet); background: -o-linear-gradient(right, orange, yellow, green, cyan, blue, violet); background: -moz-linear-gradient(right, orange, yellow, green, cyan, blue, violet); background: linear-gradient(to right, orange , yellow, green, cyan, blue, violet);" class="dot">
-            <a class="tooltip2" href="#"><strong>?</strong><span class="aboutGCI">Use the <em>Greater Community Intentions</em> dots to sort through the different styles of people coming together around the world.</span></a>
+            <a class="tooltip2" href="#"><strong>?</strong></a>
         </span>
         <?php
         foreach($gci_tags as $tag){
