@@ -12,8 +12,8 @@
             @endforeach
         </select>
     </div>
-    <div style="font-family: ralewaybold; font-color: white; font-size: 1em; width: 100%; padding-left: 14px; float: left;">
-        <span title="What are Greater Community Intentions?" style="margin-top:-10px; background: rebeccapurple; background: -webkit-linear-gradient(left, orange , yellow, green, cyan, blue, violet); background: -o-linear-gradient(right, orange, yellow, green, cyan, blue, violet); background: -moz-linear-gradient(right, orange, yellow, green, cyan, blue, violet); background: linear-gradient(to right, orange , yellow, green, cyan, blue, violet);" class="dot">
+    <div style="width: 100%; padding-left: 14px; float: left;">
+        <span title="What are Greater Community Intentions?" style="margin-top:15px; background: rebeccapurple; background: -webkit-linear-gradient(left, orange , yellow, green, cyan, blue, violet); background: -o-linear-gradient(right, orange, yellow, green, cyan, blue, violet); background: -moz-linear-gradient(right, orange, yellow, green, cyan, blue, violet); background: linear-gradient(to right, orange , yellow, green, cyan, blue, violet);" class="dot">
            <a class="tooltip2" href="#"> ? <span class="aboutgci"><em>Greater Community Intentions</em> Use the colored dots to sort through the different styles of community gathering around the world.</span></a>
         </span>
         <?php

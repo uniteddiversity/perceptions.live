@@ -60,6 +60,9 @@ div .tooltip{
     border-bottom: 1px dotted #000000; color: #000000; outline: none;
     cursor: help; text-decoration: none;
     position: relative;
+    font-family: ralewaybold;
+    font-color: white;
+    font-size: 1.2em;
 }
 .tooltip2 span {
     margin-left: -999em;
