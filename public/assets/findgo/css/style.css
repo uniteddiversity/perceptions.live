@@ -1670,6 +1670,18 @@ nav > ul > li.menu-item-has-children:hover > ul {
     float: left;
     color: #b5b5b5;
 }
+.openplacedetails span {
+    font-size: 13px;
+    color: #8d8d8d;
+    padding: 0px 0;
+    line-height: 25px;
+}
+.openplacedetails span i {
+    font-size: 21px;
+    margin-right: 8px;
+    float: left;
+    color: #b5b5b5;
+}
 
 .singleline {
     float: left;
