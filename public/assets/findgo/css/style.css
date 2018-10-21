@@ -136,8 +136,8 @@ b, u, i, center,
 dl, dt, dd, ol, ul, li,
 fieldset, form, label, legend,
 table, caption, tbody, tfoot, thead, tr, th, td,
-article, aside, canvas, details, embed, 
-figure, figcaption, footer, header, hgroup, 
+article, aside, canvas, details, embed,
+figure, figcaption, footer, header, hgroup,
 menu, nav, output, ruby, section, summary,
 time, mark, audio, video{
     margin:0;
@@ -148,7 +148,7 @@ time, mark, audio, video{
     vertical-align:baseline;
 }
 /* HTML5 display-role reset for older browsers */
-article, aside, details, figcaption, figure, 
+article, aside, details, figcaption, figure,
 footer, header, hgroup, menu, nav, section{display:block}
 body{line-height:1.2}
 blockquote, q{quotes:none}
@@ -167,7 +167,7 @@ body{
     font-family:'questrial', sans-serif;
     overflow-x:hidden;
     position:relative;
-    
+
 }
 body *{outline:none !important;}
 h1, h2, h3, h4, h5, h6{
@@ -235,10 +235,10 @@ section{
     padding-bottom: 30px;
 }
 .row.no-gape{
-  margin: 0;
+    margin: 0;
 }
 .row.no-gape > div{
-  padding: 0;
+    padding: 0;
 }
 html.no-scroll {
     overflow-y: hidden;
@@ -337,7 +337,7 @@ button{
     font-size:18px;
     padding:8px 30px;
     color:#FFF;
-    
+
     -webkit-border-radius:2px;
     -moz-border-radius:2px;
     -ms-border-radius:2px;
@@ -346,7 +346,7 @@ button{
 
     background:black;
     border:0;
-    
+
     cursor: pointer;
 }
 
@@ -367,7 +367,7 @@ button{
     text-align: center;
     padding: 3px !important;
     margin: 0 7px !important;
-    
+
     -webkit-border-radius: 50%;
     -moz-border-radius: 50%;
     -ms-border-radius: 50%;
@@ -378,7 +378,7 @@ button{
 }
 .slick-dotted .slick-dots > li button {
     background: #28b8dc none repeat scroll 0 0;
-    
+
     -webkit-border-radius: 50%;
     -moz-border-radius: 50%;
     -ms-border-radius: 50%;
@@ -401,7 +401,7 @@ button{
 .slick-prev, .slick-next {
     background: #ffffff none repeat scroll 0 0;
     border: medium none;
-    
+
     -webkit-border-radius: 50%;
     -moz-border-radius: 50%;
     -ms-border-radius: 50%;
@@ -420,7 +420,7 @@ button{
     position: absolute;
     bottom: -63px;
     width: 40px;
-    
+
     -webkit-box-shadow: 0px 0px 5px rgba(0,0,0,0.05);
     -moz-box-shadow: 0px 0px 5px rgba(0,0,0,0.05);
     -ms-box-shadow: 0px 0px 5px rgba(0,0,0,0.05);
@@ -435,8 +435,8 @@ button{
 .slick-prev {left: 50%; margin-left: -55px;}
 [dir='rtl'] .slick-prev {right: -25px; left: auto; }
 .slick-prev::before {content: "\f104"; }
-[dir='rtl'] .slick-prev:before {content: '\f104’'; } 
-.slick-next {margin-right: -55px; left: auto;right: 50%;} 
+[dir='rtl'] .slick-prev:before {content: '\f104’'; }
+.slick-next {margin-right: -55px; left: auto;right: 50%;}
 [dir='rtl'] .slick-next {right: auto; left: -25px; }
 .slick-next:before {content: '\f105'; }
 [dir='rtl'] .slick-next:before {content: '\f105'; }
@@ -445,15 +445,15 @@ button{
     display: block;
     cursor: all-scroll;
     -moz-box-sizing: border-box;
-         box-sizing: border-box;
+    box-sizing: border-box;
     -webkit-user-select: none;
-       -moz-user-select: none;
-        -ms-user-select: none;
-            user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
     -webkit-touch-callout: none;
     -khtml-user-select: none;
     -ms-touch-action: pan-y;
-        touch-action: pan-y;
+    touch-action: pan-y;
     -webkit-tap-highlight-color: transparent;
 }
 .slick-list {position: relative; display: block; overflow: hidden; margin: 0; padding: 0; }
@@ -462,10 +462,10 @@ button{
 .slick-slider .slick-track,
 .slick-slider .slick-list {
     -webkit-transform: translate3d(0, 0, 0);
-       -moz-transform: translate3d(0, 0, 0);
-        -ms-transform: translate3d(0, 0, 0);
-         -o-transform: translate3d(0, 0, 0);
-            transform: translate3d(0, 0, 0);
+    -moz-transform: translate3d(0, 0, 0);
+    -ms-transform: translate3d(0, 0, 0);
+    -o-transform: translate3d(0, 0, 0);
+    transform: translate3d(0, 0, 0);
 }
 .slick-track {position: relative; top: 0; left: 0; display: block; }
 .slick-track:before, .slick-track:after {display: table; content: ''; }
@@ -496,7 +496,7 @@ button{
     left: 50%;
     position: absolute;
     top: 50%;
-    
+
     -webkit-transform: translateX(-50%) translateY(-50%);
     -moz-transform: translateX(-50%) translateY(-50%);
     -ms-transform: translateX(-50%) translateY(-50%);
@@ -508,7 +508,7 @@ button{
     cursor: pointer;
     display: inline-block;
     font-size: 17px;
-    
+
     margin-top: 30px;
     text-decoration: underline;
 }
@@ -522,115 +522,115 @@ header.sticktop {
 /* Basic styles */
 input[type="checkbox"],
 input[type="radio"] {
-  position: absolute;
-  opacity: 0;
-  z-index: -1;
-  margin: 0;
+    position: absolute;
+    opacity: 0;
+    z-index: -1;
+    margin: 0;
 }
 label {
-  position: relative;
-  display: inline-block;
-  padding: 0 0 0 33px;
-  height: auto;
-  line-height: 25px;
-  cursor: pointer;
+    position: relative;
+    display: inline-block;
+    padding: 0 0 0 33px;
+    height: auto;
+    line-height: 25px;
+    cursor: pointer;
 }
 label::before,
 label::after {
-  position: absolute;
-  top: 3px;
-  left: 0;
-  display: block;
-  width: 20px !important;
-  height: 20px !important;
+    position: absolute;
+    top: 3px;
+    left: 0;
+    display: block;
+    width: 20px !important;
+    height: 20px !important;
 }
 label::before {
-  content: " ";
-  
-  -webkit-border-radius: 0px;
-  -moz-border-radius: 0px;
-  -ms-border-radius: 0px;
-  -o-border-radius: 0px;
-  border-radius: 0px;
-  background: #ffffff;
-  border-radius: 0px;
-  border: 1px solid #e8ecec;
+    content: " ";
+
+    -webkit-border-radius: 0px;
+    -moz-border-radius: 0px;
+    -ms-border-radius: 0px;
+    -o-border-radius: 0px;
+    border-radius: 0px;
+    background: #ffffff;
+    border-radius: 0px;
+    border: 1px solid #e8ecec;
 }
 /* Checkbox */
 input[type="checkbox"] + label::after {
-  content: "";
-  width: 10px !important;
-  height: 10px !important;
-  background: #28b8dc;
-  left: 5px;
-  top: 8px;
-  
-  -webkit-border-radius: 2px;
-  -moz-border-radius: 2px;
-  -ms-border-radius: 2px;
-  -o-border-radius: 2px;
-  border-radius: 2px;
+    content: "";
+    width: 10px !important;
+    height: 10px !important;
+    background: #28b8dc;
+    left: 5px;
+    top: 8px;
+
+    -webkit-border-radius: 2px;
+    -moz-border-radius: 2px;
+    -ms-border-radius: 2px;
+    -o-border-radius: 2px;
+    border-radius: 2px;
 
 }
 /* Radio */
 input[type="radio"] + label::before {
-  -webkit-border-radius: 50%;
-  -moz-border-radius: 50%;
-  -ms-border-radius: 50%;
-  -o-border-radius: 50%;
-  border-radius: 50%;
+    -webkit-border-radius: 50%;
+    -moz-border-radius: 50%;
+    -ms-border-radius: 50%;
+    -o-border-radius: 50%;
+    border-radius: 50%;
 }
 input[type=radio] + label::after {
-  content: " ";
-  top: 7px;
-  left: 4px;
-  width: 6px !important;
-  height: 6px !important;
-  background: #fff;
-  border: 3px solid #32328e;
-  
-  -webkit-border-radius: 50%;
-  -moz-border-radius: 50%;
-  -ms-border-radius: 50%;
-  -o-border-radius: 50%;
-  border-radius: 50%;
+    content: " ";
+    top: 7px;
+    left: 4px;
+    width: 6px !important;
+    height: 6px !important;
+    background: #fff;
+    border: 3px solid #32328e;
+
+    -webkit-border-radius: 50%;
+    -moz-border-radius: 50%;
+    -ms-border-radius: 50%;
+    -o-border-radius: 50%;
+    border-radius: 50%;
 }
 /* :checked */
 input[type="checkbox"]:checked + label::before,
 input[type="radio"]:checked + label::before {
-  background: #ffffff;
-  border-color: #e8ecec;
+    background: #ffffff;
+    border-color: #e8ecec;
 }
 input[type="checkbox"] + label::after,
 input[type=radio] + label::after {
-  -webkit-transform: scale(0);
-  -moz-transform: scale(0);
-  -ms-transform: scale(0);
-  -o-transform: scale(0);
-  transform: scale(0);
+    -webkit-transform: scale(0);
+    -moz-transform: scale(0);
+    -ms-transform: scale(0);
+    -o-transform: scale(0);
+    transform: scale(0);
 }
 input[type="checkbox"]:checked + label::after,
 input[type=radio]:checked + label::after {
-  -webkit-transform: scale(1);
-  -moz-transform: scale(1);
-  -ms-transform: scale(1);
-  -o-transform: scale(1);
-  transform: scale(1);
+    -webkit-transform: scale(1);
+    -moz-transform: scale(1);
+    -ms-transform: scale(1);
+    -o-transform: scale(1);
+    transform: scale(1);
 }
 /* Transition */
 label::before,
 label::after {
-  -webkit-transition: .25s all ease;
-  -moz-transition: .25s all ease;
-  -ms-transition: .25s all ease;
-  -o-transition: .25s all ease;
-  transition: .25s all ease;
+    -webkit-transition: .25s all ease;
+    -moz-transition: .25s all ease;
+    -ms-transition: .25s all ease;
+    -o-transition: .25s all ease;
+    transition: .25s all ease;
 }
 
 /* End Default Settings */
 
 header{
-    
+
     border-bottom: 1px solid rgba(255,255,255,0.2);
     padding: 0 70px;
     float: left;
@@ -693,7 +693,7 @@ nav > ul > li.menu-item-has-children > a::before {
 .extras > a {
     float: left;
     border: 1px solid #ffffff;
-    
+
     -webkit-border-radius: 2px;
     -moz-border-radius: 2px;
     -ms-border-radius: 2px;
@@ -738,7 +738,7 @@ nav > ul > li.menu-item-has-children ul {
     left: 0;
     top: 100%;
     background: #ffffff;
-    
+
     -webkit-border-radius: 2px;
     -moz-border-radius: 2px;
     -ms-border-radius: 2px;
@@ -770,7 +770,7 @@ nav > ul > li.menu-item-has-children ul li a {
     font-size: 13px;
     color: #8d8d8d;
     font-family: ralewayregular;
-    
+
     position: relative;
 }
 nav > ul > li.menu-item-has-children ul li:hover > a {
@@ -805,7 +805,7 @@ nav > ul > li.menu-item-has-children ul li.menu-item-has-children > ul {
     left: 100%;
     top: 0;
     margin: 0;
-    
+
     -webkit-box-shadow: 0px 0px 40px rgba(0,0,0,0.05);
     -moz-box-shadow: 0px 0px 40px rgba(0,0,0,0.05);
     -ms-box-shadow: 0px 0px 40px rgba(0,0,0,0.05);
@@ -850,7 +850,7 @@ nav > ul > li.menu-item-has-children:hover > ul {
     background: #ffffff;
     margin: 150px 0;
     margin-left: -225px;
-    
+
     -webkit-border-radius: 2px;
     -moz-border-radius: 2px;
     -ms-border-radius: 2px;
@@ -863,7 +863,7 @@ nav > ul > li.menu-item-has-children:hover > ul {
     width: 50px;
     height: 50px;
     background: #fb3640;
-    
+
     -webkit-border-radius: 2px;
     -moz-border-radius: 2px;
     -ms-border-radius: 2px;
@@ -925,7 +925,7 @@ nav > ul > li.menu-item-has-children:hover > ul {
     font-family: ralewayregular;
     color: #242423;
     margin: 0;
-        margin-bottom: 0px;
+    margin-bottom: 0px;
     margin-bottom: 8px;
 }
 .accountformfield label::before {
@@ -939,8 +939,8 @@ nav > ul > li.menu-item-has-children:hover > ul {
     border: 1px solid #e8ecec;
     height: 50px;
     font-family: ralewayregular;
-    
-    
+
+
     -webkit-border-radius: 2px;
     -moz-border-radius: 2px;
     -ms-border-radius: 2px;
@@ -967,9 +967,9 @@ nav > ul > li.menu-item-has-children:hover > ul {
     font-family: ralewayregular;
     font-size: 17px;
     background: #28b8dc;
-    
+
     padding: 15px 0;
-    
+
     -webkit-border-radius: 2px;
     -moz-border-radius: 2px;
     -ms-border-radius: 2px;
@@ -1003,7 +1003,7 @@ nav > ul > li.menu-item-has-children:hover > ul {
     color: #ffffff;
     background: #333333;
     line-height: 40px;
-    
+
     -webkit-border-radius: 50%;
     -moz-border-radius: 50%;
     -ms-border-radius: 50%;
@@ -1029,7 +1029,7 @@ nav > ul > li.menu-item-has-children:hover > ul {
     border-radius: 2px 0px 0px 0px;
 }
 .ctabs.group li:last-child a {
-    
+
     -webkit-border-radius: 0px 2px 0px 0px;
     -moz-border-radius: 0px 2px 0px 0px;
     -ms-border-radius: 0px 2px 0px 0px;
@@ -1046,7 +1046,7 @@ nav > ul > li.menu-item-has-children:hover > ul {
     line-height: 24px;
     padding-right: 50px;
     margin: 3px 0;
-        margin-bottom: 3px;
+    margin-bottom: 3px;
     margin-bottom: 6px;
 }
 .terms a {
@@ -1057,7 +1057,7 @@ nav > ul > li.menu-item-has-children:hover > ul {
     width: 50px;
     height: 50px;
     background: #fb3640;
-    
+
     -webkit-border-radius: 2px;
     -moz-border-radius: 2px;
     -ms-border-radius: 2px;
@@ -1080,7 +1080,7 @@ nav > ul > li.menu-item-has-children:hover > ul {
     line-height: 44px;
     font-weight: lighter;
     font-family: ralewayregular;
-    
+
     -webkit-transform: rotate(45deg);
     -moz-transform: rotate(45deg);
     -ms-transform: rotate(45deg);
@@ -1103,7 +1103,7 @@ nav > ul > li.menu-item-has-children:hover > ul {
     font-size: 45px;
     color: #ffffff;
     font-weight: bold;
-    
+
     margin: 0;
 }
 .listingsf > p {
@@ -1114,14 +1114,14 @@ nav > ul > li.menu-item-has-children:hover > ul {
     color: #ffffff;
     font-weight: lighter;
     margin: 0;
-        margin-top: 0px;
+    margin-top: 0px;
     margin-top: 13px;
 }
 .listingform {
     float: left;
     width: 100%;
     background: #ffffff;
-    
+
     -webkit-border-radius: 2px;
     -moz-border-radius: 2px;
     -ms-border-radius: 2px;
@@ -1188,7 +1188,7 @@ nav > ul > li.menu-item-has-children:hover > ul {
     font-family: ralewayregular;
     font-size: 13px;
     color: #67676f;
-    
+
 
 }
 .dd-option label {
@@ -1205,7 +1205,7 @@ nav > ul > li.menu-item-has-children:hover > ul {
 }
 .dd-selected-text {
     padding: 0;
-        padding-left: 0px;
+    padding-left: 0px;
     line-height: 35px !important;
     padding-left: 10px;
 }
@@ -1246,7 +1246,7 @@ nav > ul > li.menu-item-has-children:hover > ul {
     float: left;
     width: 100%;
     background: #28b8dc;
-    
+
     -webkit-border-radius: 2px;
     -moz-border-radius: 2px;
     -ms-border-radius: 2px;
@@ -1256,7 +1256,7 @@ nav > ul > li.menu-item-has-children:hover > ul {
     font-family: ralewayregular;
     font-size: 17px;
     font-weight: 100;
-    
+
     padding: 14px 34px;
 }
 .fieldbtn button i {
@@ -1295,7 +1295,7 @@ nav > ul > li.menu-item-has-children:hover > ul {
     color: #ffffff;
     padding: 6px 16px;
     border: 1px solid #ffffff;
-    
+
     -webkit-border-radius: 2px;
     -moz-border-radius: 2px;
     -ms-border-radius: 2px;
@@ -1317,7 +1317,7 @@ nav > ul > li.menu-item-has-children:hover > ul {
     font-size: 30px;
     color: #242423;
     font-weight: bold;
-    
+
     margin-bottom: 17px;
 }
 .heading span {
@@ -1356,7 +1356,7 @@ nav > ul > li.menu-item-has-children:hover > ul {
     background: -ms-linear-gradient(top,  rgba(0,0,0,0.65) 0%,rgba(0,0,0,0) 100%);
     background: linear-gradient(to bottom,  rgba(0,0,0,0.65) 0%,rgba(0,0,0,0) 100%);
     filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#a6000000', endColorstr='#00000000',GradientType=0 );
-    
+
     content: "";
 
     position: absolute;
@@ -1403,7 +1403,7 @@ nav > ul > li.menu-item-has-children:hover > ul {
     color: #ffffff;
     line-height: 52px;
     font-size: 32px;
-    
+
     -webkit-border-radius: 50%;
     -moz-border-radius: 50%;
     -ms-border-radius: 50%;
@@ -1486,13 +1486,13 @@ nav > ul > li.menu-item-has-children:hover > ul {
     font-size: 26px;
     line-height: 40px;
     cursor: pointer;
-	text-align: center;
+    text-align: center;
 }
 .watchicon2 span i {
     font-size: 21px;
     float: left;
     margin-right: 10px;
-	margin-top:-40px;
+    margin-top:-40px;
 }
 
 .placeoptions {
@@ -1502,7 +1502,7 @@ nav > ul > li.menu-item-has-children:hover > ul {
     width: 100%;
     z-index: 0;
     padding: 0 25px;
-        padding-bottom: 0px;
+    padding-bottom: 0px;
     padding-bottom: 15px;
     z-index: 1;
 }
@@ -1541,7 +1541,7 @@ nav > ul > li.menu-item-has-children:hover > ul {
     border: 0px solid #e8ecec;
     margin-top: -1px;
     padding-left: 10px;
-    padding-bottom: 5px;
+    padding-bottom: 0px;
     padding-top: 5px;
 }
 .placeinfosdesc > span {
@@ -1564,7 +1564,7 @@ nav > ul > li.menu-item-has-children:hover > ul {
     float: right;
     width: 100%;
     margin: 0;
-    padding-left: 40%;
+    padding-left: 3%;
     margin-top: 2px;
 }
 .listmetas li {
@@ -1636,7 +1636,7 @@ nav > ul > li.menu-item-has-children:hover > ul {
     background: #d6c3ee;
     padding: 2px 7px;
     font-size: 13px;
-    
+
     -webkit-border-radius: 2px;
     -moz-border-radius: 2px;
     -ms-border-radius: 2px;
@@ -1715,7 +1715,7 @@ nav > ul > li.menu-item-has-children:hover > ul {
     font-size: 20px;
     font-weight: bold;
     color: #212121;
-   
+
     margin-top: 16px;
     margin-bottom: 12px;
 }
@@ -1726,7 +1726,7 @@ nav > ul > li.menu-item-has-children:hover > ul {
     color: #8d8d8d;
     font-family: ralewayregular;
     margin: 0;
-        margin-top: 0px;
+    margin-top: 0px;
     line-height: 26px;
     padding: 0 16px;
     margin-top: 5px;
@@ -1799,7 +1799,7 @@ nav > ul > li.menu-item-has-children:hover > ul {
     pointer-events: auto;
 }
 .cities:hover {
-    
+
     -webkit-transform: scale(1.1);
     -moz-transform: scale(1.1);
     -ms-transform: scale(1.1);
@@ -1813,7 +1813,7 @@ nav > ul > li.menu-item-has-children:hover > ul {
     -ms-box-shadow: 0px 0px 10px rgba(0,0,0,0.1);
     -o-box-shadow: 0px 0px 10px rgba(0,0,0,0.1);
     box-shadow: 0px 0px 10px rgba(0,0,0,0.1);
-    
+
     -webkit-border-radius: 2px;
     -moz-border-radius: 2px;
     -ms-border-radius: 2px;
@@ -1823,7 +1823,7 @@ nav > ul > li.menu-item-has-children:hover > ul {
     overflow: hidden;
 }
 .cities:hover img {
-    
+
     -webkit-border-radius: 2px;
     -moz-border-radius: 2px;
     -ms-border-radius: 2px;
@@ -1847,7 +1847,7 @@ nav > ul > li.menu-item-has-children:hover > ul {
     height: 40px;
     top: 50%;
     margin-top: -20px;
-    
+
     -webkit-border-radius: 50%;
     -moz-border-radius: 50%;
     -ms-border-radius: 50%;
@@ -1857,7 +1857,7 @@ nav > ul > li.menu-item-has-children:hover > ul {
     margin-left: -10px;
     background: #ffffff;
     z-index: 11;
-    
+
     -webkit-box-shadow: 0px 0px 30px rgba(0,0,0,0.1);
     -moz-box-shadow: 0px 0px 30px rgba(0,0,0,0.1);
     -ms-box-shadow: 0px 0px 30px rgba(0,0,0,0.1);
@@ -1919,7 +1919,7 @@ nav > ul > li.menu-item-has-children:hover > ul {
     float: left;
     width: 100%;
     margin: 0;
-        margin-bottom: 0px;
+    margin-bottom: 0px;
     font-family: ralewayregular;
     font-size: 20px;
     font-weight: bold;
@@ -1947,7 +1947,7 @@ nav > ul > li.menu-item-has-children:hover > ul {
 .tes-nav img {
     float: none;
     display: inline-block;
-    
+
     -webkit-border-radius: 50%;
     -moz-border-radius: 50%;
     -ms-border-radius: 50%;
@@ -1975,7 +1975,7 @@ nav > ul > li.menu-item-has-children:hover > ul {
     margin-top: 30px;
     position: relative;
     overflow: hidden;
-    
+
     -webkit-border-radius: 2px;
     -moz-border-radius: 2px;
     -ms-border-radius: 2px;
@@ -1998,7 +1998,7 @@ nav > ul > li.menu-item-has-children:hover > ul {
     left: 30px;
     top: 30px;
     background: #fb3640;
-    
+
     -webkit-border-radius: 30px;
     -moz-border-radius: 30px;
     -ms-border-radius: 30px;
@@ -2022,7 +2022,7 @@ nav > ul > li.menu-item-has-children:hover > ul {
     background: -ms-linear-gradient(top,  rgba(0,0,0,0) 0%,rgba(0,0,0,0.65) 100%);
     background: linear-gradient(to bottom,  rgba(0,0,0,0) 0%,rgba(0,0,0,0.65) 100%);
     filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#00000000', endColorstr='#a6000000',GradientType=0 );
-    
+
     content: '';
 
     position: absolute;
@@ -2054,7 +2054,7 @@ nav > ul > li.menu-item-has-children:hover > ul {
     font-weight: 500;
     font-size: 18px;
     margin: 10px 0;
-    
+
     padding-right: 80px;
 }
 .blogtitle h3 a{
@@ -2138,7 +2138,7 @@ footer {
     font-size: 13px;
     color: #8d8d8d;
     padding: 26px 0;
-    
+
 }
 header.s2 {
     padding: 0;
@@ -2228,7 +2228,7 @@ header.s2 {
     width: 100%;
     opacity: 1;
     pointer-events: all;
-    
+
     -webkit-transform: scale(1);
     -moz-transform: scale(1);
     -ms-transform: scale(1);
@@ -2240,7 +2240,7 @@ header.s2 {
 }
 .places.s2 {
     background: #ffffff;
-    
+
     -webkit-box-shadow: 0px 0px 7px rgba(0,0,0,0.05);
     -moz-box-shadow: 0px 0px 7px rgba(0,0,0,0.05);
     -ms-box-shadow: 0px 0px 7px rgba(0,0,0,0.05);
@@ -2340,7 +2340,7 @@ header.s2 {
     width: auto;
     color: #8d8d8d;
     margin: 14px 0;
-        margin-left: 0px;
+    margin-left: 0px;
     margin-left: 23px;
 }
 .scrollup {
@@ -2350,14 +2350,14 @@ header.s2 {
     background: #ffffff;
     width: 40px;
     height: 40px;
-    
+
     -webkit-box-shadow: 0px 0px 10px rgba(0,0,0,0.1);
     -moz-box-shadow: 0px 0px 10px rgba(0,0,0,0.1);
     -ms-box-shadow: 0px 0px 10px rgba(0,0,0,0.1);
     -o-box-shadow: 0px 0px 10px rgba(0,0,0,0.1);
     box-shadow: 0px 0px 10px rgba(0,0,0,0.1);
 
-    
+
     -webkit-border-radius: 50%;
     -moz-border-radius: 50%;
     -ms-border-radius: 50%;
@@ -2402,10 +2402,10 @@ header.s3::before {
     float: left;
     width: 100%;
     padding: 71px;
-        padding-top: 71px;
+    padding-top: 71px;
     padding-top: 0;
     position: relative;
-    
+
     -webkit-box-shadow: 0px 0px 10px rgba(0,0,0,0.1);
     -moz-box-shadow: 0px 0px 10px rgba(0,0,0,0.1);
     -ms-box-shadow: 0px 0px 10px rgba(0,0,0,0.1);
@@ -2428,7 +2428,7 @@ header.s3::before {
     left: 50%;
     z-index: 1;
     bottom: 25px;
-    
+
     -webkit-transform: translateX(-50%);
     -moz-transform: translateX(-50%);
     -ms-transform: translateX(-50%);
@@ -2500,14 +2500,14 @@ header.s3::before {
     position: relative;
     background: #ffffff;
     overflow: hidden;
-    
+
     -webkit-box-shadow: 0px 2px 5px rgba(0,0,0,0.05);
     -moz-box-shadow: 0px 2px 5px rgba(0,0,0,0.05);
     -ms-box-shadow: 0px 2px 5px rgba(0,0,0,0.05);
     -o-box-shadow: 0px 2px 5px rgba(0,0,0,0.05);
     box-shadow: 0px 2px 5px rgba(0,0,0,0.05);
 
-    
+
     -webkit-border-radius: 2px;
     -moz-border-radius: 2px;
     -ms-border-radius: 2px;
@@ -2521,7 +2521,7 @@ header.s3::before {
     left: 0;
     top: 0;
     opacity: 0;
-    
+
     -webkit-transform: scale(2);
     -moz-transform: scale(2);
     -ms-transform: scale(2);
@@ -2567,7 +2567,7 @@ header.s3::before {
     color: #ffffff;
 }
 .fc:hover img {
-    
+
     -webkit-transform: scale(1);
     -moz-transform: scale(1);
     -ms-transform: scale(1);
@@ -2595,7 +2595,7 @@ header.s3::before {
     background: #ffffff;
     padding-bottom: 10px;
     padding-top: 0;
-    
+
     -webkit-transform: perspective(203px) rotateY(-7deg);
     -moz-transform: perspective(203px) rotateY(-7deg);
     -ms-transform: perspective(203px) rotateY(-7deg);
@@ -2616,7 +2616,7 @@ header.s3::before {
     width: 100%;
     height: 100%;
     content: "";
-    
+
     -webkit-box-shadow: 0px 0px 0px #ffffff;
     -moz-box-shadow: 0px 0px 0px #ffffff;
     -ms-box-shadow: 0px 0px 0px #ffffff;
@@ -2686,7 +2686,7 @@ header.s3::before {
     height: 8px;
     background: #515151;
     content: "";
-    
+
     -webkit-border-radius: 50%;
     -moz-border-radius: 50%;
     -ms-border-radius: 50%;
@@ -2719,7 +2719,7 @@ header.s3::before {
     height: 8px;
     background: #515151;
     content: "";
-    
+
     -webkit-border-radius: 50%;
     -moz-border-radius: 50%;
     -ms-border-radius: 50%;
@@ -2737,7 +2737,7 @@ header.s3::before {
 }
 .bottomline.minimal .social a {
     margin: 0 14px;
-        margin-bottom: 0px;
+    margin-bottom: 0px;
     line-height: 20px;
     margin-bottom: 20px;
 }
@@ -2751,7 +2751,7 @@ header.s4 {
 }
 .fcsec.widely {
     margin: 0;
-    
+
     -webkit-box-shadow: 0px 2px 4px rgba(0,0,0,0.05);
     -moz-box-shadow: 0px 2px 4px rgba(0,0,0,0.05);
     -ms-box-shadow: 0px 2px 4px rgba(0,0,0,0.05);
@@ -2774,7 +2774,7 @@ header.s4 {
     -ms-box-shadow: none;
     -o-box-shadow: none;
     box-shadow: none;
-    
+
     -webkit-border-radius: 0 0;
     -moz-border-radius: 0 0;
     -ms-border-radius: 0 0;
@@ -2787,7 +2787,7 @@ header.s4 {
 .fcsec.widely .fc {
     margin: 0;
     border: none;
-    
+
     -webkit-box-shadow: none;
     -moz-box-shadow: none;
     -ms-box-shadow: none;
@@ -2809,7 +2809,7 @@ header.s4 {
     font-family: ralewayregular;
     font-weight: 100;
     color: #f8fafa;
-    
+
     margin-top: 8px;
     margin-right: 22px;
     position: absolute;
@@ -2872,7 +2872,7 @@ header.s4 {
 .howwork.s2 {
     background: #ffffff;
     padding: 30px 30px;
-    
+
     -webkit-box-shadow: 0px 2px 7px rgba(0,0,0,0.05);
     -moz-box-shadow: 0px 2px 7px rgba(0,0,0,0.05);
     -ms-box-shadow: 0px 2px 7px rgba(0,0,0,0.05);
@@ -2911,7 +2911,7 @@ header.s4 {
     width: 100%;
     padding: 75px 310px;
     z-index: 0;
-    
+
     -webkit-border-radius: 2px;
     -moz-border-radius: 2px;
     -ms-border-radius: 2px;
@@ -2970,7 +2970,7 @@ header.s5 .extras > a {
 }
 .fc.s2 {
     background: #f9f9f9;
-    
+
     -webkit-box-shadow: none;
     -moz-box-shadow: none;
     -ms-box-shadow: none;
@@ -3079,7 +3079,7 @@ header.s5 .extras > a {
     float: right;
     width: auto;
     margin: 0;
-        margin-top: 0px;
+    margin-top: 0px;
     margin-top: 10px;
 }
 .ml-title .listmetas li {
@@ -3095,7 +3095,7 @@ header.s5 .extras > a {
 /* Custom Tooltip */
 .custom-tooltip > div:nth-child(4) {
     border: medium none !important;
-    
+
     -webkit-box-shadow: none !important;
     -moz-box-shadow: none !important;
     -ms-box-shadow: none !important;
@@ -3110,7 +3110,7 @@ header.s5 .extras > a {
 .custom-tooltip > div:nth-child(4) > div > div > div:nth-child(2) {
     background: rgba(0, 0, 0, 0) none repeat scroll 0 0 !important;
     border: medium none !important;
-    
+
     -webkit-box-shadow: none !important;
     -moz-box-shadow: none !important;
     -ms-box-shadow: none !important;
@@ -3167,7 +3167,7 @@ header.s5 .extras > a {
 }
 .custom-tooltip > div:nth-child(4) > div > div:last-child::before {
     background: #333333 none repeat scroll 0 0;
-    
+
     -webkit-border-radius: 50%;
     -moz-border-radius: 50%;
     -ms-border-radius: 50%;
@@ -3204,7 +3204,7 @@ header.s5 .extras > a {
     width: 45px;
     height: 100%;
     background: #d5d5ed;
-    
+
     -webkit-box-shadow: 0px 0px 30px rgba(0,0,0,0.05);
     -moz-box-shadow: 0px 0px 30px rgba(0,0,0,0.05);
     -ms-box-shadow: 0px 0px 30px rgba(0,0,0,0.05);
@@ -3229,7 +3229,7 @@ header.s5 .extras > a {
     font-family: ralewaybold;
     text-transform: uppercase;
     font-size: 16px;
-    
+
     -webkit-transform: rotate(-90deg);
     -moz-transform: rotate(-90deg);
     -ms-transform: rotate(-90deg);
@@ -3269,7 +3269,7 @@ header.s5 .extras > a {
     line-height: 18px;
     font-weight: 300;
     font-family: ralewayregular;
-    
+
     -webkit-transform: rotate(45deg);
     -moz-transform: rotate(45deg);
     -ms-transform: rotate(45deg);
@@ -3323,7 +3323,7 @@ header.s5 .extras > a {
     font-size: 15px;
     color: #8d8d8d;
     margin: 0;
-        margin-top: 0px;
+    margin-top: 0px;
     line-height: 15px;
     margin-top: 7px;
 }
@@ -3348,7 +3348,7 @@ header.s5 .extras > a {
     position: relative;
     background: #fafafa;
     margin-bottom: 5px;
-       margin-left: -5px;
+    margin-left: -20px;
 }
 .mlfield > input {
     float: left;
@@ -3373,7 +3373,7 @@ header.s5 .extras > a {
     float: left;
     position: relative;
     background: #6060D5;
-    
+
     -webkit-border-radius: 2px;
     -moz-border-radius: 2px;
     -ms-border-radius: 2px;
@@ -3397,7 +3397,7 @@ header.s5 .extras > a {
     font-family: ralewayregular;
     font-size: 13px;
     color: #ffffff;
-    
+
     margin: 0;
     line-height: 20px;
 }
@@ -3420,7 +3420,7 @@ header.s5 .extras > a {
     font-style: normal;
     width: 60px;
     text-align: center;
-    
+
     -webkit-border-radius: 2px;
     -moz-border-radius: 2px;
     -ms-border-radius: 2px;
@@ -3469,7 +3469,7 @@ header.s5 .extras > a {
     float: left;
     position: relative;
     background: #6060D5;
-    
+
     -webkit-border-radius: 2px;
     -moz-border-radius: 2px;
     -ms-border-radius: 2px;
@@ -3493,7 +3493,7 @@ header.s5 .extras > a {
     font-family: ralewayregular;
     font-size: 13px;
     color: #ffffff;
-    
+
     margin: 0;
     line-height: 20px;
 }
@@ -3516,7 +3516,7 @@ header.s5 .extras > a {
     font-style: normal;
     width: 60px;
     text-align: center;
-    
+
     -webkit-border-radius: 2px;
     -moz-border-radius: 2px;
     -ms-border-radius: 2px;
@@ -3579,7 +3579,7 @@ header.s5 .extras > a {
 .SumoSelect > .CaptionCont > label { position: absolute; top: 0; right: 0; bottom: 0; width: 30px;}
 .SumoSelect > .CaptionCont > label > i { background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAA0AAAANCAYAAABy6+R8AAAACXBIWXMAAAsTAAALEwEAmpwYAAAAB3RJTUUH3wMdBhAJ/fwnjwAAAGFJREFUKM9jYBh+gBFKuzEwMKQwMDB8xaOWlYGB4T4DA0MrsuapDAwM//HgNwwMDDbYTJuGQ8MHBgYGJ1xOYGNgYJiBpuEpAwODHSF/siDZ+ISBgcGClEDqZ2Bg8B6CkQsAPRga0cpRtDEAAAAASUVORK5CYII=');
     background-position: center center; width: 16px; height: 16px; display: block; position: absolute; top: 0; left: 0; right: 0; bottom: 0; margin: auto;background-repeat: no-repeat;
-opacity: 0.1;
+    opacity: 0.1;
 }
 
 .SumoSelect > .optWrapper {display:none; z-index: 1000; top: 30px; width: 100%; position: absolute; left: 0;    background: #fafafa; border: 1px solid #eaeaea;  border-radius: 0px;overflow: hidden;margin-top: 5px;width: 100%;}
@@ -3588,9 +3588,9 @@ opacity: 0.1;
 
 .SumoSelect > .optWrapper ul {list-style: none; display: block; padding: 0; margin: 0; overflow: auto;float: left;width: 100%;padding: 8px 0px;}
 .SumoSelect > .optWrapper > .options { border-radius: 2px;position:relative;
-/*Set the height of pop up here (only for desktop mode)*/
-max-height: 250px;
- /*height*/ }
+    /*Set the height of pop up here (only for desktop mode)*/
+    max-height: 250px;
+    /*height*/ }
 .SumoSelect > .optWrapper.okCancelInMulti > .options { border-radius: 2px 2px 0 0;}
 .SumoSelect > .optWrapper.selall > .options { border-radius: 0 0 2px 2px;}
 .SumoSelect > .optWrapper.selall.okCancelInMulti > .options { border-radius: 0;}
@@ -3800,7 +3800,7 @@ body.fakescroll-grabbed{
     -webkit-appearance: none;
     height: 40px;
     width: 25px;
-    
+
     -webkit-border-radius: 50%;
     -moz-border-radius: 50%;
     -ms-border-radius: 50%;
@@ -3822,7 +3822,7 @@ body.fakescroll-grabbed{
 .am-slider::-moz-range-thumb {
     height: 40px;
     width: 25px;
-    
+
     -webkit-border-radius: 50%;
     -moz-border-radius: 50%;
     -ms-border-radius: 50%;
@@ -3879,7 +3879,7 @@ body.fakescroll-grabbed{
     height: 14px;
     line-height: 35px;
     overflow: hidden;
-    
+
     -webkit-border-radius: 50%;
     -moz-border-radius: 50%;
     -ms-border-radius: 50%;
@@ -3910,7 +3910,7 @@ body.fakescroll-grabbed{
     width: 40px;
     height: 25px;
     line-height: 25px;
-    
+
     -webkit-border-radius: 2px;
     -moz-border-radius: 2px;
     -ms-border-radius: 2px;
@@ -3934,13 +3934,13 @@ body.fakescroll-grabbed{
 }
 .mfilterform2 > form > button {
     float: left;
-	margin-left: 30px;
+    margin-left: 30px;
     width: 60%;
     font-family: ralewaybold;
     text-transform: uppercase;
     font-size: 16px;
     background: #2B2B47;
-    
+
     -webkit-border-radius: 2px;
     -moz-border-radius: 2px;
     -ms-border-radius: 2px;
@@ -4000,6 +4000,7 @@ body.fakescroll-grabbed{
     float: left;
     width: 100%;
     margin-bottom: 30px;
+    padding-bottom: 0px;
 }
 .ml-placessec {
     float: left;
@@ -4052,7 +4053,7 @@ header.s4 .listingform {
     float: left;
     width: auto;
     margin: 13px 0;
-        margin-left: 0px;
+    margin-left: 0px;
     margin-left: 35px;
 }
 .s4.dark {
@@ -4065,7 +4066,7 @@ header.s4 .listingform {
 .ml-filterslide.openall {
     float: none;
     width: 50%;
-    
+
     -webkit-box-shadow: 0px 0px 10px rgba(0,0,0,0.1);
     -moz-box-shadow: 0px 0px 10px rgba(0,0,0,0.1);
     -ms-box-shadow: 0px 0px 10px rgba(0,0,0,0.1);
@@ -4083,7 +4084,7 @@ header.s4 .listingform {
     left: 0;
     opacity: 1;
     padding-top: 0 !important;
-    
+
     -webkit-box-shadow: none;
     -moz-box-shadow: none;
     -ms-box-shadow: none;
@@ -4119,7 +4120,7 @@ header.s4 .listingform {
     top: 100%;
     width: 410px;
     background: #ffffff;
-    
+
     -webkit-box-shadow: 0px 0px 20px rgba(0,0,0,0.05);
     -moz-box-shadow: 0px 0px 20px rgba(0,0,0,0.05);
     -ms-box-shadow: 0px 0px 20px rgba(0,0,0,0.05);
@@ -4144,7 +4145,7 @@ header.s4 .listingform {
     content: '';
     background: #ffffff;
     border: 1px solid #eaeaea;
-    
+
     -webkit-border-radius: 2px;
     -moz-border-radius: 2px;
     -ms-border-radius: 2px;
@@ -4179,7 +4180,7 @@ header.s4 .listingform {
     background: #28b8dc;
     font-weight: 100;
     padding: 8px 20px;
-    
+
     -webkit-border-radius: 2px;
     -moz-border-radius: 2px;
     -ms-border-radius: 2px;
@@ -4360,7 +4361,7 @@ header.s4 .listingform {
     visibility: visible;
     background: none;
     padding: 0 !important;
-    
+
     -webkit-box-shadow: none;
     -moz-box-shadow: none;
     -ms-box-shadow: none;
@@ -4372,7 +4373,7 @@ header.s4 .listingform {
 .mlfilter-sec.static .mltitle {
     padding-top: 27px;
     padding-bottom: 28px;
-	width: 
+    width:
 }
 .ml-placessec.golist .row > div {
     float: left;
@@ -4418,7 +4419,7 @@ header.s4 .listingform {
     right: 6px;
     top: 6px;
     background: #2ab8dc;
-    
+
     -webkit-border-radius: 2px;
     -moz-border-radius: 2px;
     -ms-border-radius: 2px;
@@ -4427,7 +4428,7 @@ header.s4 .listingform {
 
     font-family: ralewayregular;
     font-size: 17px;
-    
+
     font-weight: 100;
     padding: 14px 30px;
 }
@@ -4472,7 +4473,7 @@ header.s4 .listingform {
     color: #8d8d8d;
     line-height: 24px;
     margin: 0;
-        margin-bottom: 0px;
+    margin-bottom: 0px;
     margin-bottom: 17px;
 }
 .howworksec.turnservices {
@@ -4516,7 +4517,7 @@ header.s4 .listingform {
     text-align: center;
     margin-top: 30px;
     background: #eaf4f4;
-    
+
 
     padding: 10px;
 }
@@ -4524,7 +4525,7 @@ header.s4 .listingform {
     float: left;
     width: 100%;
     background: #ffffff;
-    
+
 
 
     padding: 35px 0;
@@ -4545,8 +4546,8 @@ header.s4 .listingform {
     font-size: 60px;
     font-weight: bold;
     margin: 0;
-        margin-top: 0px;
-        margin-bottom: 0px;
+    margin-top: 0px;
+    margin-bottom: 0px;
     margin-top: 17px;
     line-height: 50px;
     margin-bottom: 13px;
@@ -4588,7 +4589,7 @@ header.s4 .listingform {
     font-size: 17px;
     color: #ffffff;
     padding: 15px 98px;
-    
+
 
     margin-bottom: 40px;
     margin-top: 20px;
@@ -4620,9 +4621,9 @@ header.s4 .listingform {
     font-size: 22px;
     font-weight: 500;
     color: #202020;
-    
+
     margin: 0;
-        margin-bottom: 0px;
+    margin-bottom: 0px;
     margin-bottom: 10px;
 }
 .contactlistsec p {
@@ -4656,7 +4657,7 @@ header.s4 .listingform {
     float: left;
     width: 100%;
     height: 380px;
-    
+
     -webkit-border-radius: 2px;
     -moz-border-radius: 2px;
     -ms-border-radius: 2px;
@@ -4672,7 +4673,7 @@ header.s4 .listingform {
     padding: 17px 50px;
     margin-right: 20px;
     margin-top: 30px;
-    
+
     -webkit-border-radius: 2px;
     -moz-border-radius: 2px;
     -ms-border-radius: 2px;
@@ -4704,7 +4705,7 @@ header.s4 .listingform {
     width: 100%;
     padding: 0;
     margin: 0;
-        margin-bottom: 0px;
+    margin-bottom: 0px;
     font-family: ralewayregular;
     font-size: 15px;
     color: #242423;
@@ -4718,7 +4719,7 @@ header.s4 .listingform {
     width: 100%;
     background: #fff;
     border: 1px solid #e8ecec;
-    
+
     -webkit-border-radius: 2px;
     -moz-border-radius: 2px;
     -ms-border-radius: 2px;
@@ -4736,10 +4737,10 @@ header.s4 .listingform {
     font-size: 15px;
     color: #ffffff;
     border: 1px solid #fb3640;
-   
+
     background: #fb3640;
     padding: 15px 40px;
-    
+
     -webkit-border-radius: 2px;
     -moz-border-radius: 2px;
     -ms-border-radius: 2px;
@@ -4762,7 +4763,7 @@ header.s4 .listingform {
     float: left;
     width: 100%;
     border: 2px dashed #ced0e6;
-    
+
     -webkit-border-radius: 2px;
     -moz-border-radius: 2px;
     -ms-border-radius: 2px;
@@ -4830,7 +4831,7 @@ header.s4 .listingform {
     margin: 0;
     background: #ffffff;
     border: 1px solid #e5e9e9;
-    
+
     -webkit-border-radius: 2px;
     -moz-border-radius: 2px;
     -ms-border-radius: 2px;
@@ -4853,7 +4854,7 @@ header.s4 .listingform {
     float: left;
     width: 100%;
     background: #28b8dc;
-    
+
     -webkit-border-radius: 2px;
     -moz-border-radius: 2px;
     -ms-border-radius: 2px;
@@ -4875,7 +4876,7 @@ header.s4 .listingform {
     float: left;
     width: 100%;
     margin: 0;
-        margin-top: 0px;
+    margin-top: 0px;
     margin-top: 20px;
 }
 .shipingtotal > ul > li {
@@ -4887,8 +4888,8 @@ header.s4 .listingform {
     float: left;
     width: 100%;
     margin: 0;
-        margin-top: 0px;
-        margin-bottom: 0px;
+    margin-top: 0px;
+    margin-bottom: 0px;
     font-size: 15px;
     font-weight: 500;
     color: #ffffff;
@@ -4967,7 +4968,7 @@ header.s4 .listingform {
     color: #ffffff;
     line-height: 20px;
     margin: 4px 0;
-        margin-bottom: 4px;
+    margin-bottom: 4px;
     padding-right: 30px;
     margin-bottom: 10px;
 }
@@ -4999,7 +5000,7 @@ header.s4 .listingform {
     width: 100%;
     text-align: center;
     border: 2px dashed #d8dcdc;
-    
+
     -webkit-border-radius: 2px;
     -moz-border-radius: 2px;
     -ms-border-radius: 2px;
@@ -5086,7 +5087,7 @@ header.s4 .listingform {
     font-family: ralewayregular;
     font-weight: 100;
     padding: 20px 0;
-    
+
     -webkit-border-radius: 2px;
     -moz-border-radius: 2px;
     -ms-border-radius: 2px;
@@ -5100,7 +5101,7 @@ header.s4 .listingform {
     float: left;
     width: 100%;
     border: 1px solid #e8ecec;
-    
+
     -webkit-border-radius: 2px;
     -moz-border-radius: 2px;
     -ms-border-radius: 2px;
@@ -5195,7 +5196,7 @@ header.s4 .listingform {
     width: 200px;
     height: 50px;
     border: 1px solid #e8ecec;
-    
+
     -webkit-border-radius: 2px;
     -moz-border-radius: 2px;
     -ms-border-radius: 2px;
@@ -5208,7 +5209,7 @@ header.s4 .listingform {
     font-size: 13px;
     font-family: ralewayregular;
     background: #151519;
-    
+
     -webkit-border-radius: 2px;
     -moz-border-radius: 2px;
     -ms-border-radius: 2px;
@@ -5218,7 +5219,7 @@ header.s4 .listingform {
     padding: 17px 40px;
     margin-left: 13px;
     border: 1px solid #151519;
-    
+
 }
 .cartextras > a {
     float: right;
@@ -5227,7 +5228,7 @@ header.s4 .listingform {
     background: #fb3640;
     color: #ffffff;
     padding: 17px 45px;
-    
+
     -webkit-border-radius: 2px;
     -moz-border-radius: 2px;
     -ms-border-radius: 2px;
@@ -5241,7 +5242,7 @@ header.s4 .listingform {
     float: left;
     width: 100%;
     background: #28b8dc;
-    
+
     -webkit-border-radius: 2px;
     -moz-border-radius: 2px;
     -ms-border-radius: 2px;
@@ -5286,7 +5287,7 @@ header.s4 .listingform {
     height: 50px;
     border: 1px solid #e8ecec;
     position: relative;
-    
+
     -webkit-border-radius: 2px;
     -moz-border-radius: 2px;
     -ms-border-radius: 2px;
@@ -5340,7 +5341,7 @@ header.s4 .listingform {
     right: 40px;
     width: 54px;
     height: 54px;
-    
+
     -webkit-border-radius: 50%;
     -moz-border-radius: 50%;
     -ms-border-radius: 50%;
@@ -5348,8 +5349,8 @@ header.s4 .listingform {
     border-radius: 50%;
 
     padding: 0;
-    
-   background: #fb3640;
+
+    background: #fb3640;
 }
 .cartbtn strong {
     position: absolute;
@@ -5359,7 +5360,7 @@ header.s4 .listingform {
     height: 20px;
     background: #000000;
     color: #ffffff;
-    
+
     -webkit-border-radius: 50%;
     -moz-border-radius: 50%;
     -ms-border-radius: 50%;
@@ -5404,7 +5405,7 @@ header.s4 .listingform {
 .tabs > li a img {
     float: left;
     width: 100%;
-    
+
 
 }
 .tabs > li.current a img {
@@ -5460,7 +5461,7 @@ header.s4 .listingform {
 .sproduct-info > span img {
     float: left;
     margin: 4px 0;
-        margin-right: 0px;
+    margin-right: 0px;
     margin-right: 12px;
 }
 .sproduct-info > p {
@@ -5468,7 +5469,7 @@ header.s4 .listingform {
     width: 100%;
     font-size: 13px;
     color: #8d8d8d;
-    
+
     line-height: 24px;
     margin-top: 17px;
 }
@@ -5554,7 +5555,7 @@ header.s4 .listingform {
     float: right;
     background: #fb3640;
     padding: 11px 50px;
-    
+
     -webkit-border-radius: 2px;
     -moz-border-radius: 2px;
     -ms-border-radius: 2px;
@@ -5633,7 +5634,7 @@ header.s4 .listingform {
 .cavatar img {
     float: left;
     width: 100%;
-    
+
     -webkit-border-radius: 50%;
     -moz-border-radius: 50%;
     -ms-border-radius: 50%;
@@ -5669,8 +5670,8 @@ header.s4 .listingform {
     color: #8d8d8d;
     line-height: 26px;
     margin: 0;
-        margin-top: 0px;
-        margin-bottom: 0px;
+    margin-top: 0px;
+    margin-bottom: 0px;
     margin-top: 10px;
     margin-bottom: 16px;
 }
@@ -5711,7 +5712,7 @@ header.s4 .listingform {
     font-size: 13px;
     color: #333333;
     border: 1px solid #e8ecec;
-    
+
     -webkit-border-radius: 2px;
     -moz-border-radius: 2px;
     -ms-border-radius: 2px;
@@ -5728,7 +5729,7 @@ header.s4 .listingform {
     width: auto;
     color: #ffffff;
     padding: 17px 50px;
-    
+
     -webkit-border-radius: 2px;
     -moz-border-radius: 2px;
     -ms-border-radius: 2px;
@@ -5737,7 +5738,7 @@ header.s4 .listingform {
     border: 1px solid #fb3640;
 
     cursor: pointer;
-      -webkit-transition: all 300ms linear 0s; -moz-transition: all 300ms ease-in 0s; -ms-transition: all 300ms ease-in 0s; -o-transition: all 300ms ease-in 0s; transition: all 300ms ease-in 0s;
+    -webkit-transition: all 300ms linear 0s; -moz-transition: all 300ms ease-in 0s; -ms-transition: all 300ms ease-in 0s; -o-transition: all 300ms ease-in 0s; transition: all 300ms ease-in 0s;
 
 }
 
@@ -5750,7 +5751,7 @@ header.s4 .listingform {
     background: #ffffff;
     padding: 30px;
     border: 1px solid #e8ecec;
-    
+
     -webkit-border-radius: 2px;
     -moz-border-radius: 2px;
     -ms-border-radius: 2px;
@@ -5817,7 +5818,7 @@ header.s4 .listingform {
     font-weight: 500;
     font-size: 18px;
     color: #121212;
-    
+
     margin: 0;
     width: 75%;
 }
@@ -5851,7 +5852,7 @@ header.s4 .listingform {
     float: left;
     width: 100%;
     background: #ffffff;
-    
+
     -webkit-border-radius: 2px;
     -moz-border-radius: 2px;
     -ms-border-radius: 2px;
@@ -5947,7 +5948,7 @@ header.s4 .listingform {
     background: #28b8dc;
     margin-right: 5px;
     padding: 5px 9px;
-    
+
     -webkit-border-radius: 2px;
     -moz-border-radius: 2px;
     -ms-border-radius: 2px;
@@ -6065,7 +6066,7 @@ tbody tr td {
     float: left;
     width: 100%;
     border: 2px dashed #e8ecec;
-    
+
     -webkit-border-radius: 2px;
     -moz-border-radius: 2px;
     -ms-border-radius: 2px;
@@ -6119,7 +6120,7 @@ tbody tr td {
     float: left;
     width: 100%;
     position: relative;
-    
+
     -webkit-border-radius: 2px;
     -moz-border-radius: 2px;
     -ms-border-radius: 2px;
@@ -6142,7 +6143,7 @@ tbody tr td {
     font-style: normal;
     text-align: center;
     color: #ffffff;
-    
+
     -webkit-border-radius: 2px;
     -moz-border-radius: 2px;
     -ms-border-radius: 2px;
@@ -6230,7 +6231,7 @@ tbody tr td {
     font-size: 14px;
     color: #ffffff;
     padding: 13px 26px;
-    
+
     -webkit-border-radius: 2px;
     -moz-border-radius: 2px;
     -ms-border-radius: 2px;
@@ -6249,7 +6250,7 @@ tbody tr td {
     float: left;
     width: 100%;
     background: #ffffff;
-    
+
     -webkit-box-shadow: 0px 0px 7px rgba(0,0,0,0.1);
     -moz-box-shadow: 0px 0px 7px rgba(0,0,0,0.1);
     -ms-box-shadow: 0px 0px 7px rgba(0,0,0,0.1);
@@ -6257,7 +6258,7 @@ tbody tr td {
     box-shadow: 0px 0px 7px rgba(0,0,0,0.1);
 
     padding: 30px 0;
-        padding-left: 0px;
+    padding-left: 0px;
     padding-left: 350px;
 }
 .menubarsec a {
@@ -6290,7 +6291,7 @@ tbody tr td {
 .reviewthumb img {
     float: left;
     width: 100%;
-    
+
     -webkit-border-radius: 50%;
     -moz-border-radius: 50%;
     -ms-border-radius: 50%;
@@ -6379,7 +6380,7 @@ tbody tr td {
 .rgallery a img {
     float: left;
     width: 100%;
-    
+
     -webkit-border-radius: 2px;
     -moz-border-radius: 2px;
     -ms-border-radius: 2px;
@@ -6415,7 +6416,7 @@ tbody tr td {
     font-weight: normal;
     font-size: 10px;
     position: absolute;
-    
+
     -webkit-border-radius: 50%;
     -moz-border-radius: 50%;
     -ms-border-radius: 50%;
@@ -6443,7 +6444,7 @@ tbody tr td {
 }
 .userdropsec > span img {
     float: left;
-    
+
     -webkit-border-radius: 50%;
     -moz-border-radius: 50%;
     -ms-border-radius: 50%;
@@ -6465,14 +6466,14 @@ tbody tr td {
     top: 100%;
     background: #ffffff;
     width: 240px;
-    
+
     -webkit-box-shadow: 0px 0px 6px rgba(0,0,0,0.1);
     -moz-box-shadow: 0px 0px 6px rgba(0,0,0,0.1);
     -ms-box-shadow: 0px 0px 6px rgba(0,0,0,0.1);
     -o-box-shadow: 0px 0px 6px rgba(0,0,0,0.1);
     box-shadow: 0px 0px 6px rgba(0,0,0,0.1);
 
-    
+
     -webkit-border-radius: 2px;
     -moz-border-radius: 2px;
     -ms-border-radius: 2px;
@@ -6495,7 +6496,7 @@ tbody tr td {
 .userdopinfo img {
     float: left;
     width: 50px;
-    
+
     -webkit-border-radius: 50%;
     -moz-border-radius: 50%;
     -ms-border-radius: 50%;
@@ -6678,7 +6679,7 @@ tbody tr td {
     color: #28b8dc;
     padding: 11px 20px;
     border: 1px solid #e8ecec;
-    
+
     -webkit-border-radius: 2px;
     -moz-border-radius: 2px;
     -ms-border-radius: 2px;
@@ -6716,7 +6717,7 @@ tbody tr td {
 }
 .mlistingdash .places.s2.makelist {
     margin-bottom: 30px;
-    
+
     -webkit-box-shadow: none;
     -moz-box-shadow: none;
     -ms-box-shadow: none;
@@ -6738,7 +6739,7 @@ tbody tr td {
     width: 100%;
     background: #ffffff;
     text-align: center;
-    
+
     -webkit-border-radius: 2px;
     -moz-border-radius: 2px;
     -ms-border-radius: 2px;
@@ -6768,7 +6769,7 @@ tbody tr td {
     float: none;
     display: inline-block;
     max-width: 100%;
-    
+
     -webkit-border-radius: 2px;
     -moz-border-radius: 2px;
     -ms-border-radius: 2px;
@@ -6793,7 +6794,7 @@ tbody tr td {
     font-family: ralewayregular;
     font-size: 14px;
     padding: 12px 45px;
-    
+
     -webkit-border-radius: 2px;
     -moz-border-radius: 2px;
     -ms-border-radius: 2px;
@@ -6827,7 +6828,7 @@ tbody tr td {
     -ms-border-radius: 2px;
     -o-border-radius: 2px;
     border-radius: 2px;
-      -webkit-transition: all 300ms linear 0s; -moz-transition: all 300ms ease-in 0s; -ms-transition: all 300ms ease-in 0s; -o-transition: all 300ms ease-in 0s; transition: all 300ms ease-in 0s;
+    -webkit-transition: all 300ms linear 0s; -moz-transition: all 300ms ease-in 0s; -ms-transition: all 300ms ease-in 0s; -o-transition: all 300ms ease-in 0s; transition: all 300ms ease-in 0s;
 
 }
 
@@ -6874,7 +6875,7 @@ tbody tr td {
     height: 110px;
     text-align: center;
     border: 2px solid rgba(255,255,255,0.4);
-    
+
     -webkit-border-radius: 50%;
     -moz-border-radius: 50%;
     -ms-border-radius: 50%;
@@ -6890,7 +6891,7 @@ tbody tr td {
     border: 2px solid #ffffff;
     text-align: center;
     line-height: 70px;
-    
+
     -webkit-border-radius: 50%;
     -moz-border-radius: 50%;
     -ms-border-radius: 50%;
@@ -6915,7 +6916,7 @@ tbody tr td {
     width: 90px;
     height: 90px;
     content: "";
-    
+
     -webkit-border-radius: 50%;
     -moz-border-radius: 50%;
     -ms-border-radius: 50%;
@@ -6935,7 +6936,7 @@ tbody tr td {
 }
 .dashbadge.white {
     background: #ffffff;
-    
+
     -webkit-box-shadow: 0px 0px 4px rgba(0,0,0,0.05);
     -moz-box-shadow: 0px 0px 4px rgba(0,0,0,0.05);
     -ms-box-shadow: 0px 0px 4px rgba(0,0,0,0.05);
@@ -6993,7 +6994,7 @@ tbody tr td {
     float: left;
     width: 100%;
     border: 1px solid #e8ecec;
-    
+
     -webkit-border-radius: 2px;
     -moz-border-radius: 2px;
     -ms-border-radius: 2px;
@@ -7058,7 +7059,7 @@ tbody tr td {
 }
 .minipost img {
     float: left;
-    
+
     -webkit-border-radius: 2px;
     -moz-border-radius: 2px;
     -ms-border-radius: 2px;
@@ -7105,7 +7106,7 @@ tbody tr td {
     width: 100%;
     height: 100%;
     content: "";
-    
+
     background: rgb(250,217,35);
     background: url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiA/Pgo8c3ZnIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgdmlld0JveD0iMCAwIDEgMSIgcHJlc2VydmVBc3BlY3RSYXRpbz0ibm9uZSI+CiAgPGxpbmVhckdyYWRpZW50IGlkPSJncmFkLXVjZ2ctZ2VuZXJhdGVkIiBncmFkaWVudFVuaXRzPSJ1c2VyU3BhY2VPblVzZSIgeDE9IjAlIiB5MT0iMCUiIHgyPSIxMDAlIiB5Mj0iMTAwJSI+CiAgICA8c3RvcCBvZmZzZXQ9IjAlIiBzdG9wLWNvbG9yPSIjZmFkOTIzIiBzdG9wLW9wYWNpdHk9IjEiLz4KICAgIDxzdG9wIG9mZnNldD0iMzUlIiBzdG9wLWNvbG9yPSIjZTgyODdlIiBzdG9wLW9wYWNpdHk9IjEiLz4KICAgIDxzdG9wIG9mZnNldD0iNzIlIiBzdG9wLWNvbG9yPSIjNjcyM2M4IiBzdG9wLW9wYWNpdHk9IjEiLz4KICAgIDxzdG9wIG9mZnNldD0iOTglIiBzdG9wLWNvbG9yPSIjNjcyM2M4IiBzdG9wLW9wYWNpdHk9IjEiLz4KICA8L2xpbmVhckdyYWRpZW50PgogIDxyZWN0IHg9IjAiIHk9IjAiIHdpZHRoPSIxIiBoZWlnaHQ9IjEiIGZpbGw9InVybCgjZ3JhZC11Y2dnLWdlbmVyYXRlZCkiIC8+Cjwvc3ZnPg==);
     background: -moz-linear-gradient(-45deg,  rgba(250,217,35,1) 0%, rgba(232,40,126,1) 35%, rgba(103,35,200,1) 72%, rgba(103,35,200,1) 98%);
@@ -7123,7 +7124,7 @@ tbody tr td {
     width: 100%;
     position: relative;
     overflow: hidden;
-    
+
     -webkit-border-radius: 2px;
     -moz-border-radius: 2px;
     -ms-border-radius: 2px;
@@ -7141,7 +7142,7 @@ tbody tr td {
 .instawidget a img {
     float: left;
     width: 100%;
-    
+
     -webkit-border-radius: 2px;
     -moz-border-radius: 2px;
     -ms-border-radius: 2px;
@@ -7208,7 +7209,7 @@ tbody tr td {
 .spthumb img {
     float: left;
     width: 100%;
-    
+
     -webkit-border-radius: 2px;
     -moz-border-radius: 2px;
     -ms-border-radius: 2px;
@@ -7323,9 +7324,9 @@ blockquote span {
     background: #eaf4f4;
     border: 1px solid #eaeaea;
     font-size: 17px;
-      -webkit-transition: all 300ms linear 0s; -moz-transition: all 300ms ease-in 0s; -ms-transition: all 300ms ease-in 0s; -o-transition: all 300ms ease-in 0s; transition: all 300ms ease-in 0s;
+    -webkit-transition: all 300ms linear 0s; -moz-transition: all 300ms ease-in 0s; -ms-transition: all 300ms ease-in 0s; -o-transition: all 300ms ease-in 0s; transition: all 300ms ease-in 0s;
 
-    
+
     -webkit-border-radius: 2px;
     -moz-border-radius: 2px;
     -ms-border-radius: 2px;
@@ -7339,7 +7340,7 @@ blockquote span {
     background: #5ac8e4;
     border-color: #5ac8e4;
     color: #fff;
-    }
+}
 
 
 .spnavsec a:last-child {
@@ -7363,7 +7364,7 @@ blockquote span {
     font-size: 18px;
     font-weight: 500;
     color: #121212;
-    
+
     margin-top: 0;
 }
 .spinfos .commentsec .commentsarea li {
@@ -7470,7 +7471,7 @@ blockquote span {
     color: #28b8dc;
     font-size: 14px;
     border: 1px solid #28b8dc;
-    
+
     -webkit-border-radius: 2px;
     -moz-border-radius: 2px;
     -ms-border-radius: 2px;
@@ -7499,7 +7500,7 @@ blockquote span {
     background: #28b8dc;
     text-align: center;
     padding: 18px 0;
-    
+
     -webkit-border-radius: 2px;
     -moz-border-radius: 2px;
     -ms-border-radius: 2px;
@@ -7538,7 +7539,7 @@ blockquote span {
     width: 100%;
     border: 1px solid #e8ecec;
     padding: 35px;
-    
+
     -webkit-border-radius: 2px;
     -moz-border-radius: 2px;
     -ms-border-radius: 2px;
@@ -7591,12 +7592,12 @@ blockquote span {
 }
 .gallerylistin li {
     margin: 0;
-    
+
 }
 .gallerylistin li img {
     float: left;
     width: 100%;
-    
+
     -webkit-border-radius: 2px;
     -moz-border-radius: 2px;
     -ms-border-radius: 2px;
@@ -7612,7 +7613,7 @@ blockquote span {
     background: #eaf4f4;
     width: 32px;
     height: 32px;
-    
+
     -webkit-box-shadow: none;
     -moz-box-shadow: none;
     -ms-box-shadow: none;
@@ -7644,7 +7645,7 @@ blockquote span {
     border: 1px solid;
     font-size: 13px;
     line-height: 40px;
-    
+
     -webkit-border-radius: 2px;
     -moz-border-radius: 2px;
     -ms-border-radius: 2px;
@@ -7680,7 +7681,7 @@ blockquote span {
     background: #fafafa;
     border: 1px solid #e8ecec;
     padding: 35px;
-    
+
     -webkit-border-radius: 2px;
     -moz-border-radius: 2px;
     -ms-border-radius: 2px;
@@ -7732,7 +7733,7 @@ blockquote span {
     font-weight: normal;
     border: 1px solid #b4c52c;
     padding: 12px 25px;
-    
+
     -webkit-border-radius: 2px;
     -moz-border-radius: 2px;
     -ms-border-radius: 2px;
@@ -7758,7 +7759,7 @@ blockquote span {
     width: 100%;
     border: 1px solid #e8ecec;
     padding: 35px;
-    
+
     -webkit-border-radius: 2px;
     -moz-border-radius: 2px;
     -ms-border-radius: 2px;
@@ -7831,7 +7832,7 @@ blockquote span {
     width: 100%;
     border: 1px solid #e8ecec;
     padding: 35px;
-    
+
     -webkit-border-radius: 2px;
     -moz-border-radius: 2px;
     -ms-border-radius: 2px;
@@ -7863,7 +7864,7 @@ blockquote span {
     width: 100%;
     border: 1px solid #e8ecec;
     padding: 35px;
-    
+
     -webkit-border-radius: 2px;
     -moz-border-radius: 2px;
     -ms-border-radius: 2px;
@@ -7904,7 +7905,7 @@ blockquote span {
 }
 .cbusiness form button {
     float: left;
-    
+
     -webkit-border-radius: 2px;
     -moz-border-radius: 2px;
     -ms-border-radius: 2px;
@@ -7913,17 +7914,17 @@ blockquote span {
 
     color: #ffffff;
     font-size: 13px;
-    
+
     color: #fff;
     background: #28b8dc;
     padding: 15px 40px;
     border: 1px solid #28b8dc;
-      -webkit-transition: all 300ms linear 0s; -moz-transition: all 300ms ease-in 0s; -ms-transition: all 300ms ease-in 0s; -o-transition: all 300ms ease-in 0s; transition: all 300ms ease-in 0s;
+    -webkit-transition: all 300ms linear 0s; -moz-transition: all 300ms ease-in 0s; -ms-transition: all 300ms ease-in 0s; -o-transition: all 300ms ease-in 0s; transition: all 300ms ease-in 0s;
 
 }
 
 .cbusiness form button:hover {
-    
+
     color: #28b8dc;
     background: transparent;
     border-color: #28b8dc;
@@ -7942,7 +7943,7 @@ blockquote span {
 .ad img {
     float: left;
     width: 100%;
-    
+
     -webkit-border-radius: 2px;
     -moz-border-radius: 2px;
     -ms-border-radius: 2px;
@@ -7965,7 +7966,7 @@ blockquote span {
 }
 .block.flip .slhead{
     background: #ffffff;
-    
+
     -webkit-box-shadow: 0px 0px 20px rgba(0,0,0,0.05);
     -moz-box-shadow: 0px 0px 20px rgba(0,0,0,0.05);
     -ms-box-shadow: 0px 0px 20px rgba(0,0,0,0.05);
@@ -8075,7 +8076,7 @@ blockquote span {
     border-color: #ffffff;
 }
 .slbtnsspans.light .slbtns > a:hover {
-   border-color: #28b8dc;
+    border-color: #28b8dc;
 }
 .amenties.listing span {
     float: left;
@@ -8127,7 +8128,7 @@ blockquote span {
 #resgallery li img {
     float: left;
     width: 100%;
-    
+
     -webkit-border-radius: 2px;
     -moz-border-radius: 2px;
     -ms-border-radius: 2px;
@@ -8140,7 +8141,7 @@ blockquote span {
     width: 100%;
     position: relative;
     margin: 0;
-        margin-top: 0px;
+    margin-top: 0px;
     margin-top: 14px;
     padding: 0 8px;
 }
@@ -8154,7 +8155,7 @@ blockquote span {
 #resthumb .slick-list li img {
     float: left;
     width: 100%;
-    
+
     -webkit-border-radius: 2px;
     -moz-border-radius: 2px;
     -ms-border-radius: 2px;
@@ -8180,7 +8181,7 @@ blockquote span {
     width: 100%;
     border: 1px solid #e8ecec;
     padding: 35px;
-    
+
     -webkit-border-radius: 2px;
     -moz-border-radius: 2px;
     -ms-border-radius: 2px;
@@ -8256,7 +8257,7 @@ blockquote span {
     margin-bottom: 30px;
     position: relative;
     overflow: hidden;
-    
+
     -webkit-border-radius: 2px;
     -moz-border-radius: 2px;
     -ms-border-radius: 2px;
@@ -8273,7 +8274,7 @@ blockquote span {
     background: -ms-linear-gradient(top,  rgba(0,0,0,0) 0%,rgba(0,0,0,0.65) 100%);
     background: linear-gradient(to bottom,  rgba(0,0,0,0) 0%,rgba(0,0,0,0.65) 100%);
     filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#00000000', endColorstr='#a6000000',GradientType=0 );
-    
+
     position: absolute;
     left: 0;
     top: 0;
@@ -8296,7 +8297,7 @@ blockquote span {
     color: #ffffff;
     font-size: 15px;
     padding: 20px 30px;
-        padding-right: 30px;
+    padding-right: 30px;
     padding-right: 0;
 }
 .room > a i {
@@ -8308,7 +8309,7 @@ blockquote span {
     font-weight: 500;
     font-size: 25px;
     padding: 17px 30px;
-        padding-left: 30px;
+    padding-left: 30px;
     padding-left: 0;
 }
 
@@ -8322,7 +8323,7 @@ blockquote span {
     display: table-cell;
     vertical-align: top;
     width: 120px;
-    
+
     -webkit-border-radius: 2px;
     -moz-border-radius: 2px;
     -ms-border-radius: 2px;
@@ -8334,7 +8335,7 @@ blockquote span {
 .dishlisthumb img {
     float: left;
     width: 100%;
-    
+
     -webkit-border-radius: 2px;
     -moz-border-radius: 2px;
     -ms-border-radius: 2px;
@@ -8398,7 +8399,7 @@ blockquote span {
     background: #595959;
 }
 .errorsec > form button:hover {
-    
+
 }
 .social a:hover {
     background: #2ab8dc;
@@ -8422,7 +8423,7 @@ blockquote span {
     color: #fb3640;
 }
 .placeorderbtn:hover {
-    
+
 }
 .cartextras > form button:hover {
     border: 1px solid #151519;
@@ -8458,7 +8459,7 @@ blockquote span {
     opacity: 1;
 }
 .category:hover img {
-    
+
     -webkit-transform: scale(1.1);
     -moz-transform: scale(1.1);
     -ms-transform: scale(1.1);
@@ -8480,7 +8481,7 @@ blockquote span {
     color: #fb3640;
 }
 .cities.still:hover a img {
-    
+
     -webkit-transform: scale(1.1);
     -moz-transform: scale(1.1);
     -ms-transform: scale(1.1);
@@ -8496,7 +8497,7 @@ header.s3 .extras > a:hover {
     background: #28b8dc;
 }
 .hpf:hover .hpfthumb {
-    
+
     -webkit-transform: perspective(203px) rotateY(0deg);
     -moz-transform: perspective(203px) rotateY(0deg);
     -ms-transform: perspective(203px) rotateY(0deg);
@@ -8505,7 +8506,7 @@ header.s3 .extras > a:hover {
 
 }
 .mfilterform2 > form > button:hover {
-   
+
 }
 .responsiveheader {
     float: left;
@@ -8587,7 +8588,7 @@ header.s3 .extras > a:hover {
     float: left;
     width: 100%;
     padding: 20px 30px;
-        padding-left: 30px;
+    padding-left: 30px;
     font-size: 15px;
     color: #323031;
     padding-left: 85px;
@@ -8722,8 +8723,8 @@ header.s3 .extras > a:hover {
 
 .datebox {
 
-font-family: ralewayregular;
-font-weight: 800;
+    font-family: ralewayregular;
+    font-weight: 800;
 }
 
 
@@ -8786,7 +8787,7 @@ nav > ul > li.menu-item-has-children ul,
 .hpf,
 .hpf *,
 .rnaver{
-    
+
     -webkit-transition:all 0.3s ease 0s;
     -moz-transition:all 0.3s ease 0s;
     -ms-transition:all 0.3s ease 0s;

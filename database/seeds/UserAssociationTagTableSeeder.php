@@ -60,7 +60,7 @@ class UserAssociationTagTableSeeder extends Seeder
                 'id' => '8',
                 'name' => 'Music & Sampling',
                 'slug' => 'role',
-                'icon' => 'fa-file-audio-o'
+                'icon' => 'fa-music'
             ],
             [
                 'id' => '9',
@@ -72,7 +72,7 @@ class UserAssociationTagTableSeeder extends Seeder
                 'id' => '10',
                 'name' => 'Music/Audio Production',
                 'slug' => 'role',
-                'icon' => 'fa-music'
+                'icon' => 'fa-file-audio-o'
             ],
             [
                 'id' => '11',

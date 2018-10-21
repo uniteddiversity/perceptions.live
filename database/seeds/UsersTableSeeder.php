@@ -15,11 +15,11 @@ class UsersTableSeeder extends Seeder
         DB::table('users')->insert([
             [
                 'id'            =>  '1',
-                'first_name'    =>  'admin',
-                'display_name'     =>  'admin',
-//                'username'      =>  'admin',
+                'first_name'    =>  'PRCPTION Travel',
+                'display_name'     =>  'PRCPTION Travel',
+//                'username'      =>  'prcptiontravel',
                 'email'         =>  'Jordan@perceptiontravel.tv',
-                'password'      =>  bcrypt('secret'),
+                'password'      =>  bcrypt('~!RhTA7HCd!~'),
                 'role_id'       =>  1,
                 'status_id'        =>  1
             ]

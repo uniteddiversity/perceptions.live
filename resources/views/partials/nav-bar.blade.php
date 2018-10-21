@@ -1,16 +1,16 @@
 <div class="responsiveheader">
     <div class="rheader">
         <span><img src="/assets/findgo/images/ricon.png" alt="" /></span>
-        <div class="logo">
+    <?php  <div class="logo">
             <a href="#" title=""><img src="/assets/findgo/images/live-prcptions-beta-small.png" width=100 height=388 alt="" /></a>
-        </div>
+        </div> ?>
         <div class="extras">
             <span class="accountbtn"><i class="flaticon-avatar"></i></span>
         </div>
     </div>
     <div class="rnaver">
         <span class="closeresmenu"><i>x</i>Close</span>
-        <div class="logo"><a href="#" title=""><img src="/assets/findgo/images/live-prcptions-beta-small.png" width=100 height=388 alt="" /></a></div>
+    <?php   <div class="logo"><a href="#" title=""><img src="/assets/findgo/images/live-prcptions-beta-small.png" width=100 height=388 alt="" /></a></div> ?>
         @if (Route::has('login'))
 
             @auth
@@ -45,7 +45,7 @@
 
             @auth
                 <div class="extras">
-                    <a href="/user/content-add" title=""><img src="/assets/findgo/images/icon1.png" alt="" /> Submit Video</a>
+                    <a href="/user/user-profile" title=""><img src="/assets/findgo/images/icon1.png" alt="" /> Control Panel</a>
                 </div>
             @else
                 <div class="extras">
@@ -65,7 +65,7 @@
                 @else
 
                 @endauth
-                <li><a href="/claim-profile" target="_blank" ><i class="fa fa-registered white"></i>&nbsp;Claim Your Profile</a></li>
+                <li><a href="/claim-profile" target="_blank" ><i class="fa fa-registered white"></i>&nbsp;Claim Profile</a></li>
             @endif
             </ul>
             {{--<ul>--}}
@@ -152,7 +152,7 @@
         position: absolute;
         display: block;
         width: 40%;
-        margin-left: 30%;
+        margin-left: 3%;
         background-color: #transparent;
         z-index:50;
     }

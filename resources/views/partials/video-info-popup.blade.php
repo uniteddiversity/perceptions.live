@@ -10,7 +10,7 @@ $video_id = isset($matches[1])?$matches[1]:'';
             <span style="z-index: 5;">
                 <?php foreach($info->gciTags as $tag){
                     if(isset($tag->tag) && isset($tag->tag->tag))
-                        echo '<span style="background-color: '.$tag->tag->tag_color.'" class="dot"></span>';
+                        echo '<span data-toggle="tooltip" data-animation="true" data-placement="bottom" title="'.$tag['tag'].'" onclick="searchByTag(\''.$tag['id'].'\')" style="background-color: '.$tag['tag_color'].'" class="dot"></span>';
                 }
                 ?>
             </span>
@@ -79,7 +79,7 @@ $video_id = isset($matches[1])?$matches[1]:'';
 
                 if(!empty($datas)){
                 ?>
-                <div>On screen(s):
+                <div>
                     <?php
                     echo implode(', ', $datas);
                     ?>

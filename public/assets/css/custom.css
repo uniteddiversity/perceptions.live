@@ -54,5 +54,27 @@
 div .tooltip{
     border-radius: 5px;
     padding: 5px;
-    font-size: 13px;
+    font-size: 12px;
 }
+
+/* Tooltip text */
+.tooltip2 .tooltip2text {
+    visibility: hidden;
+    width: 120px;
+    background-color: black;
+    color: #fff;
+    text-align: center;
+    padding: 5px 0;
+    border-radius: 6px;
+
+    /* Position the tooltip text - see examples below! */
+    position: absolute;
+    z-index: 1;
+}
+
+/* Show the tooltip text when you mouse over the tooltip container */
+.tooltip2:hover .tooltip2text {
+    visibility: visible;
+}
+
+.aboutGCI { background: #9FDAEE; border: 1px solid #2BB0D7;	}

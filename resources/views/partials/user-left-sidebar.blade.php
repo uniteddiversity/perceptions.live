@@ -4,12 +4,20 @@
 
         <div class="pcoded-navigatio-lavel" data-i18n="nav.category.navigation" >Navigation</div>
 
-
+        <ul class="pcoded-item pcoded-left-item">
+            <li class="pcoded-hasmenu">
+                <a href="/user/user-profile">
+                    <span class="pcoded-micon"><i class="ti-layout-sidebar-left"></i></span>
+                    <span class="pcoded-mtext" data-i18n="nav.page_layout.main">Profile</span>
+                    <span class="pcoded-mcaret"></span>
+                </a>
+            </li>
+        </ul>
         <ul class="pcoded-item pcoded-left-item">
             <li class="pcoded-hasmenu <?php if(in_array(Request::segment(3), array('content-add','content-list-open','content-list','location-list','sorting-tag-add'))){ echo 'active pcoded-trigger'; } ?> pcoded-trigger">
                 <a href="javascript:void(0)">
                     <span class="pcoded-micon"><i class="ti-video-camera"></i></span>
-                    <span class="pcoded-mtext" data-i18n="nav.dash.main">Video</span>
+                    <span class="pcoded-mtext" data-i18n="nav.dash.main">Your Videos</span>
                     <span class="pcoded-mcaret"></span>
                 </a>
                 <ul class="pcoded-submenu">

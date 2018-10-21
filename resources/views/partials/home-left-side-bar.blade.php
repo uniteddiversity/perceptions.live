@@ -1,6 +1,6 @@
 <div style="padding-left: 30px; padding-top: 12px; padding-bottom: 30px;">
     <div class="rfield">
-        <input type="text" placeholder="Looking for something?" name="search_text" id="search_text" />
+        <input type="text" placeholder="What are you looking for?" name="search_text" id="search_text" />
         <i class="flaticon-magnifying-glass" style="cursor:pointer" onclick="searchVideo()" ></i>
     </div>
 
@@ -12,41 +12,44 @@
             @endforeach
         </select>
     </div>
-	<div style="width=100%; padding-left: 20px; float: left;">
-    <?php
-    foreach($gci_tags as $tag){
-        echo '<span data-toggle="tooltip" data-animation="true" data-placement="bottom" title="'.$tag['tag'].'" onclick="searchByTag(\''.$tag['id'].'\')" style="background-color: '.$tag['tag_color'].'" class="dot"></span>';
-    } ?>
-		</div>
+    <div style="width=100%; padding-left: 20px; float: left;">
+        <span title="What are Greater Community Intentions?" style="background: rebeccapurple; background: -webkit-linear-gradient(left, orange , yellow, green, cyan, blue, violet); background: -o-linear-gradient(right, orange, yellow, green, cyan, blue, violet); background: -moz-linear-gradient(right, orange, yellow, green, cyan, blue, violet); background: linear-gradient(to right, orange , yellow, green, cyan, blue, violet);" class="dot">
+            <a class="tooltip2" href="#"><strong>?</strong><span class="aboutGCI">Use the <em>Greater Community Intentions</em> dots to sort through the different styles of people coming together around the world.</span></a>
+        </span>
+        <?php
+        foreach($gci_tags as $tag){
+            echo '<span data-toggle="tooltip" data-animation="true" data-placement="bottom" title="'.$tag['tag'].'" onclick="searchByTag(\''.$tag['id'].'\')" style="background-color: '.$tag['tag_color'].'" class="dot"></span>';
+        } ?>
+    </div>
 </div>
 
 {{--<div class="ml-filterbar">--}}
-    {{--<ul>--}}
-        {{--<li><a id="finddo-geolocate" class="theme-btn2" href="#"><em class="fa fa-crosshairs"></em> Geolocate</a></li>--}}
-        {{--<li><a id="finddo-target" class="theme-btn2" href="#"><i class="fa fa-bullseye"></i> Target </a></i></span></li>--}}
-    {{--</ul>--}}
+{{--<ul>--}}
+{{--<li><a id="finddo-geolocate" class="theme-btn2" href="#"><em class="fa fa-crosshairs"></em> Geolocate</a></li>--}}
+{{--<li><a id="finddo-target" class="theme-btn2" href="#"><i class="fa fa-bullseye"></i> Target </a></i></span></li>--}}
+{{--</ul>--}}
 {{--</div>--}}
 {{--<div class="col-lg-12">--}}
-    {{--<div class="mlradius">--}}
-        {{--<span>Radius :</span>--}}
-        {{--<div class="mlfield s2">--}}
-            {{--<select class="selectbox">--}}
-                {{--<option>Kilometer</option>--}}
-                {{--<option>Miles</option>--}}
-            {{--</select>--}}
-        {{--</div>--}}
-        {{--<div class="rslider">--}}
-            {{--<amino-slider class="slider" data-min="0" data-max="100" data-value="10"></amino-slider>--}}
-        {{--</div>--}}
-    {{--</div>--}}
+{{--<div class="mlradius">--}}
+{{--<span>Radius :</span>--}}
+{{--<div class="mlfield s2">--}}
+{{--<select class="selectbox">--}}
+{{--<option>Kilometer</option>--}}
+{{--<option>Miles</option>--}}
+{{--</select>--}}
+{{--</div>--}}
+{{--<div class="rslider">--}}
+{{--<amino-slider class="slider" data-min="0" data-max="100" data-value="10"></amino-slider>--}}
+{{--</div>--}}
+{{--</div>--}}
 {{--</div>--}}
 {{--<div class="ml-filterbar">--}}
-    {{--<h3><i class="flaticon-eye"></i>14 Results Found</h3>--}}
-    {{--<ul>--}}
-        {{--<li class="singleplaces active"><span><i class="fa fa-exchange"></i></span></li>--}}
-        {{--<li class="doubleplaces"><span><i class="fa fa-th-large"></i></span></li>--}}
-        {{--<li class="listingplaces"><span><i class="fa fa-th-list"></i></span></li>--}}
-    {{--</ul>--}}
+{{--<h3><i class="flaticon-eye"></i>14 Results Found</h3>--}}
+{{--<ul>--}}
+{{--<li class="singleplaces active"><span><i class="fa fa-exchange"></i></span></li>--}}
+{{--<li class="doubleplaces"><span><i class="fa fa-th-large"></i></span></li>--}}
+{{--<li class="listingplaces"><span><i class="fa fa-th-list"></i></span></li>--}}
+{{--</ul>--}}
 {{--</div>--}}
 <div class="ml-placessec">
     <div class="row" id="video_search_res" >
@@ -56,23 +59,23 @@
 
 
 <style>
-.dot {
-height: 22px;
-width: 22px;
-border-radius: 50%;
-display: inline-block;
-margin: 2px;
-cursor: pointer;
-}
+    .dot {
+        height: 22px;
+        width: 22px;
+        border-radius: 50%;
+        display: inline-block;
+        margin: 2px;
+        cursor: pointer;
+    }
 
-.dot-small {
-height: 10px;
-width: 10px;
-border-radius: 50%;
-display: inline-block;
-margin: 2px;
-cursor: pointer;
-}
+    .dot-small {
+        height: 10px;
+        width: 10px;
+        border-radius: 50%;
+        display: inline-block;
+        margin: 2px;
+        cursor: pointer;
+    }
 </style>
 <?php /*
 
