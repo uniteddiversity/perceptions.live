@@ -31,7 +31,7 @@ $video_id = isset($matches[1])?$matches[1]:'';
                     foreach($tags as $tag){
                         $tag_name_n_color = explode('-', $tag);
                         $tag_id = isset($tag_name_n_color[1])? $tag_name_n_color[1] : '0';
-                        echo '<span data-toggle="tooltip" data-animation="false" data-placement="right" title="'.$tag_name_n_color.'" onclick="searchByTag(\''.$tag_id.'\')" style="background-color: '.$tag_name_n_color[0].'" class="dot-small"></span>';
+                        echo '<span data-toggle="tooltip" data-animation="false" data-placement="right" title="'.$tag.'" onclick="searchByTag(\''.$tag_id.'\')" style="background-color: '.$tag_name_n_color[0].'" class="dot-small"></span>';
                     } ?>
                 </span>
 		<span style="padding-bottom: 6px;"><small><i class="fa fa-calendar"></i> <em><?php echo date('d F Y',strtotime($info['created_at'])) ?></em></small></span>
