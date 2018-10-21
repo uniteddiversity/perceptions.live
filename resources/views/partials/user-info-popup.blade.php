@@ -76,7 +76,7 @@ $display = ($user_status == 'private' || $user_status == 'only-logged')? false :
 </div>
 
 <div style="display: block; width:100%; padding-bottom: 20px; text-align: center;">
-    <div style="display: block; width:50%; padding-right: 20px; float: left; text-align: center;">
+    <div style="display: block; width:50%; padding: 0 0 0 40px; float: left; text-align: center;">
         <div><h5><i class="fa fa-film"></i> Media Involvements</h5></div>
         <?php /* ### LIST OF ASSOCIATED VIDEOS - CLICK THUMBNAIL IMAGE TO OPEN VIDEO-INFO-BLADE */ ?>
 
@@ -98,10 +98,23 @@ $display = ($user_status == 'private' || $user_status == 'only-logged')? false :
         <?php } ?>
 
     </div>
-    <div style="display: block; float: right; width:50%; padding-left: 20px; text-align: center;">
+    <div style="display: block; float: right; width:40%; padding:0 40px 0 20px; text-align: center;">
         <div><h5><i class="fa fa-users"></i> Group Associations</h5></div>
+        <div class="placedetails">
+        <?php
+        $group_names=[];
+        $vid_ids = explode(',',$video['group_names_ids']);
+        foreach($vid_ids as $v){
+            $group_name_id = explode('-',$v);
+            $group_id = isset($group_name_id[1])?$group_name_id[1]:'';
+            $group_name = isset($group_name_id[0])?$group_name_id[0]:'';
+            $group_names[] = '<span class="inactive_link" onclick="openGroupProfile(\''. $group_id .'\')">'. $group_name .'</span>';
+        }
+        ?>
+        <span class="pull-right"><i class="fa fa-users"></i> <?php echo implode(', ', $group_names) ?>
+            <div style="clear: both;"></div>
+        </span></div>
         <?php /* ### click group image to open group-info-blade */ ?>
-        <?php /* ### this div is only present if there is a group associated with video ### can we align icon with text? */ ?>
 
         <?php foreach($info['group_involvement_videos'] as $video){ //dd($video['location']);
         preg_match("/^(?:http(?:s)?:\/\/)?(?:www\.)?(?:m\.)?(?:youtu\.be\/|youtube\.com\/(?:(?:watch)?\?(?:.*&)?v(?:i)?=|(?:embed|v|vi|user)\/))([^\?&\"'>]+)/", $video['url'], $matches);
@@ -112,18 +125,6 @@ $display = ($user_status == 'private' || $user_status == 'only-logged')? false :
         </div><div style="clear: both;"></div>
         <div class="placedetails">
             <span class="pull-left" ><i class="flaticon-pin"></i> <?php echo $video['location'] ?> </span>
-            <?php
-            $group_names=[];
-            $vid_ids = explode(',',$video['group_names_ids']);
-            foreach($vid_ids as $v){
-                $group_name_id = explode('-',$v);
-                $group_id = isset($group_name_id[1])?$group_name_id[1]:'';
-                $group_name = isset($group_name_id[0])?$group_name_id[0]:'';
-                $group_names[] = '<span class="inactive_link" onclick="openGroupProfile(\''. $group_id .'\')">'. $group_name .'</span>';
-            }
-            ?>
-            <span class="pull-right"><i class="fa fa-users"></i> <?php echo implode(', ', $group_names) ?>
-                <div style="clear: both;"></div>
         </div>
         <?php } ?>
     </div>
