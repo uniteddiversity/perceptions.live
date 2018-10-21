@@ -10,7 +10,7 @@
     </div>
     <div class="rnaver">
         <span class="closeresmenu"><i>x</i>Close</span>
-    <?php   <div class="logo"><a href="#" title=""><img src="/assets/findgo/images/live-prcptions-beta-small.png" width=100 height=388 alt="" /></a></div> ?>
+    <?php /*   <div class="logo"><a href="#" title=""><img src="/assets/findgo/images/live-prcptions-beta-small.png" width=100 height=388 alt="" /></a></div> */ ?>
         @if (Route::has('login'))
 
             @auth
