@@ -53,7 +53,7 @@ $video_id = isset($matches[1])?$matches[1]:'';
 </span>
         <span class="pull-right" style="width:50%; float: right;><i class="flaticon-avatar"></i> <span class="inactive_link"><?php foreach($info->videoProducer as $key => $users){ if(isset($info->videoProducer[$key])){ echo '<span class="inactive_link" onclick="openProfile(\''. $info->videoProducer[$key]->user->id .'\')">@'.$info->videoProducer[$key]->user->display_name.'</span>'; break; } }?></span></span>
     </div>
-    <div width="100%">
+    <div width="100%" style="padding-top: 10px;">
     <ul class="listmetas2">
         <?php
         $datas = [];
@@ -75,9 +75,10 @@ $video_id = isset($matches[1])?$matches[1]:'';
         </p>
     </span>
     </div>
-    <div style="width:100%; display: block; padding 10px;">
+    <div style="width:100%; text-align: center; display: block;">
+        <strong>Credits</strong>
         <div class="usersmetas2">
-            <strong><i class="fa fa-user-circle"></i> Onscreen</strong>:
+            <strong><i class="fa fa-user-circle"></i> Onscreen</strong>:<br>
                 <?php if(isset($info->onScreen) && count($info->onScreen) > 0){
                 $datas = array();
                 foreach($info->onScreen as $user){
@@ -95,7 +96,7 @@ $video_id = isset($matches[1])?$matches[1]:'';
                 }; ?>
         </div>
             <div class="usersmetas2">
-                <strong><i class="fa fa-user"></i> Co-Creators</strong>:
+                <strong><i class="fa fa-user"></i> Co-Creators</strong>:<br>
                 <?php if(isset($info->coCreators)){
 
                     $datas = array();

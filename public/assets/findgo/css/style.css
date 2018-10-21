@@ -1616,6 +1616,7 @@ nav > ul > li.menu-item-has-children:hover > ul {
     color: #2B2B47;
     line-height: 16px;
     padding-bottom: 5px;
+    padding-top: 5px;
 }
 .usersmetas2 strong {
     color: #6060D5;
