@@ -10,7 +10,7 @@
     </div>
     <div class="rnaver">
         <span class="closeresmenu"><i>x</i>Close</span>
-    <?php /*   <div class="logo"><a href="#" title=""><img src="/assets/findgo/images/live-prcptions-beta-small.png" width=100 height=388 alt="" /></a></div> */ ?>
+    <div class="logo"><a href="#" title=""><img src="/assets/findgo/images/live-prcptions-beta-small.png" width=100 height=388 alt="" /></a></div>
         @if (Route::has('login'))
 
             @auth
@@ -55,7 +55,7 @@
         @endif
 
             <div class="logo">
-                <a href="#" title=""><img src="/assets/findgo/images/horizontal-white.png" height="40" width="175" alt="" /></a>
+<?php /*           <a href="#" title=""><img src="/assets/findgo/images/horizontal-white.png" height="40" width="175" alt="" /></a> */ ?>
             </div>
         <nav>
             <ul>
@@ -65,7 +65,7 @@
                 @else
 
                 @endauth
-                <li><a href="/claim-profile" target="_blank" ><i class="fa fa-registered white"></i>&nbsp;Claim Profile</a></li>
+                <li><a href="/claim-profile" target="_blank" ><i class="fa fa-user"></i>&nbsp;Claim Profile</a></li>
             @endif
             </ul>
             {{--<ul>--}}

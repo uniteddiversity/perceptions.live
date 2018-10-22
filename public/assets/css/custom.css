@@ -80,9 +80,9 @@ div .tooltip{
     float: left; position: absolute;
 }
 .tooltip2:hover em {
-    font-family: ralewaybold, sans-serif; font-size: 1.2em; font-weight: bold;
+    font-family: ralewaybold, sans-serif; font-size: 1em;
     display: block; padding: 0.2em 0 0.6em 0;
 }
 .aboutgci { padding: 0.8em 1em; }
 * html a:hover { background: transparent; }
-.aboutgci {background: #D2C9F6; border: 0px; text-shadow: none; color: #000; }
+.aboutgci {background: #D2C9F6; border: 0px; text-shadow: none; color: #333; }

@@ -77,7 +77,7 @@ $display = ($user_status == 'private' || $user_status == 'only-logged')? false :
 
 <div style="display: block; width:100%; padding-bottom: 20px; text-align: center;">
     <div style="display: block; width:50%; padding: 0 0 0 40px; float: left; text-align: center;">
-        <div><h5><i class="fa fa-film"></i> Media Involvements</h5></div>
+        <div><h5>Media Involvements</h5></div>
         <?php /* ### LIST OF ASSOCIATED VIDEOS - CLICK THUMBNAIL IMAGE TO OPEN VIDEO-INFO-BLADE */ ?>
 
         <?php foreach($info['user_involvement_videos'] as $video){ //dd($video['user_association_tag_slug']);
@@ -99,7 +99,7 @@ $display = ($user_status == 'private' || $user_status == 'only-logged')? false :
 
     </div>
     <div style="display: block; float: right; width:40%; padding:0 40px 0 20px; text-align: center;">
-        <div><h5><i class="fa fa-users"></i> Group Associations</h5></div>
+        <div><h5>Group Associations</h5></div>
         <?php
         $group_names=[];
         $vid_ids = explode(',',$video['group_names_ids']);

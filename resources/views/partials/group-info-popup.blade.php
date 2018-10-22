@@ -9,7 +9,7 @@
 
             <?php /* ### PRIVACY SETTINGS ICON: if public, then fa-eye; if only logged in, then fa-lock; if private, then fa-eye-slash  */ ?>
 
-            <div style="width:100%; text-align: center;"><h4><?php echo $info['name'] ?>
+            <div style="width:100%; text-align: center;"><h4><i class="fa fa-users"></i> <?php echo $info['name'] ?>
                     {{--<i class="fa fa-eye"></i>--}}
                 </h4>
             </div>
@@ -77,7 +77,7 @@
 
 <div style="display: block; width:100%; text-align: center;">
     <div style="display: block; padding-bottom: 40px; width:65%; padding-top: 40px; padding-right: 20px; float: left; text-align: center;">
-        <div><h5><i class="fa fa-film"></i> Media Involvements</h5></div>
+        <div><h5> Media Involvements</h5></div>
         <?php /* ### LIST OF ASSOCIATED VIDEOS - CLICK THUMBNAIL IMAGE TO OPEN VIDEO-INFO-BLADE */ ?>
         <?php
 
@@ -89,14 +89,14 @@
         <div class="placedetails">
             <span class="pull-left" ><i class="fa fa-tag"></i> <?php echo $content['primary_subject_tag'] ?></span>
             <?php foreach($content->videoProducer as $user){ ?>
-                <span class="pull-right"><i class="flaticon-avatar"></i> <span class="inactive_link" onclick="openProfile('<?php echo $user->user->id ?>')" >@<?php echo $user->user->display_name ?></span></span>
+                <span class="pull-right"><i class="fa fa-film"></i> <span class="inactive_link" onclick="openProfile('<?php echo $user->user->id ?>')" >@<?php echo $user->user->display_name ?></span></span>
             <?php } ?>
         </div>
         <?php } ?>
 
     </div>
     <div style="display: block; text-align: center; padding-bottom: 40px; padding-top: 40px; float: right; width:35%; padding-left: 20px; ">
-        <div><h5><i class="fa fa-users"></i> Users</h5></div>
+        <div><h5>Users</h5></div>
         <?php /* ### list of group users that have privacy setting = public (or, if logged in, = logged in)*/
         foreach($group_users as $user){
         ?>

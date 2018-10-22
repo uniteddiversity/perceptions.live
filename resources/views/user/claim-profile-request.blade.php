@@ -10,7 +10,8 @@ $data['proof_images'] = array();
 <div class="col-lg-12 grid-margin stretch-card">
         <div class="card">
             <div class="card-body">
-                <h4 class="card-title">Profile Settings</h4>
+                <h4 class="card-title">Claim A User Profile</h4>
+                <em>The PRCPTIONS.live platform creates 'shadow profiles' of users featured in a piece of but not actually registered for the site. If you happen to stumble upon a shadow profile that is you, please fill out this form to claim it as your own.</em>
                 <div class="table-responsive">
                     @if ($errors->any())
                         <div class="alert alert-danger">

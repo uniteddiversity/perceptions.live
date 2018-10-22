@@ -137,7 +137,7 @@ class SortingTagsTableSeeder extends Seeder
                 'status' => '1',
                 'tag_for' => 'gci',
                 'not_selectable' => '1'
-            ]
+            ],
             [
             'id' => '12',
             'tag' => 'Instructors & Teachers',

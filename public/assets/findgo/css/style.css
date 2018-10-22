@@ -862,7 +862,7 @@ nav > ul > li.menu-item-has-children:hover > ul {
     position: absolute;
     width: 50px;
     height: 50px;
-    background: #fb3640;
+    background: #30306a;
 
     -webkit-border-radius: 2px;
     -moz-border-radius: 2px;
@@ -966,7 +966,7 @@ nav > ul > li.menu-item-has-children:hover > ul {
     width: 100%;
     font-family: ralewayregular;
     font-size: 17px;
-    background: #28b8dc;
+    background: #4214c7;
 
     padding: 15px 0;
 
@@ -3730,7 +3730,7 @@ header.s5 .extras > a {
     position : relative;
     z-index  : 1;
     margin-left: -5px;
-    padding-right: 0px;
+    padding-right: 10px;
 }
 .scrollContent{
     height          : 100%;
