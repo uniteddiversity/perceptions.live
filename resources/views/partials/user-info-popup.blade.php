@@ -110,12 +110,40 @@ $display = ($user_status == 'private' || $user_status == 'only-logged')? false :
             $group_names[] = '<span class="inactive_link" onclick="openGroupProfile(\''. $group_id .'\')">'. $group_name .'</span>';
         }
         ?>
+        <?php /*
         <span class="pull-right"><i class="fa fa-users"></i> <?php echo implode(', ', $group_names) ?>
             <div style="clear: both;"></div>
         </span>
+        */ ?>
         <?php /* ### click group image to open group-info-blade */ ?>
 
-        <?php foreach($info['group_involvement_videos'] as $video){ //dd($video['location']);
+        <?php
+        if(isset($info->groups)){
+            foreach($info->groups as $group){  //dd($group->group);?>
+
+
+        <div style="width: 100%; text-align: center;">
+            <?php if(!isset($group->group->image[0]->url)){?>
+            <img class="active_link" onclick="openGroupProfile('<?php echo $group->group->id ?>')" style="margin-left: 25%;" height="150" width="150" src="/assets/img/face1.png">
+            <?php }else{ ?>
+            <img class="active_link" onclick="openGroupProfile('<?php echo $group->group->id ?>')" style="margin-left: 25%;" height="150" width="150" src="<?php echo '/storage/'.$group->group->image[0]->url; ?>">
+            <?php } ?>
+
+            <div style="clear: both"></div>
+        </div>
+        <div style="display: block; width: 100%; text-align: center;">
+            <span style="color: #8d8d8d;"><i class="fa fa-user"></i> <span class="inactive_link" onclick="openGroupProfile('<?php echo $group->group->id ?>')"><?php echo $group->group->name ?></span></span>
+            <?php if(!empty($group->group->default_location)){ ?>
+                <div style="color: #8d8d8d;"><i class="flaticon-pin"></i><?php echo $group->group->default_location ?></div>
+            <?php } ?>
+
+        </div>
+
+
+           <?php
+            }
+        }
+        /*foreach($info['group_involvement_videos'] as $video){ //dd($video['location']);
         preg_match("/^(?:http(?:s)?:\/\/)?(?:www\.)?(?:m\.)?(?:youtu\.be\/|youtube\.com\/(?:(?:watch)?\?(?:.*&)?v(?:i)?=|(?:embed|v|vi|user)\/))([^\?&\"'>]+)/", $video['url'], $matches);
         $video_id = isset($matches[1])?$matches[1]:'';
         ?>
@@ -125,7 +153,7 @@ $display = ($user_status == 'private' || $user_status == 'only-logged')? false :
         <div class="placedetails">
             <span class="pull-left" ><i class="flaticon-pin"></i> <?php echo $video['location'] ?> </span>
         </div>
-        <?php } ?>
+        <?php } */ ?>
     </div>
 </div>
 <?php } ?>

@@ -22,7 +22,7 @@
     <div class="col-lg-12 grid-margin stretch-card">
         <div class="card">
             <div class="card-body">
-                <h4 class="card-title">Profile Settings <?php <button class="tag label label-info" onclick="openProfile(<?php echo $data['id'] ?>)">View my public profile</button> ?></h4>
+                <h4 class="card-title">Profile Settings <?php /* <button class="tag label label-info" onclick="openProfile(<?php echo $data['id'] ?>)">View my public profile</button> */ ?></h4>
                 <div class="table-responsive">
                     @if ($errors->any())
                         <div class="alert alert-danger">

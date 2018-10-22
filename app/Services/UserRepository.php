@@ -165,7 +165,11 @@ class UserRepository
 
     public function getUser($user_id)
     {
-        return $this->user->where('users.id', $user_id)->with(['image','groups',
+        return $this->user->where('users.id', $user_id)->with(['image','groups' => function($q){
+            $q->with(['group'=> function($r){
+                $r->with('image');
+            }]);
+        },
             'actingRoles' => function($q){
                 $q->with('tag');
             },

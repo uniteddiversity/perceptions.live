@@ -45,4 +45,11 @@ class Group extends Model
     {
         return $this->hasMany('App\TagGroupAssociation','group_id')->where('slug','role');
     }
+
+    public function image()
+    {
+        return $this->hasMany('App\Attachment', 'fk_id')->where('table','groups')
+            ->where('status','=','1')
+            ->where('submission_type','=','group-avatar');
+    }
 }
