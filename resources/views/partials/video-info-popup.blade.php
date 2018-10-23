@@ -37,7 +37,8 @@ $video_id = isset($matches[1])?$matches[1]:'';
             <?php if(isset($info->groups) && count($info->groups) > 0){
             $datas = array();
             foreach($info->groups as $group){
-                $datas[] = '@'.'<span class="inactive_link" onclick="openGroupProfile('.$group->group->id.')">'.$group->group->name.'</span>';
+                if(isset($group->group) && isset($group->group->id))
+                    $datas[] = '@'.'<span class="inactive_link" onclick="openGroupProfile('.$group->group->id.')">'.$group->group->name.'</span>';
             }
 
             if(!empty($datas)){

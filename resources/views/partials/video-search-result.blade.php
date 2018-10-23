@@ -34,7 +34,7 @@ $video_id = isset($matches[1])?$matches[1]:'';
                         echo '<span data-toggle="tooltip" data-animation="false" data-placement="right" title="'.$tag.'" onclick="searchByTag(\''.$tag_id.'\')" style="background-color: '.$tag_name_n_color[0].'" class="dot-small"></span>';
                     } ?>
                 </span>
-		<span style="padding-bottom: 6px;"><small><i class="fa fa-calendar"></i> <em><?php echo date('d F Y',strtotime($info['created_at'])) ?></em></small></span>
+		<span style="padding-bottom: 6px;"><small><i class="fa fa-calendar"></i> <em><?php echo date('d F Y',strtotime($info['captured_date'])) ?></em></small></span>
             </div>
         </div><div class="placeinfosdesc">
                 <?php if(!empty($info['trim_description'])){ ?>

@@ -527,7 +527,7 @@ class AdminController extends Controller
     public function postGroupAdd(Request $request)
     {
         $validator = Validator::make($request->all(), [
-            'name' => 'required',
+            'name' => 'required|unique:groups',
             'description' => 'required',
             'category_id' => 'required'
         ]);
@@ -628,6 +628,14 @@ class AdminController extends Controller
 
     public function postSortingTagAdd(Request $request)
     {
+        $validator = Validator::make($request->all(), [
+            'tag' => 'required|unique:sorting_tags'
+        ]);
+
+        if ($validator->fails()) {
+            return Redirect::back()->withErrors($validator->messages())->withInput();
+        }
+
         $r = $request->toArray();
         $user_id = (!isset(Auth::user()->id))? 0 : Auth::user()->id;
         $this->userRepository->addSortingTag($user_id, 0, array('tag' => $r['tag'], 'description' => $r['description'], 'tag_for' => 'content'));

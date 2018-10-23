@@ -39,7 +39,7 @@
 <header class="s4 dark">
 
     <div class="container fluid">
-        <div id="logo_overlay"><img src="/assets/findgo/images/live-perceptions-logo2.png" width="600" height="122"></div>
+        <div id="logo_overlay"><img src="/assets/findgo/images/live-perceptions-logo.png" width="600" height="122"></div>
 
         @if (Route::has('login'))
 
@@ -152,7 +152,7 @@
         position: absolute;
         display: block;
         width: 40%;
-        margin-left: 10%;
+        margin-left: 3%;
         background-color: #transparent;
         z-index:50;
     }

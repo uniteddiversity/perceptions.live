@@ -41,7 +41,7 @@ if(typeof(L) != "undefined"){
 
     // map.on('click', onMapClick);
     var popup = L.popup();
-    searchVideo();
+    // searchVideo();
 }
 
 // function onMapClick(e) {
