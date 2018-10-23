@@ -152,7 +152,7 @@
         position: absolute;
         display: block;
         width: 40%;
-        margin-left: 3%;
+        margin-left: 10%;
         background-color: #transparent;
         z-index:50;
     }
