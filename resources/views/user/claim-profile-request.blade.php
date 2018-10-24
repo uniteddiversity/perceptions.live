@@ -14,7 +14,7 @@ $data['proof_images'] = array();
                  <a href="/"><img src="/assets/findgo/images/live-perceptions-logo.png" width="600" height="122"></a>
                 </div>
                 <div class="claimprofile">
-                <h3 align=center class="card-title">Claim A Group or User Profile</h3>
+                <h2 align=center class="card-title">Claim A Group or User Profile</h2>
                 <div class="pagedesc" align="center">
                 <em>The PRCPTIONS.live platform creates 'shadow profiles' of users featured in a piece of but not actually registered for the site. If you happen to stumble upon a shadow profile that is you, please fill out this form to claim it as your own.</em>
                 </div>
@@ -78,12 +78,12 @@ $data['proof_images'] = array();
                                 <hr style="padding: 10px;">
                             <div class="form-group">
                                 <label for="email">Your E-mail Address</label>
-                                <input type="text" name="email" id="email">
+                                <input type="text" class="form-control" name="email" id="email">
                             </div>
 
                             <div class="form-group">
-                                <input type="checkbox" name="accept_tos" id="accept_tos" value="1" />
-                                <label for="password"> I have read and understand PRCPTION Travel's <a href="https://perceptiontravel.tv/terms-of-service/">Terms of Service</a>.</label>
+                                <input type="checkbox" class="form-control" name="accept_tos" id="accept_tos" value="1" />
+                                <label for="password"> I have read and understand PRCPTION Travel's <a target="_blank" href="https://perceptiontravel.tv/terms-of-service/">Terms of Service</a>.</label>
                             </div>
 
 
@@ -100,10 +100,10 @@ $data['proof_images'] = array();
     </div>
 <style>
     .pagedesc {
-        font-size: 18px;
+        font-size: 16px;
         font-style: italic;
         font-family: questrial;
-        line-height: 1.6em;
+        line-height: 1.4em;
         padding-bottom: 40px;
     }
 
@@ -115,10 +115,12 @@ $data['proof_images'] = array();
          padding-bottom: 10px;
      }
 
-    .footer { width: 100%; margin: auto; text-align: center; font-size: 12px; color: slategray; }
+    .footer { margin-top: 60px; width: 100%; margin: auto; text-align: center; font-size: 12px; color: slategray; }
+
+    formtextbottom { padding-top:30px; padding-bottom: 30px; }
 
 .formtextbottom a {
-    padding-top: 20px;
+    color: #2B2B47;
 }
 
 .claimprofile { width: 50%; margin: auto; padding-top: 40px; }
