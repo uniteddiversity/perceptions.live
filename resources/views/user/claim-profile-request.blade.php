@@ -14,8 +14,8 @@ $data['proof_images'] = array();
                  <a href="/"><img src="/assets/findgo/images/live-perceptions-logo.png" width="600" height="122"></a>
                 </div>
                 <div class="claimprofile">
-                <h4 class="card-title">Claim A User Profile</h4>
-                <div class="formdesctext">
+                <h4 align=center class="card-title">Claim A User Profile</h4>
+                <div class="formdesctext" align="center">
                 <em>The PRCPTIONS.live platform creates 'shadow profiles' of users featured in a piece of but not actually registered for the site. If you happen to stumble upon a shadow profile that is you, please fill out this form to claim it as your own.</em>
                 </div>
                     <div class="table-responsive">
@@ -36,7 +36,7 @@ $data['proof_images'] = array();
                         <form action="/claim-profile-post" method="post" enctype='multipart/form-data'>
                             <input type="hidden" name="_token" id="csrf-token" value="{{ Session::token() }}" />
                             <div class="form-group">
-                                <label for="display_name">Select the display name you've seen</label>
+                                <label for="display_name">Select the display name you wish to claim: </label>
                                 <select class="form-control" id="display_name_for_claim" name="display_name">
                                     <option value="">select display name</option>
                                     @foreach($user_list as $user)
@@ -58,15 +58,6 @@ $data['proof_images'] = array();
                             </div>
 
                             <div class="form-group">
-                                <label for="additional_comments">Additional comments, (lost videos, requests, etc)</label>
-                                <textarea class="form-control" placeholder="Additional comments, (lost videos, requests, etc)" rows="5" name="additional_comments">{{ old('additional_comments') }}</textarea>
-                            </div>
-                            <div class="form-group">
-                                <label for="email">Your E-mail Address</label>
-                                <input type="text" class="form-control" name="email" id="email" placeholder="Email">
-                            </div>
-
-                            <div class="form-group">
                                 <label for="accept_tos">Relevant Proof of Identity</label>
                                 <div class="formdesctext">
                                     <em>Please upload some evidence that you are who you claim to be (i.e. selfie or personal document) </em>
@@ -79,7 +70,19 @@ $data['proof_images'] = array();
                             </div>
 
                             <div class="form-group">
-                                <label for="password">I have read and understand PRCPTION Travel's Terms of Service: </label>
+                                <label for="additional_comments">Additional information, comments, questions, or concerns: </label>
+                                <textarea class="form-control" placeholder="Additional comments, (lost videos, requests, etc)" rows="5" name="additional_comments">{{ old('additional_comments') }}</textarea>
+                            </div>
+                                <hr style="padding: 10px;">
+                            <div class="form-group">
+                                <label for="email">Your E-mail Address</label>
+                                <input type="text" class="form-control" name="email" id="email" placeholder="Email">
+                            </div>
+
+
+
+                            <div class="form-group">
+                                <label for="password">I have read and understand PRCPTION.LIVE's <a href="https://perceptiontravel.tv/terms-of-service/">Terms of Service</a>: </label>
                                 <input type="checkbox" name="accept_tos" id="accept_tos" value="1" />
                             </div>
 
@@ -95,13 +98,21 @@ $data['proof_images'] = array();
         </div>
     </div>
 <style>
-.formdesctext {
-font-size: 14px;
-    font-style: italic;
-font-family: questrial;
-line-height: 1.1em;
-    padding-bottom: 10px;
-}
+    .pagedesc {
+        font-size: 18px;
+        font-style: italic;
+        font-family: questrial;
+        line-height: 1.6em;
+        padding-bottom: 20px;
+    }
+
+    .formdesctext {
+         font-size: 14px;
+         font-style: italic;
+         font-family: questrial;
+         line-height: 1.2em;
+         padding-bottom: 10px;
+     }
 
 .formtextbottom { padding-top: 20px;}
 
