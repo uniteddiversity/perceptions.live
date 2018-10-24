@@ -88,13 +88,13 @@ $data['proof_images'] = array();
                             </div>
 
 
-                            <button type="submit" class="btn btn-primary">Submit</button>
+                            <button type="submit" class="btn btn-primary" style="background-color:#2B2B47; color: #ffffff;">Submit</button>
                         </form>
 
                     </div>
-
+                </div>
                     <div class="footer">
-                        <div class"formtextbottom"><a href="/"><- Return to PRCPTIONS.LIVE</a>
+                        <div style="padding-bottom: 20px;"><a href="/"><- Return to PRCPTIONS.LIVE</a>
                     </div>
                         &copy; 2018 PRCPTION Travel, Inc.</div>
 
@@ -105,7 +105,6 @@ $data['proof_images'] = array();
 <style>
     .pagedesc {
         font-size: 16px;
-        font-style: italic;
         font-family: questrial;
         line-height: 1.4em;
         padding-bottom: 40px;
