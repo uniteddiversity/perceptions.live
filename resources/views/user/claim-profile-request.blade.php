@@ -53,17 +53,17 @@ $data['proof_images'] = array();
 
                                 </select>
                             </div>
-<hr>
+
                             <div class="form-group">
                                 <input type="checkbox" name="confirm_selected_content" id="confirm_selected_content" value="1" />
                                 <label for="confirm_selected_content"> I confirm that this is my involvement, appearance, and/or content in these videos.</label>
 
                             </div>
-
+                            <hr>
                             <div class="form-group">
-                                <label for="accept_tos">Relevant Proof of Identity</label>
+                                <label for="accept_tos">Relevant Proof of Identity </label>
                                 <div class="formdesctext">
-                                    <em>Please upload some evidence that you are who you claim to be (i.e. selfie or personal document) </em>
+                                    <em>Please upload some evidence that you are who you claim to be, like a selfie or personal document. If you have nothing else, please upload a selfie. </em>
                                 </div>
                                 <input class="form-control" type="file" multiple name="proof_of_work[]" />
 
@@ -104,10 +104,10 @@ $data['proof_images'] = array();
     </div>
 <style>
     .pagedesc {
-        font-size: 18px;
+        font-size: 20px;
         font-family: questrial;
-        line-height: 1.2em;
-        padding-bottom: 40px;
+        line-height: 1em;
+        padding-bottom: 20px;
     }
 
     .formdesctext {
@@ -125,6 +125,8 @@ $data['proof_images'] = array();
     color: #2B2B47;
     font-size: 20px;
 }
+
+hr { padding-top: 20px; padding-bottom: 20px; }
 
 .claimprofile { width: 50%; margin: auto; padding-top: 40px; }
 
