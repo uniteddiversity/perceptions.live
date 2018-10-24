@@ -1653,14 +1653,6 @@ nav > ul > li.menu-item-has-children:hover > ul {
     line-height: 16px;
 }
 
-.formdesctext {
-    font-size: 11px;
-    font-family: questrial;
-    line-height: .8em;
-    padding: 5px 0 10px 0;
-
-}
-
 .modal-dialog {
     background: #fff !important;
     width: 750px !important;

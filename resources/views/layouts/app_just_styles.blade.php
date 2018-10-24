@@ -8,7 +8,6 @@
     <link rel="stylesheet" href="/assets/admin-temp/vendors/iconfonts/mdi/css/materialdesignicons.min.css">
     <link rel="stylesheet" href="/assets/admin-temp/vendors/css/vendor.bundle.base.css">
     <link rel="stylesheet" href="/assets/admin-temp/css/style.css">
-    <link rel="stylesheet" href="/assets/findgo/css/style.css">
     <link rel="stylesheet" href="/assets/admin-temp/vendors/css/vendor.bundle.addons.css">
     <link rel="stylesheet" href="/js/dist/css/select2.min.css" />
 

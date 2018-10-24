@@ -10446,6 +10446,8 @@ input[type="button"].btn-block {
     border-bottom-right-radius: 0.25rem;
     border-bottom-left-radius: 0.25rem; }
 
+  .claimprofile { width: 50%; margin: auto; }
+
 .card-body {
   flex: 1 1 auto;
   padding: 1.25rem; }
