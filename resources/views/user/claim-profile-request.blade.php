@@ -8,8 +8,8 @@ $data['proof_images'] = array();
 ?>
 
 <div class="col-lg-12 grid-margin stretch-card">
-        <div class="card" width="50%">
-            <div class="card-body">
+        <div class="card">
+            <div class="card-body" width="50%">
                 <h4 class="card-title">Claim A User Profile</h4>
                 <div class="formdesctext">
                 <em>The PRCPTIONS.live platform creates 'shadow profiles' of users featured in a piece of but not actually registered for the site. If you happen to stumble upon a shadow profile that is you, please fill out this form to claim it as your own.</em>
@@ -79,6 +79,9 @@ $data['proof_images'] = array();
 
                             <button type="submit" class="btn btn-primary">Submit</button>
                         </form>
+                        <div style="formdescobv">
+                            <a href="/"><- Return to PRCPTIONS.LIVE</a>
+                        </div>
                 </div>
             </div>
         </div>

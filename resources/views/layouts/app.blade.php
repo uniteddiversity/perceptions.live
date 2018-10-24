@@ -34,7 +34,6 @@
 
 <div class="page-loading">
     <img src="/assets/findgo/images/loader.gif" alt="" />
-    <span>Skip Loading?</span>
 </div>
 
 <div class="theme-layout">
