@@ -16,7 +16,8 @@ $data['proof_images'] = array();
                 <div class="claimprofile">
                 <h2 align=center class="card-title">Claim A Group or User Profile</h2>
                 <div class="pagedesc" align="center">
-                <em>In order to continue networking the communities of the world, the PRCPTIONS.live platform creates 'shadow profiles' of users and groups featured in a piece of media who are not yet registered in the system. If you happen to stumble upon a shadow profile that is you, please fill out this form to claim it as your own.</em>
+                    <p>In order to effectively networking the communities of the world, the PRCPTIONS.LIVE platform creates 'shadow profiles' of users and groups featured in a piece of media who are not yet registered in the system.</p>
+                    <p>If you happen to stumble upon a shadow profile that is you, please fill out this form to claim it as your own.</p>
                 </div>
                     <hr>
                     <div class="table-responsive">
@@ -82,7 +83,7 @@ $data['proof_images'] = array();
                             </div>
 
                             <div class="form-group">
-                                <input type="checkbox" class="form-control" name="accept_tos" id="accept_tos" value="1" />
+                                <input type="checkbox" name="accept_tos" id="accept_tos" value="1" />
                                 <label for="password"> I have read and understand PRCPTION Travel's <a target="_blank" href="https://perceptiontravel.tv/terms-of-service/">Terms of Service</a>.</label>
                             </div>
 
@@ -90,13 +91,13 @@ $data['proof_images'] = array();
                             <button type="submit" class="btn btn-primary">Submit</button>
                         </form>
 
-
+                    </div>
 
                     <div class="footer">
                         <div class"formtextbottom"><a href="/"><- Return to PRCPTIONS.LIVE</a>
                     </div>
                         &copy; 2018 PRCPTION Travel, Inc.</div>
-                    </div>
+
                 </div>
             </div>
         </div>
@@ -111,20 +112,19 @@ $data['proof_images'] = array();
     }
 
     .formdesctext {
-        color: slategray;s
-         font-size: 14px;
+        color: slategray;
+         font-size: 12px;
          font-style: italic;
          font-family: questrial;
-         line-height: 1.2em;
+         line-height: 1em;
          padding-bottom: 10px;
      }
 
     .footer { margin-top: 60px; width: 100%; margin: auto; text-align: center; font-size: 12px; color: slategray; }
 
-    formtextbottom { padding-top:30px; padding-bottom: 30px; }
-
-.formtextbottom a {
+.footer a {
     color: #2B2B47;
+    font-size: 20px;
 }
 
 .claimprofile { width: 50%; margin: auto; padding-top: 40px; }
