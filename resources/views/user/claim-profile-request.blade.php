@@ -10,6 +10,9 @@ $data['proof_images'] = array();
 <div class="col-lg-12 grid-margin stretch-card">
         <div class="card">
             <div class="card-body">
+                <div style="width:100%; background:">
+
+                </div>
                 <div class="claimprofile">
                 <h4 class="card-title">Claim A User Profile</h4>
                 <div class="formdesctext">
@@ -80,7 +83,7 @@ $data['proof_images'] = array();
 
                             <button type="submit" class="btn btn-primary">Submit</button>
                         </form>
-                        <div style="formtextbottom">
+                        <div class"formtextbottom">
                             <a href="/"><- Return to PRCPTIONS.LIVE</a>
                         </div>
                     </div>
@@ -93,7 +96,7 @@ $data['proof_images'] = array();
 font-size: 12px;
     font-style: italic;
 font-family: questrial;
-line-height: .8em;
+line-height: 1.1em;
     padding-bottom: 10px;
 }
 
