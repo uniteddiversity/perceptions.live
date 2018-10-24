@@ -14,7 +14,7 @@ $data['proof_images'] = array();
                  <a href="/"><img src="/assets/findgo/images/live-perceptions-logo.png" width="600" height="122"></a>
                 </div>
                 <div class="claimprofile">
-                <h3 align=center class="card-title">Claim A Username</h3>
+                <h3 align=center class="card-title">Claim A Group or User Profile</h3>
                 <div class="pagedesc" align="center">
                 <em>The PRCPTIONS.live platform creates 'shadow profiles' of users featured in a piece of but not actually registered for the site. If you happen to stumble upon a shadow profile that is you, please fill out this form to claim it as your own.</em>
                 </div>
