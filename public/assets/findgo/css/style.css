@@ -1614,7 +1614,6 @@ nav > ul > li.menu-item-has-children:hover > ul {
     padding-right: 0 !important;
 }
 
-
 .usersmetas2 {
     margin: auto;
     font-family: ralewayregular;
@@ -1652,6 +1651,14 @@ nav > ul > li.menu-item-has-children:hover > ul {
 
     margin-right: 9px;
     line-height: 16px;
+}
+
+.formdesctext {
+    font-size: 11px;
+    font-family: questrial;
+    line-height: .8em;
+    padding: 5px 0 10px 0;
+
 }
 
 .modal-dialog {
