@@ -80,7 +80,7 @@ $data['proof_images'] = array();
 
                             <button type="submit" class="btn btn-primary">Submit</button>
                         </form>
-                        <div style="formdescobv">
+                        <div style="formtextbottom">
                             <a href="/"><- Return to PRCPTIONS.LIVE</a>
                         </div>
                     </div>
@@ -94,9 +94,12 @@ font-size: 12px;
     font-style: italic;
 font-family: questrial;
 line-height: .8em;
-padding: 5px 0 10px 0;
-
+    padding-bottom: 10px;
 }
+
+.formtextbottom { padding-top: 20px;}
+
+.claimprofile { width: 50%; margin: auto; }
 </style>
 
 @endsection
