@@ -10,8 +10,8 @@ $data['proof_images'] = array();
 <div class="col-lg-12 grid-margin stretch-card">
         <div class="card">
             <div class="card-body">
-                <div style="width:100%; background:#2B2B47; text-align: center;">
-                 <a href="/"><img src="/assets/findgo/images/live-prcptions-beta-small.png" width=100 height=388 alt="" /></a>
+                <div style="width:100%; background:#2B2B47; text-align: center; padding-bottom:25px;">
+                 <a href="/"><img src="/assets/findgo/images/live-perceptions-logo.png" width="600" height="122"></a>
                 </div>
                 <div class="claimprofile">
                 <h4 class="card-title">Claim A User Profile</h4>
