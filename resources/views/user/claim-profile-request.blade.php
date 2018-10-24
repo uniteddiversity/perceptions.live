@@ -16,7 +16,7 @@ $data['proof_images'] = array();
                 <div class="claimprofile">
                 <h2 align=center class="card-title">Claim A Group or User Profile</h2>
                 <div class="pagedesc" align="center">
-                <em>The PRCPTIONS.live platform creates 'shadow profiles' of users featured in a piece of but not actually registered for the site. If you happen to stumble upon a shadow profile that is you, please fill out this form to claim it as your own.</em>
+                <em>In order to continue networking the communities of the world, the PRCPTIONS.live platform creates 'shadow profiles' of users and groups featured in a piece of media who are not yet registered in the system. If you happen to stumble upon a shadow profile that is you, please fill out this form to claim it as your own.</em>
                 </div>
                     <hr>
                     <div class="table-responsive">
@@ -89,10 +89,13 @@ $data['proof_images'] = array();
 
                             <button type="submit" class="btn btn-primary">Submit</button>
                         </form>
-                        <div class"formtextbottom">
-                            <a href="/"><- Return to PRCPTIONS.LIVE</a>
-                        </div>
-                    <div class="footer">&copy; 2018 PRCPTION Travel, Inc.</div>
+
+
+
+                    <div class="footer">
+                        <div class"formtextbottom"><a href="/"><- Return to PRCPTIONS.LIVE</a>
+                    </div>
+                        &copy; 2018 PRCPTION Travel, Inc.</div>
                     </div>
                 </div>
             </div>
@@ -108,6 +111,7 @@ $data['proof_images'] = array();
     }
 
     .formdesctext {
+        color: slategray;s
          font-size: 14px;
          font-style: italic;
          font-family: questrial;
@@ -124,6 +128,7 @@ $data['proof_images'] = array();
 }
 
 .claimprofile { width: 50%; margin: auto; padding-top: 40px; }
+
 </style>
 
 @endsection
