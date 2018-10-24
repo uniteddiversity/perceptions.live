@@ -16,10 +16,9 @@ $data['proof_images'] = array();
                 <div class="claimprofile">
                 <h2 align=center class="card-title">Claim A Group or User Profile</h2>
                 <div class="pagedesc" align="center">
-                    <p>In order to effectively network the communities of the world, the PRCPTIONS.LIVE platform creates 'shadow profiles' of users and groups featured in a piece of media who are not yet registered in the system.</p>
+                    <p>In order to effectively network the communities of the world, the PRCPTIONS.LIVE platform automatically creates 'shadow profiles' of users and groups who are featured in media yet not yet registered in the system.</p>
                     <p>If you happen upon a shadow profile that is you, please fill out this form to claim it and activate your account.</p>
                 </div>
-                    <hr>
                     <div class="table-responsive">
                     @if ($errors->any())
                         <div class="alert alert-danger">
