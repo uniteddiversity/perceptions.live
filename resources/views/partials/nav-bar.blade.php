@@ -45,7 +45,7 @@
         @if (Route::has('login'))
 
             @auth
-                <div class="extras">
+
                     <li class="menu-item-has-children>
                     <a href="#" title=""><img src="/assets/findgo/images/icon1.png" alt="" /> {{Auth::user()->first_name}}</a>
                     <ul>
@@ -53,7 +53,7 @@
                     <li><a href="listing-category.html" title="Submit A Video"></a></li>
                     <li><a href="listing-category2.html" title="">Submit Feedback</a></li>
                     </ul>
-            </div>
+
         @else
             <div class="extras">
                 <span class="accountbtn"><i class="flaticon-avatar"></i></span>
