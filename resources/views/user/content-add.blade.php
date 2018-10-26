@@ -49,7 +49,7 @@
         <div class="card">
             <div class="card-body">
                 <div class="submitprcption">
-                    <h4 class="card-title" style="margin-bottom: 10px;">Submit Your PRCPTION</h4>
+                    <h4 class="card-title" style="margin-bottom: 10px; text-align: center;">Submit Your PRCPTION</h4>
                     <div class="pagedesc" align="center">
                         <p>Use this page to submit your own content that supports the exposure of cooperative, smiling people endeavors worldwide. We'll review it, get back to you if necessary, and it will become a part of the network!</p>
                 <div class="table-responsive">
@@ -348,7 +348,7 @@
                     line-height: 1em;
                     padding-bottom: 10px;
                 }
-                .submitprcption { width: 50%; float: left; }
+                .submitprcption { width: 75%; margin: auto; }
 
             </style>
 
