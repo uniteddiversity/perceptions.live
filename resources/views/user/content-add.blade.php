@@ -48,7 +48,10 @@
     <div class="col-lg-12 grid-margin stretch-card">
         <div class="card">
             <div class="card-body">
-                <h4 class="card-title">Add Video <span style="font-size: 12px;"><?php if(!empty($data['id'])){ ?><a class="btn btn-primary btn-xs" onclick="openVideo('<?php echo $data['id'] ?>')" href="#" >Video Profile</a><?php } ?></span></h4>
+                <div class="submitprcption">
+                    <h4 class="card-title" style="margin-bottom: 10px;">Submit Your PRCPTION</h4>
+                    <div class="pagedesc" align="center">
+                        <p>Use this page to submit your own content that supports the exposure of cooperative, smiling people endeavors worldwide. We'll review it, get back to you if necessary, and it will become a part of the network!</p>
                 <div class="table-responsive">
                     @if ($errors->any())
                         <div class="alert alert-danger">
