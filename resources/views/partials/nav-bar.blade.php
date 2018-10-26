@@ -46,31 +46,37 @@
 
             @auth
                 <div class="extras">
-                    <a href="/user/user-profile" title=""><img src="/assets/findgo/images/icon1.png" alt="" /> Control Panel</a>
-                </div>
-            @else
-                <div class="extras">
-                    <span class="accountbtn"><i class="flaticon-avatar"></i></span>
-                </div>
-            @endif
-        @endif
-
-            <div class="logo">
-<?php /*           <a href="#" title=""><img src="/assets/findgo/images/horizontal-white.png" height="40" width="175" alt="" /></a> */ ?>
+                    <li class="menu-item-has-children>
+                    <a href="#" title=""><img src="/assets/findgo/images/icon1.png" alt="" /> {{Auth::user()->first_name}}</a>
+                    <ul>
+                    <li><a href="/user/user-profile" title="">Your Profile</a></li>
+                    <li><a href="listing-category.html" title="Submit A Video"></a></li>
+                    <li><a href="listing-category2.html" title="">Submit Feedback</a></li>
+                    </ul>
             </div>
-        <nav>
-            <ul>
-            @if (Route::has('login'))
-                @auth
-                    <li><a href="/user/logout" ><i class="fa fa-sign-out white"></i>&nbspLogout {{Auth::user()->first_name}}</a></li>
-                @else
+        @else
+            <div class="extras">
+                <span class="accountbtn"><i class="flaticon-avatar"></i></span>
+            </div>
+        @endif
+    @endif
 
-                @endauth
-                <li><a href="/claim-profile" target="_blank" ><i class="fa fa-user"></i>&nbsp;Claim A Profile</a></li>
-                    <li><a href="https://perceptiontravel.tv/about-perceptions-live" target="_blank" ><i class="fa fa-info"></i>&nbsp;About</a></li>
-            @endif
-            </ul>
-            {{--<ul>--}}
+        <div class="logo">
+<?php /*           <a href="#" title=""><img src="/assets/findgo/images/horizontal-white.png" height="40" width="175" alt="" /></a> */ ?>
+        </div>
+    <nav>
+        <ul>
+        @if (Route::has('login'))
+            @auth
+                <li><a href="/user/logout" ><i class="fa fa-sign-out white"></i>&nbspLogout {{Auth::user()->first_name}}</a></li>
+            @else
+
+            @endauth
+            <li"><a href="/claim-profile" target="_blank" ><i class="fa fa-user"></i>&nbsp;Claim A Profile</a></li>
+                <li><a href="https://perceptiontravel.tv/about-perceptions-live" target="_blank" ><i class="fa fa-info"></i>&nbsp;About</a></li>
+        @endif
+        </ul>
+        {{--<ul>--}}
                 {{--<li class="menu-item-has-children">--}}
                     {{--<a href="#" title="">Home</a>--}}
                     {{--<ul>--}}

@@ -774,7 +774,7 @@ nav > ul > li.menu-item-has-children ul li a {
     position: relative;
 }
 nav > ul > li.menu-item-has-children ul li:hover > a {
-    color: #242423;
+    color: #4214c7;
     padding-left: 10px;
 }
 nav > ul > li.menu-item-has-children ul li a::after {
