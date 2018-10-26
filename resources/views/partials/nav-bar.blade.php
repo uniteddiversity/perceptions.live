@@ -46,7 +46,7 @@
 
             @auth
                 <div class="extras">
-                    <a href="/user/user-profile" title=""><img src="/assets/findgo/images/icon1.png" alt="" /> Your Account</a>
+                    <a href="/user/user-profile" title=""><img src="/assets/findgo/images/icon1.png" alt="" /> Account</a>
                 </div>
             @else
                 <div class="extras">
@@ -66,7 +66,7 @@
                 @else
 
                 @endauth
-                <li"><a href="/claim-profile" target="_blank" ><i class="fa fa-user"></i>&nbsp;Claim A Profile</a></li>
+                <li><a href="/claim-profile" target="_blank" ><i class="fa fa-user"></i>&nbsp;Claim A Profile</a></li>
                     <li><a href="https://perceptiontravel.tv/about-perceptions-live" target="_blank" ><i class="fa fa-info"></i>&nbsp;About</a></li>
             @endif
             </ul>
