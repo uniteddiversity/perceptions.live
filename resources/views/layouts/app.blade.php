@@ -2,7 +2,7 @@
 <html>
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <title>{{ config('app.name') }}</title>
+    <title>PRCPTIONS.LIVE: exploring the world's perception</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="">
     <meta name="keywords" content="">
@@ -34,7 +34,6 @@
 
 <div class="page-loading">
     <img src="/assets/findgo/images/loader.gif" alt="" />
-    <span>Skip Loading?</span>
 </div>
 
 <div class="theme-layout">

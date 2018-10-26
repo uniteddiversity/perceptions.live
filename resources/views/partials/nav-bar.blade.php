@@ -30,7 +30,8 @@
                 @else
 
                 @endauth
-                <li><a href="/claim-profile" target="_blank" ><i class="fa fa-registered white"></i>&nbspClaim Your Profile</a></li>
+                <li><a href="/claim-profile" target="_blank" ><i class="fa fa-registered white"></i> Claim A Profile</a></li>
+                    <li><a href="https://perceptiontravel.tv/about-perceptions-live" target="_blank" ><i class="fa fa-info"></i>&nbsp;About</a></li>
             @endif
         </ul>
     </div>
@@ -65,7 +66,8 @@
                 @else
 
                 @endauth
-                <li><a href="/claim-profile" target="_blank" ><i class="fa fa-user"></i>&nbsp;Claim Profile</a></li>
+                <li><a href="/claim-profile" target="_blank" ><i class="fa fa-user"></i>&nbsp;Claim A Profile</a></li>
+                    <li><a href="https://perceptiontravel.tv/about-perceptions-live" target="_blank" ><i class="fa fa-info"></i>&nbsp;About</a></li>
             @endif
             </ul>
             {{--<ul>--}}
@@ -152,7 +154,7 @@
         position: absolute;
         display: block;
         width: 40%;
-        margin-left: 3%;
+        margin-left: 6%;
         background-color: #transparent;
         z-index:50;
     }

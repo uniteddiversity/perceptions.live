@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>{{ config('app.name') }}</title>
+    <title>PRCPTIONS.LIVE: exploring the world's perception</title>
     <link rel="stylesheet" href="/assets/css/bootstrap.min.css">
     <link rel="stylesheet" href="/assets/fontawesome/css/all.css">
     <link rel="stylesheet" type="text/css" href="/assets/css/leaflet_0.7.css" />
