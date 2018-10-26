@@ -1,4 +1,4 @@
-<li class="responsiveheader">
+<div class="responsiveheader">
     <div class="rheader">
         <span><img src="/assets/findgo/images/ricon.png" alt="" /></span>
     <?php /* <div class="logo">
@@ -8,23 +8,22 @@
             <span class="accountbtn"><i class="flaticon-avatar"></i></span>
         </div>
     </div>
-    <li class="rnaver">
+    <div class="rnaver">
         <span class="closeresmenu"><i>x</i>Close</span>
     <div class="logo"><a href="#" title=""><img src="/assets/findgo/images/live-prcptions-beta-small.png" width=100 height=388 alt="" /></a></div>
-        <ul>
         @if (Route::has('login'))
 
             @auth
-                <li>
-                    <a href="/user/content-add" title=""><img src="/assets/findgo/images/icon1.png" alt="" /> {{Auth::user()->first_name}}</a>
-                </li>
+                <div class="extras">
+                    <a href="/user/content-add" title=""><img src="/assets/findgo/images/icon1.png" alt="" /> Submit Video</a>
+                </div>
             @else
-                    <li>
-                    <span class="accountbtn"><i class="flaticon-avatar"></i> Login/Sign-Up</span>
-                </li>
+                <div class="extras">
+                    <span class="accountbtn"><i class="flaticon-avatar"></i></span>
+                </div>
             @endif
         @endif
-
+        <ul>
             @if (Route::has('login'))
                 @auth
                     <li><a href="/user/logout" ><i class="fa fa-sign-out white"></i>&nbspLogout {{Auth::user()->first_name}}</a></li>
@@ -40,28 +39,29 @@
 </div>
 <header class="s4 dark">
 
-    <li class="container fluid">
+    <div class="container fluid">
         <div id="logo_overlay"><img src="/assets/findgo/images/live-perceptions-logo.png" width="600" height="122"></div>
-<ul>
+
         @if (Route::has('login'))
 
             @auth
-
+                <div class="extras">
                     <li class="menu-item-has-children">
                     <a href="#" title=""><img src="/assets/findgo/images/icon1.png" alt="" /> {{Auth::user()->first_name}}</a>
                     <ul>
                     <li><a href="/user/user-profile" title="">Your Profile</a></li>
-                    <li><a href="/user/content-add" title="">Submit A Video</a></li>
-                    <li><a href="https://perceptiontravel.tv/community-feedback/" title="">Submit Feedback</a></li>
+                    <li><a href="listing-category.html" title="">Submit A Video</a></li>
+                    <li><a href="listing-category2.html" title="">Listing Category 2</a></li>
+                    <li><a href="listing-full.html" title="">Listing Full</a></li>
                     </ul>
-
+            </div>
         @else
-            <li>
-                <span class="accountbtn"><i class="flaticon-avatar"></i> Login/Sign-Up</span>
-            </li>
+            <div class="extras">
+                <span class="accountbtn"><i class="flaticon-avatar"></i></span>
+            </div>
         @endif
     @endif
-</ul>
+
         <div class="logo">
 <?php /*           <a href="#" title=""><img src="/assets/findgo/images/horizontal-white.png" height="40" width="175" alt="" /></a> */ ?>
         </div>
