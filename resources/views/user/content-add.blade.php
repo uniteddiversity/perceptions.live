@@ -331,6 +331,26 @@
         </div>
     </div>
 
+            <style type="text/css">
+
+                .pagedesc {
+                    font-size: 20px;
+                    font-family: questrial;
+                    line-height: 1em;
+                    padding-bottom: 20px;
+                }
+
+                .formdesctext {
+                    color: slategray;
+                    font-size: 12px;
+                    font-style: italic;
+                    font-family: questrial;
+                    line-height: 1em;
+                    padding-bottom: 10px;
+                }
+                .submitprcption { width: 50%; float: left; }
+
+            </style>
 
 @endsection
 <script>
