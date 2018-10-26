@@ -39,14 +39,14 @@
 </div>
 <header class="s4 dark">
 
-    <div class="container fluid">
+    <div class="container fluid">git
         <div id="logo_overlay"><img src="/assets/findgo/images/live-perceptions-logo.png" width="600" height="122"></div>
 
         @if (Route::has('login'))
 
             @auth
                 <div class="extras">
-                    <a href="/user/user-profile" title=""><img src="/assets/findgo/images/icon1.png" alt="" /> Account</a>
+                    <a href="/user/user-profile" title=""><img src="/assets/findgo/images/icon1.png" alt="" /> Submit PRCPTION</a>
                 </div>
             @else
                 <div class="extras">

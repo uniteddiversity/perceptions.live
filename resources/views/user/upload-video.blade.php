@@ -4,7 +4,11 @@
     <div class="col-lg-12 grid-margin stretch-card">
         <div class="card">
             <div class="card-body">
-                <h4 class="card-title">Add Video</h4>
+                <div class="submitprcption">
+                <h4 class="card-title" style="margin-bottom: 10px;">Submit Your PRCPTION</h4>
+                    <div class="pagedesc" align="center">
+                        <p>Use this page to submit your own content that supports the exposure of cooperative, smiling people endeavors worldwide. We'll review it, get back to you if necessary, and it will become a part of the network!</p>
+                    </div>
                 <div class="table-responsive">
                     @if ($errors->any())
                         <div class="alert alert-danger">
@@ -28,7 +32,7 @@
                                 <input type="text" class="form-control" aria-describedby="nameHelp" name="title" placeholder="Title" value="{{ old('title') }}">
                             </div>
                             <div class="form-group">
-                                <label for="exampleSelect1">Access Level</label>
+                                <label for="exampleSelect1">Privacy Setting</label>
                                 <select class="form-control" id="exampleSelect1" name="access_level_id">
                                     <option value="1">Public</option>
                                     <option value="2">Only Registered</option>
@@ -184,13 +188,34 @@
                                         {{--</label>--}}
                                     {{--</div>--}}
                                 {{--</fieldset>--}}
-                            <button type="submit" class="btn btn-primary">Submit</button>
+                            <button type="submit" class="btn btn-primary">Submit My PRCPTION!</button>
                         </form>
+                </div>
                 </div>
             </div>
         </div>
     </div>
 
+    <style type="text/css">
+
+        .pagedesc {
+            font-size: 20px;
+            font-family: questrial;
+            line-height: 1em;
+            padding-bottom: 20px;
+        }
+
+        .formdesctext {
+            color: slategray;
+            font-size: 12px;
+            font-style: italic;
+            font-family: questrial;
+            line-height: 1em;
+            padding-bottom: 10px;
+        }
+    .submitprcption { width: 50%; float: left; }
+
+</style>
 
     @endsection
     <script>
