@@ -52,7 +52,7 @@ class SortingTagsTableSeeder extends Seeder
             ],
             [
                 'id' => '4',
-                'tag' => 'Artists & Musicians',
+                'tag' => 'Artists, Musicians, Entrepreneurs',
                 'tag_color' => '#008000',
                 'description' => '',
                 'created_by' => '0',

@@ -52,6 +52,7 @@
                     <h4 class="card-title" style="margin-bottom: 10px; text-align: center;">Submit Your PRCPTION</h4>
                     <div class="pagedesc" align="center">
                         <p>Use this page to submit your own content that supports the exposure of cooperative, smiling people endeavors worldwide. We'll review it, get back to you if necessary, and it will become a part of the network!</p>
+                        <p><em>To keep our community thriving, we kindly ask that you refresh yourself with our <a href="https://perceptionstravel.tv/user-guidelines">User Guidelines</a> before using this form. Thanks!</em></p>
                 <div class="table-responsive">
                     @if ($errors->any())
                         <div class="alert alert-danger">
@@ -73,7 +74,8 @@
                         <input type="hidden" name="id" id="csrf-token" value="<?php echo uid($data['id']) ?>" />
                         <div class="formdesctext">
                             <hr>
-                            <em>MEDIA INFO: In this section, please fill in the basic details about your PRCPTION submission.</em>
+                           <span>Media Info</span>
+                            <em>In this section, please fill in the basic details about your PRCPTION submission.</em>
                         </div>
                         <div class="form-group">
                             <label for="exampleInputEmail1">Title of this PRCPTION</label>
@@ -105,11 +107,12 @@
                         {{--</div>--}}
                         <div class="formdesctext">
                             <hr>
-                            <em>USERS: In this section, choose the people who have been a part of this PRCPTION. If no name appears, press 'enter' to add them as a shadow profile--don't worry, you can let them know and they can <a href="claim-profile">claim their empty profile</a> whenever they want.</em>
+                            <span>Users</span>
+                            <em>In this section, please choose the individuals and groups who have been a part of this PRCPTION. If no name appears, press 'enter' to add them as a shadow profile--don't worry, you can let them know and they can <a href="/claim-profile">claim their empty profile</a> whenever they want.</em>
                         </div>
 
                         <div class="form-group">
-                            <label for="video_producer">Video Producer(s)</label>
+                            <label for="video_producer">Video Producer(s) (you may tag yourself)</label>
                             {{--<input type="text" class="form-control" aria-describedby="nameHelp" name="video_producer" placeholder="Video Producer" value="{{ old('video_producer') }}">--}}
                             <select class="form-control multi-select2-with-tags" id="video_producer" multiple searchable="Search here.." name="video_producer[]" >
                                 @foreach($user_list as $user)
@@ -118,7 +121,7 @@
                             </select>
                         </div>
                         <div class="form-group">
-                            <label for="onscreen">Onscreen (If not exist, add unique display name's)</label>
+                            <label for="onscreen">Who's Onscreen? (individuals and/or organizations)</label>
                             {{--<input type="text" class="form-control" aria-describedby="nameHelp" name="onscreen" placeholder="Onscreen" value="{{ old('onscreen') }}">--}}
                             <select class="form-control multi-select2-with-tags" id="onscreen" multiple searchable="Search here.." name="onscreen[]" >
                                 @foreach($user_list as $user)
@@ -127,7 +130,7 @@
                             </select>
                         </div>
                         <div class="form-group">
-                            <label for="co_creators">Co Creator(s) (If not exist, add unique display name's)</label>
+                            <label for="co_creators">Co Creator(s) Involved (music credits, co-producers, etc.)</label>
                             {{--<input type="text" class="form-control" aria-describedby="nameHelp" name="co_creators" placeholder="Co Creators" value="{{ old('co_creators') }}">--}}
                             <select class="form-control multi-select2-with-tags" multiple id="co_creators" searchable="Search here.." name="co_creators[]" >
                                 @foreach($user_list as $user)
@@ -136,7 +139,7 @@
                             </select>
                         </div>
                         <div class="form-group">
-                            <label for="groups">Organization(s)/Group(s)</label>
+                            <label for="groups">Community, Group, or Organization(s) Involved</label>
                             <select class="form-control multi-select2-with-tags" id="groups" multiple searchable="Search here.." name="groups[]" >
                                 @foreach($groups as $group)
                                     <option value="{{base64_encode($group->id)}}" <?php if(in_array($group->id, old('groups',$data['groups']))){ echo 'selected'; } ?> >{{$group->name}} ({{$group->email}})</option>
@@ -145,15 +148,26 @@
                             {{--<input type="text" class="form-control" aria-describedby="nameHelp" name="organization" placeholder="Organization" value="{{ old('organization') }}">--}}
                         </div>
                         <div class="form-group">
-                            <label for="learn_more_url">Learn More Url</label>
+                            <label for="learn_more_url">URL (web address) to learn more about the contents of this video: </label>
                             <input type="text" class="form-control" aria-describedby="nameHelp" id="learn_more_url" name="learn_more_url" placeholder="Learn More Url" value="{{ old('learn_more_url',$data['learn_more_url']) }}">
                         </div>
 
-
-
+                        <div class="formdesctext">
+                            <hr>
+                            <span>Visibility, Sorting, and Filters</span>
+                            <em>Who and how should people find this PRCPTION?</em>
+                        </div>
+                        <div class="form-group">
+                            <label for="exampleSelect1">Privacy Settings: Who can find this PRCPTION?</label>
+                            <select class="form-control" id="exampleSelect1" name="access_level_id">
+                                <?php foreach($access_levels as $access){ ?>
+                                <option value="{{$access->id}}" <?php if(old('access_level_id',$data['access_level_id']) == $access->id){ echo 'selected'; } ?> >{{$access->name}}</option>
+                                <?php }?>
+                            </select>
+                        </div>
 
                         <div class="form-group">
-                            <label for="category_id">Category</label>
+                            <label for="category_id">Umbrella Category</label>
                             <select class="form-control" id="category_id" name="category_id">
                                 <option value="0">Select</option>
                                 @foreach($categories as $cat)
@@ -171,11 +185,11 @@
                             </select>
                         </div>
                         <div class="form-group">
-                            <label for="primary_subject_tag">Primary Subject Tag (40 max)</label>
+                            <label for="primary_subject_tag">What's the Primary Subject of the PRCPTION?</label>
                             <input type="text" class="form-control" aria-describedby="nameHelp" id="primary_subject_tag" name="primary_subject_tag" placeholder="Primary Subject Tag" value="{{ old('primary_subject_tag',$data['primary_subject_tag']) }}">
                         </div>
                         <div class="form-group">
-                            <label for="sorting_tags">Sorting Tags</label>
+                            <label for="sorting_tags">Sorting Tags (like hashtags!)</label>
                             <select class="form-control multi-select2-with-tags" id="sorting_tags" multiple name="sorting_tags[]">
                                 @foreach($sorting_tags as $tag)
                                     <option value="{{base64_encode($tag['id'])}}" <?php if(in_array($tag->id, old('sorting_tags',$data['sorting_tags']))){ echo 'selected'; } ?> >{{$tag['tag']}}</option>
@@ -218,9 +232,13 @@
                         <input type="hidden" value="0" id="long_val" name="long" value="{{ old('long',$data['long']) }}">
                         <?php } ?>
 
-
+                        <div class="formdesctext">
+                            <hr>
+                            <span>Video-Meta</span>
+                            <em>Is this video online already? Or do you need to find an editor?</em>
+                        </div>
                         <div class="form-group">
-                            <label for="exampleTextarea">URL</label>
+                            <label for="exampleTextarea">Video URL (YouTube, Vimeo, etc)</label>
                             <input type="text" class="form-control" aria-describedby="nameHelp" name="url" placeholder="URL" value="{{ old('url',$data['url']) }}">
                         </div>
 
@@ -267,20 +285,20 @@
                         {{--</div>--}}
                         {{--</fieldset>--}}
                         <div class="form-group">
-                            <label for="is_exchange">Exchange (Y/N)</label>
                             <input class="form-control" type="checkbox" id="is_exchange" <?php if(!empty(old('exchange',$data['exchange']))){ ?> checked <?php } ?> value="1" name="exchange" style="width: 50px;"/>
+                            <label for="is_exchange"> Is anyone offering an exchange in this PRCPTION?</label>
                         </div>
                         <div class="form-group" id="exchange_enabled" <?php if(empty(old('exchange',$data['exchange']))){ ?> style="visibility: hidden;" <?php } ?> >
-                            <label for="is_exchange">If Exchange Yes, Service / Opportunity?</label>
+                            <label for="is_exchange">Is this exchange a service or an opportunity being offered?</label>
                             <select class="form-control multi-select2" id="service_or_opportunity" name="service_or_opportunity">
-                                <option value="0">Select</option>
+                                <option value="0">Please choose one</option>
                                 <option value="1" <?php if(old('exchange',$data['exchange']) == '1'){ echo 'selected'; } ?> >Service</option>
                                 <option value="2" <?php if(old('exchange',$data['exchange']) == '2'){ echo 'selected'; } ?> >Opportunity</option>
                             </select>
                         </div>
 
                         <div class="form-group">
-                            <label for="exampleSelect1">Submitted Footage</label>
+                            <label for="exampleSelect1">Do you need to submit your footage for editing?</label>
                             <select class="form-control" id="submitted_footage" name="submitted_footage" onchange="displayVideoContentUpload()">
                                 <option value="no" <?php if(old('submitted_footage',$data['submitted_footage']) == 'no'){ echo 'selected'; } ?> >No</option>
                                 <option value="yes" <?php if(old('submitted_footage',$data['submitted_footage']) == 'yes'){ echo 'selected'; } ?> >Yes</option>
@@ -301,14 +319,14 @@
                         {{--</div>--}}
 
                         <div class="form-group" id="submit_footage_form" <?php if(old('submitted_footage',$data['submitted_footage']) == 'yes'){ echo 'style="display:true"'; }else{ echo 'style="display:none"'; } ?> >
-                            <label for="accept_tos">Video Content</label>
+                            <label for="submit_footage_form">Video Content</label>
                             <input class="form-control" type="file" name="content_set1[]" /> Content Set 1
                             <input class="form-control" type="file" name="content_set2[]" /> Content Set 2
                             <input class="form-control" type="file" name="content_set3[]" /> Content Set 3
                         </div>
 
                         <div class="form-group">
-                            <label for="exampleTextarea">Additional Comments</label>
+                            <label for="exampleTextarea">Comments, notes or concerns about this PRCPTION that we should know: </label>
                             <textarea type="text" class="form-control" aria-describedby="nameHelp" name="user_comment" placeholder="Additional Comments" rows="4">{{ old('user_comment',$data['user_comment']) }}</textarea>
                         </div>
 
@@ -322,16 +340,10 @@
                             </select>
                             <?php } ?>
                         </div>
-                        <div class="form-group">
-                            <label for="exampleSelect1">Privacy Settings: Who Can See This PRCPTION?</label>
-                            <select class="form-control" id="exampleSelect1" name="access_level_id">
-                                <?php foreach($access_levels as $access){ ?>
-                                <option value="{{$access->id}}" <?php if(old('access_level_id',$data['access_level_id']) == $access->id){ echo 'selected'; } ?> >{{$access->name}}</option>
-                                <?php }?>
-                            </select>
-                        </div>
 
-                        <button type="button" onclick="submit_content()" class="btn btn-primary">Submit</button>
+                </div>
+
+                        <button type="button" onclick="submit_content()" class="btn btn-primary" style="background: #4214c7; border-color: #fff;">Submit PRCPTION</button>
                     </form>
                 </div>
             </div>
@@ -349,14 +361,17 @@
 
                 .formdesctext {
                     color: slategray;
-                    font-size: 12px;
+                    font-size: 14px;
                     font-style: italic;
                     font-family: questrial;
                     line-height: 1em;
-                    padding-bottom: 10px;
+                    padding-bottom: 20px;
                 }
+
+                .formdesctext span { font-weight: 500; color: #4214c7; margin: auto; display: block; padding-bottom: 10px; }
                 .submitprcption { width: 50%; margin: auto; }
 
+                .formgroup text {  }
             </style>
 
 @endsection
