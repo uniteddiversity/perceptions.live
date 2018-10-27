@@ -27,8 +27,12 @@
                         @endif
                         <form action="/user/post-upload-video" method="post">
                             <input type="hidden" name="_token" id="csrf-token" value="{{ Session::token() }}" />
+                            <div class="formdesctext">
+                                <hr>
+                                <em>MEDIA INFO: In this section, please fill in the basic details about your PRCPTION submission.</em>
+                            </div>
                             <div class="form-group">
-                                <label for="exampleInputEmail1">Title</label>
+                                <label for="exampleInputEmail1">Title of this PRCPTION</label>
                                 <input type="text" class="form-control" aria-describedby="nameHelp" name="title" placeholder="Title" value="{{ old('title') }}">
                             </div>
                             <div class="form-group">

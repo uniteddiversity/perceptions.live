@@ -1056,7 +1056,7 @@ nav > ul > li.menu-item-has-children:hover > ul {
     position: absolute;
     width: 50px;
     height: 50px;
-    background: #fb3640;
+    background: #ae2b0b;
 
     -webkit-border-radius: 2px;
     -moz-border-radius: 2px;
@@ -3015,7 +3015,7 @@ header.s5 .logo a {
 }
 header.s5 .extras > a {
     background: #fb3640;
-    border-color: #fb3640;
+    border-color: #2b0bae;
 }
 .fc.s2 {
     background: #f9f9f9;
@@ -3728,7 +3728,6 @@ header.s5 .extras > a {
     height   : 100%;
     position : relative;
     z-index  : 1;
-    margin-left: -5px;
     padding-right: 10px;
 }
 .scrollContent{
@@ -8441,8 +8440,9 @@ blockquote span {
     opacity: 0.5;
 }
 .extras > a:hover {
-    background: #2ab8dc;
-    border-color: #2ab8dc;
+    background: #2b0bae;
+    border-color: #ffffff;
+    color: #fff;
 }
 .accountform form button:hover {
     background: #595959;

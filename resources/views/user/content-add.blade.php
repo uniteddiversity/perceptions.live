@@ -71,25 +71,21 @@
                     <form action="/user/post-upload-video" method="post" id="submit_content" enctype='multipart/form-data'>
                         <input type="hidden" name="_token" id="csrf-token" value="{{ Session::token() }}" />
                         <input type="hidden" name="id" id="csrf-token" value="<?php echo uid($data['id']) ?>" />
+                        <div class="formdesctext">
+                            <hr>
+                            <em>MEDIA INFO: In this section, please fill in the basic details about your PRCPTION submission.</em>
+                        </div>
                         <div class="form-group">
-                            <label for="exampleInputEmail1">Title</label>
+                            <label for="exampleInputEmail1">Title of this PRCPTION</label>
                             <input type="text" class="form-control" aria-describedby="nameHelp" name="title" placeholder="Title" value="{{ old('title',$data['title']) }}">
                         </div>
                         <div class="form-group">
-                            <label for="exampleTextarea">Location</label>
+                            <label for="exampleTextarea">Location (City, Country)</label>
                             <input type="text" class="form-control" id="leaflet_search_addr" aria-describedby="nameHelp" name="location" placeholder="Location" value="{{ old('location',$data['location']) }}">
                         </div>
                         <div class="form-group">
-                            <label for="video_id">Captured Date</label>
+                            <label for="video_id">Date of PRCPTION</label>
                             <input type="text" autocomplete="off" class="form-control datepicker" aria-describedby="nameHelp" name="captured_date" placeholder="Captured Date" value="{{ old('captured_date',$data['captured_date']) }}">
-                        </div>
-                        <div class="form-group">
-                            <label for="exampleSelect1">Access Level</label>
-                            <select class="form-control" id="exampleSelect1" name="access_level_id">
-                                <?php foreach($access_levels as $access){ ?>
-                                <option value="{{$access->id}}" <?php if(old('access_level_id',$data['access_level_id']) == $access->id){ echo 'selected'; } ?> >{{$access->name}}</option>
-                                <?php }?>
-                            </select>
                         </div>
                         {{--<div class="form-group">--}}
                         {{--<label for="exampleSelect1">Type</label>--}}
@@ -107,10 +103,13 @@
                         {{--<label for="description">Description</label>--}}
                         {{--<textarea name="description" class="form-control" id="description" rows="3">{{ old('description') }}</textarea>--}}
                         {{--</div>--}}
-
+                        <div class="formdesctext">
+                            <hr>
+                            <em>USERS: In this section, choose the people who have been a part of this PRCPTION. If no name appears, press 'enter' to add them as a shadow profile--don't worry, you can let them know and they can <a href="claim-profile">claim their empty profile</a> whenever they want.</em>
+                        </div>
 
                         <div class="form-group">
-                            <label for="video_producer">Video Producer(s) (If not exist, add unique display name's)</label>
+                            <label for="video_producer">Video Producer(s)</label>
                             {{--<input type="text" class="form-control" aria-describedby="nameHelp" name="video_producer" placeholder="Video Producer" value="{{ old('video_producer') }}">--}}
                             <select class="form-control multi-select2-with-tags" id="video_producer" multiple searchable="Search here.." name="video_producer[]" >
                                 @foreach($user_list as $user)
@@ -323,6 +322,14 @@
                             </select>
                             <?php } ?>
                         </div>
+                        <div class="form-group">
+                            <label for="exampleSelect1">Privacy Settings: Who Can See This PRCPTION?</label>
+                            <select class="form-control" id="exampleSelect1" name="access_level_id">
+                                <?php foreach($access_levels as $access){ ?>
+                                <option value="{{$access->id}}" <?php if(old('access_level_id',$data['access_level_id']) == $access->id){ echo 'selected'; } ?> >{{$access->name}}</option>
+                                <?php }?>
+                            </select>
+                        </div>
 
                         <button type="button" onclick="submit_content()" class="btn btn-primary">Submit</button>
                     </form>
@@ -348,7 +355,7 @@
                     line-height: 1em;
                     padding-bottom: 10px;
                 }
-                .submitprcption { width: 75%; margin: auto; }
+                .submitprcption { width: 50%; margin: auto; }
 
             </style>
 

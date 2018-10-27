@@ -15,7 +15,7 @@
 
             @auth
                 <div class="extras">
-                    <a href="/user/content-add" title=""><img src="/assets/findgo/images/icon1.png" alt="" /> Submit Video</a>
+                    <a href="/user/content-add" title=""><img src="/assets/findgo/images/icon1.png" alt="" /> Submit PRCPTION</a>
                 </div>
             @else
                 <div class="extras">
@@ -46,7 +46,7 @@
 
             @auth
                 <div class="extras">
-                    <a href="/user/user-profile" title=""><img src="/assets/findgo/images/icon1.png" alt="" /> Submit PRCPTION</a>
+                    <a href="/user/content-add" title=""><img src="/assets/findgo/images/icon1.png" alt="" /> Submit PRCPTION</a>
                 </div>
             @else
                 <div class="extras">

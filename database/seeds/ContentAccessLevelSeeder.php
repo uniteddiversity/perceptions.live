@@ -16,17 +16,17 @@ class ContentAccessLevelSeeder extends Seeder
         DB::table('content_access_levels')->insert([
             [
                 'id' => '1',
-                'name' => 'Public',
+                'name' => 'Public: Anyone.',
                 'slug' => 'public'
             ],
             [
                 'id' => '2',
-                'name' => 'Only Logged',
+                'name' => 'Logged In: Only members of the PRCPTION network.',
                 'slug' => 'only-logged'
             ],
             [
                 'id' => '3',
-                'name' => 'Private',
+                'name' => 'Private: Only users of a certain group or community.',
                 'slug' => 'private'
             ]
         ]);
