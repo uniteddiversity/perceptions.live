@@ -190,7 +190,29 @@
                 </div>
             </div>
         </div>
-    </div>
+    </div>	<style>
+		
+.pagedesc {
+                    font-size: 20px;
+                    font-family: questrial;
+                    line-height: 1em;
+                    padding-bottom: 20px;
+       }
+
+div.formdesctext {
+                    color: slategray;
+                    font-size: 14px;
+                    font-style: italic;
+                    font-family: questrial;
+                    line-height: 1em;
+                    padding-bottom: 20px;
+         }
+
+div.formdesctext span { font-weight: 800; color: #4214c7; size: 20px; margin: auto; display: block; padding-bottom: 10px; }
+div.submitprcption { width: 50%; margin: auto; }
+
+		</style>
+
 
     @endsection
     <script>
