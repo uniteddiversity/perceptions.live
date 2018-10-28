@@ -59,6 +59,29 @@ p {
     border-right: .25rem solid #eceeef;
     border-left: none; }
 
+/* added by jordan */
+.pagedesc {
+                    font-size: 20px;
+                    font-family: questrial;
+                    line-height: 1em;
+                    padding-bottom: 20px;
+       }
+
+.formdesctext {
+                    color: slategray;
+                    font-size: 14px;
+                    font-style: italic;
+                    font-family: questrial;
+                    line-height: 1em;
+                    padding-bottom: 20px;
+         }
+
+.formdesctext span { font-weight: 800; color: #4214c7; size: 20px; margin: auto; display: block; padding-bottom: 10px; }
+.submitprcption { width: 50%; margin: auto; }
+
+.formgroup text {  }
+
+
 /**====== Typography css end ======**/
 h1 {
   font-size: 40px; }
@@ -19248,24 +19271,3 @@ body.menu-bottom .navbar-wrapper {
 
 /*# sourceMappingURL=style.css.map */
 
-/* added by jordan */
-.pagedesc {
-                    font-size: 20px;
-                    font-family: questrial;
-                    line-height: 1em;
-                    padding-bottom: 20px;
-       }
-
-.formdesctext {
-                    color: slategray;
-                    font-size: 14px;
-                    font-style: italic;
-                    font-family: questrial;
-                    line-height: 1em;
-                    padding-bottom: 20px;
-         }
-
-.formdesctext span { font-weight: 800; color: #4214c7; size: 20px; margin: auto; display: block; padding-bottom: 10px; }
-.submitprcption { width: 50%; margin: auto; }
-
-.formgroup text {  }
