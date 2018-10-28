@@ -52,6 +52,7 @@
     <link rel="stylesheet" href="/js/dist/css/select2.min.css" />
 
     <link rel="stylesheet" href="/assets/css/custom_common_styles.css" />
+	<link rel="stylesheet" href="/assets/css/custom.css" />
 
     <link rel="stylesheet" href="/assets/croppie/croppie.css" />
     <link rel="stylesheet" href="/assets/js/datatable/datatables.min.css" />

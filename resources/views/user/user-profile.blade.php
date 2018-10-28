@@ -104,7 +104,7 @@
                                 {{--<a href="#" class="upload-result">Send</a>--}}
 
                                 <label for="user_avatar">Avatar (1MB or less please!)</label>
-                                <input id="upload" class="form-control" type="file" name="user_avatar" />
+                                <input id="upload" class="form-control" type="file" name="user_avatar" style="width: 40%;"/>
                                 <?php foreach($data['image'] as $img){ ?>
                                 <input type="hidden" value="/storage/<?php echo $img['url'] ?>" id="preset_image_path"/>
                                 <a target="_blank" href="/storage/<?php echo $img['url'] ?>"><img src="/storage/<?php echo $img['url'] ?>" alt="Avatar" class="avatar profile_img_mini"></a>
