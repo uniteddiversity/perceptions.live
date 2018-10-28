@@ -52,7 +52,8 @@
                     <h4 class="card-title" style="margin-bottom: 10px; text-align: center;">Submit Your PRCPTION</h4>
                     <div class="pagedesc" align="center">
                         <p>Use this page to submit your own content that supports the exposure of cooperative, smiling people endeavors worldwide. We'll review it, get back to you if necessary, and it will become a part of the network!</p>
-                        <p><em>To keep our community thriving, we kindly ask that you refresh yourself with our <a href="https://perceptionstravel.tv/user-guidelines">User Guidelines</a> before using this form. Thanks!</em></p>
+                        <p>To keep our community thriving, we kindly ask that you refresh yourself with our <a href="https://perceptionstravel.tv/user-guidelines">User Guidelines</a> before using this form. Thanks!</p>
+						<p><em>Should you encounter any errors we encourage you to <a href="https://perceptiontravel.tv/community-feedback">let us know</a>. Thanks!</em></p>
                 <div class="table-responsive">
                     @if ($errors->any())
                         <div class="alert alert-danger">
@@ -350,29 +351,6 @@
         </div>
     </div>
 
-            <style type="text/css">
-
-                .pagedesc {
-                    font-size: 20px;
-                    font-family: questrial;
-                    line-height: 1em;
-                    padding-bottom: 20px;
-                }
-
-                .formdesctext {
-                    color: slategray;
-                    font-size: 14px;
-                    font-style: italic;
-                    font-family: questrial;
-                    line-height: 1em;
-                    padding-bottom: 20px;
-                }
-
-                .formdesctext span { font-weight: 500; color: #4214c7; margin: auto; display: block; padding-bottom: 10px; }
-                .submitprcption { width: 50%; margin: auto; }
-
-                .formgroup text {  }
-            </style>
 
 @endsection
 <script>

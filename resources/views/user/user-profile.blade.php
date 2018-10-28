@@ -22,7 +22,11 @@
     <div class="col-lg-12 grid-margin stretch-card">
         <div class="card">
             <div class="card-body">
-                <h4 class="card-title">Profile Settings <?php /* <button class="tag label label-info" onclick="openProfile(<?php echo $data['id'] ?>)">View my public profile</button> */ ?></h4>
+              <div class="submitprcption">
+                    <h4 class="card-title" style="margin-bottom: 10px; text-align: center;">Account and Profile Settings</h4>
+                    <div class="pagedesc" align="center">
+                        <p>The information here will be the data that will [eventually] connect you to connections and collaborations around the world. Have fun with it and keep it as accurate as possible! :) </p>
+						<p><em>Should you encounter any errors we encourage you to <a href="https://perceptiontravel.tv/community-feedback">let us know</a>. Thanks!</em></p>
                 <div class="table-responsive">
                     @if ($errors->any())
                         <div class="alert alert-danger">
@@ -42,58 +46,46 @@
                             <?php if(!empty($data['id'])){?>
                             <input type="hidden" name="id" id="id" value="{{ uid($data['id']) }}" />
                             <?php }?>
+							<div class="formdesctext">
+                            <hr>
+                           <span>Your Account</span>
+               
+                        </div>
                             <div class="form-group">
-                                <label for="exampleInputEmail1">Display Name</label>
+                                <label for="exampleInputEmail1">@DisplayName</label>
                                 <input type="text" class="form-control" aria-describedby="nameHelp" name="display_name" placeholder="Display Name" value="{{ old('display_name',$data['display_name']) }}">
                             </div>
                             <input type="hidden" name="_token" id="csrf-token" value="{{ Session::token() }}" />
                             <div class="form-group">
-                                <label for="exampleInputEmail1">Email</label>
+                                <label for="exampleInputEmail1">Your Email</label>
                                 <input type="text" class="form-control" aria-describedby="nameHelp" name="email" placeholder="Email" value="{{ old('email',$data['email']) }}">
-                            </div>
-                            <div class="form-group">
-                                <label for="exampleInputEmail1">First Name</label>
-                                <input type="text" class="form-control" aria-describedby="nameHelp" name="first_name" placeholder="First Name" value="{{ old('first_name',$data['first_name']) }}">
                             </div>
 
                             <div class="form-group">
                                 <label for="exampleInputEmail1">Change Your Password</label>
                                 <input type="text" class="form-control" aria-describedby="nameHelp" name="password" placeholder="Password" value="{{ old('password') }}">
                             </div>
-
-                            <div class="form-group">
-                                <label for="video_producer">Your Collaboration Roles</label>
-                                {{--<input type="text" class="form-control" aria-describedby="nameHelp" name="video_producer" placeholder="Video Producer" value="{{ old('video_producer') }}">--}}
-                                <select class="form-control multi-select2" id="video_producer" multiple searchable="Search here.." name="user_acting_roles[]" >
-                                    @foreach($user_acting_role as $role)
-                                        <option value="{{$role->id}}" <?php if(in_array($role->id, old('user_acting_roles',$data['user_acting_roles']))){ echo 'selected'; } ?> >{{$role->name}}</option>
-                                    @endforeach
+							
+							    <div class="form-group">
+                                <label for="exampleSelect1">Your Privacy Settings</label>
+                                <select class="form-control" id="exampleSelect1" name="access_level_id">
+                                    <?php foreach($access_levels as $access){ ?>
+                                    <option value="{{$access->id}}" <?php if(old('access_level_id',$data['access_level_id']) == $access->id){ echo 'selected'; } ?> >{{$access->name}}</option>
+                                    <?php }?>
                                 </select>
                             </div>
 
-                            <?php if(Auth::user()->is('admin')){ ?>
-                            <div class="form-group">
-                                <label for="status_id">Status</label>
-                                <select class="form-control" id="status_id" name="status_id">
-                                    @foreach($status as $st)
-                                        <option value="{{$st->id}}" <?php if(old('status_id',$data['status_id']) == $st->id){ echo 'selected'; } ?> >{{$st->name}}</option>
-                                    @endforeach
-                                </select>
+											<div class="formdesctext">
+                            <hr>
+                           <span>About You</span>
+                            <em>Personalize your profile. Let the network know a little about yourself.</em>
+                        </div>
+							<div class="form-group">
+                                <label for="exampleInputEmail1">First Name</label>
+                                <input type="text" class="form-control" aria-describedby="nameHelp" name="first_name" placeholder="First Name" value="{{ old('first_name',$data['first_name']) }}">
                             </div>
-                            <?php } ?>
-
-                            <?php if(Auth::user()->is('admin')){ ?>
-                            {{--<div class="form-group">--}}
-                                {{--<label for="exampleSelect1">Role</label>--}}
-                                {{--<select class="form-control" id="exampleSelect1" name="role_id">--}}
-                                    {{--@foreach($user_roles as $role)--}}
-                                    {{--<option value="{{$role->id}}">{{$role->name}}</option>--}}
-                                    {{--@endforeach--}}
-                                {{--</select>--}}
-                            {{--</div>--}}
-                            <?php } ?>
-
-                                <div class="form-group">
+							
+							 <div class="form-group">
                                     <label for="location">Current Location</label>
                                     <input type="text" class="form-control" aria-describedby="nameHelp" name="location" placeholder="Location" value="{{ old('location',$data['location']) }}">
                                 </div>
@@ -104,18 +96,14 @@
                                 </div>
 
 
-
-
-
+							
                             <div class="form-group">
                                 {{--<input type="file" id="upload" value="Choose a file">--}}
                                 <div id="upload-profile"></div>
                                 <input type="hidden" id="imagebase64" name="profile_image">
                                 {{--<a href="#" class="upload-result">Send</a>--}}
 
-
-
-                                <label for="user_avatar">User Avatar</label>
+                                <label for="user_avatar">Avatar (1MB or less please!)</label>
                                 <input id="upload" class="form-control" type="file" name="user_avatar" />
                                 <?php foreach($data['image'] as $img){ ?>
                                 <input type="hidden" value="/storage/<?php echo $img['url'] ?>" id="preset_image_path"/>
@@ -124,15 +112,25 @@
                             </div>
 
 
+                        
+							
+						<div class="formdesctext">
+                            <hr>
+                           <span>Connections and Collaborations</span>
+                            <em>These are the details by which others will discover you. What skills do you have to offer? What values do you represent?</em>
+                        </div>
+
+		
                             <div class="form-group">
-                                <label for="exampleSelect1">Your Privacy Settings</label>
-                                <select class="form-control" id="exampleSelect1" name="access_level_id">
-                                    <?php foreach($access_levels as $access){ ?>
-                                    <option value="{{$access->id}}" <?php if(old('access_level_id',$data['access_level_id']) == $access->id){ echo 'selected'; } ?> >{{$access->name}}</option>
-                                    <?php }?>
+                                <label for="video_producer">Your Collaboration Roles (select as many as you'd like)</label>
+                                {{--<input type="text" class="form-control" aria-describedby="nameHelp" name="video_producer" placeholder="Video Producer" value="{{ old('video_producer') }}">--}}
+                                <select class="form-control multi-select2" id="video_producer" multiple searchable="Search here.." name="user_acting_roles[]" >
+                                    @foreach($user_acting_role as $role)
+                                        <option value="{{$role->id}}" <?php if(in_array($role->id, old('user_acting_roles',$data['user_acting_roles']))){ echo 'selected'; } ?> >{{$role->name}}</option>
+                                    @endforeach
                                 </select>
                             </div>
-
+				
                             <div class="form-group">
                                 <label for="grater_community_intention_id">Your Greater Community Intentions (max. 3)</label>
                                 <select class="form-control multi-select2-max3" id="grater_community_intention_id" multiple name="grater_community_intention_ids[]">
@@ -163,18 +161,36 @@
                             </div>
                             <?php } ?>
 
+							
+                            <?php if(Auth::user()->is('admin')){ ?>
+                            <div class="form-group">
+                                <label for="status_id">Status</label>
+                                <select class="form-control" id="status_id" name="status_id">
+                                    @foreach($status as $st)
+                                        <option value="{{$st->id}}" <?php if(old('status_id',$data['status_id']) == $st->id){ echo 'selected'; } ?> >{{$st->name}}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                            <?php } ?>
 
-                            <button type="submit" class="btn btn-primary">Submit</button>
+                            <?php if(Auth::user()->is('admin')){ ?>
+                            {{--<div class="form-group">--}}
+                                {{--<label for="exampleSelect1">Role</label>--}}
+                                {{--<select class="form-control" id="exampleSelect1" name="role_id">--}}
+                                    {{--@foreach($user_roles as $role)--}}
+                                    {{--<option value="{{$role->id}}">{{$role->name}}</option>--}}
+                                    {{--@endforeach--}}
+                                {{--</select>--}}
+                            {{--</div>--}}
+                            <?php } ?>
+
+
+                            <button type="submit" class="btn btn-primary" style="background: #4214c7; border-color: #fff;">Update My Profile</button>
                         </form>
                 </div>
             </div>
         </div>
     </div>
-
-
-
-
-
 
     @endsection
     <script>
