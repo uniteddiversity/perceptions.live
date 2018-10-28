@@ -95,7 +95,7 @@ div .tooltip{
                     padding-bottom: 20px;
        }
 
-.formdesctext {
+div.formdesctext {
                     color: slategray;
                     font-size: 14px;
                     font-style: italic;
@@ -104,7 +104,7 @@ div .tooltip{
                     padding-bottom: 20px;
          }
 
-.formdesctext span { font-weight: 800; color: #4214c7; size: 20px; margin: auto; display: block; padding-bottom: 10px; }
-.submitprcption { width: 50%; margin: auto; }
+div.formdesctext span { font-weight: 800; color: #4214c7; size: 20px; margin: auto; display: block; padding-bottom: 10px; }
+div.submitprcption { width: 50%; margin: auto; }
 
 .formgroup text {  }
