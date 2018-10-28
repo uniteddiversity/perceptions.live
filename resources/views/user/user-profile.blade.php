@@ -57,12 +57,12 @@
                             </div>
 
                             <div class="form-group">
-                                <label for="exampleInputEmail1">Password</label>
+                                <label for="exampleInputEmail1">Change Your Password</label>
                                 <input type="text" class="form-control" aria-describedby="nameHelp" name="password" placeholder="Password" value="{{ old('password') }}">
                             </div>
 
                             <div class="form-group">
-                                <label for="video_producer">User Roles</label>
+                                <label for="video_producer">Your Collaboration Roles</label>
                                 {{--<input type="text" class="form-control" aria-describedby="nameHelp" name="video_producer" placeholder="Video Producer" value="{{ old('video_producer') }}">--}}
                                 <select class="form-control multi-select2" id="video_producer" multiple searchable="Search here.." name="user_acting_roles[]" >
                                     @foreach($user_acting_role as $role)
@@ -94,12 +94,12 @@
                             <?php } ?>
 
                                 <div class="form-group">
-                                    <label for="location">Location</label>
+                                    <label for="location">Current Location</label>
                                     <input type="text" class="form-control" aria-describedby="nameHelp" name="location" placeholder="Location" value="{{ old('location',$data['location']) }}">
                                 </div>
 
                                 <div class="form-group">
-                                    <label for="location">Description</label>
+                                    <label for="location">A Little About Yourself</label>
                                     <textarea type="text" class="form-control" rows="3" aria-describedby="nameHelp" name="description" placeholder="Description">{{ old('description',$data['description']) }}</textarea>
                                 </div>
 
@@ -125,7 +125,7 @@
 
 
                             <div class="form-group">
-                                <label for="exampleSelect1">Privacy settings</label>
+                                <label for="exampleSelect1">Your Privacy Settings</label>
                                 <select class="form-control" id="exampleSelect1" name="access_level_id">
                                     <?php foreach($access_levels as $access){ ?>
                                     <option value="{{$access->id}}" <?php if(old('access_level_id',$data['access_level_id']) == $access->id){ echo 'selected'; } ?> >{{$access->name}}</option>
@@ -134,7 +134,7 @@
                             </div>
 
                             <div class="form-group">
-                                <label for="grater_community_intention_id">Greater Community Intention</label>
+                                <label for="grater_community_intention_id">Your Greater Community Intentions (max. 3)</label>
                                 <select class="form-control multi-select2-max3" id="grater_community_intention_id" multiple name="grater_community_intention_ids[]">
                                     @foreach($gci_tags as $m)
                                         <option value="{{$m['id']}}" <?php if(in_array($m['id'], old('grater_community_intention_ids',$data['grater_community_intention_ids']))){ echo 'selected'; } ?> >{{$m['tag']}}</option>
@@ -143,7 +143,7 @@
                             </div>
 
                             <div class="form-group">
-                                <label for="skills">Skills (add if not exist)</label>
+                                <label for="skills">Your Skills</label>
                                 <select class="form-control multi-select2-with-tags-max3" id="skills" multiple name="skills[]">
                                     @foreach($skill_tags as $m)
                                         <option value="{{base64_encode($m['id'])}}" <?php if(in_array($m['id'], old('skills',$data['skills']))){ echo 'selected'; } ?> >{{$m['tag']}}</option>
