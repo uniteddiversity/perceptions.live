@@ -91,8 +91,8 @@
 						
                         <div class="form-group" id="submit_footage_form" <?php if(old('submitted_footage',$data['submitted_footage']) == 'yes'){ echo 'style="display:true"'; }else{ echo 'style="display:none"'; } ?> >
 							    <div class="formdesctext">
-                            <strong>Cool! PRCPTION Travel will be excited to work with you!</strong>
-                            <em>Before you begin, please <a href="https://perceptiontravel.tv/share/" target="_blank">familiarize yourself with the steps required</a> for your video to be edited. The process is designed to split the responsibility of sharing inspiring and community-building stories around the world; please play your part by organizing your footage appropriately before submission.</em>
+                            <em>Cool! PRCPTION Travel will be excited to work with you! :)</em>
+                           <p>Before you begin, please <a href="https://perceptiontravel.tv/share/" target="_blank">familiarize yourself with the steps required</a> for your video to be edited. The process is designed to split the responsibility of sharing inspiring and community-building stories around the world; please play your part by organizing your footage appropriately before submission.</p>
                         </div>
 							
 			
@@ -391,6 +391,8 @@ div.submitprcption { width: 50%; margin: auto; }
 			
 			a { color: #2B0D82 !important; }
 			a:hover { color:#2b0bae !important; }
+			
+			.formcontrol a { font-size: 1em; }
 			
 		</style>
 @endsection
