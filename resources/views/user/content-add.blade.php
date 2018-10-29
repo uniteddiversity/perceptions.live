@@ -91,7 +91,6 @@
 						
                         <div class="form-group" id="submit_footage_form" <?php if(old('submitted_footage',$data['submitted_footage']) == 'yes'){ echo 'style="display:true"'; }else{ echo 'style="display:none"'; } ?> >
 							    <div class="formdesctext">
-                            <hr>
                             <strong>Cool! PRCPTION Travel will be excited to work with you!</strong>
                             <em>Before you begin, please <a href="https://perceptiontravel.tv/share/" target="_blank">familiarize yourself with the steps required</a> for your video to be edited. The process is designed to split the responsibility of sharing inspiring and community-building stories around the world; please play your part by organizing your footage appropriately before submission.</em>
                         </div>
@@ -383,7 +382,9 @@ div.formdesctext {
                     padding-bottom: 20px;
          }
 
-div.formdesctext strong { padding-top: 15px; font-weight: 800; font-family: raleway; color: #2B0D82; font-size: 20px; margin: auto; display: block; padding-bottom: 10px; }
+			hr { padding-top: 15px; padding-bottom: 10px; }
+			
+div.formdesctext strong { font-weight: 800; font-family: raleway; color: #2B0D82; font-size: 20px; margin: auto; display: block; padding-bottom: 10px; }
 div.submitprcption { width: 50%; margin: auto; }
 
 			.form-group {padding-top:10px;}
