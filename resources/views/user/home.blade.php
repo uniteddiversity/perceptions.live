@@ -29,6 +29,4 @@
 		
     </section>
 
-<div class="footer">&copy; 2018 PRCPTION Travel, Inc.</div>
-
 @endsection
