@@ -2123,12 +2123,14 @@ nav > ul > li.menu-item-has-children:hover > ul {
   bottom: 0;
   left: 0;
   padding: 1rem;
-	height: 50px;
+	height: 100px;
   background-color: #13054D;
   text-align: center;
 	z-index: 1000;
 	color: #fff;
 }
+
+.footer strong { font-family: ralewaysemibold; }
 
 
 .footersec {
