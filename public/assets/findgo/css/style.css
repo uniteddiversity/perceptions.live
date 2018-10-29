@@ -146,7 +146,16 @@ time, mark, audio, video{
     font-size:100%;
     font:inherit;
     vertical-align:baseline;
+	height: 100%;
+	box-sizing: border-box;
 }
+
+*,
+*:before,
+*:after {
+  box-sizing: inherit;
+}
+
 /* HTML5 display-role reset for older browsers */
 article, aside, details, figcaption, figure,
 footer, header, hgroup, menu, nav, section{display:block}
@@ -167,6 +176,9 @@ body{
     font-family:'questrial', sans-serif;
     overflow-x:hidden;
     position:relative;
+	margin: 0;
+	padding-bottom: 6rem;
+	min-height: 100%;
 
 }
 body *{outline:none !important;}
@@ -2120,6 +2132,7 @@ nav > ul > li.menu-item-has-children:hover > ul {
   bottom: 0;
   left: 0;
   padding: 1rem;
+	height: 50px;
   background-color: #13054D;
   text-align: center;
 }

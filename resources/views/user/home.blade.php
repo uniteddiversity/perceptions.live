@@ -20,11 +20,11 @@
                             <div id="map" class="map" style="height: 100%;">&nbsp;</div>
                         </div>
 
-
+<div class="footer">&copy; 2018 PRCPTION Travel, Inc.</div>
                     </div>
                 </div>
             </div>
-			<div class="footer">text footer text &copy; 2018 PRCPTION Travel, Inc.</div>
+			
         </div>
 		
     </section>
