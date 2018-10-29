@@ -2123,7 +2123,7 @@ nav > ul > li.menu-item-has-children:hover > ul {
   bottom: 0;
   left: 0;
   padding: 1rem;
-	height: 70px;
+	height: 50px;
   background-color: #13054D;
   text-align: center;
 	z-index: 1000;
@@ -2131,7 +2131,7 @@ nav > ul > li.menu-item-has-children:hover > ul {
 	font-family: ralewayregular;
 }
 
-.footer strong { font-family: ralewaybold; }
+.footer strong { font-family: ralewaymedium; font-size: 12px; }
 
 .footer a { font-size: 12px; color: #e5e5e5; padding-left: 5px; padding-right: 5px; }
 
