@@ -106,17 +106,3 @@ div.formdesctext {
 
 div.formdesctext span { font-weight: 800; color: #4214c7; size: 20px; margin: auto; display: block; padding-bottom: 10px; }
 div.submitprcption { width: 50%; margin: auto; }
-
-/**
- * Footer Styles
- */
-
-.footer {
-  position: absolute;
-  right: 0;
-  bottom: 0;
-  left: 0;
-  padding: 1rem;
-  background-color: #13054D;
-  text-align: center;
-}

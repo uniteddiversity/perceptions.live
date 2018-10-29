@@ -24,8 +24,9 @@
                     </div>
                 </div>
             </div>
+			<div class="footer">text footer text &copy; 2018 PRCPTION Travel, Inc.</div>
         </div>
-		<div class="footer">text footer text &copy; 2018 PRCPTION Travel, Inc.</div>
+		
     </section>
 
 
