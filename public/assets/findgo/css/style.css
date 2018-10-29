@@ -2135,6 +2135,7 @@ nav > ul > li.menu-item-has-children:hover > ul {
 	height: 50px;
   background-color: #13054D;
   text-align: center;
+	z-index: 1000;
 }
 
 
