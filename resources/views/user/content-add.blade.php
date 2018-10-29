@@ -79,8 +79,19 @@
                             <strong>Your PRCPTION's Media</strong>
                             <em>Before we begin: is this media online already? Or do you need to be connected with an editor?</em>
                         </div>
+						
+					  <div class="form-group">
+                    
+                            <select class="form-control" id="submitted_footage" name="submitted_footage" onchange="displayVideoContentUpload()">
+                                <option value="no" <?php if(old('submitted_footage',$data['submitted_footage']) == 'no'){ echo 'selected'; } ?> >My video is completed.</option>
+                                <option value="yes" <?php if(old('submitted_footage',$data['submitted_footage']) == 'yes'){ echo 'selected'; } ?> >I need to submit my footage!</option>
+
+                            </select>
+                        </div>
+
+						
                         <div class="form-group">
-                            <label for="exampleTextarea">Video URL (YouTube, Vimeo, etc)</label>
+                            <label for="exampleTextarea">If completed, what is the video's URL? (YouTube, Vimeo, etc)</label>
                             <input type="text" class="form-control" aria-describedby="nameHelp" name="url" placeholder="URL" value="{{ old('url',$data['url']) }}">
                         </div>
 						
@@ -98,7 +109,7 @@
                         </div>
 
                         <div class="form-group">
-                            <label for="exampleTextarea">Comments, notes, or concerns about this PRCPTION that we (or the video editor) should know: </label>
+                            <label for="exampleTextarea">Comments, notes, or concerns about this PRCPTION that we (or the video editor) should know?</label>
                             <textarea type="text" class="form-control" aria-describedby="nameHelp" name="user_comment" placeholder="Additional Comments" rows="4">{{ old('user_comment',$data['user_comment']) }}</textarea>
                         </div>
 
@@ -333,15 +344,7 @@
                         {{--</div>--}}
                         {{--</fieldset>--}}
                        
-                        <div class="form-group">
-                            <label for="exampleSelect1">Do you need to submit your footage for editing?</label>
-                            <select class="form-control" id="submitted_footage" name="submitted_footage" onchange="displayVideoContentUpload()">
-                                <option value="no" <?php if(old('submitted_footage',$data['submitted_footage']) == 'no'){ echo 'selected'; } ?> >No</option>
-                                <option value="yes" <?php if(old('submitted_footage',$data['submitted_footage']) == 'yes'){ echo 'selected'; } ?> >Yes</option>
-
-                            </select>
-                        </div>
-
+         
 
                         {{--users only items--}}
                         {{--<div class="form-group">--}}
@@ -385,6 +388,8 @@ div.formdesctext {
 div.formdesctext strong { font-weight: 800; font-family: raleway; color: #2B0D82; font-size: 20px; margin: auto; display: block; padding-bottom: 10px; }
 div.submitprcption { width: 50%; margin: auto; }
 
+			.form-group {padding-top:15px;}
+			
 		</style>
 
 @endsection

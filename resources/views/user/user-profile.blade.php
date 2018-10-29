@@ -211,6 +211,9 @@ div.formdesctext {
 div.formdesctext strong { font-weight: 800; font-family: raleway; color: #2B0D82; font-size: 20px; margin: auto; display: block; padding-bottom: 10px; }
 div.submitprcption { width: 50%; margin: auto; }
 
+			.form-group {padding-top:15px;}
+			
+			
 		</style>
 
 
