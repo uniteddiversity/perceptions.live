@@ -52,7 +52,7 @@
                     <h4 class="card-title" style="margin-bottom: 10px; text-align: center;">Submit Your PRCPTION</h4>
                     <div class="pagedesc" align="center">
                         <p>Use this page to submit your own content that supports the exposure of cooperative, smiling people endeavors worldwide. We'll review it, get back to you if necessary, and it will become a part of the network!</p>
-                        <p>To keep our community thriving, we kindly ask that you refresh yourself with our <a href="https://perceptionstravel.tv/user-guidelines">User Guidelines</a> before using this form. Thanks!</p>
+                        <p>To keep our community thriving, and so there are no misunderstandings should your submission be rejected, we kindly ask that you refresh yourself with our <a href="https://perceptiontravel.tv/user-guidelines">User Guidelines</a> and <a href="https://perceptiontravel.tv/terms-of-service">Terms of Service</a> before using this form.</p>
 						<p><em>Should you encounter any errors we encourage you to <a href="https://perceptiontravel.tv/community-feedback">let us know</a>. Thanks!</em></p>
                 <div class="table-responsive">
                     @if ($errors->any())
@@ -73,7 +73,49 @@
                     <form action="/user/post-upload-video" method="post" id="submit_content" enctype='multipart/form-data'>
                         <input type="hidden" name="_token" id="csrf-token" value="{{ Session::token() }}" />
                         <input type="hidden" name="id" id="csrf-token" value="<?php echo uid($data['id']) ?>" />
+                  
                         <div class="formdesctext">
+                            <hr>
+                            <strong>Your PRCPTION's Media</strong>
+                            <em>Before we begin: is this media online already? Or do you need to be connected with an editor?</em>
+                        </div>
+                        <div class="form-group">
+                            <label for="exampleTextarea">Video URL (YouTube, Vimeo, etc)</label>
+                            <input type="text" class="form-control" aria-describedby="nameHelp" name="url" placeholder="URL" value="{{ old('url',$data['url']) }}">
+                        </div>
+						
+                        <div class="form-group" id="submit_footage_form" <?php if(old('submitted_footage',$data['submitted_footage']) == 'yes'){ echo 'style="display:true"'; }else{ echo 'style="display:none"'; } ?> >
+							    <div class="formdesctext">
+                            <hr>
+                            <strong>Cool! PRCPTION Travel will be excited to work with you!</strong>
+                            <em>Before you begin, please <a href="https://perceptiontravel.tv/share/" target="_blank">familiarize yourself with the steps required</a> for your video to be edited. The process is designed to split the responsibility of sharing inspiring and community-building stories around the world; please play your part by organizing your footage appropriately before submission.</em>
+                        </div>
+							
+                            <label for="submit_footage_form">Upload Your Content (max 200MB each)</label>
+                            <input class="form-control" type="file" name="content_set1[]" /> <a href="https://perceptiontravel.tv/share/#step1" target="_blank">Step 1</a>: Who? Where? When?
+                            <input class="form-control" type="file" name="content_set2[]" /> <a href="https://perceptiontravel.tv/share/#step2" target="_blank">Step 2</a>: What's Up?
+                            <input class="form-control" type="file" name="content_set3[]" /> <a href="https://perceptiontravel.tv/share/#step3" target="_blank">Step 3</a>: Why? How?
+                        </div>
+
+                        <div class="form-group">
+                            <label for="exampleTextarea">Comments, notes, or concerns about this PRCPTION that we (or the video editor) should know: </label>
+                            <textarea type="text" class="form-control" aria-describedby="nameHelp" name="user_comment" placeholder="Additional Comments" rows="4">{{ old('user_comment',$data['user_comment']) }}</textarea>
+                        </div>
+
+                        <div class="form-group">
+                            <?php if(Auth::user()->is('admin') || Auth::user()->is('group-admin') || Auth::user()->is('moderator')){ ?>
+                            <label for="status">Status</label>
+                            <select class="form-control" id="status" name="status">
+                                @foreach($status as $st)
+                                    <option value="{{$st->id}}" <?php if(old('status',$data['status']) == $st->id){ echo 'selected'; } ?> >{{$st->name}}</option>
+                                @endforeach
+                            </select>
+                            <?php } ?>
+                        </div>
+
+                </div>
+
+						<div class="formdesctext">
                             <hr>
                            <strong>Media Info</strong>
                             <em>In this section, please fill in the basic details about your PRCPTION submission.</em>
@@ -108,7 +150,7 @@
                         {{--</div>--}}
                         <div class="formdesctext">
                             <hr>
-                            <span>Users</span>
+                            <strong>Users Involved</strong>
                             <em>In this section, please choose the individuals and groups who have been a part of this PRCPTION. If no name appears, press 'enter' to add them as a shadow profile--don't worry, you can let them know and they can <a href="/claim-profile">claim their empty profile</a> whenever they want.</em>
                         </div>
 
@@ -131,7 +173,7 @@
                             </select>
                         </div>
                         <div class="form-group">
-                            <label for="co_creators">Co Creator(s) Involved (music credits, co-producers, etc.)</label>
+                            <label for="co_creators">Co-Creator(s) (music credits, co-producers, etc.)</label>
                             {{--<input type="text" class="form-control" aria-describedby="nameHelp" name="co_creators" placeholder="Co Creators" value="{{ old('co_creators') }}">--}}
                             <select class="form-control multi-select2-with-tags" multiple id="co_creators" searchable="Search here.." name="co_creators[]" >
                                 @foreach($user_list as $user)
@@ -155,7 +197,7 @@
 
                         <div class="formdesctext">
                             <hr>
-                            <span>Visibility, Sorting, and Filters</span>
+                            <strong>Visibility, Sorting, and Filters</strong>
                             <em>Who and how should people find this PRCPTION?</em>
                         </div>
                         <div class="form-group">
@@ -197,6 +239,21 @@
                                 @endforeach
                             </select>
                         </div>
+						
+						 <div class="form-group">
+                            <input class="form-control" type="checkbox" id="is_exchange" <?php if(!empty(old('exchange',$data['exchange']))){ ?> checked <?php } ?> value="1" name="exchange" style="width: 50px;"/>
+                            <label for="is_exchange"> Is there some sort of exchange being offered in this PRCPTION? (work trade, volunteer, etc)</label>
+                        </div>
+                        <div class="form-group" id="exchange_enabled" <?php if(empty(old('exchange',$data['exchange']))){ ?> style="visibility: hidden;" <?php } ?> >
+                            <span class="exchange"><label for="is_exchange">Is this exchange a service or an opportunity being offered?</label>
+                            <select class="form-control multi-select2" id="service_or_opportunity" name="service_or_opportunity">
+                                <option value="0">Please choose one</option>
+                                <option value="1" <?php if(old('exchange',$data['exchange']) == '1'){ echo 'selected'; } ?> >Service</option>
+                                <option value="2" <?php if(old('exchange',$data['exchange']) == '2'){ echo 'selected'; } ?> >Opportunity</option>
+                            </select></span>
+                        </div>
+
+						
                         {{--<div class="form-group">--}}
                         {{--<label for="exampleSelect1">Secondary Subject Tag</label>--}}
                         {{--<select class="form-control" id="secondary_subject_tag_id" name="secondary_subject_tag_id">--}}
@@ -232,16 +289,6 @@
                         <input type="hidden" value="0" id="lat_val" name="lat" value="{{ old('lat',$data['lat']) }}">
                         <input type="hidden" value="0" id="long_val" name="long" value="{{ old('long',$data['long']) }}">
                         <?php } ?>
-
-                        <div class="formdesctext">
-                            <hr>
-                            <span>Video-Meta</span>
-                            <em>Is this video online already? Or do you need to find an editor?</em>
-                        </div>
-                        <div class="form-group">
-                            <label for="exampleTextarea">Video URL (YouTube, Vimeo, etc)</label>
-                            <input type="text" class="form-control" aria-describedby="nameHelp" name="url" placeholder="URL" value="{{ old('url',$data['url']) }}">
-                        </div>
 
                         {{--<div class="form-group">--}}
                         {{--<label for="exampleTextarea">Url Split</label>--}}
@@ -285,19 +332,7 @@
                         {{--</label>--}}
                         {{--</div>--}}
                         {{--</fieldset>--}}
-                        <div class="form-group">
-                            <input class="form-control" type="checkbox" id="is_exchange" <?php if(!empty(old('exchange',$data['exchange']))){ ?> checked <?php } ?> value="1" name="exchange" style="width: 50px;"/>
-                            <label for="is_exchange"> Is anyone offering an exchange in this PRCPTION?</label>
-                        </div>
-                        <div class="form-group" id="exchange_enabled" <?php if(empty(old('exchange',$data['exchange']))){ ?> style="visibility: hidden;" <?php } ?> >
-                            <label for="is_exchange">Is this exchange a service or an opportunity being offered?</label>
-                            <select class="form-control multi-select2" id="service_or_opportunity" name="service_or_opportunity">
-                                <option value="0">Please choose one</option>
-                                <option value="1" <?php if(old('exchange',$data['exchange']) == '1'){ echo 'selected'; } ?> >Service</option>
-                                <option value="2" <?php if(old('exchange',$data['exchange']) == '2'){ echo 'selected'; } ?> >Opportunity</option>
-                            </select>
-                        </div>
-
+                       
                         <div class="form-group">
                             <label for="exampleSelect1">Do you need to submit your footage for editing?</label>
                             <select class="form-control" id="submitted_footage" name="submitted_footage" onchange="displayVideoContentUpload()">
@@ -319,31 +354,7 @@
                         {{--</select>--}}
                         {{--</div>--}}
 
-                        <div class="form-group" id="submit_footage_form" <?php if(old('submitted_footage',$data['submitted_footage']) == 'yes'){ echo 'style="display:true"'; }else{ echo 'style="display:none"'; } ?> >
-                            <label for="submit_footage_form">Video Content</label>
-                            <input class="form-control" type="file" name="content_set1[]" /> Content Set 1
-                            <input class="form-control" type="file" name="content_set2[]" /> Content Set 2
-                            <input class="form-control" type="file" name="content_set3[]" /> Content Set 3
-                        </div>
-
-                        <div class="form-group">
-                            <label for="exampleTextarea">Comments, notes or concerns about this PRCPTION that we should know: </label>
-                            <textarea type="text" class="form-control" aria-describedby="nameHelp" name="user_comment" placeholder="Additional Comments" rows="4">{{ old('user_comment',$data['user_comment']) }}</textarea>
-                        </div>
-
-                        <div class="form-group">
-                            <?php if(Auth::user()->is('admin') || Auth::user()->is('group-admin') || Auth::user()->is('moderator')){ ?>
-                            <label for="status">Status</label>
-                            <select class="form-control" id="status" name="status">
-                                @foreach($status as $st)
-                                    <option value="{{$st->id}}" <?php if(old('status',$data['status']) == $st->id){ echo 'selected'; } ?> >{{$st->name}}</option>
-                                @endforeach
-                            </select>
-                            <?php } ?>
-                        </div>
-
-                </div>
-
+						
                         <button type="button" onclick="submit_content()" class="btn btn-primary" style="background: #4214c7; border-color: #fff;">Submit PRCPTION</button>
                     </form>
                 </div>
@@ -359,6 +370,8 @@
                     line-height: 1em;
                     padding-bottom: 20px;
        }
+			
+			.exchange { font-size: 14px; }
 
 div.formdesctext {
                     color: slategray;
@@ -369,7 +382,7 @@ div.formdesctext {
                     padding-bottom: 20px;
          }
 
-div.formdesctext strong { font-weight: 800; color: #4214c7; size: 20px; margin: auto; display: block; padding-bottom: 10px; }
+div.formdesctext strong { font-weight: 800; font-family: raleway; color: #2B0D82; font-size: 20px; margin: auto; display: block; padding-bottom: 10px; }
 div.submitprcption { width: 50%; margin: auto; }
 
 		</style>

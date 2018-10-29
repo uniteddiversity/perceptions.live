@@ -48,7 +48,7 @@
                             <?php }?>
 							<div class="formdesctext">
                             <hr>
-                           <span>Your Account</span>
+                           <strong>Your Account</strong>
                
                         </div>
                             <div class="form-group">
@@ -77,7 +77,7 @@
 
 											<div class="formdesctext">
                             <hr>
-                           <span>About You</span>
+                           <strong>About You</strong>
                             <em>Personalize your profile. Let the network know a little about yourself.</em>
                         </div>
 							<div class="form-group">
@@ -116,7 +116,7 @@
 							
 						<div class="formdesctext">
                             <hr>
-                           <span>Connections and Collaborations</span>
+                           <strong>Connections and Collaborations</strong>
                             <em>These are the details by which others will discover you. What skills do you have to offer? What values do you represent?</em>
                         </div>
 
@@ -208,7 +208,7 @@ div.formdesctext {
                     padding-bottom: 20px;
          }
 
-div.formdesctext span { font-weight: 800; color: #4214c7; size: 20px; margin: auto; display: block; padding-bottom: 10px; }
+div.formdesctext strong { font-weight: 800; font-family: raleway; color: #2B0D82; font-size: 20px; margin: auto; display: block; padding-bottom: 10px; }
 div.submitprcption { width: 50%; margin: auto; }
 
 		</style>
