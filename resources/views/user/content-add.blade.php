@@ -75,7 +75,7 @@
                         <input type="hidden" name="id" id="csrf-token" value="<?php echo uid($data['id']) ?>" />
                         <div class="formdesctext">
                             <hr>
-                           <span>Media Info</span>
+                           <strong>Media Info</strong>
                             <em>In this section, please fill in the basic details about your PRCPTION submission.</em>
                         </div>
                         <div class="form-group">
@@ -369,7 +369,7 @@ div.formdesctext {
                     padding-bottom: 20px;
          }
 
-div.formdesctext span { font-weight: 800; color: #4214c7; size: 20px; margin: auto; display: block; padding-bottom: 10px; }
+div.formdesctext strong { font-weight: 800; color: #4214c7; size: 20px; margin: auto; display: block; padding-bottom: 10px; }
 div.submitprcption { width: 50%; margin: auto; }
 
 		</style>
