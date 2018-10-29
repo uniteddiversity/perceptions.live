@@ -2122,7 +2122,7 @@ nav > ul > li.menu-item-has-children:hover > ul {
   right: 0;
   bottom: 0;
   left: 0;
-  padding: 1rem;
+  padding: .5rem;
 	height: 65px;
   background-color: #13054D;
   text-align: center;
@@ -2133,7 +2133,7 @@ nav > ul > li.menu-item-has-children:hover > ul {
 
 .footer strong { font-family: ralewaymedium; font-size: 12px; }
 
-.footer a { font-size: 12px; color: #e5e5e5; padding-left: 5px; padding-right: 5px; }
+.footer a { font-size: 12px; color: #e5e5e5; padding-left: 7px; padding-right: 7px; }
 
 
 .footersec {
