@@ -97,9 +97,9 @@
 							
 			
                             <label for="submit_footage_form">Upload Your Content (max 200MB each)</label>
-                            <input class="form-control" type="file" name="content_set1[]" /> <a href="https://perceptiontravel.tv/share/#step1" target="_blank">Step 1</a>: Who? Where? When?
-                            <input class="form-control" type="file" name="content_set2[]" /> <a href="https://perceptiontravel.tv/share/#step2" target="_blank">Step 2</a>: What's Up?
-                            <input class="form-control" type="file" name="content_set3[]" /> <a href="https://perceptiontravel.tv/share/#step3" target="_blank">Step 3</a>: Why? How?
+                            <input class="form-control" type="file" name="content_set1[]" /> <a href="https://perceptiontravel.tv/share/#step1" style="font-size: 18px;" target="_blank">Step 1</a>: Who? Where? When?
+                            <input class="form-control" type="file" name="content_set2[]" /> <a href="https://perceptiontravel.tv/share/#step2" style="font-size: 18px;" target="_blank">Step 2</a>: What's Up?
+                            <input class="form-control" type="file" name="content_set3[]" /> <a href="https://perceptiontravel.tv/share/#step3" style="font-size: 18px;" target="_blank">Step 3</a>: Why? How?
                         </div>
 					
                         <div class="form-group">
@@ -391,8 +391,7 @@ div.submitprcption { width: 50%; margin: auto; }
 			
 			a { color: #2B0D82 !important; }
 			a:hover { color:#2b0bae !important; }
-			
-			.form-control a { font-size: 1.2em; }
+		
 			
 		</style>
 @endsection
