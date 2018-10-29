@@ -88,12 +88,6 @@
 
                             </select>
                         </div>
-
-						
-                        <div class="form-group">
-                            <label for="exampleTextarea">If completed, what is the video's URL? (YouTube, Vimeo, etc)</label>
-                            <input type="text" class="form-control" aria-describedby="nameHelp" name="url" placeholder="URL" value="{{ old('url',$data['url']) }}">
-                        </div>
 						
                         <div class="form-group" id="submit_footage_form" <?php if(old('submitted_footage',$data['submitted_footage']) == 'yes'){ echo 'style="display:true"'; }else{ echo 'style="display:none"'; } ?> >
 							    <div class="formdesctext">
@@ -102,12 +96,18 @@
                             <em>Before you begin, please <a href="https://perceptiontravel.tv/share/" target="_blank">familiarize yourself with the steps required</a> for your video to be edited. The process is designed to split the responsibility of sharing inspiring and community-building stories around the world; please play your part by organizing your footage appropriately before submission.</em>
                         </div>
 							
+			
                             <label for="submit_footage_form">Upload Your Content (max 200MB each)</label>
                             <input class="form-control" type="file" name="content_set1[]" /> <a href="https://perceptiontravel.tv/share/#step1" target="_blank">Step 1</a>: Who? Where? When?
                             <input class="form-control" type="file" name="content_set2[]" /> <a href="https://perceptiontravel.tv/share/#step2" target="_blank">Step 2</a>: What's Up?
                             <input class="form-control" type="file" name="content_set3[]" /> <a href="https://perceptiontravel.tv/share/#step3" target="_blank">Step 3</a>: Why? How?
                         </div>
-
+					
+                        <div class="form-group">
+                            <label for="exampleTextarea">If it's already completed, what is the video's URL? (YouTube, Vimeo, etc)</label>
+                            <input type="text" class="form-control" aria-describedby="nameHelp" name="url" placeholder="URL" value="{{ old('url',$data['url']) }}">
+                        </div>
+						
                         <div class="form-group">
                             <label for="exampleTextarea">Comments, notes, or concerns about this PRCPTION that we (or the video editor) should know?</label>
                             <textarea type="text" class="form-control" aria-describedby="nameHelp" name="user_comment" placeholder="Additional Comments" rows="4">{{ old('user_comment',$data['user_comment']) }}</textarea>
@@ -373,8 +373,6 @@
                     line-height: 1em;
                     padding-bottom: 20px;
        }
-			
-			.exchange { font-size: 14px; }
 
 div.formdesctext {
                     color: slategray;
@@ -385,13 +383,15 @@ div.formdesctext {
                     padding-bottom: 20px;
          }
 
-div.formdesctext strong { font-weight: 800; font-family: raleway; color: #2B0D82; font-size: 20px; margin: auto; display: block; padding-bottom: 10px; }
+div.formdesctext strong { padding-top: 15px; font-weight: 800; font-family: raleway; color: #2B0D82; font-size: 20px; margin: auto; display: block; padding-bottom: 10px; }
 div.submitprcption { width: 50%; margin: auto; }
 
-			.form-group {padding-top:15px;}
+			.form-group {padding-top:10px;}
+			
+			a { color: #2B0D82 !important; }
+			a:hover { color:#2b0bae !important; }
 			
 		</style>
-
 @endsection
 <script>
     //        var el = document.getElementById('loading');
