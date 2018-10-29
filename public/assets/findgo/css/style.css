@@ -147,13 +147,6 @@ time, mark, audio, video{
     font:inherit;
     vertical-align:baseline;
 	height: 100%;
-	box-sizing: border-box;
-}
-
-*,
-*:before,
-*:after {
-  box-sizing: inherit;
 }
 
 /* HTML5 display-role reset for older browsers */
@@ -178,7 +171,6 @@ body{
     position:relative;
 	margin: 0;
 	padding-bottom: 6rem;
-	min-height: 100%;
 
 }
 body *{outline:none !important;}
@@ -2136,6 +2128,7 @@ nav > ul > li.menu-item-has-children:hover > ul {
   background-color: #13054D;
   text-align: center;
 	z-index: 1000;
+	color: #fff;
 }
 
 
