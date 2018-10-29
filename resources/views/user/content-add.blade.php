@@ -392,7 +392,7 @@ div.submitprcption { width: 50%; margin: auto; }
 			a { color: #2B0D82 !important; }
 			a:hover { color:#2b0bae !important; }
 			
-			.formcontrol a { font-size: 1em; }
+			.form-control a { font-size: 1.2em; }
 			
 		</style>
 @endsection
