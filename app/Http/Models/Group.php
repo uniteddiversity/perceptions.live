@@ -52,4 +52,9 @@ class Group extends Model
             ->where('status','=','1')
             ->where('submission_type','=','group-avatar');
     }
+
+    public function category()
+    {
+        return $this->hasOne('App\Category','id','category_id');
+    }
 }

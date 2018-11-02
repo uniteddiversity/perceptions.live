@@ -216,7 +216,7 @@ class UserRepository
 
     public function getGroupInfo($group_id, $full = false, $public = false)
     {
-        $group_info = $this->group->where('groups.id', $group_id)->with(['proofOfGroup','groupAvatar','actingRoles' => function($q){
+        $group_info = $this->group->where('groups.id', $group_id)->with(['category','proofOfGroup','groupAvatar','actingRoles' => function($q){
             $q->with('tag');
         }])
             ->first()->toArray();

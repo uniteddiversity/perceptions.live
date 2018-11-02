@@ -41,7 +41,7 @@
                 </div>
 
                 <div style="padding-bottom: 10px;">
-                    <div style="font-size: 14px; text-transform: uppercase; line-height: .8em; font-family: ralewaybold;"> Category</div>
+                    <div style="font-size: 14px; text-transform: uppercase; line-height: .8em; font-family: ralewaybold;"> Category : <span style="font-weight: normal;"><?php if(isset($info['category'])){ echo $info['category']['name']; } ?></span></div> <?php //dd($info) ?>
                     <div style="text-transform: none; padding-top: 10px; font-style: italic;"><?php echo $info['current_mission'] ?></div>
                 </div>
 

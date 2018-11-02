@@ -389,6 +389,8 @@ $("body").on('hidden.bs.modal', function (e) {
     console.log('close working');
     model_links = [];
     model_links_current_pos = 0;
+    var $videoEl = $('.modal-body').find('iframe');
+    $videoEl.attr('src', $videoEl.attr('src'));
     // put your default event here
 });
 
