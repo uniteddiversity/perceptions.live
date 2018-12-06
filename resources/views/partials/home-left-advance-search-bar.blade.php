@@ -1,9 +1,12 @@
-<div class="openfilters"><img src="/assets/findgo/images/icon2.png" alt="" /><span>Adv Search</span></div>
+<div class="openfilters">
+    <span>
+        <i class="far fa-arrow-alt-circle-down"></i>Adv Search</span></div>
 <div class="mlfilter-sec fakeScroll fakeScroll--inside" style="background: #d5d5ed;">
     <div class="mltitle">
         <h3>Advanced Search</h3>
-        <span class="closefilter"><i>+</i></span>
+        <i class="far fa-times-circle closefilter"></i>
     </div>
+
     <div class="mfilterform2">
         <form>
 
@@ -15,11 +18,11 @@
                     </div>
                 </div>
                 <div class="col-lg-6">
-                    <div class="mlfield">
+                    <div class="mlfield half">
                         <select class="selectbox">
                             <option>All Categories</option>
                             @foreach($categories as $cat)
-                                <option value="{{$cat->id}}" >{{$cat->name}}</option>
+                            <option value="{{$cat->id}}">{{$cat->name}}</option>
                             @endforeach
                         </select>
                     </div>
@@ -52,7 +55,8 @@
                     </div>
                 </div>
                 <div class="col-lg-12">
-                    <div class="mlfield s2">
+                    <div class="mlfield s2" style="margin-bottom:45px;">
+
                         <select class="selectbox" placeholder="Community Intentions">
                             <option value="">All Community Intentions</option>
                             <?php
@@ -64,11 +68,11 @@
                     </div>
                 </div>
                 <div class="col-lg-12">
-                    <div class="mlfield s2">
+                    <div class="mlfield s2" style="margin-bottom:30px;">
                         <select class="selectbox">
                             <option>All Sorting Tags</option>
                             @foreach($sorting_tags as $tag)
-                                <option value="{{$tag->id}}" >{{$tag->tag}}</option>
+                            <option value="{{$tag->id}}">{{$tag->tag}}</option>
                             @endforeach
                         </select>
                     </div>
@@ -97,3 +101,53 @@
         </form>
     </div>
 </div>
+
+<script>
+    $('.mlfilter-sec select').each(function() {
+        var $this = $(this),
+            numberOfOptions = $(this).children('option').length;
+
+        $this.addClass('select-hidden');
+        $this.wrap('<div class="select"></div>');
+        $this.after('<div class="select-styled"></div>');
+
+        var $styledSelect = $this.next('div.select-styled');
+        $styledSelect.text($this.children('option').eq(0).text());
+
+        var $list = $('<ul />', {
+            'class': 'select-options'
+        }).insertAfter($styledSelect);
+
+        for (var i = 0; i < numberOfOptions; i++) {
+            $('<li />', {
+                text: $this.children('option').eq(i).text(),
+                rel: $this.children('option').eq(i).val()
+            }).appendTo($list);
+        }
+
+        var $listItems = $list.children('li');
+
+        $styledSelect.click(function(e) {
+            e.stopPropagation();
+            $('div.select-styled.active').not(this).each(function() {
+                $(this).removeClass('active').next('ul.select-options').hide();
+            });
+            $(this).toggleClass('active').next('ul.select-options').toggle();
+        });
+
+        $listItems.click(function(e) {
+            e.stopPropagation();
+            $styledSelect.text($(this).text()).removeClass('active');
+            $this.val($(this).attr('rel'));
+            $list.hide();
+            //console.log($this.val());
+        });
+
+        $(document).click(function() {
+            $styledSelect.removeClass('active');
+            $list.hide();
+        });
+
+    });
+
+</script>

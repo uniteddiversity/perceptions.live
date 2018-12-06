@@ -1,5 +1,5 @@
 <?php $user_img = Auth::user()->image; ?>
-<nav class="navbar header-navbar pcoded-header" >
+<nav class="navbar header-navbar pcoded-header">
 
     <div class="navbar-wrapper">
         <div class="navbar-logo" data-navbar-theme="theme4">
@@ -9,20 +9,25 @@
             <a class="mobile-search morphsearch-search" href="#">
                 <i class="ti-search"></i>
             </a>
-            <a href="/">
-                <img class="img-fluid" src="/assets/img/logo_1.png" alt="{{ config('app.name') }}" />
-            </a>
             <a class="mobile-options">
                 <i class="ti-more"></i>
             </a>
+            <ul class="nav-left">
+                <li>
+                    <div class="sidebar_toggle">
+                        <a href="javascript:void(0)">
+                            <i class="fas fa-bars"></i>
+                        </a>
+                    </div>
+                </li>
+            </ul>
+            <a href="/" class="logo">
+                <img style="display:none;" class="img-fluid" src="/assets/img/logo_1.png" alt="{{ config('app.name') }}" />
+            </a>
         </div>
-        <div class="navbar-container container-fluid">
+        <div class="navbar-container container-fluid" style="padding-right:0;">
             <div>
-                <ul class="nav-left">
-                    <li>
-                        <div class="sidebar_toggle"><a href="javascript:void(0)"><i class="ti-menu"></i></a></div>
-                    </li>
-                </ul>
+
                 <ul class="nav-right">
                     <?php /*
                     <li class="header-notification">
@@ -77,24 +82,28 @@
 
                     <li class="user-profile header-notification">
                         <a href="#!">
-                            <img src="<?php if(isset($user_img[0])){ echo '/storage/'.$user_img[0]->url; }else{ ?>/assets/img/face1.png<?php } ?>" alt="profile image">
-                            <span><?php echo Auth::user()->display_name ?></span>
-                            <i class="ti-angle-down"></i>
+                            <span class="uimg">
+                                <img src="<?php if(isset($user_img[0])){ echo '/storage/'.$user_img[0]->url; }else{ ?>/assets/img/face1.png<?php } ?>" alt="profile image">
+                            </span>
+
+                            <span>
+                                <?php echo Auth::user()->display_name ?></span>
+                            <i class="fas fa-sort-down"></i>
                         </a>
                         <ul class="show-notification profile-notification">
                             <li>
                                 <a href="/">
-                                    <i class="ti-home"></i> Home
+                                    <i class="fas fa-home"></i> Home
                                 </a>
                             </li>
                             <li>
                                 <a href="/user/user-profile">
-                                    <i class="ti-user"></i> Profile
+                                    <i class="far fa-user"></i>Profile
                                 </a>
                             </li>
                             <li>
                                 <a href="/user/logout">
-                                    <i class="ti-layout-sidebar-left"></i> Logout
+                                    <i class="fas fa-sign-out-alt"></i> Logout
                                 </a>
                             </li>
                         </ul>

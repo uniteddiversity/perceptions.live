@@ -1,0 +1,12 @@
+/*** NEW ***/
+header.s4.dark {
+    height: 70px;
+    background: #000;
+}
+
+nav > ul > li > a {
+    padding: 0 15px !important;
+    line-height: 70px !important;
+    height: 70px !important;
+    color: #000 !Important;
+}

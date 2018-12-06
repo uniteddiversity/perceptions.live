@@ -44,7 +44,8 @@
     <link rel="stylesheet" type="text/css" href="/assets/mashable/css/style.css">
     <!--color css-->
 
-
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,600,700" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="/assets/mashable/css/linearicons.css">
     <link rel="stylesheet" type="text/css" href="/assets/mashable/css/simple-line-icons.css">
     <link rel="stylesheet" type="text/css" href="/assets/mashable/css/ionicons.css">
@@ -52,50 +53,50 @@
     <link rel="stylesheet" href="/js/dist/css/select2.min.css" />
 
     <link rel="stylesheet" href="/assets/css/custom_common_styles.css" />
-	<link rel="stylesheet" href="/assets/css/custom.css" />
+    <link rel="stylesheet" href="/assets/css/custom.css" />
 
     <link rel="stylesheet" href="/assets/croppie/croppie.css" />
     <link rel="stylesheet" href="/assets/js/datatable/datatables.min.css" />
 </head>
 
 <body>
-<!-- Pre-loader start -->
-<div class="theme-loader">
-    <div class="ball-scale">
-        <div></div>
+    <!-- Pre-loader start -->
+    <div class="theme-loader">
+        <div class="ball-scale">
+            <div></div>
+        </div>
     </div>
-</div>
-<!-- Pre-loader end -->
-<!-- Menu header start -->
-<div id="pcoded" class="pcoded">
-    <div class="pcoded-overlay-box"></div>
+    <!-- Pre-loader end -->
+    <!-- Menu header start -->
+    <div id="pcoded" class="pcoded">
+        <div class="pcoded-overlay-box"></div>
 
 
 
-    <div class="pcoded-container navbar-wrapper">
-        @include('partials.admin-nav-bar')
+        <div class="pcoded-container navbar-wrapper">
+            @include('partials.admin-nav-bar')
 
 
 
-        <!-- Sidebar inner chat end-->
-        <div class="pcoded-main-container">
-            <div class="pcoded-wrapper">
+            <!-- Sidebar inner chat end-->
+            <div class="pcoded-main-container">
+                <div class="pcoded-wrapper">
 
-                <?php if(Auth::user()->is('admin')){ ?>
+                    <?php if(Auth::user()->is('admin')){ ?>
                     @include('partials.admin-left-sidebar')
-                <?php }elseif(Auth::user()->is('group-admin')){ ?>
+                    <?php }elseif(Auth::user()->is('group-admin')){ ?>
                     @include('partials.group-admin-left-sidebar')
-                <?php }elseif(Auth::user()->is('moderator')){ ?>
+                    <?php }elseif(Auth::user()->is('moderator')){ ?>
                     @include('partials.moderator-left-sidebar')
-                <?php }else{ ?>
+                    <?php }else{ ?>
                     @include('partials.user-left-sidebar')
-                <?php } ?>
+                    <?php } ?>
 
-                <div class="pcoded-content">
-                    <div class="pcoded-inner-content">
-                        <div class="main-body">
-                            @yield('content')
-                            <?php /*
+                    <div class="pcoded-content">
+                        <div class="pcoded-inner-content">
+                            <div class="main-body">
+                                @yield('content')
+                                <?php /*
                             <div class="page-wrapper">
                                 <div class="page-header">
                                     <div class="page-header-title">
@@ -622,196 +623,198 @@
                             </div>
                             */ ?>
 
-                            {{--<div id="styleSelector">--}}
+                                {{--<div id="styleSelector">--}}
 
-                            {{--</div>--}}
+                                {{--</div>--}}
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-</div>
 
-<!-- Warning Section Ends -->
-<!-- Required Jqurey -->
-<script type="text/javascript" src="/assets/mashable/bower_components/jquery/js/jquery.min.js"></script>
-<script src="/assets/mashable/bower_components/jquery-ui/js/jquery-ui.min.js"></script>
-<script type="text/javascript" src="/assets/mashable/bower_components/popper.js/js/popper.min.js"></script>
-<script type="text/javascript" src="/assets/mashable/bower_components/bootstrap/js/bootstrap.min.js"></script>
-<!-- jquery slimscroll js -->
-<script type="text/javascript" src="/assets/mashable/bower_components/jquery-slimscroll/js/jquery.slimscroll.js"></script>
-<!-- modernizr js -->
-<script type="text/javascript" src="/assets/mashable/bower_components/modernizr/js/modernizr.js"></script>
-<script type="text/javascript" src="/assets/mashable/bower_components/modernizr/js/css-scrollbars.js"></script>
-<!-- Calender js -->
-<script type="text/javascript" src="/assets/mashable/bower_components/moment/js/moment.min.js"></script>
-<script type="text/javascript" src="/assets/mashable/pages/widget/calender/pignose.calendar.min.js"></script>
-<!-- classie js -->
-<!-- c3 chart js -->
-<script src="/assets/mashable/bower_components/c3/js/c3.js"></script>
-<script type="text/javascript" src="/assets/mashable/bower_components/classie/js/classie.js"></script>
-<!-- knob js -->
-<script src="/assets/mashable/pages/chart/knob/jquery.knob.js"></script>
-<script type="text/javascript" src="/assets/mashable/pages/widget/jquery.sparkline.js"></script>
-<!-- Rickshow Chart js -->
-<script src="/assets/mashable/bower_components/d3/js/d3.js"></script>
-<script src="/assets/mashable/bower_components/rickshaw/js/rickshaw.js"></script>
-<!-- Morris Chart js -->
-<script src="/assets/mashable/bower_components/raphael/js/raphael.min.js"></script>
-<script src="/assets/mashable/bower_components/morris.js/js/morris.js"></script>
-<!-- Float Chart js -->
-<script src="/assets/mashable/pages/chart/float/jquery.flot.js"></script>
-<script src="/assets/mashable/pages/chart/float/jquery.flot.categories.js"></script>
-<script src="/assets/mashable/pages/chart/float/jquery.flot.pie.js"></script>
-<!-- Horizontal-Timeline js -->
-<script type="text/javascript" src="/assets/mashable/pages/dashboard/horizontal-timeline/js/main.js"></script>
-<!-- amchart js -->
-<script type="text/javascript" src="/assets/mashable/pages/dashboard/amchart/js/amcharts.js"></script>
-<script type="text/javascript" src="/assets/mashable/pages/dashboard/amchart/js/serial.js"></script>
-<script type="text/javascript" src="/assets/mashable/pages/dashboard/amchart/js/light.js"></script>
-<script type="text/javascript" src="/assets/mashable/pages/dashboard/amchart/js/custom-amchart.js"></script>
-<!-- i18next.min.js -->
-<script type="text/javascript" src="/assets/mashable/bower_components/i18next/js/i18next.min.js"></script>
-<script type="text/javascript" src="/assets/mashable/bower_components/i18next-xhr-backend/js/i18nextXHRBackend.min.js"></script>
-<script type="text/javascript" src="/assets/mashable/bower_components/i18next-browser-languagedetector/js/i18nextBrowserLanguageDetector.min.js"></script>
-<script type="text/javascript" src="/assets/mashable/bower_components/jquery-i18next/js/jquery-i18next.min.js"></script>
-<!-- Custom js -->
-<script type="text/javascript" src="/assets/mashable/pages/dashboard/custom-dashboard.js"></script>
-<script type="text/javascript" src="/assets/mashable/js/script.js"></script>
+    <!-- Warning Section Ends -->
+    <!-- Required Jqurey -->
+    <script type="text/javascript" src="/assets/mashable/bower_components/jquery/js/jquery.min.js"></script>
+    <script src="/assets/mashable/bower_components/jquery-ui/js/jquery-ui.min.js"></script>
+    <script type="text/javascript" src="/assets/mashable/bower_components/popper.js/js/popper.min.js"></script>
+    <script type="text/javascript" src="/assets/mashable/bower_components/bootstrap/js/bootstrap.min.js"></script>
+    <!-- jquery slimscroll js -->
+    <script type="text/javascript" src="/assets/mashable/bower_components/jquery-slimscroll/js/jquery.slimscroll.js"></script>
+    <!-- modernizr js -->
+    <script type="text/javascript" src="/assets/mashable/bower_components/modernizr/js/modernizr.js"></script>
+    <script type="text/javascript" src="/assets/mashable/bower_components/modernizr/js/css-scrollbars.js"></script>
+    <!-- Calender js -->
+    <script type="text/javascript" src="/assets/mashable/bower_components/moment/js/moment.min.js"></script>
+    <script type="text/javascript" src="/assets/mashable/pages/widget/calender/pignose.calendar.min.js"></script>
+    <!-- classie js -->
+    <!-- c3 chart js -->
+    <script src="/assets/mashable/bower_components/c3/js/c3.js"></script>
+    <script type="text/javascript" src="/assets/mashable/bower_components/classie/js/classie.js"></script>
+    <!-- knob js -->
+    <script src="/assets/mashable/pages/chart/knob/jquery.knob.js"></script>
+    <script type="text/javascript" src="/assets/mashable/pages/widget/jquery.sparkline.js"></script>
+    <!-- Rickshow Chart js -->
+    <script src="/assets/mashable/bower_components/d3/js/d3.js"></script>
+    <script src="/assets/mashable/bower_components/rickshaw/js/rickshaw.js"></script>
+    <!-- Morris Chart js -->
+    <script src="/assets/mashable/bower_components/raphael/js/raphael.min.js"></script>
+    <script src="/assets/mashable/bower_components/morris.js/js/morris.js"></script>
+    <!-- Float Chart js -->
+    <script src="/assets/mashable/pages/chart/float/jquery.flot.js"></script>
+    <script src="/assets/mashable/pages/chart/float/jquery.flot.categories.js"></script>
+    <script src="/assets/mashable/pages/chart/float/jquery.flot.pie.js"></script>
+    <!-- Horizontal-Timeline js -->
+    <script type="text/javascript" src="/assets/mashable/pages/dashboard/horizontal-timeline/js/main.js"></script>
+    <!-- amchart js -->
+    <script type="text/javascript" src="/assets/mashable/pages/dashboard/amchart/js/amcharts.js"></script>
+    <script type="text/javascript" src="/assets/mashable/pages/dashboard/amchart/js/serial.js"></script>
+    <script type="text/javascript" src="/assets/mashable/pages/dashboard/amchart/js/light.js"></script>
+    <script type="text/javascript" src="/assets/mashable/pages/dashboard/amchart/js/custom-amchart.js"></script>
+    <!-- i18next.min.js -->
+    <script type="text/javascript" src="/assets/mashable/bower_components/i18next/js/i18next.min.js"></script>
+    <script type="text/javascript" src="/assets/mashable/bower_components/i18next-xhr-backend/js/i18nextXHRBackend.min.js"></script>
+    <script type="text/javascript" src="/assets/mashable/bower_components/i18next-browser-languagedetector/js/i18nextBrowserLanguageDetector.min.js"></script>
+    <script type="text/javascript" src="/assets/mashable/bower_components/jquery-i18next/js/jquery-i18next.min.js"></script>
+    <!-- Custom js -->
+    <script type="text/javascript" src="/assets/mashable/pages/dashboard/custom-dashboard.js"></script>
+    <script type="text/javascript" src="/assets/mashable/js/script.js"></script>
 
-<!-- pcmenu js -->
-<script src="/assets/mashable/js/pcoded.min.js"></script>
-<script src="/assets/mashable/js/demo-12.js"></script>
-<script src="/assets/mashable/js/jquery.mCustomScrollbar.concat.min.js"></script>
-<script src="/assets/mashable/js/jquery.mousewheel.min.js"></script>
-<script src="/js//dist/js/select2.full.min.js"></script>
-<script src="/assets/js/custom_common.js"></script>
-<script type="text/javascript" src="/assets/mashable/bower_components/bootstrap-datepicker/js/bootstrap-datepicker.min.js"></script>
-<script src="/assets/js/app.js"></script>
-<script src="/assets/croppie/croppie.js"></script>
-<script src="/assets/js/datatable/datatables.min.js"></script>
+    <!-- pcmenu js -->
+    <script src="/assets/mashable/js/pcoded.min.js"></script>
+    <script src="/assets/mashable/js/demo-12.js"></script>
+    <script src="/assets/mashable/js/jquery.mCustomScrollbar.concat.min.js"></script>
+    <script src="/assets/mashable/js/jquery.mousewheel.min.js"></script>
+    <script src="/js//dist/js/select2.full.min.js"></script>
+    <script src="/assets/js/custom_common.js"></script>
+    <script type="text/javascript" src="/assets/mashable/bower_components/bootstrap-datepicker/js/bootstrap-datepicker.min.js"></script>
+    <script src="/assets/js/app.js"></script>
+    <script src="/assets/croppie/croppie.js"></script>
+    <script src="/assets/js/datatable/datatables.min.js"></script>
 
-<script>
-    $(document).ready(function() {
-        // $('#users_llist').DataTable({"aaSorting": []});
-        $('.datepicker').datepicker({
-            format: 'dd-mm-yyyy',
-            // startDate: '-3d',
-            autoclose: true,
-            keepOpen: false,
+    <script>
+        $(document).ready(function() {
+            // $('#users_llist').DataTable({"aaSorting": []});
+            $('.datepicker').datepicker({
+                format: 'dd-mm-yyyy',
+                // startDate: '-3d',
+                autoclose: true,
+                keepOpen: false,
+            });
+
+            $('.select2-ajax-content').trigger('change');
+            $('.select2-ajax-users').trigger('change');
+            $('.select2-ajax-groups').trigger('change');
+            $('.select2-ajax-my-groups-content').trigger('change');
         });
 
-        $('.select2-ajax-content').trigger('change');
-        $('.select2-ajax-users').trigger('change');
-        $('.select2-ajax-groups').trigger('change');
-        $('.select2-ajax-my-groups-content').trigger('change');
-    } );
 
 
+        function submit_content() {
+            if (addr_search()) {
 
-    function submit_content(){
-        if(addr_search()){
-
+            }
         }
-    }
 
-    $('.select2-ajax-content').select2({
-        ajax: {
-            url: '/home/ajax/video-search-list',
-            dataType: 'json'
-            // Additional AJAX parameters go here; see the end of this chapter for the full code of this example
-        }
-    });
+        $('.select2-ajax-content').select2({
+            ajax: {
+                url: '/home/ajax/video-search-list',
+                dataType: 'json'
+                // Additional AJAX parameters go here; see the end of this chapter for the full code of this example
+            }
+        });
 
-    $('.select2-ajax-users').select2({
-        ajax: {
-            url: '/home/ajax/user-search-list',
-            dataType: 'json'
-        }
-    });
-
-
-    $('.select2-ajax-groups').select2({
-        ajax: {
-            url: '/home/ajax/group-search-list',
-            dataType: 'json'
-        }
-    });
-
-    $('.select2-ajax-my-groups-content').select2({
-        ajax: {
-            url: '/home/ajax/video-search-list?only_my_group=yes',
-            dataType: 'json'
-        }
-    });
-
-    $('#shearable_code').click(function(){
-        $(this).select();
-    })
-</script>
+        $('.select2-ajax-users').select2({
+            ajax: {
+                url: '/home/ajax/user-search-list',
+                dataType: 'json'
+            }
+        });
 
 
+        $('.select2-ajax-groups').select2({
+            ajax: {
+                url: '/home/ajax/group-search-list',
+                dataType: 'json'
+            }
+        });
+
+        $('.select2-ajax-my-groups-content').select2({
+            ajax: {
+                url: '/home/ajax/video-search-list?only_my_group=yes',
+                dataType: 'json'
+            }
+        });
+
+        $('#shearable_code').click(function() {
+            $(this).select();
+        })
+
+    </script>
 
 
-<script type="text/javascript">
-    $( document ).ready(function() {
-        var $uploadCrop;
 
-        function readFile(input) {
-            if (input.files && input.files[0]) {
-                var reader = new FileReader();
-                reader.onload = function (e) {
-                    $uploadCrop.croppie('bind', {
-                        url: e.target.result
-                    });
-                    $('.upload-demo').addClass('ready');
+
+    <script type="text/javascript">
+        $(document).ready(function() {
+            var $uploadCrop;
+
+            function readFile(input) {
+                if (input.files && input.files[0]) {
+                    var reader = new FileReader();
+                    reader.onload = function(e) {
+                        $uploadCrop.croppie('bind', {
+                            url: e.target.result
+                        });
+                        $('.upload-demo').addClass('ready');
+                    }
+                    reader.readAsDataURL(input.files[0]);
                 }
-                reader.readAsDataURL(input.files[0]);
             }
-        }
 
-        $uploadCrop = $('#upload-profile').croppie({
-            viewport: {
-                width: 120,
-                height: 120,
-                type: 'circle'
-            },
-            boundary: {
-                width: 200,
-                height: 200
+            $uploadCrop = $('#upload-profile').croppie({
+                viewport: {
+                    width: 120,
+                    height: 120,
+                    type: 'circle'
+                },
+                boundary: {
+                    width: 200,
+                    height: 200
+                }
+            });
+
+            $('#upload').on('change', function() {
+                readFile(this);
+                // updateSource();
+                setInterval(updateSource, 300);
+            });
+
+            function updateSource() {
+                $uploadCrop.croppie('result', {
+                    type: 'canvas',
+                    size: 'original'
+                }).then(function(resp) {
+                    $('#imagebase64').val(resp);
+                    // $('#form').submit();
+                });
             }
-        });
-
-        $('#upload').on('change', function () {
-            readFile(this);
-            // updateSource();
-            setInterval(updateSource, 300);
-        });
-
-        function updateSource(){
-            $uploadCrop.croppie('result', {
-                type: 'canvas',
-                size: 'original'
-            }).then(function (resp) {
-                $('#imagebase64').val(resp);
-                // $('#form').submit();
+            $('.upload-result').on('click', function(ev) {
+                $uploadCrop.croppie('result', {
+                    type: 'canvas',
+                    size: 'original'
+                }).then(function(resp) {
+                    $('#imagebase64').val(resp);
+                    // $('#form').submit();
+                });
             });
-        }
-        $('.upload-result').on('click', function (ev) {
-            $uploadCrop.croppie('result', {
-                type: 'canvas',
-                size: 'original'
-            }).then(function (resp) {
-                $('#imagebase64').val(resp);
-                // $('#form').submit();
-            });
+
+            console.log('image path is ' + $('#preset_image_path').val());
+            $('.cr-image').attr('src', $('#preset_image_path').val());
         });
 
-        console.log('image path is '+$('#preset_image_path').val());
-        $('.cr-image').attr('src',$('#preset_image_path').val());
-    });
-</script>
+    </script>
 
 </body>
 
@@ -1006,32 +1009,32 @@
     <div class="container-fluid page-body-wrapper">
 
     <?php if(Auth::user()->is('admin')){ ?>
-        @include('partials.admin-left-sidebar')
-    <?php }elseif(Auth::user()->is('group-admin')){ ?>
-        @include('partials.group-admin-left-sidebar')F
-    <?php }elseif(Auth::user()->is('moderator')){ ?>
-        @include('partials.moderator-left-sidebar')
-    <?php }else{ ?>
-        @include('partials.user-left-sidebar')
-    <?php } ?>
+@include('partials.admin-left-sidebar')
+<?php }elseif(Auth::user()->is('group-admin')){ ?>
+@include('partials.group-admin-left-sidebar')F
+<?php }elseif(Auth::user()->is('moderator')){ ?>
+@include('partials.moderator-left-sidebar')
+<?php }else{ ?>
+@include('partials.user-left-sidebar')
+<?php } ?>
 
 
 
+<!-- partial -->
+<div class="main-panel">
+    <div class="content-wrapper">
+
+        @yield('content')
+        <!-- content-wrapper ends -->
+        <!-- partial:partials/_footer.html -->
+        <footer class="footer">
+
+        </footer>
         <!-- partial -->
-        <div class="main-panel">
-            <div class="content-wrapper">
-
-            @yield('content')
-            <!-- content-wrapper ends -->
-            <!-- partial:partials/_footer.html -->
-            <footer class="footer">
-
-            </footer>
-            <!-- partial -->
-        </div>
-        <!-- main-panel ends -->
     </div>
-    <!-- page-body-wrapper ends -->
+    <!-- main-panel ends -->
+</div>
+<!-- page-body-wrapper ends -->
 </div>
 
 
@@ -1056,7 +1059,7 @@
 
 <!-- plugins:js -->
 
-    {{--<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>--}}
+{{--<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>--}}
 
 <script src="/assets/admin-temp/vendors/js/vendor.bundle.base.js"></script>
 <script src="/assets/admin-temp/vendors/js/vendor.bundle.addons.js"></script>
@@ -1073,27 +1076,29 @@
 
 <script>
     $(document).ready(function() {
-        $('#users_llist').DataTable({"aaSorting": []});
+        $('#users_llist').DataTable({
+            "aaSorting": []
+        });
         $('.datepicker').datepicker({
             format: 'dd-mm-yyyy',
             // startDate: '-3d',
             autoclose: true,
             keepOpen: false,
         });
-//        $('.datepicker').on('changeDate', function(ev){
-//            $(this).datepicker('hide');
-//        });
+        //        $('.datepicker').on('changeDate', function(ev){
+        //            $(this).datepicker('hide');
+        //        });
 
         $('.select2-ajax-content').trigger('change');
         $('.select2-ajax-users').trigger('change');
         $('.select2-ajax-groups').trigger('change');
         $('.select2-ajax-my-groups-content').trigger('change');
-    } );
+    });
 
 
 
-    function submit_content(){
-        if(addr_search()){
+    function submit_content() {
+        if (addr_search()) {
 
         }
     }
@@ -1128,14 +1133,15 @@
         }
     });
 
-    $('#shearable_code').click(function(){
+    $('#shearable_code').click(function() {
         $(this).select();
     })
+
 </script>
 <!-- End custom js for this page-->
 </body>
 <style>
-    #featureModal .modal-dialog{
+    #featureModal .modal-dialog {
         width: 950px;
         max-width: 950px;
     }
@@ -1143,6 +1149,8 @@
     .select2-container .select2-selection--single {
         height: 38px;
     }
+
 </style>
+
 </html>
- */ ?>
+*/ ?>

@@ -3,72 +3,23 @@ preg_match("/^(?:http(?:s)?:\/\/)?(?:www\.)?(?:m\.)?(?:youtu\.be\/|youtube\.com\
 $video_id = isset($matches[1])?$matches[1]:'';
 ?>
 <div class="modal-body">
-    <div style="display: block; width:100%; text-align: center;">
-        <div class="videosubject">
-            <i class="fa fa-tag"></i> {{$info['primary_subject_tag']}}
-        </div>
-        <div style="display: block; position: relative; width: 100%;">
-            <h4>{{$info['title']}}</h4>
-        </div>
-        <div style="display: block; width: 100%;">
-          <div style="margin-top:25px; font-size: 14px; text-transform: uppercase; font-family: ralewaybold;">
-            <span style="float: left;">
-                <?php if(isset($info->category)){ echo $info->category->name; }; ?>
-            </span>
-            <span style="margin-left: auto; margin-right: auto; z-index: 5;">
-                <?php foreach($info->gciTags as $tag){
-                    if(isset($tag->tag) && isset($tag->tag->tag))
-                        echo '<span class="dot" data-toggle="tooltip" data-animation="true" data-placement="top" style="margin-top:-10px; text-transform: none; background-color: '.$tag->tag->tag_color.'" title="'.$tag->tag->tag.'" ></span>';
-                }
-                ?>
-            </span>
-            <span style="float: right;" style="color:#cfcff2;">
-                <i class="flaticon-pin"></i> {{$info['location']}}
-            </span>
-        </div>
-        </div>
-    </div>
-    <div>
-        <iframe style="width: 100%;height: 350px" src="<?php echo str_replace( array('watch?v=','http://'), array('embed/','https://'),$info['url']) ?>" frameborder="0" allowfullscreen></iframe>
-    </div>
-    <div class="placedetails">
-        <span class="pull-leftopen"><i class="fa fa-users"></i>
-
-            <?php if(isset($info->groups) && count($info->groups) > 0){
-            $datas = array();
-            foreach($info->groups as $group){
-                if(isset($group->group) && isset($group->group->id))
-                    $datas[] = '@'.'<span class="inactive_link" onclick="openGroupProfile('.$group->group->id.')">'.$group->group->name.'</span>';
-            }
-
-            if(!empty($datas)){
-            ?>
-            <div>
-                    <?php
-                echo implode(', ', $datas);
-                ?>
-                            </div>
-            <?php }
-            }; ?>
-        </span>
-        <span class="pull-right"><i class="fa fa-film"></i>
-
-                <?php foreach($info->videoProducer as $key => $users){ if(isset($info->videoProducer[$key])){ echo '<span class="inactive_link" onclick="openProfile(\''. $info->videoProducer[$key]->user->id .'\')">@'.$info->videoProducer[$key]->user->display_name.'</span>'; break; } }?>
-            </span>
+    <button class="close mobile_show" type="button" data-dismiss="modal" aria-hidden="true">&times;</button>
+    <div class="youtube">
+        <iframe style="width: 100%;height: 506px" src="<?php echo str_replace( array('watch?v=','http://'), array('embed/','https://'),$info['url']) ?>" frameborder="0" allowfullscreen></iframe>
     </div>
 
-    <div>
-    <span style="display: block; width:100%; float: left; padding-top: 20px;">
-        <p style="font-size: .9em; line-height: 1.3em;">
-         {{$info['brief_description']}}
-        </p>
-    </span>
-    </div>
-    <div style="width:100%; text-align: center; display: block;">
-        <h5>Credits</h5>
-        <div class="usersmetas2">
-            <strong><i class="fa fa-user-circle"></i> Onscreen</strong>:<br>
-                <?php if(isset($info->onScreen) && count($info->onScreen) > 0){
+    <div class="modal-inner">
+        <div style="display: block; width:100%; text-align: center;">
+
+            <div class="placedetails">
+                <span style="float: left; display:none;">
+                    <?php if(isset($info->category)){ echo $info->category->name; }; ?>
+                </span>
+                <div class="credits_outer">
+                    <h5 style="display:none;">Credits</h5>
+                    <div class="usersmetas2" style="border-top:none;">
+                        <strong><i class="fa fa-user-circle"></i> Onscreen: </strong>
+                        <?php if(isset($info->onScreen) && count($info->onScreen) > 0){
                 $datas = array();
                 foreach($info->onScreen as $user){
                     $datas[] = '@'.'<span class="inactive_link" onclick="openProfile('.$user->user->id.')">'.$user->user->display_name.'</span>';
@@ -76,17 +27,17 @@ $video_id = isset($matches[1])?$matches[1]:'';
 
                 if(!empty($datas)){
                 ?>
-                <div>
-                    <?php
+                        <div>
+                            <?php
                     echo implode(', ', $datas);
                     ?>
-                </div>
-                <?php }
+                        </div>
+                        <?php }
                 }; ?>
-        </div>
-            <div class="usersmetas2">
-                <strong><i class="fa fa-user"></i> Co-Creators</strong>:<br>
-                <?php if(isset($info->coCreators)){
+                    </div>
+                    <div class="usersmetas2" style="margin-left:10px;">
+                        <strong><i class="far fa-user"></i> Co-Creators: </strong>
+                        <?php if(isset($info->coCreators)){
 
                     $datas = array();
                     foreach($info->coCreators as $user){
@@ -97,11 +48,77 @@ $video_id = isset($matches[1])?$matches[1]:'';
                         echo implode(', ', $datas);
                     }
                 }
-                ?></div>
-    </div>
-    <div width="70%" style="font-size: 11px;">
-    <span class="listmetas2">
-        <?php
+                ?>
+                    </div>
+                </div>
+                <div class="usersmetas1">
+                    <span style="float: right;" style="color:#cfcff2;">
+                        <i class="fas fa-map-marker-alt"></i> {{$info['location']}}
+                    </span>
+
+                    <span class="pull-leftopen"><i class="far fa-user"></i>
+
+                        <?php if(isset($info->groups) && count($info->groups) > 0){
+            $datas = array();
+            foreach($info->groups as $group){
+                if(isset($group->group) && isset($group->group->id))
+                    $datas[] = '@'.'<span class="inactive_link" onclick="openGroupProfile('.$group->group->id.')">'.$group->group->name.'</span>';
+            }
+
+            if(!empty($datas)){
+            ?>
+
+                        <?php
+                echo implode(', ', $datas);
+                ?>
+
+                        <?php }
+            }; ?>
+                    </span>
+
+                    <span class="pull-right"><i class="fab fa-youtube"></i>
+
+                        <?php foreach($info->videoProducer as $key => $users){ if(isset($info->videoProducer[$key])){ echo '<span class="inactive_link" onclick="openProfile(\''. $info->videoProducer[$key]->user->id .'\')">@'.$info->videoProducer[$key]->user->display_name.'</span>'; break; } }?>
+                    </span>
+                </div>
+            </div>
+
+
+            <div class="videosubject">
+
+                <i class="fa fa-tag"></i> {{$info['primary_subject_tag']}}
+
+                <span style="margin-left: auto; margin-right: auto; z-index: 5;">
+                    <?php foreach($info->gciTags as $tag){
+                    if(isset($tag->tag) && isset($tag->tag->tag))
+                        echo '<span class="dot" data-toggle="tooltip" data-animation="true" data-placement="top" style="margin-top:-10px; text-transform: none; background-color: '.$tag->tag->tag_color.'" title="'.$tag->tag->tag.'" ></span>';
+                }
+                ?>
+                </span>
+
+            </div>
+            <div style="display: block; position: relative; width: 100%;">
+                <h4>{{$info['title']}}</h4>
+            </div>
+            <div style="display: block; width: 100%;">
+                <div style="margin-top:25px; font-size: 14px; text-transform: uppercase; font-family: ralewaybold;">
+
+                </div>
+            </div>
+        </div>
+
+        <div>
+            <span style="display: block; width:100%; float: left;">
+                <p style="font-size: .9em; line-height: 1.3em; margin-bottom:15px;">
+                    {{$info['brief_description']}}
+                </p>
+            </span>
+        </div>
+        <div class="bottom_info">
+
+            <div class="listmetas_outer">
+                <span class="listmetas2">
+                    <?php
         $datas = [];
         foreach($info->sortingTags as $tag){
             if(isset($tag->content_tag_id) && isset($tag->tag->tag)){
@@ -112,10 +129,97 @@ $video_id = isset($matches[1])?$matches[1]:'';
             echo implode(' ', $datas);
         }
         ?>
-    </span>
+                </span>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="right-comments">
+        <button class="close" type="button" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <div class="comments_outer">
+            <div class="comments_inner">
+                <div class="comment">
+                    <p class="com_user"><i class="far fa-user"></i><a href="#">@username</a></p>
+                    <div class="comment-inner">
+                        <p>Minim consectetur proident aute aute eu culpa incididunt dolor nisi cupidatat ad.</p>
+                    </div>
+                </div>
+                <div class="comment" style="padding-left: 20px;">
+                    <p class="com_user"><i class="far fa-user"></i><a href="#">@username</a></p>
+                    <div class="comment-inner">
+                        <p>Veniam excepteur voluptate exercitation ipsum minim non non adipisicing fugiat mollit.</p>
+                    </div>
+                </div>
+                <div class="comment" style="padding-left: 40px;">
+                    <p class="com_user"><i class="far fa-user"></i><a href="#">@username</a></p>
+                    <div class="comment-inner">
+                        <p>Laboris consectetur mollit irure Lorem dolor minim adipisicing anim.</p>
+                    </div>
+                </div>
+                <div class="comment">
+                    <p class="com_user"><i class="far fa-user"></i><a href="#">@username</a></p>
+                    <div class="comment-inner">
+                        <p>Lorem reprehenderit aliquip labore anim sunt sit dolor magna anim.</p>
+                    </div>
+                </div>
+                <div class="comment" style="padding-left: 20px;">
+                    <p class="com_user"><i class="far fa-user"></i><a href="#">@username</a></p>
+                    <div class="comment-inner">
+                        <p>Laboris consectetur mollit irure adipisicing anim.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="btn_outer">
+            <div class="btn_inner" style="border-bottom:1px solid rgb(31,31,31);">
+                <label>Message</label>
+                <textarea placeholder="Text goes here..."></textarea>
+                <a href="#" class="btn">Submit</a>
+            </div>
+            <div class="btn_inner open">
+                <a href="#" id="add" class="btn">Add a Comment</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="mobile_btns">
+        <a href="#" id="details">
+            <span><i class="fas fa-info"></i>View Video Details</span>
+            <span><i class="far fa-times-circle"></i>Hide Video Details</span>
+        </a>
+        <a href="#" id="comments">
+            <span> <i class="far fa-comment-dots">
+                </i>View Comments <strong>(12)</strong></span>
+            <span> <i class="far fa-times-circle"></i>Close Comments</span>
+        </a>
     </div>
 </div>
-<div style="clear: both;" ></div>
+<div style="clear: both;"></div>
+
+<script>
+    $('.btn').on('click', function(e) {
+        $('.right-comments .btn_inner').addClass("open");
+        $(this).parent().removeClass("open");
+        e.preventDefault();
+    });
+
+    $('#details').click(function() {
+        $('.modal-inner .placedetails').toggleClass("active");
+        $(this).toggleClass("active");
+    })
+
+    $('#comments').click(function() {
+        $('.modal-dialog.big .modal-inner').toggleClass("hidden");
+        $('.youtube').toggleClass("hidden");
+        $('.modal-body .right-comments').toggleClass("active");
+        $('#details').toggleClass("hidden");
+        $('#details').removeClass("active");
+        $(this).toggleClass("active");
+    })
+
+</script>
+
 <?php /* <div class="row" style="display: block;">
     <div class="col-lg-12 grid-margin stretch-card">
         <div class="card">
@@ -129,12 +233,17 @@ $video_id = isset($matches[1])?$matches[1]:'';
 
                 <div class="row" style="display: block;margin: 25px;">
                     <div class="col-lg-5 column" style="margin:0px;padding: 0px;padding-left: 0px;">
-                        <div>Category - <?php if(isset($info->category)){ echo $info->category->name; }; ?></div>
-                        <div><?php if(!empty($info->learn_more_url)){ echo '<a target="_blank" href="'.$info->learn_more_url.'">Learn more..</a>'; }; ?></div>
-                    </div>
-                    <div class="col-lg-7 column">
-                        <div>Submitter: <?php if(isset($info->user)){ echo '@'.'<span class="inactive_link" onclick="openProfile('.$info->user->id.')">'.$info->user->display_name.'</span>'; }; ?></div>
-                        <?php if(isset($info->videoProducer)){
+                        <div>Category - <?php if(isset($info->category)){ echo $info->category->name; }; ?>
+</div>
+<div>
+    <?php if(!empty($info->learn_more_url)){ echo '<a target="_blank" href="'.$info->learn_more_url.'">Learn more..</a>'; }; ?>
+</div>
+</div>
+<div class="col-lg-7 column">
+    <div>Submitter:
+        <?php if(isset($info->user)){ echo '@'.'<span class="inactive_link" onclick="openProfile('.$info->user->id.')">'.$info->user->display_name.'</span>'; }; ?>
+    </div>
+    <?php if(isset($info->videoProducer)){
                             $datas = array();
                             foreach($info->videoProducer as $user){
                                 $datas[] = '@'.'<span class="inactive_link" onclick="openProfile('.$user->user->id.')">'.$user->user->display_name.'</span>';
@@ -142,14 +251,14 @@ $video_id = isset($matches[1])?$matches[1]:'';
 
                             if(!empty($datas)){
                             ?>
-                        <div>Producer(s):
-                            <?php
+    <div>Producer(s):
+        <?php
                             echo implode(', ', $datas);
                             ?>
-                        </div>
-                        <?php }
+    </div>
+    <?php }
                         }; ?>
-                        <?php if(isset($info->coCreators)){
+    <?php if(isset($info->coCreators)){
 
                             $datas = array();
                             foreach($info->coCreators as $user){
@@ -159,15 +268,15 @@ $video_id = isset($matches[1])?$matches[1]:'';
                             if(!empty($datas)){
                             ?>
 
-                        <div>Co-creators(s):
-                                <?php
+    <div>Co-creators(s):
+        <?php
                                 echo implode(', ', $datas);
                                 ?>
-                            </div>
+    </div>
 
-                        <?php }
+    <?php }
                         }; ?>
-                        <?php if(isset($info->onScreen) && count($info->onScreen) > 0){
+    <?php if(isset($info->onScreen) && count($info->onScreen) > 0){
                             $datas = array();
                             foreach($info->onScreen as $user){
                                 $datas[] = '@'.'<span class="inactive_link" onclick="openProfile('.$user->user->id.')">'.$user->user->display_name.'</span>';
@@ -175,14 +284,14 @@ $video_id = isset($matches[1])?$matches[1]:'';
 
                             if(!empty($datas)){
                             ?>
-                        <div>On screen(s):
-                            <?php
+    <div>On screen(s):
+        <?php
                             echo implode(', ', $datas);
                             ?>
-                        </div>
-                        <?php }
+    </div>
+    <?php }
                         }; ?>
-                        <?php if(isset($info->groups) && count($info->groups) > 0){
+    <?php if(isset($info->groups) && count($info->groups) > 0){
                             $datas = array();
                             foreach($info->groups as $group){
                                 $datas[] = '@'.'<span class="inactive_link" onclick="openGroupProfile('.$group->group->id.')">'.$group->group->name.'</span>';
@@ -190,41 +299,43 @@ $video_id = isset($matches[1])?$matches[1]:'';
 
                             if(!empty($datas)){
                             ?>
-                            <div>Organization(s):
-                                <?php
+    <div>Organization(s):
+        <?php
                                 echo implode(', ', $datas);
                                 ?>
-                            </div>
-                        <?php }
+    </div>
+    <?php }
                         }; ?>
 
-                    </div>
-                </div>
-                <div class="row" style="display: block;margin: 25px;">
-                    <iframe width="800" height="400" src="<?php echo str_replace( 'watch?v=', 'embed/',$info['url']) ?>" frameborder="0" allowfullscreen></iframe>
-                </div>
-            </div>
-        </div>
-    </div>
+</div>
+</div>
+<div class="row" style="display: block;margin: 25px;">
+    <iframe width="800" height="400" src="<?php echo str_replace( 'watch?v=', 'embed/',$info['url']) ?>" frameborder="0" allowfullscreen></iframe>
+</div>
+</div>
+</div>
+</div>
 </div>
 */ ?>
 
 <?php /*
 <img width=200 height=100 src="https://img.youtube.com/vi/<?php echo $video_id ?>/mqdefault.jpg">
 <div class="row" style="display: block;margin: 5px;">
-        <div style="font-size: 16px;margin-top: 6px;margin-bottom: 6px;">{{$info['title']}}
-            <span style="padding-bottom: 6px;float: right;">
-                <?php foreach($info->gciTags as $tag){
+    <div style="font-size: 16px;margin-top: 6px;margin-bottom: 6px;">{{$info['title']}}
+        <span style="padding-bottom: 6px;float: right;">
+            <?php foreach($info->gciTags as $tag){
                     if(isset($tag->tag) && isset($tag->tag->tag))
                     echo '<span style="background-color: '.$tag->tag->tag_color.'" class="dot-small"></span>';
                 }
                 ?>
-                </span>
-        </div>
-        <div><i class="flaticon-pin"> {{$info['location']}}</i></div>
-                <div><i class="flaticon-avatar"></i> <?php foreach($info->videoProducer as $key => $users){ if(isset($info->videoProducer[$key])){ echo '<span class="inactive_link" onclick="openProfile(\''. $info->videoProducer[$key]->user->id .'\')">@'.$info->videoProducer[$key]->user->display_name.'</span>'; break; } }?></div>
+        </span>
+    </div>
+    <div><i class="flaticon-pin"> {{$info['location']}}</i></div>
+    <div><i class="flaticon-avatar"></i>
+        <?php foreach($info->videoProducer as $key => $users){ if(isset($info->videoProducer[$key])){ echo '<span class="inactive_link" onclick="openProfile(\''. $info->videoProducer[$key]->user->id .'\')">@'.$info->videoProducer[$key]->user->display_name.'</span>'; break; } }?>
+    </div>
 
-        <div><a href="#" onclick="openVideo('<?php echo $info['id'] ?>')"><i class="flaticon-eye"> Open Video</i></a></div>
+    <div><a href="#" onclick="openVideo('<?php echo $info['id'] ?>')"><i class="flaticon-eye"> Open Video</i></a></div>
 
 </div>
- */ ?>
+*/ ?>
