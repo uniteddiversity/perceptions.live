@@ -86,6 +86,9 @@ Route::group(['prefix' => 'user', 'middleware' => ['auth', 'web', 'admin']], fun
 });
 
  */
+Route::group(['prefix' => 'auth-user', 'middleware' => ['web']], function () {
+    Route::get('/movie-editor/{_token}', '\App\Controllers\User\UserController@getTokenInfo');
+});
 
 Route::group(['prefix' => 'user', 'middleware' => ['auth', 'web']], function () {
     Route::get('/content-add', '\App\Controllers\User\UserController@uploadVideo');
