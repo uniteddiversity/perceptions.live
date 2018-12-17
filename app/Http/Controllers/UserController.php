@@ -575,8 +575,9 @@ class UserController extends Controller
     {
         $video_editor_url = env("VIDEO_EDITOR_URL", "");
         $user_id = (!isset(Auth::user()->id))? 0 : Auth::user()->id;
-        $userEditVideos->create(array('user_id' => $user_id, 'token' => 'abc', 'info' => json_encode(array('test' => 'test video'))));
+        $token_key = md5($user_id + time() + rand(0,10));
+        $temp_data = $userEditVideos->create(array('user_id' => $user_id, 'token' => $token_key, 'info' => json_encode(array('test' => 'test video'))));
 
-        return Redirect::to($video_editor_url);
+        return Redirect::to($video_editor_url.'?key='.$temp_data->token);
     }
 }
