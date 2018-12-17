@@ -19,6 +19,7 @@ class CreateUserEditVideos extends Migration
             $table->integer('user_id');
             $table->string('token');
             $table->json('info');
+            $table->integer('is_deleted');
             $table->rememberToken();
             $table->timestamps();
         });
