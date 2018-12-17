@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class AlterUsersTable extends Migration
+class CreateUserEditVideos extends Migration
 {
     /**
      * Run the migrations.
@@ -13,9 +13,14 @@ class AlterUsersTable extends Migration
      */
     public function up()
     {
-        Schema::table('users', function (Blueprint $table) {
+        Schema::create('user_edit_videos', function (Blueprint $table) {
             $table->engine = 'InnoDB';
-            $table->string('location')->nullable(true);
+            $table->increments('id');
+            $table->integer('user_id');
+            $table->string('token');
+            $table->json('info');
+            $table->rememberToken();
+            $table->timestamps();
         });
     }
 
@@ -26,6 +31,6 @@ class AlterUsersTable extends Migration
      */
     public function down()
     {
-//        Schema::dropIfExists('users');
+        //
     }
 }

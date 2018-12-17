@@ -10,6 +10,7 @@ use App\Group;
 use App\Http\Controllers\Controller;
 use App\MetaData;
 use App\User;
+use App\UserEditVideo;
 use Content\Services\ContentService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
@@ -568,5 +569,14 @@ class UserController extends Controller
         $user_id = (!isset(Auth::user()->id))? 0 : Auth::user()->id;
         $r = $this->userRepository->updateLastActive($user_id);
         return response()->json($r, 200);
+    }
+
+    public function movieEditor(UserEditVideo $userEditVideos)
+    {
+        $video_editor_url = env("VIDEO_EDITOR_URL", "");
+        $user_id = (!isset(Auth::user()->id))? 0 : Auth::user()->id;
+        $userEditVideos->create(array('user_id' => $user_id, 'token' => 'abc', 'info' => json_encode(array('test' => 'test video'))));
+
+        return Redirect::to($video_editor_url);
     }
 }
