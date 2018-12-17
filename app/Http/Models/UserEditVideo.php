@@ -13,5 +13,5 @@ class UserEditVideo extends Model
     /**
      * @var array
      */
-    protected $fillable = ['id', 'user_id', 'token', 'info'];
+    protected $fillable = ['id', 'user_id', 'token', 'info', 'is_deleted'];
 }
