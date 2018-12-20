@@ -10,6 +10,7 @@ use App\Group;
 use App\Http\Controllers\Controller;
 use App\MetaData;
 use App\User;
+use App\UserEditVideo;
 use Content\Services\ContentService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
@@ -568,5 +569,29 @@ class UserController extends Controller
         $user_id = (!isset(Auth::user()->id))? 0 : Auth::user()->id;
         $r = $this->userRepository->updateLastActive($user_id);
         return response()->json($r, 200);
+    }
+
+    public function movieEditor(UserEditVideo $userEditVideos)
+    {
+        $video_editor_url = env("VIDEO_EDITOR_URL", "");
+        $user_id = (!isset(Auth::user()->id))? 0 : Auth::user()->id;
+        $token_key = md5(rand(0,1000) + $user_id + time() + rand(0,1000));
+
+        $userEditVideos->where('user_id', $user_id)->update( array('is_deleted' => '1') );
+        //delete other tokens of that user
+        $temp_data = $userEditVideos->create(array('user_id' => $user_id, 'token' => $token_key,
+            'info' => json_encode(array('test' => 'test video')), 'is_deleted' => '0'));
+
+        return Redirect::to($video_editor_url.'?key='.$temp_data->token);
+    }
+
+    public function getTokenInfo($token, UserEditVideo $userEditVideos)
+    {
+        $token_info = $userEditVideos->where('token', $token)
+            ->leftJoin('users', 'users.id', 'user_edit_videos.user_id')
+            ->select('users.id','users.display_name','user_edit_videos.token','user_edit_videos.info')
+            ->where('is_deleted', '0')->get()->first();
+
+        return isset($token_info->id)? $token_info : array();
     }
 }

@@ -86,6 +86,9 @@ Route::group(['prefix' => 'user', 'middleware' => ['auth', 'web', 'admin']], fun
 });
 
  */
+Route::group(['prefix' => 'auth-user', 'middleware' => ['web']], function () {
+    Route::get('/movie-editor/{_token}', '\App\Controllers\User\UserController@getTokenInfo');
+});
 
 Route::group(['prefix' => 'user', 'middleware' => ['auth', 'web']], function () {
     Route::get('/content-add', '\App\Controllers\User\UserController@uploadVideo');
@@ -96,6 +99,8 @@ Route::group(['prefix' => 'user', 'middleware' => ['auth', 'web']], function () 
     Route::post('/user-profile-post', '\App\Controllers\User\UserController@postProfileSettings');
 
     Route::get('/user-last-active', '\App\Controllers\User\UserController@postLastActive');
+    Route::get('/movie-editor', '\App\Controllers\User\UserController@movieEditor');
+    Route::get('/movie-editor/{_token}', '\App\Controllers\User\UserController@getTokenInfo');
 });
 
 Route::group(['prefix' => 'user', 'middleware' => ['auth', 'web', 'admin']], function () {
