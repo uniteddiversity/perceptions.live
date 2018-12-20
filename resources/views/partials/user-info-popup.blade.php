@@ -20,8 +20,8 @@ $display = ($user_status == 'private' || $user_status == 'only-logged')? false :
                     <?php /* ### PRIVACY SETTINGS ICON: if public, then fa-eye; if only logged in, then fa-lock; if private, then fa-eye-slash  */ ?>
 
                     <div class="right" style="float:left;">
-                        <div style="float:left;">
-                            <h4>{{$info['display_name']}}
+                        <div style="float:left; width:100%;">
+                            <h4 style="margin-bottom:5px;">{{$info['display_name']}}
                                 <?php
                     if($user_status == 'public'){
                         echo '<i class="fa fa-eye" style="display:none;"></i>';
@@ -35,35 +35,37 @@ $display = ($user_status == 'private' || $user_status == 'only-logged')? false :
                             </h4>
 
 
+
+
+                            <?php /* ### If profile is inactive, add this div ?>
+                            <div style="width:100%; text-align: center; color: #333333; font-style: italic; font-size: 12px; ">claim this profile</div>
+
                         </div>
 
-                        <?php /* ### If profile is inactive, add this div ?>
-                        <div style="width:100%; text-align: center; color: #333333; font-style: italic; font-size: 12px; ">claim this profile</div>
+                        <div style="display: block; width: 50%; padding-left: 5%; z-index: 99; float: left;">
+                            <div style="padding-bottom: 10px;">
+                                <span class="dot" style="background-color: #1c2833;"></span>
+                                <span class="dot" style="background-color: red;"></span>
+                                <span class="dot" style="background-color: orange;"></span>
+                            </div>
 
-                    </div>
+                            <?php /* ### HIDE FIRST NAME DIV IF UNAVAILABLE */ ?>
 
-                    <div style="display: block; width: 50%; padding-left: 5%; z-index: 99; float: left;">
-                        <div style="padding-bottom: 10px;">
-                            <span class="dot" style="background-color: #1c2833;"></span>
-                            <span class="dot" style="background-color: red;"></span>
-                            <span class="dot" style="background-color: orange;"></span>
+
+                            <?php if($display){ ?>
+                            <div style="float:left; clear:both; margin-bottom:10px;">
+                                <span style="font-size: 18px;"> <em>{{$info['first_name']}}</em></span>
+                            </div>
                         </div>
 
-                        <?php /* ### HIDE FIRST NAME DIV IF UNAVAILABLE */ ?>
-
-
-                        <?php if($display){ ?>
-                        <div style="float:left; clear:both;">
-                            <span style="font-size: 18px;"> <em>{{$info['first_name']}}</em></span>
-                        </div>
                         <?php if(!empty($info['location'])){ ?>
-                        <div style="font-size: 14px; text-transform: uppercase; font-family: ralewaymedium; color: #6060D5;"><i class="flaticon-pin"></i> <em>{{$info['location']}}</em></div>
+                        <div class="location" style="font-size: 14px; text-transform: uppercase; color: #6060D5;"><i class="flaticon-pin"></i> <em>{{$info['location']}}</em></div>
                         <?php } ?>
                         <?php /*<div style="padding-top: 20px; font-size: .9em; line-height: 1.3em;"><i class="fa fa-clipboard"></i> SKILLSitem1, <i class="fa fa-clipboard"></i> SKILLSitem2, etc</div> */ ?>
 
                         <?php if(isset($info->actingRoles) && count($info->actingRoles) > 0){ ?>
-                        <div style="padding-top: 10px; font-size: .9em; line-height: 1.3em;">
-                            <span>COLLABORATION ROLES: </span>
+                        <div class="roles" style="padding-top: 10px; font-size: .9em; line-height: 1.3em; float:left;">
+                            <span style="margin:0;">COLLABORATION ROLES: </span>
                             <?php foreach($info->actingRoles as $tag){ ?>
                             <span data-toggle="tooltip" data-animation="true" data-placement="bottom" data-original-title="<?php echo $tag->tag->name ?>"><i class="fa <?php echo $tag->tag->icon ?>"></i></span>
                             <?php } ?>
@@ -85,14 +87,13 @@ $display = ($user_status == 'private' || $user_status == 'only-logged')? false :
 
 
 
-    <?php if($display){ ?>
-    <div style="display: block; width:100%; border-top: 1px solid rgb(21,21,21);  float: left; text-align: center;">
-        <span style="text-transform: none; font-style: italic;">
-            <?php echo $info['description'] ?></span>
-    </div>
-
     <div class="video_section">
         <div class="video_inner">
+            <?php if($display){ ?>
+            <div style="display: block; width:100%; float: left; text-align: center; padding-top:15px;padding-bottom:10px;">
+                <span style="text-transform: none; font-style: italic;">
+                    <?php echo $info['description'] ?></span>
+            </div>
             <div>
                 <h5><i class="fas fa-video"></i> Media Involvements</h5>
             </div>

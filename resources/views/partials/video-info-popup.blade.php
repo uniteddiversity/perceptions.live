@@ -34,6 +34,26 @@ $video_id = isset($matches[1])?$matches[1]:'';
                         </div>
                         <?php }
                 }; ?>
+
+                        <span class="pull-leftopen">
+
+                            <?php if(isset($info->groups) && count($info->groups) > 0){
+            $datas = array();
+            foreach($info->groups as $group){
+                if(isset($group->group) && isset($group->group->id))
+                    $datas[] = '@'.'<span class="inactive_link" onclick="openGroupProfile('.$group->group->id.')">'.$group->group->name.'</span>';
+            }
+
+            if(!empty($datas)){
+            ?>
+
+                            <?php
+                echo implode(', ', $datas);
+                ?>
+
+                            <?php }
+            }; ?>
+                        </span>
                     </div>
                     <div class="usersmetas2" style="margin-left:10px;">
                         <strong><i class="far fa-user"></i> Co-Creators: </strong>
@@ -49,6 +69,11 @@ $video_id = isset($matches[1])?$matches[1]:'';
                     }
                 }
                 ?>
+
+                        <span class="pull-right">
+
+                            <?php foreach($info->videoProducer as $key => $users){ if(isset($info->videoProducer[$key])){ echo '<span class="inactive_link" onclick="openProfile(\''. $info->videoProducer[$key]->user->id .'\')">@'.$info->videoProducer[$key]->user->display_name.'</span>'; break; } }?>
+                        </span>
                     </div>
                 </div>
                 <div class="usersmetas1">
@@ -56,30 +81,9 @@ $video_id = isset($matches[1])?$matches[1]:'';
                         <i class="fas fa-map-marker-alt"></i> {{$info['location']}}
                     </span>
 
-                    <span class="pull-leftopen"><i class="far fa-user"></i>
 
-                        <?php if(isset($info->groups) && count($info->groups) > 0){
-            $datas = array();
-            foreach($info->groups as $group){
-                if(isset($group->group) && isset($group->group->id))
-                    $datas[] = '@'.'<span class="inactive_link" onclick="openGroupProfile('.$group->group->id.')">'.$group->group->name.'</span>';
-            }
 
-            if(!empty($datas)){
-            ?>
 
-                        <?php
-                echo implode(', ', $datas);
-                ?>
-
-                        <?php }
-            }; ?>
-                    </span>
-
-                    <span class="pull-right"><i class="fab fa-youtube"></i>
-
-                        <?php foreach($info->videoProducer as $key => $users){ if(isset($info->videoProducer[$key])){ echo '<span class="inactive_link" onclick="openProfile(\''. $info->videoProducer[$key]->user->id .'\')">@'.$info->videoProducer[$key]->user->display_name.'</span>'; break; } }?>
-                    </span>
                 </div>
             </div>
 
@@ -137,6 +141,9 @@ $video_id = isset($matches[1])?$matches[1]:'';
 
     <div class="right-comments">
         <button class="close" type="button" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <div class="donate mobile_hide">
+            <a href="#" class="btn"><i class="fas fa-hand-holding-usd"></i>Donate</a>
+        </div>
         <div class="comments_outer">
             <div class="comments_inner">
                 <div class="comment">
@@ -193,6 +200,7 @@ $video_id = isset($matches[1])?$matches[1]:'';
                 </i>View Comments <strong>(12)</strong></span>
             <span> <i class="far fa-times-circle"></i>Close Comments</span>
         </a>
+        <a href="#" class="btn mobile_show"><i class="fas fa-hand-holding-usd"></i>Donate</a>
     </div>
 </div>
 <div style="clear: both;"></div>

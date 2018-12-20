@@ -46,16 +46,20 @@
     //    dd($data);
     ?>
 <div class="col-lg-12 grid-margin stretch-card">
-    <div class="card">
+    <div class="card" style="box-shadow:none;">
         <div class="card-body">
             <div class="submitprcption">
                 <div class="col-lg-4">
                     <div class="box purple" style="padding-top:40px;">
                         <h5>Submit your <b>PRCPTION</b></h5>
-                        <p>Use this page to submit your own content that supports the exposure of cooperative, smiling people endeavors worldwide. We'll review it, get back to you if necessary, and it will become a part of the network!</p>
-                        <p>To keep our community thriving, and so there are no misunderstandings should your submission be rejected, we kindly ask that you refresh yourself with our <a href="https://perceptiontravel.tv/user-guidelines">User Guidelines</a> and <a href="https://perceptiontravel.tv/terms-of-service">Terms of Service</a> before using this form.</p>
-                        <hr />
-                        <p style="color:#4214c7;"><b>Should you encounter any errors we encourage you to <a href="https://perceptiontravel.tv/community-feedback">let us know</a>. Thanks!</b></p>
+                        <p style="margin:0;">Use this page to submit your own content that supports the exposure of cooperative, smiling people endeavors worldwide. We'll review it, get back to you if necessary, and it will become a part of the network!</p>
+                        <span class="mobile_show">Read More</span>
+                        <div class="more" style="margin-top:20px;">
+                            <p>To keep our community thriving, and so there are no misunderstandings should your submission be rejected, we kindly ask that you refresh yourself with our <a href="https://perceptiontravel.tv/user-guidelines">User Guidelines</a> and <a href="https://perceptiontravel.tv/terms-of-service">Terms of Service</a> before using this form.</p>
+                            <hr />
+                            <p style="color:#4214c7;"><b>Should you encounter any errors we encourage you to <a href="https://perceptiontravel.tv/community-feedback">let us know</a>. Thanks!</b></p>
+                        </div>
+
                     </div>
                 </div>
 
@@ -64,16 +68,18 @@
                     <div class="breadcrumbs">
                         <div class="line"></div>
                         <ul>
-                            <li class="active">
-                                <span style="left:40px;"><i class="fas fa-video"></i><b>1</b></span>
+                            <li class="active" id="st1">
+
+                                <span style="left:55px;"><i class="far fa-file-video"></i><b>1</b></span>
                             </li>
-                            <li>
-                                <span style="left:55px;"><i class="far fa-file-video"></i><b>2</b></span>
+                            <li id="st2">
+                                <span style="left:40px;"><i class="fas fa-video"></i><b>2</b></span>
                             </li>
-                            <li>
+                            <li id="st3">
+
                                 <span style="left:72px;"><i class="fas fa-users"></i><b>3</b></span>
                             </li>
-                            <li>
+                            <li id="st4">
                                 <span style="left:100%; margin-left:-104px;"><i class="fas fa-filter"></i><b>4</b></span>
                             </li>
                         </ul>
@@ -102,72 +108,8 @@
                             <input type="hidden" name="_token" id="csrf-token" value="{{ Session::token() }}" />
                             <input type="hidden" name="id" id="csrf-token" value="<?php echo uid($data['id']) ?>" />
 
-                            <!-- step -->
+
                             <div class="step" id="st1">
-                                <!-- top text -->
-                                <div class="text_top">
-                                    <span><i class="fas fa-video"></i><b>1</b></span>
-                                    <h4>Your <b>PRCPTION's</b> Media</h4>
-                                    <p>Before we begin: is this media online already? Or do you need to be connected with an editor?</p>
-                                </div>
-                                <!-- top text -->
-
-                                <div class="form-group">
-                                    <div class="custom_select">
-                                        <select class="form-control" id="submitted_footage" name="submitted_footage" onchange="displayVideoContentUpload()" placeholder="How is your video?">
-
-                                            <option value="no" <?php if(old('submitted_footage',$data['submitted_footage'])=='no' ){ echo 'selected' ; } ?> >My video is completed.</option>
-                                            <option value="yes" <?php if(old('submitted_footage',$data['submitted_footage'])=='yes' ){ echo 'selected' ; } ?> >I need to submit my footage!</option>
-
-                                        </select>
-                                    </div>
-                                </div>
-
-                                <div class="form-group" id="submit_footage_form" <?php if(old('submitted_footage',$data['submitted_footage'])=='yes' ){ echo 'style="display:true"' ; }else{ echo 'style="display:none"' ; } ?> >
-                                    <div class="tinfo">
-                                        <p style="margin:0; color:rgb(81, 81, 81);">
-                                            <b style="color:#4214c7;">Cool! PRCPTION Travel will be excited to work with you! :)</b>
-                                            <br /><br />
-                                            Before you begin, please <a href="https://perceptiontravel.tv/share/" target="_blank">familiarize yourself with the steps required</a> for your video to be edited. The process is designed to split the responsibility of sharing inspiring and community-building stories around the world; please play your part by organizing your footage appropriately before submission.</p>
-                                    </div>
-
-
-                                    <label for="submit_footage_form">Upload Your Content (max 200MB each)</label>
-                                    <input class="form-control" type="file" name="content_set1[]" /> <a href="https://perceptiontravel.tv/share/#step1" style="font-size: 18px;" target="_blank">Step 1</a>: <label>Who? Where? When?</label>
-                                    <input class="form-control" type="file" name="content_set2[]" /> <a href="https://perceptiontravel.tv/share/#step2" style="font-size: 18px;" target="_blank">Step 2</a>: <label>What's Up?</label>
-                                    <input class="form-control" type="file" name="content_set3[]" /> <a href="https://perceptiontravel.tv/share/#step3" style="font-size: 18px;" target="_blank">Step 3</a>: <label>Why? How?</label>
-                                </div>
-
-                                <div class="form-group">
-                                    <label for="exampleTextarea">If it's already completed, what is the video's URL? (YouTube, Vimeo, etc)</label>
-                                    <input type="text" class="form-control" aria-describedby="nameHelp" name="url" placeholder="URL" value="{{ old('url',$data['url']) }}">
-                                </div>
-
-                                <div class="form-group">
-                                    <label for="exampleTextarea">Comments, notes, or concerns about this PRCPTION that we (or the video editor) should know?</label>
-                                    <textarea type="text" class="form-control" aria-describedby="nameHelp" name="user_comment" placeholder="Additional Comments" rows="4">{{ old('user_comment',$data['user_comment']) }}</textarea>
-                                </div>
-
-                                <div class="form-group" style="padding:0 40px;">
-                                    <?php if(Auth::user()->is('admin') || Auth::user()->is('group-admin') || Auth::user()->is('moderator')){ ?>
-                                    <label for="status">Status</label>
-                                    <select class="form-control" id="status" name="status">
-                                        @foreach($status as $st)
-                                        <option value="{{$st->id}}" <?php if(old('status',$data['status'])==$st->id){ echo 'selected'; } ?> >{{$st->name}}</option>
-                                        @endforeach
-                                    </select>
-                                    <?php } ?>
-                                </div>
-                                <!-- btns -->
-                                <div class="btn_outer">
-                                    <a href="#" class="btn"><i class="fas fa-long-arrow-alt-left"></i> Back</a>
-                                    <a href="#" class="btn">Next Step <i class="fas fa-long-arrow-alt-right"></i></a>
-                                </div>
-                                <!-- btns -->
-                            </div>
-                            <!-- step -->
-
-                            <div class="step" id="st2">
                                 <!-- top text -->
                                 <div class="text_top">
                                     <span><i class="far fa-file-video"></i><b>2</b></span>
@@ -205,15 +147,107 @@
                                 <!-- btns -->
                                 <div class="btn_outer">
                                     <a href="#" class="btn"><i class="fas fa-long-arrow-alt-left"></i> Back</a>
-                                    <a href="#" class="btn">Next Step <i class="fas fa-long-arrow-alt-right"></i></a>
+                                    <a href="#" class="btn click" rel="st2">Next Step <i class="fas fa-long-arrow-alt-right"></i></a>
                                 </div>
                                 <!-- btns -->
                             </div>
 
-                            <div class="step" id="st3">
+                            <!-- step -->
+                            <div class="step hidden" id="st2">
                                 <!-- top text -->
                                 <div class="text_top">
-                                    <span><i class="fas fa-users"></i><b>3</b></span>
+                                    <span><i class="fas fa-video"></i><b>3</b></span>
+                                    <h4>Your <b>PRCPTION's</b> Media</h4>
+                                    <p>Before we begin: is this media online already? Or do you need to be connected with an editor?</p>
+                                </div>
+                                <!-- top text -->
+
+                                <div class="form-group">
+                                    <div class="custom_select">
+                                        <select class="form-control" id="submitted_footage" name="submitted_footage" onchange="displayVideoContentUpload()" placeholder="How is your video?">
+
+                                            <option value="no" <?php if(old('submitted_footage',$data['submitted_footage'])=='no' ){ echo 'selected' ; } ?> >My video is completed.</option>
+                                            <option id="2" value="yes" <?php if(old('submitted_footage',$data['submitted_footage'])=='yes' ){ echo 'selected' ; } ?> >I need to submit my footage!</option>
+
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <div class="form-group" id="submit_footage_form" <?php if(old('submitted_footage',$data['submitted_footage'])=='yes' ){ echo 'style="display:true"' ; }else{ echo 'style="display:none"' ; } ?> >
+                                    <div class="tinfo">
+                                        <p style="margin:0; color:rgb(81, 81, 81);">
+                                            <b style="color:#4214c7;">Cool! PRCPTION Travel will be excited to work with you! :)</b>
+                                            <br /><br />
+                                            Before you begin, please <a href="https://perceptiontravel.tv/share/" target="_blank">familiarize yourself with the steps required</a> for your video to be edited. The process is designed to split the responsibility of sharing inspiring and community-building stories around the world; please play your part by organizing your footage appropriately before submission.</p>
+                                    </div>
+
+
+                                    <label for="submit_footage_form">Upload Your Content (max 200MB each)</label>
+
+                                    <label>Who? Where? When?</label>
+                                    <a class="question" href="#" data-toggle="modal" data-target="#step1">
+                                        <i class="fas fa-question"></i></a>
+                                    <div class="drag">
+                                        <input class="form-control" type="file" name="content_set1[]" />
+                                        <p>Drag your files here or click in this area.</p>
+                                        <i class="fas fa-cloud-upload-alt"></i>
+                                    </div>
+
+                                    <label>What's Up?</label>
+                                    <a class="question" href="#" data-toggle="modal" data-target="#step2"> <i class="fas fa-question"></i></a>
+                                    <div class="drag">
+                                        <input class="form-control" type="file" name="content_set2[]" />
+                                        <p>Drag your files here or click in this area.</p>
+                                        <i class="fas fa-cloud-upload-alt"></i>
+                                    </div>
+
+
+                                    <label>Why? How?</label>
+                                    <a class="question" href="#" data-toggle="modal" data-target="#step3"> <i class="fas fa-question"></i></a>
+                                    <div class="drag">
+                                        <input class="form-control" type="file" name="content_set3[]" />
+                                        <p>Drag your files here or click in this area.</p>
+                                        <i class="fas fa-cloud-upload-alt"></i>
+                                    </div>
+
+                                </div>
+
+                                <div class="form-group url">
+                                    <label for="exampleTextarea">If it's already completed, what is the video's URL? (YouTube, Vimeo, etc)</label>
+                                    <input type="text" class="form-control" aria-describedby="nameHelp" name="url" placeholder="URL" value="{{ old('url',$data['url']) }}">
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="exampleTextarea">Comments, notes, or concerns about this PRCPTION that we (or the video editor) should know?</label>
+                                    <textarea type="text" class="form-control" aria-describedby="nameHelp" name="user_comment" placeholder="Additional Comments" rows="4">{{ old('user_comment',$data['user_comment']) }}</textarea>
+                                </div>
+
+                                <div class="form-group" style="padding:0 40px;">
+                                    <?php if(Auth::user()->is('admin') || Auth::user()->is('group-admin') || Auth::user()->is('moderator')){ ?>
+                                    <label for="status">Status</label>
+                                    <select class="form-control" id="status" name="status">
+                                        @foreach($status as $st)
+                                        <option value="{{$st->id}}" <?php if(old('status',$data['status'])==$st->id){ echo 'selected'; } ?> >{{$st->name}}</option>
+                                        @endforeach
+                                    </select>
+                                    <?php } ?>
+                                </div>
+                                <!-- btns -->
+                                <div class="btn_outer">
+                                    <a href="#" class="btn click" rel="st1"><i class="fas fa-long-arrow-alt-left"></i> Back</a>
+                                    <a href="#" class="btn click" rel="st3" style="float:right;">Next Step <i class="fas fa-long-arrow-alt-right"></i></a>
+                                    <!-- submit button //hidden for DEMO ONLY -->
+                                    <button type="button" onclick="submit_content()" class="btn dark" rel="st4" style="display:none;">Submit PRCPTION</button>
+                                </div>
+                                <!-- btns -->
+                            </div>
+                            <!-- step -->
+
+                            <!-- step -->
+                            <div class="step hidden" id="st3">
+                                <!-- top text -->
+                                <div class="text_top">
+                                    <span><i class="fas fa-users"></i><b>1</b></span>
                                     <h4>Users Involved</h4>
                                     <p>In this section, please choose the individuals and groups who have been a part of this PRCPTION. If no name appears, press 'enter' to add them as a shadow profile--don't worry, you can let them know and they can <a href="/claim-profile">claim their empty profile</a> whenever they want.</p>
                                 </div>
@@ -261,13 +295,14 @@
                                 <!-- btns -->
                                 <div class="btn_outer">
                                     <a href="#" class="btn"><i class="fas fa-long-arrow-alt-left"></i> Back</a>
-                                    <a href="#" class="btn">Next Step <i class="fas fa-long-arrow-alt-right"></i></a>
+                                    <a href="#" class="btn click" rel="st4">Next Step <i class="fas fa-long-arrow-alt-right"></i></a>
                                 </div>
                                 <!-- btns -->
                             </div>
 
 
-                            <div class="step" id="st4">
+
+                            <div class="step hidden" id="st4">
                                 <!-- top text -->
                                 <div class="text_top">
                                     <span><i class="fas fa-filter"></i><b>4</b></span>
@@ -276,30 +311,36 @@
                                 </div>
                                 <div class="form-group">
                                     <label for="exampleSelect1">Privacy Settings: Who can find this PRCPTION?</label>
-                                    <select class="form-control" id="exampleSelect1" name="access_level_id">
-                                        <?php foreach($access_levels as $access){ ?>
-                                        <option value="{{$access->id}}" <?php if(old('access_level_id',$data['access_level_id'])==$access->id){ echo 'selected'; } ?> >{{$access->name}}</option>
-                                        <?php }?>
-                                    </select>
+                                    <div class="custom_select">
+                                        <select class="form-control" id="exampleSelect1" name="access_level_id">
+                                            <?php foreach($access_levels as $access){ ?>
+                                            <option value="{{$access->id}}" <?php if(old('access_level_id',$data['access_level_id'])==$access->id){ echo 'selected'; } ?> >{{$access->name}}</option>
+                                            <?php }?>
+                                        </select>
+                                    </div>
                                 </div>
 
                                 <div class="form-group">
                                     <label for="category_id">Umbrella Category</label>
-                                    <select class="form-control" id="category_id" name="category_id">
-                                        <option value="0">Select</option>
-                                        @foreach($categories as $cat)
-                                        <option value="{{$cat->id}}" <?php if($cat->id == old('category_id',$data['category_id'])){ echo 'selected'; } ?> >{{$cat->name}}</option>
-                                        @endforeach
-                                    </select>
+                                    <div class="custom_select">
+                                        <select class="form-control" id="category_id" name="category_id">
+                                            <option value="0">Select</option>
+                                            @foreach($categories as $cat)
+                                            <option value="{{$cat->id}}" <?php if($cat->id == old('category_id',$data['category_id'])){ echo 'selected'; } ?> >{{$cat->name}}</option>
+                                            @endforeach
+                                        </select>
+                                    </div>
                                 </div>
 
                                 <div class="form-group">
                                     <label for="exampleSelect1">Greater Community Intention</label>
+
                                     <select class="form-control multi-select2-max3" id="grater_community_intention_id" multiple name="grater_community_intention_ids[]">
                                         @foreach($gci_tags as $m)
                                         <option value="{{$m['id']}}" <?php if(in_array($m['id'], old('grater_community_intention_ids',$data['grater_community_intention_ids']))){ echo 'selected' ; } ?> >{{$m['tag']}}</option>
                                         @endforeach
                                     </select>
+
                                 </div>
                                 <div class="form-group">
                                     <label for="primary_subject_tag">What's the Primary Subject of the PRCPTION?</label>
@@ -317,9 +358,9 @@
                                 <div class="form-group">
                                     <input class="form-control" type="checkbox" id="is_exchange" <?php if(!empty(old('exchange',$data['exchange']))){ ?> checked
                                     <?php } ?> value="1" name="exchange"/>
-                                    <label for="is_exchange"> Is there some sort of exchange being offered in this PRCPTION? (work trade, volunteer, etc)</label>
+                                    <label class="exc" for="is_exchange"> Is there some sort of exchange being offered in this PRCPTION? (work trade, volunteer, etc)</label>
                                 </div>
-                                <div class="form-group" id="exchange_enabled" <?php if(empty(old('exchange',$data['exchange']))){ ?> style="visibility: hidden;"
+                                <div class="form-group" id="exchange_enabled" <?php if(empty(old('exchange',$data['exchange']))){ ?> style="visibility: hidden; padding:0 40px;"
                                     <?php } ?> >
                                     <span class="exchange"><label for="is_exchange">Is this exchange a service or an opportunity being offered?</label>
                                         <select class="form-control multi-select2" id="service_or_opportunity" name="service_or_opportunity">
@@ -425,7 +466,7 @@
                     {{--</div>--}}
                     <!-- btns -->
                     <div class="btn_outer">
-                        <a href="#" class="btn"><i class="fas fa-long-arrow-alt-left"></i> Back</a>
+                        <a href="#" class="btn click" rel="st3"><i class="fas fa-long-arrow-alt-left"></i> Back</a>
                         <button type="button" onclick="submit_content()" class="btn dark">Submit PRCPTION</button>
                     </div>
                     <!-- btns -->
@@ -436,7 +477,155 @@
     </div>
 </div>
 </div>
+
+<div class="modal modal_steps fade" id="step1" tabindex="-1" role="dialog">
+    <div class="modal-dialog" style="position: relative;">
+        <div class="modal-content">
+            <button class="close" type="button" data-dismiss="modal" aria-hidden="true">&times;</button>
+            <div class="modal-body">
+                <h2><b>STEP 1:</b></h2>
+                <h1>Who? Where? When?</h1>
+                <h2 class="two">Introduce yourself as a relatable human being to the world.</h2>
+                <p><b>Goal: approx. 1 minute</b></p>
+                <p><b>REQUIRED:</b> 40-60 seconds introductory audio/video.
+
+                    Introduce yourself, or the organization, or both.
+
+                    Where is the subject of your video/story located?
+
+                    Mention the date and the era of what's going on.</p>
+                <p class="nomargin"><b>You may also include related photos and videos (audio will be cut).</b></p>
+
+            </div>
+            <div class="youtube">
+                <iframe width="100%" height="260px" src="https://www.youtube.com/embed/jNF9IamqLmA" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+            </div>
+            <div class="text">
+                <p><b>Video Example:</b></p>
+                <p>showing <b>Artist Name</b> from the video <a href=#>Video Title Link</a></p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal modal_steps fade" id="step2" tabindex="-1" role="dialog">
+    <div class="modal-dialog" style="position: relative;">
+        <div class="modal-content">
+            <button class="close" type="button" data-dismiss="modal" aria-hidden="true">&times;</button>
+            <div class="modal-body">
+                <h2><b>STEP 2:</b></h2>
+                <h1>What’s up?</h1>
+                <h2 class="two">Present information to the world via your perspective.</h2>
+                <p><b>Goal: 1 minute 30 seconds</b></p>
+                <p style="margin-bottom:0;"><b>REQUIRED:</b> 60-90 seconds of information-packed content, including vocal explanations and visuals of "what's up."
+
+                    What would you like to share? Explain, describe, present, or sell it to us. It can be anything!<br /> <br /><b>Some examples:</b></p>
+                <p class="bullets">
+                    <i class="fas fa-bullseye"></i> your words, an opinion or testimony <br />
+                    <i class="fas fa-bullseye"></i> an activity or event<br />
+                    <i class="fas fa-bullseye"></i> a cause or mission that you support
+                </p>
+                <p class="nomargin"><b>Please include several photos and/or video clips of "what's up."</b></p>
+
+            </div>
+            <div class="youtube">
+                <iframe width="100%" height="260px" src="https://www.youtube.com/embed/jNF9IamqLmA" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+            </div>
+            <div class="text">
+                <p><b>Video Example:</b></p>
+                <p>showing <b>Artist Name</b> from the video <a href=#>Video Title Link</a></p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal modal_steps fade" id="step3" tabindex="-1" role="dialog">
+    <div class="modal-dialog" style="position: relative;">
+        <div class="modal-content">
+            <button class="close" type="button" data-dismiss="modal" aria-hidden="true">&times;</button>
+            <div class="modal-body">
+                <h2><b>STEP 3:</b></h2>
+                <h1>Why? How?</h1>
+                <h2 class="two">Engage the world with your passion!</h2>
+                <p><b>Goal: 1 minute</b></p>
+                <p style="margin-bottom:0;">
+                    <b>REQUIRED: A conclusion and call-to-action of some sort.</b><br /><br />
+                    Why are you creating this video?
+
+                    What should the audience come away with after watching?
+
+                    How can the viewer participate?
+
+                    Your words might inspire someone, so be mindful of how you present your message!
+                </p>>
+                <p class="nomargin"><b>Once again, you are free to include more photos and videos to help tell your story.</b></p>
+
+            </div>
+            <div class="youtube">
+                <iframe width="100%" height="260px" src="https://www.youtube.com/embed/jNF9IamqLmA" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+            </div>
+            <div class="text">
+                <p><b>Video Example:</b></p>
+                <p>showing <b>Artist Name</b> from the video <a href=#>Video Title Link</a></p>
+            </div>
+        </div>
+    </div>
+</div>
+
+
 <script src="https://code.jquery.com/jquery-2.2.4.min.js" integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=" crossorigin="anonymous"></script>
+
+
+<script>
+    $(document).ready(function() {
+        $('.drag input').change(function() {
+            $('.drag p').text(this.files.length + " file(s) selected");
+        });
+    });
+
+</script>
+<script>
+    $('#submitted_footage').change(function() {
+        if ($("option#2:selected").length) {
+            // do something here
+            $('.url').addClass('hidden');
+        } else {
+
+            $('.url').removeClass('hidden');
+        }
+    })
+
+</script>
+<!-- script for mobile "show more" text -->
+<script>
+    $('.card .box .mobile_show').on('click', function(e) {
+        $('.more').toggleClass("active"); //you can list several class names 
+        $(this).toggleClass("hidden"); //you can list several class names 
+        e.preventDefault();
+    });
+
+</script>
+<!-- script for steps to toggle them hide/activate -->
+<!-- maybe add script to verify if input fields are completed before going to next step -->
+<script>
+    $('.table-responsive .btn_outer .btn.click').on('click', function(e) {
+        $(this).parent().parent().toggleClass("hidden"); //you can list several class names 
+        var num = $(this).attr('rel');
+        $('.step' + '#' + num).removeClass("hidden");
+        $('.breadcrumbs ul li').removeClass("active");
+        $('.breadcrumbs ul li' + '#' + num).addClass("active");
+        e.preventDefault();
+    });
+    $('.table-responsive .btn_outer button').on('click', function(e) {
+        $(this).parent().parent().toggleClass("hidden"); //you can list several class names 
+        var num = $(this).attr('rel');
+        $('.step' + '#' + num).removeClass("hidden");
+        $('.breadcrumbs ul li').removeClass("active");
+        $('.breadcrumbs ul li' + '#' + num).addClass("active");
+        e.preventDefault();
+    });
+
+</script>
 
 
 <style>
