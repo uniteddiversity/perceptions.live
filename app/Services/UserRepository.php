@@ -8,6 +8,8 @@ use App\Content;
 use App\ContentAccessLevels;
 use App\Group;
 use App\GroupContentAssociation;
+use App\MediaPackage;
+use App\MediaPackageRules;
 use App\MetaData;
 use App\Role;
 use App\SortingTag;
@@ -841,6 +843,56 @@ class UserRepository
         $user = $this->user->where('id',$user_id)->first();
         $user->last_active = date_create();
         $user->save();
+    }
+
+    public function generateMediaCost($options)
+    {
+        if(!isset($options['duration'])){
+            return [];
+        }
+
+        $duration = intval($options['duration']);
+
+        $mediaPackage = new MediaPackage();
+        $mediaPackageRules = new MediaPackageRules();
+        $package_info = $mediaPackage->where('min_video_minutes', '<', $duration)
+            ->where('max_video_minutes', '>=', $duration)
+            ->get()->first();
+
+        if($package_info == null)
+            return false;
+
+        $package_info = $package_info->toArray();
+
+        $cost_bk['total_cost'] = 0;
+        $cost_bk = [];
+
+        $cost_bk['bd']['video_cost']['amount'] = $duration * floatval($package_info['charge_per_minute']);
+        $cost_bk['bd']['video_cost']['unit_price'] = floatval($package_info['charge_per_minute']);
+        $cost_bk['bd']['video_cost']['description'] = $package_info['description']." ({$package_info['name']})";
+        $cost_bk['total_cost'] = $cost_bk['bd']['video_cost']['amount'];
+
+        $extraCosts = $mediaPackageRules->where('is_deleted','<>','1')->get()->toArray();
+
+        foreach($extraCosts as $rule){
+            $cost_bk['bd'][ $rule['rule_key'] ]['unit_price'] = floatval($rule['amount']);
+            $cost_bk['bd'][ $rule['rule_key'] ]['description'] = $rule['rule_description'];
+            if(isset($options[ $rule['rule_key'] ])){
+                $qty = intval($options[ $rule['rule_key'] ]);
+                $cost_bk['bd'][ $rule['rule_key'] ]['amount'] = floatval($rule['amount']) * $qty;
+            }else{
+                $cost_bk['bd'][ $rule['rule_key'] ]['amount'] = floatval($rule['amount']) * 0;
+            }
+
+            $cost_bk['total_cost'] += $cost_bk['bd'][ $rule['rule_key'] ]['amount'];
+        }
+
+        return $cost_bk;
+    }
+
+    public function generateInvoice($selections)
+    {
+
     }
 }
 
