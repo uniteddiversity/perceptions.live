@@ -3,16 +3,12 @@
 
     <div class="navbar-wrapper">
         <div class="navbar-logo" data-navbar-theme="theme4">
-            <a class="mobile-menu" id="mobile-collapse" href="#!">
-                <i class="ti-menu"></i>
-            </a>
-            <a class="mobile-search morphsearch-search" href="#">
-                <i class="ti-search"></i>
-            </a>
-            <a class="mobile-options">
-                <i class="ti-more"></i>
-            </a>
-            <ul class="nav-left">
+            <div class="sidebar_toggle">
+                <a class="mobile-menu" id="mobile-collapse" href="#!">
+                    <i class="fas fa-bars"></i>
+                </a>
+            </div>
+            <ul class="nav-left mobile_hidden">
                 <li>
                     <div class="sidebar_toggle">
                         <a href="javascript:void(0)">
@@ -24,10 +20,13 @@
             <a href="/" class="logo">
                 <img style="display:none;" class="img-fluid" src="/assets/img/logo_1.png" alt="{{ config('app.name') }}" />
             </a>
+            <a class="mobile-options" style="display:none;">
+                <i class="fas fa-ellipsis-h"></i>
+            </a>
+
         </div>
         <div class="navbar-container container-fluid" style="padding-right:0;">
             <div>
-
                 <ul class="nav-right">
                     <?php /*
                     <li class="header-notification">
@@ -82,7 +81,7 @@
 
                     <li class="user-profile header-notification">
                         <a href="#!">
-                            <span class="uimg">
+                            <span class="uimg" style="display:block;">
                                 <img src="<?php if(isset($user_img[0])){ echo '/storage/'.$user_img[0]->url; }else{ ?>/assets/img/face1.png<?php } ?>" alt="profile image">
                             </span>
 
@@ -97,6 +96,12 @@
                                 </a>
                             </li>
                             <li>
+                                <!--  include search -->
+                                <a class="mobile-search morphsearch-search" href="#">
+                                    <i class="fas fa-search"></i> Search
+                                </a>
+                            </li>
+                            <li>
                                 <a href="/user/user-profile">
                                     <i class="far fa-user"></i>Profile
                                 </a>
@@ -107,6 +112,13 @@
                                 </a>
                             </li>
                         </ul>
+                    </li>
+                    <li style="display:none;">
+                        <!--  include search -->
+                        <a class="mobile-search morphsearch-search" href="#">
+                            <i class="fas fa-search"></i>
+                        </a>
+                        <p>Search</p>
                     </li>
                 </ul>
 

@@ -693,6 +693,8 @@
     <script src="/assets/croppie/croppie.js"></script>
     <script src="/assets/js/datatable/datatables.min.js"></script>
 
+    <script src="/assets/js/dropzone.js"></script>
+
     <script>
         $(document).ready(function() {
             // $('#users_llist').DataTable({"aaSorting": []});

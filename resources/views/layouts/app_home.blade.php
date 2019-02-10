@@ -232,6 +232,7 @@
         <script src="/assets/admin-temp/vendors/js/vendor.bundle.addons.js"></script>
         <script src="/assets/admin-temp/js/off-canvas.js"></script>
         <script src="/assets/admin-temp/js/misc.js"></script>
+
         <!-- endinject -->
         <!-- Custom js for this page-->
         <script src="/assets/admin-temp/js/dashboard.js"></script>
@@ -244,6 +245,7 @@
         <script src="/assets/js/leaflet.markercluster.js"></script>
         <script src="/assets/js/L.Control.Locate.min.js"></script>
         <script src="/assets/leaflet-groupedlayercontrol/leaflet.groupedlayercontrol.js"></script>
+
 
         <script src="/assets/js/app.js"></script>
         {{--map related--}}

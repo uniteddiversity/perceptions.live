@@ -1325,8 +1325,7 @@ input[type="text"]:focus::placeholder {
 }
 
 .modal-dialog.big .close,
-.modal-dialog.big .model-back,
-.modal_steps .close {
+.modal-dialog.big .model-back {
     position: absolute;
     z-index: 9999;
     width: 48px;
@@ -1344,8 +1343,7 @@ input[type="text"]:focus::placeholder {
     margin-bottom: -48px;
 }
 
-.modal-dialog.big .close,
-.modal_steps .close {
+.modal-dialog.big .close {
     top: -40px;
     right: -40px;
 }
@@ -1355,8 +1353,7 @@ input[type="text"]:focus::placeholder {
     top: -40px;
 }
 
-.modal-dialog.big .close:hover,
-.modal_steps .close:hover {
+.modal-dialog.big .close:hover {
     background: #000;
 }
 
@@ -1707,26 +1704,6 @@ input[type="text"]:focus::placeholder {
     opacity: 1;
 }
 
-.right-comments .donate {
-    width: 100%;
-    padding-bottom: 20px;
-    float: left;
-    border-bottom: 1px solid rgb(31, 31, 31);
-}
-
-.right-comments .donate .btn {
-    width: 100%;
-    background: rgb(181, 181, 181);
-    color: rgb(21, 21, 21);
-}
-
-.right-comments .btn i {
-    padding-right: 10px;
-}
-
-.right-comments .donate .btn:hover {
-    background: rgb(201, 201, 201);
-}
 
 
 /* Location Small Modal */
@@ -2140,7 +2117,6 @@ input[type="text"]:focus::placeholder {
 
 #feature-info .user_info .right {
     padding: 20px;
-    padding-top: 10px;
 }
 
 #feature-info .user_info .btn_top {
@@ -2165,10 +2141,6 @@ input[type="text"]:focus::placeholder {
     overflow-y: scroll;
     text-align: center;
     padding-top: 10px;
-}
-
-#feature-info .user_info .roles span {
-    margin-left: 10px;
 }
 
 
@@ -2697,8 +2669,7 @@ body[themebg-pattern="pattern2"] {
     color: rgb(81, 81, 81);
 }
 
-.card p,
-.modal_steps p {
+.card p {
     font-size: 14.4px;
     line-height: 20px;
     font-family: 'Open Sans', sans-serif;
@@ -2727,16 +2698,14 @@ body[themebg-pattern="pattern2"] {
     padding-bottom: 0;
 }
 
-.card h4,
-.modal_steps h1 {
+.card h4 {
     font-size: 32px;
     color: #4214c7;
     font-weight: 600;
     margin-bottom: 10px;
 }
 
-.card h5,
-.modal_steps h2 {
+.card h5 {
     font-size: 16px;
     font-weight: 600;
     color: #4214c7;
@@ -2805,7 +2774,7 @@ body[themebg-pattern="pattern2"] {
     -webkit-border-radius: 5px;
     -moz-border-radius: 5px;
     border-radius: 5px;
-    margin-bottom: 10px;
+    margin-bottom: 25px;
     border: 1px solid #dacefb;
 }
 
@@ -3080,8 +3049,6 @@ body[themebg-pattern="pattern2"] {
     font-size: 16px;
     text-align: center;
     line-height: 24px !important;
-    transform: translateX(0%) translateY(0%);
-    margin-top: 5px;
 }
 
 #submit_footage_form .question:hover {
@@ -3091,64 +3058,6 @@ body[themebg-pattern="pattern2"] {
 #submit_footage_form .question i {
     height: 24px;
     line-height: 24px;
-    margin-top: -48px;
-    position: relative;
-    z-index: 9;
-    font-size: 13px;
-}
-
-
-#submit_footage_form .question:before {
-    content: '';
-    position: relative;
-    display: block;
-    width: 300%;
-    height: 300%;
-    box-sizing: border-box;
-    margin-left: -100%;
-    margin-top: -100%;
-    border-radius: 45px;
-    background-color: #4214c7;
-    animation: pulse-ring 1.75s cubic-bezier(0.215, 0.61, 0.355, 1) infinite;
-}
-
-#submit_footage_form .question:after {
-    content: '';
-    position: absolute;
-    left: 0;
-    top: 0;
-    display: block;
-    width: 100%;
-    height: 100%;
-    background-color: #4214c7;
-    border-radius: 15px;
-    box-shadow: 0 0 8px rgba(0, 0, 0, .3);
-    animation: pulse-dot 1.75s cubic-bezier(0.455, 0.03, 0.515, 0.955) -.4s infinite;
-}
-
-@keyframes pulse-ring {
-    0% {
-        transform: scale(.33);
-    }
-
-    80%,
-    100% {
-        opacity: 0;
-    }
-}
-
-@keyframes pulse-dot {
-    0% {
-        transform: scale(.8);
-    }
-
-    50% {
-        transform: scale(1);
-    }
-
-    100% {
-        transform: scale(.8);
-    }
 }
 
 .url {
@@ -3328,61 +3237,8 @@ body[themebg-pattern="pattern2"] {
 
 /* Datepicker */
 
-.datepicker.datepicker-dropdown {
+.datepicker {
     padding: 10px;
-    padding-top: 5px;
-    min-width: 260px;
-    border: 2px solid #4214c7;
-}
-
-.datepicker:after {
-    content: '';
-    position: absolute;
-    bottom: -14px;
-    left: 12px;
-    width: 0;
-    height: 0;
-    border-style: solid;
-    border-width: 14px 8px 0 8px;
-    border-color: #4214c7 transparent transparent transparent;
-}
-
-.datepicker .table-condensed {
-    width: 100%;
-}
-
-.datepicker .day {
-    background: rgb(248, 248, 248);
-    border: 2px solid #fff;
-    text-align: center !important;
-    font-weight: 600;
-    height: 30px;
-    line-height: 30px;
-    cursor: pointer;
-    padding: 0;
-}
-
-.datepicker .day:hover,
-.datepicker .day.active {
-    background: #4214c7;
-    color: #fff;
-}
-
-.datepicker .dow {
-    padding-bottom: 5px;
-    padding-top: 5px;
-    text-align: center;
-    font-weight: 400;
-    color: #4214c7;
-}
-
-.datepicker .datepicker-switch {
-    text-align: center;
-}
-
-.header-navbar .mobile-search,
-.mobile-search {
-    display: none;
 }
 
 /* Steps */
@@ -3403,126 +3259,9 @@ body[themebg-pattern="pattern2"] {
     opacity: 1;
 }
 
-/* Steps info Modal */
-
-.modal_steps .modal-dialog {
-    margin-top: 110px !important;
-}
-
-.modal_steps .modal-content {
-    width: 860px;
-    position: relative;
-    background: #000;
-}
-
-.modal_steps .modal-body {
-    padding: 40px;
-    width: 50%;
-    background: rgb(21, 21, 21);
-    border-right: 2px solid rgb(31, 31, 31);
-    min-height: 356px;
-}
-
-.modal_steps .close {
-    margin: 0;
-    right: auto;
-    left: 100%;
-    margin-left: -20px;
-    top: -20px;
-    color: #fff;
-    text-shadow: none;
-    position: absolute;
-}
-
-.modal_steps h1,
-.modal_steps h2 {
-    color: #fff;
-}
-
-.modal_steps h2 {
-    margin-bottom: 0;
-    color: #6060D5;
-}
-
-.modal_steps h2.two {
-    margin-bottom: 20px;
-    font-weight: 400;
-}
-
-.modal_steps h1 span {
-    display: none;
-}
-
-.modal_steps p b {
-    color: rgb(181, 181, 181);
-}
-
-.modal_steps p.bullets {
-    color: #6060D5;
-    line-height: 32px;
-    margin-bottom: 20px;
-    margin-top: 10px;
-}
-
-.modal_steps p.bullets i {
-    margin-right: 5px;
-}
-
-.modal_steps .youtube {
-    position: absolute;
-    top: 40px;
-    right: 20px;
-    width: 50%;
-    border: 4px solid #4214c7;
-    background: #4214c7;
-    height: 256px;
-}
-
-.modal_steps p.nomargin {
-    margin-bottom: 0;
-}
-
-.modal_steps .text {
-    width: 50%;
-    padding: 20px;
-    padding-bottom: 0px;
-    position: absolute;
-    top: 280px;
-    right: 0;
-    text-align: center;
-}
-
-.modal_steps .text p {
-    margin-bottom: 10px;
-}
-
-.modal_steps .text p a {
-    color: #6060D5 !important;
-    font-weight: bolder;
-    text-decoration: underline;
-}
-
-.mobile_hide {
-    display: block;
-}
-
-.mobile_show {
-    display: none;
-}
-
-
-
 
 /***** Mobile Responsiveness ****/
 @media screen and (max-width: 768px) {
-
-    .mobile_hide {
-        display: none;
-    }
-
-    .mobile_show {
-        display: block;
-    }
 
     .theme-layout {
         padding: 0;
@@ -4038,11 +3777,6 @@ body[themebg-pattern="pattern2"] {
         border-radius: 5px;
         font-size: 13px;
         text-align: center;
-        margin-top: 10px;
-    }
-
-    .mobile_btns a:first-child {
-        margin-top: 0;
     }
 
     .mobile_btns a span,
@@ -4060,8 +3794,8 @@ body[themebg-pattern="pattern2"] {
         font-size: 16px;
     }
 
-    .mobile_btns a:last-child,
-    .mobile_btns a:nth-child(2) {
+    .mobile_btns a:last-child {
+        margin-top: 10px;
         color: #000;
         background: #fff;
     }
@@ -4222,6 +3956,8 @@ body[themebg-pattern="pattern2"] {
     .header-navbar .navbar-wrapper .navbar-logo .mobile-options {
         right: 23px;
     }
+
+    .header-navbar .mobile-search {}
 
     .header-navbar .mobile-search .fas {
         margin-top: 10px;
@@ -4404,7 +4140,7 @@ body[themebg-pattern="pattern2"] {
     }
 
     #st2 .text_top h4,
-    #st1 .text_top h4 {
+    #st3 .text_top h4 {
         padding-top: 15px;
         margin-bottom: 30px;
     }
@@ -4438,49 +4174,6 @@ body[themebg-pattern="pattern2"] {
 
     .table-responsive .btn_outer .btn:last-child {
         margin-top: 10px;
-    }
-
-    /* Steps info Modal */
-    .modal_steps .modal-content {
-        width: 320px;
-        margin: 0 auto;
-    }
-
-    .modal_steps .close {
-        top: -40px;
-        margin-left: -25px;
-    }
-
-    .modal_steps .modal-body {
-        width: 100%;
-        padding: 20px;
-        padding-top: 255px;
-    }
-
-    .modal_steps .youtube {
-        top: 0;
-        right: 0;
-    }
-
-    .modal_steps .text {
-        width: 100%;
-        top: 148px;
-        border-bottom: 2px solid rgb(31, 31, 31);
-        padding-bottom: 5px;
-        background: #000;
-    }
-
-    .modal_steps .text p {
-        margin-bottom: 5px;
-    }
-
-    .modal_steps h1 {
-        font-size: 20px;
-        line-height: 24px;
-    }
-
-    .modal_steps .modal-dialog {
-        margin-top: 0 !important;
     }
 
 }
