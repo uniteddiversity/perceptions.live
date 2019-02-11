@@ -608,7 +608,6 @@ class UserController extends Controller
 //        $package_info = $this->userRepository->generateMediaCost(array('duration' => 10, 'remove_water_mark', 'future_documentary' => 2));
 //        echo '<pre>';print_r($package_info);die('</pre>');
         $options = $request->all();
-        $package_info = $this->userRepository->generateMediaCost($options);
-        return $package_info;
+        return $this->userRepository->generateMediaCost($options);
     }
 }

@@ -860,7 +860,7 @@ class UserRepository
             ->get()->first();
 
         if($package_info == null)
-            return false;
+            return ['error' => 'No package match for the duration!'];
 
         $package_info = $package_info->toArray();
 
