@@ -19,5 +19,5 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 
 Route::group(['middleware' => []], function()
 {
-    Route::post('/calculate_video_cost/{_token}', '\App\Controllers\User\UserController@calculateVideoCost');
+    Route::get('/calculate_video_cost/{_token}', '\App\Controllers\User\UserController@calculateVideoCost');
 });
