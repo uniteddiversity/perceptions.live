@@ -848,7 +848,7 @@ class UserRepository
     public function generateMediaCost($options)
     {
         if(!isset($options['duration'])){
-            return [];
+            return array('error' => 'No option set!');
         }
 
         $duration = intval($options['duration']);
