@@ -872,6 +872,7 @@ class UserRepository
 
         $cost_bk['bd']['video_cost']['amount'] = $duration * floatval($package_info['charge_per_minute']);
         $cost_bk['bd']['video_cost']['unit_price'] = floatval($package_info['charge_per_minute']);
+        $cost_bk['bd']['video_cost']['unites'] = $duration;
         $cost_bk['bd']['video_cost']['description'] = $package_info['description']." ({$package_info['name']})";
         $cost_bk['total_cost'] = $cost_bk['bd']['video_cost']['amount'];
 
@@ -883,7 +884,9 @@ class UserRepository
             if(isset($options[ $rule['rule_key'] ])){
                 $qty = intval($options[ $rule['rule_key'] ]);
                 $cost_bk['bd'][ $rule['rule_key'] ]['amount'] = floatval($rule['amount']) * $qty;
+                $cost_bk['bd']['video_cost']['unites'] = $qty;
             }else{
+                $cost_bk['bd']['video_cost']['unites'] = 0;
                 $cost_bk['bd'][ $rule['rule_key'] ]['amount'] = floatval($rule['amount']) * 0;
             }
 
