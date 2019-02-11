@@ -874,6 +874,7 @@ class UserRepository
         $cost_bk['bd']['video_cost']['unit_price'] = floatval($package_info['charge_per_minute']);
         $cost_bk['bd']['video_cost']['unites'] = $duration;
         $cost_bk['bd']['video_cost']['description'] = $package_info['description']." ({$package_info['name']})";
+        $cost_bk['bd']['video_cost']['key'] = 'video_cost';
         $cost_bk['total_cost'] = $cost_bk['bd']['video_cost']['amount'];
 
         $extraCosts = $mediaPackageRules->where('is_deleted','<>','1')->get()->toArray();
@@ -892,6 +893,7 @@ class UserRepository
             }
 
             $cost_bk['bd'][ $rule['rule_key'] ]['unites'] = $qty;
+            $cost_bk['bd'][ $rule['rule_key'] ]['key'] = $rule['rule_key'];
             $cost_bk['total_cost'] += $cost_bk['bd'][ $rule['rule_key'] ]['amount'];
         }
 
