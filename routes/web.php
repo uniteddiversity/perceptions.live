@@ -86,9 +86,9 @@ Route::group(['prefix' => 'user', 'middleware' => ['auth', 'web', 'admin']], fun
 });
 
  */
-Route::group(['prefix' => 'auth-user', 'middleware' => ['web']], function () {
+Route::group(['prefix' => 'auth-user'], function () {
     Route::get('/movie-editor/{_token}', '\App\Controllers\User\UserController@getTokenInfo');
-    Route::post('/calculate-video-cost/{_token}', '\App\Controllers\User\UserController@calculateVideoCost');
+//    Route::get('/calculate-video-cost/{_token}', '\App\Controllers\User\UserController@calculateVideoCost');
 });
 
 Route::group(['prefix' => 'user', 'middleware' => ['auth', 'web']], function () {

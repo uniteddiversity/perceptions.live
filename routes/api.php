@@ -16,3 +16,8 @@ use Illuminate\Http\Request;
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
+
+Route::group(['middleware' => []], function()
+{
+    Route::post('/calculate_video_cost/{_token}', '\App\Controllers\User\UserController@calculateVideoCost');
+});
