@@ -851,6 +851,7 @@ class UserRepository
             return array('error' => 'No option set!');
         }
 
+
         $duration = intval($options['duration']);
 
         $mediaPackage = new MediaPackage();
