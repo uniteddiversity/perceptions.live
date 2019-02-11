@@ -52,6 +52,14 @@ class MediaPricingRuleSeeder extends Seeder
                 'rule_description'     =>  'Prioritize my Account',
                 'amount'     =>  '100',
                 'is_deleted'     =>  '0',
+            ],
+            [
+                'id'    =>  '6',
+                'package_id'    =>  '0',
+                'rule_key'     =>  'map_sponsorship',
+                'rule_description'     =>  'Map Sponsorship (pin your video to our feed)',
+                'amount'     =>  '100',
+                'is_deleted'     =>  '0',
             ]
         ]);
         DB::statement('SET FOREIGN_KEY_CHECKS=1;');
