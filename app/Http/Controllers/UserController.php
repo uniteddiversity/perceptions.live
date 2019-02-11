@@ -603,7 +603,7 @@ class UserController extends Controller
             ->where('is_deleted', '0')->get()->first();
 
         if(!isset($token_info->id))
-            return [];
+            return array('error' => 'Un authenticated!');
 
 //        $package_info = $this->userRepository->generateMediaCost(array('duration' => 10, 'remove_water_mark', 'future_documentary' => 2));
 //        echo '<pre>';print_r($package_info);die('</pre>');
