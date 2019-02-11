@@ -11,6 +11,7 @@ class MediaPricingRuleSeeder extends Seeder
      */
     public function run()
     {
+        DB::table('media_package_rules')->truncate();
         DB::statement('SET FOREIGN_KEY_CHECKS=0;');
         DB::table('media_package_rules')->insert([
             [
