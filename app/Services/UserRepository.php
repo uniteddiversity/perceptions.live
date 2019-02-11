@@ -891,7 +891,7 @@ class UserRepository
                 $cost_bk['bd'][ $rule['rule_key'] ]['amount'] = floatval($rule['amount']) * 0;
             }
 
-            $cost_bk['bd']['video_cost']['unites'] = $qty;
+            $cost_bk['bd'][ $rule['rule_key'] ]['unites'] = $qty;
             $cost_bk['total_cost'] += $cost_bk['bd'][ $rule['rule_key'] ]['amount'];
         }
 
