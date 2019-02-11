@@ -602,12 +602,12 @@ class UserController extends Controller
             ->select('users.id','users.display_name','user_edit_videos.token','user_edit_videos.info')
             ->where('is_deleted', '0')->get()->first();
 
-        if(!isset($token_info->id))
-            return array('error' => 'Un authenticated!');
+//        if(!isset($token_info->id))
+//            return array('error' => 'Un authenticated!');
 
 //        $package_info = $this->userRepository->generateMediaCost(array('duration' => 10, 'remove_water_mark', 'future_documentary' => 2));
 //        echo '<pre>';print_r($package_info);die('</pre>');
-        $options = $request;
+        $options = $request->all();
         $package_info = $this->userRepository->generateMediaCost($options);
         return $package_info;
     }
