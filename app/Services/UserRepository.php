@@ -881,15 +881,17 @@ class UserRepository
         foreach($extraCosts as $rule){
             $cost_bk['bd'][ $rule['rule_key'] ]['unit_price'] = floatval($rule['amount']);
             $cost_bk['bd'][ $rule['rule_key'] ]['description'] = $rule['rule_description'];
+            $qty = 0;
             if(isset($options[ $rule['rule_key'] ])){
                 $qty = intval($options[ $rule['rule_key'] ]);
                 $cost_bk['bd'][ $rule['rule_key'] ]['amount'] = floatval($rule['amount']) * $qty;
-                $cost_bk['bd']['video_cost']['unites'] = $qty;
+
             }else{
-                $cost_bk['bd']['video_cost']['unites'] = 0;
+                $qty = 0;
                 $cost_bk['bd'][ $rule['rule_key'] ]['amount'] = floatval($rule['amount']) * 0;
             }
 
+            $cost_bk['bd']['video_cost']['unites'] = $qty;
             $cost_bk['total_cost'] += $cost_bk['bd'][ $rule['rule_key'] ]['amount'];
         }
 
