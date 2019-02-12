@@ -915,7 +915,11 @@ class UserRepository
         $invoice_type = 'mm-video-edit';
         $invoice_id = $invoice->create(array('user_id' => $user_id, 'invoice_type' => $invoice_type, 'invoice_element' => json_encode($options), 'status' => 0, 'amount' => $invoice_total));
 
-        return array('invoice_number' => $invoice_id->id, 'status' => $invoice_id->status, 'invoice_type' => $invoice_type, 'invoice_amount' => $invoice_total);
+        return array('invoice_number' => $invoice_id->id,
+            'status' => $invoice_id->status,
+            'invoice_type' => $invoice_type,
+            'invoice_amount' => $invoice_total,
+            'paypal_url' => env("PAYPAL_URL", ""));
     }
 }
 
