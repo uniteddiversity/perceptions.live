@@ -877,6 +877,7 @@ class UserRepository
         $cost_bk['bd']['video_cost']['unites'] = $duration;
         $cost_bk['bd']['video_cost']['description'] = $package_info['description']." ({$package_info['name']})";
         $cost_bk['bd']['video_cost']['key'] = 'video_cost';
+        $cost_bk['bd']['video_cost']['package_id'] = $package_info['id'];
         $cost_bk['total_cost'] = $cost_bk['bd']['video_cost']['amount'];
 
         $extraCosts = $mediaPackageRules->where('is_deleted','<>','1')->get()->toArray();
@@ -913,7 +914,7 @@ class UserRepository
 
         $invoice = new Invoice();
         $invoice_type = 'mm-video-edit';
-        $invoice_id = $invoice->create(array('user_id' => $user_id, 'invoice_type' => $invoice_type, 'invoice_element' => json_encode($options), 'status' => 0, 'amount' => $invoice_total));
+        $invoice_id = $invoice->create(array('user_id' => $user_id, 'plan_id' => $user_id, 'invoice_type' => $invoice_type, 'invoice_element' => json_encode($options), 'status' => 0, 'amount' => $invoice_total));
 
         return array('invoice_number' => $invoice_id->id,
             'status' => $invoice_id->status,
