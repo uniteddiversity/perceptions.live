@@ -907,7 +907,7 @@ class UserRepository
         $invoice_total = 0;
         foreach($options as $key => $option){
             if(isset($option['unit_price']) && isset($option['unites'])){
-                $invoice_total += (floatval($option['unit_price']) * floatval(option['unites']));
+                $invoice_total += (floatval($option['unit_price']) * floatval($options['unites']));
             }
         }
 
