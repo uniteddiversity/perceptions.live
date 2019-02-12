@@ -17,7 +17,7 @@ class CreateInvoice extends Migration
             $table->engine = 'InnoDB';
             $table->increments('id')->start_from(10000);
             $table->integer('user_id');
-            $table->integer('type');
+            $table->string('invoice_type');
             $table->json('invoice_element');
             $table->decimal('amount',10,2)->default(0);
             $table->string('status')->default(0);
