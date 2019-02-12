@@ -28,6 +28,7 @@ use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\URL;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Validation\Rules\In;
 
 class UserRepository
 {
@@ -901,7 +902,7 @@ class UserRepository
         return $cost_bk;
     }
 
-    public function generateInvoice($user_id, $options, Invoice $invoice)
+    public function generateInvoice($user_id, $options)
     {
         $invoice_total = 0;
         foreach($options as $key => $option){
@@ -910,6 +911,7 @@ class UserRepository
             }
         }
 
+        $invoice = new Invoice();
         $invoice_type = 'mm-video-edit';
         $invoice_id = $invoice->create(array('user_id' => $user_id, 'type' => $invoice_type, 'invoice_element' => json_encode($options), 'status' => 0, 'amount' => $invoice_total));
 
