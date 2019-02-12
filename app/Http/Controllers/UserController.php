@@ -608,4 +608,9 @@ class UserController extends Controller
         $options = $request->all();
         return $this->userRepository->generateMediaCost($options);
     }
+
+    public function generateInvoice($token, Request $request, UserEditVideo $userEditVideos)
+    {
+        dd($request->all());
+    }
 }
