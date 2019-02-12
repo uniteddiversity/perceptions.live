@@ -1,5 +1,6 @@
 <?php
 
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
@@ -23,6 +24,9 @@ class CreateInvoice extends Migration
             $table->string('status')->default(0);
             $table->timestamps();
         });
+
+        //then set autoincrement to 1000
+        DB::update("ALTER TABLE invoices AUTO_INCREMENT = 1000;");
     }
 
     /**
