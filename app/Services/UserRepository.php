@@ -919,7 +919,8 @@ class UserRepository
             'status' => $invoice_id->status,
             'invoice_type' => $invoice_type,
             'invoice_amount' => $invoice_total,
-            'paypal_url' => env("PAYPAL_URL", ""));
+            'paypal_url' => env("PAYPAL_URL", ""),
+            'paypal_email' => env("PAYPAL_EMAIL", ""));
     }
 }
 
