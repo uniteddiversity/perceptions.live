@@ -589,7 +589,7 @@ class UserController extends Controller
     {
         $token_info = $userEditVideos->where('token', $token)
             ->leftJoin('users', 'users.id', 'user_edit_videos.user_id')
-            ->select('users.id','users.display_name','user_edit_videos.token','user_edit_videos.info')
+            ->select('users.id','users.display_name','users.email','user_edit_videos.token','user_edit_videos.info')
             ->where('is_deleted', '0')->get()->first();
 
         return isset($token_info->id)? $token_info : array();
