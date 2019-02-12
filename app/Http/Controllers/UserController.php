@@ -611,6 +611,24 @@ class UserController extends Controller
 
     public function generateInvoice($token, Request $request, UserEditVideo $userEditVideos)
     {
-        dd($request->all());
+        $token_info = $userEditVideos->where('token', $token)
+            ->leftJoin('users', 'users.id', 'user_edit_videos.user_id')
+            ->select('users.id','users.display_name','user_edit_videos.token','user_edit_videos.info')
+            ->where('is_deleted', '0')->get()->first();
+
+        if(!isset($token_info->id))
+            return array('error' => 'Un authenticated!');
+
+        $options = $request->all();
+
+        $invoiced_options = [];
+        foreach($options as $key => $option){
+            $key = explode('-',$key);
+            if(isset($key[0]) && $key[1]){
+                $invoiced_options[$key[0]][$key[1]] = $option;
+            }
+        }
+
+        return $this->userRepository->generateInvoice($token_info->id, $invoiced_options);
     }
 }

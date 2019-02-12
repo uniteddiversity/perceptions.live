@@ -8,6 +8,7 @@ use App\Content;
 use App\ContentAccessLevels;
 use App\Group;
 use App\GroupContentAssociation;
+use App\Invoice;
 use App\MediaPackage;
 use App\MediaPackageRules;
 use App\MetaData;
@@ -900,9 +901,19 @@ class UserRepository
         return $cost_bk;
     }
 
-    public function generateInvoice($selections)
+    public function generateInvoice($user_id, $options, Invoice $invoice)
     {
+        $invoice_total = 0;
+        foreach($options as $key => $option){
+            if(isset($option['unit_price']) && isset($option['unites'])){
+                $invoice_total += (floatval($option['unit_price']) * floatval(option['unites']));
+            }
+        }
 
+        $invoice_type = 'mm-video-edit';
+        $invoice_id = $invoice->create(array('user_id' => $user_id, 'type' => $invoice_type, 'invoice_element' => json_encode($options), 'status' => 0, 'amount' => $invoice_total));
+
+        return array('invoice_number' => $invoice_id, 'invoice_type' => $invoice_type, 'invoice_amount' => $invoice_total);
     }
 }
 
