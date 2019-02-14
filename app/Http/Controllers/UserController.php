@@ -644,6 +644,7 @@ class UserController extends Controller
             ->select('users.id','users.display_name','users.email','user_edit_videos.token','user_edit_videos.info')
             ->where('is_deleted', '0')->get()->first();
 
+        $token_info['info'] = json_decode($token_info['info']);
         return isset($token_info->id)? $token_info : array();
     }
 
