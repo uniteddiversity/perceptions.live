@@ -32,6 +32,13 @@
     {{--<link rel="stylesheet" href="/assets/js/datatable/datatables.min.css" />--}}
     <script src="/assets/js/jquery-2.1.4.min.js"></script>
     {{--<link rel="stylesheet" href="/assets/css/app.css">--}}
+
+    <link rel="stylesheet" href="/assets/admin-temp/css/style.css">
+
+
+
+
+
 </head>
 
 <body class="full-height" id="scrollup">

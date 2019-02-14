@@ -8,6 +8,7 @@ use App\ClaimProfileRequests;
 use App\Content;
 use App\Group;
 use App\Http\Controllers\Controller;
+use App\MediaProject;
 use App\MetaData;
 use App\User;
 use App\UserEditVideo;
@@ -88,6 +89,54 @@ class UserController extends Controller
 
         return view('user.home')
             ->with(compact('users_data','user_acting_role','categories','gci_tags','sorting_tags'));
+    }
+
+    public function startProject()
+    {
+        $user_id = (!isset(Auth::user()->id))? 0 : Auth::user()->id;
+        $step_1_data = array();
+        if(isset($_GET['step'])){
+            $step = $_GET['step'];
+            $step_1_data = session('step_1_data');
+        }else{
+            $step = 'step1';
+            session()->forget('step_1_data');
+        }
+
+        return view('user.content-add-movie')
+            ->with(compact('user_id', 'step', 'step_1_data'));
+    }
+
+    public function submitProject(Request $request)
+    {
+        $validator = Validator::make($request->all(), [
+            'title' => 'required',
+            'location' => 'required',
+        ]);
+
+        $r = $request->toArray();
+        $step = isset($r['next_step'])? $r['next_step'] : 'step1';
+
+        if ($validator->fails()) {
+            return Redirect::back()->withErrors($validator->messages())->withInput();
+        }
+
+        session()->put('step_1_data', $r);
+        if(isset($r['next_step']) && $r['next_step'] == 'submit'){
+            $user_id = (!isset(Auth::user()->id))? 0 : Auth::user()->id;
+            $mediaProject = new MediaProject();
+            $project_data = $mediaProject->create( array('user_id' => $user_id,
+                'title' => $r['title'],
+                'location' => $r['location'],
+                'video_date' => empty($r['captured_date'])?date('Y-m-d'):$r['captured_date'],
+                'description' => $r['brief_description'],
+                'status' => 1
+            ) );
+
+            $this->movieEditor( $project_data );
+        }
+
+        return redirect('/content-add-public?step='.$step);
     }
 
     public function uploadVideo()
@@ -571,16 +620,17 @@ class UserController extends Controller
         return response()->json($r, 200);
     }
 
-    public function movieEditor(UserEditVideo $userEditVideos)
+    public function movieEditor($extra_data = [])
     {
         $video_editor_url = env("VIDEO_EDITOR_URL", "");
         $user_id = (!isset(Auth::user()->id))? 0 : Auth::user()->id;
         $token_key = md5(rand(0,1000) + $user_id + time() + rand(0,1000));
 
+        $userEditVideos = new UserEditVideo();
         $userEditVideos->where('user_id', $user_id)->update( array('is_deleted' => '1') );
         //delete other tokens of that user
         $temp_data = $userEditVideos->create(array('user_id' => $user_id, 'token' => $token_key,
-            'info' => json_encode(array('test' => 'test video')), 'is_deleted' => '0'));
+            'info' => json_encode(array('test' => 'test video')), 'is_deleted' => '0', 'more_info' => $extra_data));
 
         return Redirect::to($video_editor_url.'?key='.$temp_data->token);
     }

@@ -21,3 +21,7 @@
     background-color:white;
     border-color: black;
 }
+
+.package_list .package div{
+    margin: 10px;
+}

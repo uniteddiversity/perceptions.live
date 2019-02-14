@@ -294,6 +294,11 @@ $("#login-btn").click(function() {
     return false;
 });
 
+function openLoginRegister(){
+    $('.popupsec').fadeIn();
+    $('html').addClass('no-scroll');
+};
+
 $("#register-btn").click(function() {
     $("#registerModal").modal("show");
     $(".navbar-collapse.in").collapse("hide");
@@ -327,7 +332,13 @@ function userLogin(){
                 })
             }else{
                 $('#login-form #messages').html('<div class="alert alert-success" role="alert">'+val+'</div>');
-                window.location.href = "/user/profile";
+                let $redirect_to = $('#redirect_to').val();
+                if($redirect_to == ''){
+                    window.location.href = "/user/profile";
+                }else{
+                    window.location.href = $redirect_to;
+                }
+
             }
         })
         // Do something with the response

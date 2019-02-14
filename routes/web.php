@@ -86,6 +86,9 @@ Route::group(['prefix' => 'user', 'middleware' => ['auth', 'web', 'admin']], fun
 });
 
  */
+Route::get('/content-add-public', '\App\Controllers\User\UserController@startProject');
+Route::post('/content-post-public', '\App\Controllers\User\UserController@submitProject');
+
 Route::group(['prefix' => 'auth-user'], function () {
     Route::get('/movie-editor/{_token}', '\App\Controllers\User\UserController@getTokenInfo');
 //    Route::get('/calculate-video-cost/{_token}', '\App\Controllers\User\UserController@calculateVideoCost');
