@@ -133,6 +133,7 @@ class UserController extends Controller
                 'status' => 1
             ) );
 
+            session()->forget('step_1_data');
             $this->movieEditor( $project_data );
         }
 
@@ -631,8 +632,8 @@ class UserController extends Controller
         //delete other tokens of that user
         $temp_data = $userEditVideos->create(array('user_id' => $user_id, 'token' => $token_key,
             'info' => json_encode(array('test' => 'test video')), 'is_deleted' => '0', 'more_info' => $extra_data));
-
-        return Redirect::to($video_editor_url.'?key='.$temp_data->token);
+        ob_clean();
+        echo '<script> window.location.href="'.$video_editor_url.'?key='.$temp_data->token.'" </script>';
     }
 
     public function getTokenInfo($token, UserEditVideo $userEditVideos)
