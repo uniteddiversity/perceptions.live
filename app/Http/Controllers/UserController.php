@@ -633,7 +633,8 @@ class UserController extends Controller
         $temp_data = $userEditVideos->create(array('user_id' => $user_id, 'token' => $token_key,
             'info' => json_encode(array('test' => 'test video')), 'is_deleted' => '0', 'more_info' => $extra_data));
         ob_clean();
-        echo '<script> window.location.href="'.$video_editor_url.'?key='.$temp_data->token.'" </script>';
+        echo '<script>window.location.href="'.$video_editor_url.'?key='.$temp_data->token.'"</script>';
+        die();
     }
 
     public function getTokenInfo($token, UserEditVideo $userEditVideos)
