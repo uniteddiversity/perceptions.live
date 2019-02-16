@@ -625,8 +625,8 @@ class UserController extends Controller
     {
         $video_editor_url = env("VIDEO_EDITOR_URL", "");
         $user_id = (!isset(Auth::user()->id))? 0 : Auth::user()->id;
-        $token_key = md5(rand(0,1000) + $user_id + time() + rand(0,1000));
 
+        $token_key = $this->generateToken($user_id);
         $userEditVideos = new UserEditVideo();
         $userEditVideos->where('user_id', $user_id)->update( array('is_deleted' => '1') );
         //delete other tokens of that user
@@ -683,5 +683,37 @@ class UserController extends Controller
         }
 
         return $this->userRepository->generateInvoice($token_info->id, $invoiced_options);
+    }
+
+    public function closeProject($token, Request $request, UserEditVideo $userEditVideos)
+    {
+        $token_info = $userEditVideos->where('token', $token)
+            ->leftJoin('users', 'users.id', 'user_edit_videos.user_id')
+            ->select('users.id','users.display_name','user_edit_videos.token','user_edit_videos.info')
+            ->where('is_deleted', '0')->get()->first();
+
+        if(!isset($token_info->id))
+            return array('error' => 'Un authenticated!');
+
+        $options = $request->all();
+
+        //invalidate the existing token
+        $userEditVideos = new UserEditVideo();
+        $userEditVideos->where('token', $token)->update(array('is_deleted' => '1'));
+
+        //issue new token without project
+        $token_key = $this->generateToken($token_info->id);
+        $userEditVideos = new UserEditVideo();
+        $userEditVideos->where('user_id', $token_info->id)->update( array('is_deleted' => '1') );
+
+        //delete other tokens of that user
+        $temp_data = $userEditVideos->create(array('user_id' => $token_info->id, 'token' => $token_key,
+            'info' => json_encode(array('more_info' => [])), 'is_deleted' => '0'));
+        return $temp_data->token;
+    }
+
+    private function generateToken($user_id)
+    {
+        return md5(rand(0,1000) + $user_id + time() + rand(0,1000));
     }
 }

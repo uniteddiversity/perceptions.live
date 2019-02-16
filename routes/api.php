@@ -21,4 +21,5 @@ Route::group(['middleware' => []], function()
 {
     Route::get('/calculate_video_cost/{_token}', '\App\Controllers\User\UserController@calculateVideoCost');
     Route::post('/generate_invoice/{_token}', '\App\Controllers\User\UserController@generateInvoice');
+    Route::get('/close_project/{_token}', '\App\Controllers\User\UserController@closeProject');
 });
