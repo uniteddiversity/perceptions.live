@@ -860,7 +860,7 @@ class UserRepository
         $mediaPackageRules = new MediaPackageRules();
         $duration_minutes = intval($duration);
 
-        $package_info = $mediaPackage->where('min_video_minutes', '<', $duration_minutes)
+        $package_info = $mediaPackage->where('min_video_minutes', '=<', $duration_minutes)
             ->where('max_video_minutes', '>=', $duration_minutes)
             ->get()->first();
 
