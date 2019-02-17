@@ -732,9 +732,7 @@ class UserController extends Controller
             return array('error' => 'Un authenticated!');
 
         $options = $request->all();
-
-        $mediaProject = new MediaProject();
-        $projects = $mediaProject->where('id', $options['project_id'])->get()->toArray();
+        $projects = $this->userRepository->userProjects($token_info->id, $options);
 
         return $projects;
     }

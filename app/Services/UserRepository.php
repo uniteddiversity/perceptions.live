@@ -11,6 +11,7 @@ use App\GroupContentAssociation;
 use App\Invoice;
 use App\MediaPackage;
 use App\MediaPackageRules;
+use App\MediaProject;
 use App\MetaData;
 use App\Role;
 use App\SortingTag;
@@ -922,6 +923,15 @@ class UserRepository
             'invoice_amount' => $invoice_total,
             'paypal_url' => env("PAYPAL_URL", ""),
             'paypal_email' => env("PAYPAL_EMAIL", ""));
+    }
+
+    public function userProjects($user_id, $filter)
+    {
+        $mediaProject = new MediaProject();
+        $projects = $mediaProject->where('user_id', $user_id)->where('status', '1')->get()->toArray();
+
+
+        return $projects;
     }
 }
 
