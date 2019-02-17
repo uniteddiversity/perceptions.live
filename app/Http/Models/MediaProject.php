@@ -13,5 +13,5 @@ class MediaProject extends Model
     /**
      * @var array
      */
-    protected $fillable = ['id', 'user_id', 'title', 'location', 'video_date', 'description', 'status'];
+    protected $fillable = ['id', 'user_id', 'title', 'location', 'video_date', 'description', 'status', 'output'];
 }

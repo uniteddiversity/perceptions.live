@@ -701,6 +701,10 @@ class UserController extends Controller
         $userEditVideos = new UserEditVideo();
         $userEditVideos->where('token', $token)->update(array('is_deleted' => '1'));
 
+        //update project with status
+        $mediaProject = new MediaProject();
+        $mediaProject->where('id', $options['project_id'])->update(array('output' => $options['output']));
+
         //issue new token without project
         $token_key = $this->generateToken($token_info->id);
         $userEditVideos = new UserEditVideo();

@@ -22,6 +22,7 @@ class CreateMediaProject extends Migration
             $table->string('location');
             $table->dateTime('video_date')->nullable();
             $table->text('description')->nullable();
+            $table->json('output')->nullable();
             $table->string('status')->default(0);
             $table->timestamps();
         });
