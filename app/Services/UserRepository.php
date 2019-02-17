@@ -927,11 +927,28 @@ class UserRepository
 
     public function userProjects($user_id, $filter)
     {
+        $elements = ['part_1', 'part_2', 'part_3', 'music_and_misc'];
+
         $mediaProject = new MediaProject();
         $projects = $mediaProject->where('user_id', $user_id)->where('status', '1')->get()->toArray();
 
+        $return = []; $i = 0;
+        foreach($projects as $project){
+            if(!empty($project['output'])){
+                $info = json_decode($project['output'], true);
+                $return[$i] = $project;
+                $return[$i]['output'] = [];//clearing the output key
+                foreach($info as $key => $r){
+                    if(in_array($key, $elements) && !isset($r['error'])){
+                        $return[$i]['output'][$key] = $r;
+                    }
+                }
 
-        return $projects;
+                $i++;
+            }
+        }
+
+        return $return;
     }
 }
 
