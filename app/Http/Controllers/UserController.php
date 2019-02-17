@@ -703,7 +703,7 @@ class UserController extends Controller
 
         //update project with status
         $mediaProject = new MediaProject();
-        $mediaProject->where('id', $options['project_id'])->update(array('output' => $options['output']));
+        $mediaProject->where('id', $options['project_id'])->update(array('output' => json_encode($options['output'])));
 
         //issue new token without project
         $token_key = $this->generateToken($token_info->id);
