@@ -720,4 +720,22 @@ class UserController extends Controller
     {
         return md5(rand(0,1000) + $user_id + time() + rand(0,1000));
     }
+
+    public function getMyProjects($token, Request $request, UserEditVideo $userEditVideos)
+    {
+        $token_info = $userEditVideos->where('token', $token)
+            ->leftJoin('users', 'users.id', 'user_edit_videos.user_id')
+            ->select('users.id','users.display_name','user_edit_videos.token','user_edit_videos.info')
+            ->where('is_deleted', '0')->get()->first();
+
+        if(!isset($token_info->id))
+            return array('error' => 'Un authenticated!');
+
+        $options = $request->all();
+
+        $mediaProject = new MediaProject();
+        $projects = $mediaProject->where('id', $options['project_id'])->get()->toArray();
+
+        return $projects;
+    }
 }
