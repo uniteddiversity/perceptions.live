@@ -233,10 +233,10 @@ $step_1_data['brief_description'] = isset($step_1_data['brief_description'])? $s
                                 </div>
 
                                 <input type="hidden" value="step3" name="next_step" />
-                                <input type="hidden" id="redirect_to" value="/content-add-public?step=step1" />
+                                <input type="hidden" id="redirect_to" value="/content-add-public?step=step3" />
                                 <!-- btns -->
                                 <div class="btn_outer">
-                                    <a href="/content-add-public?step=step3" class="btn"><i class="fas fa-long-arrow-alt-left"></i> Back</a>
+                                    <a href="/content-add-public?step=step1" class="btn"><i class="fas fa-long-arrow-alt-left"></i> Back</a>
                                     <?php if($user_id == 0){ ?>
                                     <a href="#" id="login-or-register" onclick="openLoginRegister()" class="btn click" style="float:right;">I understand. Continue <i class="fas fa-long-arrow-alt-right"></i></a>
                                     <?php }else{ ?>
