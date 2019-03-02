@@ -33,6 +33,9 @@
     <script src="/assets/js/jquery-2.1.4.min.js"></script>
     {{--<link rel="stylesheet" href="/assets/css/app.css">--}}
 
+    <link rel="stylesheet" href="/assets/admin-temp/css/style.css">
+
+
 
 
 
@@ -234,6 +237,17 @@
             $('[data-toggle="tooltip"]').tooltip();
         });
 
+    </script>
+    <script>
+        $(document).ready(function() {
+            // $('#users_llist').DataTable({"aaSorting": []});
+            $('.datepicker').datepicker({
+                format: 'dd-mm-yyyy',
+                // startDate: '-3d',
+                autoclose: true,
+                keepOpen: false,
+            });
+        });
     </script>
     {{--<script>--}}
     {{--$(document).ready(function() {--}}
