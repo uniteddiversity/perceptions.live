@@ -128,7 +128,7 @@ class UserController extends Controller
             $project_data = $mediaProject->create( array('user_id' => $user_id,
                 'title' => $r['title'],
                 'location' => $r['location'],
-                'video_date' => empty($r['captured_date'])?date('Y-m-d'):$r['captured_date'],
+                'video_date' => empty($r['captured_date'])?date('Y-m-d'):date('Y-m-d', strtotime($r['captured_date'])),
                 'description' => $r['brief_description'],
                 'status' => 1
             ) );
