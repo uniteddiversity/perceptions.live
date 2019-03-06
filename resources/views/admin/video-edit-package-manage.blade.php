@@ -8,6 +8,7 @@
     $data['name'] = isset($edit_data['name'])?$edit_data['name']: '';
     $data['description'] = isset($edit_data['description'])?$edit_data['description']: '';
     $data['free_storage'] = isset($edit_data['free_storage'])?$edit_data['free_storage']: '';
+    $data['charge_per_minute'] = isset($edit_data['charge_per_minute'])?$edit_data['charge_per_minute']: '0';
     $data['discount'] = isset($edit_data['discount'])?$edit_data['discount']:'';
 
 //dd($data);
@@ -73,10 +74,10 @@
                             {{--<label for="video_id">Maximum Minutes</label>--}}
                             {{--<input type="text" class="form-control" id="leaflet_search_addr" aria-describedby="nameHelp" name="location" placeholder="Location" value="{{ old('location',$data['location']) }}">--}}
                             {{--</div>--}}
-                            {{--<div class="form-group">--}}
-                            {{--<label for="video_id">Charge Per Minutes</label>--}}
-                            {{--<input type="text" class="form-control" id="leaflet_search_addr" aria-describedby="nameHelp" name="location" placeholder="Location" value="{{ old('location',$data['location']) }}">--}}
-                            {{--</div>--}}
+                            <div class="form-group">
+                            <label for="video_id">Charge Per Minutes</label>
+                            <input type="text" class="form-control" id="charge_per_minute" aria-describedby="nameHelp" name="charge_per_minute" placeholder="Charge Per Minute" value="{{ old('charge_per_minute',$data['charge_per_minute']) }}">
+                            </div>
 
                             <div class="form-group">
                                 <label for="video_id">Free Storage (MB)</label>

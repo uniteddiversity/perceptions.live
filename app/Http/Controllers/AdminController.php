@@ -877,7 +877,8 @@ class AdminController extends Controller
                     'name' => $r['name'],
                     'description' => $r['description'],
                     'free_storage' => $r['free_storage'],
-                    'discount' => $r['discount']
+                    'discount' => $r['discount'],
+                    'charge_per_minute' => $r['charge_per_minute']
                 )
             );
 
