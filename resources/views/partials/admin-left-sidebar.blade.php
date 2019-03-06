@@ -139,6 +139,16 @@
 
         <ul class="pcoded-item pcoded-left-item">
             <li class="pcoded-hasmenu">
+                <a href="/user/admin/package-manager/">
+                    <span class="pcoded-micon"><i class="ti-layout-sidebar-left"></i></span>
+                    <span class="pcoded-mtext" data-i18n="nav.page_layout.main">Package Manager</span>
+                    <span class="pcoded-mcaret"></span>
+                </a>
+            </li>
+        </ul>
+
+        <ul class="pcoded-item pcoded-left-item">
+            <li class="pcoded-hasmenu">
                 <a href="/user/logout">
                     <span class="pcoded-micon"><i class="ti-layout-sidebar-left"></i></span>
                     <span class="pcoded-mtext" data-i18n="nav.page_layout.main">Log Out</span>

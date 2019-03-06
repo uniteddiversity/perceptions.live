@@ -140,6 +140,10 @@ Route::group(['prefix' => 'user', 'middleware' => ['auth', 'web', 'admin']], fun
 
     Route::get('/admin/group-content-list/{_id}', '\App\Controllers\User\AdminController@groupContentList');
     Route::get('/admin/group-content-list-ajax/{_id}', '\App\Controllers\User\AdminController@groupContentListAjax');
+
+    Route::get('/admin/package-manager/', '\App\Controllers\User\AdminController@packageManager');
+    Route::get('/admin/package-manager/{_id}', '\App\Controllers\User\AdminController@packageManager');
+    Route::post('/admin/update-package-manager', '\App\Controllers\User\AdminController@updatePackageManager');
 });
 
 Route::group(['prefix' => 'user', 'middleware' => ['auth', 'web', 'groupadmin']], function () {

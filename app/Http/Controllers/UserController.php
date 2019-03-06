@@ -8,6 +8,7 @@ use App\ClaimProfileRequests;
 use App\Content;
 use App\Group;
 use App\Http\Controllers\Controller;
+use App\MediaPackage;
 use App\MediaProject;
 use App\MetaData;
 use App\User;
@@ -103,8 +104,11 @@ class UserController extends Controller
             session()->forget('step_1_data');
         }
 
+        $packages = new MediaPackage();
+        $packages = $packages->get()->toArray();
+
         return view('user.content-add-movie')
-            ->with(compact('user_id', 'step', 'step_1_data'));
+            ->with(compact('user_id', 'step', 'step_1_data', 'packages'));
     }
 
     public function submitProject(Request $request)

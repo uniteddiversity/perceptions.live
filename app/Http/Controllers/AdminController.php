@@ -6,6 +6,7 @@ use App\Category;
 use App\Content;
 use App\Group;
 use App\Http\Controllers\Controller;
+use App\MediaPackage;
 use App\MetaData;
 use App\User;
 use Content\Services\ContentService;
@@ -850,5 +851,41 @@ class AdminController extends Controller
 
 //        $ret = array('data' => $processed, 'draw' => 5, 'recordsTotal'=>100, 'recordsFiltered' => 100);
         return response()->json($processed, 200);
+    }
+
+    public function packageManager($id = 0)
+    {
+        $packages = new MediaPackage();
+        $packages = $packages->get()->toArray();
+
+        if($id > 0){
+            $package = new MediaPackage();
+            $edit_data = $package->where('id',$id)->first()->toArray();
+        }
+        return view('admin.video-edit-package-manage')
+            ->with(compact('packages','edit_data'));
+    }
+
+    public function updatePackageManager(Request $request)
+    {
+        $r = $request->all();
+        $packages = new MediaPackage();
+
+        if(isset($r['id'])){
+            $package = $packages->where('id', $r['id'])->update(
+                array(
+                    'name' => $r['name'],
+                    'description' => $r['description'],
+                    'free_storage' => $r['free_storage'],
+                    'discount' => $r['discount']
+                )
+            );
+
+            if( $r['id']){
+                return redirect('/user/admin/package-manager')->with('message', "Successfully Updated!");
+            }
+        }
+
+        return Redirect::back()->withErrors('Wrong Package ID')->withInput();
     }
 }

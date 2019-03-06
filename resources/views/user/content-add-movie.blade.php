@@ -186,43 +186,62 @@ $step_1_data['brief_description'] = isset($step_1_data['brief_description'])? $s
                                         </div>
                                     </div>
                                     <div class="row">
-                                        <div class="col-sm-3 package pak1">
-                                            <div>
-                                                <h3>Free</h3>
-                                                <span>$10 per row minute</span>
+                                        <?php
+                                        foreach($packages as $package){ ?>
+                                            <div class="col-sm-3 package pak1">
+                                                <div>
+                                                    <h3>{{$package['name']}}</h3>
+                                                </div>
+                                                <p>
+                                                    {{$package['description']}}
+                                                </p>
+                                                <div>
+                                                    <ul>
+                                                        <li><span>{{number_format(floatval($package['charge_per_minute']) - (floatval($package['charge_per_minute'])/100*floatval($package['discount'])), 2) }} USD per row minute</span></li>
+                                                        <li>720p/1080p</li>
+                                                        <li>{{$package['min_video_minutes']}} to {{$package['max_video_minutes']}} minutes final video</li>
+                                                        <li>{{$package['free_storage']}} free Storage</li>
+                                                    </ul>
+                                                </div>
                                             </div>
-                                            <div>
-                                                <ul>
-                                                    <li>720p/1080p</li>
-                                                    <li><=3 minutes final video</li>
-                                                    <li>7 minute raw footage</li>
-                                                </ul>
-                                            </div>
-                                        </div>
-                                        <div class="col-sm-3 package pak1">
-                                            <div>
-                                                <h3>Basic</h3>
-                                            </div>
-                                            <div>
-                                                <ul>
-                                                    <li>720p/1080p</li>
-                                                    <li><=5 minutes final video</li>
-                                                    <li>20 minute raw footage</li>
-                                                </ul>
-                                            </div>
-                                        </div>
-                                        <div class="col-sm-3 package pak1">
-                                            <div>
-                                                <h3>Plus</h3>
-                                            </div>
-                                            <div>
-                                                <ul>
-                                                    <li>720p/1080p</li>
-                                                    <li><=15 minutes final video</li>
-                                                    <li>45 minute raw footage</li>
-                                                </ul>
-                                            </div>
-                                        </div>
+                                        <?php } ?>
+                                        {{--<div class="col-sm-3 package pak1">--}}
+                                            {{--<div>--}}
+                                                {{--<h3>Free</h3>--}}
+                                                {{--<span>$10 per row minute</span>--}}
+                                            {{--</div>--}}
+                                            {{--<div>--}}
+                                                {{--<ul>--}}
+                                                    {{--<li>720p/1080p</li>--}}
+                                                    {{--<li><=3 minutes final video</li>--}}
+                                                    {{--<li>7 minute raw footage</li>--}}
+                                                {{--</ul>--}}
+                                            {{--</div>--}}
+                                        {{--</div>--}}
+                                        {{--<div class="col-sm-3 package pak1">--}}
+                                            {{--<div>--}}
+                                                {{--<h3>Basic</h3>--}}
+                                            {{--</div>--}}
+                                            {{--<div>--}}
+                                                {{--<ul>--}}
+                                                    {{--<li>720p/1080p</li>--}}
+                                                    {{--<li><=5 minutes final video</li>--}}
+                                                    {{--<li>20 minute raw footage</li>--}}
+                                                {{--</ul>--}}
+                                            {{--</div>--}}
+                                        {{--</div>--}}
+                                        {{--<div class="col-sm-3 package pak1">--}}
+                                            {{--<div>--}}
+                                                {{--<h3>Plus</h3>--}}
+                                            {{--</div>--}}
+                                            {{--<div>--}}
+                                                {{--<ul>--}}
+                                                    {{--<li>720p/1080p</li>--}}
+                                                    {{--<li><=15 minutes final video</li>--}}
+                                                    {{--<li>45 minute raw footage</li>--}}
+                                                {{--</ul>--}}
+                                            {{--</div>--}}
+                                        {{--</div>--}}
                                         <div class="col-sm-3 package pak1">
                                             <div>
                                                 <h3>Pro</h3>
@@ -338,6 +357,14 @@ $step_1_data['brief_description'] = isset($step_1_data['brief_description'])? $s
 
 
 <style>
+    .package p{
+       min-height: 50px;
+    }
+
+    .package ul li{
+        list-style: square;
+    }
+
     .pagedesc {
         font-size: 20px;
         font-family: questrial;

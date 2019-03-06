@@ -13,5 +13,7 @@ class MediaPackage extends Model
     /**
      * @var array
      */
-    protected $fillable = ['id', 'name', 'description', 'min_video_minutes', 'max_video_minutes', 'charge_per_minute', 'is_deleted'];
+    protected $fillable = ['id', 'name', 'description', 'min_video_minutes', 'max_video_minutes', 'charge_per_minute', 'is_deleted', 'free_storage', 'discount'];
+
+    public $timestamps = false;
 }
