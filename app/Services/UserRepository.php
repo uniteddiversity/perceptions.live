@@ -915,7 +915,7 @@ class UserRepository
 
         $invoice = new Invoice();
         $invoice_type = 'mm-video-edit';
-        $invoice_id = $invoice->create(array('user_id' => $user_id, 'plan_id' => $user_id, 'invoice_type' => $invoice_type, 'invoice_element' => json_encode($options), 'status' => 0, 'amount' => $invoice_total));
+        $invoice_id = $invoice->create(array('user_id' => $user_id, 'plan_id' => $user_id, 'invoice_type' => $invoice_type, 'invoice_element' => json_encode($options), 'status' => 0, 'amount' => $invoice_total, 'discount' => '0'));
 
         return array('invoice_number' => $invoice_id->id,
             'status' => $invoice_id->status,
