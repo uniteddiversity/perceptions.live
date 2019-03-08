@@ -197,10 +197,10 @@ $step_1_data['brief_description'] = isset($step_1_data['brief_description'])? $s
                                                 </p>
                                                 <div>
                                                     <ul>
-                                                        <li><span>{{number_format(floatval($package['charge_per_minute']) - (floatval($package['charge_per_minute'])/100*floatval($package['discount'])), 2) }} USD per row minute</span></li>
+                                                        <li><span>{{number_format(floatval($package['charge_per_minute']) - (floatval($package['charge_per_minute'])/100*floatval($package['discount'])), 0) }} USD per row minute</span></li>
                                                         <li>720p/1080p</li>
                                                         <li>{{$package['min_video_minutes']}} to {{$package['max_video_minutes']}} minutes final video</li>
-                                                        <li>{{$package['free_storage']}} free Storage</li>
+                                                        <li>{{$package['free_storage']}}Mb free Storage</li>
                                                     </ul>
                                                 </div>
                                             </div>
