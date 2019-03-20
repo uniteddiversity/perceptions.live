@@ -15,7 +15,7 @@ class AlterInvoice2 extends Migration
     {
         Schema::table('invoices', function (Blueprint $table) {
             $table->engine = 'InnoDB';
-            $table->json('response');
+            $table->json('response')->nullable(true);;
         });
     }
 
