@@ -779,7 +779,7 @@ class UserController extends Controller
         $listener->onVerificationFailure(function (IPNVerificationFailure $event) use ($order_id) {
 //            $this->repository->handle($event, PayPalIPN::IPN_FAILURE, $order_id);
         });
-//        Log::info(print_r($r, true));
+        Log::info(print_r($r, true));
         $listener->listen();
 
         if(($env == 'sandbox') && isset($r['payment_status']) && in_array($r['payment_status'] ,array('complete', 'pending')) || (isset($r['payment_status']) && in_array($r['payment_status'] ,array('complete')))){//pending happen if sandbox and not a real paypal account
