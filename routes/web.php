@@ -19,7 +19,7 @@ Route::get('/payment/response', '\App\Controllers\User\UserController@updateInvo
 Route::post('/payment/response/{order?}/{env?}', [
     'name' => 'PayPal Express IPN',
     'as' => 'webhook.paypal.ipn',
-    'uses' => 'UserController@updateInvoice',
+    'uses' => '\App\Controllers\User\UserController@updateInvoice',
 ]);
 
 Route::get('/register/confirm/resend', 'Auth\RegisterController@resendConfirmation')->name('auth.resend_confirmation');
