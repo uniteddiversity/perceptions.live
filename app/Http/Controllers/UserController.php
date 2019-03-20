@@ -756,15 +756,13 @@ class UserController extends Controller
     public function updateInvoice($order_id, $env, Request $request)
     {
         $r = $request->all();
-        Log::info(print_r($r, true));
-
-die('end');
+//        Log::info(print_r($r, true));
 
         $listener = new ArrayListener;
 //
-////        if ($env == 'sandbox') {
+        if ($env == 'sandbox') {
             $listener->useSandbox();
-////        }
+        }
 //
         $listener->setData($request->all());
 
@@ -781,8 +779,14 @@ die('end');
         $listener->onVerificationFailure(function (IPNVerificationFailure $event) use ($order_id) {
 //            $this->repository->handle($event, PayPalIPN::IPN_FAILURE, $order_id);
         });
-        Log::info(print_r($r, true));
+//        Log::info(print_r($r, true));
         $listener->listen();
+
+        if(($env == 'sandbox') && in_array($r['payment_status'] ,array('complete', 'pending')) && in_array($r['payment_status'] ,array('complete'))){//pending happen if sandbox and not a real paypal account
+            $invoice = new Invoice();
+            $invoice->where('id', $order_id)->where('status','<>', '1')->update(array('response' => json_encode($r), 'status' => '1'));
+        }
+
 
     }
 }
