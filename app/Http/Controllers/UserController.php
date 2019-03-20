@@ -782,7 +782,7 @@ class UserController extends Controller
 //        Log::info(print_r($r, true));
         $listener->listen();
 
-        if(($env == 'sandbox') && isset($r['payment_status']) && in_array($r['payment_status'] ,array('complete', 'pending')) || in_array($r['payment_status'] ,array('complete'))){//pending happen if sandbox and not a real paypal account
+        if(($env == 'sandbox') && isset($r['payment_status']) && in_array($r['payment_status'] ,array('complete', 'pending')) || (isset($r['payment_status']) && in_array($r['payment_status'] ,array('complete')))){//pending happen if sandbox and not a real paypal account
             $invoice = new Invoice();
             $invoice->where('id', $order_id)->where('status','<>', '1')->update(array('response' => json_encode($r), 'status' => '1'));
         }
