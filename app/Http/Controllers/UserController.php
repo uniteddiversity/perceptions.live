@@ -642,8 +642,9 @@ class UserController extends Controller
         die();
     }
 
-    public function tokenInfoByToken($token, UserEditVideo $userEditVideos)
+    public function tokenInfoByToken($token)
     {
+        $userEditVideos = new UserEditVideo();
         $token_info = $userEditVideos->where('token', $token)
             ->leftJoin('users', 'users.id', 'user_edit_videos.user_id')
             ->select('users.id','users.display_name','users.email','user_edit_videos.token','user_edit_videos.info')
