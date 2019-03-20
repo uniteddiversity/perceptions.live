@@ -667,6 +667,7 @@ class UserController extends Controller
     public function getTokenInfo($token)
     {
         $token_info = $this->tokenInfoByToken($token);
+        $token_info['info'] = json_decode($token_info['info']);
         return isset($token_info->id)? $token_info : array();
     }
 
