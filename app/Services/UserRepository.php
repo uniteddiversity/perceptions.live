@@ -926,7 +926,7 @@ class UserRepository
             'status' => $invoice_id->status,
             'invoice_type' => $invoice_type,
             'invoice_amount' => $invoice_total,
-            'return_url' => $_SERVER['HTTP_HOST'].'/payment/response',
+            'ipn_url' => $_SERVER['HTTP_HOST'].'/payment/response',
             'paypal_url' => env("PAYPAL_URL", ""),
             'paypal_email' => env("PAYPAL_EMAIL", ""));
     }
