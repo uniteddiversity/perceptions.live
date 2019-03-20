@@ -15,6 +15,7 @@ use App\MetaData;
 use App\User;
 use App\UserEditVideo;
 use Content\Services\ContentService;
+use Illuminate\Contracts\Logging\Log;
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Auth;
@@ -750,6 +751,7 @@ class UserController extends Controller
 
     public function updateInvoice(Request $request)
     {
-
+        $r = $request->all();
+        Log::info(print_r($r, true));
     }
 }
