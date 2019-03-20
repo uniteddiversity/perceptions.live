@@ -13,5 +13,5 @@ class Invoice extends Model
     /**
      * @var array
      */
-    protected $fillable = ['id', 'user_id', 'invoice_type', 'invoice_element', 'amount', 'status', 'discount', 'total_amount'];
+    protected $fillable = ['id', 'user_id', 'invoice_type', 'invoice_element', 'amount', 'status', 'discount', 'total_amount', 'response'];
 }
