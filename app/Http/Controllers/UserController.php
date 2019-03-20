@@ -8,6 +8,7 @@ use App\ClaimProfileRequests;
 use App\Content;
 use App\Group;
 use App\Http\Controllers\Controller;
+use App\Invoice;
 use App\MediaPackage;
 use App\MediaProject;
 use App\MetaData;
@@ -641,23 +642,38 @@ class UserController extends Controller
         die();
     }
 
-    public function getTokenInfo($token, UserEditVideo $userEditVideos)
+    public function tokenInfoByToken($token, UserEditVideo $userEditVideos)
     {
         $token_info = $userEditVideos->where('token', $token)
             ->leftJoin('users', 'users.id', 'user_edit_videos.user_id')
             ->select('users.id','users.display_name','users.email','user_edit_videos.token','user_edit_videos.info')
             ->where('is_deleted', '0')->get()->first();
 
+        $token_info['storage_limit'] = 1000;
+        $token_info['is_verified'] = false;
+
+        $invoice = new Invoice();
+        $v_info = $invoice->where('user_id', $token_info['id'])->where('status', '1')->where('verify_account[0]->key', 'verify_account')->get()->first();
+
+        if(isset($v_info['id'])){
+            $token_info['storage_limit'] = 4000;
+            $token_info['is_verified'] = true;
+        }
+
+        return $token_info;
+    }
+
+    public function getTokenInfo($token)
+    {
+        $token_info = $this->tokenInfoByToken($token);
+
         $token_info['info'] = json_decode($token_info['info']);
         return isset($token_info->id)? $token_info : array();
     }
 
-    public function calculateVideoCost($token, Request $request, UserEditVideo $userEditVideos)
+    public function calculateVideoCost($token, Request $request)
     {
-        $token_info = $userEditVideos->where('token', $token)
-            ->leftJoin('users', 'users.id', 'user_edit_videos.user_id')
-            ->select('users.id','users.display_name','user_edit_videos.token','user_edit_videos.info')
-            ->where('is_deleted', '0')->get()->first();
+        $token_info  = $this->tokenInfoByToken($token);
 
         if(!isset($token_info->id))
             return array('error' => 'Un authenticated!');
@@ -666,12 +682,9 @@ class UserController extends Controller
         return $this->userRepository->generateMediaCost($options);
     }
 
-    public function generateInvoice($token, Request $request, UserEditVideo $userEditVideos)
+    public function generateInvoice($token, Request $request)
     {
-        $token_info = $userEditVideos->where('token', $token)
-            ->leftJoin('users', 'users.id', 'user_edit_videos.user_id')
-            ->select('users.id','users.display_name','user_edit_videos.token','user_edit_videos.info')
-            ->where('is_deleted', '0')->get()->first();
+        $token_info = $this->tokenInfoByToken($token);
 
         if(!isset($token_info->id))
             return array('error' => 'Un authenticated!');
@@ -689,12 +702,9 @@ class UserController extends Controller
         return $this->userRepository->generateInvoice($token_info->id, $invoiced_options);
     }
 
-    public function closeProject($token, Request $request, UserEditVideo $userEditVideos)
+    public function closeProject($token, Request $request)
     {
-        $token_info = $userEditVideos->where('token', $token)
-            ->leftJoin('users', 'users.id', 'user_edit_videos.user_id')
-            ->select('users.id','users.display_name','user_edit_videos.token','user_edit_videos.info')
-            ->where('is_deleted', '0')->get()->first();
+        $token_info = $this->tokenInfoByToken($token);
 
         if(!isset($token_info->id))
             return array('error' => 'Un authenticated!');
@@ -725,12 +735,9 @@ class UserController extends Controller
         return md5(rand(0,1000) + $user_id + time() + rand(0,1000));
     }
 
-    public function getMyProjects($token, Request $request, UserEditVideo $userEditVideos)
+    public function getMyProjects($token, Request $request)
     {
-        $token_info = $userEditVideos->where('token', $token)
-            ->leftJoin('users', 'users.id', 'user_edit_videos.user_id')
-            ->select('users.id','users.display_name','user_edit_videos.token','user_edit_videos.info')
-            ->where('is_deleted', '0')->get()->first();
+        $token_info = $this->tokenInfoByToken($token);
 
         if(!isset($token_info->id))
             return array('error' => 'Un authenticated!');
@@ -739,5 +746,10 @@ class UserController extends Controller
         $projects = $this->userRepository->userProjects($token_info->id, $options);
 
         return $projects;
+    }
+
+    public function updateInvoice(Request $request)
+    {
+
     }
 }

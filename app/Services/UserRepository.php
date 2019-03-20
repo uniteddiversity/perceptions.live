@@ -884,6 +884,11 @@ class UserRepository
         $extraCosts = $mediaPackageRules->where('is_deleted','<>','1')->get()->toArray();
 
         foreach($extraCosts as $rule){
+            //remove items that not related to invoice item
+            if(in_array($rule['rule_key'], array('verify_account'))){
+                continue;
+            }
+
             $cost_bk['bd'][ $rule['rule_key'] ]['unit_price'] = floatval($rule['amount']);
             $cost_bk['bd'][ $rule['rule_key'] ]['description'] = $rule['rule_description'];
             $qty = 0;
@@ -921,6 +926,7 @@ class UserRepository
             'status' => $invoice_id->status,
             'invoice_type' => $invoice_type,
             'invoice_amount' => $invoice_total,
+            'return_url' => $_SERVER['REQUEST_URI'].'/payment/response',
             'paypal_url' => env("PAYPAL_URL", ""),
             'paypal_email' => env("PAYPAL_EMAIL", ""));
     }
