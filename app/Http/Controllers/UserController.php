@@ -758,7 +758,7 @@ class UserController extends Controller
         $r = $request->all();
         Log::info(print_r($r, true));
 
-
+die('end');
 
         $listener = new ArrayListener;
 //
