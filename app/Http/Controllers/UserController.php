@@ -23,6 +23,7 @@ use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Validator;
 //use System\Request;
+use PayPal\IPN\Listener\Http\ArrayListener;
 use System\UID\UID;
 use User\Services\UserRepository;
 
@@ -749,9 +750,36 @@ class UserController extends Controller
         return $projects;
     }
 
-    public function updateInvoice(Request $request)
+    public function updateInvoice($order_id, $env, Request $request)
     {
         $r = $request->all();
         Log::info(print_r($r, true));
+
+
+
+//        $listener = new ArrayListener;
+//
+////        if ($env == 'sandbox') {
+//            $listener->useSandbox();
+////        }
+//
+//        $listener->setData($request->all());
+//
+//        $listener = $listener->run();
+//
+//        $listener->onInvalid(function (IPNInvalid $event) use ($order_id) {
+//            $this->repository->handle($event, PayPalIPN::IPN_INVALID, $order_id);
+//        });
+//
+//        $listener->onVerified(function (IPNVerified $event) use ($order_id) {
+//            $this->repository->handle($event, PayPalIPN::IPN_VERIFIED, $order_id);
+//        });
+//
+//        $listener->onVerificationFailure(function (IPNVerificationFailure $event) use ($order_id) {
+//            $this->repository->handle($event, PayPalIPN::IPN_FAILURE, $order_id);
+//        });
+//
+//        $listener->listen();
+
     }
 }
