@@ -14,7 +14,7 @@
 
 Route::post('user/login', array('uses' => '\App\Http\Controllers\Auth\LoginController@userLogin'));
 Route::post('user/register', array('uses' => '\App\Http\Controllers\Auth\RegisterController@createUser'));
-Route::get('/payment/response', '\App\Controllers\User\UserController@updateInvoice');
+//Route::get('/payment/response', '\App\Controllers\User\UserController@updateInvoice');
 
 Route::post('/payment/response/{order?}/{env?}', [
     'name' => 'PayPal Express IPN',
