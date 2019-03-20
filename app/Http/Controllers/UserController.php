@@ -654,7 +654,7 @@ class UserController extends Controller
         $token_info->is_verified = false;
 
         $invoice = new Invoice();
-        $v_info = $invoice->where('user_id', $token_info['id'])->where('status', '1')->where('verify_account[0]->key', 'verify_account')->get()->first();
+        $v_info = $invoice->where('user_id', $token_info['id'])->where('status', '1')->where('invoice_element->verify_account[0]->key', 'verify_account')->get()->first();
 
         if(isset($v_info->id)){
             $token_info->storage_limit = 4000;
