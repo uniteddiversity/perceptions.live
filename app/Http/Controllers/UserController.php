@@ -649,15 +649,15 @@ class UserController extends Controller
             ->select('users.id','users.display_name','users.email','user_edit_videos.token','user_edit_videos.info')
             ->where('is_deleted', '0')->get()->first();
 
-        $token_info['storage_limit'] = 1000;
-        $token_info['is_verified'] = false;
+        $token_info->storage_limit = 1000;
+        $token_info->is_verified = false;
 
         $invoice = new Invoice();
         $v_info = $invoice->where('user_id', $token_info['id'])->where('status', '1')->where('verify_account[0]->key', 'verify_account')->get()->first();
 
-        if(isset($v_info['id'])){
-            $token_info['storage_limit'] = 4000;
-            $token_info['is_verified'] = true;
+        if(isset($v_info->id)){
+            $token_info->storage_limit = 4000;
+            $token_info->is_verified = true;
         }
 
         return $token_info;
@@ -666,8 +666,6 @@ class UserController extends Controller
     public function getTokenInfo($token)
     {
         $token_info = $this->tokenInfoByToken($token);
-
-        $token_info['info'] = json_decode($token_info['info']);
         return isset($token_info->id)? $token_info : array();
     }
 
