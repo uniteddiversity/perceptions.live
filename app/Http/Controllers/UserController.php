@@ -691,7 +691,7 @@ class UserController extends Controller
     {
         $token_info = $this->tokenInfoByToken($token);
         $token_info['info'] = json_decode($token_info->info, true);
-        Log::info(print_r($token_info, true));
+//        Log::info(print_r($token_info, true));
         if(!isset($token_info->id))
             return array('error' => 'Un authenticated!');
 
@@ -788,12 +788,15 @@ class UserController extends Controller
             $invoice = new Invoice();
             $invoice->where('id', $order_id)->where('status','<>', '1')->update(array('response' => json_encode($r), 'status' => '1'));
 
-            $v_info = $invoice->where('id', $order_id)->where('status', '1')->get()->first();
+            $invoice_info = $invoice->where('id', $order_id)->where('status', '1')->get()->first();
             if(isset($v_info['invoice_element']['verify_account'])){
                 //account verify
             }else{
-                $output = file_get_contents(env('VIDEO_EDITOR_URL', '').'/php/export_externally.php?project_id=43&invoice_id=1199&user_id=kushan');
-                Log::info('mash process output:'. $output);
+                $user = new User();
+                $user = $user->where('id', $invoice_info['user_id'])->get()->first();
+                $v_process_url = env('VIDEO_EDITOR_URL', '').'/php/export_externally.php?project_id='.$invoice_info['project_id'].'&invoice_id='.$order_id.'&user_id='.$user['display_name'];
+                $output = file_get_contents($v_process_url);
+                Log::info('mash process output:'. $output. $v_process_url);
                 //video process
             }
         }
