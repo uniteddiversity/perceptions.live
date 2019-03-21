@@ -794,7 +794,7 @@ class UserController extends Controller
             }else{
                 $user = new User();
                 $user = $user->where('id', $invoice_info['user_id'])->get()->first();
-                $v_process_url = env('VIDEO_EDITOR_URL', '').'/php/export_externally.php?project_id='.$invoice_info['project_id'].'&invoice_id='.$order_id.'&user_id='.$user['display_name'];
+                $v_process_url = env('VIDEO_EDITOR_URL', '').'php/export_externally.php?project_id='.$invoice_info['project_id'].'&invoice_id='.$order_id.'&user_id='.$user['display_name'];
                 $output = file_get_contents($v_process_url);
                 Log::info('mash process output:'. $output. $v_process_url);
                 //video process
