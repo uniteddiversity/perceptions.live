@@ -16,7 +16,6 @@ class AlterInvoice3 extends Migration
         Schema::table('invoices', function (Blueprint $table) {
             $table->engine = 'InnoDB';
             $table->json('project_id')->nullable(true);
-            $table->timestamps();
         });
     }
 
