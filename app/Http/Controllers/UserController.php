@@ -690,7 +690,7 @@ class UserController extends Controller
     public function generateInvoice($token, Request $request)
     {
         $token_info = $this->tokenInfoByToken($token);
-        $token_info->info = json_decode($token_info->info);
+        $token_info['info'] = json_decode($token_info->info, true);
         Log::info(print_r($token_info, true));
         if(!isset($token_info->id))
             return array('error' => 'Un authenticated!');
