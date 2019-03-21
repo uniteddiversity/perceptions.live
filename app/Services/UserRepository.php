@@ -909,7 +909,7 @@ class UserRepository
         return $cost_bk;
     }
 
-    public function generateInvoice($user_id, $options)
+    public function generateInvoice($user_id, $options, $token_info = array())
     {
         $invoice_total = 0;
         foreach($options as $key => $option){
@@ -920,7 +920,7 @@ class UserRepository
 
         $invoice = new Invoice();
         $invoice_type = 'mm-video-edit';
-        $invoice_id = $invoice->create(array('user_id' => $user_id, 'plan_id' => $user_id, 'invoice_type' => $invoice_type, 'invoice_element' => json_encode($options), 'status' => 0, 'amount' => $invoice_total, 'discount' => '0'));
+        $invoice_id = $invoice->create(array('user_id' => $user_id, 'plan_id' => $user_id, 'invoice_type' => $invoice_type, 'invoice_element' => json_encode($options), 'status' => 0, 'amount' => $invoice_total, 'discount' => '0', 'project_id'=>$token_info['id']));
 
         return array('invoice_number' => $invoice_id->id,
             'status' => $invoice_id->status,
