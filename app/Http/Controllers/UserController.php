@@ -691,7 +691,7 @@ class UserController extends Controller
     {
         $token_info = $this->tokenInfoByToken($token);
         $token_info['info'] = json_decode($token_info['info']);
-
+        Log::info(print_r($token_info, true));
         if(!isset($token_info->id))
             return array('error' => 'Un authenticated!');
 
