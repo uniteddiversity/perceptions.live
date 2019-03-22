@@ -936,23 +936,38 @@ class UserRepository
         $elements = ['part_1', 'part_2', 'part_3', 'music_and_misc'];
 
         $mediaProject = new MediaProject();
-        $projects = $mediaProject->where('user_id', $user_id)->where('status', '1')->orderBy('id', 'DESC')->take(1)->get()->toArray();
+        $project = $mediaProject->where('user_id', $user_id)->where('status', '1')->orderBy('id', 'DESC')->first()->toArray();
 
         $return = []; $i = 0;
-        foreach($projects as $project){
-            if(!empty($project['output'])){
-                $info = json_decode($project['output'], true);
-                $return[$i] = $project;
-                $return[$i]['output'] = [];//clearing the output key
+//dd($project);
+        if(!empty($project['title'])){
+            $info = json_decode($project['output'], true);
+            $return[$i] = $project;
+            $return[$i]['output'] = [];//clearing the output key
+
+            if(is_array($info)){
                 foreach($info as $key => $r){
                     if(in_array($key, $elements) && !isset($r['error'])){
                         $return[$i]['output'][$key] = $r;
                     }
                 }
-
-                $i++;
             }
         }
+
+//        foreach($projects as $project){
+//            if(!empty($project['output'])){
+//                $info = json_decode($project['output'], true);
+//                $return[$i] = $project;
+//                $return[$i]['output'] = [];//clearing the output key
+//                foreach($info as $key => $r){
+//                    if(in_array($key, $elements) && !isset($r['error'])){
+//                        $return[$i]['output'][$key] = $r;
+//                    }
+//                }
+//
+//                $i++;
+//            }
+//        }
 
         return $return;
     }
