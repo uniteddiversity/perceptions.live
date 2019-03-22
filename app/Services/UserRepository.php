@@ -936,7 +936,7 @@ class UserRepository
         $elements = ['part_1', 'part_2', 'part_3', 'music_and_misc'];
 
         $mediaProject = new MediaProject();
-        $projects = $mediaProject->where('user_id', $user_id)->where('status', '1')->orderBy('id', 'DESC')->limit(1)->get()->toArray();
+        $projects = $mediaProject->where('user_id', $user_id)->where('status', '1')->orderBy('id', 'DESC')->take(1)->get()->toArray();
 
         $return = []; $i = 0;
         foreach($projects as $project){
