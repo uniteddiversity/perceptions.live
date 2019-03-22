@@ -638,12 +638,22 @@ class UserController extends Controller
 
         $token_key = $this->generateToken($user_id);
         $userEditVideos = new UserEditVideo();
-        $userEditVideos->where('user_id', $user_id)->update( array('is_deleted' => '1') );
+
+//        $userEditVideos->where('user_id', $user_id)->update( array('is_deleted' => '1') );
         //delete other tokens of that user
-        $temp_data = $userEditVideos->create(array('user_id' => $user_id, 'token' => $token_key,
-            'info' => json_encode(array('more_info' => $extra_data)), 'is_deleted' => '0'));
+        $existing_tokens = $userEditVideos->where('user_id', $user_id)->where('is_deleted' , '0')->get()->first();
+
+        $token = '';
+        if(isset($existing_tokens->token)){
+            $token = $existing_tokens->token;
+        }else{
+            $temp_data = $userEditVideos->create(array('user_id' => $user_id, 'token' => $token_key,
+                'info' => json_encode(array('more_info' => $extra_data)), 'is_deleted' => '0'));
+            $token = $temp_data->token;
+        }
+
         ob_clean();
-        echo '<script>window.location.href="'.$video_editor_url.'?key='.$temp_data->token.'"</script>';
+        echo '<script>window.location.href="'.$video_editor_url.'?key='.$token.'"</script>';
         die();
     }
 
