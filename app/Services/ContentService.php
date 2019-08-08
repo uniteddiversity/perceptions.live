@@ -2,6 +2,7 @@
 
 namespace Content\Services;
 
+use App\Attachment;
 use App\Content;
 use App\MetaData;
 use App\ShearedContent;
@@ -37,14 +38,20 @@ class ContentService
      * @var ShearedContentAssociation
      */
     private $shearedContentAssociation;
+    /**
+     * @var Attachment
+     */
+    private $attachment;
 
-    public function __construct(MetaData $metaData, Content $content, User $user, ShearedContent $shearedContent, ShearedContentAssociation $shearedContentAssociation)
+    public function __construct(MetaData $metaData, Content $content, User $user, ShearedContent $shearedContent,
+                                ShearedContentAssociation $shearedContentAssociation, Attachment $attachment)
     {
         $this->metaData = $metaData;
         $this->content = $content;
         $this->user = $user;
         $this->shearedContent = $shearedContent;
         $this->shearedContentAssociation = $shearedContentAssociation;
+        $this->attachment = $attachment;
     }
 
     public function getMetaListByKey($key = '')
@@ -398,5 +405,12 @@ class ContentService
         $subject_tags = $subject_tags->select('primary_subject_tag as tag')->groupBy('primary_subject_tag')->limit(10)->get();
 
         return $subject_tags;
+    }
+
+    public function getUploadedContent($id)
+    {
+        $uploaded_files = $this->attachment->whereIn('submission_type',array('video-s-1','video-s-2','video-s-3'))
+            ->where('table','contents')->where('fk_id', $id)->get();
+        return $uploaded_files;
     }
 }

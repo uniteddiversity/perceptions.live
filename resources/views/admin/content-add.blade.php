@@ -301,8 +301,43 @@
                             <div class="form-group">
                                 <label for="accept_tos">Video Content</label>
                                 <input class="form-control" type="file" name="content_set1[]" /> Content Set 1
+
+                                <?php
+                                if(isset($uploaded_files)){
+                                    echo '<span class="downlod-content-files">';
+                                    foreach($uploaded_files as $file){
+                                        if($file['submission_type'] == 'video-s-1')
+                                            echo '<br/><a href="/storage/'.$file['url'].'" target="_blank" />'.$file['url'].'</a>';
+                                    }
+                                    echo '</span>';
+                                }
+                                ?>
+
                                 <input class="form-control" type="file" name="content_set2[]" /> Content Set 2
+                                <?php
+                                if(isset($uploaded_files)){
+                                    echo '<span class="downlod-content-files">';
+                                    foreach($uploaded_files as $file){
+                                        if($file['submission_type'] == 'video-s-2')
+                                            echo '<br/><a href="/storage/'.$file['url'].'" target="_blank" />'.$file['url'].'</a>';
+                                    }
+                                    echo '</span>';
+                                }
+                                ?>
+
                                 <input class="form-control" type="file" name="content_set3[]" /> Content Set 3
+
+                                <?php
+                                if(isset($uploaded_files)){
+                                    echo '<span class="downlod-content-files">';
+                                    foreach($uploaded_files as $file){
+                                        if($file['submission_type'] == 'video-s-3')
+                                            echo '<br/><a href="/storage/'.$file['url'].'" target="_blank" />'.$file['url'].'</a>';
+                                    }
+                                    echo '</span>';
+                                }
+
+                                ?>
                             </div>
 
                             <div class="form-group">

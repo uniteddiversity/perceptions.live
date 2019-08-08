@@ -337,6 +337,7 @@ class AdminController extends Controller
     public function contentEdit($id)
     {
         $id = UID::translator($id);
+        $uploaded_files = $this->contentService->getUploadedContent($id);
         $video_data = $this->contentService->getContentData($id);
         $user_id = (!isset(Auth::user()->id))? 0 : Auth::user()->id;
         $categories = $this->category->get();
@@ -348,7 +349,7 @@ class AdminController extends Controller
         $access_levels = $this->userRepository->getAccessLevels();
         $status = $this->userRepository->getStatus();
         return view('admin.content-add')
-            ->with(compact('categories','meta_array','user_list','sorting_tags','groups','access_levels','video_data','status', 'gci_tags'));
+            ->with(compact('categories','meta_array','user_list','sorting_tags','groups','access_levels','video_data','status', 'gci_tags', 'uploaded_files'));
     }
 
     public function adminUserAdd(Request $request)
