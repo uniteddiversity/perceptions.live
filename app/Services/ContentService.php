@@ -3,10 +3,14 @@
 namespace Content\Services;
 
 use App\Attachment;
+use App\Category;
 use App\Content;
+use App\Group;
+use App\HomeSliderFeed;
 use App\MetaData;
 use App\ShearedContent;
 use App\ShearedContentAssociation;
+use App\SortingTag;
 use App\User;
 use Illuminate\Support\Facades\DB;
 
@@ -42,9 +46,25 @@ class ContentService
      * @var Attachment
      */
     private $attachment;
+    /**
+     * @var Category
+     */
+    private $category;
+    /**
+     * @var Group
+     */
+    private $group;
+    /**
+     * @var SortingTag
+     */
+    private $sortingTag;
+    /**
+     * @var HomeSliderFeed
+     */
+    private $homeSliderFeed;
 
     public function __construct(MetaData $metaData, Content $content, User $user, ShearedContent $shearedContent,
-                                ShearedContentAssociation $shearedContentAssociation, Attachment $attachment)
+                                ShearedContentAssociation $shearedContentAssociation, Attachment $attachment, Category $category, Group $group, SortingTag $sortingTag, HomeSliderFeed $homeSliderFeed)
     {
         $this->metaData = $metaData;
         $this->content = $content;
@@ -52,6 +72,10 @@ class ContentService
         $this->shearedContent = $shearedContent;
         $this->shearedContentAssociation = $shearedContentAssociation;
         $this->attachment = $attachment;
+        $this->category = $category;
+        $this->group = $group;
+        $this->sortingTag = $sortingTag;
+        $this->homeSliderFeed = $homeSliderFeed;
     }
 
     public function getMetaListByKey($key = '')
@@ -412,5 +436,63 @@ class ContentService
         $uploaded_files = $this->attachment->whereIn('submission_type',array('video-s-1','video-s-2','video-s-3'))
             ->where('table','contents')->where('fk_id', $id)->get();
         return $uploaded_files;
+    }
+
+    public function ajaxSearchContentGroup($text, $type = '')
+    {
+        $content = [];
+        $r = [];
+        if($type == ''){
+            $content['category'] = $this->category->where('name', 'like', '%'.$text.'%')->limit(10)->get()->toArray();
+            $content['group'] = $this->group->where('name', 'like', '%'.$text.'%')->limit(10)->get()->toArray();
+            $content['gci'] = $this->sortingTag->where('tag', 'like', '%'.$text.'%')->where('tag_for','gci')->limit(10)->get()->toArray();
+        }
+
+        foreach($content as $type => $arrays){
+            foreach($arrays as $value){
+                $r[] = array(
+                    'id' => $value['id'],
+                    'text' => empty($value['tag'])?$value['name']:$value['tag'],
+                    'type' => $type,
+                );
+            }
+        }
+
+        return $r;
+    }
+
+    public function listHomeSlider()
+    {
+        $slider = $this->homeSliderFeed->with('image')
+            ->leftJoin('groups','groups.id', 'home_slider_feeds.fk_id', function($q){
+                $q->where('home_slider_feeds.type', 'group');
+            })
+            ->leftJoin('categories','categories.id', 'home_slider_feeds.fk_id', function($q){
+                $q->where('home_slider_feeds.type', 'category');
+            })->leftJoin('sorting_tags','sorting_tags.id', 'home_slider_feeds.fk_id', function($q){
+                $q->where('home_slider_feeds.type', 'gci');
+            })
+            ->select('home_slider_feeds.*', 'groups.name', 'categories.name', 'categories.name', 'sorting_tags.tag')
+            ->get()->toArray();
+
+        $r = array();
+        $i = 0;
+        foreach($slider as $val){
+            $r[$i]['id'] = $val['id'];
+            $r[$i]['side'] = $val['side'];
+            $r[$i]['title'] = $val['title'];
+            $r[$i]['fk_title'] = isset($val['name'])?$val['name'] : $val['tag'];
+            $r[$i]['fk_id'] = $val['fk_id'];
+            $r[$i]['type'] = $val['type'];
+            $r[$i]['icon'] = isset($val['image'][0]) && !empty($val['image'][0])? $val['image'][0]['url'] : 'default_icon.jpg';
+            $i++;
+        }
+
+        return $r;
+    }
+
+    public function deleteHomeSlider($id)
+    {
+        return $this->homeSliderFeed->where('id', $id)->delete();
     }
 }

@@ -4496,3 +4496,40 @@ body[themebg-pattern="pattern2"] {
         padding-top: 40px !Important;
     }
 }
+
+
+.topsearch .left_feed{
+    float: left;
+    width: 140px;
+    overflow: hidden;
+}
+
+.topsearch .right_feed{
+    float: right;
+    width: 140px;
+    overflow: hidden;
+}
+
+.topsearch .feed_icon{
+    float: left;
+    margin-left: 5px;
+}
+
+.topsearch .feed_text{
+    display: none;
+}
+
+.disable_loading{
+    background: url("/assets/findgo/images/button_loading.svg") no-repeat;
+    float: left;
+    width: 30px;
+    height: 25px;
+    position:absolute;
+    left: 105px;
+    bottom: 13px;
+    display: none;
+}
+
+.register_button{
+    position: relative;
+}

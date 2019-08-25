@@ -348,11 +348,15 @@ function userLogin(){
 }
 
 function userRegister(){
+    $('.disable_loading').css('display', 'block');
+    $('.register_button').attr("disabled",true);
     jQuery.ajax({
         url: '/user/register',
         method: 'POST',
         data: $('#register-form').serialize()
     }).done(function (response) {
+        $('.disable_loading').css('display', 'none');
+        $('.register_button').attr("disabled",false);
         $.each(response, function(key, val){
             if(key == 'error'){
                 $.each(val, function(key2, val2){
@@ -372,7 +376,7 @@ function userRegister(){
         // Whoops; show an error.
     });
 }
-console.log('w');
+
 function openVideoOnly(){
     var video_id = $('.watchvideo').data("videolink");
     console.log('working:'+video_id);
@@ -507,3 +511,62 @@ function displayVideoContentUpload(){
         $('#submit_footage_form').hide();
     }
 }
+
+$('.content-type-select-ajax').select2({
+    ajax: {
+        url: '/user/admin/search-content-type/ajax',
+        dataType: 'json',
+
+        // data: function() {
+        //     var myValue = $(this).val();
+        //     return JSON.stringify({variable: myValue})
+        // },
+        data: function (term, page) {
+            // page is the one-based page number tracked by Select2
+            return {
+                //search term
+                "q": term,
+                // page size
+                "_per_page": 30,
+                // page number
+                "_page": page,
+            };
+        },
+        initSelection: function (data) {
+            console.log('selected option ', data);
+        },
+        templateResult: function (data) {
+            // console.log('selected option ', data);
+            //     var $result = $("<span></span>");
+            //     $result.text(data.text);
+            //     if (data.newOption) {
+            //         $result.append(" <em>(new)</em>");
+            //     }
+            //     return $result;
+        },
+        processResults: function (response) {
+            // return {
+            //     results: response
+            // };
+
+            let results = [];
+            $.each(response, function (index, data) {
+                results.push({
+                    id: data.id,
+                    text: data.text + ' ('+data.type+')',
+                    type: data.type
+                });
+            });
+
+            return {
+                results: results
+            };
+        },
+    }
+});
+
+$('.content-type-select-ajax').on('select2:select', function (e) {
+    let data = e.params.data;
+    $('#fk_id').val(data.id);
+    $('#type').val(data.type);
+});

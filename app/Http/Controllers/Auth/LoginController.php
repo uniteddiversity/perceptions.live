@@ -54,6 +54,10 @@ class LoginController extends Controller
         }
 
         if ($success) {
+            if(Auth::user()->status_id != '1'){
+                Auth::logout();
+                return response()->json(array('error' => array('user' => 'Inactive Login!')), 200);
+            }
             return response()->json(array('success' => 'Logged in!'), 200);
         } else {
             return response()->json(array('error' => array('user' => 'Invalid login!')), 200);

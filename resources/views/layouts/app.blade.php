@@ -138,7 +138,7 @@
                                     <input name="accept_tos" value="1" id="cb6" type="checkbox"><label for="cb6" style="color:black;">I’ve read and accept the terms &amp; conditions *</label>
                                 </p>
                                 <div class="btn_outer">
-                                    <button type="button" onclick="userRegister()">Sign Up</button>
+                                    <button type="button" class="register_button" onclick="userRegister()"><i class="disable_loading"></i>Sign Up</button>
                                 </div>
 
                             </form>

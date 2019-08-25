@@ -150,6 +150,15 @@ Route::group(['prefix' => 'user', 'middleware' => ['auth', 'web', 'admin']], fun
     Route::get('/admin/package-manager/', '\App\Controllers\User\AdminController@packageManager');
     Route::get('/admin/package-manager/{_id}', '\App\Controllers\User\AdminController@packageManager');
     Route::post('/admin/update-package-manager', '\App\Controllers\User\AdminController@updatePackageManager');
+
+    ////////////new development/////////
+    Route::get('/admin/site-settings', '\App\Controllers\User\AdminController@siteSettings');
+    Route::post('/admin/post-site-settings', '\App\Controllers\User\AdminController@postSiteSettings');
+    Route::get('/admin/home-slider-feed', '\App\Controllers\User\AdminController@homeSliderFeed');
+    Route::post('/admin/post-home-slider-feed', '\App\Controllers\User\AdminController@postHomeSliderFeed');
+    Route::get('/admin/list-slider-feed', '\App\Controllers\User\AdminController@listHomeSliderFeed');
+    Route::get('/admin/delete-slider-feed/{_id}', '\App\Controllers\User\AdminController@deleteHomeSliderFeed');
+    Route::get('/admin/search-content-type/ajax', '\App\Controllers\User\AdminController@searchContentTypes');
 });
 
 Route::group(['prefix' => 'user', 'middleware' => ['auth', 'web', 'groupadmin']], function () {

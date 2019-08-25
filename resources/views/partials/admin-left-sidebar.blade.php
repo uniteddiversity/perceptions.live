@@ -6,7 +6,7 @@
 
 
         <ul class="pcoded-item pcoded-left-item">
-            <li class="pcoded-hasmenu <?php if(in_array(Request::segment(3), array('content-add','content-list-open','content-list','location-list','sorting-tag-add'))){ echo 'active pcoded-trigger'; } ?> pcoded-trigger">
+            <li class="pcoded-hasmenu <?php if(in_array(Request::segment(3), array('content-add','content-list-open','content-list','location-list','sorting-tag-add'))){ echo 'active pcoded-trigger'; } ?> ">
                 <a href="javascript:void(0)">
                     <span class="pcoded-micon"><i class="ti-video-camera"></i></span>
                     <span class="pcoded-mtext" data-i18n="nav.dash.main">Video</span>
@@ -51,7 +51,7 @@
                 </ul>
             </li>
 
-            <li class="pcoded-hasmenu <?php if(in_array(Request::segment(3), array('user-list','user-add'))){ echo 'active pcoded-trigger'; } ?> pcoded-trigger">
+            <li class="pcoded-hasmenu <?php if(in_array(Request::segment(3), array('user-list','user-add'))){ echo 'active pcoded-trigger'; } ?>">
                 <a href="javascript:void(0)">
                     <span class="pcoded-micon"><i class="ti-user"></i></span>
                     <span class="pcoded-mtext" data-i18n="nav.page_layout.main">User Manage</span>
@@ -125,6 +125,32 @@
                     </li>
                 </ul>
             </li>
+
+            <li class="pcoded-hasmenu <?php if(in_array(Request::segment(3), array('site-settings','list-slider-feed','home-slider-feed'))){ echo 'active pcoded-trigger'; } ?>">
+                <a href="javascript:void(0)">
+                    <span class="pcoded-micon"><i class="ti-share"></i></span>
+                    <span class="pcoded-mtext" data-i18n="nav.page_layout.main">Page Settings</span>
+                    <span class="pcoded-mcaret"></span>
+                </a>
+                <ul class="pcoded-submenu">
+                    <li class="nav-item <?php if(in_array(Request::segment(3), array('site-settings'))){ echo 'active'; } ?>">
+                        <a class="nav-link" href="/user/admin/site-settings">
+                            Site Settings
+                        </a>
+                    </li>
+                    <li class="nav-item <?php if(in_array(Request::segment(3), array('list-slider-feed'))){ echo 'active'; } ?>">
+                        <a class="nav-link" href="/user/admin/list-slider-feed">
+                            List Home Slider
+                        </a>
+                    </li>
+                    <li class="nav-item <?php if(in_array(Request::segment(3), array('home-slider-feed'))){ echo 'active'; } ?>">
+                        <a class="nav-link" href="/user/admin/home-slider-feed">
+                            Add Home Slider
+                        </a>
+                    </li>
+                </ul>
+            </li>
+
         </ul>
 
         <ul class="pcoded-item pcoded-left-item">
@@ -137,7 +163,7 @@
             </li>
         </ul>
 
-        <ul class="pcoded-item pcoded-left-item">
+        <ul class="pcoded-item pcoded-left-item <?php if(in_array(Request::segment(3), array('package-manager'))){ echo 'active'; } ?>">
             <li class="pcoded-hasmenu">
                 <a href="/user/admin/package-manager/">
                     <span class="pcoded-micon"><i class="ti-layout-sidebar-left"></i></span>

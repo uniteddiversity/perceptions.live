@@ -5,9 +5,11 @@ namespace App\Controllers\User;
 use App\Category;
 use App\Content;
 use App\Group;
+use App\HomeSliderFeed;
 use App\Http\Controllers\Controller;
 use App\MediaPackage;
 use App\MetaData;
+use App\SiteSetting;
 use App\User;
 use Content\Services\ContentService;
 use Illuminate\Http\Request;
@@ -50,9 +52,18 @@ class AdminController extends Controller
      * @var Group
      */
     private $group;
+    /**
+     * @var SiteSetting
+     */
+    private $siteSetting;
+    /**
+     * @var HomeSliderFeed
+     */
+    private $homeSliderFeed;
 
     public function __construct(Content $content, User $user, UserRepository $userRepository,
-                                Category $category, MetaData $metaData, ContentService $contentService, Group $group)
+                                Category $category, MetaData $metaData, ContentService $contentService, Group $group,
+                                SiteSetting $siteSetting, HomeSliderFeed $homeSliderFeed)
     {
         $this->content = $content;
         $this->user = $user;
@@ -61,6 +72,8 @@ class AdminController extends Controller
         $this->metaData = $metaData;
         $this->contentService = $contentService;
         $this->group = $group;
+        $this->siteSetting = $siteSetting;
+        $this->homeSliderFeed = $homeSliderFeed;
     }
 
     public function profile()
@@ -889,5 +902,101 @@ class AdminController extends Controller
         }
 
         return Redirect::back()->withErrors('Wrong Package ID')->withInput();
+    }
+
+    public function siteSettings()
+    {
+        $data = $this->siteSetting->getAll()->toArray();
+        $settings = [];
+        foreach($data as $d){
+            $settings[$d['key']] = $d['value'];
+        }
+        return view('admin.site-settings-add')
+            ->with(compact('settings'));
+    }
+
+    public function postSiteSettings(Request $data)
+    {
+        $user_id = (!isset(Auth::user()->id))? 0 : Auth::user()->id;
+        $post_data = $data->all();
+        if(isset($post_data['settings'])){
+            $data_array = [];
+            $this->siteSetting->deleteAll();
+            $i = 0;
+            foreach($post_data['settings'] as $key => $d){
+                $data_array[$i]['key'] = $key;
+                $data_array[$i]['value'] = $d;
+                $data_array[$i]['other'] = '';
+                $data_array[$i]['user_id'] = $user_id;
+                $i++;
+            }
+
+            $this->siteSetting->insert($data_array);
+        }
+
+        return redirect()->back()->with('message', 'Successfully Updated!');
+    }
+
+    public function deleteHomeSliderFeed($id)
+    {
+//        $user_id = (!isset(Auth::user()->id))? 0 : Auth::user()->id;
+        $id = UID::translator($id);
+
+        $this->contentService->deleteHomeSlider($id);
+        return Redirect::back()->with('message', "Successfully Deleted!");
+    }
+
+    public function listHomeSliderFeed()
+    {
+        $data = $this->contentService->listHomeSlider();
+        return view('admin.home-slider-feed-list')
+            ->with(compact('data'));
+    }
+
+    public function homeSliderFeed()
+    {
+        return view('admin.home-slider-feed-add')->with(compact('data'));
+    }
+
+    public function postHomeSliderFeed(Request $request)
+    {
+        $messages = [
+            'fk_id.required' => 'Please search and select the Category/GCI/Group!',
+        ];
+
+        $validator = Validator::make($request->all(), [
+            'side' => 'required',
+            'title' => 'required',
+            'type' => 'required',
+            'fk_id' => 'required'
+        ], $messages);
+
+        if ($validator->fails()) {
+            return Redirect::back()->withErrors($validator->messages())->withInput();
+        }
+
+        $r = $request->toArray();
+        $new = $this->homeSliderFeed->create(
+            array(
+                'side' => $r['side'],
+                'title' => $r['title'],
+                'type' => $r['type'],
+                'fk_id' => $r['fk_id'],
+            )
+        );
+
+        if(isset($new['id']) && isset($r['icon'])){
+            $this->userRepository->uploadAttachment($r['icon'],Auth::user()->id, $new['id'],
+                'home_slider_feeds ', 'home_slider_feeds',1);
+        }
+
+        return Redirect::back()->with('message', "Successfully Added!");
+    }
+
+    public function searchContentTypes(Request $request)
+    {
+        $r = $request->all();
+        $data = $this->contentService->ajaxSearchContentGroup($r['q']['term']);
+        echo json_encode($data);
     }
 }

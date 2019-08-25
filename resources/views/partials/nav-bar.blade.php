@@ -90,6 +90,36 @@
         </div>
 
 
+        <div class="topsearch">
+            <div class="site_mid_title"><h5>{{$settings['home_centered_title'] or ""}}</h5></div>
+            <div class="site_slider_feed">
+                @if(isset($top_slider_feed))
+                <div class="left_feed">
+                    @foreach($top_slider_feed as $feed)
+                        @if($feed['side'] == 'left')
+                        <div class="feed_icon">
+                            <img width="25px" src="/storage/{{$feed['icon']}}">
+                            <span class="feed_text">{{$feed['title']}}</span>
+                        </div>
+                        @endif
+                    @endforeach
+                </div>
+
+                <div class="right_feed">
+                    @foreach($top_slider_feed as $feed)
+                        @if($feed['side'] == 'right')
+                        <div class="feed_icon">
+                            <img width="25px" src="/storage/{{$feed['icon']}}">
+                            <span class="feed_text">{{$feed['title']}}</span>
+                        </div>
+                        @endif
+                    @endforeach
+                </div>
+
+
+                @endif
+            </div>
+        </div>
 
         @if (Route::has('login'))
 

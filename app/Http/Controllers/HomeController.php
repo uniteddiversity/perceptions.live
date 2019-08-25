@@ -5,6 +5,7 @@ namespace App\Controllers;
 use App\Category;
 use App\Content;
 use App\Http\Controllers\Controller;
+use App\SiteSetting;
 use App\User;
 use Content\Services\ContentService;
 use Illuminate\Http\Request;
@@ -35,28 +36,41 @@ class HomeController extends Controller
      * @var Category
      */
     private $category;
+    /**
+     * @var SiteSetting
+     */
+    private $siteSetting;
 
     public function __construct(Content $content, User $user, UserRepository $userRepository, ContentService $contentService,
-                                Category $category)
+                                Category $category, SiteSetting $siteSetting)
     {
         $this->content = $content;
         $this->user = $user;
         $this->userRepository = $userRepository;
         $this->contentService = $contentService;
         $this->category = $category;
+        $this->siteSetting = $siteSetting;
     }
 
     public function home()
     {
         $user_id = (!isset(Auth::user()->id))? 0 : Auth::user()->id;
         $filter = array();
+        $data = $this->siteSetting->getAll()->toArray();
+        $settings = [];
+        foreach($data as $d){
+            $settings[$d['key']] = $d['value'];
+        }
+        $top_slider_feed = $this->contentService->listHomeSlider();
+
+
         $uploaded_list = $this->userRepository->getPublicContents($user_id, $filter);
         $user_acting_role = $this->userRepository->getUserActingRoles();
         $gci_tags = $this->userRepository->getGreaterCommunityIntentionTag();
         $sorting_tags = $this->userRepository->getSortingTags($user_id, true);
         $categories = $this->category->get();
         return view('user.home')
-            ->with(compact('uploaded_list','user_acting_role','categories','gci_tags','sorting_tags'));
+            ->with(compact('uploaded_list','user_acting_role','categories','gci_tags','sorting_tags', 'top_slider_feed','settings'));
     }
 
     public function ajaxVideos($id = 0)

@@ -12,6 +12,7 @@ use App\Invoice;
 use App\MediaPackage;
 use App\MediaProject;
 use App\MetaData;
+use App\SiteSetting;
 use App\User;
 use App\UserEditVideo;
 use Content\Services\ContentService;
@@ -68,10 +69,14 @@ class UserController extends Controller
      * @var ClaimAssociatedContents
      */
     private $claimAssociatedContents;
+    /**
+     * @var SiteSetting
+     */
+    private $siteSetting;
 
     public function __construct(Content $content, User $user, UserRepository $userRepository,
                                 Category $category, MetaData $metaData, ContentService $contentService, Group $group,
-                                ClaimProfileRequests $claimProfileRequests, ClaimAssociatedContents $claimAssociatedContents)
+                                ClaimProfileRequests $claimProfileRequests, ClaimAssociatedContents $claimAssociatedContents, SiteSetting $siteSetting)
     {
         $this->content = $content;
         $this->user = $user;
@@ -82,6 +87,7 @@ class UserController extends Controller
         $this->group = $group;
         $this->claimProfileRequests = $claimProfileRequests;
         $this->claimAssociatedContents = $claimAssociatedContents;
+        $this->siteSetting = $siteSetting;
     }
 
     public function profile()
@@ -89,13 +95,21 @@ class UserController extends Controller
         $user_id = (!isset(Auth::user()->id))? 0 : Auth::user()->id;
 //        $user_acting_role = $this->userRepository->getUserActingRoles();
 //        $gci_tags = $this->userRepository->getGreaterCommunityIntentionTag();
+
+        $data = $this->siteSetting->getAll()->toArray();
+        $settings = [];
+        foreach($data as $d){
+            $settings[$d['key']] = $d['value'];
+        }
+        $top_slider_feed = $this->contentService->listHomeSlider();
+
         $categories = $this->category->get();
         $user_acting_role = $this->userRepository->getUserActingRoles();
         $gci_tags = $this->userRepository->getGreaterCommunityIntentionTag();
         $sorting_tags = $this->userRepository->getSortingTags($user_id, true);
 
         return view('user.home')
-            ->with(compact('users_data','user_acting_role','categories','gci_tags','sorting_tags'));
+            ->with(compact('users_data','user_acting_role','categories','gci_tags','sorting_tags','top_slider_feed','settings'));
     }
 
     public function startProject()
