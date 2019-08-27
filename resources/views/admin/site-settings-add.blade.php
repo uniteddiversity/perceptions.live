@@ -3,6 +3,8 @@
 @section('content')
 <?php
 $data['home_centered_title'] = isset($settings['home_centered_title'])?$settings['home_centered_title']:'';
+$data['left_feed_name'] = isset($settings['left_feed_name'])?$settings['left_feed_name']:'';
+$data['right_feed_name'] = isset($settings['right_feed_name'])?$settings['right_feed_name']:'';
 ?>
 <div class="col-lg-12 grid-margin stretch-card">
     <div class="card">
@@ -32,6 +34,15 @@ $data['home_centered_title'] = isset($settings['home_centered_title'])?$settings
                         <input type="text" class="form-control" aria-describedby="nameHelp" name="settings[home_centered_title]" placeholder="Home Centered Title" value="{{ old('home_centered_title',$data['home_centered_title']) }}">
                     </div>
 
+                    <div class="form-group">
+                        <label for="exampleInputEmail1">Left Feed Name</label>
+                        <input type="text" class="form-control" aria-describedby="nameHelp" name="settings[left_feed_name]" placeholder="Left Feed Title" value="{{ old('left_feed_name',$data['left_feed_name']) }}">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="exampleInputEmail1">Right Feed Name</label>
+                        <input type="text" class="form-control" aria-describedby="nameHelp" name="settings[right_feed_name]" placeholder="Right Feed Title" value="{{ old('right_feed_name',$data['right_feed_name']) }}">
+                    </div>
 
                     <button type="submit" class="btn btn-primary">Submit</button>
                 </form>

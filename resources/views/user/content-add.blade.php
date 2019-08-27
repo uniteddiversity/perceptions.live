@@ -579,7 +579,7 @@
 <script>
     $(document).ready(function() {
         $('.drag input').change(function() {
-            $('.drag p').text(this.files.length + " file(s) selected");
+            $(this).parent().find('p').text(this.files.length + " file(s) selected");
         });
     });
 

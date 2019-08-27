@@ -90,30 +90,66 @@
         </div>
 
 
-        <div class="topsearch">
+        <div class="topsearch" id="slider_feed">
             <div class="site_mid_title"><h5>{{$settings['home_centered_title'] or ""}}</h5></div>
-            <div class="site_slider_feed">
+
+
+            <div class="site_slider_feed" >
                 @if(isset($top_slider_feed))
-                <div class="left_feed">
-                    @foreach($top_slider_feed as $feed)
-                        @if($feed['side'] == 'left')
-                        <div class="feed_icon">
-                            <img width="25px" src="/storage/{{$feed['icon']}}">
-                            <span class="feed_text">{{$feed['title']}}</span>
+                <div class="left_feed slideshow">
+                    <span>{{$settings['left_feed_name'] or ""}}</span>
+                    <div class="thumbs-container bottom">
+                        <div id="prev-btn" class="prev">
+                            <i class="fa fa-chevron-left fa-1x"></i>
                         </div>
-                        @endif
-                    @endforeach
+
+                        <ul class="thumbs">
+
+                            <?php $i = 0; ?>
+                            @foreach($top_slider_feed as $feed)
+                                <?php $i++; ?>
+                                @if($feed['side'] == 'left')
+                                    <li data-thumb-id="<?php echo $i ?>" class="thumb active" style="background-image: url('/storage/{{$feed['icon']}}')">
+                                        <span>{{$feed['title']}}</span>
+
+                                    </li>
+
+                                @endif
+                            @endforeach
+                        </ul>
+
+                        <div id="next-btn" class="next">
+                            <i class="fa fa-chevron-right fa-1x"></i>
+                        </div>
+                    </div>
                 </div>
 
-                <div class="right_feed">
-                    @foreach($top_slider_feed as $feed)
-                        @if($feed['side'] == 'right')
-                        <div class="feed_icon">
-                            <img width="25px" src="/storage/{{$feed['icon']}}">
-                            <span class="feed_text">{{$feed['title']}}</span>
+                <div class="near_me_icon">
+                    <i class="map_center_icon" ></i>
+                </div>
+
+                <div class="right_feed slideshow">
+                    <span>{{$settings['right_feed_name'] or ""}}</span>
+                    <div class="thumbs-container bottom">
+                        <div id="prev-btn" class="prev">
+                            <i class="fa fa-chevron-left fa-1x"></i>
                         </div>
-                        @endif
-                    @endforeach
+
+                        <ul class="thumbs">
+
+                            <?php $i = 0; ?>
+                            @foreach($top_slider_feed as $feed)
+                                <?php $i++; ?>
+                                @if($feed['side'] == 'right')
+                                    <li data-thumb-id="<?php echo $i ?>" class="thumb active" style="background-image: url('/storage/{{$feed['icon']}}')"></li>
+                                @endif
+                            @endforeach
+                        </ul>
+
+                        <div id="next-btn" class="next">
+                            <i class="fa fa-chevron-right fa-1x"></i>
+                        </div>
+                    </div>
                 </div>
 
 
@@ -124,29 +160,82 @@
         @if (Route::has('login'))
 
         @auth
+
+
+        <nav class="two">
+            <ul>
+                <li class="user-profile header-notification">
+                    <a href="#!">
+                        <span class="uimg" style="display:block;">
+                            <img src="<?php if(isset($user_img[0])){ echo '/storage/'.$user_img[0]->url; }else{ ?>/assets/img/face1.png<?php } ?>" alt="profile image">
+                        </span>
+
+                        <span>
+                            <?php echo Auth::user()->display_name ?></span>
+                        <i class="fas fa-sort-down"></i>
+                    </a>
+                    <ul class="show-notification profile-notification">
+                        <li>
+                            <a href="/">
+                                <i class="fas fa-home"></i> Home
+                            </a>
+                        </li>
+                        <li>
+                            <!--  include search -->
+                            <a class="mobile-search morphsearch-search" href="#">
+                                <i class="fas fa-search"></i> Search
+                            </a>
+                        </li>
+                        <li><a href="/claim-profile" target="_blank">
+                                <i class="fas fa-user-circle"></i>
+                                Claim A Profile</a></li>
+                        <li>
+                            <a href="/user/user-profile">
+                                <i class="far fa-user"></i>Profile
+                            </a>
+                        </li>
+                        <li>
+                            <a href="/user/logout">
+                                <i class="fas fa-sign-out-alt"></i> Logout {{Auth::user()->first_name}}
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+        </nav>
+
         <div class="extras">
-            <a class="accountbtn two" href="/user/content-add" title="">
+            <a class="submitprcp" href="/user/content-add" title="">
                 <i class="fas fa-video"></i>
                 Submit PRCPTION</a>
         </div>
         @else
+        <nav class="two">
+            <ul>
+
+            </ul>
+        </nav>
+
         <div class="extras">
             <span class="accountbtn">
                 <i class="flaticon-avatar"></i>
                 Sign Up/Log In
             </span>
         </div>
+
         @endif
         @endif
 
         <div class="logo">
             <?php /*           <a href="#" title=""><img src="/assets/findgo/images/horizontal-white.png" height="40" width="175" alt="" /></a> */ ?>
         </div>
+
+
         <nav>
             <ul>
                 @if (Route::has('login'))
                 @auth
-                <li>
+                <li style="display:none;">
                     <a href="/user/logout">
 
                         <i class="fas fa-sign-out-alt"></i> Logout {{Auth::user()->first_name}}
@@ -155,89 +244,32 @@
                 @else
 
                 @endauth
-                <li><a href="/claim-profile" target="_blank">
+                <li style="display:none;"><a href="/claim-profile" target="_blank">
                         <i class="fas fa-user-circle"></i>
                         Claim A Profile</a></li>
-                <li><a href="https://perceptiontravel.tv/about-perceptions-live" target="_blank">
+                <li><a data-toggle="modal" data-target="#about">
                         <i class="fas fa-info-circle"></i>
                         About</a></li>
                 @endif
             </ul>
-            {{--<ul>--}}
-            {{--<li class="menu-item-has-children">--}}
-            {{--<a href="#" title="">Home</a>--}}
-            {{--<ul>--}}
-            {{--<li><a href="index.html" title="">Home 1</a></li>--}}
-            {{--<li><a href="index2.html" title="">Home 2</a></li>--}}
-            {{--<li><a href="index3.html" title="">Home 3</a></li>--}}
-            {{--<li><a href="index4.html" title="">Home 4</a></li>--}}
-            {{--<li><a href="index5.html" title="">Home 5</a></li>--}}
-            {{--</ul>--}}
-            {{--</li>--}}
-            {{--<li class="menu-item-has-children">--}}
-            {{--<a href="#" title="">Listings</a>--}}
-            {{--<ul>--}}
-            {{--<li><a href="add-listing.html" title="">Add Listing</a></li>--}}
-            {{--<li><a href="listing-category.html" title="">Listing Category</a></li>--}}
-            {{--<li><a href="listing-category2.html" title="">Listing Category 2</a></li>--}}
-            {{--<li><a href="listing-full.html" title="">Listing Full</a></li>--}}
-            {{--<li><a href="listing-map.html" title="">Listing Map</a></li>--}}
-            {{--<li><a href="listing-map2.html" title="">Listing Map 2</a></li>--}}
-            {{--<li><a href="listing-sidebar.html" title="">Listing Sidebar</a></li>--}}
-            {{--</ul>--}}
-            {{--</li>--}}
-            {{--<li class="menu-item-has-children">--}}
-            {{--<a href="#" title="">Listing Details</a>--}}
-            {{--<ul>--}}
-            {{--<li><a href="listing-single1.html" title="">Listing Details 1</a></li>--}}
-            {{--<li><a href="listing-single2.html" title="">Listing Details 2</a></li>--}}
-            {{--<li><a href="listing-single3.html" title="">Listing Details 3</a></li>--}}
-            {{--<li><a href="listing-single4.html" title="">Listing Details 4</a></li>--}}
-            {{--<li><a href="listing-single5.html" title="">Listing Details 5</a></li>--}}
-            {{--</ul>--}}
-            {{--</li>--}}
-            {{--<li class="menu-item-has-children">--}}
-            {{--<a href="#" title="">User</a>--}}
-            {{--<ul>--}}
-            {{--<li><a href="user-dashboard.html" title="">User Dashboard</a></li>--}}
-            {{--<li><a href="user-favourite.html" title="">User Favourites</a></li>--}}
-            {{--<li><a href="user-my-listings.html" title="">User Listing</a></li>--}}
-            {{--<li><a href="user-notification.html" title="">User Notifications</a></li>--}}
-            {{--<li><a href="user-profile.html" title="">User Profile</a></li>--}}
-            {{--<li><a href="user-review.html" title="">User Review</a></li>--}}
-            {{--</ul>--}}
-            {{--</li>--}}
-            {{--<li class="menu-item-has-children">--}}
-            {{--<a href="#" title="">Pages</a>--}}
-            {{--<ul>--}}
-            {{--<li class="menu-item-has-children">--}}
-            {{--<a href="#" title="">BLog</a>--}}
-            {{--<ul>--}}
-            {{--<li><a href="blog1.html" title="">Blog 1</a></li>--}}
-            {{--<li><a href="blog2.html" title="">Blog 2</a></li>--}}
-            {{--<li><a href="blog-single.html" title="">Blog Details</a></li>--}}
-            {{--</ul>--}}
-            {{--</li>--}}
-            {{--<li><a href="pricing.html" title="">Pricing</a></li>--}}
-            {{--<li><a href="404.html" title="">404 Error</a></li>--}}
-            {{--<li><a href="contact.html" title="">Contact Us</a></li>--}}
-            {{--<li><a href="services.html" title="">Our Services</a></li>--}}
-            {{--<li><a href="terms.html" title="">Our Terms</a></li>--}}
-            {{--<li><a href="testimonials.html" title="">Testimonials</a></li>--}}
-            {{--</ul>--}}
-            {{--</li>--}}
-            {{--<li class="menu-item-has-children">--}}
-            {{--<a href="#" title="">Shop</a>--}}
-            {{--<ul>--}}
-            {{--<li><a href="shop-list.html" title="">Shop Lists</a></li>--}}
-            {{--<li><a href="shop-detail.html" title="">Shop Details</a></li>--}}
-            {{--<li><a href="cart.html" title="">Shop Cart</a></li>--}}
-            {{--<li><a href="checkout.html" title="">Checkout</a></li>--}}
-            {{--<li><a href="shop-order.html" title="">Shop Order</a></li>--}}
-            {{--</ul>--}}
-            {{--</li>--}}
-            {{--</ul>--}}
+
         </nav>
+
+
+        <div class="navbar-container container-fluid" style="padding-right:0; display:none;">
+            <div>
+                <ul class="nav-right">
+
+                    <li style="display:none;">
+                        <!--  include search -->
+                        <a class="mobile-search morphsearch-search" href="#">
+                            <i class="fas fa-search"></i>
+                        </a>
+                        <p>Search</p>
+                    </li>
+                </ul>
+            </div>
+        </div>
     </div>
 </header>
 

@@ -20,6 +20,6 @@ class SiteSetting extends Model
     }
 
     public function getAll(){
-        return $this->whereIn('key',array('home_centered_title'))->get();
+        return $this->whereIn('key',array('home_centered_title','left_feed_name','right_feed_name'))->get();
     }
 }
