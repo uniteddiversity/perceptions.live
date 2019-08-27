@@ -4502,6 +4502,7 @@ body[themebg-pattern="pattern2"] {
     float: left;
     width: 140px;
     overflow: hidden;
+    height: 30px;
 }
 
 .topsearch .right_feed{
@@ -4532,4 +4533,114 @@ body[themebg-pattern="pattern2"] {
 
 .register_button{
     position: relative;
+}
+
+.near_me_icon{
+    float: left;
+    width: 40px;
+}
+
+#slider_feed{
+    width: 335px;
+}
+
+.near_me_icon{
+    width: 50px;
+    height: 50px;
+    background: url("/assets/img/map_center_icon.svg") no-repeat;
+    background-size: 50px 50px;
+}
+
+/*new css */
+{
+    min-width: 161px;
+    border-left: 2px solid rgb(241, 241, 241);
+    padding-left: 10px;
+    font-size: 14px;
+}
+
+nav.two .user-profile .uimg {
+    margin-top: 15px;
+    margin-right: 10px;
+}
+
+nav.two .user-profile .fas.fa-sort-down {
+    float: right;
+    color: rgb(121, 121, 121) !important;
+    font-size: 16px;
+    position: absolute;
+    top: -3px;
+    right: -37px;
+    height: 57px;
+}
+
+nav.two ul {
+    padding: 0;
+    margin: 0;
+}
+
+nav.two li {
+    width: 100%;
+}
+
+nav.two .header-notification .profile-notification {
+    position: absolute;
+    right: -47px;
+    top: 110px;
+    opacity: 0;
+    -webkit-transition: all 0.4s ease;
+    -moz-transition: all 0.4s ease;
+    -o-transition: all 0.4s ease;
+    -ms-transition: all 0.4s ease;
+    transition: all 0.4s ease;
+}
+
+nav.two:hover .header-notification .profile-notification {
+    top: 70px;
+    opacity: 1;
+}
+
+
+nav > ul > li > a:hover {
+    color: #4214c7;
+}
+
+header .extras {
+    margin: 0;
+    height: 70px;
+    line-height: 70px;
+    background: #fff;
+    padding: 10px;
+    margin-left: 10px;
+    -webkit-border-top-right-radius: 5px;
+    -webkit-border-bottom-right-radius: 5px;
+    -moz-border-radius-topright: 5px;
+    -moz-border-radius-bottomright: 5px;
+    border-top-right-radius: 5px;
+    border-bottom-right-radius: 5px;
+    overflow: hidden;
+}
+
+header .extras .accountbtn,
+.btn,
+.rnaver .extras a.accountbtn,
+header .extras .submitprcp {
+    background: #1c1c8e;
+    background: #4214c7;
+    color: #fff;
+    padding: 0 30px;
+    font-size: 13px;
+    font-weight: 600;
+    height: 50px;
+    line-height: 50px;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    border-radius: 5px;
+    cursor: pointer;
+    box-shadow: 0 30px 60px 0 rgba(32, 35, 68, 0.1);
+}
+
+header .extras .submitprcp i {
+    margin-right: 8px;
+    font-size: 16px;
 }
