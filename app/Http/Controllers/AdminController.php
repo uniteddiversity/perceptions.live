@@ -762,6 +762,10 @@ class AdminController extends Controller
         $id = (isset($r['id']))?UID::translator($r['id']):0;
         $user_id = (!isset(Auth::user()->id))? 0 : Auth::user()->id;
 
+        $groups = $this->userRepository->groupList($user_id, true);
+        if(count($groups) >= 1 && !Auth::user()->is('admin')){
+            return Redirect::back()->withErrors('Maximum one map allowed!')->withInput();
+        }
         $validator = Validator::make($request->all(), [
             'group' => 'required',
             'domain' => 'required',

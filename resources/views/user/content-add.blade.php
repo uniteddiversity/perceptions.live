@@ -223,7 +223,7 @@
                                 </div>
 
                                 <div class="form-group" style="padding:0 40px;">
-                                    <?php if(Auth::user()->is('admin') || Auth::user()->is('group-admin') || Auth::user()->is('moderator')){ ?>
+                                    <?php if(Auth::user()->is('admin') && ( (Auth::user()->is('group-admin') || Auth::user()->is('moderator')) && !empty($data['id']) )){ ?>
                                     <label for="status">Status</label>
                                     <select class="form-control" id="status" name="status">
                                         @foreach($status as $st)

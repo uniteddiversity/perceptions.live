@@ -55,7 +55,12 @@
                             {{ session()->get('message') }}
                         </div>
                         @endif
-                        <form action="/user/admin/post-map-generate" method="post" id="submit_content" enctype='multipart/form-data'>
+                        @if(Auth::user()->is('admin'))
+                            <form action="/user/admin/post-map-generate" method="post" id="submit_content" enctype='multipart/form-data'>
+                        @else
+                            <form action="/user/group-admin/post-map-generate" method="post" id="submit_content" enctype='multipart/form-data'>
+                        @endif
+
                             <input type="hidden" name="_token" id="csrf-token" value="{{ Session::token() }}" />
                             <?php if($data['id']){?>
                                 <input type="hidden" name="id" id="csrf-token" value="<?php echo uid($data['id']) ?>" />

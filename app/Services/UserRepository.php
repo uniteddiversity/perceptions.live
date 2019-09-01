@@ -453,7 +453,7 @@ class UserRepository
                     $user_group = $user_group->leftJoin('user_groups', 'user_groups.group_id', 'groups.id');
                     $user_group = $user_group->where('user_groups.user_id', $user_info['id']);
                 }
-                $user_group = $user_group->groupBy('groups.id')->orderBy('groups.updated_at','DESC')->get();
+                $user_group = $user_group->groupBy('groups.id')->orderBy('groups.name')->orderBy('groups.updated_at','DESC')->get();
 
             }
         }

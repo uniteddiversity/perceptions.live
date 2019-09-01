@@ -185,7 +185,7 @@ Route::group(['prefix' => 'user', 'middleware' => ['auth', 'web', 'groupadmin']]
     Route::get('/group-admin/map-generate', '\App\Controllers\User\AdminController@mapGenerate');
     Route::get('/group-admin/map-generate-list', '\App\Controllers\User\AdminController@mapGeneratedList');
     Route::post('/group-admin/post-map-generate', '\App\Controllers\User\AdminController@postMapGenerate');
-    Route::get('/group-admin/map-generate/{_id}', '\App\Controllers\User\AdminController@editMapGenerate');
+    Route::get('/group-admin/map-generate/{_id}', '\App\Controllers\User\AdminController@editMapGenerate')->name('map-sharing.edit');
 });
 
 Route::group(['prefix' => 'user', 'middleware' => ['auth', 'web', 'moderator']], function () {
