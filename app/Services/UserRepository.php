@@ -130,7 +130,7 @@ class UserRepository
         $this->tagGroupAssociation = $tagGroupAssociation;
     }
 
-    public function getUsers($filter = array(), $user_id = null)
+    public function getUsers($filter = array(), $user_id = null, &$r = '', $per_page = null)
     {
         $current_user = $this->getUser($user_id);
 
@@ -163,7 +163,13 @@ class UserRepository
         $r->select('users.id','users.*',
             DB::Raw("COUNT(contents.id) as no_submission"));
         $r->groupBy('users.id')->orderBy('updated_at', 'DESC');
-        $r = $r->get();
+//        $r = $r->get();
+
+        if($per_page != null){
+            $r = $r->paginate($per_page);
+        }else{
+            $r = $r->get();
+        }
 
         return $r;
     }
@@ -270,7 +276,15 @@ class UserRepository
         return $r;
     }
 
-    public function getPublicContents($user_id, $filter = array(), &$count = 0)
+    /**
+     * @param $user_id
+     * @param array $filter
+     * @param int $count
+     * @param string $contents
+     * @param null $per_page
+     * @return array
+     */
+    public function getPublicContents($user_id, $filter = array(), &$count = 0, &$contents = '', $per_page = null)
     {
         $contents = $this->content->with(['videoProducer' => function($q){
             $q->with('user');
@@ -333,9 +347,15 @@ class UserRepository
         $contents = $contents->select('contents.id', DB::Raw("SUBSTRING(contents.brief_description, 1, 128) as trim_description"), 'contents.lat', 'contents.long', 'contents.title', 'contents.url',
                 'users.display_name','users.id as user_id','contents.created_at','contents.captured_date','contents.location','contents.user_id','contents.primary_subject_tag',DB::Raw("GROUP_CONCAT(DISTINCT (user_sorting_tags.name) SEPARATOR ', ') as user_association"), DB::Raw("GROUP_CONCAT(DISTINCT (groups.name) SEPARATOR ', ') as group_names"), DB::Raw("GROUP_CONCAT(DISTINCT concat(groups.name,'-',groups.id) SEPARATOR ',') as group_names_ids"),
                 DB::Raw("GROUP_CONCAT(DISTINCT (concat(sorting_tags.tag_color,'-',sorting_tags.id,'-',sorting_tags.tag)) SEPARATOR ', ') as tag_colors") )
-            ->groupBy('contents.id')->orderBy('contents.captured_date', 'DESC')->limit(500)->get();
-        $r = array(); $i = 0;
+            ->groupBy('contents.id')->orderBy('contents.captured_date', 'DESC')->limit(500);
 
+        if($per_page != null){
+            $contents = $contents->paginate($per_page);
+        }else{
+            $contents = $contents->get();
+        }
+        $r = array(); $i = 0;
+//dd($contents->lastPage());
         foreach($contents as $c){
             if(isset($c['lat']) && isset($c['long'])){
                 $r[$i] = $c;

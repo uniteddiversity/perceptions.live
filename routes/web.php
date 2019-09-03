@@ -38,7 +38,12 @@ Route::post('/', function(){
     Route::get('/home/ajax-video-info/{_video_id}', '\App\Controllers\HomeController@getVideoInfo');
     Route::get('/home/ajax-video-info-small/{_video_id}', '\App\Controllers\HomeController@getVideoInfoMini');
     Route::get('/home/ajax-user-info/{_user_id}', '\App\Controllers\HomeController@getUserInfo');
+    Route::get('/home/ajax-user-info-video/{_user_id}', '\App\Controllers\HomeController@getUserInfoVideoPartial');
+    Route::get('/home/ajax-user-info-groups/{_user_id}', '\App\Controllers\HomeController@getUserInfoGroupPartial');
+
     Route::get('/home/ajax-group-info/{_group_id}', '\App\Controllers\HomeController@getGroupInfo');
+    Route::get('/home/ajax-group-info-video/{_group_id}', '\App\Controllers\HomeController@getGroupInfoVideoPartial');
+    Route::get('/home/ajax-group-info-users/{_group_id}', '\App\Controllers\HomeController@getGroupInfoUsersPartial');
 
     Route::get('/home/ajax/video-search', '\App\Controllers\HomeController@searchVideos');
     Route::get('/claim-profile', '\App\Controllers\User\UserController@claimUserProfile');

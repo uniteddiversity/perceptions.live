@@ -176,6 +176,7 @@
     <script src="/assets/js/datatable/datatables.min.js"></script>
     <script src="/assets/juery-confirm/jquery-confirm.js"></script>
     <script src="/assets/js/thumbnail_slider.js"></script>
+    <script src="/assets/js/home-common.js"></script>
     <style>
         #featureModal {
             position: fixed;

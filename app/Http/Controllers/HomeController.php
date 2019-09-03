@@ -41,6 +41,8 @@ class HomeController extends Controller
      */
     private $siteSetting;
 
+    private $per_page = 4;
+
     public function __construct(Content $content, User $user, UserRepository $userRepository, ContentService $contentService,
                                 Category $category, SiteSetting $siteSetting)
     {
@@ -126,23 +128,53 @@ class HomeController extends Controller
     {
         $user_associate_videos = $this->userRepository->getAssociatedVideosForUser($user_id);
         $info = $this->userRepository->getUser($user_id);
-        $info['user_involvement_videos'] = $this->userRepository->getPublicContents($user_id, array('user_involvement' => $user_id));
-        $info['group_involvement_videos'] = $this->userRepository->getPublicContents($user_id, array('group_involvement' => $user_id));
+        $info['user_involvement_videos'] = $this->userRepository->getPublicContents($user_id, array('user_involvement' => $user_id), $count, $contents1, $this->per_page);
+        $info['group_involvement_videos'] = $this->userRepository->getPublicContents($user_id, array('group_involvement' => $user_id), $count, $contents2, $this->per_page);
 
         $user_status = $this->userRepository->getUserStatus($user_id);
         $gci_tags = $this->userRepository->getGreaterCommunityIntentionTag();
 
         return view('partials.user-info-popup')
-            ->with(compact('info','user_associate_videos','gci_tags','user_status'));
+            ->with(compact('info','user_associate_videos','gci_tags','user_status', 'contents1', 'contents2', 'user_id'));
+    }
+
+    public function getUserInfoVideoPartial($user_id)
+    {
+//        $user_associate_videos = $this->userRepository->getAssociatedVideosForUser($user_id);
+        $contentInfo = $this->userRepository->getPublicContents($user_id, array('user_involvement' => $user_id), $count, $paginationData, $this->per_page);
+
+        return view('partials.user-info-popup_video-info')
+            ->with(compact('contentInfo', 'paginationData', 'user_id'));
+    }
+
+    public function getUserInfoGroupPartial($user_id)
+    {
+        $groupsInfo = $this->userRepository->getPublicContents($user_id, array('group_involvement' => $user_id), $count, $paginationData, $this->per_page);
+        return view('partials.user-info-popup_group-info')
+            ->with(compact('groupsInfo', 'paginationData', 'user_id'));
     }
 
     public function getGroupInfo($group_id)
     {
         $info = $this->userRepository->getGroupInfo($group_id, true, true);
-        $group_contents = $this->contentService->getSearchableContents(0, array('group_id' => $group_id), 10);
-        $group_users = $this->userRepository->getUsers(array('group_id' => $group_id));
+        $group_contents = $this->contentService->getSearchableContents(0, array('group_id' => $group_id), 10, $contents1, $this->per_page);
+        $group_users = $this->userRepository->getUsers(array('group_id' => $group_id), null,$contents2, $this->per_page);
         return view('partials.group-info-popup')
-            ->with(compact('info','group_contents','group_users'));
+            ->with(compact('info','group_contents','group_users', 'contents1', 'contents2', 'group_id'));
+    }
+
+    public function getGroupInfoUsersPartial($group_id)
+    {
+        $groupUsers = $this->userRepository->getUsers(array('group_id' => $group_id), null,$paginationData, $this->per_page);
+        return view('partials.group-info-popup_user')
+            ->with(compact('groupUsers','paginationData'));
+    }
+
+    public function getGroupInfoVideoPartial($group_id)
+    {
+        $videos = $this->contentService->getSearchableContents(0, array('group_id' => $group_id), 10, $paginationData, $this->per_page );
+        return view('partials.group-info-popup_video')
+            ->with(compact('videos','paginationData'));
     }
 
     public function location($id)
