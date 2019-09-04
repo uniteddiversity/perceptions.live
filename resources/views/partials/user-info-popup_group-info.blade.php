@@ -18,31 +18,30 @@
 
 <?php
 if(isset($groupsInfo)){
-    foreach($groupsInfo as $group){  //dd($group->group);?>
-
-
+    foreach($groupsInfo as $group){  //dd($group); ?>
         <div style="width: 100%; text-align: center;">
-            <?php if(!isset($group->group->image[0]->url)){?>
-                <img class="active_link" onclick="openGroupProfile('<?php echo $group->group->id ?>')" style="margin-left: 10%;" height="150" width="150" src="/assets/img/face1.png">
+            <?php if(!isset($group['group_avatar']) || empty($group['group_avatar'])){?>
+                <img class="active_link" onclick="openGroupProfile('<?php echo $group['group_id'] ?>')" style="margin-left: 10%;" height="150" width="150" src="/assets/img/face1.png">
             <?php }else{ ?>
-                <img class="active_link" onclick="openGroupProfile('<?php echo $group->group->id ?>')" style="margin-left: 10%;" height="150" width="150" src="<?php echo '/storage/'.$group->group->image[0]->url; ?>">
+                <img class="active_link" onclick="openGroupProfile('<?php echo $group['group_id'] ?>')" style="margin-left: 10%;" height="150" width="150" src="<?php echo '/storage/'.$group['group_avatar']; ?>">
             <?php } ?>
 
             <div style="clear: both"></div>
         </div>
         <div style="display: block; width: 100%; text-align: center;">
-                    <span style="color: #8d8d8d;"><i class="fa fa-user"></i> <span class="inactive_link" onclick="openGroupProfile('<?php echo $group->group->id ?>')">
-                            <?php echo $group->group->name ?></span></span>
-            <?php if(!empty($group->group->default_location)){ ?>
+                    <span style="color: #8d8d8d;"><i class="fa fa-user"></i> <span class="inactive_link" onclick="openGroupProfile('<?php echo $group['id'] ?>')">
+                            <?php echo $group['group_name'] ?></span></span>
+            <?php if(!empty($group['group_default_location'])){ ?>
                 <div style="color: #8d8d8d;"><i class="flaticon-pin"></i>
-                    <?php echo $group->group->default_location ?>
+                    <?php echo $group['group_default_location'] ?>
                 </div>
             <?php } ?>
 
         </div>
         <?php
     }
-}?>
+}
+?>
 
 <div class="pages">
     @include('partials.pagination-popup', ['paginationData' => $paginationData, 'id' => 'user_group_paging'])

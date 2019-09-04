@@ -3,7 +3,7 @@ $('body').on('click', '#user_group_paging a', function(){
     let $user_id = $('#popup_user_id').val();
     let $page_id = $(this).data("page");
     $.ajax({
-        url: "/home/ajax-user-info-group/"+ $user_id +'?page='+ $page_id,
+        url: "/home/ajax-user-info-groups/"+ $user_id +'?page='+ $page_id,
         context: document.body
     }).done(function(data) {
         $('#user-info-popup_group').html(data);

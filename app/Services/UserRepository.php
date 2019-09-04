@@ -195,6 +195,35 @@ class UserRepository
             ->first();
     }
 
+    public function getUserGroups($user_id, &$contents = '', $per_page = null)
+    {
+        $contents = $this->user->where('users.id', $user_id)->with(['image',
+            'actingRoles' => function($q){
+                $q->with('tag');
+            },
+            'gci' => function($q){
+                $q->with('tag');
+            },
+            'skill' => function($q){
+                $q->with('tag');
+            }])
+            ->leftJoin('user_groups', 'users.id', '=', 'user_groups.user_id')
+            ->leftJoin('groups', 'groups.id', '=', 'user_groups.group_id')
+            ->leftJoin('attachments', function($q){
+              $q->on('attachments.fk_id', '=', 'groups.id');
+              $q->where('attachments.table', '=', 'groups');
+            })
+            ->select('users.*','groups.name as group_name','groups.id as group_id','groups.default_location as group_default_location','attachments.url as group_avatar', 'user_groups.group_id', 'user_groups.role_id as group_role_id');
+
+        if($per_page != null){
+            $contents = $contents->paginate($per_page);
+        }else{
+            $contents = $contents->get();
+        }
+
+        return $contents;
+    }
+
     public function getUserStatus($user_id)
     {
         $status = '';
