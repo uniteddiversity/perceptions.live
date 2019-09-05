@@ -115,7 +115,7 @@ function updateMarkers(markers) {
 
 
     var all_b = [];
-    for (var i = 0; i < addressPoints.length; ++i) {
+    for (var i = 0; i < markers.length; ++i) {
         var popup = 'abc' + markers[i].name;
         // var m = L.marker( [markers[i].lat, markers[i].lng], {icon: myIcon} )
         //     .bindPopup( popup );
