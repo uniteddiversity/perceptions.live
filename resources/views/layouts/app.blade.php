@@ -168,7 +168,7 @@
     <script src="/assets/js/leaflet.js"></script>
     <script src="/assets/js/leaflet.markercluster.new.js"></script>
     <script src="/assets/js/leaflet.freeze.js"></script>
-    <script src="/assets/js/L.Control.Locate.new.js"></script>
+    <script src="/assets/js//L.control.locate.new.js"></script>
     <script src="/assets/leaflet-groupedlayercontrol/leaflet.groupedlayercontrol.js"></script>
 
 
