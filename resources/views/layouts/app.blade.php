@@ -263,10 +263,21 @@
             background-color: #47489E;
             color: white;
         } 
-    </style>
+        /* Adding margins on zoom controls */
+        .leaflet-top{
+            top:90px;
+        }
+
+        /* Adding Target icon */
+        .custom{
+            width: 25px;
+            height: 31px;
+            content: url(/assets/img/target.svg);
+        }
+</style>
     <script>
         $(document).ready(function() {
-            $('[data-toggle="tooltip"]').tooltip();
+            $('[data-toggle="tooltip"]').t  ooltip();
         });
 
     </script>

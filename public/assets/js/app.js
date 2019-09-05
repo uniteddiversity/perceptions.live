@@ -37,7 +37,8 @@ if (typeof (L) != "undefined") {
             returnToPrevBounds: true,
             showCompass: false,
             drawCircle: false,
-            drawMarker: false
+            drawMarker: false,
+            icon: 'custom'
         })
         .addTo(map);
 
