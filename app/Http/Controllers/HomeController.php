@@ -134,14 +134,12 @@ class HomeController extends Controller
 
         $user_status = $this->userRepository->getUserStatus($user_id);
         $gci_tags = $this->userRepository->getGreaterCommunityIntentionTag();
-//dd($this->userRepository->getUserGroups($user_id));
         return view('partials.user-info-popup')
             ->with(compact('info','user_associate_videos','gci_tags','user_status', 'contents1', 'contents2', 'user_id'));
     }
 
     public function getUserInfoVideoPartial($user_id)
     {
-//        $user_associate_videos = $this->userRepository->getAssociatedVideosForUser($user_id);
         $contentInfo = $this->userRepository->getPublicContents($user_id, array('user_involvement' => $user_id), $count, $paginationData, $this->per_page);
 
         return view('partials.user-info-popup_video-info')
@@ -151,7 +149,6 @@ class HomeController extends Controller
     public function getUserInfoGroupPartial($user_id)
     {
         $groupsInfo = $this->userRepository->getUserGroups($user_id, $paginationData, $this->per_page);
-//        $groupsInfo = $this->userRepository->getPublicContents($user_id, array('group_involvement' => $user_id), $count, $paginationData, $this->per_page);
         return view('partials.user-info-popup_group-info')
             ->with(compact('groupsInfo', 'paginationData', 'user_id'));
     }
@@ -190,19 +187,6 @@ class HomeController extends Controller
 
 
         $locations = $this->getSearchListInJson($uploaded_list);
-//        $ret = array(); $i = 0;
-//        foreach($uploaded_list as $u){
-//            $ret[$i]['id'] = $u['id'];
-//            $ret[$i]['lng'] = floatval($u['long']);
-//            $ret[$i]['lat'] = floatval($u['lat']);
-//            $ret[$i]['name'] = $u['title'];
-////            $ret[$i]['city'] = $u['city'];
-//            $i++;
-//        }
-//        $locations = response()->json($ret, 200);
-//
-
-
         $location_id = $id;
         return view('user.home2')
             ->with(compact('locations','location_id'));

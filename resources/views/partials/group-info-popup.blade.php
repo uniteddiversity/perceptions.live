@@ -107,7 +107,7 @@
                 <h5><i class="fas fa-video"></i> Media Involvements</h5>
             </div>
             <div id="group-info-popup_video">
-                @include('partials.group-info-popup_video', ['videos' => $group_contents, 'paginationData' => $contents2])
+                @include('partials.group-info-popup_video', ['videos' => $group_contents, 'paginationData' => $contents1])
             </div>
         </div>
         <div class="col-3">
