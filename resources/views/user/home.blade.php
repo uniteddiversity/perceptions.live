@@ -17,7 +17,7 @@
                         </div>
 
                         <div class="half-map" style="height: 100%;">
-                            <div id="map" class="map" style="height: 100%;">&nbsp;</div>
+                            <div id="map" class="map" style="height: 100%;margin-left:30px;">&nbsp;</div>
                         </div>
 
 

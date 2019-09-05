@@ -20,9 +20,10 @@
 
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,600,700" rel="stylesheet">
 
-    <link rel="stylesheet" type="text/css" href="/assets/css/leaflet_0.7.css" />
+    <link rel="stylesheet" type="text/css" href="/assets/css/leaflet.css" />
     {{--<link rel="stylesheet" href="/assets/css/leaflet.css">--}}
     {{--<link rel="stylesheet" href="/assets/css/MarkerCluster.css">--}}
+    <link rel="stylesheet" href="/assets/css/MarkerCluster.css">
     <link rel="stylesheet" href="/assets/css/MarkerCluster.Default.css">
     <link rel="stylesheet" href="/assets/css/L.Control.Locate.css">
     <link rel="stylesheet" href="/assets/leaflet-groupedlayercontrol/leaflet.groupedlayercontrol.css">
@@ -164,9 +165,10 @@
     {{--<script src="http://maps.googleapis.com/maps/api/js?key=AIzaSyCYc537bQom7ajFpWE5sQaVyz1SQa9_tuY&sensor=true&libraries=places"></script><!-- Maps -->--}}
     {{--<script type="text/javascript" src="/assets/findgo/js/map1.js"></script>--}}
     <script type="text/javascript" src="/assets/findgo/js/jq.aminoSlider.js"></script>
-    <script src="/assets/js/leaflet_0.7.js"></script>
-    <script src="/assets/js/leaflet.markercluster.js"></script>
-    <script src="/assets/js/L.Control.Locate.min.js"></script>
+    <script src="/assets/js/leaflet.js"></script>
+    <script src="/assets/js/leaflet.markercluster.new.js"></script>
+    <script src="/assets/js/leaflet.freeze.js"></script>
+    <script src="/assets/js/L.Control.Locate.new.js"></script>
     <script src="/assets/leaflet-groupedlayercontrol/leaflet.groupedlayercontrol.js"></script>
 
 
@@ -229,6 +231,38 @@
             width: 200px;
         }
 
+        /* Geolocation Icon */
+        .fa-map-marker:before {
+            content: "\f0ac";
+        }
+
+        /*  Clustering color   */
+        .marker-cluster-small {
+            background-color: #8a88ff;
+        }
+
+        .marker-cluster-medium {
+            background-color: #8a88ff;
+        }
+
+        .marker-cluster-large {
+            background-color: #8a88ff;
+        }
+
+        .marker-cluster-small div {
+            background-color: #47489E;
+            color: white;
+        }
+
+        .marker-cluster-medium div {
+            background-color: #47489E;
+            color: white;
+        }
+
+        .marker-cluster-large div {
+            background-color: #47489E;
+            color: white;
+        } 
     </style>
     <script>
         $(document).ready(function() {
