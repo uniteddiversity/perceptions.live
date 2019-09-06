@@ -139,8 +139,8 @@ function updateMarkers(markers) {
     map.addLayer(markerClusters);
     map.on("zoomend", function () {
         let zoom = map.getZoom();
+        console.log(zoom);
         if (zoom <= 12 && zoom >= 9) {
-            console.log(zoom);
             markerClusters2.disableClustering();
         } else {
             markerClusters2.enableClustering();
