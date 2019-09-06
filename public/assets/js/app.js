@@ -86,9 +86,9 @@ function updateMarkers(markers) {
     map.addLayer(markerClusters2);
 
     var myIcon = L.icon({
-        iconUrl: myURL + '/assets/img/globe_new.png',
-        iconRetinaUrl: myURL + '/assets/img/globe_new.png',
-        iconSize: [29, 29],
+        iconUrl: myURL + '/assets/img/new-pin.png',
+        iconRetinaUrl: myURL + '/assets/img/new-pin.png',
+        iconSize: [45, 45],
         iconAnchor: [9, 21],
         popupAnchor: [0, -14]
     });
