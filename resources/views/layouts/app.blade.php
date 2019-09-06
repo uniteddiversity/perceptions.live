@@ -274,6 +274,14 @@
             height: 31px;
             content: url(/assets/img/target.svg);
         }
+        
+        /* changin zoom in and out colors */
+        .leaflet-control-zoom-in{
+            color : #47489E !important;
+        }
+        .leaflet-control-zoom-out{
+            color : #47489E !important;
+        }
 </style>
     <script>
         $(document).ready(function() {
