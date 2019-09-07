@@ -502,6 +502,35 @@ $(document).ready(function() {
             {"data": 'updated_at'}
         ]
     });
+
+    $("#lazy-loaded-table-group-admin").dataTable({
+        "scrollCollapse": true,
+        "serverSide": true,
+        // "ordering": true,
+        // "searching": true,
+        "lengthChange": true,
+        "ajax": {
+            "url": '/user/group-admin/group-content-list-ajax/'+data_list_id,
+            "type": "GET",
+        },
+        "scroller": {
+            "loadingIndicator": true
+        },
+        "deferRender": true,
+        "dom": "rtiS",
+        "scrollY": "600px",
+        "length": 10,
+        "columns": [
+            {"data": "action"},
+            {"data": "title"},
+            {"data": 'submitted_by'},
+            {"data": 'status'},
+            {"data": 'url'},
+            {"data": 'email'},
+            {"data": 'location'},
+            {"data": 'updated_at'}
+        ]
+    });
 } );
 
 function displayVideoContentUpload(){

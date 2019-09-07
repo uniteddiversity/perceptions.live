@@ -75,6 +75,13 @@
                     <span class="pcoded-mcaret"></span>
                 </a>
                 <ul class="pcoded-submenu">
+                    <li class="nav-item <?php if(in_array(Request::segment(3), array('group-list'))){ echo 'active'; } ?>">
+                        <a class="nav-link" href="/user/group-admin/group-list">
+                            <span class="pcoded-micon"><i class="ti-angle-right"></i></span>
+                            <span class="pcoded-mtext" data-i18n="nav.dash.default">All Groups</span>
+                            <span class="pcoded-mcaret"></span>
+                        </a>
+                    </li>
                     <li class="nav-item <?php if(in_array(Request::segment(3), array('user-to-group-add'))){ echo 'active'; } ?>">
                         <a class="nav-link" href="/user/group-admin/user-to-group-add">
                             <span class="pcoded-micon"><i class="ti-angle-right"></i></span>

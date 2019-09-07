@@ -185,6 +185,9 @@ Route::group(['prefix' => 'user', 'middleware' => ['auth', 'web', 'groupadmin']]
     Route::get('/group-admin/sorting-tag-add', '\App\Controllers\User\GroupAdminController@sortingTagAdd');
     Route::post('/group-admin/post-sorting-tag-add', '\App\Controllers\User\GroupAdminController@postSortingTagAdd');
     Route::get('/group-admin/group-edit/{_group_id}', '\App\Controllers\User\GroupAdminController@editGroup');
+    Route::get('/group-admin/group-content-list/{_id}', '\App\Controllers\User\GroupAdminController@groupContentList');
+    Route::get('/group-admin/group-content-list-ajax/{_id}', '\App\Controllers\User\GroupAdminController@groupContentListAjax');
+
     Route::get('/group-admin/location-list', '\App\Controllers\ContentController@adminLocationList');
 
     Route::get('/group-admin/map-generate', '\App\Controllers\User\AdminController@mapGenerate');

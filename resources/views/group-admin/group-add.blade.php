@@ -16,6 +16,10 @@
     $data['proof_images'] = isset($group['proofOfGroup'])?$group['proofOfGroup']:array();
     $data['avatar_images'] = isset($group['groupAvatar'])?$group['groupAvatar']:array();
     $data['id'] = isset($group['id'])?$group['id']:'';
+    $group['experience_kno'] = isset($group['experienceKnowledge'])?$group['experienceKnowledge']->toArray():[];
+    $data['experience_kno'] = isset($group['experience_kno'])?array_column($group['experience_kno'],'group_tag_id'):array();
+    $data['group_acting_roles'] = isset($group['actingRoles'])?array_column(($group['actingRoles'])->toArray(),'group_tag_id'):array();
+
 //    dd($data);
     ?>
     <div class="col-lg-12 grid-margin stretch-card">
@@ -60,9 +64,27 @@
                                 <label for="exampleInputEmail1">Current Mission</label>
                                 <textarea class="form-control" placeholder="Current Mission" rows="5" name="current_mission">{{ old('current_mission',$data['current_mission']) }}</textarea>
                             </div>
+                            {{--<div class="form-group">--}}
+                                {{--<label for="exampleInputEmail1">Experience Knowledge Interests</label>--}}
+                                {{--<textarea class="form-control" placeholder="Experience Knowledge Interests" rows="5" name="experience_knowledge_interests">{{ old('experience_knowledge_interests',$data['experience_knowledge_interests']) }}</textarea>--}}
+                            {{--</div>--}}
                             <div class="form-group">
-                                <label for="exampleInputEmail1">Experience Knowledge Interests</label>
-                                <textarea class="form-control" placeholder="Experience Knowledge Interests" rows="5" name="experience_knowledge_interests">{{ old('experience_knowledge_interests',$data['experience_knowledge_interests']) }}</textarea>
+                                <label for="video_producer">Group Roles</label>
+                                {{--<input type="text" class="form-control" aria-describedby="nameHelp" name="video_producer" placeholder="Video Producer" value="{{ old('video_producer') }}">--}}
+                                <select class="form-control multi-select2" id="group_roles" multiple searchable="Search here.." name="group_acting_roles[]" >
+                                    @foreach($user_acting_role as $role)
+                                        <option value="{{$role->id}}" <?php if(in_array($role->id, old('group_acting_roles',$data['group_acting_roles']))){ echo 'selected'; } ?> >{{$role->name}}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="skills">Experience knowledge interests (add if not exist)</label>
+                                <select class="form-control multi-select2-with-tags-max5" id="experience_kno" multiple name="experience_kno[]">
+                                    @foreach($experience_knowledge_tags as $m)
+                                        <option value="{{base64_encode($m['id'])}}" <?php if(in_array($m['id'], old('experience_kno',$data['experience_kno']))){ echo 'selected'; } ?> >{{$m['tag']}}</option>
+                                    @endforeach
+                                </select>
                             </div>
                             <div class="form-group">
                                 <label for="exampleInputEmail1">Default Location</label>
