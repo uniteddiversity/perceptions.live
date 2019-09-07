@@ -541,17 +541,25 @@ class AdminController extends Controller
 
     public function postGroupAdd(Request $request)
     {
-        $validator = Validator::make($request->all(), [
-            'name' => 'required|unique:groups',
-            'description' => 'required',
-            'category_id' => 'required'
-        ]);
+        $r = $request->toArray();
+        if((isset($r['id']))){
+            $validator = Validator::make($request->all(), [
+                'name' => 'required|unique:groups,name,'.UID::translator($r['id']),//pass the id as third parameter
+                'description' => 'required',
+                'category_id' => 'required'
+            ]);
+        }else{
+            $validator = Validator::make($request->all(), [
+                'name' => 'required|unique:groups',
+                'description' => 'required',
+                'category_id' => 'required'
+            ]);
+        }
+
 
         if ($validator->fails()) {
             return Redirect::back()->withErrors($validator->messages())->withInput();
         }
-
-        $r = $request->toArray();
 
         $new_group = $this->group->updateOrCreate(
             [

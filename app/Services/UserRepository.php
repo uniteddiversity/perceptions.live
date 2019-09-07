@@ -738,12 +738,18 @@ class UserRepository
                 }
                 break;
             case 'group':
-                return $this->group->create(
-                    array(
-                        'name' => $value,
-                        'status' => 5
-                    )
-                );
+                $group = $this->group->getGroupByName($value);
+                //look for groups in similar name, if exist, will return it instead of creating one
+                if(!$group) {
+                    return $this->group->create(
+                        array(
+                            'name' => $value,
+                            'status' => 5
+                        )
+                    );
+                }
+
+                return $group;
                 break;
             case 'tag':
                 $current_user = $this->getUser($user_id);

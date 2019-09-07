@@ -57,4 +57,13 @@ class Group extends Model
     {
         return $this->hasOne('App\Category','id','category_id');
     }
+
+    public function getGroupByName($name)
+    {
+        $r = $this->where('name',$name)->get()->first();
+        if($r)
+            return $r;
+        else
+            return false;
+    }
 }
