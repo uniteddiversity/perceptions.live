@@ -41,7 +41,7 @@
     $data['status'] = isset($video_data['status'])?$video_data['status']:'';
 
     $data['id'] = isset($video_data['id'])?$video_data['id']:'';
-
+    $data['language'] = isset($video_data['language'])?$video_data['language']:'en';
 
     //    dd($data);
     ?>
@@ -351,6 +351,15 @@
                                     <select class="form-control multi-select2-with-tags" id="sorting_tags" multiple name="sorting_tags[]">
                                         @foreach($sorting_tags as $tag)
                                         <option value="{{base64_encode($tag['id'])}}" <?php if(in_array($tag->id, old('sorting_tags',$data['sorting_tags']))){ echo 'selected'; } ?> >{{$tag['tag']}}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="status">Language</label>
+                                    <select class="form-control" id="language" name="language">
+                                        @foreach($languages as $lng)
+                                        <option value="{{$lng->code}}" <?php if(old('language',$data['language']) == $lng->code){ echo 'selected'; } ?> >{{$lng->language}}</option>
                                         @endforeach
                                     </select>
                                 </div>

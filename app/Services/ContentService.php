@@ -7,6 +7,7 @@ use App\Category;
 use App\Content;
 use App\Group;
 use App\HomeSliderFeed;
+use App\Language;
 use App\MetaData;
 use App\ShearedContent;
 use App\ShearedContentAssociation;
@@ -62,9 +63,14 @@ class ContentService
      * @var HomeSliderFeed
      */
     private $homeSliderFeed;
+    /**
+     * @var Language
+     */
+    private $language;
 
     public function __construct(MetaData $metaData, Content $content, User $user, ShearedContent $shearedContent,
-                                ShearedContentAssociation $shearedContentAssociation, Attachment $attachment, Category $category, Group $group, SortingTag $sortingTag, HomeSliderFeed $homeSliderFeed)
+                                ShearedContentAssociation $shearedContentAssociation, Attachment $attachment,
+                                Category $category, Group $group, SortingTag $sortingTag, HomeSliderFeed $homeSliderFeed, Language $language)
     {
         $this->metaData = $metaData;
         $this->content = $content;
@@ -76,6 +82,7 @@ class ContentService
         $this->group = $group;
         $this->sortingTag = $sortingTag;
         $this->homeSliderFeed = $homeSliderFeed;
+        $this->language = $language;
     }
 
     public function getMetaListByKey($key = '')
@@ -500,5 +507,10 @@ class ContentService
     public function deleteHomeSlider($id)
     {
         return $this->homeSliderFeed->where('id', $id)->delete();
+    }
+
+    public function getLanguages()
+    {
+        return $this->language->get();
     }
 }

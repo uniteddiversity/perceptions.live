@@ -175,9 +175,9 @@ class UserController extends Controller
         $groups = $this->userRepository->groupList($user_id);
         $access_levels = $this->userRepository->getAccessLevels();
         $status = $this->userRepository->getStatus();
-
+        $languages = $this->contentService->getLanguages();
         return view('user.content-add')
-            ->with(compact('categories','meta_array','user_list','sorting_tags','groups','access_levels','status', 'gci_tags'));
+            ->with(compact('categories','meta_array','user_list','sorting_tags','groups','access_levels','status', 'gci_tags','languages'));
     }
 
     public function postUploadVideo(Request $request)
@@ -238,7 +238,8 @@ class UserController extends Controller
 //                'captured_date' => date('Y-m-d'),
 //                'video_date' => date('Y-m-d'),
                 'created_by' => $user_id,
-                'user_comment' => $r['user_comment']
+                'user_comment' => $r['user_comment'],
+                'language' => $r['language']
             ]
         );
 

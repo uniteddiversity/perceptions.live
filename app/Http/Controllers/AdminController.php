@@ -117,7 +117,6 @@ class AdminController extends Controller
             return Redirect::back()->withErrors($validator->messages())->withInput();
         }
 
-
         $r = $request->toArray();
         $update_array = [
             'title' => $r['title'],
@@ -152,7 +151,8 @@ class AdminController extends Controller
 //                'captured_date' => date('Y-m-d'),
 //                'video_date' => date('Y-m-d'),
             'created_by' => $user_id,
-            'user_comment' => $r['user_comment']
+            'user_comment' => $r['user_comment'],
+            'language' => $r['language']
         ];
         if(isset($r['id'])){//if edit, original creator should remain
             unset($update_array['created_by']);
@@ -342,9 +342,10 @@ class AdminController extends Controller
         $groups = $this->userRepository->groupList($user_id);
         $access_levels = $this->userRepository->getAccessLevels();
         $status = $this->userRepository->getStatus();
+        $languages = $this->contentService->getLanguages();
 
         return view('admin.content-add')
-            ->with(compact('categories','meta_array','user_list','sorting_tags','groups','access_levels','status', 'gci_tags'));
+            ->with(compact('categories','meta_array','user_list','sorting_tags','groups','access_levels','status', 'gci_tags', 'languages'));
     }
 
     public function contentEdit($id)
@@ -361,8 +362,9 @@ class AdminController extends Controller
         $groups = $this->userRepository->groupList($user_id);
         $access_levels = $this->userRepository->getAccessLevels();
         $status = $this->userRepository->getStatus();
+        $languages = $this->contentService->getLanguages();
         return view('admin.content-add')
-            ->with(compact('categories','meta_array','user_list','sorting_tags','groups','access_levels','video_data','status', 'gci_tags', 'uploaded_files'));
+            ->with(compact('categories','meta_array','user_list','sorting_tags','groups','access_levels','video_data','status', 'gci_tags', 'uploaded_files','languages'));
     }
 
     public function adminUserAdd(Request $request)
