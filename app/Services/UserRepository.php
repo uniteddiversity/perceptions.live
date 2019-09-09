@@ -350,7 +350,12 @@ class UserRepository
                 $q->where('title', 'like', '%'.$filter['keyword'].'%');
                 $q->orWhere('brief_description', 'like', '%'.$filter['keyword'].'%');
                 $q->orWhere('primary_subject_tag', 'like', '%'.$filter['keyword'].'%');
+                $q->orWhere('contents.description', 'like', '%'.$filter['keyword'].'%');
+                $q->orWhere('contents.location', 'like', '%'.$filter['keyword'].'%');
             });
+            $contents = $contents->orWhere('user_sorting_tags.name', 'like', '%'.$filter['keyword'].'%');
+            $contents = $contents->orWhere('groups.name', 'like', '%'.$filter['keyword'].'%');
+            $contents = $contents->orWhere('sorting_tags.tag', 'like', '%'.$filter['keyword'].'%');
         }
 
         if(isset($filter['gcs']) && !empty($filter['gcs'])){
