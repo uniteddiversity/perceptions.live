@@ -389,4 +389,11 @@ class HomeController extends Controller
         $content = (string)htmlspecialchars($content);
         return array('content' => $content, 'json' => $json_output);
     }
+
+    public function searchDisplayNames(Request $request)
+    {
+        $r = $request->all();
+        $data = $this->userRepository->ajaxSearchDisplayNames($r['q']['term']);
+        echo json_encode($data);
+    }
 }

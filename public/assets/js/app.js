@@ -599,3 +599,62 @@ $('.content-type-select-ajax').on('select2:select', function (e) {
     $('#fk_id').val(data.id);
     $('#type').val(data.type);
 });
+
+
+$('.display-name-select-ajax').select2({
+    ajax: {
+        url: '/home/list-display-names/ajax',
+        dataType: 'json',
+        data: function (term, page) {
+            // page is the one-based page number tracked by Select2
+            return {
+                "q": term,
+                "_per_page": 30,
+                "_page": page,
+            };
+        },
+        initSelection: function (data) {
+            console.log('selected option ', data);
+        },
+        templateResult: function (data) {
+        },
+        processResults: function (response) {
+            let results = [];
+            $.each(response, function (index, data) {
+                results.push({
+                    id: data.id,
+                    text: data.text + ' ('+data.email+')',
+                    type: data.type
+                });
+            });
+
+            return {
+                results: results
+            };
+        },
+    }
+});
+
+$('.display-name-select-ajax').on('select2:select', function (e) {
+    let data = e.params.data;
+    videosForUser(data.id)
+});
+
+function videosForUser(user_id){
+    jQuery.ajax({
+        url: '/ajax/associated_videos_by_user_id/'+user_id,
+        method: 'GET'
+    }).done(function (response) {
+        console.log(response);
+        $('#claim_video_profile').html('');
+        response.forEach(function(element) {
+            $('#claim_video_profile').append($('<option>', {
+                value: element.id,
+                text: element.title
+            }));
+        });
+        // Do something with the response
+    }).fail(function () {
+        // Whoops; show an error.
+    });
+}

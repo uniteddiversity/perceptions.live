@@ -575,7 +575,7 @@ class UserController extends Controller
 
     public function claimUserProfile()
     {
-        $user_list = $this->userRepository->getUsers(array('filter_system_users' => true));
+//        $user_list = $this->userRepository->getUsers(array('filter_system_users' => true));
         return view('user.claim-profile-request')
             ->with(compact('user_list'));
     }
@@ -593,7 +593,7 @@ class UserController extends Controller
         $user_id = (!isset(Auth::user()->id))? 0 : Auth::user()->id;
 
         $validator = Validator::make($request->all(), [
-            'email' => 'required|email|unique:users',
+//            'email' => 'required|email|unique:users',
             'display_name' => 'required',
             'claim_video_profile' => 'required',
             'confirm_selected_content' => 'required',

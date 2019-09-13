@@ -63,6 +63,7 @@
         <script src="/assets/admin-temp/js/dashboard.js"></script>
 
         <script src="/js//dist/js/select2.full.min.js"></script>
+        <script src="/assets/js/app.js"></script>
 
         <script>
             $(document).ready(function() {

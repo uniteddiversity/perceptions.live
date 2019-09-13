@@ -27,11 +27,14 @@ $data['proof_images'] = array();
                             <input type="hidden" name="_token" id="csrf-token" value="{{ Session::token() }}" />
                             <div class="form-group">
                                 <label for="display_name">Display Name</label>
-                                <select class="form-control" id="display_name_for_claim" name="display_name">
+                                <?php /*<select class="form-control" id="display_name_for_claim" name="display_name">
                                     <option value="">Select Display Name</option>
                                     @foreach($user_list as $user)
                                         <option value="{{$user->id}}" >{{$user->display_name}}</option>
                                     @endforeach
+                                </select>*/ ?>
+                                <select class="display-name-select-ajax form-control" name="display_name">
+                                    <option>Search Here</option>
                                 </select>
                             </div>
 

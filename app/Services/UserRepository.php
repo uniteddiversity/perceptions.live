@@ -1031,5 +1031,21 @@ class UserRepository
 
         return $return;
     }
+
+    public function ajaxSearchDisplayNames($text)
+    {
+        $r = [];
+        $content = $this->user->where('display_name', 'like', '%'.$text.'%')->limit(10)->get()->toArray();
+
+        foreach($content as $user){
+            $r[] = array(
+                'id' => $user['id'],
+                'text' => empty($user['display_name'])?$user['display_name']:$user['email'],
+                'email' => $user['email']
+            );
+        }
+
+        return $r;
+    }
 }
 
