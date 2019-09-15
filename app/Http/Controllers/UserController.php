@@ -194,7 +194,9 @@ class UserController extends Controller
 //            'url' => 'required',
             'captured_date' => 'date_format:"d-m-Y"',
 //            'video_date' => 'required'
-        ]);
+            'g-recaptcha-response' => 'required|recaptcha'
+        ],
+            ['g-recaptcha-response.required' => 'Recaptcha must be clicked.']);
 
         if ($validator->fails()) {
             return Redirect::back()->withErrors($validator->messages())->withInput();
@@ -643,14 +645,18 @@ class UserController extends Controller
             $validator = Validator::make($request->all(), [
                 'name' => 'required|unique:groups,name,'.UID::translator($r['id']),//pass the id as third parameter
                 'description' => 'required',
-                'category_id' => 'required'
-            ]);
+                'category_id' => 'required',
+                'g-recaptcha-response' => 'required|recaptcha'
+            ],
+            ['g-recaptcha-response.required' => 'Recaptcha must be clicked.']);
         }else{
             $validator = Validator::make($request->all(), [
                 'name' => 'required|unique:groups',
                 'description' => 'required',
-                'category_id' => 'required'
-            ]);
+                'category_id' => 'required',
+                'g-recaptcha-response' => 'required|recaptcha'
+            ],
+            ['g-recaptcha-response.required' => 'Recaptcha must be clicked.']);
         }
 
         if ($validator->fails()) {
@@ -746,13 +752,16 @@ class UserController extends Controller
         $r = $request->toArray();
         $user_id = (!isset(Auth::user()->id))? 0 : Auth::user()->id;
 
-        $validator = Validator::make($request->all(), [
+        $validator = Validator::make($request->all(),
+            [
 //            'email' => 'required|email|unique:users',
-            'display_name' => 'required',
-            'claim_video_profile' => 'required',
-            'confirm_selected_content' => 'required',
-            'accept_tos' => 'required'
-        ]);
+                'display_name' => 'required',
+                'claim_video_profile' => 'required',
+                'confirm_selected_content' => 'required',
+                'accept_tos' => 'required',
+                'g-recaptcha-response' => 'required|recaptcha'
+            ],
+            ['g-recaptcha-response.required' => 'Recaptcha must be clicked.']);
 
         if ($validator->fails()) {
             return Redirect::back()->withErrors($validator->messages())->withInput();

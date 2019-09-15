@@ -815,9 +815,8 @@
             console.log('image path is ' + $('#preset_image_path').val());
             $('.cr-image').attr('src', $('#preset_image_path').val());
         });
-
     </script>
-
+    <script src='https://www.google.com/recaptcha/api.js'></script>
 </body>
 
 </html>

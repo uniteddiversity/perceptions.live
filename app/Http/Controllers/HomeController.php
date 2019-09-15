@@ -5,11 +5,13 @@ namespace App\Controllers;
 use App\Category;
 use App\Content;
 use App\Http\Controllers\Controller;
+use App\Mail\contactUs;
 use App\SiteSetting;
 use App\User;
 use Content\Services\ContentService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Validator;
 use User\Services\UserRepository;
@@ -395,5 +397,40 @@ class HomeController extends Controller
         $r = $request->all();
         $data = $this->userRepository->ajaxSearchDisplayNames($r['q']['term']);
         echo json_encode($data);
+    }
+
+    public function contactUs()
+    {
+        return view('user.contact-us');
+    }
+
+    public function contactUsPost(Request $request)
+    {
+        $r = $request->toArray();
+        $user_id = (!isset(Auth::user()->id))? 0 : Auth::user()->id;
+
+        $validator = Validator::make($request->all(),
+            [
+                'name' => 'required',
+                'email' => 'required|email',
+                'subject' => 'required',
+                'message' => 'required',
+                'g-recaptcha-response' => 'required|recaptcha'
+            ],
+            ['g-recaptcha-response.required' => 'Recaptcha must be clicked.']);
+
+        if ($validator->fails()) {
+            return Redirect::back()->withErrors($validator->messages())->withInput();
+        }
+
+        $to = [
+            [
+                'email' => 'jordan@perceptiontravel.tv',
+                'name' => 'jordan',
+            ]
+        ];
+        Mail::to($to)->send(new contactUs($request->all()));
+
+        return redirect()->back()->with('message', 'Successfully Sent!');
     }
 }

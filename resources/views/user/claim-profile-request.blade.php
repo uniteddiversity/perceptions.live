@@ -85,6 +85,14 @@ $data['proof_images'] = array();
                             </div>
 
                             <div class="form-group">
+                                @if(env('GOOGLE_RECAPTCHA_KEY'))
+                                <div class="g-recaptcha"
+                                     data-sitekey="{{env('GOOGLE_RECAPTCHA_KEY')}}">
+                                </div>
+                                @endif
+                            </div>
+
+                            <div class="form-group">
                                 <input type="checkbox" name="accept_tos" id="accept_tos" value="1" />
                                 <label for="password"> I have read and understand PRCPTION Travel's <a target="_blank" href="https://perceptiontravel.tv/terms-of-service/">Terms of Service</a>.</label>
                             </div>

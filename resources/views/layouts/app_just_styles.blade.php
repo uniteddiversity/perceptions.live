@@ -128,6 +128,7 @@
             }
 
         </script>
+        <script src='https://www.google.com/recaptcha/api.js'></script>
         <!-- End custom js for this page-->
 </body>
 <style>

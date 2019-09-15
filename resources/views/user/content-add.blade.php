@@ -379,6 +379,14 @@
                                         </select></span>
                                 </div>
 
+                                <div class="form-group">
+                                    @if(env('GOOGLE_RECAPTCHA_KEY'))
+                                    <div class="g-recaptcha"
+                                         data-sitekey="{{env('GOOGLE_RECAPTCHA_KEY')}}">
+                                    </div>
+                                    @endif
+                                </div>
+
 
                                 {{--<div class="form-group">--}}
                                 {{--<label for="exampleSelect1">Secondary Subject Tag</label>--}}

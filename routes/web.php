@@ -50,6 +50,8 @@ Route::post('/', function(){
     Route::get('/claim-profile-clean', '\App\Controllers\User\UserController@claimUserProfileClean');
     Route::post('/claim-profile-post', '\App\Controllers\User\UserController@claimUserProfilePost');
 
+    Route::get('/contact-us', '\App\Controllers\HomeController@contactUs');
+    Route::post('/contact-us-post', '\App\Controllers\HomeController@contactUsPost');
 
     Route::get('/ajax/associated_videos_by_user_id/{_user_id}', '\App\Controllers\User\UserController@getAssociatedVideosByUserId');
     Route::get('/home/ajax/video-search-list', '\App\Controllers\HomeController@searchVideosList');
