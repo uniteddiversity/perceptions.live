@@ -51,6 +51,9 @@
             <li>
                 <a href="#"><i class="fas fa-pencil-alt"></i>Submit Feedback</a>
             </li>
+            <li>
+                <a href="/contact"><i class="fas fa-pencil-alt"></i>Contact Us</a>
+            </li>
             @endif
 
 

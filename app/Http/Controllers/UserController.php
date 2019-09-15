@@ -9,6 +9,7 @@ use App\Content;
 use App\Group;
 use App\Http\Controllers\Controller;
 use App\Invoice;
+use App\Mail\groupCreated;
 use App\MediaPackage;
 use App\MediaProject;
 use App\MetaData;
@@ -21,6 +22,7 @@ use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Crypt;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Validator;
@@ -744,6 +746,17 @@ class UserController extends Controller
         }
 
         $this->userRepository->addUserToGroup($user_id, $new_group->id);//add himself to the group
+
+        if(!isset($r['id'])){
+            $to = [
+                [
+                    'email' => env("ADMIN_MAIL"),
+                    'name' => env("ADMIN_NAME"),
+                ]
+            ];
+
+            Mail::to($to)->send(new groupCreated($new_group));
+        }
 
         return redirect()->back()->with('message', 'Successfully Added!');
     }

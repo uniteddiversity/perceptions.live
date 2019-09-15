@@ -14,9 +14,10 @@
     });
 </script>
 
-@if(session()->has('message'))
-<div class="alert alert-success">
-    <script>
+@if(session()->has('message') && $test === 'abc')
+<script>
+    let message = '<?php echo session()->get('message') ?>'
+    if(message != ''){
         $.notify({
             title: '<?php echo session()->get('message') ?>',
             button: 'Confirm'
@@ -25,8 +26,8 @@
             autoHide: true,
             clickToHide: true
         });
-    </script>
-</div>
+    }
+</script>
 @endif
 <style>
     .notifyjs-foo-base {

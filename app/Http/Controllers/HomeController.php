@@ -425,8 +425,8 @@ class HomeController extends Controller
 
         $to = [
             [
-                'email' => 'jordan@perceptiontravel.tv',
-                'name' => 'jordan',
+                'email' => env("ADMIN_MAIL"),
+                'name' => env("ADMIN_NAME"),
             ]
         ];
         Mail::to($to)->send(new contactUs($request->all()));
