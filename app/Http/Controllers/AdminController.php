@@ -7,6 +7,8 @@ use App\Content;
 use App\Group;
 use App\HomeSliderFeed;
 use App\Http\Controllers\Controller;
+use App\Mail\groupApproved;
+use App\Mail\groupCreated;
 use App\MediaPackage;
 use App\MetaData;
 use App\SiteSetting;
@@ -16,6 +18,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Crypt;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Validator;
 //use System\Request;
@@ -563,6 +566,12 @@ class AdminController extends Controller
             return Redirect::back()->withErrors($validator->messages())->withInput();
         }
 
+        $old_group = [];
+        if(isset($r['id'])){
+            $old_group = $this->group->where('id', UID::translator($r['id']))->get()->first();
+        }
+
+
         $new_group = $this->group->updateOrCreate(
             [
                 'id'   => (isset($r['id']))?UID::translator($r['id']):0,
@@ -578,12 +587,23 @@ class AdminController extends Controller
                 'category_id' => $r['category_id'],
                 'contact_user_id' => $r['contact_user_id'],
 //                'accept_tos' => isset($r['accept_tos'])? 1 : 0,
-                'created_by' => Auth::user()->id,
+//                'created_by' => Auth::user()->id,
             ]
         );
 
+        if(!(isset($r['id']))){
+            $new_group = $this->group->updateOrCreate(
+                [
+                    'id' => $new_group->id,
+                ],
+                [
+                    'created_by' => Auth::user()->id,
+                ]
+            );
+        }
+
         if(isset($r['accept_tos'])){
-            $this->group->updateOrCreate(
+            $new_group = $this->group->updateOrCreate(
                 [
                     'id' => $new_group->id,
                 ],
@@ -594,7 +614,7 @@ class AdminController extends Controller
         }
 
         if(isset($r['status'])){
-            $this->group->updateOrCreate(
+            $new_group = $this->group->updateOrCreate(
                 [
                     'id' => $new_group->id,
                 ],
@@ -637,6 +657,15 @@ class AdminController extends Controller
             $this->userRepository->deleteGroupFromTag($new_group->id,'role');
             foreach($r['group_acting_roles'] as $tag){
                 $user_group = $this->userRepository->addTagToGroup($new_group->id, $tag,'role');
+            }
+        }
+
+        if(isset($r['id']) && $old_group->status == '2' && $new_group->status == '1' && $new_group->created_by != ''){
+            $created_user = $this->user->where('id', $new_group->created_by)->first();
+            if($created_user->id
+                != Auth::user()->id &&
+                $created_user->role != '1'){
+                Mail::to($created_user)->send(new groupApproved($new_group));
             }
         }
 
