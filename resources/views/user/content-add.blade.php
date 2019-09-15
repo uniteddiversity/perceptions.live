@@ -45,6 +45,7 @@
 
     //    dd($data);
     ?>
+
 <div class="col-lg-12 grid-margin stretch-card">
     <div class="card" style="box-shadow:none;">
         <div class="card-body">
@@ -79,9 +80,9 @@
 
                                 <span style="left:72px;"><i class="fas fa-users"></i><b>3</b></span>
                             </li>
-                            <li id="st4">
-                                <span style="left:100%; margin-left:-104px;"><i class="fas fa-filter"></i><b>4</b></span>
-                            </li>
+<!--                            <li id="st4">-->
+<!--                                <span style="left:100%; margin-left:-104px;"><i class="fas fa-filter"></i><b>4</b></span>-->
+<!--                            </li>-->
                         </ul>
                     </div>
 
@@ -292,10 +293,18 @@
                                     <label for="learn_more_url">URL (web address) to learn more about the contents of this video: </label>
                                     <input type="text" class="form-control" aria-describedby="nameHelp" id="learn_more_url" name="learn_more_url" placeholder="Learn More Url" value="{{ old('learn_more_url',$data['learn_more_url']) }}">
                                 </div>
+                                <div class="form-group">
+                                    @if(env('GOOGLE_RECAPTCHA_KEY'))
+                                    <div class="g-recaptcha"
+                                         data-sitekey="{{env('GOOGLE_RECAPTCHA_KEY')}}">
+                                    </div>
+                                    @endif
+                                </div>
                                 <!-- btns -->
                                 <div class="btn_outer">
                                     <a href="#" class="btn"><i class="fas fa-long-arrow-alt-left"></i> Back</a>
-                                    <a href="#" class="btn click" rel="st4">Next Step <i class="fas fa-long-arrow-alt-right"></i></a>
+<!--                                    <a href="#" class="btn click" rel="st4">Next Step <i class="fas fa-long-arrow-alt-right"></i></a>-->
+                                    <button type="button" onclick="submit_content()" class="btn dark">Submit PRCPTION</button>
                                 </div>
                                 <!-- btns -->
                             </div>
@@ -379,13 +388,7 @@
                                         </select></span>
                                 </div>
 
-                                <div class="form-group">
-                                    @if(env('GOOGLE_RECAPTCHA_KEY'))
-                                    <div class="g-recaptcha"
-                                         data-sitekey="{{env('GOOGLE_RECAPTCHA_KEY')}}">
-                                    </div>
-                                    @endif
-                                </div>
+
 
 
                                 {{--<div class="form-group">--}}

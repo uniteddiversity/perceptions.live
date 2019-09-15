@@ -177,6 +177,7 @@ class UserController extends Controller
         $access_levels = $this->userRepository->getAccessLevels();
         $status = $this->userRepository->getStatus();
         $languages = $this->contentService->getLanguages();
+
         return view('user.content-add')
             ->with(compact('categories','meta_array','user_list','sorting_tags','groups','access_levels','status', 'gci_tags','languages'));
     }
@@ -368,7 +369,7 @@ class UserController extends Controller
             }
         ////////////////////end video upload//////////////////
 
-        return redirect()->back()->with('message', 'Successfully Added!');
+        return redirect()->to('/')->with('message', 'Successfully Added!');
     }
 
     public function profileSettings()
