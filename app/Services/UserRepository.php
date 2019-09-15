@@ -464,7 +464,7 @@ class UserRepository
         return implode($pass); //turn the array into a string
     }
 
-    function groupList($user_id, $full = false, $group_id = 0)
+    function groupList($user_id, $full = false, $group_id = 0, $filter = [])
     {
         $user_info = $this->getUser($user_id);
 
@@ -489,6 +489,10 @@ class UserRepository
 //            $user_group->select('groups.*', DB::Raw("count(contents.id) as active_video_count"));
 
 
+        }
+
+        foreach($filter as $f){
+            $user_group = $user_group->where($f[0], $f[1], $f[2]);
         }
 
 //        $user_group->orderBy('groups.updated_at','DESC');
@@ -1046,6 +1050,10 @@ class UserRepository
         }
 
         return $r;
+    }
+
+    public function getGroupsByUser($user_id, $filter = []){
+
     }
 }
 

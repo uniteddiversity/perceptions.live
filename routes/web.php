@@ -117,6 +117,12 @@ Route::group(['prefix' => 'user', 'middleware' => ['auth', 'web']], function () 
     Route::get('/user-last-active', '\App\Controllers\User\UserController@postLastActive');
     Route::get('/movie-editor', '\App\Controllers\User\UserController@movieEditor');
     Route::get('/movie-editor/{_token}', '\App\Controllers\User\UserController@getTokenInfo');
+
+    Route::get('/group-list', '\App\Controllers\User\UserController@groupList');
+    Route::get('/user-group-add', '\App\Controllers\User\UserController@groupAdd');
+    Route::post('/post-group-add', '\App\Controllers\User\UserController@postGroupAdd');
+    Route::post('/post-user-group-add/{_group_id}', '\App\Controllers\User\UserController@postUserToGroupAdd');
+    Route::get('/group-edit/{_group_id}', '\App\Controllers\User\UserController@editGroup');
 });
 
 Route::group(['prefix' => 'user', 'middleware' => ['auth', 'web', 'admin']], function () {

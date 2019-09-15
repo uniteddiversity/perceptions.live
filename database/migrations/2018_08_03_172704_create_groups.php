@@ -29,7 +29,7 @@ class CreateGroups extends Migration
             $table->string('contact_name', 800)->nullable(true);
             $table->string('contact_email', 800)->nullable(true);
             $table->integer('accept_tos')->default(0)->nullable(true);
-            $table->integer('status')->default(1)->nullable(true);//1-active, 2-inactive, 3-deleted
+            $table->integer('status')->default(1)->nullable(true);//1-active, 2-inactive, 3-deleted, 5-system created
             $table->timestamps();
         });
     }

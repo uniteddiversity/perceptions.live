@@ -31,6 +31,32 @@
                     </li>
                 </ul>
             </li>
+
+
+
+            <li class="pcoded-hasmenu <?php if(in_array(Request::segment(3), array('group-list','user-to-group-add','user-group-add'))){ echo 'active pcoded-trigger'; } ?>">
+                <a href="javascript:void(0)">
+                    <span class="pcoded-micon"><i class="ti-list"></i></span>
+                    <span class="pcoded-mtext" data-i18n="nav.page_layout.main">Groups</span>
+                    <span class="pcoded-mcaret"></span>
+                </a>
+                <ul class="pcoded-submenu">
+                    <li class="nav-item <?php if(in_array(Request::segment(3), array('group-list'))){ echo 'active'; } ?>">
+                        <a class="nav-link" href="/user/group-list">
+                            <span class="pcoded-micon"><i class="ti-angle-right"></i></span>
+                            <span class="pcoded-mtext" data-i18n="nav.dash.default">All Groups</span>
+                            <span class="pcoded-mcaret"></span>
+                        </a>
+                    </li>
+                    <li class="nav-item <?php if(in_array(Request::segment(3), array('user-group-add'))){ echo 'active'; } ?>">
+                        <a class="nav-link" href="/user/user-group-add">
+                            <span class="pcoded-micon"><i class="ti-angle-right"></i></span>
+                            <span class="pcoded-mtext" data-i18n="nav.dash.default">Create Group</span>
+                            <span class="pcoded-mcaret"></span>
+                        </a>
+                    </li>
+                </ul>
+            </li>
         </ul>
         <ul class="pcoded-item pcoded-left-item">
             <li class="pcoded-hasmenu">
