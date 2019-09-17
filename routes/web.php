@@ -173,6 +173,8 @@ Route::group(['prefix' => 'user', 'middleware' => ['auth', 'web', 'admin']], fun
     Route::get('/admin/list-slider-feed', '\App\Controllers\User\AdminController@listHomeSliderFeed');
     Route::get('/admin/delete-slider-feed/{_id}', '\App\Controllers\User\AdminController@deleteHomeSliderFeed');
     Route::get('/admin/search-content-type/ajax', '\App\Controllers\User\AdminController@searchContentTypes');
+    Route::get('/admin/list-profile-claim-request', '\App\Controllers\User\AdminController@listClaimProfileRequest');
+    Route::get('/admin/view-profile-claim-request/{_id}', '\App\Controllers\User\AdminController@viewClaimProfileRequest');
 });
 
 Route::group(['prefix' => 'user', 'middleware' => ['auth', 'web', 'groupadmin']], function () {

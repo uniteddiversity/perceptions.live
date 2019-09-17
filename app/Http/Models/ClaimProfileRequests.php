@@ -26,6 +26,11 @@ class ClaimProfileRequests extends Model
         return $this->belongsTo('App\User','user_id');
     }
 
+    public function needUser()
+    {
+        return $this->belongsTo('App\User','fk_id');
+    }
+
     public function proof()
     {
         return $this->hasMany('App\Attachment', 'fk_id')->where('table','claim_profile_requests')

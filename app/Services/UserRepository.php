@@ -863,6 +863,20 @@ class UserRepository
         },'requestedUser'])->where('fk_id', $user_id)->where('type', 'users')->get();
     }
 
+    public function getClaimRequests($id = 0)
+    {
+        $claim_requests = $this->claimProfileRequests->with(['proof', 'needUser', 'associatedContent' => function($q){
+            $q->with('content');
+        },'requestedUser'])->where('type', 'users');
+
+        if($id != 0){
+            $claim_requests = $claim_requests->where('id', $id);
+        }
+
+        $claim_requests = $claim_requests->get();
+        return $claim_requests;
+    }
+
     public function getUsersList($user_id, $filter, $limit = 30)
     {
         $users = $this->user;

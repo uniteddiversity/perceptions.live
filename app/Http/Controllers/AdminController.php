@@ -1042,4 +1042,17 @@ class AdminController extends Controller
         $data = $this->contentService->ajaxSearchContentGroup($r['q']['term']);
         echo json_encode($data);
     }
+
+    public function listClaimProfileRequest()
+    {
+        $data = $this->userRepository->getClaimRequests();
+        return view('admin.profile-claim-request-list')->with(compact('data'));
+    }
+
+    public function viewClaimProfileRequest($_id)
+    {
+        $id = UID::translator($_id);
+        $data = $this->userRepository->getClaimRequests($id);
+        return view('admin.profile-claim-request-view')->with(compact('data'));
+    }
 }
