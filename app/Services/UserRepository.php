@@ -863,7 +863,7 @@ class UserRepository
         },'requestedUser'])->where('fk_id', $user_id)->where('type', 'users')->get();
     }
 
-    public function getClaimRequests($id = 0)
+    public function getClaimRequests($id = 0, $user_id = 0)
     {
         $claim_requests = $this->claimProfileRequests->with(['proof', 'needUser', 'associatedContent' => function($q){
             $q->with('content');
@@ -871,6 +871,10 @@ class UserRepository
 
         if($id != 0){
             $claim_requests = $claim_requests->where('id', $id);
+        }
+
+        if($user_id != 0){
+            $claim_requests = $claim_requests->where('user_id', $user_id);
         }
 
         $claim_requests = $claim_requests->get();
@@ -1068,6 +1072,11 @@ class UserRepository
 
     public function getGroupsByUser($user_id, $filter = []){
 
+    }
+
+    public function updateClaimRequestStatus($id, $status)
+    {
+        return $this->claimProfileRequests->where('id', $id)->update(['status' => $status]);
     }
 }
 

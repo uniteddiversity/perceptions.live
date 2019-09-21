@@ -48,13 +48,6 @@
                             <span class="pcoded-mcaret"></span>
                         </a>
                     </li>
-                    <li class="<?php if(in_array(Request::segment(3), array('list-profile-claim-request'))){ echo 'active'; } ?>">
-                        <a class="nav-link" href="/user/admin/list-profile-claim-request">
-                            <span class="pcoded-micon"><i class="ti-angle-right"></i></span>
-                            <span class="pcoded-mtext" data-i18n="nav.dash.default">Profile Claim Request's</span>
-                            <span class="pcoded-mcaret"></span>
-                        </a>
-                    </li>
                 </ul>
             </li>
 
@@ -76,6 +69,13 @@
                         <a href="/user/admin/user-add">
                             <span class="pcoded-micon"><i class="ti-angle-right"></i></span>
                             <span class="pcoded-mtext" data-i18n="nav.dash.default">Add User</span>
+                            <span class="pcoded-mcaret"></span>
+                        </a>
+                    </li>
+                    <li class="<?php if(in_array(Request::segment(3), array('list-profile-claim-request'))){ echo 'active'; } ?>">
+                        <a class="nav-link" href="/user/admin/list-profile-claim-request">
+                            <span class="pcoded-micon"><i class="ti-angle-right"></i></span>
+                            <span class="pcoded-mtext" data-i18n="nav.dash.default">Profile Claim Request's</span>
                             <span class="pcoded-mcaret"></span>
                         </a>
                     </li>

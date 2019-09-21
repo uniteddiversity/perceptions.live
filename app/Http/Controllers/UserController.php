@@ -1002,7 +1002,21 @@ class UserController extends Controller
                 //video process
             }
         }
+    }
 
 
+    public function listClaimProfileRequest()
+    {
+        $user_id = Auth::user()->id;
+        $data = $this->userRepository->getClaimRequests(0, $user_id);
+        return view('user.profile-claim-request-list')->with(compact('data'));
+    }
+
+    public function deleteClaimProfileRequest($_id)
+    {
+        $user_id = Auth::user()->id;
+        $id = UID::translator($_id);
+        $this->userRepository->updateClaimRequestStatus($id, 4);
+        return redirect('/user/user/list-profile-claim-request')->with('message', 'Successfully Deleted!');
     }
 }

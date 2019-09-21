@@ -32,13 +32,19 @@
                 </ul>
             </li>
 
-
+            <li class="<?php if(in_array(Request::segment(3), array('list-profile-claim-request'))){ echo 'active'; } ?>">
+                <a class="nav-link" href="/user/user/list-profile-claim-request">
+                    <span class="pcoded-micon"><i class="far fa-user-circle"></i></span>
+                    <span class="pcoded-mtext" data-i18n="nav.dash.default">My Claim Request's</span>
+                    <span class="pcoded-mcaret"></span>
+                </a>
+            </li>
 
             <li class="pcoded-hasmenu <?php if(in_array(Request::segment(3), array('group-list','user-to-group-add','user-group-add'))){ echo 'active pcoded-trigger'; } ?>">
                 <a href="javascript:void(0)">
                     <span class="pcoded-micon"><i class="ti-list"></i></span>
                     <span class="pcoded-mtext" data-i18n="nav.page_layout.main">Groups</span>
-                    <span class="pcoded-mcaret"></span>
+                    <span class="pcoded-mcaret"><i class="fas fa-sort-down"></i></span>
                 </a>
                 <ul class="pcoded-submenu">
                     <li class="nav-item <?php if(in_array(Request::segment(3), array('group-list'))){ echo 'active'; } ?>">

@@ -175,6 +175,7 @@ Route::group(['prefix' => 'user', 'middleware' => ['auth', 'web', 'admin']], fun
     Route::get('/admin/search-content-type/ajax', '\App\Controllers\User\AdminController@searchContentTypes');
     Route::get('/admin/list-profile-claim-request', '\App\Controllers\User\AdminController@listClaimProfileRequest');
     Route::get('/admin/view-profile-claim-request/{_id}', '\App\Controllers\User\AdminController@viewClaimProfileRequest');
+    Route::post('/admin/post-claim-request/{_id}', '\App\Controllers\User\AdminController@postClaimProfileRequest');
 });
 
 Route::group(['prefix' => 'user', 'middleware' => ['auth', 'web', 'groupadmin']], function () {
@@ -235,4 +236,6 @@ Route::group(['prefix' => 'user', 'middleware' => ['auth', 'web', 'user']], func
 //    Route::post('/user/post-content-add', '\App\Controllers\User\UserController@contentAdd');
     Route::get('/user/sorting-tag-add', '\App\Controllers\User\UserController@sortingTagAdd');
     Route::post('/user/post-sorting-tag-add', '\App\Controllers\User\UserController@postSortingTagAdd');
+    Route::get('/user/list-profile-claim-request', '\App\Controllers\User\UserController@listClaimProfileRequest');
+    Route::get('/user/delete-profile-claim-request/{_id}', '\App\Controllers\User\UserController@deleteClaimProfileRequest');
 });

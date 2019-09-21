@@ -9,7 +9,10 @@ $data = $data[0];
             <div class="card">
                 <div class="card-body">
                     <h4 class="card-title">Claim request info</h4>
-                    <div class="table-responsive">
+                    <form action="/user/admin/post-claim-request/{{$data->id}}" method="post" id="submit_content" enctype='multipart/form-data'>
+                        <input type="hidden" name="_token" id="csrf-token" value="{{ Session::token() }}" />
+                        <div class="table-responsive">
+                        @include('partials.admin-notification-partial')
                         <table>
                             <tr class="table">
                                 <th>Email</th>
@@ -72,16 +75,15 @@ $data = $data[0];
 <!--                            <button type="button" class="btn btn-primary" name="delete">Delete</button>-->
 <!--                        </div>-->
                         <div class="row">
-                            <div class="col-1">
-                                <button type="button" class="btn btn-primary" name="approve">Approve</button>
+                            <div class="col-1.5">
+                                <button type="submit" class="btn btn-primary" name="status" value="1" onclick="return confirm('Are you sure?')">Approve</button>
                             </div>
-                            <div class="col-1">
-                                <button type="button" class="btn btn-primary" name="delete">Delete</button>
+                            <div class="col-2">
+                                <button type="submit" class="btn btn-primary" name="status" value="4" onclick="return confirm('Are you sure?')">Delete</button>
                             </div>
                         </div>
-
-
                     </div>
+                    </form>
                 </div>
             </div>
         </div>

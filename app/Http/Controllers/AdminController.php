@@ -7,6 +7,8 @@ use App\Content;
 use App\Group;
 use App\HomeSliderFeed;
 use App\Http\Controllers\Controller;
+use App\Mail\ClaimProfileApproved;
+use App\Mail\contactUs;
 use App\Mail\groupApproved;
 use App\Mail\groupCreated;
 use App\MediaPackage;
@@ -1053,6 +1055,32 @@ class AdminController extends Controller
     {
         $id = UID::translator($_id);
         $data = $this->userRepository->getClaimRequests($id);
+
         return view('admin.profile-claim-request-view')->with(compact('data'));
+    }
+
+    public function postClaimProfileRequest($_id, Request $request)
+    {
+        $r = $request->all();
+        $this->userRepository->updateClaimRequestStatus($_id, $r['status']);
+
+        if($r['status'] == 1){
+            $request_data = $this->userRepository->getClaimRequests($_id);
+//            dd($request_data);
+            $to = [
+                [
+                    'email' => env("ADMIN_MAIL"),
+                    'name' => env("ADMIN_NAME"),
+                ],
+                [
+                    'email' => $request_data[0]['email'],
+                    'name' => $request_data[0]['email'],
+                ]
+            ];
+
+            Mail::to($to)->send(new ClaimProfileApproved($request_data[0]));
+        }
+
+        return redirect('/user/admin/list-profile-claim-request')->with('message', 'Successfully Added!');
     }
 }
