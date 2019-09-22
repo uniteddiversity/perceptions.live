@@ -290,6 +290,13 @@ class HomeController extends Controller
         $filter['gcs'] = isset($_GET['gcs'])?($_GET['gcs']):'';
         $filter['video_id'] = isset($_GET['video_id'])?($_GET['video_id']):'';
 
+        $filter['text'] = isset($_GET['text'])?($_GET['text']):'';
+        $filter['date_from'] = isset($_GET['date_from'])?($_GET['date_from']):'';
+        $filter['date_to'] = isset($_GET['date_to'])?($_GET['date_to']):'';
+        $filter['location_text'] = isset($_GET['location_text'])?($_GET['location_text']):'';
+        $filter['sorting_tag'] = isset($_GET['sorting_tag'])?($_GET['sorting_tag']):'';
+        $filter['service_or_opportunity'] = isset($_GET['exchange_for'])?($_GET['exchange_for']):'';
+
         $uploaded_list = $this->userRepository->getPublicContents($user_id, $filter, $result_count);
         $json_output = $this->getSearchListInJson($uploaded_list);
         $content = view('partials.video-search-result')

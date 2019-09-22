@@ -13,14 +13,14 @@
             <div class="row">
                 <div class="col-lg-6">
                     <div class="mlfield">
-                        <input type="text" placeholder="Location" />
+                        <input type="text" placeholder="Location" id="ads_location" />
                         <i class="fa fa-map-marker-alt"></i>
                     </div>
                 </div>
                 <div class="col-lg-6">
                     <div class="mlfield half">
-                        <select class="selectbox">
-                            <option>All Categories</option>
+                        <select class="selectbox" id="ads_category">
+                            <option value="">All Categories</option>
                             @foreach($categories as $cat)
                             <option value="{{$cat->id}}">{{$cat->name}}</option>
                             @endforeach
@@ -50,14 +50,14 @@
             <div class="row">
                 <div class="col-lg-12">
                     <div class="mlfield s2">
-                        <input type="text" placeholder="Keywords?" />
+                        <input type="text" id="ads_keyword" placeholder="Keywords?" />
                         <i class="fa fa-tags"></i>
                     </div>
                 </div>
                 <div class="col-lg-12">
                     <div class="mlfield s2" style="margin-bottom:45px;">
 
-                        <select class="selectbox" placeholder="Community Intentions">
+                        <select id="ads_intentions" class="selectbox" placeholder="Community Intentions">
                             <option value="">All Community Intentions</option>
                             <?php
                             foreach($gci_tags as $tag){
@@ -69,8 +69,8 @@
                 </div>
                 <div class="col-lg-12">
                     <div class="mlfield s2" style="margin-bottom:30px;">
-                        <select class="selectbox">
-                            <option>All Sorting Tags</option>
+                        <select class="selectbox" id="ads_sorting_tag">
+                            <option value="">All Sorting Tags</option>
                             @foreach($sorting_tags as $tag)
                             <option value="{{$tag->id}}">{{$tag->tag}}</option>
                             @endforeach
@@ -83,12 +83,12 @@
                         <div class="mltags">
                             <div class="row">
                                 <div class="col-lg-6">
-                                    <p class="c-label"><input name="cb" id="1" type="checkbox"><label for="1">Service</label></p>
-                                    <p class="c-label"><input name="cb" id="2" type="checkbox"><label for="2">Opportunity</label></p>
+                                    <p class="c-label"><input class="exchange_for" value="2" name="cb" id="1" type="checkbox"><label for="1">Service</label></p>
+                                    <p class="c-label"><input class="exchange_for" value="1" name="cb" id="2" type="checkbox"><label for="2">Opportunity</label></p>
                                 </div>
                                 <div class="col-lg-6">
-                                    <p class="c-label"><input name="cb" id="4" type="checkbox"><label for="4">Sponsored</label></p>
-                                    <p class="c-label"><input name="cb" id="3" type="checkbox"><label for="3">User-Submitted</label></p>
+                                    <p class="c-label"><input class="exchange_for" value="service" name="cb" id="4" type="checkbox"><label for="4">Sponsored</label></p>
+                                    <p class="c-label"><input class="exchange_for" value="service" name="cb" id="3" type="checkbox"><label for="3">User-Submitted</label></p>
                                 </div>
                             </div>
                         </div>
@@ -97,7 +97,7 @@
 
 
             </div>
-            <button type="submit">Search <i class="flaticon-magnifying-glass"></i></button>
+            <button type="button" onclick="advance_search()">Search <i class="flaticon-magnifying-glass"></i></button>
         </form>
     </div>
 </div>

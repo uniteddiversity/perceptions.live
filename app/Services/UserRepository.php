@@ -328,6 +328,9 @@ class UserRepository
             })->leftJoin('tag_content_associations as search_tag', function($q){
                 $q->on( 'contents.id', 'search_tag.content_id');
                 $q->where( 'search_tag.tag_for', 'gci');
+            })->leftJoin('tag_content_associations as exchange_for', function($q){
+                $q->on( 'contents.id', 'exchange_for.content_id');
+                $q->where( 'exchange_for.tag_for', 'exchange');
             })
             ->leftJoin('sorting_tags', function($q){
                 $q->on('sorting_tags.id', 'tag_content_associations.content_tag_id');
@@ -358,12 +361,19 @@ class UserRepository
             $contents = $contents->orWhere('sorting_tags.tag', 'like', '%'.$filter['keyword'].'%');
         }
 
+        if(isset($filter['text']) && !empty($filter['text'])){
+            $contents = $contents->where(function($q) use($filter){
+                $q->where('title', 'like', '%'.$filter['text'].'%');
+                $q->orWhere('brief_description', 'like', '%'.$filter['text'].'%');
+            });
+        }
+
         if(isset($filter['gcs']) && !empty($filter['gcs'])){
             $contents = $contents->where('search_tag.content_tag_id', $filter['gcs']);
         }
 
         if(isset($filter['category_id']) && !empty($filter['category_id'])){
-            $contents = $contents->where('category_id', $filter['category_id']);
+            $contents = $contents->where('contents.category_id', $filter['category_id']);
         }
 
         if(isset($filter['video_id']) && !empty($filter['video_id'])){
@@ -378,10 +388,30 @@ class UserRepository
             $contents = $contents->where('user_groups.user_id', $filter['group_involvement']);
         }
 
+        if(isset($filter['date_from']) && !empty($filter['date_from'])){
+            $contents = $contents->where('contents.video_date', '>=', $filter['date_from']);
+        }
+
+        if(isset($filter['date_to']) && !empty($filter['date_to'])){
+            $contents = $contents->where('contents.video_date', '<=', $filter['date_to']);
+        }
+
+        if(isset($filter['location_text']) && !empty($filter['location_text'])){
+            $contents = $contents->where('contents.location', 'LIKE', '%'.$filter['location_text'].'%');
+        }
+
+        if(isset($filter['sorting_tag']) && !empty($filter['sorting_tag'])){
+            $contents = $contents->where('sorting_tags.tag', $filter['sorting_tag']);
+        }
+
+        if(isset($filter['service_or_opportunity']) && !empty($filter['service_or_opportunity'])){
+            $contents = $contents->whereIn('exchange_for.content_tag_id', explode(',',$filter['service_or_opportunity']));
+        }
+
         $contents = $contents->select('contents.id', DB::Raw("SUBSTRING(contents.brief_description, 1, 128) as trim_description"), 'contents.lat', 'contents.long', 'contents.title', 'contents.url',
                 'users.display_name','users.id as user_id','contents.created_at','contents.captured_date','contents.location','contents.user_id','contents.primary_subject_tag',DB::Raw("GROUP_CONCAT(DISTINCT (user_sorting_tags.name) SEPARATOR ', ') as user_association"), DB::Raw("GROUP_CONCAT(DISTINCT (groups.name) SEPARATOR ', ') as group_names"), DB::Raw("GROUP_CONCAT(DISTINCT concat(groups.name,'-',groups.id) SEPARATOR ',') as group_names_ids"),
                 DB::Raw("GROUP_CONCAT(DISTINCT (concat(sorting_tags.tag_color,'-',sorting_tags.id,'-',sorting_tags.tag)) SEPARATOR ', ') as tag_colors") )
-            ->groupBy('contents.id')->orderBy('contents.captured_date', 'DESC')->limit(500);
+            ->groupBy('contents.id')->orderBy('contents.captured_date', 'DESC')->limit(1000);
 
         if($per_page != null){
             $contents = $contents->paginate($per_page);
@@ -389,7 +419,7 @@ class UserRepository
             $contents = $contents->get();
         }
         $r = array(); $i = 0;
-//dd($contents->lastPage());
+
         foreach($contents as $c){
             if(isset($c['lat']) && isset($c['long'])){
                 $r[$i] = $c;
