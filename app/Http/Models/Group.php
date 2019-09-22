@@ -41,6 +41,11 @@ class Group extends Model
         return $this->hasMany('App\TagGroupAssociation','group_id')->where('slug','experience_kno');
     }
 
+    public function gci()
+    {
+        return $this->hasMany('App\TagGroupAssociation','group_id')->where('slug','gci');
+    }
+
     public function actingRoles()
     {
         return $this->hasMany('App\TagGroupAssociation','group_id')->where('slug','role');

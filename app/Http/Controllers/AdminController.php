@@ -514,6 +514,7 @@ class AdminController extends Controller
 
     public function groupAdd()
     {
+        $gci_tags = $this->userRepository->getGreaterCommunityIntentionTag();
         $categories = $this->category->get();
         $user_id = (!isset(Auth::user()->id))? 0 : Auth::user()->id;
         $user_list = $this->userRepository->getUsers(array(),$user_id);
@@ -523,7 +524,7 @@ class AdminController extends Controller
         $user_acting_role = $this->userRepository->getUserActingRoles();
 
         return view('admin.group-add')
-            ->with(compact('categories','user_list','status','experience_knowledge_tags','user_acting_role'));
+            ->with(compact('categories','user_list','status','experience_knowledge_tags','user_acting_role','gci_tags'));
     }
 
     public function postUserToGroupAdd(Request $request, $group_id)
@@ -654,6 +655,20 @@ class AdminController extends Controller
             }
         }
 
+        if(isset($r['grater_community_intention_ids'])){
+            $this->userRepository->deleteTagsOfGroupBySlug($new_group->id, 'gci');
+            foreach($r['grater_community_intention_ids'] as $sorting_tags_id){
+                $tag_id = base64_decode($sorting_tags_id);
+                if(is_numeric($tag_id)){
+                    $this->userRepository->addTagToGroup($new_group->id, $tag_id,'gci');
+                }else{
+//                    $newly_created_id = $this->userRepository->addIfNotExist($sorting_tags_id,'gci', Auth::user()->id);
+//                    if(isset($newly_created_id->id))
+//                        $this->userRepository->addTagToGroup($new_group->id, $newly_created_id->id,  'gci');
+                }
+            }
+        }
+
         //add role tag to user
         if(isset($new_group->id) && !empty($r['group_acting_roles'])){
             $this->userRepository->deleteGroupFromTag($new_group->id,'role');
@@ -709,7 +724,7 @@ class AdminController extends Controller
     public function editGroup($id, Request $request)
     {
         $id = UID::translator($id);
-
+        $gci_tags = $this->userRepository->getGreaterCommunityIntentionTag();
         $categories = $this->category->get();
         $user_id = (!isset(Auth::user()->id))? 0 : Auth::user()->id;
         $user_list = $this->userRepository->getUsers(array(),$user_id);
@@ -719,7 +734,7 @@ class AdminController extends Controller
         $user_acting_role = $this->userRepository->getUserActingRoles();
 
         return view('admin.group-add')
-            ->with(compact('categories','group','user_list','status','experience_knowledge_tags','user_acting_role'));
+            ->with(compact('categories','group','user_list','status','experience_knowledge_tags','user_acting_role','gci_tags'));
     }
 
     public function approveContent($id){

@@ -500,6 +500,8 @@ class UserRepository
             $user_group = $user_group->where('groups.id', $group_id);
             $user_group->with(['proofOfGroup','groupAvatar','actingRoles','experienceKnowledge' => function($q){
                 $q->with('tag');
+            },'gci' => function($q){
+                $q->with('tag');
             }]);
             $user_group = $user_group->groupBy('groups.id')->first();
         }else{
