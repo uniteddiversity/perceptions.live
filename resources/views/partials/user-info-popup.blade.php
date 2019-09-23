@@ -19,7 +19,7 @@ $display = ($user_status == 'private' || $user_status == 'only-logged')? false :
 
                     <div class="right" style="float:left;">
                         <div style="float:left; width:100%;">
-                            <h4 style="margin-bottom:5px;">{{$info['user_groups']['display_name']}}
+                            <h4 style="margin-bottom:5px;">{{$info['display_name']}}
                                 <?php
                                 if($user_status == 'public'){
                                     echo '<i class="fa fa-eye" style="display:none;"></i>';
@@ -46,7 +46,7 @@ $display = ($user_status == 'private' || $user_status == 'only-logged')? false :
 
                             <?php if($display){ ?>
                             <div style="float:left; clear:both; margin-bottom:10px;">
-                                <span style="font-size: 18px;"> <em>{{$info['user_groups']['first_name']}}</em></span>
+                                <span style="font-size: 18px;"> <em>{{$info['first_name']}}</em></span>
                             </div>
                         </div>
 
@@ -55,10 +55,10 @@ $display = ($user_status == 'private' || $user_status == 'only-logged')? false :
                         <?php } ?>
                         <?php /*<div style="padding-top: 20px; font-size: .9em; line-height: 1.3em;"><i class="fa fa-clipboard"></i> SKILLSitem1, <i class="fa fa-clipboard"></i> SKILLSitem2, etc</div> */ ?>
 
-                        <?php if(isset($info['user_groups']->actingRoles) && count($info['user_groups']->actingRoles) > 0){ ?>
+                        <?php if(isset($info->actingRoles) && count($info->actingRoles) > 0){ ?>
                         <div class="roles" style="padding-top: 10px; font-size: .9em; line-height: 1.3em; float:left;">
                             <span style="margin:0;">COLLABORATION ROLES: </span>
-                            <?php foreach($info['user_groups']->actingRoles as $tag){ ?>
+                            <?php foreach($info->actingRoles as $tag){ ?>
                             <span data-toggle="tooltip" data-animation="true" data-placement="bottom" data-original-title="<?php echo $tag->tag->name ?>"><i class="fa <?php echo $tag->tag->icon ?>"></i></span>
                             <?php } ?>
 
@@ -68,7 +68,7 @@ $display = ($user_status == 'private' || $user_status == 'only-logged')? false :
                     <div class="btn_top">
                         <?php } //only visible true ?>
 
-                        <?php if($info['user_groups']['status_id'] == '5' ){ ?>
+                        <?php if($info['status_id'] == '5' ){ ?>
                         <a class="btn white" href="/claim-profile" target="_blank">Claim this Profile</a>
                         <?php } ?>
                     </div>
@@ -83,7 +83,7 @@ $display = ($user_status == 'private' || $user_status == 'only-logged')? false :
         <div class="video_inner col-9">
             <div style="display: block; width:100%; float: left; text-align: center; padding-top:15px;padding-bottom:10px;">
                 <span style="text-transform: none; font-style: italic;">
-                    <?php echo $info['user_groups']['description'] ?>
+                    <?php echo $info['description'] ?>
                 </span>
             </div>
             <div>

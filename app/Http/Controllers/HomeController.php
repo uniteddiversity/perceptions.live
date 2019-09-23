@@ -129,7 +129,7 @@ class HomeController extends Controller
     public function getUserInfo($user_id)
     {
         $user_associate_videos = $this->userRepository->getAssociatedVideosForUser($user_id);
-//        $info = $this->userRepository->getUser($user_id);
+        $info = $this->userRepository->getUser($user_id);
         $info['user_groups'] = $this->userRepository->getUserGroups($user_id, $contents2, $this->per_page);
         $info['user_involvement_videos'] = $this->userRepository->getPublicContents($user_id, array('user_involvement' => $user_id), $count, $contents1, $this->per_page);
         $info['group_involvement_videos'] = $this->userRepository->getPublicContents($user_id, array('group_involvement' => $user_id), $count);
