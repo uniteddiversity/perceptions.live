@@ -1,6 +1,6 @@
 <div class="openfilters">
     <span>
-        <i class="far fa-arrow-alt-circle-down"></i>Adv Search</span></div>
+        <i class="fas fa-search maginify-glass" ></i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></div>
 <div class="mlfilter-sec fakeScroll fakeScroll--inside" style="background: #d5d5ed;">
     <div class="mltitle">
         <h3>Advanced Search</h3>

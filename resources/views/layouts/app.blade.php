@@ -39,7 +39,7 @@
 
 </head>
 
-<body class="full-height" id="scrollup">
+<body class="full-height" id="scrollup" >
 
     <div class="page-loading">
         <img src="/assets/findgo/images/loader.gif" alt="" />
@@ -282,6 +282,22 @@
         .leaflet-control-zoom-out{
             color : #47489E !important;
         }
+        /* Participate Icon */
+        .participate{
+            top: 70%;
+            z-index: 10001;
+            color: #1C1C8C;
+            position: absolute;
+            left: 50%;
+            font-size: 100px;
+
+        }
+        /* Left Magnifying Glass */
+        .maginify-glass{
+            font-size: 40px;
+            transform: rotate(180deg);
+        }
+
 </style>
     <script>
         $(document).ready(function() {

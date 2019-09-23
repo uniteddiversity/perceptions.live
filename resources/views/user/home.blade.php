@@ -18,9 +18,10 @@
 
                         <div class="half-map" style="height: 100%;">
                             <div id="map" class="map" style="height: 100%;margin-left:30px;">&nbsp;</div>
+                            <!-- <div class="participate" style="height: 100%;">
+                               <i class="fas fa-cloud-upload-alt pointer" style="cursor:pointer" onclick="window.location='/user/content-add'"></i>
+                            </div> -->
                         </div>
-
-
                     </div>
                 </div>
             </div>
