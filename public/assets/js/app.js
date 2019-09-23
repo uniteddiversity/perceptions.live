@@ -1,5 +1,6 @@
 var model_links = [];
 var model_links_current_pos = 0;
+var showed_markers = null;
 
 if (typeof (L) != "undefined") {
     if ($('#video_id').val() != undefined) {
@@ -48,6 +49,7 @@ if (typeof (L) != "undefined") {
         ext: 'png'
     }).addTo(map);
 
+
     myURL = '';
     var markerClusters = L.markerClusterGroup({
         showCoverageOnHover: false,
@@ -75,6 +77,14 @@ if (typeof (L) != "undefined") {
 var m;
 function updateMarkers(markers) {
     map.removeLayer(markerClusters);
+
+    function onLocationFound(e) {
+        searchVideoWithUserLocation();
+    }
+
+
+    map.on("locationfound", onLocationFound)
+
 
     var markerClusters2 = L.markerClusterGroup({
         showCoverageOnHover: false,
@@ -297,11 +307,49 @@ function searchVideo() {
             console.log(data.json.original);
             if (data.content == '')
                 $('#video_search_res').html('No result!');
-
+            showed_markers = data.json.original;
             updateMarkers(data.json.original);
+            console.log(data.content);
             $('#video_search_res').html(decode(data.content));
 
         });
+}
+
+/////////////////////////////////////////////////////////
+function searchVideoWithUserLocation() {
+    $('#video_search_res').html('<i class="fa fa-spinner"></i> loading.....');
+
+    var $search_text = $('#search_text').val();
+    var $search_cat = $('#content_search_cat').val();
+    var $video_id = $('#video_id').val();
+    if ($search_text == undefined)
+        $search_text = '';
+    if ($search_cat == undefined)
+        $search_cat = '';
+    if ($video_id == undefined)
+        $video_id = '';
+
+
+    if (showed_markers) {
+        let markers = showed_markers.filter((marker) => {
+            return map.getBounds().contains([marker.lat, marker.lng]);
+        });
+        let ids = markers.map(marker => marker.id).join();
+
+        $.get("/home/ajax/show-current-feed/?keyword=" + $search_text + "&category_id=" + $search_cat
+            + "&video_id=" + $video_id + "&ids=" + ids, function (data) {
+                if (data.content == '')
+                    $('#video_search_res').html('No result!');
+                console.log(123);
+                // let new_data = data.json.original;
+                // new_data = new_data.filter((marker) => {
+                //     return map.getBounds().contains([marker.lat, marker.lng]);
+                // });
+
+                $('#video_search_res').html(decode(data.content));
+            });
+    }
+
 }
 
 function searchByTag(id) {
