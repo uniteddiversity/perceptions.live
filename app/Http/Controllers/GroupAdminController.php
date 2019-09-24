@@ -91,6 +91,14 @@ class GroupAdminController extends Controller
     public function contentList()
     {
         $user_id = (!isset(Auth::user()->id))? 0 : Auth::user()->id;
+        $videos = $this->contentService->getContentList($user_id, [], null, 20, true);
+        return view('group-admin.content-list')
+            ->with(compact('videos'));
+    }
+
+    public function groupContentListNew()
+    {
+        $user_id = (!isset(Auth::user()->id))? 0 : Auth::user()->id;
         $videos = $this->contentService->getContentList($user_id);
         return view('group-admin.content-list')
             ->with(compact('videos'));
@@ -107,9 +115,10 @@ class GroupAdminController extends Controller
         $groups = $this->userRepository->groupList($user_id);
         $access_levels = $this->userRepository->getAccessLevels();
         $status = $this->userRepository->getStatus();
+        $languages = $this->contentService->getLanguages();
 
         return view('admin.content-add')
-            ->with(compact('categories','meta_array','user_list','sorting_tags','groups','access_levels','status', 'gci_tags'));
+            ->with(compact('categories','meta_array','user_list','sorting_tags','groups','access_levels','status', 'gci_tags', 'languages'));
     }
 
     public function contentEdit($id)
@@ -125,8 +134,10 @@ class GroupAdminController extends Controller
         $groups = $this->userRepository->groupList($user_id);
         $access_levels = $this->userRepository->getAccessLevels();
         $status = $this->userRepository->getStatus();
+        $languages = $this->contentService->getLanguages();
+
         return view('admin.content-add')
-            ->with(compact('categories','meta_array','user_list','sorting_tags','groups','access_levels','video_data','status', 'gci_tags'));
+            ->with(compact('categories','meta_array','user_list','sorting_tags','groups','access_levels','video_data','status', 'gci_tags', 'languages'));
     }
 
     public function adminUserAdd(Request $request)

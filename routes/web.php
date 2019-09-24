@@ -185,8 +185,10 @@ Route::group(['prefix' => 'user', 'middleware' => ['auth', 'web', 'groupadmin']]
     Route::get('/group-admin/user-add', '\App\Controllers\User\GroupAdminController@userAdd');
     Route::get('/group-admin/user-edit/{_user_id}', '\App\Controllers\User\GroupAdminController@adminUserEdit');
     Route::get('/group-admin/video-edit/{_content_id}', '\App\Controllers\User\GroupAdminController@contentEdit');
+    Route::post('/admin/post-upload-video', '\App\Controllers\User\AdminController@postUploadVideo');
     Route::post('/group-admin/post-user-add', '\App\Controllers\User\GroupAdminController@adminUserAdd');
     Route::get('/group-admin/content-list', '\App\Controllers\User\GroupAdminController@contentList');
+    Route::get('/group-admin/content-list-group', '\App\Controllers\User\GroupAdminController@groupContentListNew');
 //    Route::get('/group-admin/content-add', '\App\Controllers\User\GroupAdminController@contentAdd');
 //    Route::post('/group-admin/post-content-add', '\App\Controllers\User\GroupAdminController@contentAdd');
     Route::get('/group-admin/user-group-add', '\App\Controllers\User\GroupAdminController@groupAdd');

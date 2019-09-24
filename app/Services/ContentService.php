@@ -105,7 +105,7 @@ class ContentService
         return $meta_array;
     }
 
-    public function getContentList($user_id, $filter = array(), $page = null, $page_size = 20)
+    public function getContentList($user_id, $filter = array(), $page = null, $page_size = 20, $only_my = false)
     {
         $user_info = $this->getUser($user_id);
 
@@ -126,6 +126,10 @@ class ContentService
             $videos->leftJoin('user_groups as created_by_user_groups', 'created_by_user_groups.group_id','group_content_associations.group_id');
         }else{//if user
             $videos->where('user_id', $user_info['id']);
+        }
+
+        if($only_my){
+            $videos->where('contents.user_id', $user_info['id']);
         }
 
         if(isset($filter['open_list'])){

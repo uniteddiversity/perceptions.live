@@ -52,13 +52,15 @@ if(typeof(L) != "undefined"){
 // }
 
 var m;
-function updateMarkers(markers){
-    map.removeLayer(markerClusters);
+function updateMarkers(markers, remove){
+    // map.removeLayer(markerClusters);
+    markerClusters.clearLayers();
 
-    var markerClusters2 = L.markerClusterGroup();
-    map.addLayer( markerClusters2 );
+    // let markerClusters2 = L.markerClusterGroup();
+    // map.addLayer( markerClusters2 );
 
-    var myIcon = L.icon({
+
+    let myIcon = L.icon({
         iconUrl: myURL + '/assets/img/globe_new.png',
         iconRetinaUrl: myURL + '/assets/img/globe_new.png',
         iconSize: [29, 29],
@@ -66,20 +68,20 @@ function updateMarkers(markers){
         popupAnchor: [0, -14]
     });
 
-    var all_b = [];
-    for ( var i = 0; i < markers.length; ++i )
+    let all_b = [];
+    for ( let i = 0; i < markers.length; ++i )
     {
-        var popup = 'abc'+markers[i].name;
+        let popup = 'abc'+markers[i].name;
         // var m = L.marker( [markers[i].lat, markers[i].lng], {icon: myIcon} )
         //     .bindPopup( popup );
         m = L.marker( [markers[i].lat, markers[i].lng], {icon: myIcon, id: markers[i].id} );
         m.on('click', onMarkerClick);
-        markerClusters2.addLayer( m );
+        markerClusters.addLayer( m );
         all_b.push(m);
-        console.log(markers[i]);
+        console.log('new markers',markers[i]);
     }
 
-    var group = new L.featureGroup(all_b);
+    let group = new L.featureGroup(all_b);
     // map.fitBounds(group.getBounds());
     if($('#video_id').val() == undefined){
         map.fitBounds(group.getBounds());
@@ -237,6 +239,20 @@ function searchVideo(){
 
     $.get( "/home/ajax/video-search/?keyword="+$search_text+"&category_id="+$search_cat
         +"&video_id="+$video_id, function( data ) {
+        console.log(data.json.original);
+        if(data.content == '')
+            $('#video_search_res').html('No result!');
+
+        updateMarkers(data.json.original, true);
+        $('#video_search_res').html(decode(data.content));
+
+    });
+}
+
+function resetSearch(){
+    $('#video_search_res').html('<i class="fa fa-spinner"></i> loading.....');
+
+    $.get( "/home/ajax/video-search/?keyword="+'', function( data ) {
         console.log(data.json.original);
         if(data.content == '')
             $('#video_search_res').html('No result!');

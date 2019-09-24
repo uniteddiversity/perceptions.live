@@ -78,4 +78,8 @@ function advance_search(){
         $('#video_search_res').html(decode(data.content));
 
     });
+
+    $('.openfilters').removeClass("active");
+    $('.mlfilter-sec').removeClass('active');
+    $('.ml-listings').removeClass('active');
 }
