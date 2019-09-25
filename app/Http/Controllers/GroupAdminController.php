@@ -267,8 +267,12 @@ class GroupAdminController extends Controller
         $user_id = (!isset(Auth::user()->id))? 0 : Auth::user()->id;
         $user_list = $this->userRepository->getUsers(array(),$user_id);
         $status = $this->userRepository->getStatus();
+
+        $experience_knowledge_tags = $this->userRepository->getSkillsTag();
+        $user_acting_role = $this->userRepository->getUserActingRoles();
+
         return view('group-admin.group-add')
-            ->with(compact('categories','user_list','status'));
+            ->with(compact('categories','user_list','status','experience_knowledge_tags','user_acting_role'));
     }
 
     public function postUserToGroupAdd(Request $request, $group_id)

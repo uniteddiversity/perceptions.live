@@ -1079,7 +1079,6 @@ class AdminController extends Controller
 
         if($r['status'] == 1){
             $request_data = $this->userRepository->getClaimRequests($_id);
-//            dd($request_data);
             $to = [
                 [
                     'email' => env("ADMIN_MAIL"),
