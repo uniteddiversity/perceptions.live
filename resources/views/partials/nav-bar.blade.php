@@ -107,16 +107,13 @@
                         </div>
 
                         <ul class="thumbs">
-
                             <?php $i = 0; ?>
                             @foreach($top_slider_feed as $feed)
                                 <?php $i++; ?>
                                 @if($feed['side'] == 'left')
-                                    <li data-thumb-id="<?php echo $i ?>" class="thumb active" style="background-image: url('/storage/{{$feed['icon']}}')">
+                                    <li onclick="loadFilters({{$feed['fk_id']}},'{{$feed['type']}}')" data-thumb-id="<?php echo $i ?>" class="thumb active" style="background-image: url('/storage/{{$feed['icon']}}')">
                                         <span>{{$feed['title']}}</span>
-
                                     </li>
-
                                 @endif
                             @endforeach
                         </ul>
@@ -144,7 +141,7 @@
                             @foreach($top_slider_feed as $feed)
                                 <?php $i++; ?>
                                 @if($feed['side'] == 'right')
-                                    <li data-thumb-id="<?php echo $i ?>" class="thumb active" style="background-image: url('/storage/{{$feed['icon']}}')"></li>
+                                    <li onclick="loadFilters({{$feed['fk_id']}},'{{$feed['type']}}')" data-thumb-id="<?php echo $i ?>" class="thumb active" style="background-image: url('/storage/{{$feed['icon']}}')"></li>
                                 @endif
                             @endforeach
                         </ul>

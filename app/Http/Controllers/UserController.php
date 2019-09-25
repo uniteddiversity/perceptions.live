@@ -789,6 +789,7 @@ class UserController extends Controller
                 'claim_video_profile' => 'required',
                 'confirm_selected_content' => 'required',
                 'accept_tos' => 'required',
+                'email' => 'required',
                 'g-recaptcha-response' => 'required|recaptcha'
             ],
             ['g-recaptcha-response.required' => 'Recaptcha must be clicked.']);

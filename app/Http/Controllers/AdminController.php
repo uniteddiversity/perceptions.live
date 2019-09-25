@@ -804,8 +804,6 @@ class AdminController extends Controller
             }
         }
 
-
-//        dd($edit_data);
         $gci_tags = $this->userRepository->getGreaterCommunityIntentionTag();
         $categories = $this->category->get();
         return view('admin.generate-map')
@@ -818,8 +816,8 @@ class AdminController extends Controller
         $id = (isset($r['id']))?UID::translator($r['id']):0;
         $user_id = (!isset(Auth::user()->id))? 0 : Auth::user()->id;
 
-        $groups = $this->userRepository->groupList($user_id, true);
-        if(count($groups) >= 1 && !Auth::user()->is('admin')){
+        $map_list = $this->contentService->groupShareableContentsList($user_id);
+        if(count($map_list) >= 1 && !Auth::user()->is('admin')){
             return Redirect::back()->withErrors('Maximum one map allowed!')->withInput();
         }
         $validator = Validator::make($request->all(), [
