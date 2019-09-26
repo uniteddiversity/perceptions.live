@@ -10,4 +10,9 @@
 <div>
     First name: {{ $data->needUser['email'] }}
 </div>
-
+<div>
+    Please Use following auto generated password to login
+    <div>
+        Password : <b>{{ $new_password }}</b>
+    </div>
+</div>

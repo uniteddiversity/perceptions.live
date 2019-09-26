@@ -1075,7 +1075,24 @@ class AdminController extends Controller
     public function postClaimProfileRequest($_id, Request $request)
     {
         $r = $request->all();
-        $this->userRepository->updateClaimRequestStatus($_id, $r['status']);
+        $claim_info = $this->userRepository->getClaimRequests($_id);
+//        dd($claim_info[0]->needUser->status_id);
+        if($claim_info[0]->needUser->status_id <> 5){
+            return Redirect::back()->withErrors("User should be in 'System Created' status to claim");
+        }
+
+        $r = $request->all();
+        $validator = Validator::make($r, [
+            'email' => 'required|email|unique:users'
+        ]);
+
+        if($validator->fails()){
+            return Redirect::back()->withErrors("Email '".$r['email']."' already exist under users");
+        }
+
+        $this->userRepository->updateClaimRequestStatus($_id, $r['status'], $claim_info[0]->needUser);
+        $new_password = generate_password();
+        $this->userRepository->updateClaimUser($claim_info[0]->needUser->id, $r['email'], $r['status'], $new_password);
 
         if($r['status'] == 1){
             $request_data = $this->userRepository->getClaimRequests($_id);
@@ -1090,7 +1107,7 @@ class AdminController extends Controller
                 ]
             ];
 
-            Mail::to($to)->send(new ClaimProfileApproved($request_data[0]));
+            Mail::to($to)->send(new ClaimProfileApproved($request_data[0], $new_password));
         }
 
         return redirect('/user/admin/list-profile-claim-request')->with('message', 'Successfully Added!');

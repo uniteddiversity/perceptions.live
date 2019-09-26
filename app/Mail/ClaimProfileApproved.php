@@ -13,14 +13,17 @@ class ClaimProfileApproved extends Mailable
 
     public $data;
 
+    public $new_password;
+
     /**
      * Create a new message instance.
      *
      * @return void
      */
-    public function __construct($data)
+    public function __construct($data, $new_password)
     {
         $this->data = $data;
+        $this->new_password = $new_password;
     }
 
     /**

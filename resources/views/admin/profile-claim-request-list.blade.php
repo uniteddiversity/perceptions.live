@@ -6,6 +6,7 @@
             <div class="card">
                 <div class="card-body">
                     <h4 class="card-title">Claim Profile List</h4>
+                    @include('partials.admin-notification-partial')
                     <div class="table-responsive">
                         <table class="table" id="users_llist">
                             <thead>

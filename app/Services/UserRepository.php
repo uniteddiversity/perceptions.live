@@ -1110,9 +1110,16 @@ class UserRepository
 
     }
 
-    public function updateClaimRequestStatus($id, $status)
+    public function updateClaimRequestStatus($id, $status, $_old_info)
     {
-        return $this->claimProfileRequests->where('id', $id)->update(['status' => $status]);
+        return $this->claimProfileRequests->where('id', $id)->update(['status' => $status, 'old_email' => $_old_info['email'], 'info' => json_encode($_old_info)]);
+    }
+
+    public function updateClaimUser($id, $new_email, $status, $new_password)
+    {
+        if($status == 1){
+            return $this->user->where('id', $id)->update(array('email' => $new_email, 'status_id' => 4, 'password' => bcrypt($new_password)));
+        }
     }
 }
 

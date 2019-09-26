@@ -18,6 +18,7 @@ $data = $data[0];
                                 <th>Email</th>
                                 <td>{{$data->email}}</td>
                             </tr>
+                            <input type="hidden" name="email" value="{{$data->email}}" />
                             <tr class="table">
                                 <th>Claiming Profile</th>
                                 <td>
@@ -33,6 +34,10 @@ $data = $data[0];
                                         <tr>
                                             <th>Email</th>
                                             <td>{{$data->needUser->email}}</td>
+                                        </tr>
+                                        <tr>
+                                            <th>Status</th>
+                                            <td>{{$data->needUser->status->name}}</td>
                                         </tr>
                                     </table>
                                 </td>
