@@ -913,7 +913,7 @@ class UserRepository
             $claim_requests = $claim_requests->where('user_id', $user_id);
         }
 
-        $claim_requests = $claim_requests->get();
+        $claim_requests = $claim_requests->orderBy('id')->get();
         return $claim_requests;
     }
 

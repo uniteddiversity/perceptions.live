@@ -26,6 +26,9 @@
                                 <th>
                                     Status
                                 </th>
+                                <th>
+                                    Date
+                                </th>
                             </tr>
                             </thead>
                             <tbody>
@@ -54,6 +57,9 @@
                                         @elseif($d->status == 4)
                                             Deleted
                                         @endif
+                                    </td>
+                                    <td>
+                                        {{ date('Y-m-d', strtotime($d->created_at)) }}
                                     </td>
                                 </tr>
                             @endforeach
