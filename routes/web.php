@@ -180,9 +180,9 @@ Route::group(['prefix' => 'user', 'middleware' => ['auth', 'web', 'admin']], fun
 
 Route::group(['prefix' => 'user', 'middleware' => ['auth', 'web', 'groupadmin']], function () {
 //    Route::post('/group-admin/post-upload-video', '\App\Controllers\User\GroupAdminController@postUploadVideo');
-    Route::get('/group-admin/user-list', '\App\Controllers\User\GroupAdminController@userList');
+//    Route::get('/group-admin/user-list', '\App\Controllers\User\GroupAdminController@userList');
     Route::get('/group-admin/group-list', '\App\Controllers\User\GroupAdminController@groupList');
-    Route::get('/group-admin/user-add', '\App\Controllers\User\GroupAdminController@userAdd');
+//    Route::get('/group-admin/user-add', '\App\Controllers\User\GroupAdminController@userAdd');
     Route::get('/group-admin/user-edit/{_user_id}', '\App\Controllers\User\GroupAdminController@adminUserEdit');
     Route::get('/group-admin/video-edit/{_content_id}', '\App\Controllers\User\GroupAdminController@contentEdit');
     Route::post('/admin/post-upload-video', '\App\Controllers\User\AdminController@postUploadVideo');

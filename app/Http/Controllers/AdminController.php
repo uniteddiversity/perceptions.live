@@ -679,10 +679,15 @@ class AdminController extends Controller
 
         if(isset($r['id']) && $old_group->status == '2' && $new_group->status == '1' && $new_group->created_by != ''){
             $created_user = $this->user->where('id', $new_group->created_by)->first();
+//            dd($created_user);
             if($created_user->id
                 != Auth::user()->id &&
-                $created_user->role != '1'){
+                $created_user->role_id != '1'){
                 Mail::to($created_user)->send(new groupApproved($new_group));
+
+                if($created_user->role_id == 120){//at the time group is approved, normal user will become group-admin
+                    $this->user->where('id', $created_user->id)->update(['role_id' => 100]);
+                }
             }
         }
 
@@ -1076,12 +1081,15 @@ class AdminController extends Controller
     {
         $r = $request->all();
         $claim_info = $this->userRepository->getClaimRequests($_id);
-//        dd($claim_info[0]->needUser->status_id);
+
+        if($r['status'] != 1){//if deleting, no need to validate
+            $this->userRepository->updateClaimRequestStatus($_id, $r['status'], $claim_info[0]->needUser);
+        }
+
         if($claim_info[0]->needUser->status_id <> 5){
             return Redirect::back()->withErrors("User should be in 'System Created' status to claim");
         }
 
-        $r = $request->all();
         $validator = Validator::make($r, [
             'email' => 'required|email|unique:users'
         ]);

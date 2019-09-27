@@ -1110,7 +1110,7 @@ class UserRepository
 
     }
 
-    public function updateClaimRequestStatus($id, $status, $_old_info)
+    public function updateClaimRequestStatus($id, $status, $_old_info = array())
     {
         return $this->claimProfileRequests->where('id', $id)->update(['status' => $status, 'old_email' => $_old_info['email'], 'info' => json_encode($_old_info)]);
     }

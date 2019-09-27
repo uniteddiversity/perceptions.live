@@ -44,7 +44,7 @@
                 </ul>
             </li>
 
-            <li class="pcoded-hasmenu <?php if(in_array(Request::segment(3), array('user-list','user-add'))){ echo 'active pcoded-trigger'; } ?> pcoded-trigger">
+            <?php /*<li class="pcoded-hasmenu <?php if(in_array(Request::segment(3), array('user-list','user-add'))){ echo 'active pcoded-trigger'; } ?> pcoded-trigger">
                 <a href="javascript:void(0)">
                     <span class="pcoded-micon"><i class="ti-user"></i></span>
                     <span class="pcoded-mtext" data-i18n="nav.page_layout.main">User Manage</span>
@@ -66,7 +66,7 @@
                         </a>
                     </li>
                 </ul>
-            </li>
+            </li>*/ ?>
 
             <li class="pcoded-hasmenu <?php if(in_array(Request::segment(3), array('group-list','user-to-group-add','user-group-add'))){ echo 'active pcoded-trigger'; } ?>">
                 <a href="javascript:void(0)">
