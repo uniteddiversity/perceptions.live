@@ -173,14 +173,14 @@
                             <div class="form-group">
                                 <label for="public_videos">Shearable Code</label>
                                 <p style="background-color: #cccccc;color: black;">
-                                    <textarea id="shearable_code" class="form-control">&lt;iframe src="<?php echo env('APP_DOMAIN', $_SERVER['SERVER_NAME']) ?>/home/shared/group/<?php echo $data['_token'] ?>" width="100%" height="350" &gt; &lt;/iframe&gt;</textarea>
+                                    <textarea id="shearable_code" class="form-control">&lt;iframe src="<?php echo env('APP_DOMAIN', $_SERVER['SERVER_NAME']) ?>/home/shared/group/<?php echo $data['_token'] ?>?output=embed" width="100%" height="350" &gt; &lt;/iframe&gt;</textarea>
 
                                 </p>
                             </div>
 
                             <div class="form-group">
                                 <label for="exampleSelect1">Preview Map</label>
-                                <iframe src="<?php echo env('APP_DOMAIN', $_SERVER['SERVER_NAME']) ?>/home/shared/group/<?php echo $data['_token'] ?>" width="100%" height="350"></iframe>
+                                <iframe src="<?php echo env('APP_DOMAIN', $_SERVER['SERVER_NAME']) ?>/home/shared/group/<?php echo $data['_token'] ?>?output=embed" width="100%" height="350"></iframe>
                             </div>
                             <?php } ?>
                         </form>
