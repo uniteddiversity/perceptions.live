@@ -18,7 +18,7 @@ class FrameHeadersMiddleware
         $response = $next($request);
 //        $response->header('X-Frame-Options', 'ALLOW FROM https://example.com/');
         $response->header('X-Frame-Options', 'ALLOW FROM *');
-        $response->headers->set('X-Frame-Options', 'ALLOW');
+        $response->headers->set('X-Frame-Options','GOFORIT');
         return $response;
     }
 }
