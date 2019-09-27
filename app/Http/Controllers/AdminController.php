@@ -862,7 +862,7 @@ class AdminController extends Controller
         }
 
         $sheared_content = $this->contentService->createGroupShareableContents($user_id, $data, $id);
-        return Redirect::route('map-sharing.edit', ['_id' => UID($sheared_content->id)])->with('message', 'Successfully Added!');
+        return Redirect::route('admin-map-sharing.edit', ['_id' => UID($sheared_content->id)])->with('message', 'Successfully Added!');
 //        return redirect()->back()->with('message', 'Successfully Added!');
     }
 
