@@ -820,7 +820,6 @@ class AdminController extends Controller
         $r = $request->toArray();
         $id = (isset($r['id']))?UID::translator($r['id']):0;
         $user_id = (!isset(Auth::user()->id))? 0 : Auth::user()->id;
-
         $map_list = $this->contentService->groupShareableContentsList($user_id);
         if(count($map_list) >= 1 && !Auth::user()->is('admin')){
             return Redirect::back()->withErrors('Maximum one map allowed!')->withInput();
@@ -862,8 +861,11 @@ class AdminController extends Controller
         }
 
         $sheared_content = $this->contentService->createGroupShareableContents($user_id, $data, $id);
-        return Redirect::route('admin-map-sharing.edit', ['_id' => UID($sheared_content->id)])->with('message', 'Successfully Added!');
-//        return redirect()->back()->with('message', 'Successfully Added!');
+
+        if(Auth::user()->role_id == 1)
+            return Redirect::route('admin-map-sharing-edit', ['_id' => UID($sheared_content->id)])->with('message', 'Successfully Added!');
+        if(Auth::user()->role_id == 100)
+            return redirect('user/group-admin/map-generate/'.UID($sheared_content->id))->with('message', 'Successfully Added!');
     }
 
     public static function createToken($prefix='', $length = 20)
