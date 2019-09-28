@@ -17,8 +17,9 @@ class FrameHeadersMiddleware
     {
         $response = $next($request);
 //        $response->header('X-Frame-Options', 'ALLOW FROM https://example.com/');
-        $response->header('X-Frame-Options', 'ALLOW FROM *');
-        $response->headers->set('X-Frame-Options','GOFORIT');
+//        $response->header('X-Frame-Options', 'ALLOW FROM *');
+//        $response->headers->set('X-Frame-Options','GOFORIT');
+        $response->header('X-Frame-Options', 'ALLOW FROM http://responsive.perceptiontravel.tv/');
         return $response;
     }
 }
