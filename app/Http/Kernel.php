@@ -21,7 +21,7 @@ class Kernel extends HttpKernel
         \App\Http\Middleware\TrustProxies::class,
         // appending custom middleware
         \App\Http\Middleware\HttpsProtocol::class,
-        \App\Http\Middleware\FrameHeadersMiddleware::class
+//        \App\Http\Middleware\FrameHeadersMiddleware::class
     ];
 
     /**
