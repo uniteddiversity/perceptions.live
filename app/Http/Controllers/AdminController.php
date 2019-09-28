@@ -1084,6 +1084,7 @@ class AdminController extends Controller
 
         if($r['status'] != 1){//if deleting, no need to validate
             $this->userRepository->updateClaimRequestStatus($_id, $r['status'], $claim_info[0]->needUser);
+            return redirect('/user/admin/list-profile-claim-request')->with('message', 'Successfully Deleted!');
         }
 
         if($claim_info[0]->needUser->status_id <> 5){
