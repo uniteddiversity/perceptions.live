@@ -155,6 +155,10 @@ class UserRepository
             $r = $r->whereIn('user_groups.group_id', array($filter['group_id']));
         }
 
+        if(isset($filter['group_role_id'])){
+            $r = $r->whereIn('user_groups.role_id', array($filter['group_role_id']));
+        }
+
         if(isset($filter['filter_system_users'])){
             $r = $r->where('users.status_id', '5');
         }
@@ -604,13 +608,24 @@ class UserRepository
         return $this->userGroup->where('group_id', $group_id)->delete();
     }
 
-    function addUserToGroup($user_id, $group_id, $role_id = 0)
+    function deleteUsersRoleFromGroup($group_id, $role_id, $user_id = 0)
+    {
+        $userGroup = $this->userGroup->where('group_id', $group_id)
+            ->where('role_id', $role_id);
+        if($user_id != 0){
+            $userGroup = $userGroup->where('user_id', $user_id);
+        }
+
+        return $userGroup->delete();
+    }
+
+    function addUserToGroup($user_id, $group_id, $role_id = 120)
     {
         return $this->userGroup->create(
             array(
                 'user_id' => $user_id,
                 'group_id' => $group_id,
-                'role_id' => 120
+                'role_id' => $role_id
             )
         );
     }

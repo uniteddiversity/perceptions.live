@@ -256,7 +256,7 @@ class GroupAdminController extends Controller
         $user_id = (!isset(Auth::user()->id))? 0 : Auth::user()->id;
         $groups = $this->userRepository->groupList($user_id);
         $user_list = $this->userRepository->getUsers(array(),$user_id);
-        $user_list_in_group = $this->userRepository->getUsers(array('group_id' => $group_id),$user_id);
+        $user_list_in_group = $this->userRepository->getUsers(array('group_id' => $group_id, 'group_role_id' => 120),$user_id);
         return view('group-admin.user-group-add')
             ->with(compact('user_list','groups','user_list_in_group','group_id'));
     }
@@ -280,7 +280,7 @@ class GroupAdminController extends Controller
         $r = $request->toArray();
 
         if(is_array($r['users_in_groups']) && isset($group_id) && intVal($group_id) > 0){
-            $this->userRepository->deleteUsersFromGroup($group_id);
+            $this->userRepository->deleteUsersRoleFromGroup($group_id, 120);
             $user_ids = array();
             foreach($r['users_in_groups'][$group_id] as $user_id){
                 $user_ids[$user_id] = $user_id;
@@ -347,6 +347,18 @@ class GroupAdminController extends Controller
             );
         }
 
+        if(isset($r['users_in_groups'])){
+            $this->userRepository->deleteUsersRoleFromGroup($new_group->id, 110);
+            $user_ids = array();
+            foreach($r['users_in_groups'] as $u_id){
+                $user_ids[$u_id] = $u_id;
+            }
+
+            foreach($user_ids as $u_id){
+                $this->userRepository->addUserToGroup($u_id, $new_group->id, 110);//add as a moderator
+            }
+        }
+
         if(isset($r['status'])){
             $this->group->updateOrCreate(
                 [
@@ -394,7 +406,8 @@ class GroupAdminController extends Controller
             }
         }
 
-        $this->userRepository->addUserToGroup($user_id, $new_group->id);//add himself to the group
+        $this->userRepository->deleteUsersRoleFromGroup($new_group->id, 100, $user_id);
+        $this->userRepository->addUserToGroup($user_id, $new_group->id, 100);//add himself to the group as admin
 
         return redirect()->back()->with('message', 'Successfully Added!');
     }
@@ -442,9 +455,9 @@ class GroupAdminController extends Controller
         $status = $this->userRepository->getStatus();
         $user_acting_role = $this->userRepository->getUserActingRoles();
         $experience_knowledge_tags = $this->userRepository->getSkillsTag();
-
+        $mod_user_list_in_group = $this->userRepository->getUsers(array('group_id' => $id, 'group_role_id' => 110),$user_id);
         return view('group-admin.group-add')
-            ->with(compact('categories','group','user_list','status','user_acting_role','experience_knowledge_tags'));
+            ->with(compact('categories','group','user_list','status','user_acting_role','experience_knowledge_tags','mod_user_list_in_group'));
     }
 
     public function groupContentList($id)

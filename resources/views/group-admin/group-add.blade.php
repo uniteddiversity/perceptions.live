@@ -79,6 +79,22 @@
                             </div>
 
                             <div class="form-group">
+                                <?php
+
+                                $user_ids = [];
+                                foreach($mod_user_list_in_group as $user){
+                                    $user_ids[$user['id']] = $user['id'];
+                                }
+                                ?>
+                                <label for="video_producer">Moderators</label>
+                                <select class="form-control multi-select2" id="moderators" multiple name="users_in_groups[]">
+                                    @foreach($user_list as $user)
+                                    <option value="{{$user->id}}" <?php if(isset($user_ids[$user->id])){ echo 'selected'; } ?> >{{$user->first_name}} ({{$user->email}})</option>
+                                    @endforeach
+                                </select>
+                            </div>
+
+                            <div class="form-group">
                                 <label for="skills">Experience knowledge interests (add if not exist)</label>
                                 <select class="form-control multi-select2-with-tags-max5" id="experience_kno" multiple name="experience_kno[]">
                                     @foreach($experience_knowledge_tags as $m)
@@ -161,6 +177,6 @@
 
     @endsection
     <script>
-        var el = document.getElementById('loading');
-        el.remove(); // Removes the div with the 'div-02' id
+        // var el = document.getElementById('loading');
+        // el.remove(); // Removes the div with the 'div-02' id
     </script>
