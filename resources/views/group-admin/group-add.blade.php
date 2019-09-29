@@ -78,7 +78,7 @@
                                 </select>
                             </div>
 
-                            <div class="form-group">
+                            <?php /*<div class="form-group">
                                 <?php
 
                                 $user_ids = [];
@@ -92,7 +92,7 @@
                                     <option value="{{$user->id}}" <?php if(isset($user_ids[$user->id])){ echo 'selected'; } ?> >{{$user->first_name}} ({{$user->email}})</option>
                                     @endforeach
                                 </select>
-                            </div>
+                            </div>*/ ?>
 
                             <div class="form-group">
                                 <label for="skills">Experience knowledge interests (add if not exist)</label>
@@ -119,7 +119,8 @@
                                     @endforeach
                                 </select>
                             </div>
-                            <div class="form-group">
+                            <input type="hidden" name="contact_user_id" value="{{ Auth::user()->id }}" />
+                            <?php /*<div class="form-group">
                                 <label for="exampleSelect1">Contact User</label>
                                 <select class="form-control  multi-select2" id="exampleSelect1" name="contact_user_id">
                                     <option value="">Select</option>
@@ -127,7 +128,7 @@
                                     <option value="{{$user->id}}" <?php if(old('contact_user_id',$data['contact_user_id']) == $user->id){ echo 'selected'; } ?>>{{$user->first_name}} ({{$user->email}})</option>
                                     @endforeach
                                 </select>
-                            </div>
+                            </div> */ ?>
                             <div class="form-group">
                                 <label for="accept_tos">Proof of Group Involvement</label>
                                 <input class="form-control" type="file" name="proof_of_group[]" />
