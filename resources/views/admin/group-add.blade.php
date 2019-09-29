@@ -47,7 +47,7 @@
                         <form action="/user/admin/post-group-add" method="post" enctype='multipart/form-data'>
                             <input type="hidden" name="_token" id="csrf-token" value="{{ Session::token() }}" />
                             <?php if(!empty($data['id'])){ ?>
-                            <input type="hidden" name="id" id="id" value="{{ uid($data['id']) }}" />
+                            <input type="hidden" name="id" id="id" value="{{ uid($data['id']) }}" data-id="{{$data['id']}}" />
                             <?php } ?>
 
                             <div class="form-group">
