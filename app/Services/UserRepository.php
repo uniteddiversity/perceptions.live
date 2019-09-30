@@ -1113,7 +1113,7 @@ class UserRepository
         foreach($content as $user){
             $r[] = array(
                 'id' => $user['id'],
-                'text' => empty($user['display_name'])?$user['display_name']:$user['email'],
+                'text' => !empty($user['display_name'])?$user['display_name']:$user['email'],
                 'email' => $user['email']
             );
         }

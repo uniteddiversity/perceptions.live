@@ -639,7 +639,8 @@ $('.display-name-select-ajax').select2({
             $.each(response, function (index, data) {
                 results.push({
                     id: data.id,
-                    text: data.text + ' ('+data.email+')',
+                    text: data.text,
+                    // text: data.text + ' ('+data.email+')',
                     type: data.type
                 });
             });
