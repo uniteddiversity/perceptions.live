@@ -5,7 +5,7 @@
         <div class="col-lg-12 grid-margin stretch-card">
             <div class="card">
                 <div class="card-body">
-                    <h4 class="card-title">Uploaded Videos</h4>
+                    <h4 class="card-title">Sharable Maps</h4>
                     <div class="table-responsive">
                         <table class="table" id="users_llist">
                             <thead>
@@ -17,7 +17,7 @@
                                     {{--Id--}}
                                 {{--</th>--}}
                                 <th>
-                                    Group
+                                    Title
                                 </th>
                                 <th>
                                     Domain
@@ -38,10 +38,14 @@
                             </tr>
                             </thead>
                             <tbody>
-                            @foreach ($list as $video) <?php //dd($video) ?>
+                            @foreach ($list as $video)
                                 <tr>
                                     <td>
-                                        <a href="/user/admin/map-generate/{{ uid($video->id) }}" >Edit</a>&nbsp;&nbsp;
+                                        @if(Auth::user()->is('admin'))
+                                            <a href="/user/admin/map-generate/{{ uid($video->id) }}" >Edit</a>&nbsp;&nbsp;
+                                        @else
+                                            <a href="/user/group-admin/map-generate/{{ uid($video->id) }}" >Edit</a>&nbsp;&nbsp;
+                                        @endif
                                     </td>
                                     {{--<td>--}}
                                         {{--{{ $video->id }}--}}

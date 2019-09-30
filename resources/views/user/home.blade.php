@@ -32,7 +32,7 @@
 
 <div class="footer">
 	<span style="display: block; padding-bottom: 7px; margin: auto;">
-	<a href="https://perceptiontravel.tv/privacy-policy" target="_blank">Privacy Policy</a> | <a href="https://perceptiontravel.tv/terms-of-service" target="_blank">Terms of Service</a> | <a href="https://perceptiontravel.tv/community/donations/" target="_blank">Make a Donation</a> | <a href="https://perceptiontravel.tv/community-feedback/" target="_blank">Submit Feedback</a></span>
+	<a href="https://perceptiontravel.tv/privacy-policy" target="_blank">Privacy Policy</a> | <a href="https://perceptiontravel.tv/terms-of-service" target="_blank">Terms of Service</a> | <a href="https://perceptiontravel.tv/community/donations/" target="_blank">Make a Donation</a> | <a href="https://perceptiontravel.tv/community-feedback/" target="_blank">Submit Feedback</a> | <a href="/contact-us" target="_blank">Contact Us</a></span>
 	<span>
 	<strong>&copy; 2018 <a href="https://perceptiontravel.tv/" target="_blank">PRCPTION Travel, Inc.</a> - a non-profit, 501(c)3 organization.</strong></span>
 		

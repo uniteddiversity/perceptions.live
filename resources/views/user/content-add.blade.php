@@ -41,10 +41,11 @@
     $data['status'] = isset($video_data['status'])?$video_data['status']:'';
 
     $data['id'] = isset($video_data['id'])?$video_data['id']:'';
-
+    $data['language'] = isset($video_data['language'])?$video_data['language']:'en';
 
     //    dd($data);
     ?>
+
 <div class="col-lg-12 grid-margin stretch-card">
     <div class="card" style="box-shadow:none;">
         <div class="card-body">
@@ -79,9 +80,9 @@
 
                                 <span style="left:72px;"><i class="fas fa-users"></i><b>3</b></span>
                             </li>
-                            <li id="st4">
-                                <span style="left:100%; margin-left:-104px;"><i class="fas fa-filter"></i><b>4</b></span>
-                            </li>
+<!--                            <li id="st4">-->
+<!--                                <span style="left:100%; margin-left:-104px;"><i class="fas fa-filter"></i><b>4</b></span>-->
+<!--                            </li>-->
                         </ul>
                     </div>
 
@@ -223,7 +224,7 @@
                                 </div>
 
                                 <div class="form-group" style="padding:0 40px;">
-                                    <?php if(Auth::user()->is('admin') || Auth::user()->is('group-admin') || Auth::user()->is('moderator')){ ?>
+                                    <?php if(Auth::user()->is('admin') && ( (Auth::user()->is('group-admin') || Auth::user()->is('moderator')) && !empty($data['id']) )){ ?>
                                     <label for="status">Status</label>
                                     <select class="form-control" id="status" name="status">
                                         @foreach($status as $st)
@@ -292,10 +293,18 @@
                                     <label for="learn_more_url">URL (web address) to learn more about the contents of this video: </label>
                                     <input type="text" class="form-control" aria-describedby="nameHelp" id="learn_more_url" name="learn_more_url" placeholder="Learn More Url" value="{{ old('learn_more_url',$data['learn_more_url']) }}">
                                 </div>
+                                <div class="form-group">
+                                    @if(env('GOOGLE_RECAPTCHA_KEY'))
+                                    <div class="g-recaptcha"
+                                         data-sitekey="{{env('GOOGLE_RECAPTCHA_KEY')}}">
+                                    </div>
+                                    @endif
+                                </div>
                                 <!-- btns -->
                                 <div class="btn_outer">
                                     <a href="#" class="btn"><i class="fas fa-long-arrow-alt-left"></i> Back</a>
-                                    <a href="#" class="btn click" rel="st4">Next Step <i class="fas fa-long-arrow-alt-right"></i></a>
+<!--                                    <a href="#" class="btn click" rel="st4">Next Step <i class="fas fa-long-arrow-alt-right"></i></a>-->
+                                    <button type="button" onclick="submit_content()" class="btn dark">Submit PRCPTION</button>
                                 </div>
                                 <!-- btns -->
                             </div>
@@ -356,6 +365,15 @@
                                 </div>
 
                                 <div class="form-group">
+                                    <label for="status">Language</label>
+                                    <select class="form-control" id="language" name="language">
+                                        @foreach($languages as $lng)
+                                        <option value="{{$lng->code}}" <?php if(old('language',$data['language']) == $lng->code){ echo 'selected'; } ?> >{{$lng->language}}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+
+                                <div class="form-group">
                                     <input class="form-control" type="checkbox" id="is_exchange" <?php if(!empty(old('exchange',$data['exchange']))){ ?> checked
                                     <?php } ?> value="1" name="exchange"/>
                                     <label class="exc" for="is_exchange"> Is there some sort of exchange being offered in this PRCPTION? (work trade, volunteer, etc)</label>
@@ -369,6 +387,8 @@
                                             <option value="2" <?php if(old('exchange',$data['exchange'])=='2' ){ echo 'selected' ; } ?> >Opportunity</option>
                                         </select></span>
                                 </div>
+
+
 
 
                                 {{--<div class="form-group">--}}

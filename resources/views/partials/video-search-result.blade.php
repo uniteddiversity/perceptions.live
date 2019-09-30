@@ -1,6 +1,6 @@
 <input type="hidden" id="result_count" value="{{$result_count}}" />
 <div class="ml-filterbar" style="margin-left: 18px;margin-right: 10px;">
-    <a href="#"><i class="fas fa-redo"></i> Reset Search</a>
+    <a href="#" onclick="resetSearch()"><i class="fas fa-redo"></i> Reset Search</a>
     <h3><b>{{$result_count}} PRCPTIONs</b><i class="fas fa-list"></i></h3>
 
 </div>

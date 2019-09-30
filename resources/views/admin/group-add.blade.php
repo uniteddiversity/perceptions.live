@@ -11,6 +11,8 @@
     $data['category_id'] = isset($group['category_id'])?$group['category_id']:'';
     $data['learn_more_url'] = isset($group['learn_more_url'])?$group['learn_more_url']:'';
 
+    $group['gci_tags'] = isset($group['gci'])?$group['gci']->toArray():[];
+    $data['grater_community_intention_ids'] = isset($group['gci_tags'])?array_column($group['gci_tags'],'group_tag_id'):array();
     $data['contact_user_id'] = isset($group['contact_user_id'])?$group['contact_user_id']:'';
     $data['status'] = isset($group['status'])?$group['status']:'';
     $data['proof_images'] = isset($group['proofOfGroup'])?$group['proofOfGroup']:array();
@@ -45,7 +47,7 @@
                         <form action="/user/admin/post-group-add" method="post" enctype='multipart/form-data'>
                             <input type="hidden" name="_token" id="csrf-token" value="{{ Session::token() }}" />
                             <?php if(!empty($data['id'])){ ?>
-                            <input type="hidden" name="id" id="id" value="{{ uid($data['id']) }}" />
+                            <input type="hidden" name="id" id="id" value="{{ uid($data['id']) }}" data-id="{{$data['id']}}" />
                             <?php } ?>
 
                             <div class="form-group">
@@ -102,6 +104,15 @@
                                     <option value="{{$category->id}}" <?php if(old('category_id',$data['category_id']) == $category->id){ echo 'selected'; } ?>>{{$category->name}}</option>
                                     @endforeach
                                 </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="exampleSelect1">Greater Community Intention</label>
+                                <select class="form-control multi-select2-max3" id="grater_community_intention_id" multiple name="grater_community_intention_ids[]">
+                                    @foreach($gci_tags as $m)
+                                    <option value="{{base64_encode($m['id'])}}" <?php if(in_array(base64_encode($m['id']), old('grater_community_intention_ids', [])) || in_array($m['id'], old('grater_community_intention_ids', $data['grater_community_intention_ids'] ))){ echo 'selected' ; } ?> >{{$m['tag']}}</option>
+                                    @endforeach
+                                </select>
+
                             </div>
                             <div class="form-group">
                                 <label for="exampleSelect1">Contact User</label>

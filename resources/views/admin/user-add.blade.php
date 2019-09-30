@@ -13,6 +13,7 @@
     $data['group'] = isset($user_data['groups'])?array_column($user_data['groups'],'group_id'):array();
     $data['user_acting_roles'] = isset($user_data['acting_roles'])?array_column($user_data['acting_roles'],'user_tag_id'):array();
     $data['location'] = isset($user_data['location'])?$user_data['location']:'';
+    $data['role_id'] = isset($user_data['role_id'])?$user_data['role_id']:'';
     ?>
     <div class="col-lg-12 grid-margin stretch-card">
         <div class="card">
@@ -81,7 +82,7 @@
                                 <label for="exampleSelect1">Role</label>
                                 <select class="form-control" id="exampleSelect1" name="role_id">
                                     @foreach($user_roles as $role)
-                                    <option value="{{$role->id}}">{{$role->name}}</option>
+                                    <option <?php if($data['role_id'] == $role->id){ echo 'selected'; } ?> value="{{$role->id}}">{{$role->name}}</option>
                                     @endforeach
                                 </select>
                             </div>

@@ -76,7 +76,8 @@ if (typeof (L) != "undefined") {
 
 var m;
 function updateMarkers(markers) {
-    map.removeLayer(markerClusters);
+    // map.removeLayer(markerClusters);
+    markerClusters.clearLayers();
 
     function onLocationFound(e) {
         searchVideoWithUserLocation();
@@ -86,14 +87,14 @@ function updateMarkers(markers) {
     map.on("locationfound", onLocationFound)
 
 
-    var markerClusters2 = L.markerClusterGroup({
-        showCoverageOnHover: false,
-        spiderLegPolylineOptions: {
-            weight: 0,
-            opacity: 0
-        }
-    });
-    map.addLayer(markerClusters2);
+    // var markerClusters2 = L.markerClusterGroup({
+    //     showCoverageOnHover: false,
+    //     spiderLegPolylineOptions: {
+    //         weight: 0,
+    //         opacity: 0
+    //     }
+    // });
+    // map.addLayer(markerClusters2);
 
     var myIcon = L.icon({
         iconUrl: myURL + '/assets/img/new-pin.png',
@@ -103,28 +104,6 @@ function updateMarkers(markers) {
         popupAnchor: [0, -14]
     });
 
-    // var addressPoints = [
-    //     [-37.8210922667, 175.2209316333, "2"],
-    //     [-37.8210819833, 175.2213903167, "3"],
-    //     [-37.8210881833, 175.2215004833, "3A"],
-    //     [-37.8211946833, 175.2213655333, "1"],
-    //     [-37.8209458667, 175.2214051333, "5"],
-    //     [-37.8208292333, 175.2214374833, "7"],
-    //     [-37.8325816, 175.2238798667, "537"],
-    //     [-37.8315855167, 175.2279767, "454"],
-    //     [-37.8096336833, 175.2223743833, "176"],
-    //     [-37.80970685, 175.2221815833, "178"],
-    //     [-37.8102146667, 175.2211562833, "190"],
-    //     [-37.8088037167, 175.2242227, "156"],
-    //     [-37.8112330167, 175.2193425667, "210"],
-    //     [-37.8116368667, 175.2193005167, "212"],
-    //     [-37.80812645, 175.2255449333, "146"],
-    //     [-37.8080231333, 175.2286383167, "125"],
-    //     [-37.8089538667, 175.2222222333, "174"],
-    //     [-37.8080905833, 175.2275400667, "129"]
-    // ];
-
-
     var all_b = [];
     for (var i = 0; i < markers.length; ++i) {
         var popup = 'abc' + markers[i].name;
@@ -132,12 +111,12 @@ function updateMarkers(markers) {
         //     .bindPopup( popup );
         m = L.marker([markers[i].lat, markers[i].lng], { icon: myIcon, id: markers[i].id });
         m.on('click', onMarkerClick);
-        markerClusters2.addLayer(m);
+        markerClusters.addLayer(m);
         all_b.push(m);
         console.log(markers[i]);
     }
 
-    var group = new L.featureGroup(all_b);
+    let group = new L.featureGroup(all_b);
     // map.fitBounds(group.getBounds());
     if ($('#video_id').val() == undefined) {
         map.fitBounds(group.getBounds());
@@ -151,9 +130,9 @@ function updateMarkers(markers) {
         let zoom = map.getZoom();
         console.log(zoom);
         if (zoom <= 12 && zoom >= 9) {
-            markerClusters2.disableClustering();
+            markerClusters.disableClustering();
         } else {
-            markerClusters2.enableClustering();
+            markerClusters.enableClustering();
         }
     });
 }
@@ -585,7 +564,7 @@ $(document).ready(function () {
         // "searching": true,
         "lengthChange": true,
         "ajax": {
-            "url": '/user/admin/group-content-list-ajax/' + data_list_id,
+            "url": '/user/admin/group-content-list-ajax/'+data_list_id,
             "type": "GET",
         },
         "scroller": {
@@ -674,3 +653,63 @@ $('.content-type-select-ajax').on('select2:select', function (e) {
     $('#fk_id').val(data.id);
     $('#type').val(data.type);
 });
+
+
+$('.display-name-select-ajax').select2({
+    ajax: {
+        url: '/home/list-display-names/ajax',
+        dataType: 'json',
+        data: function (term, page) {
+            // page is the one-based page number tracked by Select2
+            return {
+                "q": term,
+                "_per_page": 30,
+                "_page": page,
+            };
+        },
+        initSelection: function (data) {
+            console.log('selected option ', data);
+        },
+        templateResult: function (data) {
+        },
+        processResults: function (response) {
+            let results = [];
+            $.each(response, function (index, data) {
+                results.push({
+                    id: data.id,
+                    text: data.text,
+                    // text: data.text + ' ('+data.email+')',
+                    type: data.type
+                });
+            });
+
+            return {
+                results: results
+            };
+        },
+    }
+});
+
+$('.display-name-select-ajax').on('select2:select', function (e) {
+    let data = e.params.data;
+    videosForUser(data.id)
+});
+
+function videosForUser(user_id){
+    jQuery.ajax({
+        url: '/ajax/associated_videos_by_user_id/'+user_id,
+        method: 'GET'
+    }).done(function (response) {
+        console.log(response);
+        $('#claim_video_profile').html('');
+        response.forEach(function(element) {
+            $('#claim_video_profile').append($('<option>', {
+                value: element.id,
+                text: element.title
+            }));
+        });
+        // Do something with the response
+    }).fail(function () {
+        // Whoops; show an error.
+    });
+}
