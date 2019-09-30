@@ -354,8 +354,12 @@ class ContentService
                     ->where('association.type', 'group')
                     ->where('association.table', 'categories');
             })
+            ->leftJoin('contents as content', function($q){
+                $q->on('content.primary_subject_tag', 'shared_contents.primary_subject_tag');
+            })
             ->select(
                 'shared_contents.id',
+                DB::Raw("GROUP_CONCAT(DISTINCT content.id SEPARATOR ',') as contents_content_ids"),
                 DB::Raw("GROUP_CONCAT(DISTINCT content_category.id SEPARATOR ',') as contents_category_ids"),
                 DB::Raw("GROUP_CONCAT(DISTINCT users_contents.content_id SEPARATOR ',') as user_contents_ids"),
                 DB::Raw("GROUP_CONCAT(DISTINCT contents_d.fk_id SEPARATOR ',') as contents_ids")
@@ -365,6 +369,12 @@ class ContentService
         $map = $map->where('shared_contents.public_token', $token)->groupBy('shared_contents.id')->get()->first();
 
         $ids = array();
+
+        if(isset($map['contents_content_ids'])){
+            foreach(explode(',',$map['contents_content_ids']) as $id){
+                $ids[$id] = $id;
+            }
+        }
 
         if(isset($map['contents_category_ids'])){
             foreach(explode(',',$map['contents_category_ids']) as $id){
