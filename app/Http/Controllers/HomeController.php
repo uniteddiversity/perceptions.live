@@ -276,6 +276,32 @@ class HomeController extends Controller
         return response()->json(array('total_count' => count($r), 'incomplete_results' => false, 'results' => $r), 200);
     }
 
+    public function showCurrentLocationVideos(Request $request)
+    {
+        $r = $request->all();
+        $result_count = 0;
+        $filter['category'] = isset($r['category'])?$r['category']: array();
+        $filter['keyword'] = isset($r['keyword'])?$r['keyword']: array();
+        $filter['gcs'] = isset($r['gcs'])?$r['gcs']: array();//great community service
+        $user_id = (!isset(Auth::user()->id))? 0 : Auth::user()->id;
+
+        $filter['category_id'] = isset($_GET['category_id'])?($_GET['category_id']):'';
+        $filter['keyword'] = isset($_GET['keyword'])?($_GET['keyword']):'';
+        $filter['gcs'] = isset($_GET['gcs'])?($_GET['gcs']):'';
+        $filter['video_id'] = isset($_GET['video_id'])?($_GET['video_id']):'';
+        $ids=isset($_GET['ids'])?($_GET['ids']):'';
+        $array=explode(',',$ids);
+        $new_ids_array=array_filter($array);
+        $filter['ids'] = $new_ids_array;
+
+        $uploaded_list = $this->userRepository->getCurrentContents($user_id, $filter, $result_count);
+        $json_output = $this->getSearchListInJson($uploaded_list);
+        $content = view('partials.video-search-result')
+            ->with(compact('uploaded_list','result_count'));
+        $content = (string)htmlspecialchars($content);
+        return array('content' => $content, 'json' => $json_output);
+        return array('json' => $json_output);
+    }
     public function searchVideos(Request $request)
     {
         $r = $request->all();

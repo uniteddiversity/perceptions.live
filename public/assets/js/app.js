@@ -1,19 +1,20 @@
 var model_links = [];
 var model_links_current_pos = 0;
+var showed_markers = null;
 
-if(typeof(L) != "undefined"){
-    if($('#video_id').val() != undefined){
+if (typeof (L) != "undefined") {
+    if ($('#video_id').val() != undefined) {
         var lat = $('#video_lat').val();
         var long = $('#video_long').val();
         lat = parseFloat(lat);
         long = parseFloat(long);
-        var map = L.map( 'map', {
+        var map = L.map('map', {
             center: [lat, long],
             minZoom: 4,
             zoom: 4
         });
-    }else{
-        var map = L.map( 'map', {
+    } else {
+        var map = L.map('map', {
             center: [10.0, 5.0],
             minZoom: 3,
             zoom: 2
@@ -22,19 +23,41 @@ if(typeof(L) != "undefined"){
 
 
 
-// L.tileLayer( 'http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-//     attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>',
-//     subdomains: ['a','b','c']
-// }).addTo( map );
+    // L.tileLayer( 'http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    //     attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>',
+    //     subdomains: ['a','b','c']
+    // }).addTo( map );
 
-    L.tileLayer( 'https://stamen-tiles-{s}.a.ssl.fastly.net/watercolor/{z}/{x}/{y}.{ext}', {
+    L.control
+        .locate({
+            locateOptions: {
+                maxZoom: 5,
+                enableHighAccuracy: true
+            },
+            flyTo: true,
+            returnToPrevBounds: true,
+            showCompass: false,
+            drawCircle: false,
+            drawMarker: false,
+            icon: 'custom'
+        })
+        .addTo(map);
+
+    L.tileLayer('https://stamen-tiles-{s}.a.ssl.fastly.net/watercolor/{z}/{x}/{y}.{ext}', {
         attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>',
-        subdomains: ['a','b','c'],
+        subdomains: ['a', 'b', 'c'],
         ext: 'png'
-    }).addTo( map );
+    }).addTo(map);
+
 
     myURL = '';
-    var markerClusters = L.markerClusterGroup();
+    var markerClusters = L.markerClusterGroup({
+        showCoverageOnHover: false,
+        spiderLegPolylineOptions: {
+            weight: 0,
+            opacity: 0
+        }
+    });
 
     // L.marker([51.5, -0.09]).addTo(map)
     //     .bindPopup("<b>Hello world!</b><br />I am a popup.").openPopup();
@@ -52,48 +75,69 @@ if(typeof(L) != "undefined"){
 // }
 
 var m;
-function updateMarkers(markers, remove){
+function updateMarkers(markers) {
     // map.removeLayer(markerClusters);
     markerClusters.clearLayers();
 
-    // let markerClusters2 = L.markerClusterGroup();
-    // map.addLayer( markerClusters2 );
+    function onLocationFound(e) {
+        searchVideoWithUserLocation();
+    }
 
 
-    let myIcon = L.icon({
-        iconUrl: myURL + '/assets/img/globe_new.png',
-        iconRetinaUrl: myURL + '/assets/img/globe_new.png',
-        iconSize: [29, 29],
+    map.on("locationfound", onLocationFound)
+
+
+    // var markerClusters2 = L.markerClusterGroup({
+    //     showCoverageOnHover: false,
+    //     spiderLegPolylineOptions: {
+    //         weight: 0,
+    //         opacity: 0
+    //     }
+    // });
+    // map.addLayer(markerClusters2);
+
+    var myIcon = L.icon({
+        iconUrl: myURL + '/assets/img/new-pin.png',
+        iconRetinaUrl: myURL + '/assets/img/new-pin.png',
+        iconSize: [45, 45],
         iconAnchor: [9, 21],
         popupAnchor: [0, -14]
     });
 
-    let all_b = [];
-    for ( let i = 0; i < markers.length; ++i )
-    {
-        let popup = 'abc'+markers[i].name;
+    var all_b = [];
+    for (var i = 0; i < markers.length; ++i) {
+        var popup = 'abc' + markers[i].name;
         // var m = L.marker( [markers[i].lat, markers[i].lng], {icon: myIcon} )
         //     .bindPopup( popup );
-        m = L.marker( [markers[i].lat, markers[i].lng], {icon: myIcon, id: markers[i].id} );
+        m = L.marker([markers[i].lat, markers[i].lng], { icon: myIcon, id: markers[i].id });
         m.on('click', onMarkerClick);
-        markerClusters.addLayer( m );
+        markerClusters.addLayer(m);
         all_b.push(m);
-        console.log('new markers',markers[i]);
+        console.log(markers[i]);
     }
 
     let group = new L.featureGroup(all_b);
     // map.fitBounds(group.getBounds());
-    if($('#video_id').val() == undefined){
+    if ($('#video_id').val() == undefined) {
         map.fitBounds(group.getBounds());
     }
     // m.clearLayers();
 
     $("#loading").hide();
 
-    map.addLayer( markerClusters );
+    map.addLayer(markerClusters);
+    map.on("zoomend", function () {
+        let zoom = map.getZoom();
+        console.log(zoom);
+        if (zoom <= 12 && zoom >= 9) {
+            markerClusters.disableClustering();
+        } else {
+            markerClusters.enableClustering();
+        }
+    });
 }
 
-var onMarkerClick = function(e){
+var onMarkerClick = function (e) {
     // $("#feature-info").html('loading...');
     //     // console.log(this);//this.options.id
     //     // jQuery.ajax({
@@ -110,28 +154,28 @@ var onMarkerClick = function(e){
     //     // });
 
     $("#feature-info").html('loading...');
-        console.log(this);//this.options.id
-        jQuery.ajax({
-            url: '/home/ajax-video-info-small/'+this.options.id,
-            method: 'GET'
-        }).done(function (content) {
-            popup
-                .setLatLng(e.latlng)
-                .setContent(content)
-                .openOn(map);
-        }).fail(function () {
-            popup
-                .setLatLng(e.latlng)
-                .setContent("Error with loading...")
-                .openOn(map);
-        });
+    console.log(this);//this.options.id
+    jQuery.ajax({
+        url: '/home/ajax-video-info-small/' + this.options.id,
+        method: 'GET'
+    }).done(function (content) {
+        popup
+            .setLatLng(e.latlng)
+            .setContent(content)
+            .openOn(map);
+    }).fail(function () {
+        popup
+            .setLatLng(e.latlng)
+            .setContent("Error with loading...")
+            .openOn(map);
+    });
     // popup
     //     .setLatLng(e.latlng)
     //     .setContent("You clicked the map atxxxxxxxxxx " + e.latlng.toString())
     //     .openOn(map);
 }
 
-function claimProfile(no_history){
+function claimProfile(no_history) {
     // if(no_history !== true)
     //     updateModelFunction('claimProfile', id);
 
@@ -152,14 +196,14 @@ function claimProfile(no_history){
     });
 }
 
-function openVideo(id, no_history){
-    if(no_history !== true)
+function openVideo(id, no_history) {
+    if (no_history !== true)
         updateModelFunction('openVideo', id);
 
     $("#feature-info").html('loading...');
     console.log(this);//this.options.id
     jQuery.ajax({
-        url: '/home/ajax-video-info/'+id,
+        url: '/home/ajax-video-info/' + id,
         method: 'GET'
     }).done(function (content) {
         $("#feature-title").html("Info:");
@@ -173,14 +217,14 @@ function openVideo(id, no_history){
     });
 }
 
-function openProfile(id, no_history){
-    if(no_history !== true)
+function openProfile(id, no_history) {
+    if (no_history !== true)
         updateModelFunction('openProfile', id);
 
     $("#feature-info").html('loading...');
     console.log(this);//this.options.id
     jQuery.ajax({
-        url: '/home/ajax-user-info/'+id,
+        url: '/home/ajax-user-info/' + id,
         method: 'GET'
     }).done(function (content) {
         $("#feature-title").html("Info:");
@@ -195,15 +239,15 @@ function openProfile(id, no_history){
     });
 }
 
-function openGroupProfile(id, no_history){
-    if(no_history !== true)
+function openGroupProfile(id, no_history) {
+    if (no_history !== true)
         updateModelFunction('openGroupProfile', id);
 
     console.log('group loading');
     $("#feature-info").html('loading...');
     console.log(this);//this.options.id
     jQuery.ajax({
-        url: '/home/ajax-group-info/'+id,
+        url: '/home/ajax-group-info/' + id,
         method: 'GET'
     }).done(function (content) {
         $("#feature-title").html("Info:");
@@ -218,57 +262,81 @@ function openGroupProfile(id, no_history){
 }
 
 
-function navigateOnMap(lat, long){
-    console.log("lat "+lat+"   Long  "+long);
+function navigateOnMap(lat, long) {
+    console.log("lat " + lat + "   Long  " + long);
     map.panTo(new L.LatLng(parseFloat(lat), parseFloat(long)));
 }
 
 /////////////////////////////////////////////////////////
-function searchVideo(){
+function searchVideo() {
     $('#video_search_res').html('<i class="fa fa-spinner"></i> loading.....');
 
     var $search_text = $('#search_text').val();
     var $search_cat = $('#content_search_cat').val();
     var $video_id = $('#video_id').val();
-    if($search_text == undefined)
+    if ($search_text == undefined)
         $search_text = '';
-    if($search_cat == undefined)
+    if ($search_cat == undefined)
         $search_cat = '';
-    if($video_id == undefined)
+    if ($video_id == undefined)
         $video_id = '';
 
-    $.get( "/home/ajax/video-search/?keyword="+$search_text+"&category_id="+$search_cat
-        +"&video_id="+$video_id, function( data ) {
-        console.log(data.json.original);
-        if(data.content == '')
-            $('#video_search_res').html('No result!');
+    $.get("/home/ajax/video-search/?keyword=" + $search_text + "&category_id=" + $search_cat
+        + "&video_id=" + $video_id, function (data) {
+            console.log(data.json.original);
+            if (data.content == '')
+                $('#video_search_res').html('No result!');
+            showed_markers = data.json.original;
+            updateMarkers(data.json.original);
+            console.log(data.content);
+            $('#video_search_res').html(decode(data.content));
 
-        updateMarkers(data.json.original, true);
-        $('#video_search_res').html(decode(data.content));
-
-    });
+        });
 }
 
-function resetSearch(){
+/////////////////////////////////////////////////////////
+function searchVideoWithUserLocation() {
     $('#video_search_res').html('<i class="fa fa-spinner"></i> loading.....');
 
-    $.get( "/home/ajax/video-search/?keyword="+'', function( data ) {
-        console.log(data.json.original);
-        if(data.content == '')
-            $('#video_search_res').html('No result!');
+    var $search_text = $('#search_text').val();
+    var $search_cat = $('#content_search_cat').val();
+    var $video_id = $('#video_id').val();
+    if ($search_text == undefined)
+        $search_text = '';
+    if ($search_cat == undefined)
+        $search_cat = '';
+    if ($video_id == undefined)
+        $video_id = '';
 
-        updateMarkers(data.json.original);
-        $('#video_search_res').html(decode(data.content));
 
-    });
+    if (showed_markers) {
+        let markers = showed_markers.filter((marker) => {
+            return map.getBounds().contains([marker.lat, marker.lng]);
+        });
+        let ids = markers.map(marker => marker.id).join();
+
+        $.get("/home/ajax/show-current-feed/?keyword=" + $search_text + "&category_id=" + $search_cat
+            + "&video_id=" + $video_id + "&ids=" + ids, function (data) {
+                if (data.content == '')
+                    $('#video_search_res').html('No result!');
+                console.log(123);
+                // let new_data = data.json.original;
+                // new_data = new_data.filter((marker) => {
+                //     return map.getBounds().contains([marker.lat, marker.lng]);
+                // });
+
+                $('#video_search_res').html(decode(data.content));
+            });
+    }
+
 }
 
-function searchByTag(id){
-    console.log('search gcs '+id);
+function searchByTag(id) {
+    console.log('search gcs ' + id);
     $('#video_search_res').html('<i class="fa fa-spinner"></i> loading.....');
-    $.get( "/home/ajax/video-search/?gcs="+id, function( data ) {
+    $.get("/home/ajax/video-search/?gcs=" + id, function (data) {
         console.log(data.json.original);
-        if(data.content == '')
+        if (data.content == '')
             $('#video_search_res').html('No result!');
 
         updateMarkers(data.json.original);
@@ -289,69 +357,69 @@ function decode(str) {
     return e.childNodes.length === 0 ? "" : e.childNodes[0].nodeValue;
 }
 
-$(document).ready(function(){
-    $("#content_search_cat").change(function(){
+$(document).ready(function () {
+    $("#content_search_cat").change(function () {
         console.log('searching');
         searchVideo();
     });
 
-    if($('#_location_id').val() !== ''){
+    if ($('#_location_id').val() !== '') {
         // updateMap($('#_location_id').val());
     }
 
-    if(typeof(L) != "undefined"){
+    if (typeof (L) != "undefined") {
         searchVideo();
     }
 })
 
-$("#login-btn").click(function() {
+$("#login-btn").click(function () {
     $("#loginModal").modal("show");
     $(".navbar-collapse.in").collapse("hide");
     return false;
 });
 
-function openLoginRegister(){
+function openLoginRegister() {
     $('.popupsec').fadeIn();
     $('html').addClass('no-scroll');
 };
 
-$("#register-btn").click(function() {
+$("#register-btn").click(function () {
     $("#registerModal").modal("show");
     $(".navbar-collapse.in").collapse("hide");
     return false;
 });
 
-function testFunction(id){
-    if(confirm('Are you sure you want to approve this?')){
-        $('#approve_'+id).html('updating...');
+function testFunction(id) {
+    if (confirm('Are you sure you want to approve this?')) {
+        $('#approve_' + id).html('updating...');
         jQuery.ajax({
-            url: "/user/admin/ajax/approve-content/"+id,
+            url: "/user/admin/ajax/approve-content/" + id,
             method: 'GET'
         }).done(function (content) {
-            $('#approve_'+id).html('Activated!');
+            $('#approve_' + id).html('Activated!');
         }).fail(function () {
         });
-///  /user/admin/ajax/approve-content/"+id
+        ///  /user/admin/ajax/approve-content/"+id
     }
 }
 
-function userLogin(){
+function userLogin() {
     jQuery.ajax({
         url: '/user/login',
         method: 'POST',
         data: $('#login-form').serialize()
     }).done(function (response) {
-        $.each(response, function(key, val){
-            if(key == 'error'){
-                $.each(val, function(key2, val2){
-                    $('#login-form #messages').html('<div class="alert alert-danger" role="alert">'+val2+'</div>');
+        $.each(response, function (key, val) {
+            if (key == 'error') {
+                $.each(val, function (key2, val2) {
+                    $('#login-form #messages').html('<div class="alert alert-danger" role="alert">' + val2 + '</div>');
                 })
-            }else{
-                $('#login-form #messages').html('<div class="alert alert-success" role="alert">'+val+'</div>');
+            } else {
+                $('#login-form #messages').html('<div class="alert alert-success" role="alert">' + val + '</div>');
                 let $redirect_to = $('#redirect_to').val();
-                if($redirect_to == '' || typeof $redirect_to === "undefined"){
+                if ($redirect_to == '' || typeof $redirect_to === "undefined") {
                     window.location.href = "/user/profile";
-                }else{
+                } else {
                     window.location.href = $redirect_to;
                 }
 
@@ -363,22 +431,22 @@ function userLogin(){
     });
 }
 
-function userRegister(){
+function userRegister() {
     $('.disable_loading').css('display', 'block');
-    $('.register_button').attr("disabled",true);
+    $('.register_button').attr("disabled", true);
     jQuery.ajax({
         url: '/user/register',
         method: 'POST',
         data: $('#register-form').serialize()
     }).done(function (response) {
         $('.disable_loading').css('display', 'none');
-        $('.register_button').attr("disabled",false);
-        $.each(response, function(key, val){
-            if(key == 'error'){
-                $.each(val, function(key2, val2){
-                    $('#register-form #messages').html('<div class="alert alert-danger" role="alert">'+val2+'</div>');
+        $('.register_button').attr("disabled", false);
+        $.each(response, function (key, val) {
+            if (key == 'error') {
+                $.each(val, function (key2, val2) {
+                    $('#register-form #messages').html('<div class="alert alert-danger" role="alert">' + val2 + '</div>');
                 })
-            }else{
+            } else {
                 $('.popupsec').hide();
                 $.alert({
                     title: 'Email has sent!',
@@ -393,18 +461,18 @@ function userRegister(){
     });
 }
 
-function openVideoOnly(){
+function openVideoOnly() {
     var video_id = $('.watchvideo').data("videolink");
-    console.log('working:'+video_id);
+    console.log('working:' + video_id);
     $("#feature-info").html('loading...');
-    var content = '<iframe style="width: 100%;height: 600px" frameborder="0" allowfullscreen src="'+video_id+'"></iframe>';
+    var content = '<iframe style="width: 100%;height: 600px" frameborder="0" allowfullscreen src="' + video_id + '"></iframe>';
     $("#feature-info").html(content);
     $("#featureModal").modal("show");
 }
 
 setInterval(updateLastActive, 10000); // Time in milliseconds
 
-function updateLastActive(){
+function updateLastActive() {
     jQuery.ajax({
         url: '/user/user-last-active',
         method: 'GET',
@@ -431,42 +499,42 @@ function modalBack() {
     updateModelButtons();
 }
 
-function modalFoward(){
+function modalFoward() {
     model_links_current_pos += 1;
     invokeModelAction(model_links[model_links_current_pos - 1]);
     updateModelButtons();
 }
 
-function updateModelFunction(action, value){
+function updateModelFunction(action, value) {
     model_links.push([action, value]);
     model_links_current_pos++;
     updateModelButtons();
 }
 
-function updateModelButtons(){
-    if(model_links.length > model_links_current_pos)
+function updateModelButtons() {
+    if (model_links.length > model_links_current_pos)
         $('.model-foward').show();
     else
         $('.model-foward').hide();
 
 
-    if(model_links_current_pos > 1){
+    if (model_links_current_pos > 1) {
         $('.model-back').show();
         // $('.model-foward').hide();
-    }else{
+    } else {
         $('.model-back').hide();
     }
 
-    console.log('current pos '+model_links_current_pos+'   model length '+model_links.length)
-    if(model_links_current_pos < 2 && model_links.length < 2){
+    console.log('current pos ' + model_links_current_pos + '   model length ' + model_links.length)
+    if (model_links_current_pos < 2 && model_links.length < 2) {
         $('.model-back').hide();
         $('.model-foward').hide();
     }
 }
 
-function invokeModelAction(actions){
+function invokeModelAction(actions) {
     window[actions[0]](actions[1], true);
-    console.log(actions[0]+'   '+actions[1]);
+    console.log(actions[0] + '   ' + actions[1]);
 
     updateModelButtons();
 }
@@ -474,7 +542,7 @@ function invokeModelAction(actions){
 
 
 //lazy loaded table
-$(document).ready(function() {
+$(document).ready(function () {
     // $('#lazy-loaded-table').DataTable( {
     //     // serverSide: true,
     //     // ordering: false,
@@ -488,7 +556,6 @@ $(document).ready(function() {
     //         loadingIndicator: true
     //     }
     // } );
-
     var data_list_id = $('#data_list_id').val();
     $("#lazy-loaded-table").dataTable({
         "scrollCollapse": true,
@@ -508,51 +575,22 @@ $(document).ready(function() {
         "scrollY": "600px",
         "length": 10,
         "columns": [
-            {"data": "action"},
-            {"data": "title"},
-            {"data": 'submitted_by'},
-            {"data": 'status'},
-            {"data": 'url'},
-            {"data": 'email'},
-            {"data": 'location'},
-            {"data": 'updated_at'}
+            { "data": "action" },
+            { "data": "title" },
+            { "data": 'submitted_by' },
+            { "data": 'status' },
+            { "data": 'url' },
+            { "data": 'email' },
+            { "data": 'location' },
+            { "data": 'updated_at' }
         ]
     });
+});
 
-    $("#lazy-loaded-table-group-admin").dataTable({
-        "scrollCollapse": true,
-        "serverSide": true,
-        // "ordering": true,
-        // "searching": true,
-        "lengthChange": true,
-        "ajax": {
-            "url": '/user/group-admin/group-content-list-ajax/'+data_list_id,
-            "type": "GET",
-        },
-        "scroller": {
-            "loadingIndicator": true
-        },
-        "deferRender": true,
-        "dom": "rtiS",
-        "scrollY": "600px",
-        "length": 10,
-        "columns": [
-            {"data": "action"},
-            {"data": "title"},
-            {"data": 'submitted_by'},
-            {"data": 'status'},
-            {"data": 'url'},
-            {"data": 'email'},
-            {"data": 'location'},
-            {"data": 'updated_at'}
-        ]
-    });
-} );
-
-function displayVideoContentUpload(){
-    if($("#submitted_footage").val() == 'yes'){
+function displayVideoContentUpload() {
+    if ($("#submitted_footage").val() == 'yes') {
         $('#submit_footage_form').show();
-    }else{
+    } else {
         $('#submit_footage_form').hide();
     }
 }
@@ -598,7 +636,7 @@ $('.content-type-select-ajax').select2({
             $.each(response, function (index, data) {
                 results.push({
                     id: data.id,
-                    text: data.text + ' ('+data.type+')',
+                    text: data.text + ' (' + data.type + ')',
                     type: data.type
                 });
             });

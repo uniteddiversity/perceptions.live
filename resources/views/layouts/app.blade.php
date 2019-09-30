@@ -20,9 +20,10 @@
 
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,600,700" rel="stylesheet">
 
-    <link rel="stylesheet" type="text/css" href="/assets/css/leaflet_0.7.css" />
+    <link rel="stylesheet" type="text/css" href="/assets/css/leaflet.css" />
     {{--<link rel="stylesheet" href="/assets/css/leaflet.css">--}}
     {{--<link rel="stylesheet" href="/assets/css/MarkerCluster.css">--}}
+    <link rel="stylesheet" href="/assets/css/MarkerCluster.css">
     <link rel="stylesheet" href="/assets/css/MarkerCluster.Default.css">
     <link rel="stylesheet" href="/assets/css/L.Control.Locate.css">
     <link rel="stylesheet" href="/assets/leaflet-groupedlayercontrol/leaflet.groupedlayercontrol.css">
@@ -38,7 +39,7 @@
 
 </head>
 
-<body class="full-height" id="scrollup">
+<body class="full-height" id="scrollup" >
 
     <div class="page-loading">
         <img src="/assets/findgo/images/loader.gif" alt="" />
@@ -164,9 +165,10 @@
     {{--<script src="http://maps.googleapis.com/maps/api/js?key=AIzaSyCYc537bQom7ajFpWE5sQaVyz1SQa9_tuY&sensor=true&libraries=places"></script><!-- Maps -->--}}
     {{--<script type="text/javascript" src="/assets/findgo/js/map1.js"></script>--}}
     <script type="text/javascript" src="/assets/findgo/js/jq.aminoSlider.js"></script>
-    <script src="/assets/js/leaflet_0.7.js"></script>
-    <script src="/assets/js/leaflet.markercluster.js"></script>
-    <script src="/assets/js/L.Control.Locate.min.js"></script>
+    <script src="/assets/js/leaflet.js"></script>
+    <script src="/assets/js/leaflet.markercluster.new.js"></script>
+    <script src="/assets/js/leaflet.freeze.js"></script>
+    <script src="/assets/js//L.control.locate.new.js"></script>
     <script src="/assets/leaflet-groupedlayercontrol/leaflet.groupedlayercontrol.js"></script>
     <script src="/assets/js/notify.js"></script>
 
@@ -232,10 +234,77 @@
             width: 200px;
         }
 
-    </style>
+        /* Geolocation Icon */
+        .fa-map-marker:before {
+            content: "\f0ac";
+        }
+
+        /*  Clustering color   */
+        .marker-cluster-small {
+            background-color: #8a88ff;
+        }
+
+        .marker-cluster-medium {
+            background-color: #8a88ff;
+        }
+
+        .marker-cluster-large {
+            background-color: #8a88ff;
+        }
+
+        .marker-cluster-small div {
+            background-color: #47489E;
+            color: white;
+        }
+
+        .marker-cluster-medium div {
+            background-color: #47489E;
+            color: white;
+        }
+
+        .marker-cluster-large div {
+            background-color: #47489E;
+            color: white;
+        } 
+        /* Adding margins on zoom controls */
+        .leaflet-top{
+            top:90px;
+        }
+
+        /* Adding Target icon */
+        .custom{
+            width: 25px;
+            height: 31px;
+            content: url(/assets/img/target.svg);
+        }
+        
+        /* changin zoom in and out colors */
+        .leaflet-control-zoom-in{
+            color : #47489E !important;
+        }
+        .leaflet-control-zoom-out{
+            color : #47489E !important;
+        }
+        /* Participate Icon */
+        .participate{
+            top: 70%;
+            z-index: 10001;
+            color: #1C1C8C;
+            position: absolute;
+            left: 50%;
+            font-size: 100px;
+
+        }
+        /* Left Magnifying Glass */
+        .maginify-glass{
+            font-size: 40px;
+            transform: rotate(180deg);
+        }
+
+</style>
     <script>
         $(document).ready(function() {
-            $('[data-toggle="tooltip"]').tooltip();
+            $('[data-toggle="tooltip"]').t  ooltip();
         });
 
     </script>

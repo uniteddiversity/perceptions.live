@@ -309,14 +309,88 @@ class UserRepository
         return $r;
     }
 
-    /**
-     * @param $user_id
-     * @param array $filter
-     * @param int $count
-     * @param string $contents
-     * @param null $per_page
-     * @return array
-     */
+    public function getCurrentContents($user_id, $filter = array(), &$count = 0)
+    {
+        $contents = $this->content->with(['videoProducer' => function($q){
+            $q->with('user');
+        }])
+            ->leftJoin('users', 'contents.user_id', 'users.id')->where(function($q) use ($user_id){
+                $q->where(function($r) use ($user_id){
+                    $r->whereIn('users.id', array($user_id))->orWhere('contents.access_level_id', '1');
+                });
+            })->leftJoin('tag_content_associations', function($q){
+                $q->on( 'contents.id', 'tag_content_associations.content_id');
+                $q->where( 'tag_content_associations.tag_for', 'gci');
+            })->leftJoin('tag_content_associations as search_tag', function($q){
+                $q->on( 'contents.id', 'search_tag.content_id');
+                $q->where( 'search_tag.tag_for', 'gci');
+            })
+            ->leftJoin('sorting_tags', function($q){
+                $q->on('sorting_tags.id', 'tag_content_associations.content_tag_id');
+            })
+            ->leftJoin('user_content_associations',
+                'user_content_associations.content_id', 'contents.id')
+            ->leftJoin('group_content_associations',
+                'group_content_associations.content_id', 'contents.id')
+            ->leftJoin('user_groups',
+                'user_groups.group_id', 'group_content_associations.group_id')
+            ->leftJoin('user_sorting_tags',
+                'user_content_associations.user_association_tag_slug', 'user_sorting_tags.slug')
+            ->leftJoin('groups',
+                'groups.id', 'user_groups.group_id')
+
+            ->where('contents.status', '=', 1);
+
+        if(isset($filter['keyword']) && !empty($filter['keyword'])){
+            $contents = $contents->where(function($q) use($filter){
+                $q->where('title', 'like', '%'.$filter['keyword'].'%');
+                $q->orWhere('brief_description', 'like', '%'.$filter['keyword'].'%');
+                $q->orWhere('primary_subject_tag', 'like', '%'.$filter['keyword'].'%');
+            });
+        }
+
+        if(isset($filter['gcs']) && !empty($filter['gcs'])){
+            $contents = $contents->where('search_tag.content_tag_id', $filter['gcs']);
+        }
+
+        if(isset($filter['category_id']) && !empty($filter['category_id'])){
+            $contents = $contents->where('category_id', $filter['category_id']);
+        }
+
+        if(isset($filter['video_id']) && !empty($filter['video_id'])){
+            $contents = $contents->where('contents.id', $filter['video_id']);
+        }
+
+        if(isset($filter['user_involvement']) && !empty($filter['user_involvement'])){
+            $contents = $contents->where('user_content_associations.user_id', $filter['user_involvement']);
+        }
+
+        if(isset($filter['group_involvement']) && !empty($filter['group_involvement'])){
+            $contents = $contents->where('user_groups.user_id', $filter['group_involvement']);
+        }
+
+        if(isset($filter['ids']) && !empty($filter['ids'])){
+            $contents = $contents->whereIn('contents.id', $filter['ids']);
+        }
+
+        $contents = $contents->select('contents.id', DB::Raw("SUBSTRING(contents.brief_description, 1, 128) as trim_description"), 'contents.lat', 'contents.long', 'contents.title', 'contents.url',
+                'users.display_name','users.id as user_id','contents.created_at','contents.captured_date','contents.location','contents.user_id','contents.primary_subject_tag',DB::Raw("GROUP_CONCAT(DISTINCT (user_sorting_tags.name) SEPARATOR ', ') as user_association"), DB::Raw("GROUP_CONCAT(DISTINCT (groups.name) SEPARATOR ', ') as group_names"), DB::Raw("GROUP_CONCAT(DISTINCT concat(groups.name,'-',groups.id) SEPARATOR ',') as group_names_ids"),
+                DB::Raw("GROUP_CONCAT(DISTINCT (concat(sorting_tags.tag_color,'-',sorting_tags.id,'-',sorting_tags.tag)) SEPARATOR ', ') as tag_colors") )
+            ->groupBy('contents.id')->orderBy('contents.captured_date', 'DESC')->limit(500)->get();
+        $r = array(); $i = 0;
+
+        foreach($contents as $c){
+            if(isset($c['lat']) && isset($c['long'])){
+                $r[$i] = $c;
+                $r[$i]['video'] = $c['url'];
+                $i++;
+            }
+        }
+
+        $count = $i;
+        return $r;
+    }
+
     public function getPublicContents($user_id, $filter = array(), &$count = 0, &$contents = '', $per_page = null)
     {
         $contents = $this->content->with(['videoProducer' => function($q){
