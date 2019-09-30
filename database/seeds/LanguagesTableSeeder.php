@@ -29,9 +29,21 @@ class LanguagesTableSeeder extends Seeder
                 'code'          =>  'de',
                 'language'      =>  'German'
             ],
+//            [
+//                'code'          =>  'fi',
+//                'language'      =>  'Finnish'
+//            ],
             [
-                'code'          =>  'fi',
-                'language'      =>  'Finnish'
+                'code'          =>  'es',
+                'language'      =>  'Spanish'
+            ],
+            [
+                'code'          =>  'fr',
+                'language'      =>  'French'
+            ],
+            [
+                'code'          =>  'oo',
+                'language'      =>  'Other'
             ],
         ]);
         DB::statement('SET FOREIGN_KEY_CHECKS=1;');
