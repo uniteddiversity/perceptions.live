@@ -61,7 +61,8 @@
                                         {{ $video->updated_at }}
                                     </td>
                                     <td>
-                                        <a href="/user/group-admin/video-edit/{{ uid($video->id) }}" >Edit</a>
+                                        {{--<a href="/user/group-admin/video-edit/{{ uid($video->id) }}" >Edit</a>--}}
+                                        <a href="/contact-us" >Edit</a>
                                     </td>
                                 </tr>
                             @endforeach
