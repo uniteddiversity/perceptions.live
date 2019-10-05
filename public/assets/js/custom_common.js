@@ -79,3 +79,12 @@ function addr_search_new() {
         return true;
     });
 }
+
+
+$(window).on('load',function(){
+    "use strict";
+
+    $('.page-loading').fadeOut();
+
+});
+

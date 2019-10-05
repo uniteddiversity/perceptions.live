@@ -5,11 +5,13 @@ namespace App\Controllers;
 use App\Category;
 use App\Content;
 use App\Http\Controllers\Controller;
+use App\Mail\contactUs;
 use App\SiteSetting;
 use App\User;
 use Content\Services\ContentService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Validator;
 use User\Services\UserRepository;
@@ -40,6 +42,8 @@ class HomeController extends Controller
      * @var SiteSetting
      */
     private $siteSetting;
+
+    private $per_page = 4;
 
     public function __construct(Content $content, User $user, UserRepository $userRepository, ContentService $contentService,
                                 Category $category, SiteSetting $siteSetting)
@@ -126,23 +130,52 @@ class HomeController extends Controller
     {
         $user_associate_videos = $this->userRepository->getAssociatedVideosForUser($user_id);
         $info = $this->userRepository->getUser($user_id);
-        $info['user_involvement_videos'] = $this->userRepository->getPublicContents($user_id, array('user_involvement' => $user_id));
-        $info['group_involvement_videos'] = $this->userRepository->getPublicContents($user_id, array('group_involvement' => $user_id));
+        $info['user_groups'] = $this->userRepository->getUserGroups($user_id, $contents2, $this->per_page);
+        $info['user_involvement_videos'] = $this->userRepository->getPublicContents($user_id, array('user_involvement' => $user_id), $count, $contents1, $this->per_page);
+        $info['group_involvement_videos'] = $this->userRepository->getPublicContents($user_id, array('group_involvement' => $user_id), $count);
 
         $user_status = $this->userRepository->getUserStatus($user_id);
         $gci_tags = $this->userRepository->getGreaterCommunityIntentionTag();
-
         return view('partials.user-info-popup')
-            ->with(compact('info','user_associate_videos','gci_tags','user_status'));
+            ->with(compact('info','user_associate_videos','gci_tags','user_status', 'contents1', 'contents2', 'user_id'));
+    }
+
+    public function getUserInfoVideoPartial($user_id)
+    {
+        $contentInfo = $this->userRepository->getPublicContents($user_id, array('user_involvement' => $user_id), $count, $paginationData, $this->per_page);
+
+        return view('partials.user-info-popup_video-info')
+            ->with(compact('contentInfo', 'paginationData', 'user_id'));
+    }
+
+    public function getUserInfoGroupPartial($user_id)
+    {
+        $groupsInfo = $this->userRepository->getUserGroups($user_id, $paginationData, $this->per_page);
+        return view('partials.user-info-popup_group-info')
+            ->with(compact('groupsInfo', 'paginationData', 'user_id'));
     }
 
     public function getGroupInfo($group_id)
     {
         $info = $this->userRepository->getGroupInfo($group_id, true, true);
-        $group_contents = $this->contentService->getSearchableContents(0, array('group_id' => $group_id), 10);
-        $group_users = $this->userRepository->getUsers(array('group_id' => $group_id));
+        $group_contents = $this->contentService->getSearchableContents(0, array('group_id' => $group_id), 10, $contents1, $this->per_page);
+        $group_users = $this->userRepository->getUsers(array('group_id' => $group_id), null,$contents2, $this->per_page);
         return view('partials.group-info-popup')
-            ->with(compact('info','group_contents','group_users'));
+            ->with(compact('info','group_contents','group_users', 'contents1', 'contents2', 'group_id'));
+    }
+
+    public function getGroupInfoUsersPartial($group_id)
+    {
+        $groupUsers = $this->userRepository->getUsers(array('group_id' => $group_id), null,$paginationData, $this->per_page);
+        return view('partials.group-info-popup_user')
+            ->with(compact('groupUsers','paginationData'));
+    }
+
+    public function getGroupInfoVideoPartial($group_id)
+    {
+        $videos = $this->contentService->getSearchableContents(0, array('group_id' => $group_id), 10, $paginationData, $this->per_page );
+        return view('partials.group-info-popup_video')
+            ->with(compact('videos','paginationData'));
     }
 
     public function location($id)
@@ -156,19 +189,6 @@ class HomeController extends Controller
 
 
         $locations = $this->getSearchListInJson($uploaded_list);
-//        $ret = array(); $i = 0;
-//        foreach($uploaded_list as $u){
-//            $ret[$i]['id'] = $u['id'];
-//            $ret[$i]['lng'] = floatval($u['long']);
-//            $ret[$i]['lat'] = floatval($u['lat']);
-//            $ret[$i]['name'] = $u['title'];
-////            $ret[$i]['city'] = $u['city'];
-//            $i++;
-//        }
-//        $locations = response()->json($ret, 200);
-//
-
-
         $location_id = $id;
         return view('user.home2')
             ->with(compact('locations','location_id'));
@@ -296,6 +316,14 @@ class HomeController extends Controller
         $filter['gcs'] = isset($_GET['gcs'])?($_GET['gcs']):'';
         $filter['video_id'] = isset($_GET['video_id'])?($_GET['video_id']):'';
 
+        $filter['text'] = isset($_GET['text'])?($_GET['text']):'';
+        $filter['date_from'] = isset($_GET['date_from'])?($_GET['date_from']):'';
+        $filter['date_to'] = isset($_GET['date_to'])?($_GET['date_to']):'';
+        $filter['location_text'] = isset($_GET['location_text'])?($_GET['location_text']):'';
+        $filter['sorting_tag'] = isset($_GET['sorting_tag'])?($_GET['sorting_tag']):'';
+        $filter['service_or_opportunity'] = isset($_GET['exchange_for'])?($_GET['exchange_for']):'';
+        $filter['group_id'] = isset($_GET['group_id'])?($_GET['group_id']):'';
+
         $uploaded_list = $this->userRepository->getPublicContents($user_id, $filter, $result_count);
         $json_output = $this->getSearchListInJson($uploaded_list);
         $content = view('partials.video-search-result')
@@ -396,5 +424,47 @@ class HomeController extends Controller
             ->with(compact('uploaded_list'));
         $content = (string)htmlspecialchars($content);
         return array('content' => $content, 'json' => $json_output);
+    }
+
+    public function searchDisplayNames(Request $request)
+    {
+        $r = $request->all();
+        $data = $this->userRepository->ajaxSearchDisplayNames($r['q']['term']);
+        echo json_encode($data);
+    }
+
+    public function contactUs()
+    {
+        return view('user.contact-us');
+    }
+
+    public function contactUsPost(Request $request)
+    {
+        $r = $request->toArray();
+        $user_id = (!isset(Auth::user()->id))? 0 : Auth::user()->id;
+
+        $validator = Validator::make($request->all(),
+            [
+                'name' => 'required',
+                'email' => 'required|email',
+                'subject' => 'required',
+                'message' => 'required',
+                'g-recaptcha-response' => 'required|recaptcha'
+            ],
+            ['g-recaptcha-response.required' => 'Recaptcha must be clicked.']);
+
+        if ($validator->fails()) {
+            return Redirect::back()->withErrors($validator->messages())->withInput();
+        }
+
+        $to = [
+            [
+                'email' => env("ADMIN_MAIL"),
+                'name' => env("ADMIN_NAME"),
+            ]
+        ];
+        Mail::to($to)->send(new contactUs($request->all()));
+
+        return redirect()->back()->with('message', 'Successfully Sent!');
     }
 }

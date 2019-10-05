@@ -7,6 +7,7 @@ use App\Category;
 use App\Content;
 use App\Group;
 use App\HomeSliderFeed;
+use App\Language;
 use App\MetaData;
 use App\ShearedContent;
 use App\ShearedContentAssociation;
@@ -62,9 +63,14 @@ class ContentService
      * @var HomeSliderFeed
      */
     private $homeSliderFeed;
+    /**
+     * @var Language
+     */
+    private $language;
 
     public function __construct(MetaData $metaData, Content $content, User $user, ShearedContent $shearedContent,
-                                ShearedContentAssociation $shearedContentAssociation, Attachment $attachment, Category $category, Group $group, SortingTag $sortingTag, HomeSliderFeed $homeSliderFeed)
+                                ShearedContentAssociation $shearedContentAssociation, Attachment $attachment,
+                                Category $category, Group $group, SortingTag $sortingTag, HomeSliderFeed $homeSliderFeed, Language $language)
     {
         $this->metaData = $metaData;
         $this->content = $content;
@@ -76,6 +82,7 @@ class ContentService
         $this->group = $group;
         $this->sortingTag = $sortingTag;
         $this->homeSliderFeed = $homeSliderFeed;
+        $this->language = $language;
     }
 
     public function getMetaListByKey($key = '')
@@ -98,7 +105,7 @@ class ContentService
         return $meta_array;
     }
 
-    public function getContentList($user_id, $filter = array(), $page = null, $page_size = 20)
+    public function getContentList($user_id, $filter = array(), $page = null, $page_size = 20, $only_my = false)
     {
         $user_info = $this->getUser($user_id);
 
@@ -119,6 +126,10 @@ class ContentService
             $videos->leftJoin('user_groups as created_by_user_groups', 'created_by_user_groups.group_id','group_content_associations.group_id');
         }else{//if user
             $videos->where('user_id', $user_info['id']);
+        }
+
+        if($only_my){
+            $videos->where('contents.user_id', $user_info['id']);
         }
 
         if(isset($filter['open_list'])){
@@ -178,7 +189,7 @@ class ContentService
 //        return response()->json($ret, 200);
     }
 
-    public function getSearchableContents($user_id, $filter = array(), $limit = 10)
+    public function getSearchableContents($user_id, $filter = array(), $limit = 10, &$contents = '', $per_page = null)
     {
         $user_info = $this->getUser($user_id);
 
@@ -244,8 +255,14 @@ class ContentService
         $contents = $contents->select('contents.id', 'contents.description', 'contents.lat', 'contents.long', 'contents.title', 'contents.url',
             'users.display_name','contents.created_at','contents.location','contents.user_id','contents.primary_subject_tag',
             DB::Raw("GROUP_CONCAT(DISTINCT (concat(sorting_tags.tag_color,'-',sorting_tags.id,'-',sorting_tags.tag)) SEPARATOR ', ') as tag_colors") )
-            ->groupBy('contents.id')->orderBy('contents.updated_at', 'DESC')->limit($limit)->get();
+            ->groupBy('contents.id')->orderBy('contents.updated_at', 'DESC');
         $r = array(); $i = 0;
+
+        if($per_page != null){
+            $contents = $contents->paginate($per_page);
+        }else{
+            $contents = $contents->limit($limit)->get();
+        }
 
         foreach($contents as $c){
             $r[$i] = $c;
@@ -337,8 +354,12 @@ class ContentService
                     ->where('association.type', 'group')
                     ->where('association.table', 'categories');
             })
+            ->leftJoin('contents as content', function($q){
+                $q->on('content.primary_subject_tag', 'shared_contents.primary_subject_tag');
+            })
             ->select(
                 'shared_contents.id',
+                DB::Raw("GROUP_CONCAT(DISTINCT content.id SEPARATOR ',') as contents_content_ids"),
                 DB::Raw("GROUP_CONCAT(DISTINCT content_category.id SEPARATOR ',') as contents_category_ids"),
                 DB::Raw("GROUP_CONCAT(DISTINCT users_contents.content_id SEPARATOR ',') as user_contents_ids"),
                 DB::Raw("GROUP_CONCAT(DISTINCT contents_d.fk_id SEPARATOR ',') as contents_ids")
@@ -348,6 +369,12 @@ class ContentService
         $map = $map->where('shared_contents.public_token', $token)->groupBy('shared_contents.id')->get()->first();
 
         $ids = array();
+
+        if(isset($map['contents_content_ids'])){
+            foreach(explode(',',$map['contents_content_ids']) as $id){
+                $ids[$id] = $id;
+            }
+        }
 
         if(isset($map['contents_category_ids'])){
             foreach(explode(',',$map['contents_category_ids']) as $id){
@@ -494,5 +521,10 @@ class ContentService
     public function deleteHomeSlider($id)
     {
         return $this->homeSliderFeed->where('id', $id)->delete();
+    }
+
+    public function getLanguages()
+    {
+        return $this->language->get();
     }
 }

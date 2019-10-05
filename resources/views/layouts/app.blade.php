@@ -136,7 +136,7 @@
                                 </div>
 
                                 <p class="terms-label">
-                                    <input name="accept_tos" value="1" id="cb6" type="checkbox"><label for="cb6" style="color:black;">I’ve read and accept the terms &amp; conditions *</label>
+                                    <input name="accept_tos" value="1" id="cb6" type="checkbox"><label for="cb6" style="color:black;">I’ve read and accept the <a href="https://perceptiontravel.tv/terms-of-service/" target="_blank">terms &amp; conditions *</a></label>
                                 </p>
                                 <div class="btn_outer">
                                     <button type="button" class="register_button" onclick="userRegister()"><i class="disable_loading"></i>Sign Up</button>
@@ -170,7 +170,7 @@
     <script src="/assets/js/leaflet.freeze.js"></script>
     <script src="/assets/js//L.control.locate.new.js"></script>
     <script src="/assets/leaflet-groupedlayercontrol/leaflet.groupedlayercontrol.js"></script>
-
+    <script src="/assets/js/notify.js"></script>
 
     <script src="/assets/js/bootstrap-tooltip.js"></script>
     <script src="/assets/js/app.js"></script>
@@ -178,6 +178,9 @@
     <script src="/assets/js/datatable/datatables.min.js"></script>
     <script src="/assets/juery-confirm/jquery-confirm.js"></script>
     <script src="/assets/js/thumbnail_slider.js"></script>
+    <script src="/assets/js/home-common.js"></script>
+
+    @include('partials.notify-messages')
     <style>
         #featureModal {
             position: fixed;

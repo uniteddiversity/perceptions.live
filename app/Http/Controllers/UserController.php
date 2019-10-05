@@ -9,6 +9,7 @@ use App\Content;
 use App\Group;
 use App\Http\Controllers\Controller;
 use App\Invoice;
+use App\Mail\groupCreated;
 use App\MediaPackage;
 use App\MediaProject;
 use App\MetaData;
@@ -21,7 +22,9 @@ use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Crypt;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Redirect;
+use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Validator;
 //use System\Request;
 use PayPal\IPN\Event\IPNInvalid;
@@ -175,9 +178,10 @@ class UserController extends Controller
         $groups = $this->userRepository->groupList($user_id);
         $access_levels = $this->userRepository->getAccessLevels();
         $status = $this->userRepository->getStatus();
+        $languages = $this->contentService->getLanguages();
 
         return view('user.content-add')
-            ->with(compact('categories','meta_array','user_list','sorting_tags','groups','access_levels','status', 'gci_tags'));
+            ->with(compact('categories','meta_array','user_list','sorting_tags','groups','access_levels','status', 'gci_tags','languages'));
     }
 
     public function postUploadVideo(Request $request)
@@ -193,7 +197,9 @@ class UserController extends Controller
 //            'url' => 'required',
             'captured_date' => 'date_format:"d-m-Y"',
 //            'video_date' => 'required'
-        ]);
+            'g-recaptcha-response' => 'required|recaptcha'
+        ],
+            ['g-recaptcha-response.required' => 'Recaptcha must be clicked.']);
 
         if ($validator->fails()) {
             return Redirect::back()->withErrors($validator->messages())->withInput();
@@ -238,7 +244,8 @@ class UserController extends Controller
 //                'captured_date' => date('Y-m-d'),
 //                'video_date' => date('Y-m-d'),
                 'created_by' => $user_id,
-                'user_comment' => $r['user_comment']
+                'user_comment' => $r['user_comment'],
+                'language' => $r['language']
             ]
         );
 
@@ -364,7 +371,7 @@ class UserController extends Controller
             }
         ////////////////////end video upload//////////////////
 
-        return redirect()->back()->with('message', 'Successfully Added!');
+        return redirect()->to('/')->with('message', 'Successfully Added!');
     }
 
     public function profileSettings()
@@ -574,7 +581,7 @@ class UserController extends Controller
 
     public function claimUserProfile()
     {
-        $user_list = $this->userRepository->getUsers(array('filter_system_users' => true));
+//        $user_list = $this->userRepository->getUsers(array('filter_system_users' => true));
         return view('user.claim-profile-request')
             ->with(compact('user_list'));
     }
@@ -586,18 +593,206 @@ class UserController extends Controller
             ->with(compact('user_list'));
     }
 
+    public function groupList()
+    {
+        $user_id = (!isset(Auth::user()->id))? 0 : Auth::user()->id;
+        $groups = $this->userRepository->groupList($user_id, false);
+        return view('user.group-list')
+            ->with(compact('groups'));
+    }
+
+    public function groupAdd()
+    {
+        if($this->userRepository
+                ->groupList(Auth::user()->id,
+                    false, 0, array(['groups.status', '<>', '5']))->count() >= 1){
+            Session::flash('error', 'Only one group can be created.');
+        }
+
+        $gci_tags = $this->userRepository->getGreaterCommunityIntentionTag();
+        $categories = $this->category->get();
+        $user_id = (!isset(Auth::user()->id))? 0 : Auth::user()->id;
+        $user_list = $this->userRepository->getUsers(array(),$user_id);
+        $status = $this->userRepository->getStatus();
+        $experience_knowledge_tags = $this->userRepository->getSkillsTag();
+
+        return view('user.group-add')
+            ->with(compact('categories','user_list','status','experience_knowledge_tags', 'gci_tags'));
+    }
+
+    public function editGroup($id, Request $request)
+    {
+        $id = UID::translator($id);
+
+        $gci_tags = $this->userRepository->getGreaterCommunityIntentionTag();
+        $categories = $this->category->get();
+        $user_id = (!isset(Auth::user()->id))? 0 : Auth::user()->id;
+        $user_list = $this->userRepository->getUsers(array(),$user_id);
+        $group = $this->userRepository->groupList($user_id, true, $id);
+        $status = $this->userRepository->getStatus();
+        $user_acting_role = $this->userRepository->getUserActingRoles();
+        $experience_knowledge_tags = $this->userRepository->getSkillsTag();
+
+        return view('user.group-add')
+            ->with(compact('categories','group','user_list','status','user_acting_role','experience_knowledge_tags','gci_tags'));
+    }
+
+    public function postGroupAdd(Request $request)
+    {
+        $r = $request->toArray();
+        if(!isset($r['id']) && $this->userRepository
+                ->groupList(Auth::user()->id,
+                    false, 0, array(['groups.status', '<>', '5']))->count() >= 1){
+            return Redirect::back()->withErrors('Only one group can be created.')->withInput();
+        }
+
+        if((isset($r['id']))){
+            $validator = Validator::make($request->all(), [
+                'name' => 'required|unique:groups,name,'.UID::translator($r['id']),//pass the id as third parameter
+                'description' => 'required',
+                'category_id' => 'required',
+                'g-recaptcha-response' => 'required|recaptcha'
+            ],
+            ['g-recaptcha-response.required' => 'Recaptcha must be clicked.']);
+        }else{
+            $validator = Validator::make($request->all(), [
+                'name' => 'required|unique:groups',
+                'description' => 'required',
+                'category_id' => 'required',
+                'g-recaptcha-response' => 'required|recaptcha'
+            ],
+            ['g-recaptcha-response.required' => 'Recaptcha must be clicked.']);
+        }
+
+        if ($validator->fails()) {
+            return Redirect::back()->withErrors($validator->messages())->withInput();
+        }
+
+        $user_id = (!isset(Auth::user()->id))? 0 : Auth::user()->id;
+        $new_group = $this->group->updateOrCreate(
+            [
+                'id'   => (isset($r['id']))?UID::translator($r['id']):0,
+            ],
+            [
+                'greeting_message_to_community' => $r['greeting_message_to_community'],
+                'name' => $r['name'],
+                'description' => $r['description'],
+                'current_mission' => $r['current_mission'],
+                'experience_knowledge_interests' => isset($r['experience_knowledge_interests'])?$r['experience_knowledge_interests']:'',
+                'default_location' => $r['default_location'],
+                'learn_more_url' =>  $r['learn_more_url'],
+                'category_id' => $r['category_id'],
+                'contact_user_id' => $r['contact_user_id'],
+//                'accept_tos' => isset($r['accept_tos'])? 1 : 0,
+                'created_by' => Auth::user()->id,
+                'status' => 2,//set inactive by default until admin approves
+            ]
+        );
+
+        if(isset($r['accept_tos'])){
+            $this->group->updateOrCreate(
+                [
+                    'id' => $new_group->id,
+                ],
+                [
+                    'accept_tos' => isset($r['accept_tos'])? 1 : 0,
+                ]
+            );
+        }
+
+        if(isset($r['status'])){
+            $this->group->updateOrCreate(
+                [
+                    'id' => $new_group->id,
+                ],
+                [
+                    'status' => $r['status'],
+                ]
+            );
+        }
+
+        if(isset($r['proof_of_group'])){
+            $this->userRepository->deleteAttachmentByFkId(Auth::user()->id, $new_group->id, 'proof-of-group-in', 'groups');
+            foreach($r['proof_of_group'] as $file){
+                $this->userRepository->uploadAttachment($file,Auth::user()->id, $new_group->id,
+                    'proof-of-group-in', 'groups',1);
+            }
+        }
+
+        if(isset($r['group_avatar'])){
+            $this->userRepository->deleteAttachmentByFkId(Auth::user()->id, $new_group->id, 'group-avatar', 'groups');
+            $this->userRepository->uploadAttachment($r['group_avatar'],Auth::user()->id, $new_group->id,
+                'group-avatar', 'groups',1);
+        }
+
+        if(isset($r['experience_kno'])){
+            $this->userRepository->deleteTagsOfGroupBySlug($new_group->id, 'experience_kno');
+            foreach($r['experience_kno'] as $sorting_tags_id){
+                $tag_id = base64_decode($sorting_tags_id);
+                if(is_numeric($tag_id)){
+                    $this->userRepository->addTagToGroup($new_group->id, $tag_id,'experience_kno');
+                }else{
+                    $newly_created_id = $this->userRepository->addIfNotExist($sorting_tags_id,'experience_kno', Auth::user()->id);
+                    if(isset($newly_created_id->id))
+                        $this->userRepository->addTagToGroup($new_group->id, $newly_created_id->id,  'experience_kno');
+                }
+            }
+        }
+
+        if(isset($r['grater_community_intention_ids'])){
+            $this->userRepository->deleteTagsOfGroupBySlug($new_group->id, 'gci');
+            foreach($r['grater_community_intention_ids'] as $sorting_tags_id){
+                $tag_id = base64_decode($sorting_tags_id);
+                if(is_numeric($tag_id)){
+                    $this->userRepository->addTagToGroup($new_group->id, $tag_id,'gci');
+                }else{
+//                    $newly_created_id = $this->userRepository->addIfNotExist($sorting_tags_id,'gci', Auth::user()->id);
+//                    if(isset($newly_created_id->id))
+//                        $this->userRepository->addTagToGroup($new_group->id, $newly_created_id->id,  'gci');
+                }
+            }
+        }
+
+        //add role tag to user
+        if(isset($new_group->id) && !empty($r['group_acting_roles'])){
+            $this->userRepository->deleteGroupFromTag($new_group->id,'role');
+            foreach($r['group_acting_roles'] as $tag){
+                $user_group = $this->userRepository->addTagToGroup($new_group->id, $tag,'role');
+            }
+        }
+
+        $this->userRepository->addUserToGroup($user_id, $new_group->id);//add himself to the group
+
+        if(!isset($r['id'])){
+            $to = [
+                [
+                    'email' => env("ADMIN_MAIL"),
+                    'name' => env("ADMIN_NAME"),
+                ]
+            ];
+
+            Mail::to($to)->send(new groupCreated($new_group));
+        }
+
+        return redirect()->back()->with('message', 'Successfully Added!');
+    }
+
     public function claimUserProfilePost(Request $request)
     {
         $r = $request->toArray();
         $user_id = (!isset(Auth::user()->id))? 0 : Auth::user()->id;
 
-        $validator = Validator::make($request->all(), [
-            'email' => 'required|email|unique:users',
-            'display_name' => 'required',
-            'claim_video_profile' => 'required',
-            'confirm_selected_content' => 'required',
-            'accept_tos' => 'required'
-        ]);
+        $validator = Validator::make($request->all(),
+            [
+//            'email' => 'required|email|unique:users',
+                'display_name' => 'required',
+                'claim_video_profile' => 'required',
+                'confirm_selected_content' => 'required',
+                'accept_tos' => 'required',
+                'email' => 'required',
+                'g-recaptcha-response' => 'required|recaptcha'
+            ],
+            ['g-recaptcha-response.required' => 'Recaptcha must be clicked.']);
 
         if ($validator->fails()) {
             return Redirect::back()->withErrors($validator->messages())->withInput();
@@ -824,7 +1019,21 @@ class UserController extends Controller
                 //video process
             }
         }
+    }
 
 
+    public function listClaimProfileRequest()
+    {
+        $user_id = Auth::user()->id;
+        $data = $this->userRepository->getClaimRequests(0, $user_id);
+        return view('user.profile-claim-request-list')->with(compact('data'));
+    }
+
+    public function deleteClaimProfileRequest($_id)
+    {
+        $user_id = Auth::user()->id;
+        $id = UID::translator($_id);
+        $this->userRepository->updateClaimRequestStatus($id, 4);
+        return redirect('/user/user/list-profile-claim-request')->with('message', 'Successfully Deleted!');
     }
 }

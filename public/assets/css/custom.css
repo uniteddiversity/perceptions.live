@@ -2298,7 +2298,7 @@ input[type="text"]:focus::placeholder {
 }
 
 #feature-info .video_thumb {
-    width: 410px;
+    height: 240px;
     width: 273px;
     float: left;
     padding: 10px;
@@ -2339,6 +2339,7 @@ input[type="text"]:focus::placeholder {
 
 .modal-inner .video_thumb .placedetails {
     position: relative;
+    min-height: 42px;
 }
 
 .modal-inner .video_thumb .placedetails:before {
@@ -4907,7 +4908,76 @@ nav.two .header-notification .profile-notification li {
     background: url("/assets/img/map_center_icon.svg") no-repeat;
     background-size: 50px 50px;
 }
+.pagination {
+    display: inline-block;
+}
 
+.pagination a {
+    color: white;
+    float: left;
+    padding: 6px 6px;
+    text-decoration: none;
+    font-size: 12px;
+}
+
+.pagination .current_page{
+    border-radius: 15px;
+    width:25px;
+    background-color: white;
+    color: #000;
+    font-weight: bolder;
+}
+
+.pages div{
+    width: auto;
+    /*position: absolute;*/
+    left: 50%;
+    margin-left: 40%;
+}
+
+.pages{
+    position: relative;
+}
+
+.pages .pagination{
+    margin-top: 10px;
+}
+
+
+/* Page Loading */
+.page-loading {
+    background-color: #ffffff;
+    content: "";
+    height: 100%;
+    left: 0;
+    position: fixed;
+    text-align: center;
+    top: 0;
+    width: 100%;
+    z-index: 2147483647;
+}
+
+.page-loading > img {
+    left: 50%;
+    position: absolute;
+    top: 50%;
+
+    -webkit-transform: translateX(-50%) translateY(-50%);
+    -moz-transform: translateX(-50%) translateY(-50%);
+    -ms-transform: translateX(-50%) translateY(-50%);
+    -o-transform: translateX(-50%) translateY(-50%);
+    transform: translateX(-50%) translateY(-50%);
+}
+
+.page-loading > span {
+    color: #b3b3b3;
+    cursor: pointer;
+    display: inline-block;
+    font-size: 17px;
+
+    margin-top: 30px;
+    text-decoration: underline;
+}
 /* Zoheb CSS */
 html, body {height: 100%;}
 header.s4.dark nav {position: absolute;right: 171px;}
@@ -5003,5 +5073,4 @@ header.s4.dark #slider_feed .near_me_icon {position: absolute;right: 50%;margin-
     .ml-filterslide .openfilters span i {font-size: 30px;}
     .half-map .participate {width: 80px;height: 80px !important;margin-left: -40px;background-size: 60px;}
     .ml-listings .cats .dot {width: 28px;height: 28px;margin-right: 5px;margin-left: 0px;}
-
 }

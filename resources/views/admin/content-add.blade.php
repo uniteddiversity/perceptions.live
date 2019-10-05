@@ -39,6 +39,7 @@
     $data['content_set2'] = isset($video_data['content_set2'])?$video_data['content_set2']:array();
     $data['content_set3'] = isset($video_data['content_set3'])?$video_data['content_set3']:array();
     $data['status'] = isset($video_data['status'])?$video_data['status']:'';
+    $data['language'] = isset($video_data['language'])?$video_data['language']:'en';
 
     $data['id'] = isset($video_data['id'])?$video_data['id']:'';
 
@@ -354,6 +355,15 @@
                                     @endforeach
                                 </select>
                                 <?php } ?>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="status">Language</label>
+                                <select class="form-control" id="language" name="language">
+                                    @foreach($languages as $lng)
+                                    <option value="{{$lng->code}}" <?php if(old('language',$data['language']) == $lng->code){ echo 'selected'; } ?> >{{$lng->language}}</option>
+                                    @endforeach
+                                </select>
                             </div>
 
                             <button type="button" onclick="submit_content()" class="btn btn-primary">Submit</button>

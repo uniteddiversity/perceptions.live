@@ -38,7 +38,12 @@ Route::post('/', function(){
     Route::get('/home/ajax-video-info/{_video_id}', '\App\Controllers\HomeController@getVideoInfo');
     Route::get('/home/ajax-video-info-small/{_video_id}', '\App\Controllers\HomeController@getVideoInfoMini');
     Route::get('/home/ajax-user-info/{_user_id}', '\App\Controllers\HomeController@getUserInfo');
+    Route::get('/home/ajax-user-info-video/{_user_id}', '\App\Controllers\HomeController@getUserInfoVideoPartial');
+    Route::get('/home/ajax-user-info-groups/{_user_id}', '\App\Controllers\HomeController@getUserInfoGroupPartial');
+
     Route::get('/home/ajax-group-info/{_group_id}', '\App\Controllers\HomeController@getGroupInfo');
+    Route::get('/home/ajax-group-info-video/{_group_id}', '\App\Controllers\HomeController@getGroupInfoVideoPartial');
+    Route::get('/home/ajax-group-info-users/{_group_id}', '\App\Controllers\HomeController@getGroupInfoUsersPartial');
 
     Route::get('/home/ajax/video-search', '\App\Controllers\HomeController@searchVideos');
     Route::get('/home/ajax/show-current-feed','\App\Controllers\HomeController@showCurrentLocationVideos');
@@ -46,6 +51,8 @@ Route::post('/', function(){
     Route::get('/claim-profile-clean', '\App\Controllers\User\UserController@claimUserProfileClean');
     Route::post('/claim-profile-post', '\App\Controllers\User\UserController@claimUserProfilePost');
 
+    Route::get('/contact-us', '\App\Controllers\HomeController@contactUs');
+    Route::post('/contact-us-post', '\App\Controllers\HomeController@contactUsPost');
 
     Route::get('/ajax/associated_videos_by_user_id/{_user_id}', '\App\Controllers\User\UserController@getAssociatedVideosByUserId');
     Route::get('/home/ajax/video-search-list', '\App\Controllers\HomeController@searchVideosList');
@@ -57,6 +64,7 @@ Route::post('/', function(){
     Route::get('/ajax/home/shared/group/{_id}', '\App\Controllers\HomeController@shearedContentJson');
 
     Route::get('/home/ajax-video-more-info/{_video_id}', '\App\Controllers\HomeController@getVideoMoreInfo');
+    Route::get('/home/list-display-names/ajax', '\App\Controllers\HomeController@searchDisplayNames');
 //});
 
 
@@ -112,6 +120,12 @@ Route::group(['prefix' => 'user', 'middleware' => ['auth', 'web']], function () 
     Route::get('/user-last-active', '\App\Controllers\User\UserController@postLastActive');
     Route::get('/movie-editor', '\App\Controllers\User\UserController@movieEditor');
     Route::get('/movie-editor/{_token}', '\App\Controllers\User\UserController@getTokenInfo');
+
+    Route::get('/group-list', '\App\Controllers\User\UserController@groupList');
+    Route::get('/user-group-add', '\App\Controllers\User\UserController@groupAdd');
+    Route::post('/post-group-add', '\App\Controllers\User\UserController@postGroupAdd');
+    Route::post('/post-user-group-add/{_group_id}', '\App\Controllers\User\UserController@postUserToGroupAdd');
+    Route::get('/group-edit/{_group_id}', '\App\Controllers\User\UserController@editGroup');
 });
 
 Route::group(['prefix' => 'user', 'middleware' => ['auth', 'web', 'admin']], function () {
@@ -143,7 +157,7 @@ Route::group(['prefix' => 'user', 'middleware' => ['auth', 'web', 'admin']], fun
     Route::get('/admin/map-generate', '\App\Controllers\User\AdminController@mapGenerate');
     Route::get('/admin/map-generate-list', '\App\Controllers\User\AdminController@mapGeneratedList');
     Route::post('/admin/post-map-generate', '\App\Controllers\User\AdminController@postMapGenerate');
-    Route::get('/admin/map-generate/{_id}', '\App\Controllers\User\AdminController@editMapGenerate')->name('map-sharing.edit');
+    Route::get('/admin/map-generate/{_id}', '\App\Controllers\User\AdminController@editMapGenerate')->name('admin-map-sharing-edit');
 
     Route::get('/admin/group-content-list/{_id}', '\App\Controllers\User\AdminController@groupContentList');
     Route::get('/admin/group-content-list-ajax/{_id}', '\App\Controllers\User\AdminController@groupContentListAjax');
@@ -160,17 +174,22 @@ Route::group(['prefix' => 'user', 'middleware' => ['auth', 'web', 'admin']], fun
     Route::get('/admin/list-slider-feed', '\App\Controllers\User\AdminController@listHomeSliderFeed');
     Route::get('/admin/delete-slider-feed/{_id}', '\App\Controllers\User\AdminController@deleteHomeSliderFeed');
     Route::get('/admin/search-content-type/ajax', '\App\Controllers\User\AdminController@searchContentTypes');
+    Route::get('/admin/list-profile-claim-request', '\App\Controllers\User\AdminController@listClaimProfileRequest');
+    Route::get('/admin/view-profile-claim-request/{_id}', '\App\Controllers\User\AdminController@viewClaimProfileRequest');
+    Route::post('/admin/post-claim-request/{_id}', '\App\Controllers\User\AdminController@postClaimProfileRequest');
 });
 
 Route::group(['prefix' => 'user', 'middleware' => ['auth', 'web', 'groupadmin']], function () {
 //    Route::post('/group-admin/post-upload-video', '\App\Controllers\User\GroupAdminController@postUploadVideo');
-    Route::get('/group-admin/user-list', '\App\Controllers\User\GroupAdminController@userList');
+//    Route::get('/group-admin/user-list', '\App\Controllers\User\GroupAdminController@userList');
     Route::get('/group-admin/group-list', '\App\Controllers\User\GroupAdminController@groupList');
-    Route::get('/group-admin/user-add', '\App\Controllers\User\GroupAdminController@userAdd');
+//    Route::get('/group-admin/user-add', '\App\Controllers\User\GroupAdminController@userAdd');
     Route::get('/group-admin/user-edit/{_user_id}', '\App\Controllers\User\GroupAdminController@adminUserEdit');
     Route::get('/group-admin/video-edit/{_content_id}', '\App\Controllers\User\GroupAdminController@contentEdit');
+    Route::post('/group-admin/post-upload-video', '\App\Controllers\User\AdminController@postUploadVideo');
     Route::post('/group-admin/post-user-add', '\App\Controllers\User\GroupAdminController@adminUserAdd');
     Route::get('/group-admin/content-list', '\App\Controllers\User\GroupAdminController@contentList');
+    Route::get('/group-admin/content-list-group', '\App\Controllers\User\GroupAdminController@groupContentListNew');
 //    Route::get('/group-admin/content-add', '\App\Controllers\User\GroupAdminController@contentAdd');
 //    Route::post('/group-admin/post-content-add', '\App\Controllers\User\GroupAdminController@contentAdd');
     Route::get('/group-admin/user-group-add', '\App\Controllers\User\GroupAdminController@groupAdd');
@@ -181,12 +200,15 @@ Route::group(['prefix' => 'user', 'middleware' => ['auth', 'web', 'groupadmin']]
     Route::get('/group-admin/sorting-tag-add', '\App\Controllers\User\GroupAdminController@sortingTagAdd');
     Route::post('/group-admin/post-sorting-tag-add', '\App\Controllers\User\GroupAdminController@postSortingTagAdd');
     Route::get('/group-admin/group-edit/{_group_id}', '\App\Controllers\User\GroupAdminController@editGroup');
+    Route::get('/group-admin/group-content-list/{_id}', '\App\Controllers\User\GroupAdminController@groupContentList');
+    Route::get('/group-admin/group-content-list-ajax/{_id}', '\App\Controllers\User\GroupAdminController@groupContentListAjax');
+
     Route::get('/group-admin/location-list', '\App\Controllers\ContentController@adminLocationList');
 
     Route::get('/group-admin/map-generate', '\App\Controllers\User\AdminController@mapGenerate');
     Route::get('/group-admin/map-generate-list', '\App\Controllers\User\AdminController@mapGeneratedList');
     Route::post('/group-admin/post-map-generate', '\App\Controllers\User\AdminController@postMapGenerate');
-    Route::get('/group-admin/map-generate/{_id}', '\App\Controllers\User\AdminController@editMapGenerate');
+    Route::get('/group-admin/map-generate/{_id}', '\App\Controllers\User\AdminController@editMapGenerate')->name('map-sharing.edit');
 });
 
 Route::group(['prefix' => 'user', 'middleware' => ['auth', 'web', 'moderator']], function () {
@@ -217,4 +239,6 @@ Route::group(['prefix' => 'user', 'middleware' => ['auth', 'web', 'user']], func
 //    Route::post('/user/post-content-add', '\App\Controllers\User\UserController@contentAdd');
     Route::get('/user/sorting-tag-add', '\App\Controllers\User\UserController@sortingTagAdd');
     Route::post('/user/post-sorting-tag-add', '\App\Controllers\User\UserController@postSortingTagAdd');
+    Route::get('/user/list-profile-claim-request', '\App\Controllers\User\UserController@listClaimProfileRequest');
+    Route::get('/user/delete-profile-claim-request/{_id}', '\App\Controllers\User\UserController@deleteClaimProfileRequest');
 });
