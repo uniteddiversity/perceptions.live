@@ -3871,7 +3871,7 @@ nav.two .header-notification .profile-notification li {
 
 
 /***** Mobile Responsiveness ****/
-@media screen and (max-width: 768px) {
+@media screen and (max-width: 1199.99px) {
 
     .mobile_hide {
         display: none;
@@ -4067,7 +4067,7 @@ nav.two .header-notification .profile-notification li {
         background: url(/assets/findgo/images/live-perceptions-logo.png) center center no-repeat;
         background-size: 100%;
         width: 100%;
-        height: 70px;
+        height: 60px;
         margin-bottom: 10px;
     }
 
@@ -4906,4 +4906,102 @@ nav.two .header-notification .profile-notification li {
     height: 50px;
     background: url("/assets/img/map_center_icon.svg") no-repeat;
     background-size: 50px 50px;
+}
+
+/* Zoheb CSS */
+html, body {height: 100%;}
+header.s4.dark nav {position: absolute;right: 171px;}
+header.s4.dark .container.fluid {padding-right: 280px;}
+header.s4.dark .container.fluid:before,
+header.s4.dark .container.fluid:after {content: '';float: none;clear: both;display: table;}
+header.s4.dark .extras {position: absolute;right: 0px;z-index: 2;top: 0px;}
+header.s4.dark #logo_overlay {width: 25%;margin: 0px;}
+header.s4.dark .topsearch {width: 30%;margin: 0px;padding-left: 20px;}
+header.s4.dark .topsearch .rfield {margin-left: 0px;}
+header.s4.dark #slider_feed {width: 45%;margin: 0px;padding-left: 30px;position: relative;padding-top: 15px;}
+header.s4.dark #slider_feed .left_feed,
+header.s4.dark #slider_feed .right_feed {width: 50%;}
+header.s4.dark #slider_feed .left_feed {padding-right: 35px;}
+header.s4.dark #slider_feed .right_feed {padding-left: 35px;}
+header.s4.dark #slider_feed .near_me_icon {position: absolute;right: 50%;margin-right: -40px;top: 10px;}
+.arrowWrapper {display: none;position: relative;z-index: 9;}
+.arrowWrapper .arrow {-webkit-transition: all .3s;-o-transition: all .3s;transition: all .3s;cursor: pointer;position: fixed;top: 50%;box-shadow: 0px 0px 2px 3px rgba(255,255,255,.6);background: #efeef2;border-radius: 10px;}
+.arrowWrapper .arrow:hover {opacity: 0.8;}
+.arrowWrapper .arrow.arrowleft {opacity: 1;width: 100px;height: 135px;left: -30px;z-index: 9;}
+.arrowWrapper .arrow.arrowright {opacity: 0;width: 70px;height: 95px;right: -100%;z-index: 12;}
+.arrowWrapper .arrow.arrowleft .icon {position: absolute;left: 50%;top:50%;margin-left: -40px;margin-top: -40px;display: block;background: #efeef2 url(/assets/img/arrowright.png) no-repeat center center / 80px;width: 80px;height: 80px;}
+.arrowWrapper .arrow.arrowright .icon {position: absolute;left: 50%;top:50%;margin-left: -31px;margin-top: -31px;display: block;background: #efeef2 url(/assets/img/arrowleft.png) no-repeat center center / 62px;width: 62px;height: 62px;}
+.arrowWrapper.active .arrow.arrowleft {left: -100%;opacity: 0;}
+.arrowWrapper.active .arrow.arrowright {right: -20px;opacity: 1;}
+.mapPageBody .responsiveheader,
+.mapPageBody .customContainer .s4.dark {display: none;}
+.responsiveheader .logo_mobile {display: none;}
+.responsiveheader .slider_feed2 {display: none;}
+.ml-listings .logo_mobile {display: none;}
+.mapPageBody .container.fluid {z-index: auto;}
+.mapPageBody .responsiveheader.active .rnaver {z-index: 10;}
+.half-map .participate {width: 110px;height: 100px !important;background: #0e1281 url(/assets/img/upload.svg) no-repeat center center / 90px;border-radius: 10px;}
+.half-map .participate i {display: none;}
+.half-map .map .leaflet-control-locate .leaflet-bar-part-single .custom {width: 24px;height: 24px;margin-top: 3px;content: url(/assets/img/locator.png);}
+@media screen and (max-width: 1199.99px) {
+    .logo_mobile {position:  fixed;left: 50%;top: 15px;margin-left: -160px;width: 320px;background-color: #fff;border-radius: 10px;background-size: 260px;}
+    .mapPageBody .customContainer .responsiveheader {display: block;}
+    .rheader > span.menubt {top: 25px;background: #fff;color: #0e1281;font-size: 25px;border: 2px solid #0e1281;padding-top: 4px;width: 45px;height: 43px;left: 50%;position: fixed;margin-left: -215px;text-align: center;margin-top: 0px;}
+    .responsiveheader .rnaver > ul {padding-top: 111px;}
+    .responsiveheader .rnaver .closeresmenu {margin-right: 15px;}
+    .responsiveheader .rnaver > .extras {position: absolute;top: 81px;left: 0px;width: 100%;height: 91px;}
+        
+    .half-map {position: fixed;left: 0px;top: 0px;width: 100%;z-index: 3;height: 100%;padding-left: 0px;}
+    .half-map .map {margin-left: 0px !important;}
+    .half-map .map .leaflet-control-locate {position: fixed;top: 14px;right: 50%;margin-right: -215px;border-radius: 10px;border: 0px;background: #f3f3f3;}
+    .half-map .map .leaflet-control-locate .leaflet-bar-part-single {width: 45px;height: 45px;padding-top: 9px;}
+    .half-map .map .leaflet-control-locate .leaflet-bar-part-single .custom {width: 28px;height: 28px;content: url(/assets/img/locator.png);}
+    .half-map .map .leaflet-control-zoom {position: fixed; bottom: 20px;left: 20px;}
+    .half-map .participate {margin-left: -55px;top: auto;bottom: 20px;}
+    .ml-filterslide {left: -100%;position: fixed;top: 0px;width: 100%;max-width: 600px;height: 100%;z-index: 10;-webkit-transition: all .3s;-o-transition: all .3s;transition: all .3s;}
+    .ml-filterslide .overlay {left: 0%;position: fixed;top: 0px;width: 100%;height: 100%;display: none;}
+    .ml-filterslide .searchbox {padding-top: 50px;}
+    .openfilters {position: absolute;left: 0px;top: 0px;z-index: 7;}
+    .mlfilter-sec {position:absolute;top: 0px;z-index: 8;}
+    .ml-listings {position:absolute;padding-left: 70px;left: 0px;top: 0px;z-index:6;}
+    .arrowWrapper {display: block;}
+    .openSideBar_ml-filterslide .customContainer {z-index: 5;}
+    .openSideBar_ml-filterslide .ml-filterslide {left: 0px;}
+    .openSideBar_ml-filterslide .ml-filterslide .overlay {display: block;}
+
+    .mapPageBody .customContainer .responsiveheader .logo_mobile {display: block;}
+    #featureModal {z-index: 15 !important;padding-top: 30px !important;}
+    #feature-info {width: 80% !important;max-width: 800px;}
+    .modal-dialog .youtube {position: relative;height: 0px !important;overflow: hidden;padding-bottom: 56%;min-height: inherit !important;}
+    .modal-dialog .youtube iframe {position: absolute;height: 100% !important;width: 100% !important;top: 0px;left: 0px;}
+}
+@media screen and (max-width: 767.99px) {
+    .logo_mobile {margin-left: -140px;width: 280px;background-size: 230px;}
+    .rheader > span.menubt {margin-left: -195px;}
+    .half-map .map .leaflet-control-locate {margin-right: -195px;}
+    .ml-filterslide {max-width: 100%;}
+    .ml-listings .cats {display: flex;-ms-flex-wrap: wrap;flex-wrap: wrap;-ms-flex-pack: center !important;justify-content: center !important;}
+    .ml-listings .cats .dot {width: 35px;height: 35px;margin-right: 10px;margin-left: 0px;float: left;}
+    .half-map .map .leaflet-control-zoom {display: none;}
+    #featureModal .modal-dialog.big .modal-header {z-index: 99999;}
+    #featureModal .modal-dialog.big .model-back {right: 280px;top: -38px !important;left: 25px !important;}
+}
+@media screen and (max-width: 400px) {
+    .logo_mobile {margin-left: -100px;width: 200px;background-size: 200px;}
+    .rheader > span.menubt {margin-left: -153px;}
+    .half-map .map .leaflet-control-locate {margin-right: -152px;}
+
+    .arrowWrapper .arrow.arrowleft {opacity: 1;width: 70px;height: 95px;left: -20px;}
+    .arrowWrapper .arrow.arrowright {opacity: 0;width: 60px;height: 75px;right: -100%;}
+    .arrowWrapper .arrow.arrowleft .icon {margin-left: -31px;margin-top: -31px;-webkit-background-size: 60px;background-size: 60px;width: 60px;height: 60px;}
+    .arrowWrapper .arrow.arrowright .icon {margin-left: -26px;margin-top: -26px;display: block;-webkit-background-size: 52px;background-size: 52px;width: 52px;height: 52px;}
+    .arrowWrapper.active .arrow.arrowleft {left: -100%;opacity: 0;}
+    .arrowWrapper.active .arrow.arrowright {right: -15px;opacity: 1;}
+    .ml-listings {padding-left: 50px !important;}
+    .ml-filterslide .openfilters {width: 50px;padding-top: 0px !important;}
+    .ml-filterslide .openfilters span {width: 40px;margin-left: 1px;}
+    .ml-filterslide .openfilters span i {font-size: 30px;}
+    .half-map .participate {width: 80px;height: 80px !important;margin-left: -40px;background-size: 60px;}
+    .ml-listings .cats .dot {width: 28px;height: 28px;margin-right: 5px;margin-left: 0px;}
+
 }

@@ -6,6 +6,9 @@
             <i class="fas fa-bars"></i>
         </span>
 
+        <div class="logo_mobile">
+
+        </div>
         <?php /* <div class="logo">
             <a href="#" title=""><img src="/assets/findgo/images/live-prcptions-beta-small.png" width=100 height=388 alt="" /></a>
         </div> */ ?>
@@ -72,7 +75,58 @@
         @endif
         @endif
     </div>
-
+    <div class="topsearch" id="slider_feed2">
+        <div class="site_mid_title"><h5>{{$settings['home_centered_title'] or ""}}</h5></div>
+        <div class="site_slider_feed" >
+            @if(isset($top_slider_feed))
+            <div class="left_feed slideshow">
+                <span>{{$settings['left_feed_name'] or ""}}</span>
+                <div class="thumbs-container bottom">
+                    <div id="prev-btn" class="prev">
+                        <i class="fa fa-chevron-left fa-1x"></i>
+                    </div>
+                    <ul class="thumbs">
+                        <?php $i = 0; ?>
+                        @foreach($top_slider_feed as $feed)
+                            <?php $i++; ?>
+                            @if($feed['side'] == 'left')
+                                <li data-thumb-id="<?php echo $i ?>" class="thumb active" style="background-image: url('/storage/{{$feed['icon']}}')">
+                                    <span>{{$feed['title']}}</span>
+                                </li>
+                            @endif
+                        @endforeach
+                    </ul>
+                    <div id="next-btn" class="next">
+                        <i class="fa fa-chevron-right fa-1x"></i>
+                    </div>
+                </div>
+            </div>
+            <div class="near_me_icon">
+                <i class="map_center_icon" ></i>
+            </div>
+            <div class="right_feed slideshow">
+                <span>{{$settings['right_feed_name'] or ""}}</span>
+                <div class="thumbs-container bottom">
+                    <div id="prev-btn" class="prev">
+                        <i class="fa fa-chevron-left fa-1x"></i>
+                    </div>
+                    <ul class="thumbs">
+                        <?php $i = 0; ?>
+                        @foreach($top_slider_feed as $feed)
+                            <?php $i++; ?>
+                            @if($feed['side'] == 'right')
+                                <li data-thumb-id="<?php echo $i ?>" class="thumb active" style="background-image: url('/storage/{{$feed['icon']}}')"></li>
+                            @endif
+                        @endforeach
+                    </ul>
+                    <div id="next-btn" class="next">
+                        <i class="fa fa-chevron-right fa-1x"></i>
+                    </div>
+                </div>
+            </div>
+            @endif
+        </div>
+    </div>
 </div>
 <header class="s4 dark">
 

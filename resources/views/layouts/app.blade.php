@@ -301,7 +301,7 @@
 </style>
     <script>
         $(document).ready(function() {
-            $('[data-toggle="tooltip"]').t  ooltip();
+            $('[data-toggle="tooltip"]').tooltip();
         });
 
     </script>
