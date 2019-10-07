@@ -5019,6 +5019,7 @@ header.s4.dark #slider_feed .near_me_icon {position: absolute;right: 50%;margin-
     .logo_mobile {position:  fixed;left: 50%;top: 15px;margin-left: -160px;width: 320px;background-color: #fff;border-radius: 10px;background-size: 260px;}
     .mapPageBody .customContainer .responsiveheader {display: block;}
     .rheader > span.menubt {top: 25px;background: #fff;color: #0e1281;font-size: 25px;border: 2px solid #0e1281;padding-top: 4px;width: 45px;height: 43px;left: 50%;position: fixed;margin-left: -215px;text-align: center;margin-top: 0px;}
+    .responsiveheader .rnaver {box-shadow: none}
     .responsiveheader .rnaver > ul {padding-top: 111px;}
     .responsiveheader .rnaver .closeresmenu {margin-right: 15px;}
     .responsiveheader .rnaver > .extras {position: absolute;top: 81px;left: 0px;width: 100%;height: 91px;}
@@ -5034,8 +5035,8 @@ header.s4.dark #slider_feed .near_me_icon {position: absolute;right: 50%;margin-
     .ml-filterslide .overlay {left: 0%;position: fixed;top: 0px;width: 100%;height: 100%;display: none;}
     .ml-filterslide .searchbox {padding-top: 50px;}
     .openfilters {position: absolute;left: 0px;top: 0px;z-index: 7;}
-    .mlfilter-sec {position:absolute;top: 0px;z-index: 8;}
-    .ml-listings {position:absolute;padding-left: 70px;left: 0px;top: 0px;z-index:6;}
+    .mlfilter-sec {position:absolute;top: 0px;z-index: 8;left: -100%;}
+    .ml-listings {box-shadow: none;position:absolute;padding-left: 70px;left: 0px;top: 0px;z-index:6;}
     .arrowWrapper {display: block;}
     .openSideBar_ml-filterslide .customContainer {z-index: 5;}
     .openSideBar_ml-filterslide .ml-filterslide {left: 0px;}
