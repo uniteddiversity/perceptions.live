@@ -594,7 +594,7 @@ function displayVideoContentUpload() {
         $('#submit_footage_form').hide();
     }
 }
-
+if(select2)
 $('.content-type-select-ajax').select2({
     ajax: {
         url: '/user/admin/search-content-type/ajax',
@@ -648,11 +648,21 @@ $('.content-type-select-ajax').select2({
     }
 });
 
-$('.content-type-select-ajax').on('select2:select', function (e) {
+/*$('.content-type-select-ajax').on('select2:select', function (e) {
     let data = e.params.data;
     $('#fk_id').val(data.id);
     $('#type').val(data.type);
-});
+});*/
+
+/*ZOHEB FUNCTION*/
+function openSideBarMenu (btn){
+    $('#arrowMapWrapper').addClass('active');
+    $('body').addClass('openSideBar_ml-filterslide');
+}
+function closeSideBarMenu (btn){
+    $('#arrowMapWrapper').removeClass('active');
+    $('body').removeClass('openSideBar_ml-filterslide');
+}
 
 
 $('.display-name-select-ajax').select2({
