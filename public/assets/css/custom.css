@@ -5012,10 +5012,14 @@ header.s4.dark #slider_feed .near_me_icon {position: absolute;right: 50%;margin-
 .ml-listings .logo_mobile {display: none;}
 .mapPageBody .container.fluid {z-index: auto;}
 .mapPageBody .responsiveheader.active .rnaver {z-index: 10;}
-.half-map .participate {width: 110px;height: 100px !important;background: #0e1281 url(/assets/img/upload.svg) no-repeat center center / 90px;border-radius: 10px;}
-.half-map .participate i {display: none;}
+.uploadBtnWrap.participate {position:  fixed;width: 110px;height: 100px !important;background: #0e1281 url(/assets/img/upload.svg) no-repeat center center / 90px;border-radius: 10px;}
+.uploadBtnWrap.participate i {display: none;}
 .half-map .map .leaflet-control-locate .leaflet-bar-part-single .custom {width: 24px;height: 24px;margin-top: 3px;content: url(/assets/img/locator.png);}
+.mlfilter-sec .mltitle .closefilter {color: #fff;}
+.advanceSearchOpen .arrowWrapper .arrowright {display: none;} 
+.advanceSearchOpen .uploadBtnWrap.participate {display: none;} 
 @media screen and (max-width: 1199.99px) {
+    body, html {height: 100%;overflow:  hidden;}
     .logo_mobile {position:  fixed;left: 50%;top: 15px;margin-left: -160px;width: 320px;background-color: #fff;border-radius: 10px;background-size: 260px;}
     .mapPageBody .customContainer .responsiveheader {display: block;}
     .rheader > span.menubt {top: 25px;background: #fff;color: #0e1281;font-size: 25px;border: 2px solid #0e1281;padding-top: 4px;width: 45px;height: 43px;left: 50%;position: fixed;margin-left: -215px;text-align: center;margin-top: 0px;}
@@ -5030,7 +5034,7 @@ header.s4.dark #slider_feed .near_me_icon {position: absolute;right: 50%;margin-
     .half-map .map .leaflet-control-locate .leaflet-bar-part-single {width: 45px;height: 45px;padding-top: 9px;}
     .half-map .map .leaflet-control-locate .leaflet-bar-part-single .custom {width: 28px;height: 28px;content: url(/assets/img/locator.png);}
     .half-map .map .leaflet-control-zoom {position: fixed; bottom: 20px;left: 20px;}
-    .half-map .participate {margin-left: -55px;top: auto;bottom: 20px;}
+    .uploadBtnWrap.participate {margin-left: -55px;top: auto;bottom: 20px;}
     .ml-filterslide {left: -100%;position: fixed;top: 0px;width: 100%;max-width: 600px;height: 100%;z-index: 10;-webkit-transition: all .3s;-o-transition: all .3s;transition: all .3s;}
     .ml-filterslide .overlay {left: 0%;position: fixed;top: 0px;width: 100%;height: 100%;display: none;}
     .ml-filterslide .searchbox {padding-top: 50px;}
@@ -5064,9 +5068,9 @@ header.s4.dark #slider_feed .near_me_icon {position: absolute;right: 50%;margin-
     .rheader > span.menubt {margin-left: -153px;}
     .half-map .map .leaflet-control-locate {margin-right: -152px;}
 
-    .arrowWrapper .arrow.arrowleft {opacity: 1;width: 70px;height: 95px;left: -20px;}
+    .arrowWrapper .arrow.arrowleft {opacity: 1;width: 60px;height: 75px;left: -15px;}
     .arrowWrapper .arrow.arrowright {opacity: 0;width: 60px;height: 75px;right: -100%;}
-    .arrowWrapper .arrow.arrowleft .icon {margin-left: -31px;margin-top: -31px;-webkit-background-size: 60px;background-size: 60px;width: 60px;height: 60px;}
+    .arrowWrapper .arrow.arrowleft .icon {margin-left: -26px;margin-top: -26px;-webkit-background-size: 52px;background-size: 52px;width: 52px;height: 52px;}
     .arrowWrapper .arrow.arrowright .icon {margin-left: -26px;margin-top: -26px;display: block;-webkit-background-size: 52px;background-size: 52px;width: 52px;height: 52px;}
     .arrowWrapper.active .arrow.arrowleft {left: -100%;opacity: 0;}
     .arrowWrapper.active .arrow.arrowright {right: -15px;opacity: 1;}
@@ -5074,6 +5078,6 @@ header.s4.dark #slider_feed .near_me_icon {position: absolute;right: 50%;margin-
     .ml-filterslide .openfilters {width: 50px;padding-top: 0px !important;}
     .ml-filterslide .openfilters span {width: 40px;margin-left: 1px;}
     .ml-filterslide .openfilters span i {font-size: 30px;}
-    .half-map .participate {width: 80px;height: 80px !important;margin-left: -40px;background-size: 60px;}
+    .uploadBtnWrap.participate {width: 80px;height: 70px !important;margin-left: -40px;background-size: 60px;}
     .ml-listings .cats .dot {width: 28px;height: 28px;margin-right: 5px;margin-left: 0px;}
 }

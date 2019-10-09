@@ -64,11 +64,13 @@ $(document).on('ready',function(){
         $(this).addClass("active");
         $('.mlfilter-sec').addClass('active');
         $('.ml-listings').addClass('active');
+        $('html').addClass('advanceSearchOpen');
     });
     $('.closefilter').on('click', function(){
         $('.openfilters').removeClass("active");
         $('.mlfilter-sec').removeClass('active');
         $('.ml-listings').removeClass('active');
+        $('html').removeClass('advanceSearchOpen');
     });
 
     // Filter Open Close //
@@ -80,7 +82,7 @@ $(document).on('ready',function(){
     $('.closefilter').on('click', function(){
         $('.openfilterbtn').removeClass("active");
         $('.mlfilter-sec').removeClass('active');
-        $('html').removeClass('no-scroll');        
+        $('html').removeClass('no-scroll advanceSearchOpen');        
     });
 
     // Grids Filter Active //
