@@ -2,6 +2,10 @@ var model_links = [];
 var model_links_current_pos = 0;
 var showed_markers = null;
 
+var southWest = L.latLng(-89.98155760646617, -180),
+    northEast = L.latLng(89.99346179538875, 180);
+var bounds = L.latLngBounds(southWest, northEast);
+
 if (typeof (L) != "undefined") {
     if ($('#video_id').val() != undefined) {
         var lat = $('#video_lat').val();
@@ -11,13 +15,15 @@ if (typeof (L) != "undefined") {
         var map = L.map('map', {
             center: [lat, long],
             minZoom: 4,
-            zoom: 4
+            zoom: 4,
+            maxBoundsViscosity: 1.0
         });
     } else {
         var map = L.map('map', {
             center: [10.0, 5.0],
             minZoom: 3,
-            zoom: 2
+            zoom: 2,
+            maxBoundsViscosity: 1.0
         });
     }
 
@@ -126,6 +132,12 @@ function updateMarkers(markers) {
     $("#loading").hide();
 
     map.addLayer(markerClusters);
+    //Disableing map from running out of screen
+    map.setMaxBounds(bounds);
+    map.on('drag', function () {
+        map.panInsideBounds(bounds, { animate: false });
+    });
+
     map.on("zoomend", function () {
         let zoom = map.getZoom();
         console.log(zoom);
@@ -564,7 +576,7 @@ $(document).ready(function () {
         // "searching": true,
         "lengthChange": true,
         "ajax": {
-            "url": '/user/admin/group-content-list-ajax/'+data_list_id,
+            "url": '/user/admin/group-content-list-ajax/' + data_list_id,
             "type": "GET",
         },
         "scroller": {
@@ -594,59 +606,59 @@ function displayVideoContentUpload() {
         $('#submit_footage_form').hide();
     }
 }
-if(select2)
-$('.content-type-select-ajax').select2({
-    ajax: {
-        url: '/user/admin/search-content-type/ajax',
-        dataType: 'json',
+if (select2)
+    $('.content-type-select-ajax').select2({
+        ajax: {
+            url: '/user/admin/search-content-type/ajax',
+            dataType: 'json',
 
-        // data: function() {
-        //     var myValue = $(this).val();
-        //     return JSON.stringify({variable: myValue})
-        // },
-        data: function (term, page) {
-            // page is the one-based page number tracked by Select2
-            return {
-                //search term
-                "q": term,
-                // page size
-                "_per_page": 30,
-                // page number
-                "_page": page,
-            };
-        },
-        initSelection: function (data) {
-            console.log('selected option ', data);
-        },
-        templateResult: function (data) {
-            // console.log('selected option ', data);
-            //     var $result = $("<span></span>");
-            //     $result.text(data.text);
-            //     if (data.newOption) {
-            //         $result.append(" <em>(new)</em>");
-            //     }
-            //     return $result;
-        },
-        processResults: function (response) {
-            // return {
-            //     results: response
-            // };
+            // data: function() {
+            //     var myValue = $(this).val();
+            //     return JSON.stringify({variable: myValue})
+            // },
+            data: function (term, page) {
+                // page is the one-based page number tracked by Select2
+                return {
+                    //search term
+                    "q": term,
+                    // page size
+                    "_per_page": 30,
+                    // page number
+                    "_page": page,
+                };
+            },
+            initSelection: function (data) {
+                console.log('selected option ', data);
+            },
+            templateResult: function (data) {
+                // console.log('selected option ', data);
+                //     var $result = $("<span></span>");
+                //     $result.text(data.text);
+                //     if (data.newOption) {
+                //         $result.append(" <em>(new)</em>");
+                //     }
+                //     return $result;
+            },
+            processResults: function (response) {
+                // return {
+                //     results: response
+                // };
 
-            let results = [];
-            $.each(response, function (index, data) {
-                results.push({
-                    id: data.id,
-                    text: data.text + ' (' + data.type + ')',
-                    type: data.type
+                let results = [];
+                $.each(response, function (index, data) {
+                    results.push({
+                        id: data.id,
+                        text: data.text + ' (' + data.type + ')',
+                        type: data.type
+                    });
                 });
-            });
 
-            return {
-                results: results
-            };
-        },
-    }
-});
+                return {
+                    results: results
+                };
+            },
+        }
+    });
 
 /*$('.content-type-select-ajax').on('select2:select', function (e) {
     let data = e.params.data;
@@ -655,11 +667,11 @@ $('.content-type-select-ajax').select2({
 });*/
 
 /*ZOHEB FUNCTION*/
-function openSideBarMenu (btn){
+function openSideBarMenu(btn) {
     $('#arrowMapWrapper').addClass('active');
     $('body').addClass('openSideBar_ml-filterslide');
 }
-function closeSideBarMenu (btn){
+function closeSideBarMenu(btn) {
     $('#arrowMapWrapper').removeClass('active');
     $('body').removeClass('openSideBar_ml-filterslide');
 }
@@ -705,14 +717,14 @@ $('.display-name-select-ajax').on('select2:select', function (e) {
     videosForUser(data.id)
 });
 
-function videosForUser(user_id){
+function videosForUser(user_id) {
     jQuery.ajax({
-        url: '/ajax/associated_videos_by_user_id/'+user_id,
+        url: '/ajax/associated_videos_by_user_id/' + user_id,
         method: 'GET'
     }).done(function (response) {
         console.log(response);
         $('#claim_video_profile').html('');
-        response.forEach(function(element) {
+        response.forEach(function (element) {
             $('#claim_video_profile').append($('<option>', {
                 value: element.id,
                 text: element.title
