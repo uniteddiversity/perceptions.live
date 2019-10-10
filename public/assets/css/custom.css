@@ -4999,9 +4999,9 @@ header.s4.dark #slider_feed .near_me_icon {position: absolute;right: 50%;margin-
 .arrowWrapper {display: none;position: relative;z-index: 9;}
 .arrowWrapper .arrow {-webkit-transition: all .3s;-o-transition: all .3s;transition: all .3s;cursor: pointer;position: fixed;top: 50%;box-shadow: 0px 0px 2px 3px rgba(255,255,255,.6);background: #efeef2;border-radius: 10px;}
 .arrowWrapper .arrow:hover {opacity: 0.8;}
-.arrowWrapper .arrow.arrowleft {opacity: 1;width: 100px;height: 135px;left: -30px;z-index: 9;}
+.arrowWrapper .arrow.arrowleft {opacity: 1;width: 70px;height: 95px;left: -20px;z-index: 9;}
 .arrowWrapper .arrow.arrowright {opacity: 0;width: 70px;height: 95px;right: -100%;z-index: 12;}
-.arrowWrapper .arrow.arrowleft .icon {position: absolute;left: 50%;top:50%;margin-left: -40px;margin-top: -40px;display: block;background: #efeef2 url(/assets/img/arrowright.png) no-repeat center center / 80px;width: 80px;height: 80px;}
+.arrowWrapper .arrow.arrowleft .icon {position: absolute;left: 50%;top:50%;margin-left: -31px;margin-top: -31px;display: block;background: #efeef2 url(/assets/img/arrowright.png) no-repeat center center / 62px;width: 62px;height: 62px;}
 .arrowWrapper .arrow.arrowright .icon {position: absolute;left: 50%;top:50%;margin-left: -31px;margin-top: -31px;display: block;background: #efeef2 url(/assets/img/arrowleft.png) no-repeat center center / 62px;width: 62px;height: 62px;}
 .arrowWrapper.active .arrow.arrowleft {left: -100%;opacity: 0;}
 .arrowWrapper.active .arrow.arrowright {right: -20px;opacity: 1;}
