@@ -222,6 +222,7 @@ function openVideo(id, no_history) {
         $("#feature-info").html(content);
         $("#featureModal").modal("show");
         $('[data-toggle="tooltip"]').tooltip();
+        $('.uploadBtnWrap').css('display', 'none');
     }).fail(function () {
         $("#feature-title").html("Error:");
         $("#feature-info").html("Fail to load info");
@@ -382,6 +383,9 @@ $(document).ready(function () {
     if (typeof (L) != "undefined") {
         searchVideo();
     }
+    $('#featureModal').on('hidden.bs.modal', function (e) {
+        $('.uploadBtnWrap').css('display', 'block');
+    })
 })
 
 $("#login-btn").click(function () {
@@ -675,6 +679,7 @@ function closeSideBarMenu(btn) {
     $('#arrowMapWrapper').removeClass('active');
     $('body').removeClass('openSideBar_ml-filterslide');
 }
+
 
 
 $('.display-name-select-ajax').select2({

@@ -5017,7 +5017,7 @@ header.s4.dark #slider_feed .near_me_icon {position: absolute;right: 50%;margin-
 .half-map .map .leaflet-control-locate .leaflet-bar-part-single .custom {width: 24px;height: 24px;margin-top: 3px;content: url(/assets/img/locator.png);}
 .mlfilter-sec .mltitle .closefilter {color: #fff;}
 .advanceSearchOpen .arrowWrapper .arrowright {display: none;} 
-.advanceSearchOpen .uploadBtnWrap.participate {display: none;} 
+.advanceSearchOpen .uploadBtnWrap.participate {display: none !important;} 
 @media screen and (max-width: 1199.99px) {
     body, html {height: 100%;overflow:  hidden;}
     .logo_mobile {position:  fixed;left: 50%;top: 15px;margin-left: -160px;width: 320px;background-color: #fff;border-radius: 10px;background-size: 260px;}
