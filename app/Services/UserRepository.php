@@ -4,6 +4,7 @@ namespace User\Services;
 
 use App\Attachment;
 use App\ClaimProfileRequests;
+use App\Comment;
 use App\Content;
 use App\ContentAccessLevels;
 use App\Group;
@@ -103,13 +104,17 @@ class UserRepository
      * @var TagGroupAssociation
      */
     private $tagGroupAssociation;
+    /**
+     * @var Comment
+     */
+    private $comment;
 
     public function __construct(User $user, Content $content,
                                 UserGroup $userGroup, Group $group, Role $role, UserContentAssociation $userContentAssociation,
                                 Attachment $attachment, SortingTag $sortingTag, GroupContentAssociation $groupContentAssociation,
                                 TagContentAssociation $tagContentAssociation, TagUserAssociation $tagUserAssociation, UserStatus $userStatus,
                                 ContentAccessLevels $contentAccessLevels, MetaData $metaData, UserSortingTag $userSortingTag, ClaimProfileRequests $claimProfileRequests,
-                                TagGroupAssociation $tagGroupAssociation)
+                                TagGroupAssociation $tagGroupAssociation, Comment $comment)
     {
         $this->user = $user;
         $this->content = $content;
@@ -128,6 +133,7 @@ class UserRepository
         $this->userSortingTag = $userSortingTag;
         $this->claimProfileRequests = $claimProfileRequests;
         $this->tagGroupAssociation = $tagGroupAssociation;
+        $this->comment = $comment;
     }
 
     public function getUsers($filter = array(), $user_id = null, &$r = '', $per_page = null)
@@ -1209,6 +1215,51 @@ class UserRepository
         if($status == 1){
             return $this->user->where('id', $id)->update(array('email' => $new_email, 'status_id' => 4, 'password' => bcrypt($new_password)));
         }
+    }
+
+    public function postComment($data)
+    {
+        return $this->comment->create($data);
+    }
+
+    public function getComments($fk_id, $table, $id = 0)
+    {
+        $comments = $this->comment->with(['user' => function($q){
+            return $q->with('image');
+        }
+        ])->where('table', $table)
+            ->where('fk_id', $fk_id)
+            ->where('comments.status', '1')
+            ->where('comments.parent_id', '0');
+
+        if($id != 0){
+            $comments = $this->comment->with('user')
+                ->where('comments.id', $id);
+        }
+
+        return $comments->orderBy('comments.id', 'ASC')->get();
+    }
+
+    public function getArrangedComments($fk_id, $table){
+        return $this->getComments($fk_id, $table);
+
+//        $c = $this->getComments($fk_id, $table)->toArray();
+//        $comments = []; $c1 = [];
+//        foreach($c as $comment){
+//            $c1[ $comment['id'] ] = $comment;
+//        }
+//
+//        foreach($c1 as $id => $comment){
+//            if($comment['parent_id'] == '0'){
+//                $comments[ $id ] = $comment;
+//            }else{
+////                $c2[ $comment['parent_id'] ] = $c1[$comment['parent_id']];
+//                $comments[ $comment['parent_id'] ]['sub'][] = $comment;
+//            }
+//        }
+//
+//
+//        return $comments;
     }
 }
 

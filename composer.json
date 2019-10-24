@@ -11,6 +11,7 @@
         "laracasts/flash": "^3.0",
         "laravel/framework": "5.5.*",
         "laravel/tinker": "~1.0",
+        "shawnsandy/img-fly": "^0.1.21",
         "sudiptpa/paypal-ipn": "^2.0"
     },
     "require-dev": {

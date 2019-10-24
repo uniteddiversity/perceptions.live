@@ -109,3 +109,41 @@ function loadFilters(id, type){
 
     });
 }
+
+function showTextbox($id){
+    $('.reply_comment').hide();
+    $('#'+$id).show();
+}
+
+function hideTextbox($id){
+    $('.reply_comment').hide();
+    $('#'+$id)
+    $('#'+$id).hide();
+    $('#'+$id).find('.comment_box').val('');
+}
+
+function postComments($fk_id, $table, $parent, $text_field){
+    let text = $('#'+$text_field).val();
+    let $token = $('#csrf-token').val();
+    $('#forcomment_'+$parent).show();
+    $('#comment_text_0').val('')
+    $.ajax({
+        type: "POST",
+        url: "/user/home/post-comment",
+        data: {parent:$parent, comment:text, fk_id: $fk_id, table: $table, _token: $token},
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        },
+        success: function($data){
+            if($data.data.parent_id != '0'){
+                $('#content_reply_'+$data.data.parent_id).prepend($data.view);
+                hideTextbox('forcomment_'+$data.data.parent_id);
+            }else{
+                $('.comments_inner').prepend($data.view);
+                hideTextbox('forcomment_'+$data.data.parent_id);
+            }
+
+        },
+        dataType: 'json'
+    });
+}

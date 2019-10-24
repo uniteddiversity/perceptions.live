@@ -1036,4 +1036,43 @@ class UserController extends Controller
         $this->userRepository->updateClaimRequestStatus($id, 4);
         return redirect('/user/user/list-profile-claim-request')->with('message', 'Successfully Deleted!');
     }
+
+    public function postComment(Request $request)
+    {
+        $validator = Validator::make($request->all(), [
+            'comment' => 'required',
+        ]);
+
+        if ($validator->fails()) {
+             return (response()->json([
+                'message' => $validator->messages()], 401));
+        }
+
+        $parent_id = 0;
+        if(isset($request['parent']) && UID::translator($request['parent']) != 0 && UID::translator($request['parent']) != ''){
+            $parent_id = UID::translator($request['parent']);
+        }
+
+        $user_id = Auth::user()->id;
+        $data = array(
+            'user_id' => $user_id,
+            'comment' => $request['comment'],
+            'table' => $request['table'],
+            'fk_id' => UID::translator($request['fk_id']),
+//            'created_by' => '',
+//            'modified_by' => '',
+            'parent_id' => $parent_id,
+            'status' => '1'
+        );
+
+        $added_data = $this->userRepository->postComment($data);
+        $comment = $this->userRepository->getComments($added_data->fk_id, $added_data->table, $added_data->id);
+
+        $user_image = (isset($comment[0]->user['image']) && $comment[0]->user['image'][0])?$comment[0]->user['image'][0]->url:'';
+        $data = array('id' => UID::generate($comment[0]->id), 'fk_id' => $comment[0]->fk_id, 'comment' => $comment[0]->comment,
+            'user' => $comment[0]->user, 'user_image' => $user_image, 'parent_id' => ($comment[0]->parent_id != 0)? UID::generate($comment[0]->parent_id): 0);
+        $view = view('partials.partial_comment')
+            ->with(compact('data'))->render();
+        echo json_encode(array('data' => $data, 'view' => $view));
+    }
 }

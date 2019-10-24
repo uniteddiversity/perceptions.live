@@ -5076,3 +5076,44 @@ header.s4.dark #slider_feed .near_me_icon {position: absolute;right: 50%;margin-
     .half-map .participate {width: 80px;height: 80px !important;margin-left: -40px;background-size: 60px;}
     .ml-listings .cats .dot {width: 28px;height: 28px;margin-right: 5px;margin-left: 0px;}
 }
+
+.reply_comment input{
+     padding: 8px 10px;
+     margin-bottom: 10px;
+ }
+
+.reply_comment a{
+    padding: 0 10px;
+    line-height: 36px;
+    height: 32px;
+    margin-left: 10px;
+}
+
+.reply_comment{
+    display: none;
+}
+
+.reply_comment_link{
+    /*float: left;*/
+    line-height: 17px;
+    color: rgb(121, 121, 121);
+    /*margin: 0;*/
+    font-size: 11px;
+    /*margin-bottom: 10px;*/
+    float: none !important;
+}
+
+.reply_comment_link i{
+    float: none !important;
+}
+
+.right-comments{
+    overflow-y: scroll;
+    overflow-x: hidden;
+}
+
+.comment_avatar{
+    border-radius: 50%;
+    width: 15px;
+    margin-right: 5px;
+}
