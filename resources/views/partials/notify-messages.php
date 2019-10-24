@@ -14,7 +14,7 @@
     });
 </script>
 
-@if(session()->has('message') && $test === 'abc')
+
 <script>
     let message = '<?php echo session()->get('message') ?>'
     if(message != ''){
@@ -28,7 +28,7 @@
         });
     }
 </script>
-@endif
+
 <style>
     .notifyjs-foo-base {
         opacity: 0.85;
