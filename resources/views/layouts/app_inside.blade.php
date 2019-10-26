@@ -693,6 +693,7 @@
     <script src="/js//dist/js/select2.full.min.js"></script>
     <script src="/assets/js/custom_common.js"></script>
     <script type="text/javascript" src="/assets/mashable/bower_components/bootstrap-datepicker/js/bootstrap-datepicker.min.js"></script>
+    <script src="/js/jquery.timeago.js"></script>
     <script src="/assets/js/app.js"></script>
     <script src="/assets/croppie/croppie.js"></script>
     <script src="/assets/js/datatable/datatables.min.js"></script>
@@ -818,6 +819,9 @@
             console.log('image path is ' + $('#preset_image_path').val());
             $('.cr-image').attr('src', $('#preset_image_path').val());
         });
+    </script>
+    <script>
+        jQuery("time.timeago").timeago();
     </script>
     <script src='https://www.google.com/recaptcha/api.js'></script>
 </body>

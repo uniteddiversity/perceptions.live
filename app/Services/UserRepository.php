@@ -1240,7 +1240,8 @@ class UserRepository
         return $comments->orderBy('comments.id', 'ASC')->get();
     }
 
-    public function getArrangedComments($fk_id, $table){
+    public function getArrangedComments($fk_id, $table)
+    {
         return $this->getComments($fk_id, $table);
 
 //        $c = $this->getComments($fk_id, $table)->toArray();
@@ -1260,6 +1261,11 @@ class UserRepository
 //
 //
 //        return $comments;
+    }
+
+    public function deleteComment($id, $user_id)
+    {
+        return $this->comment->where('id',$id)->delete();
     }
 }
 

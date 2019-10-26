@@ -9,6 +9,8 @@ use App\Content;
 use App\Group;
 use App\Http\Controllers\Controller;
 use App\Invoice;
+use App\Mail\CommentUpdate;
+use App\Mail\contactUs;
 use App\Mail\groupCreated;
 use App\MediaPackage;
 use App\MediaProject;
@@ -1069,10 +1071,26 @@ class UserController extends Controller
         $comment = $this->userRepository->getComments($added_data->fk_id, $added_data->table, $added_data->id);
 
         $user_image = (isset($comment[0]->user['image']) && $comment[0]->user['image'][0])?$comment[0]->user['image'][0]->url:'';
-        $data = array('id' => UID::generate($comment[0]->id), 'fk_id' => $comment[0]->fk_id, 'comment' => $comment[0]->comment,
+        $data = array('id' => UID::generate($comment[0]->id), 'fk_id' => $comment[0]->fk_id, 'comment' => $comment[0]->comment, 'created_at' => $comment[0]->created_at, 'updated_at' => $comment[0]->updated_at,
             'user' => $comment[0]->user, 'user_image' => $user_image, 'parent_id' => ($comment[0]->parent_id != 0)? UID::generate($comment[0]->parent_id): 0);
         $view = view('partials.partial_comment')
             ->with(compact('data'))->render();
+
+        $to = [
+            [
+                'email' => env("ADMIN_MAIL"),
+                'name' => env("ADMIN_NAME"),
+            ]
+        ];
+
+        $parent_content = [];
+        $parent_content['type'] = 'Not Set';
+        if($request['table'] == 'contents'){
+            $parent_content['type'] = 'Video';
+            $parent_content['content'] = $this->contentService->getContentDataMinimum(UID::translator($request['fk_id']));
+        }
+
+        Mail::to($to)->send(new CommentUpdate($comment, $parent_content));
         echo json_encode(array('data' => $data, 'view' => $view));
     }
 }

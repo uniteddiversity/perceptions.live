@@ -136,14 +136,15 @@ function postComments($fk_id, $table, $parent, $text_field){
         },
         success: function($data){
             if($data.data.parent_id != '0'){
-                $('#content_reply_'+$data.data.parent_id).prepend($data.view);
+                $('#content_reply_'+$data.data.parent_id).append($data.view);
                 hideTextbox('forcomment_'+$data.data.parent_id);
             }else{
-                $('.comments_inner').prepend($data.view);
+                $('.comments_inner').append($data.view);
                 hideTextbox('forcomment_'+$data.data.parent_id);
             }
-
+            jQuery("time.timeago").timeago();
         },
         dataType: 'json'
     });
 }
+

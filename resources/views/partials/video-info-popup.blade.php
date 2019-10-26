@@ -146,7 +146,7 @@ $video_id = isset($matches[1])?$matches[1]:'';
         </div>
         <div class="comments_outer">
             <div class="comments_inner">
-                @include('partials.commentsDisplay', ['comments' => $comments, 'fk_id' => $info->id])
+                @include('partials.commentsDisplay', ['comments' => $comments, 'fk_id' => $info->id, 'table' => 'contents'])
             </div>
         </div>
         <input type="hidden" name="_token" id="csrf-token" value="{{ Session::token() }}" />
@@ -200,7 +200,9 @@ $video_id = isset($matches[1])?$matches[1]:'';
     })
 
 </script>
-
+<script>
+    jQuery("time.timeago").timeago();
+</script>
 <?php /* <div class="row" style="display: block;">
     <div class="col-lg-12 grid-margin stretch-card">
         <div class="card">

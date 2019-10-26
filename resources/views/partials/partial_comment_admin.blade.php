@@ -6,7 +6,7 @@
             <img class="comment_avatar" src="{{ Imgfly::imgPublic('face1.png?w=25','img' )}}">&nbsp;
         <?php } ?>
         &nbsp;
-        <a href="#">@<?php echo $data['user']['display_name'] ?><time class="timeago" datetimez="2016-07-07T09:24:17Z" datetime="<?php echo $data['created_at']->format('c') ?>"><?php echo $data['created_at']->format('c') ?></time></a>
+        <a href="#">@<?php echo $data['user']['display_name'] ?></a>
     </p>
     <div class="comment-inner">
         <p>
@@ -27,5 +27,5 @@
         </div>
     </div>
 <?php } ?>
-<div class="comment" id='content_reply_<?php echo uid($data['id']) ?>' style="padding-left: 20px;"><div class="comment" id='content_reply_<?php echo $data['id'] ?>'>
+<div class="comment" id='content_reply_<?php echo uid($data['id']) ?>' style="padding-left: 20px;"><div class="comment" id='content_reply_<?php echo $data['id'] ?>' style="padding-left: 20px;">
 </div>

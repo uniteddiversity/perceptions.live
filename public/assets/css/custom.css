@@ -5122,3 +5122,154 @@ header.s4.dark #slider_feed .near_me_icon {position: absolute;right: 50%;margin-
     width: 15px;
     margin-right: 5px;
 }
+
+
+/* Admin comments */
+.admin_comments .comment {
+    float: left;
+    width: 100%;
+    text-align: left;
+}
+
+.admin_comments .com_user {
+    color: #fff;
+    padding-left: 10px;
+}
+
+.admin_comments .comment .comment-inner {
+    padding: 10px;
+    background: #f2f0f0;
+    float: left;
+    width: 98%;
+    /*-webkit-border-radius: 10px;*/
+    /*-moz-border-radius: 10px;*/
+    /*border-radius: 10px;*/
+    margin: 10px !important;
+}
+
+.admin_comments .comments_inner{
+    padding: 10px !important;
+}
+
+.admin_comments .comment a {
+    margin-bottom: 10px;
+    float: left;
+    color: #6060D5 !important;
+    font-weight: 600 !important;
+}
+
+.admin_comments .comment i {
+    float: left;
+    margin-right: 5px;
+    margin-top: 2px;
+    color: #000;
+}
+
+.admin_comments .comment .actions{
+    float: right;
+}
+
+.admin_comments .comment p {
+    float: left;
+    /*width: 90%;*/
+    font-size: 13px;
+    line-height: 17px;
+    /*color: rgb(121, 121, 121);*/
+    color: #000;
+    margin: 0;
+}
+
+.admin_comments .com_user {
+    font-size: 11px !important;
+}
+
+.admin_comments .btn_outer {
+    width: 100%;
+    background: #000;
+    border-top: 1px solid rgb(31, 31, 31);
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    -webkit-border-bottom-right-radius: 5px;
+    -moz-border-radius-bottomright: 5px;
+    border-bottom-right-radius: 5px;
+}
+
+.admin_comments .btn_outer .btn_inner {
+    width: 100%;
+    float: left;
+    padding: 20px;
+}
+
+.admin_comments .btn_outer label:before {
+    display: none;
+}
+
+.admin_comments .btn_outer label {
+    color: rgb(121, 121, 121);
+    text-align: left;
+    font-size: 13px;
+    font-family: 'Open Sans', sans-serif;
+    float: left;
+    padding-left: 0;
+    margin-bottom: 10px;
+}
+
+.admin_comments .btn_outer textarea {
+    min-height: 100px;
+    padding: 10px 20px;
+    background: rgb(31, 31, 31);
+    color: rgb(121, 121, 121);
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    border-radius: 5px;
+    font-size: 13px;
+    font-family: 'Open Sans', sans-serif;
+}
+
+.admin_comments .btn_outer textarea:focus {
+    background: #fff;
+    color: #000;
+}
+
+.admin_comments .btn_outer .btn {
+    width: 100%;
+}
+
+.admin_comments .btn_inner {
+    display: none;
+    opacity: 0;
+    transition: all 1s ease-in;
+}
+
+.admin_comments .btn_inner.open {
+    display: block;
+    opacity: 1;
+}
+
+.admin_comments .donate {
+    width: 100%;
+    padding-bottom: 20px;
+    float: left;
+    border-bottom: 1px solid rgb(31, 31, 31);
+}
+
+.admin_comments .donate .btn {
+    width: 100%;
+    background: rgb(181, 181, 181);
+    color: rgb(21, 21, 21);
+}
+
+.admin_comments .btn i {
+    padding-right: 10px;
+}
+
+.comment-inner .actions i{
+    cursor: pointer;
+}
+
+.comment-inner .actions .link{
+    float: left !important;
+    cursor: pointer;
+    margin-right: 5px;
+}

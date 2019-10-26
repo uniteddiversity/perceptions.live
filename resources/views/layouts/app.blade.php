@@ -172,7 +172,9 @@
     <script src="/assets/leaflet-groupedlayercontrol/leaflet.groupedlayercontrol.js"></script>
     <script src="/assets/js/notify.js"></script>
 
+    <script src="/js/jquery.timeago.js"></script>
     <script src="/assets/js/bootstrap-tooltip.js"></script>
+
     <script src="/assets/js/app.js"></script>
 
     <script src="/assets/js/datatable/datatables.min.js"></script>
