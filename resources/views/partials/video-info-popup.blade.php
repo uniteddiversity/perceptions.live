@@ -149,7 +149,7 @@ $video_id = isset($matches[1])?$matches[1]:'';
                 @include('partials.commentsDisplay', ['comments' => $comments, 'fk_id' => $info->id, 'table' => 'contents'])
                 <?php if(count($comments) == 0){ ?>
                     <div class="comment no-comment-yet-<?php echo uid($info->id) ?>" >
-                        *No comments yet
+                        No comments yet. Start the discussion!
                     </div>
                 <?php } ?>
             </div>
