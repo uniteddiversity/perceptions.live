@@ -34,6 +34,6 @@ class CommentUpdate extends Mailable
     {
         $data = $this->data;
         $target_data = $this->target_data;
-        return $this->view('emails.comment-update')->with(compact('target_data','data'));
+        return $this->subject("New Comment")->view('emails.comment-update')->with(compact('target_data','data'));
     }
 }

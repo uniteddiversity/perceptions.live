@@ -30,6 +30,6 @@ class groupCreated extends Mailable
      */
     public function build()
     {
-        return $this->view('emails.group-created');
+        return $this->subject("New Group Created")->view('emails.group-created');
     }
 }

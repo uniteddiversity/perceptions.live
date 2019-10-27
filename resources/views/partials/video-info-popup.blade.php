@@ -147,6 +147,11 @@ $video_id = isset($matches[1])?$matches[1]:'';
         <div class="comments_outer">
             <div class="comments_inner">
                 @include('partials.commentsDisplay', ['comments' => $comments, 'fk_id' => $info->id, 'table' => 'contents'])
+                <?php if(count($comments) == 0){ ?>
+                    <div class="comment no-comment-yet-<?php echo uid($info->id) ?>" >
+                        *No comments yet
+                    </div>
+                <?php } ?>
             </div>
         </div>
         <input type="hidden" name="_token" id="csrf-token" value="{{ Session::token() }}" />

@@ -143,6 +143,8 @@ function postComments($fk_id, $table, $parent, $text_field){
                 hideTextbox('forcomment_'+$data.data.parent_id);
             }
             jQuery("time.timeago").timeago();
+            $('.no-comment-yet-'+$fk_id).hide();
+            console.log('$fk_id',$fk_id)
         },
         dataType: 'json'
     });
