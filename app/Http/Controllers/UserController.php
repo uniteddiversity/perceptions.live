@@ -1090,7 +1090,7 @@ class UserController extends Controller
             $parent_content['content'] = $this->contentService->getContentDataMinimum(UID::translator($request['fk_id']));
         }
 
-        Mail::to($to)->send(new CommentUpdate($comment, $parent_content));
+        Mail::to($to)->send(new CommentUpdate($comment, $parent_content))->subject("Comment Added");
         echo json_encode(array('data' => $data, 'view' => $view));
     }
 }

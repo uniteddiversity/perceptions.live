@@ -66,11 +66,16 @@ Route::post('/', function(){
     Route::get('/home/ajax-video-more-info/{_video_id}', '\App\Controllers\HomeController@getVideoMoreInfo');
     Route::get('/home/list-display-names/ajax', '\App\Controllers\HomeController@searchDisplayNames');
     Route::get('/home/list-comments/{_id}/{_type}', '\App\Controllers\HomeController@getComments');
-    Route::post('/home/post-comment', '\App\Controllers\User\UserController@postComment');
+
 //Route::get('/home/post-comment', '\App\Controllers\User\UserController@postComment');
 //});
 
-Route::group(['prefix' => 'user', 'middleware' => ['auth', 'web', 'admin']], function () {
+Route::group(['prefix' => 'user', 'middleware' => ['auth']], function () {
+//    Route::post('/home/post-comment', '\App\Controllers\User\UserController@postComment');
+});
+
+
+Route::group(['prefix' => 'user', 'middleware' => ['auth']], function () {
     Route::post('/home/post-comment', '\App\Controllers\User\UserController@postComment');
 });
 
