@@ -151,15 +151,24 @@ $video_id = isset($matches[1])?$matches[1]:'';
         </div>
         <input type="hidden" name="_token" id="csrf-token" value="{{ Session::token() }}" />
         <div class="btn_outer">
-            <div class="btn_inner" style="border-bottom:1px solid rgb(31,31,31);">
-                <label>Message</label>
-                <?php /* <textarea id="comment_0" placeholder="Text goes here..."></textarea> */ ?>
-                <input type="text" id="comment_text_0" placeholder="Text goes here..." />
-                <a href="#" onclick="postComments('<?php echo uid($info->id) ?>', 'contents', 0, 'comment_text_0')" class="btn">Submit</a>
-            </div>
+            <?php if((Auth::user())){ ?>
+                <div class="btn_inner" style="border-bottom:1px solid rgb(31,31,31);">
+                    <label>Message</label>
+                    <?php /* <textarea id="comment_0" placeholder="Text goes here..."></textarea> */ ?>
+                    <input type="text" id="comment_text_0" placeholder="Text goes here..." />
+                    <a href="#" onclick="postComments('<?php echo uid($info->id) ?>', 'contents', 0, 'comment_text_0')" class="btn">Submit</a>
+                </div>
+            <?php }?>
+            <?php if((Auth::user())){ ?>
             <div class="btn_inner open">
                 <a href="#" id="add" class="btn">Add a Comment</a>
             </div>
+            <?php }?>
+            <?php if(!(Auth::user())){ ?>
+            <div class="open" style="padding: 20px;float: left;width: 100%;">
+                <a href="#" class="btn">Login to add comment</a>
+            </div>
+            <?php }?>
         </div>
     </div>
 
