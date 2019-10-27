@@ -148,3 +148,15 @@ function postComments($fk_id, $table, $parent, $text_field){
     });
 }
 
+
+function collapseComments($id, obj){
+    $('#'+$id).toggle('slow');
+    if($(obj).find('i').hasClass('fa-arrow-up')){
+        $(obj).find('i').removeClass('fa-arrow-up');
+        $(obj).find('i').addClass('fa-arrow-down');
+    }else{
+        $(obj).find('i').removeClass('fa-arrow-down');
+        $(obj).find('i').addClass('fa-arrow-up');
+    }
+    console.log('collopsing', $id)
+}

@@ -11,9 +11,17 @@
     <div class="comment-inner">
         <p>
             {{$data['comment']}}
-            <?php if($data['parent_id'] == 0 && (Auth::user())){ ?>
-                <a class="reply_comment_link" id="comment_<?php echo uid($data['id']) ?>" onclick="showTextbox('forcomment_<?php echo $data['id'] ?>')" href="#">reply&nbsp;&nbsp;<i class="fas fa-arrow-circle-right"></i></a>
-            <?php } ?>
+            <div class="actions">
+                <?php if($data['parent_id'] == 0 && (Auth::user())){ ?>
+                    <span class="reply_comment_link link" id="comment_<?php echo uid($data['id']) ?>" onclick="showTextbox('forcomment_<?php echo $data['id'] ?>')" href="#">reply&nbsp;&nbsp;<i class="fas fa-arrow-circle-right"></i></span>
+                <?php } ?>
+                <?php /*
+                    <span class="link"><i onclick="deleteComment('<?php echo uid($data['id']) ?>')"  class="fas fa-trash"></i>&nbsp;&nbsp;</span>
+                    */ ?>
+                <?php if($data['parent_id'] == 0){ ?>
+                    <span class="link" onclick="collapseComments('content_reply_<?php echo uid($data['id']) ?>', this)" ><i class="fas fa-arrow-up" ></i></span>
+                <?php } ?>
+            </div>
         </p>
     </div>
 </div>

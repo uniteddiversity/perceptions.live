@@ -1634,13 +1634,13 @@ input[type="text"]:focus::placeholder {
 .right-comments .comment i {
     float: left;
     margin-right: 5px;
-    margin-top: 2px;
+    /*margin-top: 2px;*/
     color: #fff;
 }
 
 .right-comments .comment p {
     float: left;
-    width: 100%;
+    /*width: 100%;*/
     font-size: 13px;
     line-height: 17px;
     color: rgb(121, 121, 121);
@@ -5113,8 +5113,8 @@ header.s4.dark #slider_feed .near_me_icon {position: absolute;right: 50%;margin-
 }
 
 .right-comments{
-    overflow-y: scroll;
-    overflow-x: hidden;
+    /*overflow-y: scroll;*/
+    /*overflow-x: hidden;*/
 }
 
 .comment_avatar{
@@ -5272,4 +5272,24 @@ header.s4.dark #slider_feed .near_me_icon {position: absolute;right: 50%;margin-
     float: left !important;
     cursor: pointer;
     margin-right: 5px;
+}
+
+.right-comments .comment p {
+    float: left;
+}
+
+.right-comments .comment .actions{
+    float: right;
+}
+
+.right-comments .comment{
+    display: block;
+}
+
+.comments_outer{
+    overflow-y: auto;
+    overflow-x: hidden;
+    width: 100%;
+    max-height: 575px;
+    height: 575px;
 }

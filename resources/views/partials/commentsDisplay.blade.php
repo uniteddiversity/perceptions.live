@@ -7,13 +7,22 @@
                 <img class="comment_avatar" src="{{ Imgfly::imgPublic('face1.png?w=25','img' )}}">&nbsp;
             <?php } ?>
 
-            <a href="#">@<?php echo $comment['user']['display_name'] ?></a><time class="timeago" datetimez="2016-07-07T09:24:17Z" datetime="<?php echo $comment['created_at']->format('c') ?>"><?php echo $comment['created_at']->format('c') ?></time></p>
+            <a href="#">@<?php echo $comment['user']['display_name'] ?></a><time class="timeago" datetimez="2016-07-07T09:24:17Z" datetime="<?php echo $comment['created_at']->format('c') ?>"><?php echo $comment['created_at']->format('c') ?></time>
+        </p>
         <div class="comment-inner">
             <p>
                 <?php echo $comment['comment'] ?>
+                <div class="actions">
                 <?php if($comment['parent_id'] == 0 && (Auth::user())){ ?>
-                    <a class="reply_comment_link" id="comment_<?php echo uid($comment['id']) ?>" onclick="showTextbox('forcomment_<?php echo uid($comment['id']) ?>')" href="#">reply&nbsp;&nbsp;<i class="fas fa-arrow-circle-right"></i></a>
+                    <span class="reply_comment_link link" id="comment_<?php echo uid($comment['id']) ?>" onclick="showTextbox('forcomment_<?php echo uid($comment['id']) ?>')" href="#">reply&nbsp;<i class="fas fa-arrow-circle-right"></i></span>
                 <?php } ?>
+                <?php /*
+                <span class="link"><i onclick="deleteComment('<?php echo uid($comment['id']) ?>')"  class="fas fa-trash"></i>&nbsp;&nbsp;</span>
+                */ ?>
+                <?php if($comment['parent_id'] == 0){ ?>
+                    <span class="link" onclick="collapseComments('content_reply_<?php echo uid($comment['id']) ?>', this)" ><i class="fas fa-arrow-up" ></i></span>
+                <?php } ?>
+                </div>
             </p>
         </div>
     </div>
