@@ -6,7 +6,7 @@
             <img class="comment_avatar" src="{{ Imgfly::imgPublic('face1.png?w=25','img' )}}">&nbsp;
         <?php } ?>
         &nbsp;
-        <a href="#">@<?php echo $data['user']['display_name'] ?></a>
+        <a href="#">@<?php echo $data['user']['display_name'] ?></a><time class="timeago" datetime="<?php echo $data['created_at']->format('c') ?>"><?php echo $data['created_at']->format('c') ?></time>
     </p>
     <div class="comment-inner">
         <p>

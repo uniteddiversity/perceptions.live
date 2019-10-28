@@ -5293,3 +5293,14 @@ header.s4.dark #slider_feed .near_me_icon {position: absolute;right: 50%;margin-
     max-height: 575px;
     height: 575px;
 }
+
+.no_comment_yet{
+    margin: 0;
+    position: absolute;
+    top: 50%;
+    -ms-transform: translateY(-50%);
+    transform: translateY(-50%);
+    width: 78% !important;
+    text-align: center !important;
+    font-size: 12px;
+}
