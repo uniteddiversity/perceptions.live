@@ -5620,7 +5620,7 @@ nav > ul > li > a i.fas {
     top: auto !important;
     bottom: 100px !Important;
     left: 55% !Important;
-    background: url(../img/upload.png) center center no-repeat #e2bc00 !important;
+    /*background: url(../img/upload.png) center center no-repeat #e2bc00 !important;*/
     background-size: 70% !important;
     height: 100px !important;
     width: 100px !important;
