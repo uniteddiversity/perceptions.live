@@ -2,9 +2,11 @@ var model_links = [];
 var model_links_current_pos = 0;
 var showed_markers = null;
 
-var southWest = L.latLng(-89.98155760646617, -180),
-    northEast = L.latLng(89.99346179538875, 180);
-var bounds = L.latLngBounds(southWest, northEast);
+if (typeof (L) != "undefined") {
+    var southWest = L.latLng(-89.98155760646617, -180),
+        northEast = L.latLng(89.99346179538875, 180);
+    var bounds = L.latLngBounds(southWest, northEast);
+}
 
 if (typeof (L) != "undefined") {
     if ($('#video_id').val() != undefined) {
@@ -614,7 +616,7 @@ function displayVideoContentUpload() {
         $('#submit_footage_form').hide();
     }
 }
-if (select2)
+// if (select2)
     $('.content-type-select-ajax').select2({
         ajax: {
             url: '/user/admin/search-content-type/ajax',
@@ -668,11 +670,11 @@ if (select2)
         }
     });
 
-/*$('.content-type-select-ajax').on('select2:select', function (e) {
+$('.content-type-select-ajax').on('select2:select', function (e) {
     let data = e.params.data;
     $('#fk_id').val(data.id);
     $('#type').val(data.type);
-});*/
+});
 
 /*ZOHEB FUNCTION*/
 function openSideBarMenu(btn) {

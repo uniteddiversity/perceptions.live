@@ -199,13 +199,14 @@
 
     <script src="/js/jquery.timeago.js"></script>
     <script src="/assets/js/bootstrap-tooltip.js"></script>
-
+    <script src="/js//dist/js/select2.full.min.js"></script>
     <script src="/assets/js/app.js"></script>
 
     <script src="/assets/js/datatable/datatables.min.js"></script>
     <script src="/assets/juery-confirm/jquery-confirm.js"></script>
     <script src="/assets/js/thumbnail_slider.js"></script>
     <script src="/assets/js/home-common.js"></script>
+
 
     @include('partials.notify-messages')
     <style>
