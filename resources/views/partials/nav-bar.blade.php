@@ -55,7 +55,7 @@
                 <a href="#"><i class="fas fa-pencil-alt"></i>Submit Feedback</a>
             </li>
             <li>
-                <a href="/contact"><i class="fas fa-pencil-alt"></i>Contact Us</a>
+                <a href="/contact-us"><i class="fas fa-pencil-alt"></i>Contact Us</a>
             </li>
             @endif
 
@@ -79,8 +79,10 @@
         @endif
     </div>
     <div class="topsearch" id="slider_feed2">
-        <div class="site_mid_title"><h5>{{$settings['home_centered_title'] or ""}}</h5></div>
-        <div class="site_slider_feed" >
+        <div class="site_mid_title">
+            <h5>{{$settings['home_centered_title'] or ""}}</h5>
+        </div>
+        <div class="site_slider_feed">
             @if(isset($top_slider_feed))
             <div class="left_feed slideshow">
                 <span>{{$settings['left_feed_name'] or ""}}</span>
@@ -91,12 +93,12 @@
                     <ul class="thumbs">
                         <?php $i = 0; ?>
                         @foreach($top_slider_feed as $feed)
-                            <?php $i++; ?>
-                            @if($feed['side'] == 'left')
-                                <li data-thumb-id="<?php echo $i ?>" class="thumb active" style="background-image: url('/storage/{{$feed['icon']}}')">
-                                    <span>{{$feed['title']}}</span>
-                                </li>
-                            @endif
+                        <?php $i++; ?>
+                        @if($feed['side'] == 'left')
+                        <li data-thumb-id="<?php echo $i ?>" class="thumb active" style="background-image: url('/storage/{{$feed['icon']}}')">
+                            <span>{{$feed['title']}}</span>
+                        </li>
+                        @endif
                         @endforeach
                     </ul>
                     <div id="next-btn" class="next">
@@ -105,7 +107,8 @@
                 </div>
             </div>
             <div class="near_me_icon">
-                <i class="map_center_icon" ></i>
+                <i class="map_center_icon"></i>
+                <p>Nearby Me</p>
             </div>
             <div class="right_feed slideshow">
                 <span>{{$settings['right_feed_name'] or ""}}</span>
@@ -116,10 +119,10 @@
                     <ul class="thumbs">
                         <?php $i = 0; ?>
                         @foreach($top_slider_feed as $feed)
-                            <?php $i++; ?>
-                            @if($feed['side'] == 'right')
-                                <li data-thumb-id="<?php echo $i ?>" class="thumb active" style="background-image: url('/storage/{{$feed['icon']}}')"></li>
-                            @endif
+                        <?php $i++; ?>
+                        @if($feed['side'] == 'right')
+                        <li data-thumb-id="<?php echo $i ?>" class="thumb active" style="background-image: url('/storage/{{$feed['icon']}}')"></li>
+                        @endif
                         @endforeach
                     </ul>
                     <div id="next-btn" class="next">
@@ -135,23 +138,25 @@
 
     <div class="container fluid">
 
-        <div id="logo_overlay">
+        <a href="#" onclick="resetSearch()" id="logo_overlay">
             <img src="/assets/findgo/images/live-perceptions-logo.png" width="600" height="122" style="display:none;">
-        </div>
+        </a>
 
         <div class="topsearch">
             <div class="rfield">
-                <input type="text" placeholder="What are you looking for?" name="search_text" id="search_text" />
+                <input type="text" placeholder="Search" name="search_text" id="search_text" />
                 <i class="fas fa-search" style="cursor:pointer" onclick="searchVideo()"></i>
             </div>
         </div>
 
 
         <div class="topsearch" id="slider_feed">
-            <div class="site_mid_title"><h5>{{$settings['home_centered_title'] or ""}}</h5></div>
+            <div class="site_mid_title">
+                <h5>{{$settings['home_centered_title'] or ""}}</h5>
+            </div>
 
 
-            <div class="site_slider_feed" >
+            <div class="site_slider_feed">
                 @if(isset($top_slider_feed))
                 <div class="left_feed slideshow">
                     <span>{{$settings['left_feed_name'] or ""}}</span>
@@ -163,12 +168,12 @@
                         <ul class="thumbs">
                             <?php $i = 0; ?>
                             @foreach($top_slider_feed as $feed)
-                                <?php $i++; ?>
-                                @if($feed['side'] == 'left')
-                                    <li onclick="loadFilters({{$feed['fk_id']}},'{{$feed['type']}}')" data-thumb-id="<?php echo $i ?>" class="thumb active" style="background-image: url('/storage/{{$feed['icon']}}')">
-                                        <span>{{$feed['title']}}</span>
-                                    </li>
-                                @endif
+                            <?php $i++; ?>
+                            @if($feed['side'] == 'left')
+                            <li onclick="loadFilters({{$feed['fk_id']}},'{{$feed['type']}}')" data-thumb-id="<?php echo $i ?>" class="thumb active" style="background-image: url('/storage/{{$feed['icon']}}')">
+                                <span>{{$feed['title']}}</span>
+                            </li>
+                            @endif
                             @endforeach
                         </ul>
 
@@ -179,7 +184,8 @@
                 </div>
 
                 <div class="near_me_icon">
-                    <i class="map_center_icon" ></i>
+                    <i class="map_center_icon"></i>
+                    <p>Nearby Me</p>
                 </div>
 
                 <div class="right_feed slideshow">
@@ -193,10 +199,10 @@
 
                             <?php $i = 0; ?>
                             @foreach($top_slider_feed as $feed)
-                                <?php $i++; ?>
-                                @if($feed['side'] == 'right')
-                                    <li onclick="loadFilters({{$feed['fk_id']}},'{{$feed['type']}}')" data-thumb-id="<?php echo $i ?>" class="thumb active" style="background-image: url('/storage/{{$feed['icon']}}')"></li>
-                                @endif
+                            <?php $i++; ?>
+                            @if($feed['side'] == 'right')
+                            <li onclick="loadFilters({{$feed['fk_id']}},'{{$feed['type']}}')" data-thumb-id="<?php echo $i ?>" class="thumb active" style="background-image: url('/storage/{{$feed['icon']}}')"></li>
+                            @endif
                             @endforeach
                         </ul>
 
@@ -215,6 +221,14 @@
 
         @auth
 
+        <div class="extras two">
+            <a class="submitprcp" data-toggle="modal" data-target="/user/admin/user-group-add">
+                <i class="fas fa-users"></i>
+                Create community</a>
+            <a class="submitprcp" href="/user/content-add" title="" style="display:none;">
+                <i class="fas fa-video"></i>
+                Submit PRCPTION</a>
+        </div>
 
         <nav class="two">
             <ul>
@@ -230,24 +244,26 @@
                     </a>
                     <ul class="show-notification profile-notification">
                         <li>
-                            <a href="/">
-                                <i class="fas fa-home"></i> Home
-                            </a>
-                        </li>
-                        <li>
                             <!--  include search -->
                             <a class="mobile-search morphsearch-search" href="#">
                                 <i class="fas fa-search"></i> Search
                             </a>
                         </li>
+                        <li>
+                            <a href="/user/user-profile">
+                                <i class="fas fa-user-cog"></i>
+                                Control Panel
+                            </a>
+                        </li>
+                        <li>
+                            <a href="/user/group-admin/content-list">
+                                <i class="fas fa-video"></i>
+                                My Videos
+                            </a>
+                        </li>
                         <li><a href="/claim-profile" target="_blank">
                                 <i class="fas fa-user-circle"></i>
                                 Claim A Profile</a></li>
-                        <li>
-                            <a href="/user/user-profile">
-                                <i class="far fa-user"></i>Profile
-                            </a>
-                        </li>
                         <li>
                             <a href="/user/logout">
                                 <i class="fas fa-sign-out-alt"></i> Logout {{Auth::user()->first_name}}
@@ -258,15 +274,13 @@
             </ul>
         </nav>
 
-        <div class="extras">
-            <a class="submitprcp" href="/user/content-add" title="">
-                <i class="fas fa-video"></i>
-                Submit PRCPTION</a>
-        </div>
         @else
-        <nav class="two">
+        <nav class="two" style="right:161px;">
             <ul>
-
+                <li><a href="/claim-profile" target="_blank">
+                        <i class="fas fa-user-circle"></i>
+                        Claim A Profile</a></li>
+                <li>
             </ul>
         </nav>
 
@@ -301,9 +315,9 @@
                 <li style="display:none;"><a href="/claim-profile" target="_blank">
                         <i class="fas fa-user-circle"></i>
                         Claim A Profile</a></li>
-                <li><a data-toggle="modal" data-target="#about">
-                        <i class="fas fa-info-circle"></i>
-                        About</a></li>
+                <li style="display:none;"><a data-toggle="modal" data-target="/user/admin/user-group-add">
+                        <i class="fas fa-users"></i>
+                        Create community</a></li>
                 @endif
             </ul>
 

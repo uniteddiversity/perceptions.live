@@ -16,6 +16,31 @@
     <link rel="stylesheet" type="text/css" href="/assets/findgo/css/style.css" />
     <link rel="stylesheet" type="text/css" href="/assets/findgo/css/responsive.css" />
 
+    <!-- Favicons -->
+    <link rel="apple-touch-icon" sizes="57x57" href="/favicon/apple-icon-57x57.png">
+    <link rel="apple-touch-icon" sizes="60x60" href="/favicon/apple-icon-60x60.png">
+    <link rel="apple-touch-icon" sizes="72x72" href="/favicon/apple-icon-72x72.png">
+    <link rel="apple-touch-icon" sizes="76x76" href="/favicon/apple-icon-76x76.png">
+    <link rel="apple-touch-icon" sizes="114x114" href="/favicon/apple-icon-114x114.png">
+    <link rel="apple-touch-icon" sizes="120x120" href="/favicon/apple-icon-120x120.png">
+    <link rel="apple-touch-icon" sizes="144x144" href="/favicon/apple-icon-144x144.png">
+    <link rel="apple-touch-icon" sizes="152x152" href="/favicon/apple-icon-152x152.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="/favicon/apple-icon-180x180.png">
+    <link rel="icon" type="image/png" sizes="192x192" href="/favicon/android-icon-192x192.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="96x96" href="/favicon/favicon-96x96.png">
+
+    <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
+    <link rel="icon" href="/favicon.ico" type="image/x-icon">
+
+    <link rel="manifest" href="/favicon/manifest.json">
+    <meta name="msapplication-TileColor" content="#ffffff">
+    <meta name="msapplication-TileImage" content="/favicon/ms-icon-144x144.png">
+    <meta name="theme-color" content="#ffffff">
+
+
+
+
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
 
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,600,700" rel="stylesheet">
@@ -39,7 +64,7 @@
 
 </head>
 
-<body class="full-height" id="scrollup" >
+<body class="full-height" id="scrollup">
 
     <div class="page-loading">
         <img src="/assets/findgo/images/loader.gif" alt="" />
@@ -267,28 +292,31 @@
         .marker-cluster-large div {
             background-color: #47489E;
             color: white;
-        } 
+        }
+
         /* Adding margins on zoom controls */
-        .leaflet-top{
-            top:90px;
+        .leaflet-top {
+            top: 90px;
         }
 
         /* Adding Target icon */
-        .custom{
+        .custom {
             width: 25px;
             height: 31px;
             content: url(/assets/img/target.svg);
         }
-        
+
         /* changin zoom in and out colors */
-        .leaflet-control-zoom-in{
-            color : #47489E !important;
+        .leaflet-control-zoom-in {
+            color: #47489E !important;
         }
-        .leaflet-control-zoom-out{
-            color : #47489E !important;
+
+        .leaflet-control-zoom-out {
+            color: #47489E !important;
         }
+
         /* Participate Icon */
-        .participate{
+        .participate {
             top: 70%;
             z-index: 10001;
             color: #1C1C8C;
@@ -297,13 +325,14 @@
             font-size: 100px;
 
         }
+
         /* Left Magnifying Glass */
-        .maginify-glass{
+        .maginify-glass {
             font-size: 40px;
             transform: rotate(180deg);
         }
 
-</style>
+    </style>
     <script>
         $(document).ready(function() {
             $('[data-toggle="tooltip"]').tooltip();
