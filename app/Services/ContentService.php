@@ -164,6 +164,14 @@ class ContentService
         return $content->first()->toArray();
     }
 
+    public function getContentDataMinimum($id)
+    {
+        $content = $this->content;
+        $content = $content->where('id', $id);
+        $content->select('contents.*');
+        return $content->first()->toArray();
+    }
+
     public function getUser($user_id)
     {
         return $this->user->where('users.id', $user_id)->with('image','groups','actingRoles')

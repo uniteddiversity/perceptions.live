@@ -7,20 +7,22 @@ use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Contracts\Queue\ShouldQueue;
 
-class groupCreated extends Mailable
+class CommentUpdate extends Mailable
 {
     use Queueable, SerializesModels;
 
     public $data;
+    private $target_data;
 
     /**
      * Create a new message instance.
      *
      * @return void
      */
-    public function __construct($data)
+    public function __construct($data, $target_data)
     {
         $this->data = $data;
+        $this->target_data = $target_data;
     }
 
     /**
@@ -30,6 +32,8 @@ class groupCreated extends Mailable
      */
     public function build()
     {
-        return $this->subject("New Group Created")->view('emails.group-created');
+        $data = $this->data;
+        $target_data = $this->target_data;
+        return $this->subject("New Comment")->view('emails.comment-update')->with(compact('target_data','data'));
     }
 }

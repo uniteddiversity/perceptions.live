@@ -44,10 +44,11 @@
                             @foreach ($videos as $video)
                                 <tr>
                                     <td>
-                                        <a href="/user/admin/video-edit/{{ uid($video->id) }}" >Edit</a>&nbsp;&nbsp;
+                                        <a href="/user/admin/video-edit/{{ uid($video->id) }}" >Edit</a>&nbsp&nbsp
                                         <?php if($video->status != '1'){ ?>
                                          <span id="approve_<?php echo $video->id ?>" class="approve-video inactive_link" data-value="<?php echo $video->id ?>" onclick="testFunction('<?php echo $video->id ?>')" >Approve</span>
-                                        <?php } ?>
+                                        <?php } ?>&nbsp&nbsp
+                                        <a href="/user/admin/comment-list/{{ uid($video->id) }}/contents" >Comments</a>
                                     </td>
                                     {{--<td>--}}
                                         {{--{{ $video->id }}--}}

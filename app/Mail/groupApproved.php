@@ -30,6 +30,6 @@ class groupApproved extends Mailable
      */
     public function build()
     {
-        return $this->view('emails.group-approved');
+        return $this->subject("Group Approved")->view('emails.group-approved');
     }
 }

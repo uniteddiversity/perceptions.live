@@ -369,7 +369,15 @@ class AdminController extends Controller
         $status = $this->userRepository->getStatus();
         $languages = $this->contentService->getLanguages();
         return view('admin.content-add')
-            ->with(compact('categories','meta_array','user_list','sorting_tags','groups','access_levels','video_data','status', 'gci_tags', 'uploaded_files','languages'));
+            ->with(compact('categories','meta_array','user_list','sorting_tags','groups','access_levels',
+                'video_data','status', 'gci_tags', 'uploaded_files','languages'));
+    }
+
+    public function comments($fk_id, $table){
+        $id = UID::translator($fk_id);
+        $comments = $this->userRepository->getComments($id, $table);
+        return view('admin.comments-list')
+            ->with(compact('comments', 'fk_id', 'table'));
     }
 
     public function adminUserAdd(Request $request)
@@ -1122,5 +1130,14 @@ class AdminController extends Controller
         }
 
         return redirect('/user/admin/list-profile-claim-request')->with('message', 'Successfully Added!');
+    }
+
+    public function deleteComment(Request $request)
+    {
+        $id = UID::translator($request['id']);
+        $user_id = Auth::user()->id;
+
+        $d = $this->userRepository->deleteComment($id, $user_id);
+        echo json_encode(array('data' => $id));
     }
 }

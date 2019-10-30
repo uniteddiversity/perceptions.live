@@ -10,7 +10,7 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
-
+Imgfly::routes();
 
 Route::post('user/login', array('uses' => '\App\Http\Controllers\Auth\LoginController@userLogin'));
 Route::post('user/register', array('uses' => '\App\Http\Controllers\Auth\RegisterController@createUser'));
@@ -65,9 +65,19 @@ Route::post('/', function(){
 
     Route::get('/home/ajax-video-more-info/{_video_id}', '\App\Controllers\HomeController@getVideoMoreInfo');
     Route::get('/home/list-display-names/ajax', '\App\Controllers\HomeController@searchDisplayNames');
+    Route::get('/home/list-comments/{_id}/{_type}', '\App\Controllers\HomeController@getComments');
+
+//Route::get('/home/post-comment', '\App\Controllers\User\UserController@postComment');
 //});
 
+Route::group(['prefix' => 'user', 'middleware' => ['auth']], function () {
+//    Route::post('/home/post-comment', '\App\Controllers\User\UserController@postComment');
+});
 
+
+Route::group(['prefix' => 'user', 'middleware' => ['auth']], function () {
+    Route::post('/home/post-comment', '\App\Controllers\User\UserController@postComment');
+});
 
 /*
 
@@ -177,6 +187,9 @@ Route::group(['prefix' => 'user', 'middleware' => ['auth', 'web', 'admin']], fun
     Route::get('/admin/list-profile-claim-request', '\App\Controllers\User\AdminController@listClaimProfileRequest');
     Route::get('/admin/view-profile-claim-request/{_id}', '\App\Controllers\User\AdminController@viewClaimProfileRequest');
     Route::post('/admin/post-claim-request/{_id}', '\App\Controllers\User\AdminController@postClaimProfileRequest');
+
+    Route::get('/admin/comment-list/{_fk_id}/{_table}', '\App\Controllers\User\AdminController@comments');
+    Route::post('/admin/delete-comment', '\App\Controllers\User\AdminController@deleteComment');
 });
 
 Route::group(['prefix' => 'user', 'middleware' => ['auth', 'web', 'groupadmin']], function () {

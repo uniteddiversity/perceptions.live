@@ -103,9 +103,9 @@ class HomeController extends Controller
     {
         $user_id = (!isset(Auth::user()->id))? 0 : Auth::user()->id;
         $info = $this->userRepository->getContentsInfo($user_id, $video_id);
-
+        $comments = $this->userRepository->getArrangedComments($video_id, 'contents');
         return view('partials.video-info-popup')
-            ->with(compact('info'));
+            ->with(compact('info', 'comments'));
     }
 
     public function getVideoInfoMini($video_id)
@@ -466,5 +466,10 @@ class HomeController extends Controller
         Mail::to($to)->send(new contactUs($request->all()));
 
         return redirect()->back()->with('message', 'Successfully Sent!');
+    }
+
+    public function getComments($fk_id, $table)
+    {
+        $comments = $this->comment->where('table', $table)->where('fk_id', $fk_id)->get();
     }
 }

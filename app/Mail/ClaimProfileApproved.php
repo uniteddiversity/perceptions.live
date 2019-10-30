@@ -33,6 +33,6 @@ class ClaimProfileApproved extends Mailable
      */
     public function build()
     {
-        return $this->view('emails.claim-profile-approved');
+        return $this->subject("Profile Claim Approved")->view('emails.claim-profile-approved');
     }
 }

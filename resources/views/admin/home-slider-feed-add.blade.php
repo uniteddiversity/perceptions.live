@@ -51,14 +51,14 @@
                         <label for="exampleInputEmail1">Title</label>
                         <input type="text" class="form-control" aria-describedby="nameHelp" name="title" placeholder="Title" value="{{ old('title') }}">
                     </div>
-<!--                    <div class="form-group">-->
-<!--                        <label for="exampleInputEmail1">Type</label>-->
-<!--                        <select class="form-control multi-select2" id="slider_type" name="type" >-->
-<!--                            @foreach(array('category','group','GCI') as $type)-->
-<!--                            <option value="--><?php //echo $type ?><!--" --><?php //if($type == old('type')){ echo 'selected'; } ?><!-- >{{$type}}</option>-->
-<!--                            @endforeach-->
-<!--                        </select>-->
-<!--                    </div>-->
+                    <div class="form-group">
+                        <label for="exampleInputEmail1">Type</label>
+                        <select class="form-control multi-select2" id="slider_type" name="type" >
+                            @foreach(array('category','group','GCI') as $type)
+                            <option value="<?php echo $type ?>" <?php if($type == old('type')){ echo 'selected'; } ?> >{{$type}}</option>
+                            @endforeach
+                        </select>
+                    </div>
                     <div class="form-group">
                         <label for="exampleInputEmail1">Category/GCI/Group</label>
                         <select class="content-type-select-ajax form-control">
@@ -83,8 +83,8 @@
 
 @endsection
 <script>
-    var el = document.getElementById('loading');
-    el.remove(); // Removes the div with the 'div-02' id
+    // var el = document.getElementById('loading');
+    // el.remove(); // Removes the div with the 'div-02' id
 </script>
 <style>
     .select2-container .select2-selection--single {
