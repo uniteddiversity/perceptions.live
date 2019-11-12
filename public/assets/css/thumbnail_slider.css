@@ -115,3 +115,17 @@ ul.thumbs {
     height: 30px;
     border: 1px solid #FFF;
 }
+
+.thumb_wrapper{
+     height: 55px;
+     width: 208px;
+     float: left;
+     overflow: hidden;
+     position: relative;
+ }
+
+.thumb_wrapper .thumb{
+    /*min-width: 0px;*/
+    /*width: 80px;*/
+    overflow: hidden;
+}
