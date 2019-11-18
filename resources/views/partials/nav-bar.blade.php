@@ -161,25 +161,22 @@
                 <div class="left_feed slideshow left-feed-custom">
                     <span>{{$settings['left_feed_name'] or ""}}</span>
                     <div class="thumbs-container bottom">
-                        <div id="prev-btn" class="prev">
-                            <i class="fa fa-chevron-left fa-1x"></i>
-                        </div>
                         <div class="thumb_wrapper">
-                            <ul class="thumbs">
+                            <div class="left_slide">
                                 <?php $i = 0; ?>
                                 @foreach($top_slider_feed as $feed)
 
                                 @if($feed['side'] == 'left')
-                                    <?php $i++; ?>
-                                    <li onclick="loadFilters({{$feed['fk_id']}},'{{$feed['type']}}')" data-thumb-id="<?php echo $i ?>" class="thumb <?php if($i) echo 'active' ?>" style="background-image: url('/storage/{{$feed['icon']}}')">
-                                        <span>{{$feed['title']}}</span>
-                                    </li>
+                                <?php $i++; ?>
+                                <div class="slick-tile">
+                                    <div class="slider-image" onclick="loadFilters({{$feed['fk_id']}},'{{$feed['type']}}')" data-thumb-id="<?php echo $i ?>" class="thumb <?php if($i) echo 'active' ?>" style="background-image: url('{{ Imgfly::imgFly('../public/'.$feed['icon'].'?w=35' ) }}')">
+
+                                    </div>
+                                    <div class="slider-title">{{$feed['title']}}</div>
+                                </div>
                                 @endif
                                 @endforeach
-                            </ul>
-                        </div>
-                        <div id="next-btn" class="next">
-                            <i class="fa fa-chevron-right fa-1x"></i>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -192,25 +189,22 @@
                 <div class="right_feed slideshow right-feed-custom">
                     <span>{{$settings['right_feed_name'] or ""}}</span>
                     <div class="thumbs-container bottom">
-                        <div id="prev-btn" class="prev">
-                            <i class="fa fa-chevron-left fa-1x"></i>
-                        </div>
                         <div class="thumb_wrapper">
-                            <ul class="thumbs">
+                            <div class="right_slide">
                                 <?php $i = 0; ?>
                                 @foreach($top_slider_feed as $feed)
 
                                 @if($feed['side'] == 'right')
                                 <?php $i++; ?>
-                                <li onclick="loadFilters({{$feed['fk_id']}},'{{$feed['type']}}')" data-thumb-id="<?php echo $i ?>" class="thumb <?php if($i) echo 'active' ?>" style="background-image: url('/storage/{{$feed['icon']}}')">
-                                    <span>{{$feed['title']}}</span>
-                                </li>
+                                <div class="slick-tile">
+                                    <div class="slider-image" onclick="loadFilters({{$feed['fk_id']}},'{{$feed['type']}}')" data-thumb-id="<?php echo $i ?>" class="thumb <?php if($i) echo 'active' ?>" style="background-image: url('{{ Imgfly::imgFly('../public/'.$feed['icon'].'?w=35' ) }}')">
+
+                                    </div>
+                                    <div class="slider-title">{{$feed['title']}}</div>
+                                </div>
                                 @endif
                                 @endforeach
-                            </ul>
-                        </div>
-                        <div id="next-btn" class="next">
-                            <i class="fa fa-chevron-right fa-1x"></i>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -343,6 +337,9 @@
         </div>
     </div>
 </header>
+
+
+
 
 
 <style>

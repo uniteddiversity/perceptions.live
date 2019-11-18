@@ -4859,7 +4859,7 @@ nav.two .header-notification .profile-notification li {
     float: left;
     width: 140px;
     overflow: hidden;
-    height: 30px;
+    /*height: 30px;*/
 }
 
 .topsearch .right_feed {
