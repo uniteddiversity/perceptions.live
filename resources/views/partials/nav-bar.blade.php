@@ -158,27 +158,25 @@
 
             <div class="site_slider_feed">
                 @if(isset($top_slider_feed))
-                <div class="left_feed slideshow">
+                <div class="left_feed slideshow left-feed-custom">
                     <span>{{$settings['left_feed_name'] or ""}}</span>
                     <div class="thumbs-container bottom">
-                        <div id="prev-btn" class="prev">
-                            <i class="fa fa-chevron-left fa-1x"></i>
-                        </div>
+                        <div class="thumb_wrapper">
+                            <div class="left_slide">
+                                <?php $i = 0; ?>
+                                @foreach($top_slider_feed as $feed)
 
-                        <ul class="thumbs">
-                            <?php $i = 0; ?>
-                            @foreach($top_slider_feed as $feed)
-                            <?php $i++; ?>
-                            @if($feed['side'] == 'left')
-                            <li onclick="loadFilters({{$feed['fk_id']}},'{{$feed['type']}}')" data-thumb-id="<?php echo $i ?>" class="thumb active" style="background-image: url('/storage/{{$feed['icon']}}')">
-                                <span>{{$feed['title']}}</span>
-                            </li>
-                            @endif
-                            @endforeach
-                        </ul>
+                                @if($feed['side'] == 'left')
+                                <?php $i++; ?>
+                                <div class="slick-tile">
+                                    <div class="slider-image" onclick="loadFilters({{$feed['fk_id']}},'{{$feed['type']}}')" data-thumb-id="<?php echo $i ?>" class="thumb <?php if($i) echo 'active' ?>" style="background-image: url('{{ Imgfly::imgFly('../public/'.$feed['icon'].'?w=35' ) }}')">
 
-                        <div id="next-btn" class="next">
-                            <i class="fa fa-chevron-right fa-1x"></i>
+                                    </div>
+                                    <div class="slider-title">{{$feed['title']}}</div>
+                                </div>
+                                @endif
+                                @endforeach
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -188,26 +186,25 @@
                     <p>Nearby Me</p>
                 </div>
 
-                <div class="right_feed slideshow">
+                <div class="right_feed slideshow right-feed-custom">
                     <span>{{$settings['right_feed_name'] or ""}}</span>
                     <div class="thumbs-container bottom">
-                        <div id="prev-btn" class="prev">
-                            <i class="fa fa-chevron-left fa-1x"></i>
-                        </div>
+                        <div class="thumb_wrapper">
+                            <div class="right_slide">
+                                <?php $i = 0; ?>
+                                @foreach($top_slider_feed as $feed)
 
-                        <ul class="thumbs">
+                                @if($feed['side'] == 'right')
+                                <?php $i++; ?>
+                                <div class="slick-tile">
+                                    <div class="slider-image" onclick="loadFilters({{$feed['fk_id']}},'{{$feed['type']}}')" data-thumb-id="<?php echo $i ?>" class="thumb <?php if($i) echo 'active' ?>" style="background-image: url('{{ Imgfly::imgFly('../public/'.$feed['icon'].'?w=35' ) }}')">
 
-                            <?php $i = 0; ?>
-                            @foreach($top_slider_feed as $feed)
-                            <?php $i++; ?>
-                            @if($feed['side'] == 'right')
-                            <li onclick="loadFilters({{$feed['fk_id']}},'{{$feed['type']}}')" data-thumb-id="<?php echo $i ?>" class="thumb active" style="background-image: url('/storage/{{$feed['icon']}}')"></li>
-                            @endif
-                            @endforeach
-                        </ul>
-
-                        <div id="next-btn" class="next">
-                            <i class="fa fa-chevron-right fa-1x"></i>
+                                    </div>
+                                    <div class="slider-title">{{$feed['title']}}</div>
+                                </div>
+                                @endif
+                                @endforeach
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -340,6 +337,9 @@
         </div>
     </div>
 </header>
+
+
+
 
 
 <style>

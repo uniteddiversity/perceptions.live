@@ -59,8 +59,9 @@
     <script src="/assets/js/jquery-2.1.4.min.js"></script>
     {{--<link rel="stylesheet" href="/assets/css/app.css">--}}
 
+<!--    <link rel="stylesheet" href="/assets/css/thumbnail_slider.css">-->
     <link rel="stylesheet" href="/assets/css/thumbnail_slider.css">
-
+    <link rel="stylesheet" href="/assets/js/slick_slider/slick.css">
 
 </head>
 
@@ -204,6 +205,8 @@
 
     <script src="/assets/js/datatable/datatables.min.js"></script>
     <script src="/assets/juery-confirm/jquery-confirm.js"></script>
+<!--    <script src="/assets/js/thumbnail_slider.js"></script>-->
+    <script src="/assets/js/slick_slider/slick.js"></script>
     <script src="/assets/js/thumbnail_slider.js"></script>
     <script src="/assets/js/home-common.js"></script>
 
