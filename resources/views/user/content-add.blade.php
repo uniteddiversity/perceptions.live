@@ -113,7 +113,7 @@
                             <div class="step" id="st1">
                                 <!-- top text -->
                                 <div class="text_top">
-                                    <span><i class="far fa-file-video"></i><b>2</b></span>
+                                    <span><i class="far fa-file-video"></i><b>1</b></span>
                                     <h4>Media Info</h4>
                                     <p>In this section, please fill in the basic details about your PRCPTION submission.</p>
                                 </div>
@@ -157,7 +157,7 @@
                             <div class="step hidden" id="st2">
                                 <!-- top text -->
                                 <div class="text_top">
-                                    <span><i class="fas fa-video"></i><b>3</b></span>
+                                    <span><i class="fas fa-video"></i><b>2</b></span>
                                     <h4>Your <b>PRCPTION's</b> Media</h4>
                                     <p>Before we begin: is this media online already? Or do you need to be connected with an editor?</p>
                                 </div>
