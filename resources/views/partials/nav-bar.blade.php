@@ -181,8 +181,8 @@
                     </div>
                 </div>
 
-                <div class="near_me_icon">
-                    <i class="map_center_icon"></i>
+                <div class="near_me_icon2">
+                    <a class="leaflet-bar-part2 leaflet-bar-part-single2" title="Show me where I am" style="outline: none;"><span class="custom2"></span></a>
                     <p>Nearby Me</p>
                 </div>
 

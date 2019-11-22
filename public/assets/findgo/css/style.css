@@ -623,7 +623,6 @@ button {
     border-radius: 50%;
 
     color: transparent;
-    cursor: pointer;
     display: block;
     font-size: 0;
     height: 40px;
@@ -644,18 +643,6 @@ button {
     left: 50%;
 }
 
-.slick-prev:hover:before,
-.slick-prev:focus:before,
-.slick-next:hover:before,
-.slick-next:focus:before {
-    opacity: 1;
-}
-
-.slick-prev.slick-disabled:before,
-.slick-next.slick-disabled:before {
-    opacity: .25;
-}
-
 .slick-prev::before,
 .slick-next::before {
     color: #fb3640;
@@ -671,23 +658,7 @@ button {
     margin-top: -10px;
 }
 
-.slick-prev {
-    left: 50%;
-    margin-left: -55px;
-}
 
-[dir='rtl'] .slick-prev {
-    right: -25px;
-    left: auto;
-}
-
-.slick-prev::before {
-    content: "\f104";
-}
-
-[dir='rtl'] .slick-prev:before {
-    content: '\f104’';
-}
 
 .slick-next {
     margin-right: -55px;
@@ -700,13 +671,8 @@ button {
     left: -25px;
 }
 
-.slick-next:before {
-    content: '\f105';
-}
 
-[dir='rtl'] .slick-next:before {
-    content: '\f105';
-}
+
 
 .slick-slider {
     position: relative;
@@ -2910,12 +2876,12 @@ header.s2 {
 
 .slick-prev:hover,
 .slick-next:hover {
-    background: #b3b4b4;
+    background: #13054D;
 }
 
 .slick-prev:hover:before,
 .slick-next:hover:before {
-    color: #ffffff;
+    color: #13054D;
 }
 
 .howwork.cc i {

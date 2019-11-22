@@ -5074,6 +5074,7 @@ header.s4.dark #slider_feed .near_me_icon {position: absolute;right: 50%;margin-
 .uploadBtnWrap.participate {position:  fixed;width: 110px;height: 100px !important;background: #0e1281 url(/assets/img/upload.svg) no-repeat center center / 90px;border-radius: 10px;}
 .uploadBtnWrap.participate i {display: none;}
 .half-map .map .leaflet-control-locate .leaflet-bar-part-single .custom {width: 24px;height: 24px;margin-top: 3px;content: url(/assets/img/locator.png);}
+.half-map2 .map2 .leaflet-control-locate2 .leaflet-bar-part-single2 .custom2 {width: 48px;height: 48px;content: url(/assets/img/new-pin.png);}
 .mlfilter-sec .mltitle .closefilter {color: #fff;}
 .advanceSearchOpen .arrowWrapper .arrowright {display: none;} 
 .advanceSearchOpen .uploadBtnWrap.participate {display: none !important;} 
@@ -5123,7 +5124,7 @@ header.s4.dark #slider_feed .right_feed {
     padding-left: 35px;
 }
 
-header.s4.dark #slider_feed .near_me_icon {
+header.s4.dark #slider_feed .near_me_icon2 {
     position: absolute;
     right: 50%;
     margin-right: -40px;
@@ -5540,7 +5541,7 @@ header.s4.dark #slider_feed .right_feed.slideshow .bottom {
     float: left;
 }
 
-header.s4.dark #slider_feed .near_me_icon {
+header.s4.dark #slider_feed .near_me_icon2 {
     position: relative;
     top: auto;
     right: auto;
@@ -5552,10 +5553,10 @@ header.s4.dark #slider_feed .near_me_icon {
     background-position: top center;
 }
 
-header.s4.dark #slider_feed .near_me_icon p {
+header.s4.dark #slider_feed .near_me_icon2 p {
     font-size: 13px;
     font-weight: bold;
-    color: #4214c7;
+    color: #fff;
     padding-top: 70px;
     width: 100%;
     text-align: center;

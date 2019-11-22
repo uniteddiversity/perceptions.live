@@ -74,6 +74,16 @@
     visibility: hidden;
 }
 
+.slick-prev:before, .slick-next:before {
+    font-family: FontAwesome; font-size: 20px; line-height: 1; color: #4214c7; opacity: 0.75; -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; }
+
+.slick-prev:before { content: "\f137"; }
+[dir="rtl"] .slick-prev:before { content: "\f137"; }
+
+[dir="rtl"] .slick-next { left: -10px; top: 70px; right: auto; }
+.slick-next:before { content: "\f138"; }
+[dir="rtl"] .slick-next:before { content: "\f138"; }
+
 .slick-slide
 {
     display: none;
