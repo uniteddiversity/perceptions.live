@@ -39,24 +39,42 @@ if (typeof (L) != "undefined") {
     L.control
         .locate({
             locateOptions: {
-                maxZoom: 5,
+                maxZoom: 9,
                 enableHighAccuracy: true
             },
             flyTo: true,
             returnToPrevBounds: true,
             showCompass: false,
             drawCircle: false,
-            drawMarker: false,
+            drawMarker: true,
             icon: 'custom'
         })
         .addTo(map);
 
+
     L.tileLayer('https://stamen-tiles-{s}.a.ssl.fastly.net/watercolor/{z}/{x}/{y}.{ext}', {
-        attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>',
+        attribution: 'Map tiles by <a href="http://stamen.com">Stamen Design</a>, <a href="http://creativecommons.org/licenses/by/3.0">CC BY 3.0</a> &mdash; Map data &copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
         subdomains: ['a', 'b', 'c'],
         ext: 'png'
     }).addTo(map);
 
+
+    /*
+    GEOLOCATE OUTSIDE OF MAP
+     */
+
+
+// request location update and set location
+    lc.start();
+
+    var lc = L.control.locate().addTo(map);
+    L.DomEvent.on( document.getElementById('headergeolocate'), 'click', lc.start );
+
+
+
+ //   L.control.attribution({
+ //       position: 'topleft'
+ //   }).addTo(map);
 
     myURL = '';
     var markerClusters = L.markerClusterGroup({

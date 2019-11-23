@@ -144,7 +144,7 @@
 
         <div class="topsearch">
             <div class="rfield">
-                <input type="text" placeholder="Search" name="search_text" id="search_text" />
+                <input type="text" placeholder="Quick Search" name="search_text" id="search_text" />
                 <i class="fas fa-search" style="cursor:pointer" onclick="searchVideo()"></i>
             </div>
         </div>
@@ -181,10 +181,11 @@
                     </div>
                 </div>
 
-                <div class="near_me_icon2">
-                    <a class="leaflet-bar-part2 leaflet-bar-part-single2" title="Show me where I am" style="outline: none;"><span class="custom2"></span></a>
-                    <p>Nearby Me</p>
+                <div class="near_me_icon">
+                   <a href="#" id="headergeolocate"><i class="map_center_icon"></i></a>
+                    <p><a href="#" id="headergeolocate">Nearby Me</a></p>
                 </div>
+
 
                 <div class="right_feed slideshow right-feed-custom">
                     <span>{{$settings['right_feed_name'] or ""}}</span>
@@ -243,7 +244,7 @@
                         <li>
                             <!--  include search -->
                             <a class="mobile-search morphsearch-search" href="#">
-                                <i class="fas fa-search"></i> Search
+                                <i class="fas fa-search"></i> Quick Search
                             </a>
                         </li>
                         <li>
@@ -330,7 +331,7 @@
                         <a class="mobile-search morphsearch-search" href="#">
                             <i class="fas fa-search"></i>
                         </a>
-                        <p>Search</p>
+                        <p>Quick Search</p>
                     </li>
                 </ul>
             </div>

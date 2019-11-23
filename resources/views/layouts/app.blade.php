@@ -300,7 +300,7 @@
 
         /* Adding margins on zoom controls */
         .leaflet-top {
-            top: 90px;
+            top: 80%;
         }
 
         /* Adding Target icon */
