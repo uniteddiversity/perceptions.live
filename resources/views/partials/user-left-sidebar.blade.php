@@ -17,14 +17,14 @@
             <li class="pcoded-hasmenu <?php if(in_array(Request::segment(3), array('content-add','content-list-open','content-list','location-list','sorting-tag-add'))){ echo 'active pcoded-trigger'; } ?> pcoded-trigger">
                 <a href="javascript:void(0)">
                     <span class="pcoded-micon"><i class="fas fa-video"></i></span>
-                    <span class="pcoded-mtext" data-i18n="nav.dash.main">Your Videos</span>
+                    <span class="pcoded-mtext" data-i18n="nav.dash.main">Videos</span>
                     <span class="pcoded-mcaret"><i class="fas fa-sort-down"></i></span>
                 </a>
                 <ul class="pcoded-submenu">
                     <li class="<?php if(in_array(Request::segment(3), array('content-add'))){ echo 'active'; } ?>">
                         <a class="nav-link" href="/user/content-add">
                             <span class="pcoded-micon"> <i class="fas fa-long-arrow-alt-right"></i></span>
-                            <span class="pcoded-mtext" data-i18n="nav.dash.default"><i class="fas fa-plus" style="margin-right:10px;"></i>Add Video</span>
+                            <span class="pcoded-mtext" data-i18n="nav.dash.default"><i class="fas fa-plus" style="margin-right:10px;"></i>Submit PRCPTION (Video)</span>
                             <span class="pcoded-mcaret"></span>
 
                         </a>
@@ -35,7 +35,7 @@
             <li class="<?php if(in_array(Request::segment(3), array('list-profile-claim-request'))){ echo 'active'; } ?>">
                 <a class="nav-link" href="/user/user/list-profile-claim-request">
                     <span class="pcoded-micon"><i class="far fa-user-circle"></i></span>
-                    <span class="pcoded-mtext" data-i18n="nav.dash.default">My Claim Request's</span>
+                    <span class="pcoded-mtext" data-i18n="nav.dash.default">My Claim Profile Request</span>
                     <span class="pcoded-mcaret"></span>
                 </a>
             </li>
@@ -46,21 +46,22 @@
                     <span class="pcoded-mtext" data-i18n="nav.page_layout.main">Groups</span>
                     <span class="pcoded-mcaret"><i class="fas fa-sort-down"></i></span>
                 </a>
+            <li class="nav-item <?php if(in_array(Request::segment(3), array('user-group-add'))){ echo 'active'; } ?>">
+                <a class="nav-link" href="/user/user-group-add">
+                    <span class="pcoded-micon"><i class="ti-angle-right"></i></span>
+                    <span class="pcoded-mtext" data-i18n="nav.dash.default">Create Group</span>
+                    <span class="pcoded-mcaret"></span>
+                </a>
+            </li>
                 <ul class="pcoded-submenu">
                     <li class="nav-item <?php if(in_array(Request::segment(3), array('group-list'))){ echo 'active'; } ?>">
                         <a class="nav-link" href="/user/group-list">
                             <span class="pcoded-micon"><i class="ti-angle-right"></i></span>
-                            <span class="pcoded-mtext" data-i18n="nav.dash.default">All Groups</span>
+                            <span class="pcoded-mtext" data-i18n="nav.dash.default">My Groups</span>
                             <span class="pcoded-mcaret"></span>
                         </a>
                     </li>
-                    <li class="nav-item <?php if(in_array(Request::segment(3), array('user-group-add'))){ echo 'active'; } ?>">
-                        <a class="nav-link" href="/user/user-group-add">
-                            <span class="pcoded-micon"><i class="ti-angle-right"></i></span>
-                            <span class="pcoded-mtext" data-i18n="nav.dash.default">Create Group</span>
-                            <span class="pcoded-mcaret"></span>
-                        </a>
-                    </li>
+
                 </ul>
             </li>
         </ul>

@@ -25,9 +25,9 @@
               <div class="submitprcption">
                     <h4 class="card-title" style="margin-bottom: 10px; text-align: center;">Account and Profile Settings</h4>
                     <div class="pagedesc" align="center">
-                        <p>The information here will be the data that will [eventually] connect you to connections and collaborations around the world. Have fun with it and keep it as accurate as possible! :) </p>
-						<p><em>Should you encounter any errors we encourage you to <a href="https://perceptiontravel.tv/community-feedback">let us know</a>. Thanks!</em></p>
-                <div class="table-responsive">
+                        <p>The information here will be the data that will [eventually] connect you to connections and collaborations around the world. Have fun and please keep it as accurate as possible! :) </p>
+						<p><em>Should you encounter any errors we encourage you to <a href="/contact-us">let us know</a>. Thanks!</em></p>
+                    <div class="table-responsive">
                     @if ($errors->any())
                         <div class="alert alert-danger">
                             <ul>

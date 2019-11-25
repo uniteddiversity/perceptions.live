@@ -86,6 +86,8 @@
                         </ul>
                     </div>
 
+                <div class="pagedesc col-lg-9">
+
                     <div class="table-responsive">
 
                         @if ($errors->any())
@@ -491,6 +493,36 @@
                     </div>
                     <!-- btns -->
                 </div>
+
+
+                <!-- step -->
+                <div class="step hidden" id="st6">
+                    <!-- top text -->
+                    <div class="text_top">
+                        <span><i class="fas fa-thumbs-up"></i><b>6</b></span>
+                        <h4>Finished!</h4>
+                    </div>
+                    <!-- top text -->
+                    <div class="row">
+                        <div>
+                            <p>
+                                <b style="color:#4214c7;">Thank you for your submission! :)</b>
+                                <br /><br />
+                                Someone will get in touch with you shortly.
+                            </p>
+                        </div>
+                    </div>
+
+
+                    <!-- btns -->
+                    <div class="btn_outer" style="text-align:center;">
+                        <a href="#" class="btn click" style="float:none; margin:0 auto;">Start another Submission</a>
+                        <!-- submit button //hidden for DEMO ONLY -->
+                        <button type="button" onclick="submit_content()" class="btn dark" rel="st4" style="display:none;">Finish</button>
+                    </div>
+                    <!-- btns -->
+                </div>
+                <!-- step -->
                 </form>
             </div>
         </div>
@@ -634,6 +666,18 @@
         $('.step' + '#' + num).removeClass("hidden");
         $('.breadcrumbs ul li').removeClass("active");
         $('.breadcrumbs ul li' + '#' + num).addClass("active");
+        $('.card .box.purple .b').addClass("hidden");
+        $('.card .box.purple .b' + '#' + num).removeClass("hidden");
+        e.preventDefault();
+    });
+
+    $('.table-responsive .btn_outer .btn.next').on('click', function(e) {
+        $(this).parent().parent().toggleClass("hidden"); //you can list several class names
+        var num = $(this).attr('rel');
+        $('.step' + '#' + num).removeClass("hidden");
+        $('.breadcrumbs ul li' + '#' + num).addClass("active");
+        $('.card .box.purple .b').addClass("hidden");
+        $('.card .box.purple .b' + '#' + num).removeClass("hidden");
         e.preventDefault();
     });
     $('.table-responsive .btn_outer button').on('click', function(e) {
@@ -642,6 +686,11 @@
         $('.step' + '#' + num).removeClass("hidden");
         $('.breadcrumbs ul li').removeClass("active");
         $('.breadcrumbs ul li' + '#' + num).addClass("active");
+        e.preventDefault();
+    });
+
+    $('.step .row .package.movie').on('click', function(e) {
+        $(this).parent().parent().addClass("hidden"); //you can list several class names
         e.preventDefault();
     });
 
