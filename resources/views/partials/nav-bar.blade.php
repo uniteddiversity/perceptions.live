@@ -182,8 +182,8 @@
                 </div>
 
                 <div class="near_me_icon">
-                   <a href="#" id="headergeolocate"><i class="map_center_icon"></i></a>
-                    <p><a href="#" id="headergeolocate">Nearby Me</a></p>
+                   <a href="#"><i class="map_center_icon"></i></a>
+                    <p><a href="#">Nearby Me</a></p>
                 </div>
 
 

@@ -59,23 +59,6 @@ if (typeof (L) != "undefined") {
     }).addTo(map);
 
 
-    /*
-    GEOLOCATE OUTSIDE OF MAP
-     */
-
-
-// request location update and set location
-    lc.start();
-
-    var lc = L.control.locate().addTo(map);
-    L.DomEvent.on( document.getElementById('headergeolocate'), 'click', lc.start );
-
-
-
- //   L.control.attribution({
- //       position: 'topleft'
- //   }).addTo(map);
-
     myURL = '';
     var markerClusters = L.markerClusterGroup({
         showCoverageOnHover: false,
