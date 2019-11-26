@@ -5452,7 +5452,8 @@ header.s4.dark #slider_feed .near_me_icon {
 /** Header Fixing **/
 
 header.s4.dark {
-    height: 150px;
+    /*height: 150px;*/
+    height: 75px;
     background: none;
     box-shadow: none;
     padding-bottom: 0;
