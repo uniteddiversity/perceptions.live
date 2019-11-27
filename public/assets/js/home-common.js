@@ -85,7 +85,7 @@ function advance_search(){
 }
 
 function loadFilters(id, type){
-    console.log('id and cat ',id, type)
+    // console.log('id and cat ',id, type)
     let $search_cat = '';
     let $gci = '';
     let $group_id = '';

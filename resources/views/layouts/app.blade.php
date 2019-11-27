@@ -60,8 +60,8 @@
     {{--<link rel="stylesheet" href="/assets/css/app.css">--}}
 
 <!--    <link rel="stylesheet" href="/assets/css/thumbnail_slider.css">-->
-    <link rel="stylesheet" href="/assets/css/thumbnail_slider.css">
-    <link rel="stylesheet" href="/assets/js/slick_slider/slick.css">
+<link rel="stylesheet" href="/assets/js/slick_slider/slick.css">
+<link rel="stylesheet" href="/assets/css/thumbnail_slider.css">
 
 </head>
 

@@ -122,7 +122,7 @@ function updateMarkers(markers) {
         m.on('click', onMarkerClick);
         markerClusters.addLayer(m);
         all_b.push(m);
-        console.log(markers[i]);
+        // console.log(markers[i]);
     }
 
     let group = new L.featureGroup(all_b);
@@ -303,12 +303,12 @@ function searchVideo() {
 
     $.get("/home/ajax/video-search/?keyword=" + $search_text + "&category_id=" + $search_cat
         + "&video_id=" + $video_id, function (data) {
-            console.log(data.json.original);
+            // console.log(data.json.original);
             if (data.content == '')
                 $('#video_search_res').html('No result!');
             showed_markers = data.json.original;
             updateMarkers(data.json.original);
-            console.log(data.content);
+            // console.log(data.content);
             $('#video_search_res').html(decode(data.content));
 
         });

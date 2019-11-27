@@ -134,224 +134,93 @@
         </div>
     </div>
 </div>
-<header class="s4 dark">
-
-    <div class="container fluid">
-
-        <a href="#" onclick="resetSearch()" id="logo_overlay">
-            <img src="/assets/findgo/images/live-perceptions-logo.png" width="600" height="122" style="display:none;">
+<header class="new-header">
+  <div class="header-content">
+    <div class="top-bar">
+      <div class="top-bar__left">
+        <a href="/" class="navbar-logo" onclick="resetSearch()">
+          <img src="/assets/findgo/images/live-perceptions-logo.png" alt="">
         </a>
-
-        <div class="topsearch">
-            <div class="rfield">
-                <input type="text" placeholder="Quick Search" name="search_text" id="search_text" />
-                <i class="fas fa-search" style="cursor:pointer" onclick="searchVideo()"></i>
-            </div>
+        <div class="search-box">
+          <div class="search-box-content">
+            <input type="text" placeholder="Quick Search" name="search_text" id="search_text" />
+            <button class="btn-search"><i class="fas fa-search"></i></button>
+          </div>
         </div>
-
-
-        <div class="topsearch" id="slider_feed">
-            <div class="site_mid_title">
-                <h5>{{$settings['home_centered_title'] or ""}}</h5>
-            </div>
-
-
-            <div class="site_slider_feed">
-                @if(isset($top_slider_feed))
-                <div class="left_feed slideshow left-feed-custom">
-                    <span>{{$settings['left_feed_name'] or ""}}</span>
-                    <div class="thumbs-container bottom">
-                        <div class="thumb_wrapper">
-                            <div class="left_slide">
-                                <?php $i = 0; ?>
-                                @foreach($top_slider_feed as $feed)
-
-                                @if($feed['side'] == 'left')
-                                <?php $i++; ?>
-                                <div class="slick-tile">
-                                    <div class="slider-image" onclick="loadFilters({{$feed['fk_id']}},'{{$feed['type']}}')" data-thumb-id="<?php echo $i ?>" class="thumb <?php if($i) echo 'active' ?>" style="background-image: url('{{ Imgfly::imgFly('../public/'.$feed['icon'].'?w=35' ) }}')">
-
-                                    </div>
-                                    <div class="slider-title">{{$feed['title']}}</div>
-                                </div>
-                                @endif
-                                @endforeach
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="near_me_icon">
-                   <a href="#"><i class="map_center_icon"></i></a>
-                    <p><a href="#">Nearby Me</a></p>
-                </div>
-
-
-                <div class="right_feed slideshow right-feed-custom">
-                    <span>{{$settings['right_feed_name'] or ""}}</span>
-                    <div class="thumbs-container bottom">
-                        <div class="thumb_wrapper">
-                            <div class="right_slide">
-                                <?php $i = 0; ?>
-                                @foreach($top_slider_feed as $feed)
-
-                                @if($feed['side'] == 'right')
-                                <?php $i++; ?>
-                                <div class="slick-tile">
-                                    <div class="slider-image" onclick="loadFilters({{$feed['fk_id']}},'{{$feed['type']}}')" data-thumb-id="<?php echo $i ?>" class="thumb <?php if($i) echo 'active' ?>" style="background-image: url('{{ Imgfly::imgFly('../public/'.$feed['icon'].'?w=35' ) }}')">
-
-                                    </div>
-                                    <div class="slider-title">{{$feed['title']}}</div>
-                                </div>
-                                @endif
-                                @endforeach
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-
-                @endif
-            </div>
-        </div>
-
-        @if (Route::has('login'))
-
-        @auth
-
-        <div class="extras two">
-            <a class="submitprcp" data-toggle="modal" data-target="/user/admin/user-group-add">
-                <i class="fas fa-users"></i>
-                Create community</a>
-            <a class="submitprcp" href="/user/content-add" title="" style="display:none;">
-                <i class="fas fa-video"></i>
-                Submit PRCPTION</a>
-        </div>
-
-        <nav class="two">
-            <ul>
-                <li class="user-profile header-notification">
-                    <a href="#!">
-                        <span class="uimg" style="display:block;">
-                            <img src="<?php if(isset($user_img[0])){ echo '/storage/'.$user_img[0]->url; }else{ ?>/assets/img/face1.png<?php } ?>" alt="profile image">
-                        </span>
-
-                        <span>
-                            <?php echo Auth::user()->display_name ?></span>
-                        <i class="fas fa-sort-down"></i>
-                    </a>
-                    <ul class="show-notification profile-notification">
-                        <li>
-                            <!--  include search -->
-                            <a class="mobile-search morphsearch-search" href="#">
-                                <i class="fas fa-search"></i> Quick Search
-                            </a>
-                        </li>
-                        <li>
-                            <a href="/user/user-profile">
-                                <i class="fas fa-user-cog"></i>
-                                Control Panel
-                            </a>
-                        </li>
-                        <li>
-                            <a href="/user/group-admin/content-list">
-                                <i class="fas fa-video"></i>
-                                My Videos
-                            </a>
-                        </li>
-                        <li><a href="/claim-profile" target="_blank">
-                                <i class="fas fa-user-circle"></i>
-                                Claim A Profile</a></li>
-                        <li>
-                            <a href="/user/logout">
-                                <i class="fas fa-sign-out-alt"></i> Logout {{Auth::user()->first_name}}
-                            </a>
-                        </li>
-                    </ul>
-                </li>
-            </ul>
-        </nav>
-
-        @else
-        <nav class="two" style="right:161px;">
-            <ul>
-                <li><a href="/claim-profile" target="_blank">
-                        <i class="fas fa-user-circle"></i>
-                        Claim A Profile</a></li>
-                <li>
-            </ul>
-        </nav>
-
-        <div class="extras">
-            <span class="accountbtn">
-                <i class="flaticon-avatar"></i>
-                Sign Up/Log In
-            </span>
-        </div>
-
-        @endif
-        @endif
-
-        <div class="logo">
-            <?php /*           <a href="#" title=""><img src="/assets/findgo/images/horizontal-white.png" height="40" width="175" alt="" /></a> */ ?>
-        </div>
-
-
-        <nav>
-            <ul>
-                @if (Route::has('login'))
-                @auth
-                <li style="display:none;">
-                    <a href="/user/logout">
-
-                        <i class="fas fa-sign-out-alt"></i> Logout {{Auth::user()->first_name}}
-                    </a>
-                </li>
-                @else
-
-                @endauth
-                <li style="display:none;"><a href="/claim-profile" target="_blank">
-                        <i class="fas fa-user-circle"></i>
-                        Claim A Profile</a></li>
-                <li style="display:none;"><a data-toggle="modal" data-target="/user/admin/user-group-add">
-                        <i class="fas fa-users"></i>
-                        Create community</a></li>
-                @endif
-            </ul>
-
-        </nav>
-
-
-        <div class="navbar-container container-fluid" style="padding-right:0; display:none;">
-            <div>
-                <ul class="nav-right">
-
-                    <li style="display:none;">
-                        <!--  include search -->
-                        <a class="mobile-search morphsearch-search" href="#">
-                            <i class="fas fa-search"></i>
-                        </a>
-                        <p>Quick Search</p>
-                    </li>
-                </ul>
-            </div>
-        </div>
+      </div>
+      <h5 class="header-title">"{{$settings['home_centered_title'] or ""}}"</h5>
+      <div class="top-bar__right">
+        <a class="btn-create-community" data-toggle="modal" data-target="/user/admin/user-group-add">
+          <i class="fas fa-users"></i>
+          Create Community
+        </a>
+        <button class="btn-sign-up">Sign Up / Log In</button>
+      </div>
     </div>
+  </div>
+  <div class="header-toolbar">
+    <div class="header-toolbar__content">
+      <div class="header-toolbar__left header-slider">
+        <p class="slider-title">{{$settings['left_feed_name'] or ""}}</p>
+        <div class="thumbs-container bottom">
+          <div class="thumb_wrapper">
+            <div class="left_slide">
+              <?php $i = 0; ?>
+              @foreach($top_slider_feed as $feed)
+              @if($feed['side'] == 'left')
+              <?php $i++; ?>
+              <div class="slick-tile">
+                <div onclick="loadFilters({{$feed['fk_id']}},'{{$feed['type']}}')" data-thumb-id="<?php echo $i ?>" 
+                    class="slider-image thumb <?php if($i) echo 'active' ?>" 
+                    style="background-image: url('{{ Imgfly::imgFly('../public/'.$feed['icon'].'?w=35' ) }}')">
+                </div>
+                <div class="slider-text">{{$feed['title']}}</div>
+              </div>
+              @endif
+              @endforeach
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="header-toolbar__center">
+        <a class="btn-near-me">
+          <img src="/assets/img/map_center_icon.svg" alt="">
+          <span>Near by Me</span>
+        </a>
+      </div>
+      <div class="header-toolbar__right header-slider">
+        <p class="slider-title">{{$settings['right_feed_name'] or ""}}</p>
+        <div class="thumbs-container bottom">
+          <div class="thumb_wrapper">
+            <div class="right_slide">
+                <?php $i = 0; ?>
+                @foreach($top_slider_feed as $feed)
+                @if($feed['side'] == 'right')
+                <?php $i++; ?>
+                <div class="slick-tile">
+                    <div class="slider-image" onclick="loadFilters({{$feed['fk_id']}},'{{$feed['type']}}')" data-thumb-id="<?php echo $i ?>" class="thumb <?php if($i) echo 'active' ?>" style="background-image: url('{{ Imgfly::imgFly('../public/'.$feed['icon'].'?w=35' ) }}')">
+                    </div>
+                    <div class="slider-text">{{$feed['title']}}</div>
+                </div>
+                @endif
+                @endforeach
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 </header>
 
-
-
-
-
 <style>
-    #logo_overlay {
-        position: absolute;
-        display: block;
-        width: 40%;
-        margin-left: 6%;
-        background-color: #transparent;
-        z-index: 50;
-    }
+  #logo_overlay {
+    position: absolute;
+    display: block;
+    width: 40%;
+    margin-left: 6%;
+    background-color: #transparent;
+    z-index: 50;
+  }
 
 </style>
 
