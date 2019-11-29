@@ -351,4 +351,24 @@ $(document).ready(function(){
             }
         ]
     });
+
+    $('.mobile_slide').slick({
+        dots: false,
+        arrows: true,
+        speed: 300,
+        infinite: true,
+        autoplay: true, 
+        autoplaySpeed: 2000,
+        slidesToShow: 2,
+        slidesToScroll: 1,
+        responsive: [
+            {
+                breakpoint: 400,
+                settings: {
+                    slidesToShow: 1,
+                    slidesToScroll: 1,
+                }
+            }
+        ]
+    })
 });
