@@ -162,3 +162,8 @@ function collapseComments($id, obj){
     }
     console.log('collopsing', $id)
 }
+
+// Toggle Search bar when click search icon in header
+function toggleSearchbar() {
+    $('.new-header .search-box-content').toggleClass('active');
+}
