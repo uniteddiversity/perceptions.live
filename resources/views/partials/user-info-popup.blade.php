@@ -8,7 +8,6 @@ $display = ($user_status == 'private' || $user_status == 'only-logged')? false :
     <div class="modal-body">
         <div style="display: block; width:100%; text-align: left;">
             <div class="user_info">
-                <div style="float:left;">
                     <div class="user_img">
                         <span>
                             <img height="150" width="150" class="avatar profile_img_mini" src="<?php if(isset($info['image'][0])){ echo '/storage/'.$info['image'][0]->url; }else{ ?>/assets/img/face1.png<?php } ?>" alt="profile image">
@@ -72,7 +71,6 @@ $display = ($user_status == 'private' || $user_status == 'only-logged')? false :
                         <a class="btn white" href="/claim-profile" target="_blank">Claim this Profile</a>
                         <?php } ?>
                     </div>
-                </div>
             </div>
         </div>
     </div>
@@ -80,8 +78,8 @@ $display = ($user_status == 'private' || $user_status == 'only-logged')? false :
 
     <?php if($display){ ?>
     <div class="video_section row">
-        <div class="video_inner col-9">
-            <div style="display: block; width:100%; float: left; text-align: center; padding-top:15px;padding-bottom:10px;">
+        <div class="video_inner col-lg-9">
+            <div style="display: block; width:100%;  text-align: center; padding-top:15px;padding-bottom:10px;">
                 <span style="text-transform: none; font-style: italic;">
                     <?php echo $info['description'] ?>
                 </span>
@@ -95,7 +93,7 @@ $display = ($user_status == 'private' || $user_status == 'only-logged')? false :
         </div>
 
 
-        <div class="col-3">
+        <div class="col-lg-3 group_association">
             <div>
                 <h5><i class="fas fa-users"></i> Group Associations</h5>
             </div>
@@ -211,3 +209,8 @@ $display = ($user_status == 'private' || $user_status == 'only-logged')? false :
 
 </style>
 */ ?>
+<style>
+#featureModal .modal-header {
+    display: none;
+}
+</style>

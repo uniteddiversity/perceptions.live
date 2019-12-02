@@ -219,7 +219,7 @@
             top: 0;
             width: 100%;
             height: 100%;
-            z-index: 3;
+            z-index: 30;
             background: rgba(36, 35, 35, 0.8);
             overflow-x: hidden;
             overflow-y: scroll;
@@ -322,7 +322,7 @@
         /* Participate Icon */
         .participate {
             top: 70%;
-            z-index: 10001;
+            /* z-index: 10001; */
             color: #1C1C8C;
             position: absolute;
             left: 50%;

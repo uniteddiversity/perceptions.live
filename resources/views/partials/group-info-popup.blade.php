@@ -6,9 +6,6 @@
 
     <div class="user_info">
         <div style="display: block; width:100%; text-align: left;">
-
-
-
             <div class="user_img">
                 <span>
                     <img height="150" width="150" class="avatar profile_img_mini" src="<?php if(isset($info['image'][0])){ echo '/storage/'.$info['image'][0]->url; }else{ ?>/assets/img/face1.png<?php } ?>" alt="profile image">
@@ -85,7 +82,6 @@
             <div style="display: none; position: absolute; top: 15%; right: 30%; width: 10%; padding-left: 5%; z-index: 99;">
                 <span style="font-size: 26px; color: #6060D5;"><i class="fa fa-envelope-o"></i></span>
             </div>
-
         </div>
     </div>
     <div style="display: block; width:100%; float: left; text-align: center;">
@@ -123,3 +119,9 @@
     </div>
     <div style="clear: both;"></div>
 </div>
+
+<style>
+    #featureModal .modal-header {
+        display: none;
+    }
+</style>
