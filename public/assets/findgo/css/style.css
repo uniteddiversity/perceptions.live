@@ -1176,6 +1176,7 @@ nav > ul > li.menu-item-has-children:hover > ul {
     overflow-x: hidden;
     overflow-y: scroll;
     display: none;
+    z-index: 1000000;
 }
 
 .popup {

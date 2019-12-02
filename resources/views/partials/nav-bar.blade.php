@@ -7,7 +7,7 @@
         </a>
         <div class="search-box">
           <div class="search-box-content">
-            <input type="text" placeholder="Quick Search" name="search_text" id="search_text" />
+            <input type="text" placeholder="Quick Search" name="header_search_text" id="header_search_text" />
             <button class="btn-search" onclick="toggleSearchbar()"><i class="fas fa-search"></i></button>
           </div>
         </div>
@@ -18,7 +18,7 @@
           <i class="fas fa-users"></i>
           Create Community
         </a>
-        <button class="btn-sign-up">Sign Up / Log In</button>
+        <button class="btn-sign-up accountbtn">Sign Up / Log In</button>
       </div>
     </div>
   </div>

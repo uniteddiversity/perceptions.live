@@ -43,6 +43,7 @@
         <strong>&copy; 2018-2019 <a href="https://perceptiontravel.tv/" target="_blank">PRCPTION Travel, Inc.</a> - a non-profit, 501(c)3 organization.</strong></span>
 
 </div>
+@include('partials.gropu-info-popup_right');
 <script>
     $(window).load(function() {
         $('body').addClass('mapPageBody');
