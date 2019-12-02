@@ -5987,10 +5987,12 @@ nav>ul>li>a i.fas {
     margin-left: 0px;
     float: left;
   }
-
-  .half-map .map .leaflet-control-zoom {
+  .leaflet-control-attribution.leaflet-control {
     display: none;
   }
+  /* .half-map .map .leaflet-control-zoom {
+    display: none;
+  } */
 
   #featureModal .modal-dialog.big .modal-header {
     z-index: 99999;
