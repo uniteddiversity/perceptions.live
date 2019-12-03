@@ -82,7 +82,7 @@
                                     @endforeach
                                 </select>
                             </div>
-                            <button type="submit" class="btn btn-primary">Add Selected to Group</button>
+                            <button type="submit" class="btn btn-primary btn-submit">Add Selected to Group</button>
 
                         </form>
                 </div>

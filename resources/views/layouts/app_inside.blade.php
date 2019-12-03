@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="page-admin-wrapper">
 
 <head>
     <title>PRCPTIONS.LIVE: exploring the world's perception</title>
@@ -59,7 +59,7 @@
     <link rel="stylesheet" href="/assets/js/datatable/datatables.min.css" />
 </head>
 
-<body>
+<body class="page-admin">
     <!-- Pre-loader start -->
 <!--    <div class="theme-loader">-->
 <!--        <div class="ball-scale">-->

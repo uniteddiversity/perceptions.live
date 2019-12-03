@@ -2,7 +2,7 @@
 
 @section('content')
     <div class="row">
-        <div class="col-lg-12 grid-margin stretch-card">
+        <div class="col-lg-12 grid-margin stretch-card" id="user_group_list">
             <div class="card">
                 <div class="card-body">
                     <h4 class="card-title">Group List</h4>
@@ -13,7 +13,7 @@
                                 <th>
                                     Action
                                 </th>
-                                <th>
+                                <th class="d-none d-md-block">
                                     Date Created
                                 </th>
                                 <th>
@@ -49,7 +49,7 @@
                                         @endif
                                         <!--                                        <a href="/user/group-admin/group-content-list/{{ ($group->id) }}" target="_blank" data-toggle="tooltip" title="View Videos" ><i class="ti-video-clapper"></i></a>-->
                                     </td>
-                                    <td>
+                                    <td class="d-none d-md-block">
                                         {{ date('Y-m-d', strtotime($group->created_at)) }}
                                     </td>
                                     <td>
