@@ -18,7 +18,57 @@
           <i class="fas fa-users"></i>
           Create Community
         </a>
+        @if (Route::has('login'))
+        @auth
+        
+        <nav class="two">
+          <ul>
+            <li class="user-profile header-notification">
+                <a href="#!">
+                    <span class="uimg" style="display:block;">
+                        <img src="<?php if(isset($user_img[0])){ echo '/storage/'.$user_img[0]->url; }else{ ?>/assets/img/face1.png<?php } ?>" alt="profile image">
+                    </span>
+
+                    <span>
+                        <?php echo Auth::user()->display_name ?></span>
+                    <i class="fas fa-sort-down"></i>
+                </a>
+                <ul class="show-notification profile-notification">
+                    <li>
+                        <!--  include search -->
+                        <a class="mobile-search morphsearch-search" href="#">
+                            <i class="fas fa-search"></i> Quick Search
+                        </a>
+                    </li>
+                    <li>
+                        <a href="/user/user-profile">
+                            <i class="fas fa-user-cog"></i>
+                            Control Panel
+                        </a>
+                    </li>
+                    <li>
+                        <a href="/user/group-admin/content-list">
+                            <i class="fas fa-video"></i>
+                            My Videos
+                        </a>
+                    </li>
+                    <li><a href="/claim-profile" target="_blank">
+                            <i class="fas fa-user-circle"></i>
+                            Claim A Profile</a></li>
+                    <li>
+                        <a href="/user/logout">
+                            <i class="fas fa-sign-out-alt"></i> Logout {{Auth::user()->first_name}}
+                        </a>
+                    </li>
+                </ul>
+            </li>
+          </ul>
+        </nav>
+
+        @else 
         <button class="btn-sign-up accountbtn">Sign Up / Log In</button>
+        @endif
+        @endif
       </div>
     </div>
   </div>

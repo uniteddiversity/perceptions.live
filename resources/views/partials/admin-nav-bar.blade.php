@@ -1,6 +1,5 @@
 <?php $user_img = Auth::user()->image; ?>
 <nav class="navbar header-navbar pcoded-header">
-
     <div class="navbar-wrapper">
         <div class="navbar-logo" data-navbar-theme="theme4">
             <div class="sidebar_toggle">
