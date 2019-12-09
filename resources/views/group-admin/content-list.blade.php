@@ -28,7 +28,7 @@
                                 <th>
                                     Location
                                 </th>
-                                <th>
+                                <th class="d-none d-md-table-cell">
                                     Last Updated Time
                                 </th>
                                 <th>
@@ -57,7 +57,7 @@
                                     <td>
                                         {{ $video->location }}
                                     </td>
-                                    <td>
+                                    <td class="d-none d-md-table-cell">
                                         {{ $video->updated_at }}
                                     </td>
                                     <td>

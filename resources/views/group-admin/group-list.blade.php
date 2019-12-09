@@ -13,7 +13,7 @@
                                 <th>
                                     Action
                                 </th>
-                                <th>
+                                <th class="d-none d-md-table-cell">
                                     Date Created
                                 </th>
                                 <th>
@@ -48,7 +48,7 @@
                                         <a href="/user/group-admin/user-to-group-add/{{ ($group->id) }}" target="_blank" data-toggle="tooltip" title="View Users" ><i class="ti-user"></i></a>&nbsp;
 <!--                                        <a href="/user/group-admin/group-content-list/{{ ($group->id) }}" target="_blank" data-toggle="tooltip" title="View Videos" ><i class="ti-video-clapper"></i></a>-->
                                     </td>
-                                    <td>
+                                    <td class="d-none d-md-table-cell">
                                         {{ date('Y-m-d', strtotime($group->created_at)) }}
                                     </td>
                                     <td>

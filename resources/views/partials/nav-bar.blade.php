@@ -97,7 +97,7 @@
         </div>
       </div>
       <div class="header-toolbar__center">
-        <a class="btn-near-me">
+        <a class="btn-near-me" onclick="nearByMeFunc()">
           <img src="/assets/img/map_center_icon.svg" alt="">
           <span>Near by Me</span>
         </a>

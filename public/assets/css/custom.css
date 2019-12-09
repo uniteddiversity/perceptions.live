@@ -2567,6 +2567,7 @@ nav.two {
   border-left: 2px solid rgb(241, 241, 241);
   padding-left: 10px;
   font-size: 14px;
+  padding-right: 43px;
 }
 
 nav.two .user-profile .uimg {
@@ -2807,6 +2808,7 @@ nav.two .header-notification .profile-notification li {
 
 .pcoded[theme-layout="vertical"][vertical-placement="left"][vertical-nav-type="collapsed"][vertical-effect="shrink"] .pcoded-content {
   margin-left: 98px;
+  padding-left: 0;
 }
 
 .pcoded[theme-layout="vertical"][vertical-nav-type="collapsed"] .main-menu a .fa-long-arrow-alt-right,
@@ -2822,8 +2824,9 @@ nav.two .header-notification .profile-notification li {
 }
 
 .pcoded[theme-layout="vertical"][vertical-nav-type="collapsed"] li>a .pcoded-micon i {
-  margin-top: -17px;
-  margin-left: 3px;
+  /* margin-top: -17px; */
+  /* margin-left: 3px; */
+  float: none;
 }
 
 .pcoded[theme-layout="vertical"] .pcoded-main-container {
@@ -4798,13 +4801,14 @@ nav.two .header-notification .profile-notification li {
   .table-responsive .btn_outer,
   #exchange_enabled {
     padding: 20px !important;
+    display: flex;
+    flex-direction: column-reverse;
   }
 
   .table-responsive .btn_outer .btn {
     width: 100%;
   }
-
-  .table-responsive .btn_outer .btn:last-child {
+  .table-responsive .btn_outer .btn:first-child {
     margin-top: 10px;
   }
 
@@ -5237,7 +5241,7 @@ header.s4.dark #slider_feed .near_me_icon {
 
   .mapPageBody .customContainer .responsiveheader {
     display: block;
-    z-index: 10;
+    z-index: 12;
   }
 
   .rheader>span.menubt {
@@ -5693,7 +5697,8 @@ header.s4.dark #slider_feed .near_me_icon {
 
   .half-map .map .leaflet-control-zoom {
     position: fixed;
-    bottom: 20px;
+    bottom: auto;
+    top: 100px;
     left: 20px;
   }
 
@@ -5733,7 +5738,7 @@ header.s4.dark #slider_feed .near_me_icon {
   .mlfilter-sec {
     position: absolute;
     top: 0px;
-    z-index: 8;
+    z-index: 20;
     left: -100%;
   }
 
@@ -6420,6 +6425,7 @@ nav>ul>li>a i.fas {
   width: calc(100vw - 40px);
   transform: translateX(-50%);
   font-family: 'Open Sans', sans-serif;
+  z-index: 100;
 }
 
 .new-header .header-content {
@@ -6428,6 +6434,7 @@ nav>ul>li>a i.fas {
 
 .new-header .top-bar {
   position: relative;
+  height: 70px;
   display: flex;
   padding: 0 20px;
   background-color: white;
@@ -6450,7 +6457,7 @@ nav>ul>li>a i.fas {
 }
 
 .new-header .top-bar .navbar-logo img {
-  width: 150px;
+  width: 200px;
 }
 
 .new-header .top-bar .search-box {
@@ -6548,7 +6555,7 @@ nav>ul>li>a i.fas {
 .new-header .header-toolbar {
   position: absolute;
   width: 600px;
-  top: 42px;
+  top: 68px;
   left: 50%;
   transform: translateX(-50%);
   background: white;
@@ -6750,6 +6757,9 @@ nav>ul>li>a i.fas {
 .pcoded-content .main-body .card .btn-submit {
   margin: 10px 20px;
 }
+.pcoded .pcoded-header .navbar-logo .nav-logo img{
+   max-width: 200px;
+}
 
 @media only screen and (max-width: 1439px) {
   .new-header .top-bar .search-box {
@@ -6817,8 +6827,8 @@ nav>ul>li>a i.fas {
     max-width: 200px;
   }
   .participate {
-    width: 60px;
-    height: 60px !important;
+    width: 80px;
+    height: 80px !important;
   }
   #feature-info .modal-header .model-back {
     display: none;
@@ -6936,6 +6946,9 @@ nav>ul>li>a i.fas {
     margin-left: 0 !important;
     margin-top: 0 !important;
     float: none;
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
   }
   .page-admin #pcoded .navbar-logo .sidebar_toggle {
     display: block;
@@ -6950,6 +6963,12 @@ nav>ul>li>a i.fas {
   }
   #user_content_add .step-icons-wrapper li:last-child {
     margin-right: 0;
+  }
+  .pcoded .pcoded-header .navbar-logo .nav-logo {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
   }
 }
 @media only screen and (max-width: 564px) {
@@ -6989,10 +7008,13 @@ nav>ul>li>a i.fas {
   }
   .page-admin #pcoded .logo {
     min-width: auto !important;
-    width: 100px;
+    width: 150px;
   }
   #user_content_add .card {
     width: 100%;
+  }
+  .pcoded .pcoded-header .navbar-logo .nav-logo img {
+    max-width: 150px;
   }
 }
 @media only screen and (max-width: 400px) {

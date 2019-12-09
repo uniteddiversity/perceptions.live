@@ -16,8 +16,8 @@
                     </div>
                 </li>
             </ul>
-            <a href="/" class="logo">
-                <img style="display:none;" class="img-fluid" src="/assets/img/logo_1.png" alt="{{ config('app.name') }}" />
+            <a href="/" class="nav-logo">
+                <img src="/assets/findgo/images/live-perceptions-logo.png" alt="">
             </a>
             <a class="mobile-options" style="display:none;">
                 <i class="fas fa-ellipsis-h"></i>

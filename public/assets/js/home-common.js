@@ -167,3 +167,8 @@ function collapseComments($id, obj){
 function toggleSearchbar() {
     $('.new-header .search-box-content').toggleClass('active');
 }
+
+// Near by me 
+function nearByMe() {
+    
+}

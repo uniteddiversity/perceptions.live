@@ -25,13 +25,13 @@
                                 {{--<th>--}}
                                     {{--Date--}}
                                 {{--</th>--}}
-                                <th>
+                                <th class="d-none d-md-table-cell">
                                     Created By
                                 </th>
-                                <th>
+                                <th class="d-none d-md-table-cell">
                                     Created At
                                 </th>
-                                <th>
+                                <th class="d-none d-md-table-cell">
                                     Updated At
                                 </th>
 
@@ -59,13 +59,13 @@
                                     {{--<td>--}}
                                         {{--{{ $video->date }}--}}
                                     {{--</td>--}}
-                                    <td>
+                                    <td class="d-none d-md-table-cell">
                                         {{ isset($video->user)?'@'.$video->user->display_name:'' }}
                                     </td>
-                                    <td>
+                                    <td class="d-none d-md-table-cell">
                                         {{ $video->created_at }}
                                     </td>
-                                    <td>
+                                    <td class="d-none d-md-table-cell">
                                         {{ $video->updated_at }}
                                     </td>
 
