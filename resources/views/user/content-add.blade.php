@@ -34,7 +34,7 @@ $data['language'] = isset($video_data['language'])?$video_data['language']:'en';
 //    dd($data);
 ?>
 <div class="col-lg-12 grid-margin stretch-card" id="user_content_add">
-  <div class="card" style="box-shadow:none;">
+  <div class="card form-card" style="box-shadow:none;">
     <div class="card-body">
       <div class="submitprcption row">
         <div class="col-lg-4">

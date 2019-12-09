@@ -2,32 +2,32 @@
 @section('content')
 <?php
 $data = array();
-$data['id'] = isset($user_data['id'])?$user_data['id']:'';
-$data['email'] = isset($user_data['email'])?$user_data['email']:'';
-$data['first_name'] = isset($user_data['first_name'])?$user_data['first_name']:'';
-$data['display_name'] = isset($user_data['display_name'])?$user_data['display_name']:'';
-$data['status_id'] = isset($user_data['status_id'])?$user_data['status_id']:'';
-$data['location'] = isset($user_data['location'])?$user_data['location']:'';
-$data['description'] = isset($user_data['description'])?$user_data['description']:'';
-$data['image'] = isset($user_data['image'])?$user_data['image']:array();
-$data['group'] = isset($user_data['groups'])?array_column($user_data['groups'],'group_id'):array();
-$data['user_acting_roles'] = isset($user_data['acting_roles'])?array_column($user_data['acting_roles'],'user_tag_id'):array();
-$data['access_level_id'] = isset($user_data['access_level_id'])?$user_data['access_level_id']:'';
-$data['grater_community_intention_ids'] = isset($user_data['gci'])?array_column($user_data['gci'],'user_tag_id'):array();
-$data['skills'] = isset($user_data['skill'])?array_column($user_data['skill'],'user_tag_id'):array();
+$data['id'] = isset($user_data['id']) ? $user_data['id'] : '';
+$data['email'] = isset($user_data['email']) ? $user_data['email'] : '';
+$data['first_name'] = isset($user_data['first_name']) ? $user_data['first_name'] : '';
+$data['display_name'] = isset($user_data['display_name']) ? $user_data['display_name'] : '';
+$data['status_id'] = isset($user_data['status_id']) ? $user_data['status_id'] : '';
+$data['location'] = isset($user_data['location']) ? $user_data['location'] : '';
+$data['description'] = isset($user_data['description']) ? $user_data['description'] : '';
+$data['image'] = isset($user_data['image']) ? $user_data['image'] : array();
+$data['group'] = isset($user_data['groups']) ? array_column($user_data['groups'], 'group_id') : array();
+$data['user_acting_roles'] = isset($user_data['acting_roles']) ? array_column($user_data['acting_roles'], 'user_tag_id') : array();
+$data['access_level_id'] = isset($user_data['access_level_id']) ? $user_data['access_level_id'] : '';
+$data['grater_community_intention_ids'] = isset($user_data['gci']) ? array_column($user_data['gci'], 'user_tag_id') : array();
+$data['skills'] = isset($user_data['skill']) ? array_column($user_data['skill'], 'user_tag_id') : array();
 //    dd($data['skills']);
 ?>
 <div class="col-lg-12 grid-margin stretch-card">
-  <div class="card">
+  <div class="card form-card">
     <div class="card-body">
       <div class="submitprcption">
         <h4 class="card-title" style="margin-bottom: 10px; text-align: center;">Account and Profile Settings
         </h4>
         <div class="pagedesc" align="center">
-          <p>The information here will be the data that will [eventually] connect you to connections and collaborations around the world. Have fun and please keep it as accurate as possible! :) 
+          <p>The information here will be the data that will [eventually] connect you to connections and collaborations around the world. Have fun and please keep it as accurate as possible! :)
           </p>
           <p>
-            <em>Should you encounter any errors we encourage you to 
+            <em>Should you encounter any errors we encourage you to
               <a href="/contact-us">let us know
               </a>. Thanks!
             </em>
@@ -49,9 +49,9 @@ $data['skills'] = isset($user_data['skill'])?array_column($user_data['skill'],'u
             </div>
             @endif
             <form action="/user/user-profile-post" method="post" enctype='multipart/form-data'>
-              <?php if(!empty($data['id'])){?>
-              <input type="hidden" name="id" id="id" value="{{ uid($data['id']) }}" />
-              <?php }?>
+              <?php if (!empty($data['id'])) { ?>
+                <input type="hidden" name="id" id="id" value="{{ uid($data['id']) }}" />
+              <?php } ?>
               <div class="formdesctext">
                 <strong>Your Account</strong>
               </div>
@@ -77,11 +77,12 @@ $data['skills'] = isset($user_data['skill'])?array_column($user_data['skill'],'u
                   </label>
                   <div class="custom_select">
                     <select class="form-control" id="exampleSelect1" name="access_level_id">
-                      <?php foreach($access_levels as $access){ ?>
-                      <option value="{{$access->id}}" 
-                              <?php if(old('access_level_id',$data['access_level_id']) == $access->id){ echo 'selected'; } ?> >{{$access->name}}
-                      </option>
-                    <?php }?>
+                      <?php foreach ($access_levels as $access) { ?>
+                        <option value="{{$access->id}}" <?php if (old('access_level_id', $data['access_level_id']) == $access->id) {
+                                                            echo 'selected';
+                                                          } ?>>{{$access->name}}
+                        </option>
+                      <?php } ?>
                     </select>
                   </div>
                 </div>
@@ -118,12 +119,12 @@ $data['skills'] = isset($user_data['skill'])?array_column($user_data['skill'],'u
                   </a>--}}
                   <label for="user_avatar">Avatar (1MB or less please!)
                   </label>
-                  <input id="upload" class="form-control" type="file" name="user_avatar" style="width: 40%;"/>
-                  <?php foreach($data['image'] as $img){ ?>
-                  <input type="hidden" value="/storage/<?php echo $img['url'] ?>" id="preset_image_path"/>
-                  <a target="_blank" href="/storage/<?php echo $img['url'] ?>">
-                    <img src="/storage/<?php echo $img['url'] ?>" alt="Avatar" class="avatar profile_img_mini">
-                  </a>
+                  <input id="upload" class="form-control" type="file" name="user_avatar" style="width: 40%;" />
+                  <?php foreach ($data['image'] as $img) { ?>
+                    <input type="hidden" value="/storage/<?php echo $img['url'] ?>" id="preset_image_path" />
+                    <a target="_blank" href="/storage/<?php echo $img['url'] ?>">
+                      <img src="/storage/<?php echo $img['url'] ?>" alt="Avatar" class="avatar profile_img_mini">
+                    </a>
                   <?php } ?>
                 </div>
               </div>
@@ -138,12 +139,13 @@ $data['skills'] = isset($user_data['skill'])?array_column($user_data['skill'],'u
                   </label>
                   {{--
                   <input type="text" class="form-control" aria-describedby="nameHelp" name="video_producer" placeholder="Video Producer" value="{{ old('video_producer') }}">--}}
-                  <select class="form-control multi-select2" id="video_producer" multiple searchable="Search here.." name="user_acting_roles[]" >
+                  <select class="form-control multi-select2" id="video_producer" multiple searchable="Search here.." name="user_acting_roles[]">
                     @foreach($user_acting_role as $role)
-                    <option value="{{$role->id}}" 
-                            <?php if(in_array($role->id, old('user_acting_roles',$data['user_acting_roles']))){ echo 'selected'; } ?> >{{$role->name}}
+                    <option value="{{$role->id}}" <?php if (in_array($role->id, old('user_acting_roles', $data['user_acting_roles']))) {
+                                                    echo 'selected';
+                                                  } ?>>{{$role->name}}
                     </option>
-                  @endforeach
+                    @endforeach
                   </select>
                 </div>
                 <div class="form-group">
@@ -151,10 +153,11 @@ $data['skills'] = isset($user_data['skill'])?array_column($user_data['skill'],'u
                   </label>
                   <select class="form-control multi-select2-max3" id="grater_community_intention_id" multiple name="grater_community_intention_ids[]">
                     @foreach($gci_tags as $m)
-                    <option value="{{$m['id']}}" 
-                            <?php if(in_array($m['id'], old('grater_community_intention_ids',$data['grater_community_intention_ids']))){ echo 'selected'; } ?> >{{$m['tag']}}
+                    <option value="{{$m['id']}}" <?php if (in_array($m['id'], old('grater_community_intention_ids', $data['grater_community_intention_ids']))) {
+                                                    echo 'selected';
+                                                  } ?>>{{$m['tag']}}
                     </option>
-                  @endforeach
+                    @endforeach
                   </select>
                 </div>
                 <div class="form-group">
@@ -162,13 +165,14 @@ $data['skills'] = isset($user_data['skill'])?array_column($user_data['skill'],'u
                   </label>
                   <select class="form-control multi-select2-with-tags-max3" id="skills" multiple name="skills[]">
                     @foreach($skill_tags as $m)
-                    <option value="{{base64_encode($m['id'])}}" 
-                            <?php if(in_array($m['id'], old('skills',$data['skills']))){ echo 'selected'; } ?> >{{$m['tag']}}
+                    <option value="{{base64_encode($m['id'])}}" <?php if (in_array($m['id'], old('skills', $data['skills']))) {
+                                                                  echo 'selected';
+                                                                } ?>>{{$m['tag']}}
                     </option>
-                  @endforeach
+                    @endforeach
                   </select>
                 </div>
-                <?php if(Auth::user()->is('admin')){ ?>
+                <?php if (Auth::user()->is('admin')) { ?>
                   <div class="form-group">
                     <label for="group_id">Group
                     </label>
@@ -176,42 +180,44 @@ $data['skills'] = isset($user_data['skill'])?array_column($user_data['skill'],'u
                       <option value="">Select Group
                       </option>
                       @foreach($user_groups as $group)
-                      <option value="{{$group->id}}" 
-                              <?php if(in_array($group->id,$data['group'])){ echo 'selected'; } ?> >{{$group->name}} ({{$group->email}})
+                      <option value="{{$group->id}}" <?php if (in_array($group->id, $data['group'])) {
+                                                          echo 'selected';
+                                                        } ?>>{{$group->name}} ({{$group->email}})
                       </option>
-                    @endforeach
+                      @endforeach
                     </select>
                   </div>
                 <?php } ?>
-                <?php if(Auth::user()->is('admin')){ ?>
+                <?php if (Auth::user()->is('admin')) { ?>
                   <div class="form-group">
                     <label for="status_id">Status
                     </label>
                     <select class="form-control" id="status_id" name="status_id">
                       @foreach($status as $st)
-                      <option value="{{$st->id}}" 
-                              <?php if(old('status_id',$data['status_id']) == $st->id){ echo 'selected'; } ?> >{{$st->name}}
+                      <option value="{{$st->id}}" <?php if (old('status_id', $data['status_id']) == $st->id) {
+                                                      echo 'selected';
+                                                    } ?>>{{$st->name}}
                       </option>
-                    @endforeach
+                      @endforeach
                     </select>
                   </div>
                 <?php } ?>
-                <?php if(Auth::user()->is('admin')){ ?>
+                <?php if (Auth::user()->is('admin')) { ?>
                   {{--
                   <div class="form-group">--}}
-                    {{--
+                  {{--
                     <label for="exampleSelect1">Role
                     </label>--}}
-                    {{--
+                  {{--
                     <select class="form-control" id="exampleSelect1" name="role_id">--}}
-                      {{--@foreach($user_roles as $role)--}}
-                      {{--
+                  {{--@foreach($user_roles as $role)--}}
+                  {{--
                       <option value="{{$role->id}}">{{$role->name}}
-                      </option>--}}
-                      {{--@endforeach--}}
-                      {{--
+                  </option>--}}
+                  {{--@endforeach--}}
+                  {{--
                     </select>--}}
-                    {{--
+                  {{--
                   </div>--}}
                 <?php } ?>
               </div>
@@ -225,7 +231,7 @@ $data['skills'] = isset($user_data['skill'])?array_column($user_data['skill'],'u
       </div>
     </div>
   </div>
-</div>	
+</div>
 <style>
   .pagedesc {
     font-size: 20px;
@@ -233,6 +239,7 @@ $data['skills'] = isset($user_data['skill'])?array_column($user_data['skill'],'u
     line-height: 1em;
     padding-bottom: 20px;
   }
+
   div.formdesctext {
     font-size: 14.4px;
     line-height: 20px;
@@ -244,6 +251,7 @@ $data['skills'] = isset($user_data['skill'])?array_column($user_data['skill'],'u
     padding: 20px 40px;
     border-bottom: 2px solid #e6defc;
   }
+
   div.formdesctext strong {
     margin: auto;
     font-family: 'Open Sans', sans-serif;
@@ -254,34 +262,42 @@ $data['skills'] = isset($user_data['skill'])?array_column($user_data['skill'],'u
     display: block;
     margin-bottom: 10px
   }
+
   div.submitprcption {
     width: 50%;
     margin: auto;
   }
+
   form {
     margin-bottom: 0
   }
+
   .form-content {
     padding-bottom: 20px;
     border-bottom: 2px solid #e6defc;
   }
+
   .form-content .form-group {
     float: none;
   }
+
   .form-footer {
     padding: 20px 40px;
     background: #e6defc;
     text-align: left;
   }
+
   .form-footer button {
     margin: 0 !important;
     float: none
   }
+
   .form-group .custom_select {
     height: auto;
     float: none;
   }
-  .form-group .custom_select::before  {
+
+  .form-group .custom_select::before {
     bottom: 18px;
     top: auto
   }
@@ -289,15 +305,18 @@ $data['skills'] = isset($user_data['skill'])?array_column($user_data['skill'],'u
   a {
     color: #2B0D82 !important;
   }
+
   a:hover {
-    color:#2b0bae !important;
+    color: #2b0bae !important;
   }
+
   @media only screen and (max-width: 768px) {
     div.formdesctext strong {
       font-size: 20px;
       line-height: 24px;
     }
   }
+
   @media only screen and (max-width: 576px) {
     .main-body .card {
       width: 100%;

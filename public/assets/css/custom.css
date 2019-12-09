@@ -2898,6 +2898,10 @@ nav.two .header-notification .profile-notification li {
   box-shadow: 0px 10px 38px -10px rgba(0, 0, 0, 0.08);
 }
 
+.form-card .table-responsive {
+  overflow: hidden;
+}
+
 .card .box.purple {
   background: #e6defc;
   border-color: #000;
@@ -3085,7 +3089,8 @@ nav.two .header-notification .profile-notification li {
 }
 
 .table-responsive input[type="text"],
-.table-responsive input[type="url"] {
+.table-responsive input[type="url"],
+.table-responsive input[type="file"] {
   padding: 0 20px;
   height: 50px;
   line-height: 48px;
@@ -3096,9 +3101,15 @@ nav.two .header-notification .profile-notification li {
   -moz-border-radius: 5px;
   border-radius: 5px;
 }
+.table-responsive input[type="file"] {
+  padding: 10px 20px;
+  line-height: 20px;
+}
+
 
 .table-responsive input[type="text"]::placeholder,
 .table-responsive input[type="url"]::placeholder,
+.table-responsive input[type="file"]::placeholder
 .table-responsive textarea::placeholder {
   color: #cebff9;
 }
@@ -3115,6 +3126,7 @@ nav.two .header-notification .profile-notification li {
 
 .table-responsive input[type="text"]:focus,
 .table-responsive input[type="url"]:focus,
+.table-responsive input[type="file"]:focus,
 .table-responsive textarea:focus {
   border-color: #4214c7 !important;
   color: #4214c7 !important;
@@ -3122,6 +3134,7 @@ nav.two .header-notification .profile-notification li {
 
 .table-responsive input[type="text"]:focus::placeholder,
 .table-responsive input[type="url"]:focus::placeholder,
+.table-responsive input[type="file"]:focus::placeholder,
 .table-responsive textarea:focus::placeholder {
   display: none;
 }
@@ -5697,9 +5710,8 @@ header.s4.dark #slider_feed .near_me_icon {
 
   .half-map .map .leaflet-control-zoom {
     position: fixed;
+    top: 70%;
     bottom: auto;
-    top: 100px;
-    left: 20px;
   }
 
   .ml-filterslide {
@@ -6970,6 +6982,10 @@ nav>ul>li>a i.fas {
     left: 50%;
     transform: translate(-50%, -50%);
   }
+  .half-map .map .leaflet-control-zoom {
+    top: auto;
+    bottom: 50px;
+  }
 }
 @media only screen and (max-width: 564px) {
   .searchchat {
@@ -6981,6 +6997,7 @@ nav>ul>li>a i.fas {
     height: 15px !important;
   }
   .custom-popup {
+    display: none;
     width: 100%;
     left: 50%;
     right: auto;
