@@ -54,9 +54,55 @@
 
   <link rel="stylesheet" href="/assets/css/custom_common_styles.css" />
   <link rel="stylesheet" href="/assets/css/custom.css" />
-
   <link rel="stylesheet" href="/assets/croppie/croppie.css" />
   <link rel="stylesheet" href="/assets/js/datatable/datatables.min.css" />
+  <style>
+    .user-profile {
+      padding: 0
+    }
+    nav.two {
+      border: none;
+    }
+    nav.two .user-profile .fas.fa-sort-down {
+      top: auto;
+      height: 70px;
+    }
+    nav.two .uimg {
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+    }
+    .select2-container--default .select2-selection--single {
+      border: none;
+    }
+    .select2-container--default .select2-selection--single .select2-selection__arrow {
+      display: none;
+    }
+    @media only screen and (max-width: 768px) {
+      nav.two {
+        padding-right: 0;
+        min-width: auto;
+      }
+      nav.two .header-notification .profile-notification {
+        right: 0;
+      }
+      nav.two .uname {
+        display: none;
+      }
+      nav.two .user-profile .uimg {
+        width: 40px;
+        height: 40px
+      }
+      nav.two .fa-sort-down {
+        display: none;
+      }
+    }
+    @media only screen and (max-width: 576px) {
+      .new-header .top-bar .navbar-logo img {
+        width: 150px;
+      }
+    }
+  </style>
 </head>
 
 <body class="page-admin">
@@ -71,13 +117,75 @@
   </div>
   <!-- Pre-loader end -->
   <!-- Menu header start -->
+  <header class="new-header" >
+    <div class="header-content">
+      <div class="top-bar">
+        <div class="top-bar__left">
+          <a href="/" class="navbar-logo" onclick="resetSearch()">
+            <img src="/assets/findgo/images/live-perceptions-logo.png" alt="">
+          </a>
+        </div>
+        <div class="top-bar__right">
+          @if (Route::has('login'))
+          @auth
+          
+          <nav class="two">
+            <ul>
+              <li class="user-profile header-notification">
+                  <a href="#!">
+                      <span class="uimg" style="background-image: url(<?php if(isset($user_img[0])){ echo '/storage/'.$user_img[0]->url; }else{ ?>/assets/img/face1.png<?php } ?>)">
+                          <!-- <img src="<?php if(isset($user_img[0])){ echo '/storage/'.$user_img[0]->url; }else{ ?>/assets/img/face1.png<?php } ?>" alt="profile image"> -->
+                      </span>
+
+                      <span class="uname"><?php echo Auth::user()->display_name ?></span>
+                      <i class="fas fa-sort-down"></i>
+                  </a>
+                  <ul class="show-notification profile-notification">
+                      <li>
+                          <!--  include search -->
+                          <a class="mobile-search morphsearch-search" href="#">
+                              <i class="fas fa-search"></i> Quick Search
+                          </a>
+                      </li>
+                      <li>
+                          <a href="/user/user-profile">
+                              <i class="fas fa-user-cog"></i>
+                              Control Panel
+                          </a>
+                      </li>
+                      <li>
+                          <a href="/user/group-admin/content-list">
+                              <i class="fas fa-video"></i>
+                              My Videos
+                          </a>
+                      </li>
+                      <li><a href="/claim-profile" target="_blank">
+                              <i class="fas fa-user-circle"></i>
+                              Claim A Profile</a></li>
+                      <li>
+                          <a href="/user/logout">
+                              <i class="fas fa-sign-out-alt"></i> Logout {{Auth::user()->first_name}}
+                          </a>
+                      </li>
+                  </ul>
+              </li>
+            </ul>
+          </nav>
+
+          @else 
+          <button class="btn-sign-up accountbtn">Sign Up / Log In</button>
+          @endif
+          @endif
+        </div>
+      </div>
+    </div>
+  </header>
   <div id="pcoded" class="pcoded">
     <div class="pcoded-overlay-box"></div>
 
 
 
     <div class="pcoded-container navbar-wrapper">
-
       <!-- Sidebar inner chat end-->
       <div class="pcoded-main-container">
         <div class="pcoded-wrapper">
@@ -85,12 +193,19 @@
             <div class="pcoded-inner-content">
               <div class="main-body">
                 @yield('content')
-              
+
               </div>
             </div>
           </div>
         </div>
       </div>
+    </div>
+    <div class="footer">
+      <span style="display: block; padding-bottom: 7px; margin: auto;">
+        <a href="https://perceptiontravel.tv/privacy-policy" target="_blank">Privacy Policy</a> | <a href="https://perceptiontravel.tv/terms-of-service" target="_blank">Terms of Service</a> | <a href="https://perceptiontravel.tv/community/donations/" target="_blank">Make a Donation</a> | <a href="https://perceptiontravel.tv/community-feedback/" target="_blank">Submit Feedback</a> | <a href="https://perceptiontravel.tv/about/" target="_blank">About Us</a> | <a href="/contact-us" target="_blank">Contact Us</a></span>
+      <span>
+        <strong>© 2018-2019 <a href="https://perceptiontravel.tv/" target="_blank">PRCPTION Travel, Inc.</a> - a non-profit, 501(c)3 organization.</strong></span>
+
     </div>
   </div>
 

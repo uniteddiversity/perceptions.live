@@ -1,4 +1,16 @@
 /**** CUSTOM CSS/ FIXES / NEW STYLE ****/
+@font-face {
+  font-family: 'ralewayregular';
+  src: url('../findgo/css/fonts/raleway-regular-webfont.eot');
+  src: url('../findgo/css/fonts/raleway-regular-webfont.eot?#iefix') format('embedded-opentype'),
+      url('../findgo/css/fonts/raleway-regular-webfont.woff2') format('woff2'),
+      url('../findgo/css/fonts/raleway-regular-webfont.woff') format('woff'),
+      url('../findgo/css/fonts/raleway-regular-webfont.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+
+}
+
 .dot {
   height: 20px;
   width: 20px;
@@ -363,6 +375,7 @@ header .topsearch #search_text {}
   -webkit-box-shadow: 0px -12px 47px -15px rgba(0, 0, 0, 0.5);
   -moz-box-shadow: 0px -12px 47px -15px rgba(0, 0, 0, 0.5);
   box-shadow: 0px -12px 47px -15px rgba(0, 0, 0, 0.5);
+  font-family: ralewayregular;
   z-index: 3;
 }
 
@@ -3122,9 +3135,7 @@ nav.two .header-notification .profile-notification li {
   line-height: 20px;
 }
 
-.table-responsive input[type="text"],
-.table-responsive input[type="url"],
-.table-responsive input[type="file"] {
+.table-responsive input {
   padding: 0 20px;
   height: 50px;
   line-height: 48px;
@@ -3135,15 +3146,13 @@ nav.two .header-notification .profile-notification li {
   -moz-border-radius: 5px;
   border-radius: 5px;
 }
-.table-responsive input[type="file"] {
+.table-responsive input {
   padding: 10px 20px;
   line-height: 20px;
 }
 
 
-.table-responsive input[type="text"]::placeholder,
-.table-responsive input[type="url"]::placeholder,
-.table-responsive input[type="file"]::placeholder
+.table-responsive input::placeholder
 .table-responsive textarea::placeholder {
   color: #cebff9;
 }
@@ -3158,17 +3167,13 @@ nav.two .header-notification .profile-notification li {
   padding: 15px 20px;
 }
 
-.table-responsive input[type="text"]:focus,
-.table-responsive input[type="url"]:focus,
-.table-responsive input[type="file"]:focus,
+.table-responsive input:focus,
 .table-responsive textarea:focus {
   border-color: #4214c7 !important;
   color: #4214c7 !important;
 }
 
-.table-responsive input[type="text"]:focus::placeholder,
-.table-responsive input[type="url"]:focus::placeholder,
-.table-responsive input[type="file"]:focus::placeholder,
+.table-responsive input:focus::placeholder,
 .table-responsive textarea:focus::placeholder {
   display: none;
 }
@@ -3176,6 +3181,7 @@ nav.two .header-notification .profile-notification li {
 .table-responsive input[type="checkbox"] {
   float: left;
   width: auto;
+  height: auto;
   margin-right: 10px;
 }
 

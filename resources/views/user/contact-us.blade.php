@@ -39,15 +39,17 @@ $data['proof_images'] = array();
         </div>
         <div class="form-group">
           <label for="Subject">Subject </label>
-          <select class="form-control" name="subject">
-            <option @if(old('subject')=='general message' ) selected='selected' @endif value="general message">General message</option>
-            <option @if(old('subject')=='feature request' ) selected='selected' @endif value="feature request">Feature request</option>
-            <option @if(old('subject')=='feedback' ) selected='selected' @endif value="feedback">Feedback</option>
-            <option @if(old('subject')=='questions' ) selected='selected' @endif value="questions">Questions</option>
-            <option @if(old('subject')=='partnerships' ) selected='selected' @endif value="partnerships">Partnerships</option>
-            <option @if(old('subject')=='troubleshooting' ) selected='selected' @endif value="troubleshooting">Troubleshooting</option>
-            <option @if(old('subject')=='other' ) selected='selected' @endif value="other">Other</option>
-          </select>
+          <div class="custom_select">
+            <select class="form-control" name="subject">
+              <option @if(old('subject')=='general message' ) selected='selected' @endif value="general message">General message</option>
+              <option @if(old('subject')=='feature request' ) selected='selected' @endif value="feature request">Feature request</option>
+              <option @if(old('subject')=='feedback' ) selected='selected' @endif value="feedback">Feedback</option>
+              <option @if(old('subject')=='questions' ) selected='selected' @endif value="questions">Questions</option>
+              <option @if(old('subject')=='partnerships' ) selected='selected' @endif value="partnerships">Partnerships</option>
+              <option @if(old('subject')=='troubleshooting' ) selected='selected' @endif value="troubleshooting">Troubleshooting</option>
+              <option @if(old('subject')=='other' ) selected='selected' @endif value="other">Other</option>
+            </select>
+          </div>  
         </div>
 
         <div class="form-group">
@@ -63,7 +65,7 @@ $data['proof_images'] = array();
         </div>
 
         <div class="form-footer">
-          <button type="submit" class="btn btn-primary" style="background-color:#2B2B47; color: #ffffff;">Submit</button>
+          <button type="submit" class="btn btn-submit">Submit</button>
         </div>
       </form>
     </div>
@@ -73,6 +75,46 @@ $data['proof_images'] = array();
   .card {
     float: none;
     margin: auto;
+  }
+  .form-header {
+    margin-bottom: 20px;
+    padding: 20px 40px;
+    border-bottom: 2px solid #e6defc;
+    font-family: 'Open Sans', sans-serif;
+  }
+  .form-header .card-title {
+    font-size: 32px;
+    font-weight: 600;
+    line-height: 1.1;
+    color: #4214c7;
+    margin-bottom: 10px;
+  }
+  .form-header .page-desc {
+    font-size: 14.4px;
+    line-height: 20px;
+    font-style: normal;
+    text-align: left;
+    color: #797979;
+    margin-bottom: 0
+  }
+  .table-responsive form .form-group {
+    float: none
+  }
+  .form-footer {
+    padding: 20px 40px;
+    background: #e6defc;
+    text-align: left;
+  }
+
+  .form-footer button {
+    margin: 0 !important;
+    float: none
+  }
+
+  @media only screen and (max-width: 576px) {
+    .main-body .card {
+      width: 100%;
+    }
   }
 </style>
 @endsection
