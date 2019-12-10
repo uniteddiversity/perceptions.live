@@ -6980,7 +6980,13 @@ nav>ul>li>a i.fas {
   .responsiveheader {
     z-index: 100;
   }
-
+  .custom-popup {
+    display: none;
+    width: 100%;
+    left: 50%;
+    right: auto;
+    transform: translate(-50%, -50%);
+  }
   .tooltip2 {
     color: #13054D;
     outline: none;

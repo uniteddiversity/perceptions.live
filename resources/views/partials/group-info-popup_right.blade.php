@@ -22,6 +22,7 @@
         <p>People crave authentic connection, but the current social networking giants create interactions only in service of their market domination.</p>
         <p style="margin-top:8px;"><strong>The Solution</strong></p>
         <p>Creators can produce content with the support of their audiences, interact with their communities using innovative discussion tools, and work with consumers to plan, fund, and source the continuation of a series.</p>
+        <p style="margin-top:8px; font-style: italic;"><strong>This project is still in beta, so we appreciate your patience and feedback when you encounter any errors. <a href="https://docs.perceptiontravel.tv/" target="new">Check out our documentation to learn more.</a> Thanks!</strong></p>
     </div>
 </div>
 

@@ -99,7 +99,6 @@
       <div class="header-toolbar__center">
         <a class="btn-near-me" onclick="nearByMeFunc()">
           <img src="/assets/img/map_center_icon.svg" alt="">
-          <span>Near by Me</span>
         </a>
       </div>
       <div class="header-toolbar__right header-slider">
@@ -125,6 +124,7 @@
     </div>
   </div>
 </header>
+
 <div class="responsiveheader">
     <div class="rheader">
         <img src="/assets/findgo/images/ricon.png" alt="" style="display:none;" />
