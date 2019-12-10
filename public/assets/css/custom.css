@@ -2898,6 +2898,40 @@ nav.two .header-notification .profile-notification li {
   box-shadow: 0px 10px 38px -10px rgba(0, 0, 0, 0.08);
 }
 
+.table-responsive tr td,
+.table-responsive tr th {
+  white-space: normal;
+}
+
+.table-responsive tr td a {
+  color: #212529;
+}
+
+.table-responsive .btn-icon-tooltip {
+  width: 30px;
+  height: 30px;
+  padding: 0;
+  font-size: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;  
+}
+.table-responsive .btn-icon-tooltip i {
+  margin: 0;
+}
+
+.custom-badge {
+  padding: 0;
+  width: 15px;
+  height: 15px;
+  display: inline-block;
+  border-radius: 50%;
+  vertical-align: middle;
+}
+.custom-badge.badge-Active {
+  background: green;
+}
+
 .form-card .table-responsive {
   overflow: hidden;
 }
@@ -6985,6 +7019,17 @@ nav>ul>li>a i.fas {
   .half-map .map .leaflet-control-zoom {
     top: auto;
     bottom: 50px;
+  }
+  .table-responsive tr td a {
+    text-decoration: underline;
+  }
+  .custom-badge {
+    font-size: 0;
+    width: 15px;
+    height: 15px;
+    display: block;
+    padding: 0;
+    border-radius: 50%;
   }
 }
 @media only screen and (max-width: 564px) {

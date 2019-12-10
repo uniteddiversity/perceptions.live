@@ -178,6 +178,7 @@
 
 
     {{--<script src="/assets/findgo/js/jquery.min.js" type="text/javascript"></script>--}}
+    <script src="/assets/findgo/js/popper.min.js" type="text/javascript"></script>
 
     <script src="/assets/findgo/js/modernizr.js" type="text/javascript"></script>
     <script src="/assets/findgo/js/script.js" type="text/javascript"></script>

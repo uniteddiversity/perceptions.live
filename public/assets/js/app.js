@@ -235,6 +235,7 @@ function openVideo(id, no_history) {
 
 jQuery(document).ready(function() {
     jQuery("time.timeago").timeago();
+    
 });
 
 function openProfile(id, no_history) {
