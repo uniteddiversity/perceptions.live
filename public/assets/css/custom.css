@@ -5617,7 +5617,7 @@ header.s4.dark #slider_feed .near_me_icon {
   position: fixed !important;
   background: #0e1281 url(/assets/img/upload.svg) no-repeat center center / 90px;
   border-radius: 10px;
-  top: auto;
+  top: auto !important;
   bottom: 100px;
   left: 50%;
   background-size: 80%;
@@ -6047,7 +6047,7 @@ nav>ul>li>a i.fas {
     float: left;
   }
   .leaflet-control-attribution.leaflet-control {
-    display: none;
+    margin-bottom: 0;
   }
   /* .half-map .map .leaflet-control-zoom {
     display: none;
@@ -6550,6 +6550,7 @@ nav>ul>li>a i.fas {
   border: none;
   cursor: pointer;
   transition: all .3s ease-in-out;
+  font-family: 'Open Sans', sans-serif;
 }
 
 .new-header .top-bar .search-box .search-box-content .btn-search:hover {
@@ -6597,6 +6598,7 @@ nav>ul>li>a i.fas {
   border: 0;
   border-radius: 5px;
   transition: all .3s ease-in-out;
+  font-family: 'Open Sans', sans-serif;
   cursor: pointer;
 }
 
