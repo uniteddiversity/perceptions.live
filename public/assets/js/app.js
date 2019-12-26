@@ -621,7 +621,10 @@ function displayVideoContentUpload() {
 // if (select2)
     $('.content-type-select-ajax').select2({
         ajax: {
-            url: '/user/admin/search-content-type/ajax',
+            // url: '/user/admin/search-content-type/ajax/',
+            url: function(){
+                return '/user/admin/search-content-type/ajax/type/'+  $('#slider_type').val()
+            },
             dataType: 'json',
 
             // data: function() {
@@ -631,6 +634,7 @@ function displayVideoContentUpload() {
             data: function (term, page) {
                 // page is the one-based page number tracked by Select2
                 return {
+                    "type":$('#slider_type').val(),
                     //search term
                     "q": term,
                     // page size
@@ -659,7 +663,7 @@ function displayVideoContentUpload() {
                 let results = [];
                 $.each(response, function (index, data) {
                     results.push({
-                        id: data.id,
+                        id: data.type +'-'+ data.id,
                         text: data.text + ' (' + data.type + ')',
                         type: data.type
                     });
@@ -668,7 +672,7 @@ function displayVideoContentUpload() {
                 return {
                     results: results
                 };
-            },
+            }
         }
     });
 

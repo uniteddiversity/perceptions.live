@@ -1047,16 +1047,26 @@ class AdminController extends Controller
         if ($validator->fails()) {
             return Redirect::back()->withErrors($validator->messages())->withInput();
         }
-
         $r = $request->toArray();
-        $new = $this->homeSliderFeed->create(
-            array(
-                'side' => $r['side'],
-                'title' => $r['title'],
-                'type' => $r['type'],
-                'fk_id' => $r['fk_id'],
-            )
-        );
+        if(is_array($r['type']) && count($r['type']) > 0 && count($r['fk_id']) > 0 && count($r['fk_id']) > 0){
+            $new = $this->homeSliderFeed->create(
+                array(
+                    'side' => $r['side'],
+                    'title' => $r['title'],
+                    'type' => '',//not use anymore
+                    'fk_id' => '0',//not use anymore
+                )
+            );
+
+//            foreach($r['type'] as $t){
+//                $this->userRepository->saveHomeSliderSettings($new->id, 'type-'.$t, $t);
+//            }
+
+            foreach($r['fk_id'] as $t){
+                $p = explode('-', $t);
+                $this->userRepository->saveHomeSliderSettings($new->id, $p[0], $p[1]);
+            }
+        }
 
         if(isset($new['id']) && isset($r['icon'])){
             $this->userRepository->uploadAttachment($r['icon'],Auth::user()->id, $new['id'],
@@ -1066,10 +1076,14 @@ class AdminController extends Controller
         return Redirect::back()->with('message', "Successfully Added!");
     }
 
-    public function searchContentTypes(Request $request)
+    public function searchContentTypes($type, Request $request)
     {
         $r = $request->all();
-        $data = $this->contentService->ajaxSearchContentGroup($r['q']['term']);
+        $types = explode(',', $type);
+        $data = [];
+        if(isset($r['q']['term'])){
+            $data = $this->contentService->ajaxSearchContentGroup($r['q']['term'], $types);
+        }
         echo json_encode($data);
     }
 

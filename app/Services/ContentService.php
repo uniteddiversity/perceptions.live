@@ -485,15 +485,18 @@ class ContentService
         return $uploaded_files;
     }
 
-    public function ajaxSearchContentGroup($text, $type = '')
+    public function ajaxSearchContentGroup($text, $types = [])
     {
         $content = [];
         $r = [];
-        if($type == ''){
-            $content['category'] = $this->category->where('name', 'like', '%'.$text.'%')->limit(10)->get()->toArray();
-            $content['group'] = $this->group->where('name', 'like', '%'.$text.'%')->limit(10)->get()->toArray();
-            $content['gci'] = $this->sortingTag->where('tag', 'like', '%'.$text.'%')->where('tag_for','gci')->limit(10)->get()->toArray();
-        }
+//        if($type == ''){
+            if(in_array('category', $types))
+                $content['category'] = $this->category->where('name', 'like', '%'.$text.'%')->limit(10)->get()->toArray();
+            if(in_array('group', $types))
+                $content['group'] = $this->group->where('name', 'like', '%'.$text.'%')->limit(10)->get()->toArray();
+            if(in_array('GCI', $types))
+                $content['gci'] = $this->sortingTag->where('tag', 'like', '%'.$text.'%')->where('tag_for','gci')->limit(10)->get()->toArray();
+//        }
 
         foreach($content as $type => $arrays){
             foreach($arrays as $value){
@@ -511,30 +514,40 @@ class ContentService
     public function listHomeSlider()
     {
         $slider = $this->homeSliderFeed->with('image')
-            ->leftJoin('groups','groups.id', 'home_slider_feeds.fk_id', function($q){
-                $q->where('home_slider_feeds.type', 'group');
+            ->leftJoin('home_slider_feed_settings', 'home_slider_feed_settings.feed_id','home_slider_feeds.id')
+            ->leftJoin('groups','groups.id', 'home_slider_feed_settings.fk_id', function($q){
+                $q->where('home_slider_feed_settings.type', 'group');
             })
-            ->leftJoin('categories','categories.id', 'home_slider_feeds.fk_id', function($q){
-                $q->where('home_slider_feeds.type', 'category');
-            })->leftJoin('sorting_tags','sorting_tags.id', 'home_slider_feeds.fk_id', function($q){
-                $q->where('home_slider_feeds.type', 'gci');
+            ->leftJoin('categories','categories.id', 'home_slider_feed_settings.fk_id', function($q){
+                $q->where('home_slider_feed_settings.type', 'category');
+            })->leftJoin('sorting_tags','sorting_tags.id', 'home_slider_feed_settings.fk_id', function($q){
+                $q->where('home_slider_feed_settings.type', 'gci');
             })
-            ->select('home_slider_feeds.*', 'groups.name', 'categories.name', 'categories.name', 'sorting_tags.tag')
+            ->select('home_slider_feeds.*', 'home_slider_feed_settings.type', 'home_slider_feed_settings.fk_id', 'groups.name', 'categories.name', 'categories.name', 'sorting_tags.tag')
             ->get()->toArray();
 
         $r = array();
         $i = 0;
+
         foreach($slider as $val){
+            $i = $val['id'];
             $r[$i]['id'] = $val['id'];
             $r[$i]['side'] = $val['side'];
             $r[$i]['title'] = $val['title'];
             $r[$i]['fk_title'] = isset($val['name'])?$val['name'] : $val['tag'];
-            $r[$i]['fk_id'] = $val['fk_id'];
-            $r[$i]['type'] = $val['type'];
+            $r[$i]['fk_id'][] = $val['fk_id'];
+            $r[$i]['type'][] = $val['type'];
+            $r[$i]['types'][$val['type']][] = $val['fk_id'];
+            $items = [];
+            foreach($r[$i]['types'] as $key => $v){
+                $items[] = $key .'-'. implode(',', $v);
+            }
+//            $r[$i]['type_id'][] = $items;
+            $r[$i]['type_ids'] = implode('|',$items);
             $r[$i]['icon'] = isset($val['image'][0]) && !empty($val['image'][0])? $val['image'][0]['url'] : 'default_icon.jpg';
-            $i++;
+//            $i++;
         }
-
+//        dd($r);
         return $r;
     }
 

@@ -323,6 +323,7 @@ class HomeController extends Controller
         $filter['sorting_tag'] = isset($_GET['sorting_tag'])?($_GET['sorting_tag']):'';
         $filter['service_or_opportunity'] = isset($_GET['exchange_for'])?($_GET['exchange_for']):'';
         $filter['group_id'] = isset($_GET['group_id'])?($_GET['group_id']):'';
+        $filter['multi_search'] = isset($_GET['multi_search'])?($_GET['multi_search']):'';
 
         $uploaded_list = $this->userRepository->getPublicContents($user_id, $filter, $result_count);
         $json_output = $this->getSearchListInJson($uploaded_list);

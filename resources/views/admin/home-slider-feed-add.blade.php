@@ -53,7 +53,7 @@
                     </div>
                     <div class="form-group">
                         <label for="exampleInputEmail1">Type</label>
-                        <select class="form-control multi-select2" id="slider_type" name="type" >
+                        <select multiple class="form-control multi-select2" id="slider_type" name="type[]" >
                             @foreach(array('category','group','GCI') as $type)
                             <option value="<?php echo $type ?>" <?php if($type == old('type')){ echo 'selected'; } ?> >{{$type}}</option>
                             @endforeach
@@ -61,11 +61,11 @@
                     </div>
                     <div class="form-group">
                         <label for="exampleInputEmail1">Category/GCI/Group</label>
-                        <select class="content-type-select-ajax form-control">
+                        <select data-name="selection val" multiple class="content-type-select-ajax form-control" name="fk_id[]">
                             <option>Search Here</option>
                         </select>
-                        <input type="hidden" id="type" name="type" />
-                        <input type="hidden" id="fk_id" name="fk_id" />
+<!--                        <input type="hidden" id="type" name="type" />-->
+<!--                        <input type="hidden" id="fk_id" name="fk_id" />-->
                     </div>
                     <div class="form-group">
                         <label for="exampleInputEmail1">Icon</label>

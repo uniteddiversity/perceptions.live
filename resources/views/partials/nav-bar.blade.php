@@ -84,9 +84,9 @@
               @if($feed['side'] == 'left')
               <?php $i++; ?>
               <div class="slick-tile">
-                <div onclick="loadFilters({{$feed['fk_id']}},'{{$feed['type']}}')" data-thumb-id="<?php echo $i ?>" 
+                <div onclick="loadFilters('{{ $feed['type_ids'] }}','')" data-thumb-id="<?php echo $i ?>"
                     class="slider-image thumb <?php if($i) echo 'active' ?>" 
-                    style="background-image: url('{{ Imgfly::imgFly('../public/'.$feed['icon'].'?w=35' ) }}')">
+                    style="background-image: url('{{ Imgfly::imgFly('../public/'.$feed['icon'].'?h=65' ) }}')">
                 </div>
                 <div class="slider-text">{{$feed['title']}}</div>
               </div>
@@ -111,7 +111,7 @@
                 @if($feed['side'] == 'right')
                 <?php $i++; ?>
                 <div class="slick-tile">
-                    <div class="slider-image" onclick="loadFilters({{$feed['fk_id']}},'{{$feed['type']}}')" data-thumb-id="<?php echo $i ?>" class="thumb <?php if($i) echo 'active' ?>" style="background-image: url('{{ Imgfly::imgFly('../public/'.$feed['icon'].'?w=35' ) }}')">
+                    <div class="slider-image" onclick="loadFilters( '{{$feed['type_ids']}}' ,'')" data-thumb-id="<?php echo $i ?>" class="thumb <?php if($i) echo 'active' ?>" style="background-image: url('{{ Imgfly::imgFly('../public/'.$feed['icon'].'?h=65' ) }}')">
                     </div>
                     <div class="slider-text">{{$feed['title']}}</div>
                 </div>
@@ -256,7 +256,9 @@
             @endif
         </div>
     </div>
-    <div class="toolbar">
+
+
+    <?php /*<div class="toolbar">
       <div class="thumbs-container bottom">
         <div class="thumb_wrapper">
           <div class="left_slide">
@@ -265,9 +267,9 @@
             @if($feed['side'] == 'left')
             <?php $i++; ?>
             <div class="slick-tile">
-              <div onclick="loadFilters({{$feed['fk_id']}},'{{$feed['type']}}')" data-thumb-id="<?php echo $i ?>" 
-                  class="slider-image thumb <?php if($i) echo 'active' ?>" 
-                  style="background-image: url('{{ Imgfly::imgFly('../public/'.$feed['icon'].'?w=35' ) }}')">
+              <div onclick="loadFilters('','')" data-thumb-id="<?php echo $i ?>"
+                  class="slider-image thumb <?php if($i) echo 'active' ?>"
+                  style="background-image: url('{{ Imgfly::imgFly('../public/'.$feed['icon'].'?w=65' ) }}')">
               </div>
               <div class="slider-text">{{$feed['title']}}</div>
             </div>
@@ -277,6 +279,9 @@
         </div>
       </div>
     </div>
+    */ ?>
+
+
 </div>
 <!-- <div class="new-mobile-header">
   <div class="new-mobile-inner">

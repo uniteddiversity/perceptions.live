@@ -9,6 +9,7 @@ use App\Content;
 use App\ContentAccessLevels;
 use App\Group;
 use App\GroupContentAssociation;
+use App\HomeSliderFeedSetting;
 use App\Invoice;
 use App\MediaPackage;
 use App\MediaPackageRules;
@@ -108,13 +109,17 @@ class UserRepository
      * @var Comment
      */
     private $comment;
+    /**
+     * @var HomeSliderFeedSetting
+     */
+    private $homeSliderFeedSetting;
 
     public function __construct(User $user, Content $content,
                                 UserGroup $userGroup, Group $group, Role $role, UserContentAssociation $userContentAssociation,
                                 Attachment $attachment, SortingTag $sortingTag, GroupContentAssociation $groupContentAssociation,
                                 TagContentAssociation $tagContentAssociation, TagUserAssociation $tagUserAssociation, UserStatus $userStatus,
                                 ContentAccessLevels $contentAccessLevels, MetaData $metaData, UserSortingTag $userSortingTag, ClaimProfileRequests $claimProfileRequests,
-                                TagGroupAssociation $tagGroupAssociation, Comment $comment)
+                                TagGroupAssociation $tagGroupAssociation, Comment $comment, HomeSliderFeedSetting $homeSliderFeedSetting)
     {
         $this->user = $user;
         $this->content = $content;
@@ -134,6 +139,7 @@ class UserRepository
         $this->claimProfileRequests = $claimProfileRequests;
         $this->tagGroupAssociation = $tagGroupAssociation;
         $this->comment = $comment;
+        $this->homeSliderFeedSetting = $homeSliderFeedSetting;
     }
 
     public function getUsers($filter = array(), $user_id = null, &$r = '', $per_page = null)
@@ -494,6 +500,25 @@ class UserRepository
 
         if(isset($filter['group_id']) && !empty($filter['group_id'])){
             $contents = $contents->where('user_groups.id', $filter['group_id']);
+        }
+
+        if(isset($filter['multi_search']) && !empty($filter['multi_search'])){
+            $cats = explode('|', $filter['multi_search']);
+            $search_by_groups = [];
+            foreach($cats as $v){
+                $ids = explode('-', $v);
+                $search_by_groups[$ids[0]] = $ids[1];
+            }
+//            dd($search_by_groups);
+            if(isset($search_by_groups['category'])){
+                $contents = $contents->whereIn('contents.category_id', explode(',',$search_by_groups['category']));
+            }
+            if(isset($search_by_groups['gci'])){
+                $contents = $contents->whereIn('search_tag.content_tag_id', explode(',',$search_by_groups['gci']) );
+            }
+            if(isset($search_by_groups['group'])){
+                $contents = $contents->whereIn('user_groups.id', explode(',',$search_by_groups['group']) );
+            }
         }
 
         $contents = $contents->select('contents.id', DB::Raw("SUBSTRING(contents.brief_description, 1, 128) as trim_description"), 'contents.lat', 'contents.long', 'contents.title', 'contents.url',
@@ -1266,6 +1291,22 @@ class UserRepository
     public function deleteComment($id, $user_id)
     {
         return $this->comment->where('id',$id)->delete();
+    }
+
+    public function deleteSliderSettingsByFkId($fk_id)
+    {
+        $rec = $this->homeSliderFeedSetting->where('feed_id', $fk_id);
+        return $rec->delete();
+    }
+
+    public function saveHomeSliderSettings($feed_id, $type, $setting){
+        $this->homeSliderFeedSetting->create(
+            array(
+                'feed_id' => $feed_id,
+                'type' => $type,
+                'fk_id' => $setting,
+            )
+        );
     }
 }
 

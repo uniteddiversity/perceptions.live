@@ -86,26 +86,34 @@ function advance_search(){
 
 function loadFilters(id, type){
     // console.log('id and cat ',id, type)
+    $('#video_search_res').html('Loading...');
     let $search_cat = '';
     let $gci = '';
     let $group_id = '';
     let $search_text = '';
 
-    if(type == 'gci'){
-        $gci = id;
-    }else if(type == 'category'){
-        $search_cat = id;
-    }else if (type == 'group'){
-        $group_id = id;
-    }
+    // if(type == 'gci'){
+    //     $gci = id;
+    // }else if(type == 'category'){
+    //     $search_cat = id;
+    // }else if (type == 'group'){
+    //     $group_id = id;
+    // }
 
-    $.get( "/home/ajax/video-search/?text="+$search_text+"&category_id="+$search_cat+"&gcs="+$gci+"&group_id="+$group_id, function( data ) {
+    $.get( "/home/ajax/video-search/?multi_search="+id+"&category_id="+$search_cat+"&gcs="+$gci+"&group_id="+$group_id, function( data ) {
         console.log(data.json.original);
         if(data.content == '')
             $('#video_search_res').html('No result!');
 
+        if(data.content ==''){
+            $('#video_search_res').html('* No result found');
+        }else{
+            $('#video_search_res').html(decode(data.content));
+        }
+
         updateMarkers(data.json.original);
-        $('#video_search_res').html(decode(data.content));
+        // $('#video_search_res').html(decode(data.content));
+        // $('#video_search_res').html('');
 
     });
 }

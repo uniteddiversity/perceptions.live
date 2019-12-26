@@ -23,4 +23,9 @@ class HomeSliderFeed extends Model
             ->where('status','=','1')
             ->where('submission_type','home_slider_feeds');
     }
+
+    public function setting()
+    {
+        return $this->hasMany('App\HomeSliderFeedSetting', 'feed_id');
+    }
 }
