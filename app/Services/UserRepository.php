@@ -840,9 +840,17 @@ class UserRepository
         return $tag->get();
     }
 
-    public function getGreaterCommunityIntentionTag()
+    public function getGreaterCommunityIntentionTag($filter = array())
     {
-        $tag = $this->sortingTag->where('tag_for', 'gci');
+        $tag = $this->sortingTag->where('sorting_tags.tag_for', 'gci');
+        if(isset($filter['contents'])){
+            $tag = $tag->leftJoin('tag_content_associations', function($q){
+                $q->on('tag_content_associations.content_tag_id', 'sorting_tags.id')
+                    ->where('tag_content_associations.tag_for', 'gci');
+            });
+            $tag = $tag->whereIn('tag_content_associations.content_id', $filter['contents']);
+        }
+        $tag->select('sorting_tags.*')->groupBy('sorting_tags.id');
         return $tag->get();
     }
 
@@ -1040,7 +1048,6 @@ class UserRepository
     public function getUsersList($user_id, $filter, $limit = 30)
     {
         $users = $this->user;
-
         if(isset($filter['keyword']) && !empty($filter['keyword'])){
             $users = $users->where(function($q) use($filter){
                 $q->where('display_name', 'like', '%'.$filter['keyword'].'%');
@@ -1049,18 +1056,24 @@ class UserRepository
         }
 
         if(isset($filter['ids'])){
-            $users = $users->whereIn('id', $filter['ids']);
+            $users = $users->whereIn('users.id', $filter['ids']);
+        }
+//        dd($filter);
+        if(isset($filter['groups'])){
+            $users = $users->leftJoin('user_groups', 'user_groups.user_id', 'users.id');
+            $users = $users->whereIn('user_groups.group_id', $filter['groups']);
         }
 
         $users = $users->where('access_level_id', '1')->where('status_id','<>','3');//only public and not deleted
-
-        $users = $users->select('users.*')->limit($limit);
+        $users = $users->groupBy('users.id')->select('users.*')->limit($limit);
         return $users->get();
     }
 
     public function getGroupList($user_id, $filter, $limit = 30)
     {
         $groups = $this->group;
+
+        $current_user = $this->getUser($user_id);
 
         if(isset($filter['keyword']) && !empty($filter['keyword'])){
             $groups = $groups->where(function($q) use($filter){
@@ -1074,8 +1087,12 @@ class UserRepository
         }
 
         $groups = $groups->where('status','=','1');//only public and not deleted
-
-        $groups = $groups->select('groups.*')->limit($limit);
+        if($current_user['role_id'] != 1){
+            $groups = $groups->leftJoin('user_groups', 'user_groups.group_id', 'groups.id');
+            $groups = $groups->where('user_groups.user_id',$user_id)
+            ->where('user_groups.role_id','1');
+        }
+        $groups = $groups->select('groups.*')->groupBy('groups.id')->limit($limit);
         return $groups->get();
     }
 

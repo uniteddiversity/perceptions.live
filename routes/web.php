@@ -57,6 +57,7 @@ Route::post('/', function(){
     Route::get('/ajax/associated_videos_by_user_id/{_user_id}', '\App\Controllers\User\UserController@getAssociatedVideosByUserId');
     Route::get('/home/ajax/video-search-list', '\App\Controllers\HomeController@searchVideosList');
     Route::get('/home/ajax/user-search-list', '\App\Controllers\HomeController@searchUsersList');
+    Route::get('/home/ajax/user-search-list/groups/{group_ids}', '\App\Controllers\HomeController@searchUsersListByGroups');
     Route::get('/home/ajax/group-search-list', '\App\Controllers\HomeController@searchGroupList');
     Route::get('/home/ajax/primary_subject_tag', '\App\Controllers\HomeController@searchPrimarySubjectTagList');
 

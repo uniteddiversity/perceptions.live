@@ -242,6 +242,24 @@ class HomeController extends Controller
         return response()->json(array('total_count' => count($r), 'incomplete_results' => false, 'results' => $r), 200);
     }
 
+    public function searchUsersListByGroups($groups, Request $request)
+    {
+        $r = $request->all();
+        $user_id = (!isset(Auth::user()->id))? 0 : Auth::user()->id;
+        $filter['keyword'] = isset($r['q']['term'])?$r['q']['term']: '';
+        $filter['groups'] = is_array(explode(',', $groups))?explode(',', $groups): array();
+        $users_list = $this->userRepository->getUsersList($user_id, $filter);
+
+        $r = array(); $i = 0;
+        foreach($users_list as $val){
+            $r[$i]['text'] = '@'.$val['display_name'];
+            $r[$i]['id'] = $val['id'];
+            $i++;
+        }
+
+        return response()->json(array('total_count' => count($r), 'incomplete_results' => false, 'results' => $r), 200);
+    }
+
     public function searchGroupList(Request $request)
     {
         $r = $request->all();
@@ -356,21 +374,27 @@ class HomeController extends Controller
     {
         $filters_list = $this->contentService->getSharedMapFiltersListByToken($_token);
         $basic_info = $this->contentService->getSharedMapBasicInfo($_token);
-
+        $filters_group_list = $this->contentService->getSharedMapFiltersListByToken($_token, 'groups');
+        $within_groups = [];
+        foreach($filters_group_list as $group){
+            $within_groups[] = $group['fk_id'];
+        }
+        $content_ids = $this->contentService->getContentIdsByFilter( array('groups' => $within_groups))->toArray();
+        $content_ids = array_column($content_ids,'id');
         $search_elements = '';
         foreach($filters_list as $filter){
             switch($filter['fk_id']){
                 case 1:
                     //Category
                     $type = 'category';
-                    $categories = $this->category->get();
+                    $categories = $this->contentService->getCategories(array('contents' => $content_ids));
                     $search_elements .= view('partials.search-element')
                         ->with(compact('type','categories'));
                     break;
                 case 2:
                     //Greater Community Intention
                     $type = 'gci_tags';
-                    $gci_tags = $this->userRepository->getGreaterCommunityIntentionTag();
+                    $gci_tags = $this->userRepository->getGreaterCommunityIntentionTag(array('contents' => $content_ids));
                     $search_elements .= view('partials.search-element')
                         ->with(compact('type','gci_tags'));
                     break;
@@ -383,8 +407,22 @@ class HomeController extends Controller
                 case 4:
                     //Associated Users
                     $type = 'users';
+                    $filters_users_list = $this->contentService->getSharedMapFiltersListByToken($_token, 'users');
+                    $within_users = [];
+                    foreach($filters_users_list as $user){
+                        $within_users[] = $user['fk_id'];
+                    }
+                    $sub_filter['groups'] = $within_groups;
+                    $sub_filter['ids'] = $within_users;
+                    $users_list = $this->userRepository->getUsersList(0, $sub_filter);
+                    $i = 0; $users = [];
+                    foreach($users_list as $val){
+                        $users[$i]['text'] = '@'.$val['display_name'];
+                        $users[$i]['id'] = $val['id'];
+                        $i++;
+                    }
                     $search_elements .= view('partials.search-element')
-                        ->with(compact('type'));
+                        ->with(compact('type', 'users'));
                     break;
                 case 5:
                     //Service/Opportunity
@@ -407,12 +445,19 @@ class HomeController extends Controller
         }
 
         return view('partials.shared_content')
-            ->with(compact('_token', 'search_elements', 'filters_list','basic_info'));
+            ->with(compact('_token', 'search_elements', 'filters_list','basic_info','within_groups'));
     }
 
     public function shearedContentJson($_token,Request $request)
     {
         $filter = array();
+        $filters_group_list = $this->contentService->getSharedMapFiltersListByToken($_token, 'groups');
+        $within_groups = [];
+        foreach($filters_group_list as $group){
+            $within_groups[] = $group['fk_id'];
+        }
+
+        $filter['groups'] = $within_groups;
         $filter['category_id'] = isset($request['categories'])? $request['categories'] : '';
         $filter['primary_sub_tag'] = isset($request['primary_sub_tag'])? $request['primary_sub_tag'] : '';
         $filter['service_or_opportunity'] = isset($request['s_o_p'])? $request['s_o_p'] : '';//same table with different relationship name

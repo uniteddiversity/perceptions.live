@@ -768,6 +768,7 @@ class AdminController extends Controller
 
     public function editMapGenerate($id)
     {
+        $user_id = (!isset(Auth::user()->id))? 0 : Auth::user()->id;
         $id = (isset($id))?UID::translator($id):0;
         $edit_data = $this->contentService->getGroupShareData($id);
         $filter_list = $this->contentService->getGroupSearchFilterList();
@@ -807,7 +808,7 @@ class AdminController extends Controller
         }
 
         if(isset($data['groups'])){
-            $list = $this->userRepository->getGroupList(0, array('ids' => $data['groups']));
+            $list = $this->userRepository->getGroupList($user_id, array('ids' => $data['groups']));
 
             $i = 0;
             foreach($list as $val){
@@ -815,7 +816,7 @@ class AdminController extends Controller
                 $selected_groups[$i]['id'] = $val['id'];
                 $i++;
             }
-        }
+        }//dd($selected_groups);
 
         $gci_tags = $this->userRepository->getGreaterCommunityIntentionTag();
         $categories = $this->category->get();
@@ -1034,7 +1035,7 @@ class AdminController extends Controller
     public function postHomeSliderFeed(Request $request)
     {
         $messages = [
-            'fk_id.required' => 'Please search and select the Category/GCI/Group!',
+            'fk_id.required' => 'Please search and select the Content!',
         ];
 
         $validator = Validator::make($request->all(), [

@@ -380,6 +380,10 @@ class ContentService
                 //,DB::Raw("concat(contents_category_ids,',',user_contents_ids,',',contents_ids) as all_videos")
                 );
 
+        if(isset($filter['groups'])){
+            $map = $map->whereIn('groups.group_id', $filter['groups']);
+        }
+
         $map = $map->where('shared_contents.public_token', $token)->groupBy('shared_contents.id')->get()->first();
 
         $ids = array();
@@ -420,12 +424,12 @@ class ContentService
         return $locations;
     }
 
-    public function getSharedMapFiltersListByToken($_token)
+    public function getSharedMapFiltersListByToken($_token, $table = 'filter_list')
     {
         $filters = $this->shearedContent
             ->leftJoin('shared_contents_associations as association', 'association.shared_content_id', 'shared_contents.id')
             ->where('shared_contents.public_token', $_token)
-            ->where('table', 'filter_list')->select('association.*')->get()->toArray();
+            ->where('table', $table)->select('association.*')->get()->toArray();
 
         return $filters;
     }
@@ -559,5 +563,45 @@ class ContentService
     public function getLanguages()
     {
         return $this->language->get();
+    }
+
+    public function getContentIdsByFilter($filter, $limit = 200, $per_page = null)
+    {
+        $contents = $this->content
+            ->leftJoin('group_content_associations', 'group_content_associations.content_id', 'contents.id');
+
+        if(isset($filter['groups'])){
+            $contents = $contents->whereIn('group_content_associations.group_id', $filter['groups']);
+        }
+        $contents->select('contents.id')->groupBy('contents.id');
+
+        if($per_page != null){
+            $contents = $contents->paginate($per_page);
+        }else{
+            $contents = $contents->limit($limit)->get();
+        }
+
+        return $contents;
+    }
+
+    public function getCategories($filter, $limit = 200, $per_page = null)
+    {
+        $category = $this->category;
+
+        if(isset($filter['contents']))
+        {
+            $category = $category->leftJoin('contents', 'contents.category_id', 'categories.id');
+            $category = $category->whereIn('contents.id', $filter['contents']);
+        }
+
+        $category->select('categories.*')->groupBy('categories.id');
+
+        if($per_page != null){
+            $category = $category->paginate($per_page);
+        }else{
+            $category = $category->limit($limit)->get();
+        }
+
+        return $category;
     }
 }

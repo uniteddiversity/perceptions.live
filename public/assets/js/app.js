@@ -676,6 +676,63 @@ function displayVideoContentUpload() {
         }
     });
 
+$('.map-sharing-ajax-users').select2({
+    ajax: {
+        url: function(){
+            return '/home/ajax/user-search-list/groups/'+  $('.select2-ajax-groups').val()
+        },
+        dataType: 'json',
+
+        // data: function() {
+        //     var myValue = $(this).val();
+        //     return JSON.stringify({variable: myValue})
+        // },
+        data: function (term, page) {
+            // page is the one-based page number tracked by Select2
+            return {
+                "type":$('#slider_type').val(),
+                //search term
+                "q": term,
+                // page size
+                "_per_page": 30,
+                // page number
+                "_page": page,
+            };
+        },
+        initSelection: function (data) {
+            console.log('selected option ', data);
+        },
+        templateResult: function (data) {
+            // console.log('selected option ', data);
+            //     var $result = $("<span></span>");
+            //     $result.text(data.text);
+            //     if (data.newOption) {
+            //         $result.append(" <em>(new)</em>");
+            //     }
+            //     return $result;
+        },
+        processResults: function (response) {
+            // return {
+            //     results: response
+            // };
+
+            let results = [];
+            // console.log('responce is ',response);
+            $.each(response.results, function (index, data) {
+                results.push({
+                    id: data.id,
+                    text: data.text,
+                    // type: data.type
+                });
+            });
+
+            return {
+                results: results
+            };
+        }
+    }
+});
+
 $('.content-type-select-ajax').on('select2:select', function (e) {
     let data = e.params.data;
     $('#fk_id').val(data.id);

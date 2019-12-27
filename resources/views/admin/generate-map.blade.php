@@ -138,7 +138,7 @@ if (isset($edit_data)) {
 
             <div class="form-group">
               <label for="associated_users">Associated Users</label>
-              <select class="form-control select2-ajax-users" id="associated_users" multiple name="associated_users[]">
+              <select class="form-control map-sharing-ajax-users" id="associated_users" multiple name="associated_users[]">
                 <?php foreach ($selected_users as $int_data) {
                   echo '<option value="' . $int_data['id'] . '" selected >' . $int_data['text'] . '</option>';
                 } ?>

@@ -60,7 +60,7 @@
                         </select>
                     </div>
                     <div class="form-group">
-                        <label for="exampleInputEmail1">Category/GCI/Group</label>
+                        <label for="exampleInputEmail1">Content</label>
                         <select data-name="selection val" multiple class="content-type-select-ajax form-control" name="fk_id[]">
                             <option>Search Here</option>
                         </select>
