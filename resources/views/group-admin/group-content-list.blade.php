@@ -9,7 +9,7 @@
   <div class="col-lg-12 grid-margin stretch-card">
     <div class="card">
       <div class="card-body">
-        <h4 class="card-title">Uploaded Videos</h4>
+        <h4 class="card-title">Group Videos</h4>
         <div class="table-responsive group-videos-list">
           <input type="hidden" id="data_list_id" value="{{$group_id}}" />
           <table class="table" id="lazy-loaded-table-group-admin" data-page-length='10'>

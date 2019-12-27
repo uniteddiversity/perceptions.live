@@ -4,7 +4,7 @@
 <div class="col-lg-12 grid-margin stretch-card">
   <div class="card">
     <div class="card-body">
-      <h4 class="card-title">Add User to Group</h4>
+      <h4 class="card-title">Organize Your Group's Users</h4>
       @if ($errors->any())
       <div class="alert alert-danger">
         <ul>
@@ -78,7 +78,7 @@
         ?>
         <div class="form-group">
           <label for="exampleSelect1">Users in Group</label>
-          <select class="form-control multi-select2" id="exampleSelect1" multiple name="users_in_groups[{{$group_id}}][]" style="height:300px">
+          <select class="form-control multi-select2" id="exampleSelect1" multiple name="users_in_groups[{{$group_id}}][]">
             @foreach($user_list as $user)
             <option value="{{$user->id}}" <?php if (isset($user_ids[$user->id])) {
                                             echo 'selected';
@@ -86,7 +86,7 @@
             @endforeach
           </select>
         </div>
-        <button type="submit" class="btn btn-primary btn-submit">Add Selected to Group</button>
+        <button type="submit" class="btn btn-primary btn-submit">Save</button>
 
       </form>
     </div>
