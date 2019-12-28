@@ -464,7 +464,6 @@ class HomeController extends Controller
         $filter['gcs'] = isset($request['gci'])? $request['gci'] : '';
         $filter['associate_user_id'] = isset($request['user_id'])? $request['user_id'] : '';
         $uploaded_list = $this->contentService->generateMap($_token, 0,$filter);
-
         $json_output = $this->getSearchListInJson($uploaded_list);
         $content = view('partials.shared_video-search-result')
             ->with(compact('uploaded_list'));

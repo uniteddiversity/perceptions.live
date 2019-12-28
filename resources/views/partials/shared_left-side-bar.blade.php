@@ -1,30 +1,10 @@
-<div style="padding-right: 0px;overflow: scroll;height: 350px;">
-    <div class="info-box-left" style="margin:10px 10px 10px 10px;">
-        <h2>Feed {{env('APP_NAME', '')}}</h2>
-
-        {{--<div class="form-group">--}}
-            {{--<div class="col-md-4" style="margin:0px;padding: 0px;">--}}
-                {{--<input type="text" class="form-control" aria-describedby="nameHelp" name="search_text" id="search_text" placeholder="Search">--}}
-            {{--</div>--}}
-            {{--<div class="col-md-4" style="padding-right: 0px;">--}}
-                {{--<select class="form-control" id="content_search_cat">--}}
-                    {{--<option value="">All Categories</option>--}}
-                    {{--@foreach($categories as $cat)--}}
-                        {{--<option value="{{$cat->id}}" >{{$cat->name}}</option>--}}
-                    {{--@endforeach--}}
-                {{--</select>--}}
-            {{--</div>--}}
-            {{--<div class="col-md-4" style="padding-right: 0px;padding-left: 10px;">--}}
-                {{--<buttonc class="btn btn-primary" onclick="searchVideo()">Search</buttonc>--}}
-                {{--<buttonc class="btn btn-primary" onclick="resetSearch()">Reset</buttonc>--}}
-            {{--</div>--}}
-        {{--</div>--}}
-        <div class="form-group">
-            RECENT
-        </div>
-
-
-        <div class="form-group" style="height: 100%; " id="video_search_res">
+<div style="padding-right: 0px;overflow: scroll;height: 380px;">
+    <div class="info-box-left">
+        <h3 style="margin:10px 10px 10px 22px;">{{$basic_info['group']}}</h3>
+        <div class="ml-placessec">
+            <div class="row" id="video_search_res">
+                ...
+            </div>
         </div>
     </div>
 </div>
