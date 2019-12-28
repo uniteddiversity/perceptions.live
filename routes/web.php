@@ -128,7 +128,7 @@ Route::group(['prefix' => 'user', 'middleware' => ['auth', 'web']], function () 
     Route::get('/user-profile', '\App\Controllers\User\UserController@profileSettings');
     Route::post('/user-profile-post', '\App\Controllers\User\UserController@postProfileSettings');
 
-    Route::get('/user-last-active', '\App\Controllers\User\UserController@postLastActive');
+    Route::get('/user-last-active', '\App\Controllers\User\UserController@postLastActive')->name('is.user_active');
     Route::get('/movie-editor', '\App\Controllers\User\UserController@movieEditor');
     Route::get('/movie-editor/{_token}', '\App\Controllers\User\UserController@getTokenInfo');
 

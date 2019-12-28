@@ -40,12 +40,29 @@ $(document).on('ready', function () {
     $(content).fadeIn(200);
   });
 
+    function getUrlVars() {
+        var vars = {};
+        var parts = window.location.href.replace(/[?&]+([^=&]+)=([^&]*)/gi, function(m,key,value) {
+            vars[key] = value;
+        });
+        return vars;
+    }
+
+    let action = getUrlVars()["action"];
+    if(action == 'login'){
+      openLogin();
+    }
+
+    function openLogin(){
+      $('.uploadBtnWrap').css('display', 'none');
+      $('.popupsec').fadeIn();
+      $('html').addClass('no-scroll');
+    }
 
   $('.accountbtn').on('click', function () {
-    $('.uploadBtnWrap').css('display', 'none');
-    $('.popupsec').fadeIn();
-    $('html').addClass('no-scroll');
+    openLogin()
   });
+
   $('.closepopup').on('click', function () {
     $('.uploadBtnWrap').fadeIn();
     $('.popupsec').fadeOut();
