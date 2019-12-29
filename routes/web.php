@@ -187,6 +187,8 @@ Route::group(['prefix' => 'user', 'middleware' => ['auth', 'web', 'admin']], fun
     Route::get('/admin/search-content-type/ajax/type/{_types}', '\App\Controllers\User\AdminController@searchContentTypes');
     Route::get('/admin/list-profile-claim-request', '\App\Controllers\User\AdminController@listClaimProfileRequest');
     Route::get('/admin/view-profile-claim-request/{_id}', '\App\Controllers\User\AdminController@viewClaimProfileRequest');
+    Route::get('/admin/edit-profile-claim-request/{_id}', '\App\Controllers\User\AdminController@editClaimProfileRequest');
+    Route::post('/admin/edit-profile-claim-request/{_id}', '\App\Controllers\User\AdminController@postEditClaimProfileRequest');
     Route::post('/admin/post-claim-request/{_id}', '\App\Controllers\User\AdminController@postClaimProfileRequest');
 
     Route::get('/admin/comment-list/{_fk_id}/{_table}', '\App\Controllers\User\AdminController@comments');

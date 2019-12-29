@@ -3,6 +3,8 @@
 namespace App\Controllers\User;
 
 use App\Category;
+use App\ClaimAssociatedContents;
+use App\ClaimProfileRequests;
 use App\Content;
 use App\Group;
 use App\HomeSliderFeed;
@@ -65,10 +67,18 @@ class AdminController extends Controller
      * @var HomeSliderFeed
      */
     private $homeSliderFeed;
+    /**
+     * @var ClaimProfileRequests
+     */
+    private $claimProfileRequests;
+    /**
+     * @var ClaimAssociatedContents
+     */
+    private $claimAssociatedContents;
 
     public function __construct(Content $content, User $user, UserRepository $userRepository,
                                 Category $category, MetaData $metaData, ContentService $contentService, Group $group,
-                                SiteSetting $siteSetting, HomeSliderFeed $homeSliderFeed)
+                                SiteSetting $siteSetting, HomeSliderFeed $homeSliderFeed, ClaimProfileRequests $claimProfileRequests, ClaimAssociatedContents $claimAssociatedContents)
     {
         $this->content = $content;
         $this->user = $user;
@@ -79,6 +89,8 @@ class AdminController extends Controller
         $this->group = $group;
         $this->siteSetting = $siteSetting;
         $this->homeSliderFeed = $homeSliderFeed;
+        $this->claimProfileRequests = $claimProfileRequests;
+        $this->claimAssociatedContents = $claimAssociatedContents;
     }
 
     public function profile()
@@ -1100,6 +1112,56 @@ class AdminController extends Controller
         $data = $this->userRepository->getClaimRequests($id);
 
         return view('admin.profile-claim-request-view')->with(compact('data'));
+    }
+
+    public function editClaimProfileRequest($_id)
+    {
+        $id = UID::translator($_id);
+        $data = $this->userRepository->getClaimRequests($id);
+
+        return view('admin.profile-claim-request-edit')->with(compact('data'));
+    }
+
+    public function postEditClaimProfileRequest($_id, Request $request)
+    {
+        $user_id = (!isset(Auth::user()->id))? 0 : Auth::user()->id;
+        $r = $request->all();
+        $id = UID::translator($_id);
+        $validator = Validator::make($request->all(),
+            [
+//            'email' => 'required|email|unique:users',
+                'display_name' => 'required',
+                'claim_video_profile' => 'required',
+                'email' => 'required',
+            ]);
+        if ($validator->fails()) {
+            return Redirect::back()->withErrors($validator->messages())->withInput();
+        }
+
+        $rec = $this->claimProfileRequests->find($id)->update(array(
+            'type' => 'users',
+            'fk_id' => $r['display_name'],
+            'display_name' => '[display_name]',
+            'email' => $r['email'],
+            'comments' => $r['additional_comments'],
+        ));
+
+        $this->claimAssociatedContents->where('claim_profile_request_id', $id)->delete();
+        foreach($r['claim_video_profile'] as $relation){
+            $this->claimAssociatedContents->create(array(
+//                'attachment_id' => 'users',
+                'type' => 'users',
+                'claim_profile_request_id' => $id,
+                'fk_id' => $relation
+            ));
+        }
+
+        if(isset($r['proof_of_work']))
+            foreach($r['proof_of_work'] as $content){
+                $this->userRepository->uploadAttachment($content,$user_id, $id, 'claim-proof', 'claim_profile_requests', 1);
+            }
+
+        return redirect()->back()->with('message', 'Updated!');
     }
 
     public function postClaimProfileRequest($_id, Request $request)

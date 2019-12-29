@@ -36,6 +36,7 @@
                                 <tr>
                                     <td>
                                         <a href="/user/admin/view-profile-claim-request/{{ uid($d->id) }}" >View</a>
+                                        <a href="/user/admin/edit-profile-claim-request/{{ uid($d->id) }}" >Edit</a>
                                     </td>
                                     <td>
                                         {{ $d->email }}

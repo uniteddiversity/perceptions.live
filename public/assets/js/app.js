@@ -792,6 +792,47 @@ $('.display-name-select-ajax').on('select2:select', function (e) {
     videosForUser(data.id)
 });
 
+// if($('.display-name-select-ajax').val() != ''){
+//     // videosForUser($('.display-name-select-ajax').val())
+// }
+
+$('#claim_video_profile_admin').select2({
+    ajax: {
+        url: function(){
+            return '/ajax/associated_videos_by_user_id/' +$('.display-name-select-ajax').val()
+        },
+        dataType: 'json',
+        data: function (term, page) {
+            // page is the one-based page number tracked by Select2
+            return {
+                "q": term,
+                "_per_page": 30,
+                "_page": page,
+            };
+        },
+        initSelection: function (data) {
+            console.log('selected option ', data);
+        },
+        templateResult: function (data) {
+        },
+        processResults: function (response) {
+            let results = [];
+            $.each(response, function (index, data) {
+                results.push({
+                    id: data.id,
+                    text: data.text,
+                    // text: data.text + ' ('+data.email+')',
+                    type: data.type
+                });
+            });
+
+            return {
+                results: results
+            };
+        },
+    }
+})
+
 function videosForUser(user_id) {
     jQuery.ajax({
         url: '/ajax/associated_videos_by_user_id/' + user_id,
