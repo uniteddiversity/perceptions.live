@@ -37,6 +37,7 @@ Route::post('/', function(){
     Route::get('/ajax-available-videos/{_id}', array('uses' => '\App\Controllers\HomeController@ajaxVideosNew'));
     Route::get('/home/ajax-video-info/{_video_id}', '\App\Controllers\HomeController@getVideoInfo');
     Route::get('/home/ajax-video-info-small/{_video_id}', '\App\Controllers\HomeController@getVideoInfoMini');
+    Route::get('/home/ajax-video-info-shared-small/{_video_id}', '\App\Controllers\HomeController@getVideoInfoSharedMini');
     Route::get('/home/ajax-user-info/{_user_id}', '\App\Controllers\HomeController@getUserInfo');
     Route::get('/home/ajax-user-info-video/{_user_id}', '\App\Controllers\HomeController@getUserInfoVideoPartial');
     Route::get('/home/ajax-user-info-groups/{_user_id}', '\App\Controllers\HomeController@getUserInfoGroupPartial');

@@ -380,8 +380,12 @@ class ContentService
                 //,DB::Raw("concat(contents_category_ids,',',user_contents_ids,',',contents_ids) as all_videos")
                 );
 
-        if(isset($filter['groups'])){
+        if(isset($filter['groups']) && !empty($filter['groups'])){
             $map = $map->whereIn('groups.group_id', $filter['groups']);
+        }
+
+        if(isset($filter['primary_sub_tag']) && !empty($filter['primary_sub_tag'])){
+            $map = $map->where('content.primary_subject_tag', 'LIKE', '%'.$filter['primary_sub_tag'].'%');
         }
 
         $map = $map->where('shared_contents.public_token', $token)->groupBy('shared_contents.id')->get()->first();

@@ -9,8 +9,8 @@
     </div>
     <div class="left" style="position: relative">
         <div id="map" style="width: 100%;height: 100%;">Loading..</div>
-        <div class="sh_watermark" ></div>
-        <div class="form-groupx" style="position: absolute;z-index: 2; height: 38px;padding:2px;background-color: transparent;top: 308px;">
+        <a target="_blank" href="https://www.perceptions.live"><div class="sh_watermark" ></div></a>
+        <div class="form-groupx" style="position: absolute;z-index: 2; height: 38px;padding:2px;background-color: transparent;bottom: 12px;">
         <?php echo $search_elements ?>
     </div>
 
@@ -18,21 +18,44 @@
 <style>
     .sh_container {
         width:100%;
-        height:350px;
+        height:600px;
         border:1px solid;
     }
     .left {
         width:auto;
-        height:350px;
+        height:600px;
         overflow:hidden;
     }
     .right {
-        height:350px;
+        height:600px;
         width:370px;
         float:left;
         overflow: hidden;
     }
 </style>
+    <style>
+        .dot {
+            height: 22px;
+            width: 22px;
+            border-radius: 50%;
+            display: inline-block;
+            margin: 2px;
+            cursor: pointer;
+        }
+
+        .dot-small {
+            height: 10px;
+            width: 10px;
+            border-radius: 50%;
+            display: inline-block;
+            margin: 2px;
+            cursor: pointer;
+        }
+
+        .leaflet-popup-content{
+            margin: 0px;
+        }
+    </style>
 <!--    <div id="map_position" style="height: 350px;float: left;width: auto;min-width: 900px; position: relative;">-->
 <!--        <div id="map" style="width: 100%;height: 100%;">Loading..</div>-->
 <!--        <div class="form-groupx" style="position: absolute;z-index: 2; height: 38px;padding:2px;background-color: transparent;top: 308px;">-->

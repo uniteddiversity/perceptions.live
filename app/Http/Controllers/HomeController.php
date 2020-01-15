@@ -117,6 +117,15 @@ class HomeController extends Controller
             ->with(compact('info'));
     }
 
+    public function getVideoInfoSharedMini($video_id)
+    {
+        $user_id = (!isset(Auth::user()->id))? 0 : Auth::user()->id;
+        $info = $this->userRepository->getContentsInfo($user_id, $video_id);
+
+        return view('partials.video-info-popup-shared-small')
+            ->with(compact('info'));
+    }
+
     public function getVideoMoreInfo($video_id)
     {
         $user_id = (!isset(Auth::user()->id))? 0 : Auth::user()->id;
@@ -452,14 +461,21 @@ class HomeController extends Controller
     {
         $filter = array();
         $filters_group_list = $this->contentService->getSharedMapFiltersListByToken($_token, 'groups');
+        $basic_info = $this->contentService->getSharedMapBasicInfo($_token);
         $within_groups = [];
         foreach($filters_group_list as $group){
             $within_groups[] = $group['fk_id'];
         }
 
+        if(isset($basic_info['primary_subject_tag']) && !empty($basic_info['primary_subject_tag'])){
+            $filter['primary_sub_tag'] = $basic_info['primary_subject_tag'];
+        }else{
+            $filter['primary_sub_tag'] = '';
+        }
+
         $filter['groups'] = $within_groups;
         $filter['category_id'] = isset($request['categories'])? $request['categories'] : '';
-        $filter['primary_sub_tag'] = isset($request['primary_sub_tag'])? $request['primary_sub_tag'] : '';
+//        $filter['primary_sub_tag'] = isset($request['primary_sub_tag'])? $request['primary_sub_tag'] : '';
         $filter['service_or_opportunity'] = isset($request['s_o_p'])? $request['s_o_p'] : '';//same table with different relationship name
         $filter['gcs'] = isset($request['gci'])? $request['gci'] : '';
         $filter['associate_user_id'] = isset($request['user_id'])? $request['user_id'] : '';

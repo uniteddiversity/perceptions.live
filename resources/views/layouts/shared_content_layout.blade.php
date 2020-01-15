@@ -22,6 +22,8 @@
 
     <link rel="stylesheet" type="text/css" href="/assets/findgo/css/style.css" />
     <link rel="stylesheet" href="/assets/css/custom.css?version=1" />
+    <link rel="stylesheet" href="/assets/css/custom_shared.css" />
+<!--    <link rel="stylesheet" href="/assets/css/leaflet.css" />-->
     <style>
         #featureModal {
             display: block;
@@ -113,7 +115,7 @@
             background-color: transparent;
             height: 50px;
             width: 100px;
-            background-image: url('/assets/findgo/images/live-perceptions-logo.png');
+            background-image: url('/assets/findgo/images/live-perceptions-shared-logo.png');
             /*background: no-repeat;*/
             right: 20px;
             top: 10px;

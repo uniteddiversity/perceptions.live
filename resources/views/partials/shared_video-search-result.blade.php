@@ -59,16 +59,16 @@
                 } ?>
             </span>
             </div>
-            <div class="placethumb active_link" onclick="openVideo('<?php echo $info['id'] ?>')">
+            <div class="placethumb active_link" onclick="openVideo('<?php echo $info['id'] ?>','<?php echo $info['lat'] ?>','<?php echo $info['long'] ?>')">
                 <img src="https://img.youtube.com/vi/<?php echo $video_id ?>/mqdefault.jpg">
                 <?php /*<iframe frameborder="0" showinfo="0" controls="0" autohide="1" style="width: 100%;" src="<?php echo str_replace( 'watch?v=', 'embed/',$info['url']) ?>" frameborder="0" allowfullscreen></iframe> */ ?>
-                <div class="watchicon2" onclick="openVideo('<?php echo $info['id'] ?>')"> <a href="#" title=""><img src="/assets/findgo/images/play3.png" alt=""> </a>
+                <div class="watchicon2" onclick="openVideo('<?php echo $info['id'] ?>','<?php echo $info['lat'] ?>','<?php echo $info['long'] ?>')"> <a href="#" title=""><img src="/assets/findgo/images/play3.png" alt=""> </a>
                 </div>
             </div>
             <div class="boxplaces">
                 <div class="placeinfos" style="display: block;">
 
-                    <h3><a href="#" title="" onclick="openVideo('<?php echo $info['id'] ?>')">
+                    <h3><a href="#" title="" onclick="openVideo('<?php echo $info['id'] ?>','<?php echo $info['lat'] ?>','<?php echo $info['long'] ?>')">
                             <?php echo $info['title'] ?></a>
 
                     </h3>
@@ -88,7 +88,7 @@
                     </div>
                     <?php if(!empty($info['trim_description'])){ ?>
                         <p>
-                            <?php echo $info['trim_description'] ?>...<a href="#" onclick="openVideo('<?php echo $info['id'] ?>')"> Read more →</a> </p>
+                            <?php echo $info['trim_description'] ?>...<a href="#" onclick="openVideo('<?php echo $info['id'] ?>','<?php echo $info['lat'] ?>','<?php echo $info['long'] ?>')"> Read more →</a> </p>
                     <?php } ?>
                     <div class="placedetails">
 

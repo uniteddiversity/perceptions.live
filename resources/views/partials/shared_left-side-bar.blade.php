@@ -1,6 +1,6 @@
-<div style="padding-right: 0px;overflow: scroll;height: 380px;">
+<div style="padding-right: 0px;overflow: scroll;height: 600px;">
     <div class="info-box-left">
-        <h3 style="margin:10px 10px 10px 22px;">{{$basic_info['group']}}</h3>
+        <h3 class="main_map_title" >{{$basic_info['group']}}</h3>
         <div class="ml-placessec">
             <div class="row" id="video_search_res">
                 ...

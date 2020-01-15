@@ -7,17 +7,25 @@ var map = L.map( 'map', {
     zoom: parseFloat(default_zoom)
 });
 
+var popup = L.popup();
 // L.tileLayer( 'https://stamen-tiles-{s}.a.ssl.fastly.net/watercolor/{z}/{x}/{y}.{ext}', {
 //     attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>',
 //     subdomains: ['a','b','c'],
 //     ext: 'png'
 // }).addTo( map );
 
+// L.tileLayer('https://stamen-tiles-{s}.a.ssl.fastly.net/watercolor/{z}/{x}/{y}.{ext}', {
+//     attribution: '',
+//     subdomains: ['a', 'b', 'c'],
+//     ext: 'png'
+// }).addTo(map);
 L.tileLayer('https://stamen-tiles-{s}.a.ssl.fastly.net/watercolor/{z}/{x}/{y}.{ext}', {
-    attribution: '',
+    attribution: 'Map tiles by <a href="http://stamen.com">Stamen Design</a>, <a href="http://creativecommons.org/licenses/by/3.0">CC BY 3.0</a> &mdash; Map data &copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
+    // attribution: '',
     subdomains: ['a', 'b', 'c'],
     ext: 'png'
 }).addTo(map);
+
 
 myURL = '';
 
@@ -58,37 +66,62 @@ function updateMarkers(markers){
 
 var onMarkerClick = function(e){
     $("#feature-info").html('loading...');
-    // console.log(this);//this.options.id
+    console.log(e.latlng);//this.options.id
     jQuery.ajax({
-        url: '/home/ajax-video-info/'+this.options.id,
+        url: '/home/ajax-video-info-shared-small/'+this.options.id,
         method: 'GET'
     }).done(function (content) {
-        $("#feature-title").html("Info:");
-        $("#feature-info").html(content);
-        $("#featureModal").modal("show");
+        // $("#feature-title").html("Info:");
+        // $("#feature-info").html(content);
+        // $("#featureModal").modal("show");
+        popup
+            .setLatLng(e.latlng)
+            .setContent(content)
+            .openOn(map);
     }).fail(function () {
-        $("#feature-title").html("Error:");
-        $("#feature-info").html("Fail to load info");
-        $("#featureModal").modal("show");
+        popup
+            .setLatLng(e.latlng)
+            .setContent("Error with loading...")
+            .openOn(map);
     });
 }
 
-function openVideo(id){
-    $("#feature-info").html('loading...');
+function openVideo(id, lat, long){
+    // $("#feature-info").html('loading...');
     // console.log(this);//this.options.id
     jQuery.ajax({
-        url: '/home/ajax-video-info/'+id,
+        url: '/home/ajax-video-info-shared-small/'+id,
         method: 'GET'
     }).done(function (content) {
-        $("#feature-title").html("Info:");
-        $("#feature-info").html(content);
-        $("#featureModal").modal("show");
+        // console.log(content)
+        popup
+            .setLatLng({lat: lat, lng: long})
+            .setContent(content)
+            .openOn(map);
     }).fail(function () {
-        $("#feature-title").html("Error:");
-        $("#feature-info").html("Fail to load info");
-        $("#featureModal").modal("show");
+        popup
+            // .setLatLng(e.latlng)
+            .setContent("Error with loading...")
+            .openOn(map);
     });
 }
+
+// function openVideo(id){
+//     $("#feature-info").html('loading...');
+//     // console.log(this);//this.options.id
+//     jQuery.ajax({
+//         url: '/home/ajax-video-info/'+id,
+//         method: 'GET'
+//     }).done(function (content) {
+//         $("#feature-title").html("Info:");
+//         $("#feature-info").html(content);
+//         $("#featureModal").modal("show");
+//     }).fail(function () {
+//         $("#feature-title").html("Error:");
+//         $("#feature-info").html("Fail to load info");
+//         $("#featureModal").modal("show");
+//     });
+// }
 
 function openGroupProfile(id){
     $("#feature-info").html('loading...');
