@@ -24,12 +24,11 @@ $data['skills'] = isset($user_data['skill']) ? array_column($user_data['skill'],
         <h4 class="card-title" style="margin-bottom: 10px; text-align: center;">Account and Profile Settings
         </h4>
         <div class="pagedesc" align="center">
-          <p>The information here will be the data that will [eventually] connect you to connections and collaborations around the world. Have fun and please keep it as accurate as possible! :)
+          <p>The information here will be the data that will connect you to connections and collaborations around the world. Have fun and please keep it as accurate as possible! :)
           </p>
           <p>
             <em>Should you encounter any errors we encourage you to
-              <a href="/contact-us">let us know
-              </a>. Thanks!
+              <a href="/contact-us">let us know</a>. Thanks!
             </em>
           </p>
           <div class="table-responsive">
@@ -54,6 +53,7 @@ $data['skills'] = isset($user_data['skill']) ? array_column($user_data['skill'],
               <?php } ?>
               <div class="formdesctext">
                 <strong>Your Account</strong>
+                Private settings.
               </div>
               <div class="form-content">
                 <div class="form-group">
@@ -233,6 +233,9 @@ $data['skills'] = isset($user_data['skill']) ? array_column($user_data['skill'],
   </div>
 </div>
 <style>
+
+  /* User/Group Admin Edit */
+
   .pagedesc {
     font-size: 20px;
     font-family: 'Open Sans', sans-serif;
@@ -255,7 +258,7 @@ $data['skills'] = isset($user_data['skill']) ? array_column($user_data['skill'],
   div.formdesctext strong {
     margin: auto;
     font-family: 'Open Sans', sans-serif;
-    font-size: 32px;
+    font-size: 26px;
     font-weight: 600;
     line-height: 1.1;
     color: #4214c7;
@@ -322,6 +325,8 @@ $data['skills'] = isset($user_data['skill']) ? array_column($user_data['skill'],
       width: 100%;
     }
   }
+
+
 </style>
 @endsection
 <script>

@@ -5,13 +5,13 @@
   <div class="col-lg-12 grid-margin stretch-card">
     <div class="card">
       <div class="card-body">
-        <h4 class="card-title">Uploaded Videos</h4>
+        <h4 class="card-title">Group Videos</h4>
         <div class="table-responsive">
           <table class="table" id="users_llist">
             <thead>
               <tr>
                 <th>
-                  Id
+                  ID
                 </th>
                 <th>
                   Title
@@ -19,9 +19,7 @@
                 {{--<th>--}}
                 {{--Date--}}
                 {{--</th>--}}
-                <th class="d-none d-lg-table-cell">
-                  URL
-                </th>
+
                 <!-- <th>
                   Email
                 </th> -->
@@ -29,11 +27,11 @@
                   Location
                 </th> -->
                 <th class="d-none d-lg-table-cell">
-                  Last Updated Time
+                  Last Updated
                 </th>
-                <th>Info</th>
-                <th class="d-none d-md-table-cell">
-                  Action
+                <th class="d-none d-md-table-cell"></th>
+                <th>
+
                 </th>
               </tr>
             </thead>
@@ -41,17 +39,15 @@
               @foreach ($videos as $video)
               <tr>
                 <td>
-                  <a href="/contact-us">{{ $video->id }}</a>
+                  <a href="/contact-us" target="new">{{ $video->id }}</a>
                 </td>
                 <td style="max-width: 30%">
-                  <a href="{{ $video->url }}">{{ $video->title }}</a>
+                  <strong><u><a href="{{ $video->url }}">{{ $video->title }}</a></u></strong>
                 </td>
                 {{--<td>--}}
                 {{--{{ $video->date }}--}}
                 {{--</td>--}}
-                <td class="d-none d-lg-table-cell" style="max-width: 30%">
-                  {{ $video->url }}
-                </td>
+
                 <!-- <td style="max-width: 150px">
                   {{ isset($video->user)?$video->user->email:'' }}
                 </td> -->
@@ -59,17 +55,17 @@
                   {{ $video->location }}
                 </td> -->
                 <td class="d-none d-lg-table-cell">
-                  {{ $video->updated_at }}
+                  {{ date('Y-m-d', strtotime($video->updated_at)) }}
                 </td>
-                <td style="width: 100px">
-                  <button type="button" class="btn btn-icon-tooltip mr-2" data-toggle="tooltip" title="{{ isset($video->user)?$video->user->email:'' }}">
+                <td  class="d-none d-md-table-cell" style="width: 100px">
+                  <button type="button" class="btn btn-icon-tooltip mr-2" data-toggle="tooltip" title="{{ isset($video->user)?$video->user->display_name:'' }}">
                     <i class="fas fa-envelope-open-text"></i>
                   </button>
                   <button type="button" class="btn btn-icon-tooltip" data-toggle="tooltip" title="{{ $video->location }}">
                     <i class="fas fa-map-marker-alt"></i>
                   </button>
                 </td>
-                <td class="d-none d-md-table-cell">
+                <td>
                   {{--<a href="/user/group-admin/video-edit/{{ uid($video->id) }}" >Edit</a>--}}
                   <a class="btn btn-icon-tooltip" href="/contact-us"><i class="fas fa-edit"></i></a>
                 </td>
