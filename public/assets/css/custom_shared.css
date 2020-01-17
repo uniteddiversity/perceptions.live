@@ -4,3 +4,7 @@
     font-family: 'ralewaybold';
     text-align: center;
 }
+
+iframe{
+    border: 0px;
+}

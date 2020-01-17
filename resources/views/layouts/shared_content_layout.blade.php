@@ -52,6 +52,93 @@
         /*    line-height: 0px !important;*/
         /*}*/
     </style>
+    <style>
+        /* Tooltip */
+        .tooltip {
+            position: absolute;
+            background: black;
+            color: #fff;
+            padding: 3px;
+            z-index: 1000000000;
+        }
+
+        .leaflet-popup-content {
+            margin: 0px;
+            width: 200px;
+        }
+
+        /* Geolocation Icon */
+        .fa-map-marker:before {
+            content: "\f0ac";
+        }
+
+        /*  Clustering color   */
+        .marker-cluster-small {
+            background-color: #8a88ff;
+        }
+
+        .marker-cluster-medium {
+            background-color: #8a88ff;
+        }
+
+        .marker-cluster-large {
+            background-color: #8a88ff;
+        }
+
+        .marker-cluster-small div {
+            background-color: #47489E;
+            color: white;
+        }
+
+        .marker-cluster-medium div {
+            background-color: #47489E;
+            color: white;
+        }
+
+        .marker-cluster-large div {
+            background-color: #47489E;
+            color: white;
+        }
+
+        /* Adding margins on zoom controls */
+        .leaflet-top {
+            top: 80%;
+        }
+
+        /* Adding Target icon */
+        .custom {
+            width: 25px;
+            height: 31px;
+            content: url(/assets/img/target.svg);
+        }
+
+        /* changin zoom in and out colors */
+        .leaflet-control-zoom-in {
+            color: #47489E !important;
+        }
+
+        .leaflet-control-zoom-out {
+            color: #47489E !important;
+        }
+
+        /* Participate Icon */
+        .participate {
+            top: 70%;
+            /* z-index: 10001; */
+            color: #1C1C8C;
+            position: absolute;
+            left: 50%;
+            font-size: 80px;
+
+        }
+
+        /* Left Magnifying Glass */
+        .maginify-glass {
+            font-size: 40px;
+            transform: rotate(180deg);
+        }
+
+    </style>
 </head>
 
 <body style="padding-top:0px;">

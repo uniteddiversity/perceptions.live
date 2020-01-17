@@ -7,6 +7,12 @@ var map = L.map( 'map', {
     zoom: parseFloat(default_zoom)
 });
 
+if (typeof (L) != "undefined") {
+    var southWest = L.latLng(-89.98155760646617, -180),
+        northEast = L.latLng(89.99346179538875, 180);
+    var bounds = L.latLngBounds(southWest, northEast);
+}
+
 var popup = L.popup();
 // L.tileLayer( 'https://stamen-tiles-{s}.a.ssl.fastly.net/watercolor/{z}/{x}/{y}.{ext}', {
 //     attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>',
@@ -60,9 +66,14 @@ function updateMarkers(markers){
     }
 
     var group = new L.featureGroup(all_b);
-    // map.fitBounds(group.getBounds());
+    map.fitBounds(group.getBounds());
+    map.setMaxBounds(bounds);
     $("#loading").hide();
 }
+
+map.on('drag', function () {
+    map.panInsideBounds(bounds, { animate: false });
+});
 
 var onMarkerClick = function(e){
     $("#feature-info").html('loading...');

@@ -261,7 +261,7 @@ class ContentService
         }
 
         $contents = $contents->select('contents.id', 'contents.description', 'contents.brief_description as trim_description', 'contents.lat', 'contents.long', 'contents.title', 'contents.url',
-            'users.display_name','contents.created_at','contents.location','contents.user_id','contents.primary_subject_tag',
+            'users.display_name','contents.created_at','contents.captured_date','contents.location','contents.user_id','contents.primary_subject_tag',
             DB::Raw("GROUP_CONCAT(DISTINCT (concat(sorting_tags.tag_color,'-',sorting_tags.id,'-',sorting_tags.tag)) SEPARATOR ', ') as tag_colors") )
             ->groupBy('contents.id')->orderBy('contents.updated_at', 'DESC');
         $r = array(); $i = 0;

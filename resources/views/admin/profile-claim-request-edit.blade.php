@@ -8,7 +8,7 @@ $data = $data[0];
 <div class="col-lg-12 grid-margin stretch-card">
     <div class="card">
         <div class="card-body">
-            <h4 class="card-title">Video Edit Packages</h4>
+            <h4 class="card-title">Edit Claim Request</h4>
             <div class="table-responsive">
                 @if ($errors->any())
                 <div class="alert alert-danger">
