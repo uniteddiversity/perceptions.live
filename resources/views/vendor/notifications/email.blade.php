@@ -27,7 +27,7 @@
             $color = 'red';
             break;
         default:
-            $color = 'blue';
+            $color = '#4214c7';
     }
 ?>
 @component('mail::button', ['url' => $actionUrl, 'color' => $color])
@@ -45,7 +45,7 @@
 @if (! empty($salutation))
 {{ $salutation }}
 @else
-Regards,<br>{{ config('app.name') }}
+Thanks! Best Regards, <br>{{ config('app.name') }}
 @endif
 
 {{-- Subcopy --}}

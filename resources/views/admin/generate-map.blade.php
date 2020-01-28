@@ -196,7 +196,7 @@ if (isset($edit_data)) {
 
             <?php if ($data['id']) { ?>
               <div class="form-group">
-                <label for="public_videos">Shearable Code</label>
+                <label for="public_videos">Copy & Paste This To Your Website:</label>
                 <p style="background-color: #cccccc;color: black;">
                   <textarea id="shearable_code" class="form-control">&lt;iframe border="0" frameBorder="0" src="<?php echo env('APP_DOMAIN', $_SERVER['SERVER_NAME']) ?>/home/shared/group/<?php echo $data['_token'] ?>?output=embed" width="100%" height="600" &gt; &lt;/iframe&gt;</textarea>
 
@@ -224,7 +224,7 @@ if (isset($edit_data)) {
 <style>
 
   .table-responsive .card-title {
-    padding: 20px 40px;
+    padding: 20px 10px;
     margin-bottom: 30px;
     border-bottom: 2px solid #e6defc;
   }
@@ -321,7 +321,7 @@ if (isset($edit_data)) {
   a:hover {
     color: #2b0bae !important;
   }
-  @media only screen and (max-width: 576px) {
+  @media only screen and (max-width: 992px) {
     .main-body .card {
       width: 100%;
     }
