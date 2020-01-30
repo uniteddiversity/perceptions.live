@@ -6478,7 +6478,8 @@ nav>ul>li>a i.fas {
   width: calc(100vw - 40px);
   transform: translateX(-50%);
   font-family: 'Open Sans', sans-serif;
-  z-index: 100;
+  /*z-index: 100;*/
+  z-index: 10;
 }
 
 .new-header .header-content {
