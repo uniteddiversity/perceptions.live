@@ -38,8 +38,18 @@ if (isset($edit_data)) {
 <div class="col-lg-12 grid-margin stretch-card">
   <div class="card form-card">
     <div class="card-body">
-      <div class="table-responsive">
-        <h4 class="card-title"><?php if (!empty($data['id'])) { ?>Edit Map<?php } else { ?>Build Your Map<?php } ?> <span style="font-size: 12px;"><?php if (!empty($data['id'])) { ?><a class="btn btn-primary btn-xs" onclick="openVideo('<?php echo $data['id'] ?>')" href="#">Video Profile</a><?php } ?></span></h4>
+        <div class="submitprcption">
+          <h4 class="card-title" style="margin-bottom: 10px; text-align: center;"><?php if (!empty($data['id'])) { ?>Edit Map<?php } else { ?>Generate A New Map<?php } ?> <span style="font-size: 12px;"><?php if (!empty($data['id'])) { ?><a class="btn btn-primary btn-xs" onclick="openVideo('<?php echo $data['id'] ?>')" href="#">Video Profile</a><?php } ?></span>
+          </h4>
+          <div class="pagedesc" align="center">
+            <p>Build a group map that you can embed on your community's website.
+            </p>
+            <p>
+              <em>Should you encounter any errors we encourage you to
+                <a href="/contact-us">let us know</a>. Thanks!
+              </em>
+            </p>
+            <div class="table-responsive">
         @if ($errors->any())
         <div class="alert alert-danger">
           <ul>
@@ -66,27 +76,41 @@ if (isset($edit_data)) {
             <?php if ($data['id']) { ?>
               <input type="hidden" name="id" id="csrf-token" value="<?php echo uid($data['id']) ?>" />
             <?php } ?>
+            <div class="form-content">
+      <div class="formdesctext">
+        <strong>Website Details
+        </strong>
+        Required information so our API can give access to your domain name.
+      </div>
             <div class="form-group">
-              <label for="group">Title</label>
+              <label for="group">Title of Map</label>
               <input type="text" class="form-control" aria-describedby="nameHelp" name="group" placeholder="Group" value="{{ old('group',$data['group']) }}">
             </div>
             <div class="form-group">
               <label for="domain">Domain</label>
               <input type="text" class="form-control" id="domain" aria-describedby="nameHelp" name="domain" placeholder="Domain" value="{{ old('domain',$data['domain']) }}">
             </div>
+            </div>
+            <div class="formdesctext">
+              <strong>Map Look & Feel
+              </strong>
+              Where is the map's focus? How much distance should it cover? How can users filter the map for their own browsing purposes?
+            </div>
+              <div class="form-content">
             <div class="form-group">
               <label for="leaflet_search_addr">Default Location</label>
-              <input onkeyup="addr_search_new()" type="text" class="form-control" id="leaflet_search_addr" aria-describedby="nameHelp" name="default_location" placeholder="Default Location" value="{{ old('default_location',$data['default_location']) }}">
+              <input onkeyup="addr_search_new()" type="text" class="form-control" id="leaflet_search_addr" aria-describedby="nameHelp" name="default_location" placeholder="Where does the map start?" value="{{ old('default_location',$data['default_location']) }}">
               <input type="hidden" class="form-control" aria-describedby="nameHelp" id="lat_val" name="lat" placeholder="Lat" value="{{ old('lat',$data['lat']) }}">
               <input type="hidden" class="form-control" aria-describedby="nameHelp" id="long_val" name="long" placeholder="Long" value="{{ old('long',$data['long']) }}">
 
             </div>
             <div class="form-group">
-              <label for="default_zoom_level">Default Zoom Level ( < 15 )</label> <input type="text" class="form-control" id="default_zoom_level" aria-describedby="nameHelp" name="default_zoom_level" placeholder="Default Zoom Level" value="{{ old('default_zoom_level',$data['default_zoom_level']) }}">
+                <label for="default_zoom_level">Default Zoom Level (0-15)</label>
+                <input type="text" class="form-control" id="default_zoom_level" aria-describedby="nameHelp" name="default_zoom_level" placeholder="0: the whole world // 7: US state or large European country // 15: neighborhood" value="{{ old('default_zoom_level',$data['default_zoom_level']) }}">
             </div>
 
             <div class="form-group">
-              <label for="filter_list">Filters</label>
+              <label for="filter_list">Map Browsing Filters</label>
               <select class="form-control multi-select2-max3" id="filter_list" multiple name="filter_list[]">
                 @foreach($filter_list as $m)
                 <option value="{{$m['id']}}" <?php if (in_array($m['id'], old('filter_list', $data['filter_list']))) {
@@ -95,11 +119,12 @@ if (isset($edit_data)) {
                 @endforeach
               </select>
             </div>
-
-            <div class="form-group">
-              <label for="exampleSelect1">Content (Select the content you would like to include in your map)</label>
-            </div>
-
+          </div>
+          <div class="formdesctext">
+            <strong>Content
+            </strong>
+            Select the content to be displayed on the map.
+          </div>
             <?php /*
                             {{--<div class="form-group">--}}
                                 {{--<label for="grater_community_intention_id">Great Community Intention</label>--}}
@@ -119,10 +144,9 @@ if (isset($edit_data)) {
                             {{--</div>--}}
 
                             */ ?>
-
-
+              <div class="form-content">
             <div class="form-group">
-              <label for="exampleSelect1">Group</label>
+              <label for="exampleSelect1">My Groups</label>
               <select class="form-control select2-ajax-groups" id="public_videos" multiple name="groups[]">
                 <?php //dd($selected_groups);
                 foreach ($selected_groups as $int_data) {
@@ -134,7 +158,6 @@ if (isset($edit_data)) {
               <label for="primary_subject_tag">Primary Subject Tag</label>
               <input type="text" class="form-control" aria-describedby="nameHelp" name="primary_subject_tag" placeholder="Primary Subject Tag" value="{{ old('primary_subject_tag',$data['primary_subject_tag']) }}">
             </div>
-
 
             <div class="form-group">
               <label for="associated_users">Associated Users</label>
@@ -173,7 +196,7 @@ if (isset($edit_data)) {
 
             <?php if ($data['id']) { ?>
               <div class="form-group">
-                <label for="public_videos">Shearable Code</label>
+                <label for="public_videos">Copy & Paste This To Your Website:</label>
                 <p style="background-color: #cccccc;color: black;">
                   <textarea id="shearable_code" class="form-control">&lt;iframe border="0" frameBorder="0" src="<?php echo env('APP_DOMAIN', $_SERVER['SERVER_NAME']) ?>/home/shared/group/<?php echo $data['_token'] ?>?output=embed" width="100%" height="600" &gt; &lt;/iframe&gt;</textarea>
 
@@ -199,17 +222,14 @@ if (isset($edit_data)) {
 </script>
 
 <style>
+
   .table-responsive .card-title {
-    padding: 20px 40px;
+    padding: 20px 10px;
     margin-bottom: 30px;
     border-bottom: 2px solid #e6defc;
   }
   form {
     margin-bottom: 0;
-  }
-  .table-responsive label {
-    margin-bottom: 0;
-    float:  none !important;
   }
   .table-responsive .form-group {
     float: none !important;
@@ -225,10 +245,87 @@ if (isset($edit_data)) {
     margin: 0 !important;
     float: none
   }
+  .pagedesc {
+    font-size: 20px;
+    font-family: 'Open Sans', sans-serif;
+    line-height: 1em;
+    padding-bottom: 20px;
+  }
 
-  @media only screen and (max-width: 576px) {
+  div.formdesctext {
+    font-size: 14.4px !important;;
+    line-height: 20px !important;;
+    font-family: 'Open Sans', sans-serif !important;
+    font-style: normal !important;;
+    text-align: left;
+    color: #797979;
+    margin-bottom: 20px;
+    padding: 20px 40px;
+    border-bottom: 2px solid #e6defc;
+  }
+
+  div.formdesctext strong {
+    margin: auto;
+    font-family: 'Open Sans', sans-serif;
+    font-size: 26px;
+    font-weight: 600;
+    line-height: 1.1;
+    color: #4214c7;
+    display: block;
+    margin-bottom: 10px
+  }
+
+  div.submitprcption {
+    width: 50%;
+    margin: auto;
+  }
+
+  form {
+    margin-bottom: 0
+  }
+
+  .form-content {
+    padding-bottom: 20px;
+    border-bottom: 2px solid #e6defc;
+  }
+
+  .form-content .form-group {
+    float: none;
+  }
+
+  .form-footer {
+    padding: 20px 40px;
+    background: #e6defc;
+    text-align: left;
+  }
+
+  .form-footer button {
+    margin: 0 !important;
+    float: none
+  }
+
+  .form-group .custom_select {
+    height: auto;
+    float: none;
+  }
+
+  .form-group .custom_select::before {
+    bottom: 18px;
+    top: auto
+  }
+
+  a {
+    color: #2B0D82 !important;
+  }
+
+  a:hover {
+    color: #2b0bae !important;
+  }
+  @media only screen and (max-width: 992px) {
     .main-body .card {
       width: 100%;
     }
+  }
+
   }
 </style>

@@ -1,4 +1,5 @@
 /**** CUSTOM CSS/ FIXES / NEW STYLE ****/
+/**** CUSTOM CSS/ FIXES / NEW STYLE ****/
 @font-face {
   font-family: 'ralewayregular';
   src: url('../findgo/css/fonts/raleway-regular-webfont.eot');
@@ -2716,6 +2717,12 @@ nav.two .header-notification .profile-notification li {
   margin-right: 10px;
 }
 
+
+/* User/Group Admin Edit */
+
+
+
+
 /* Sidebar */
 .pcoded .pcoded-navbar[data-navbar-theme="themelight1"] {
   height: 120vh;
@@ -2864,7 +2871,7 @@ nav.two .header-notification .profile-notification li {
 .card {
   background: none;
   border: none;
-  width: 85%;
+  width: 100%;
   float: right;
 }
 
@@ -2883,7 +2890,7 @@ nav.two .header-notification .profile-notification li {
 }
 
 .card .submitprcption .pagedesc {
-  max-width: 820px;
+  max-width: 1220px;
 }
 
 .header-navbar .navbar-wrapper .navbar-container .nav-right li.user-profile {
