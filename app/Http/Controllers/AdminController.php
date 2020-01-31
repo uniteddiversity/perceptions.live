@@ -3,10 +3,16 @@
 namespace App\Controllers\User;
 
 use App\Category;
+use App\ClaimAssociatedContents;
+use App\ClaimProfileRequests;
 use App\Content;
 use App\Group;
 use App\HomeSliderFeed;
 use App\Http\Controllers\Controller;
+use App\Mail\ClaimProfileApproved;
+use App\Mail\contactUs;
+use App\Mail\groupApproved;
+use App\Mail\groupCreated;
 use App\MediaPackage;
 use App\MetaData;
 use App\SiteSetting;
@@ -16,6 +22,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Crypt;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Validator;
 //use System\Request;
@@ -60,10 +67,18 @@ class AdminController extends Controller
      * @var HomeSliderFeed
      */
     private $homeSliderFeed;
+    /**
+     * @var ClaimProfileRequests
+     */
+    private $claimProfileRequests;
+    /**
+     * @var ClaimAssociatedContents
+     */
+    private $claimAssociatedContents;
 
     public function __construct(Content $content, User $user, UserRepository $userRepository,
                                 Category $category, MetaData $metaData, ContentService $contentService, Group $group,
-                                SiteSetting $siteSetting, HomeSliderFeed $homeSliderFeed)
+                                SiteSetting $siteSetting, HomeSliderFeed $homeSliderFeed, ClaimProfileRequests $claimProfileRequests, ClaimAssociatedContents $claimAssociatedContents)
     {
         $this->content = $content;
         $this->user = $user;
@@ -74,6 +89,8 @@ class AdminController extends Controller
         $this->group = $group;
         $this->siteSetting = $siteSetting;
         $this->homeSliderFeed = $homeSliderFeed;
+        $this->claimProfileRequests = $claimProfileRequests;
+        $this->claimAssociatedContents = $claimAssociatedContents;
     }
 
     public function profile()
@@ -117,7 +134,6 @@ class AdminController extends Controller
             return Redirect::back()->withErrors($validator->messages())->withInput();
         }
 
-
         $r = $request->toArray();
         $update_array = [
             'title' => $r['title'],
@@ -152,7 +168,8 @@ class AdminController extends Controller
 //                'captured_date' => date('Y-m-d'),
 //                'video_date' => date('Y-m-d'),
             'created_by' => $user_id,
-            'user_comment' => $r['user_comment']
+            'user_comment' => $r['user_comment'],
+            'language' => $r['language']
         ];
         if(isset($r['id'])){//if edit, original creator should remain
             unset($update_array['created_by']);
@@ -342,9 +359,10 @@ class AdminController extends Controller
         $groups = $this->userRepository->groupList($user_id);
         $access_levels = $this->userRepository->getAccessLevels();
         $status = $this->userRepository->getStatus();
+        $languages = $this->contentService->getLanguages();
 
         return view('admin.content-add')
-            ->with(compact('categories','meta_array','user_list','sorting_tags','groups','access_levels','status', 'gci_tags'));
+            ->with(compact('categories','meta_array','user_list','sorting_tags','groups','access_levels','status', 'gci_tags', 'languages'));
     }
 
     public function contentEdit($id)
@@ -361,8 +379,17 @@ class AdminController extends Controller
         $groups = $this->userRepository->groupList($user_id);
         $access_levels = $this->userRepository->getAccessLevels();
         $status = $this->userRepository->getStatus();
+        $languages = $this->contentService->getLanguages();
         return view('admin.content-add')
-            ->with(compact('categories','meta_array','user_list','sorting_tags','groups','access_levels','video_data','status', 'gci_tags', 'uploaded_files'));
+            ->with(compact('categories','meta_array','user_list','sorting_tags','groups','access_levels',
+                'video_data','status', 'gci_tags', 'uploaded_files','languages'));
+    }
+
+    public function comments($fk_id, $table){
+        $id = UID::translator($fk_id);
+        $comments = $this->userRepository->getComments($id, $table);
+        return view('admin.comments-list')
+            ->with(compact('comments', 'fk_id', 'table'));
     }
 
     public function adminUserAdd(Request $request)
@@ -507,6 +534,7 @@ class AdminController extends Controller
 
     public function groupAdd()
     {
+        $gci_tags = $this->userRepository->getGreaterCommunityIntentionTag();
         $categories = $this->category->get();
         $user_id = (!isset(Auth::user()->id))? 0 : Auth::user()->id;
         $user_list = $this->userRepository->getUsers(array(),$user_id);
@@ -516,7 +544,7 @@ class AdminController extends Controller
         $user_acting_role = $this->userRepository->getUserActingRoles();
 
         return view('admin.group-add')
-            ->with(compact('categories','user_list','status','experience_knowledge_tags','user_acting_role'));
+            ->with(compact('categories','user_list','status','experience_knowledge_tags','user_acting_role','gci_tags'));
     }
 
     public function postUserToGroupAdd(Request $request, $group_id)
@@ -541,17 +569,31 @@ class AdminController extends Controller
 
     public function postGroupAdd(Request $request)
     {
-        $validator = Validator::make($request->all(), [
-            'name' => 'required|unique:groups',
-            'description' => 'required',
-            'category_id' => 'required'
-        ]);
+        $r = $request->toArray();
+        if((isset($r['id']))){
+            $validator = Validator::make($request->all(), [
+                'name' => 'required|unique:groups,name,'.UID::translator($r['id']),//pass the id as third parameter
+                'description' => 'required',
+                'category_id' => 'required'
+            ]);
+        }else{
+            $validator = Validator::make($request->all(), [
+                'name' => 'required|unique:groups',
+                'description' => 'required',
+                'category_id' => 'required'
+            ]);
+        }
+
 
         if ($validator->fails()) {
             return Redirect::back()->withErrors($validator->messages())->withInput();
         }
 
-        $r = $request->toArray();
+        $old_group = [];
+        if(isset($r['id'])){
+            $old_group = $this->group->where('id', UID::translator($r['id']))->get()->first();
+        }
+
 
         $new_group = $this->group->updateOrCreate(
             [
@@ -568,12 +610,23 @@ class AdminController extends Controller
                 'category_id' => $r['category_id'],
                 'contact_user_id' => $r['contact_user_id'],
 //                'accept_tos' => isset($r['accept_tos'])? 1 : 0,
-                'created_by' => Auth::user()->id,
+//                'created_by' => Auth::user()->id,
             ]
         );
 
+        if(!(isset($r['id']))){
+            $new_group = $this->group->updateOrCreate(
+                [
+                    'id' => $new_group->id,
+                ],
+                [
+                    'created_by' => Auth::user()->id,
+                ]
+            );
+        }
+
         if(isset($r['accept_tos'])){
-            $this->group->updateOrCreate(
+            $new_group = $this->group->updateOrCreate(
                 [
                     'id' => $new_group->id,
                 ],
@@ -584,7 +637,7 @@ class AdminController extends Controller
         }
 
         if(isset($r['status'])){
-            $this->group->updateOrCreate(
+            $new_group = $this->group->updateOrCreate(
                 [
                     'id' => $new_group->id,
                 ],
@@ -622,11 +675,39 @@ class AdminController extends Controller
             }
         }
 
+        if(isset($r['grater_community_intention_ids'])){
+            $this->userRepository->deleteTagsOfGroupBySlug($new_group->id, 'gci');
+            foreach($r['grater_community_intention_ids'] as $sorting_tags_id){
+                $tag_id = base64_decode($sorting_tags_id);
+                if(is_numeric($tag_id)){
+                    $this->userRepository->addTagToGroup($new_group->id, $tag_id,'gci');
+                }else{
+//                    $newly_created_id = $this->userRepository->addIfNotExist($sorting_tags_id,'gci', Auth::user()->id);
+//                    if(isset($newly_created_id->id))
+//                        $this->userRepository->addTagToGroup($new_group->id, $newly_created_id->id,  'gci');
+                }
+            }
+        }
+
         //add role tag to user
         if(isset($new_group->id) && !empty($r['group_acting_roles'])){
             $this->userRepository->deleteGroupFromTag($new_group->id,'role');
             foreach($r['group_acting_roles'] as $tag){
                 $user_group = $this->userRepository->addTagToGroup($new_group->id, $tag,'role');
+            }
+        }
+
+        if(isset($r['id']) && $old_group->status == '2' && $new_group->status == '1' && $new_group->created_by != ''){
+            $created_user = $this->user->where('id', $new_group->created_by)->first();
+//            dd($created_user);
+            if($created_user->id
+                != Auth::user()->id &&
+                $created_user->role_id != '1'){
+                Mail::to($created_user)->send(new groupApproved($new_group));
+
+                if($created_user->role_id == 120){//at the time group is approved, normal user will become group-admin
+                    $this->user->where('id', $created_user->id)->update(['role_id' => 100]);
+                }
             }
         }
 
@@ -668,7 +749,7 @@ class AdminController extends Controller
     public function editGroup($id, Request $request)
     {
         $id = UID::translator($id);
-
+        $gci_tags = $this->userRepository->getGreaterCommunityIntentionTag();
         $categories = $this->category->get();
         $user_id = (!isset(Auth::user()->id))? 0 : Auth::user()->id;
         $user_list = $this->userRepository->getUsers(array(),$user_id);
@@ -678,7 +759,7 @@ class AdminController extends Controller
         $user_acting_role = $this->userRepository->getUserActingRoles();
 
         return view('admin.group-add')
-            ->with(compact('categories','group','user_list','status','experience_knowledge_tags','user_acting_role'));
+            ->with(compact('categories','group','user_list','status','experience_knowledge_tags','user_acting_role','gci_tags'));
     }
 
     public function approveContent($id){
@@ -699,6 +780,7 @@ class AdminController extends Controller
 
     public function editMapGenerate($id)
     {
+        $user_id = (!isset(Auth::user()->id))? 0 : Auth::user()->id;
         $id = (isset($id))?UID::translator($id):0;
         $edit_data = $this->contentService->getGroupShareData($id);
         $filter_list = $this->contentService->getGroupSearchFilterList();
@@ -738,7 +820,7 @@ class AdminController extends Controller
         }
 
         if(isset($data['groups'])){
-            $list = $this->userRepository->getGroupList(0, array('ids' => $data['groups']));
+            $list = $this->userRepository->getGroupList($user_id, array('ids' => $data['groups']));
 
             $i = 0;
             foreach($list as $val){
@@ -746,10 +828,8 @@ class AdminController extends Controller
                 $selected_groups[$i]['id'] = $val['id'];
                 $i++;
             }
-        }
+        }//dd($selected_groups);
 
-
-//        dd($edit_data);
         $gci_tags = $this->userRepository->getGreaterCommunityIntentionTag();
         $categories = $this->category->get();
         return view('admin.generate-map')
@@ -761,7 +841,10 @@ class AdminController extends Controller
         $r = $request->toArray();
         $id = (isset($r['id']))?UID::translator($r['id']):0;
         $user_id = (!isset(Auth::user()->id))? 0 : Auth::user()->id;
-
+        $map_list = $this->contentService->groupShareableContentsList($user_id);
+        if(count($map_list) >= 1 && !Auth::user()->is('admin')){
+            return Redirect::back()->withErrors('Maximum one map allowed!')->withInput();
+        }
         $validator = Validator::make($request->all(), [
             'group' => 'required',
             'domain' => 'required',
@@ -799,8 +882,11 @@ class AdminController extends Controller
         }
 
         $sheared_content = $this->contentService->createGroupShareableContents($user_id, $data, $id);
-        return Redirect::route('map-sharing.edit', ['_id' => UID($sheared_content->id)])->with('message', 'Successfully Added!');
-//        return redirect()->back()->with('message', 'Successfully Added!');
+
+        if(Auth::user()->role_id == 1)
+            return Redirect::route('admin-map-sharing-edit', ['_id' => UID($sheared_content->id)])->with('message', 'Successfully Added!');
+        if(Auth::user()->role_id == 100)
+            return redirect('user/group-admin/map-generate/'.UID($sheared_content->id))->with('message', 'Successfully Added!');
     }
 
     public static function createToken($prefix='', $length = 20)
@@ -961,7 +1047,7 @@ class AdminController extends Controller
     public function postHomeSliderFeed(Request $request)
     {
         $messages = [
-            'fk_id.required' => 'Please search and select the Category/GCI/Group!',
+            'fk_id.required' => 'Please search and select the Content!',
         ];
 
         $validator = Validator::make($request->all(), [
@@ -974,16 +1060,26 @@ class AdminController extends Controller
         if ($validator->fails()) {
             return Redirect::back()->withErrors($validator->messages())->withInput();
         }
-
         $r = $request->toArray();
-        $new = $this->homeSliderFeed->create(
-            array(
-                'side' => $r['side'],
-                'title' => $r['title'],
-                'type' => $r['type'],
-                'fk_id' => $r['fk_id'],
-            )
-        );
+        if(is_array($r['type']) && count($r['type']) > 0 && count($r['fk_id']) > 0 && count($r['fk_id']) > 0){
+            $new = $this->homeSliderFeed->create(
+                array(
+                    'side' => $r['side'],
+                    'title' => $r['title'],
+                    'type' => '',//not use anymore
+                    'fk_id' => '0',//not use anymore
+                )
+            );
+
+//            foreach($r['type'] as $t){
+//                $this->userRepository->saveHomeSliderSettings($new->id, 'type-'.$t, $t);
+//            }
+
+            foreach($r['fk_id'] as $t){
+                $p = explode('-', $t);
+                $this->userRepository->saveHomeSliderSettings($new->id, $p[0], $p[1]);
+            }
+        }
 
         if(isset($new['id']) && isset($r['icon'])){
             $this->userRepository->uploadAttachment($r['icon'],Auth::user()->id, $new['id'],
@@ -993,10 +1089,132 @@ class AdminController extends Controller
         return Redirect::back()->with('message', "Successfully Added!");
     }
 
-    public function searchContentTypes(Request $request)
+    public function searchContentTypes($type, Request $request)
     {
         $r = $request->all();
-        $data = $this->contentService->ajaxSearchContentGroup($r['q']['term']);
+        $types = explode(',', $type);
+        $data = [];
+        if(isset($r['q']['term'])){
+            $data = $this->contentService->ajaxSearchContentGroup($r['q']['term'], $types);
+        }
         echo json_encode($data);
+    }
+
+    public function listClaimProfileRequest()
+    {
+        $data = $this->userRepository->getClaimRequests();
+        return view('admin.profile-claim-request-list')->with(compact('data'));
+    }
+
+    public function viewClaimProfileRequest($_id)
+    {
+        $id = UID::translator($_id);
+        $data = $this->userRepository->getClaimRequests($id);
+
+        return view('admin.profile-claim-request-view')->with(compact('data'));
+    }
+
+    public function editClaimProfileRequest($_id)
+    {
+        $id = UID::translator($_id);
+        $data = $this->userRepository->getClaimRequests($id);
+
+        return view('admin.profile-claim-request-edit')->with(compact('data'));
+    }
+
+    public function postEditClaimProfileRequest($_id, Request $request)
+    {
+        $user_id = (!isset(Auth::user()->id))? 0 : Auth::user()->id;
+        $r = $request->all();
+        $id = UID::translator($_id);
+        $validator = Validator::make($request->all(),
+            [
+//            'email' => 'required|email|unique:users',
+                'display_name' => 'required',
+                'claim_video_profile' => 'required',
+                'email' => 'required',
+            ]);
+        if ($validator->fails()) {
+            return Redirect::back()->withErrors($validator->messages())->withInput();
+        }
+
+        $rec = $this->claimProfileRequests->find($id)->update(array(
+            'type' => 'users',
+            'fk_id' => $r['display_name'],
+            'display_name' => '[display_name]',
+            'email' => $r['email'],
+            'comments' => $r['additional_comments'],
+        ));
+
+        $this->claimAssociatedContents->where('claim_profile_request_id', $id)->delete();
+        foreach($r['claim_video_profile'] as $relation){
+            $this->claimAssociatedContents->create(array(
+//                'attachment_id' => 'users',
+                'type' => 'users',
+                'claim_profile_request_id' => $id,
+                'fk_id' => $relation
+            ));
+        }
+
+        if(isset($r['proof_of_work']))
+            foreach($r['proof_of_work'] as $content){
+                $this->userRepository->uploadAttachment($content,$user_id, $id, 'claim-proof', 'claim_profile_requests', 1);
+            }
+
+        return redirect()->back()->with('message', 'Updated!');
+    }
+
+    public function postClaimProfileRequest($_id, Request $request)
+    {
+        $r = $request->all();
+        $claim_info = $this->userRepository->getClaimRequests($_id);
+
+        if($r['status'] != 1){//if deleting, no need to validate
+            $this->userRepository->updateClaimRequestStatus($_id, $r['status'], $claim_info[0]->needUser);
+            return redirect('/user/admin/list-profile-claim-request')->with('message', 'Successfully Deleted!');
+        }
+
+        if($claim_info[0]->needUser->status_id <> 5){
+            return Redirect::back()->withErrors("User should be in 'System Created' status to claim");
+        }
+
+        $validator = Validator::make($r, [
+            'email' => 'required|email|unique:users'
+        ]);
+
+        if($validator->fails()){
+            return Redirect::back()->withErrors("Email '".$r['email']."' already exist under users");
+        }
+
+        $this->userRepository->updateClaimRequestStatus($_id, $r['status'], $claim_info[0]->needUser);
+        $new_password = generate_password();
+        $this->userRepository->updateClaimUser($claim_info[0]->needUser->id, $r['email'], $r['status'], $new_password);
+
+        if($r['status'] == 1){
+            $request_data = $this->userRepository->getClaimRequests($_id);
+            $to = [
+                [
+                    'email' => env("ADMIN_MAIL"),
+                    'name' => env("ADMIN_NAME"),
+                ],
+                [
+                    'email' => $request_data[0]['email'],
+                    'name' => $request_data[0]['email'],
+                ]
+            ];
+
+            Mail::to($to)->send(new ClaimProfileApproved($request_data[0], $new_password));
+        }
+
+        return redirect('/user/admin/list-profile-claim-request')->with('message', 'Successfully Added!');
+    }
+
+    public function deleteComment(Request $request)
+    {
+        $id = UID::translator($request['id']);
+        $user_id = Auth::user()->id;
+
+        $d = $this->userRepository->deleteComment($id, $user_id);
+        echo json_encode(array('data' => $id));
     }
 }

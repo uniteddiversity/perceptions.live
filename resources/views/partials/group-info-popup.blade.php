@@ -6,9 +6,6 @@
 
     <div class="user_info">
         <div style="display: block; width:100%; text-align: left;">
-
-
-
             <div class="user_img">
                 <span>
                     <img height="150" width="150" class="avatar profile_img_mini" src="<?php if(isset($info['image'][0])){ echo '/storage/'.$info['image'][0]->url; }else{ ?>/assets/img/face1.png<?php } ?>" alt="profile image">
@@ -85,7 +82,6 @@
             <div style="display: none; position: absolute; top: 15%; right: 30%; width: 10%; padding-left: 5%; z-index: 99;">
                 <span style="font-size: 26px; color: #6060D5;"><i class="fa fa-envelope-o"></i></span>
             </div>
-
         </div>
     </div>
     <div style="display: block; width:100%; float: left; text-align: center;">
@@ -100,140 +96,32 @@
     <?php /* ### map of associated videos, zoom to fit **/ ?>
     {{--<div style="display: block; padding-bottom: 40px;"><img width=100% height=100% src="smallmap.png" alt=""></div>--}}
 
-    <div class="video_section">
-        <div class="video_inner">
+    <div class="video_section row">
+        <div class="video_inner col-9">
 
             <div>
                 <h5><i class="fas fa-video"></i> Media Involvements</h5>
             </div>
-            <?php /* ### LIST OF ASSOCIATED VIDEOS - CLICK THUMBNAIL IMAGE TO OPEN VIDEO-INFO-BLADE */ ?>
-            <?php
-
-        foreach($group_contents as $content){
-        preg_match("/^(?:http(?:s)?:\/\/)?(?:www\.)?(?:m\.)?(?:youtu\.be\/|youtube\.com\/(?:(?:watch)?\?(?:.*&)?v(?:i)?=|(?:embed|v|vi|user)\/))([^\?&\"'>]+)/", $content['url'], $matches);
-        $video_id = isset($matches[1])?$matches[1]:'';
-        ?>
-            <div class="video_thumb active_link" onclick="openVideo('<?php echo $content['id'] ?>')">
-                <span>
-                    <img width=100% src="https://img.youtube.com/vi/<?php echo $video_id ?>/maxresdefault.jpg">
-                </span>
-                <div class="placedetails">
-                    <span class="pull-left"><i class="fa fa-tag"></i>
-                        <?php echo $content['primary_subject_tag'] ?></span>
-                    <?php foreach($content->videoProducer as $user){ ?>
-                    <span class="pull-right"><i class="fa fa-film"></i> <span class="inactive_link" onclick="openProfile('<?php echo $user->user->id ?>')">@
-                            <?php echo $user->user->display_name ?></span></span>
-                    <?php } ?>
-                </div>
+            <div id="group-info-popup_video">
+                @include('partials.group-info-popup_video', ['videos' => $group_contents, 'paginationData' => $contents1])
             </div>
-
-            <?php } ?>
-
-
         </div>
-        <div>
+        <div class="col-3">
             <div>
                 <h5><i class="fas fa-users"></i> Users</h5>
             </div>
-            <?php /* ### list of group users that have privacy setting = public (or, if logged in, = logged in)*/
-        foreach($group_users as $user){
-        ?>
-            <?php /* ### click user name or image to open user-info-blade */ ?>
-
-            <?php /* ### can you please help align these divs to center? */ ?>
-            <div style="width: 100%; text-align: center;">
-                <?php if(!isset($user->image[0]->url)){?>
-                <img class="active_link" onclick="openProfile('<?php echo $user->id ?>')" style="margin-left: 25%;" height="150" width="150" src="/assets/img/face1.png">
-                <?php }else{ ?>
-                <img class="active_link" onclick="openProfile('<?php echo $user->id ?>')" style="margin-left: 25%;" height="150" width="150" src="<?php echo '/storage/'.$user->image[0]->url; ?>">
-                <?php } ?>
-
-                <div style="clear: both"></div>
-            </div>
-            <div style="display: block; width: 100%; text-align: center;">
-                <span style="color: #8d8d8d;"><i class="fa fa-user"></i> <span class="inactive_link" onclick="openProfile('<?php echo $user->id ?>')">
-                        <?php echo $user->display_name ?></span></span>
+            <div id="group-info-popup_user">
+                @include('partials.group-info-popup_user', ['groupUsers' => $group_users, 'paginationData' => $contents2])
             </div>
         </div>
-        <?php } ?>
 
+        <input id="popup_group_id" type="hidden" value="{{$group_id}}" />
     </div>
     <div style="clear: both;"></div>
 </div>
-<?php /*
-  <div class="row" style="display: block;">
-    <div class="col-lg-12 grid-margin stretch-card">
-        <div class="card">
-            <div class="card-body">
-                <div class="row" style="display: block;margin: 25px;">
-                    <div class="col-md-2" style="margin:0px;padding: 0px;padding-left: 0px;">
-                        <div class="profile-image">
-                            <img class="avatar profile_img_mini" src="<?php if(isset($info['group_avatar'][0]) && !empty($info['group_avatar'][0]['url'])){ echo '/storage/'.$info['group_avatar'][0]['url']; }else{ ?>/assets/img/face1.png
-<?php } ?>" alt="profile image">
-</div>
-</div>
-<div class="col-md-7">
-    <div>
-        <h3>
-            <?php echo $info['name'] ?>
-        </h3>
-        <p>
-            <?php echo $info['description'] ?>
-        </p>
-    </div>
-</div>
-</div>
-<div class="row" style="display: block;margin: 25px;">
-    <div class="col-md-4">
-        <?php
-                        if(isset($info['users'])){
-                            $datas = array();
-                            foreach($info['users'] as $user){
-                                if(isset($user['display_name'])){
-                                    $datas[] = '@'.'<span class="inactive_link" onclick="openProfile('.$user['id'].')">'.$user['display_name'].'</span>';
-                                }
-                            }
-                            if(!empty($datas))
-                                echo '<h4>Group Users</h4>';
 
-                            echo implode(', ', $datas);
-                        } ?>
-
-    </div>
-</div>
-
-<div class="row" style="display: block;margin: 25px;">
-    <div class="col-md-8">
-        <h3>Submitted/associated video profiles</h3>
-        <div>
-            <?php foreach($info['videos'] as $video){ ?>
-            <h6 style="margin-top: 0px;font-weight: bold;cursor: pointer;" onclick="openVideo('<?php echo $video['id'] ?>')">
-                <?php echo $video['title'] ?>
-            </h6>
-            <iframe width="300" height="150" src="<?php echo str_replace( 'watch?v=', 'embed/',$video['url']) ?>" frameborder="0" allowfullscreen></iframe>
-            <?php } ?>
-        </div>
-    </div>
-
-</div>
-</div>
-</div>
-</div>
-</div>
 <style>
-    .dot {
-        height: 10px;
-        width: 10px;
-        border-radius: 50%;
-        display: inline-block;
-        margin: 2px;
-        cursor: pointer;
+    #featureModal .modal-header {
+        display: none;
     }
-
-    .inactive_link {
-        cursor: pointer;
-    }
-
 </style>
-
-*/ ?>

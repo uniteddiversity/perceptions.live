@@ -15,7 +15,7 @@ class Group extends Model
      */
     protected $fillable = ['id', 'greeting_message_to_community', 'name', 'description','current_mission', 'experience_knowledge_interest',
         'experience_knowledge_interests', 'default_location','contact_user_id',
-        'category_id', 'learn_more_url', 'content_name', 'content_email', 'accept_tos', 'status'];
+        'category_id', 'learn_more_url', 'content_name', 'content_email', 'accept_tos', 'status', 'created_by'];
 
     public function groupStatus()
     {
@@ -41,6 +41,11 @@ class Group extends Model
         return $this->hasMany('App\TagGroupAssociation','group_id')->where('slug','experience_kno');
     }
 
+    public function gci()
+    {
+        return $this->hasMany('App\TagGroupAssociation','group_id')->where('slug','gci');
+    }
+
     public function actingRoles()
     {
         return $this->hasMany('App\TagGroupAssociation','group_id')->where('slug','role');
@@ -56,5 +61,14 @@ class Group extends Model
     public function category()
     {
         return $this->hasOne('App\Category','id','category_id');
+    }
+
+    public function getGroupByName($name)
+    {
+        $r = $this->where('name',$name)->get()->first();
+        if($r)
+            return $r;
+        else
+            return false;
     }
 }

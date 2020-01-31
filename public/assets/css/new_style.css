@@ -10,3 +10,8 @@ nav > ul > li > a {
     height: 70px !important;
     color: #000 !Important;
 }
+
+header #logo_overlay {
+    background-size: 60px !important;
+    background-position: center center;
+}

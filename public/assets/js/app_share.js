@@ -1,19 +1,38 @@
 var default_zoom = $('#default_zoom').val();
 var default_lat = parseFloat($('#default_lat').val());
 var default_long = parseFloat($('#default_long').val());
-console.log('lat: '+default_lat+'   , long : '+default_long)
-console.log('default zoom is '+parseFloat(default_zoom));
 var map = L.map( 'map', {
     center: [default_lat, default_long],
     minZoom: 2,
     zoom: parseFloat(default_zoom)
 });
 
-L.tileLayer( 'https://stamen-tiles-{s}.a.ssl.fastly.net/watercolor/{z}/{x}/{y}.{ext}', {
-    attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>',
-    subdomains: ['a','b','c'],
+if (typeof (L) != "undefined") {
+    var southWest = L.latLng(-89.98155760646617, -180),
+        northEast = L.latLng(89.99346179538875, 180);
+    var bounds = L.latLngBounds(southWest, northEast);
+}
+
+var popup = L.popup();
+// L.tileLayer( 'https://stamen-tiles-{s}.a.ssl.fastly.net/watercolor/{z}/{x}/{y}.{ext}', {
+//     attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>',
+//     subdomains: ['a','b','c'],
+//     ext: 'png'
+// }).addTo( map );
+
+// L.tileLayer('https://stamen-tiles-{s}.a.ssl.fastly.net/watercolor/{z}/{x}/{y}.{ext}', {
+//     attribution: '',
+//     subdomains: ['a', 'b', 'c'],
+//     ext: 'png'
+// }).addTo(map);
+L.tileLayer('https://stamen-tiles-{s}.a.ssl.fastly.net/watercolor/{z}/{x}/{y}.{ext}', {
+    attribution: 'Map tiles by <a href="http://stamen.com">Stamen Design</a>, <a href="http://creativecommons.org/licenses/by/3.0">CC BY 3.0</a> &mdash; Map data &copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
+    // attribution: '',
+    subdomains: ['a', 'b', 'c'],
     ext: 'png'
-}).addTo( map );
+}).addTo(map);
+
+
 myURL = '';
 
 var markerClusters = L.markerClusterGroup();
@@ -28,9 +47,9 @@ function updateMarkers(markers){
     map.addLayer( markerClusters );
 
     var myIcon = L.icon({
-        iconUrl: myURL + '/assets/img/globe_new.png',
-        iconRetinaUrl: myURL + '/assets/img/globe_new.png',
-        iconSize: [29, 29],
+        iconUrl: myURL + '/assets/img/new-pin.png',
+        iconRetinaUrl: myURL + '/assets/img/new-pin.png',
+        iconSize: [45, 45],
         iconAnchor: [9, 21],
         popupAnchor: [0, -14]
     });
@@ -43,53 +62,81 @@ function updateMarkers(markers){
         m.on('click', onMarkerClick);
         markerClusters.addLayer( m );
         all_b.push(m);
-        console.log(markers[i]);
+        // console.log(markers[i]);
     }
 
-
-console.log(all_b);
     var group = new L.featureGroup(all_b);
-    // map.fitBounds(group.getBounds());
+    map.fitBounds(group.getBounds());
+    map.setMaxBounds(bounds);
     $("#loading").hide();
 }
 
+map.on('drag', function () {
+    map.panInsideBounds(bounds, { animate: false });
+});
+
 var onMarkerClick = function(e){
     $("#feature-info").html('loading...');
-    console.log(this);//this.options.id
+    console.log(e.latlng);//this.options.id
     jQuery.ajax({
-        url: '/home/ajax-video-info/'+this.options.id,
+        url: '/home/ajax-video-info-shared-small/'+this.options.id,
         method: 'GET'
     }).done(function (content) {
-        $("#feature-title").html("Info:");
-        $("#feature-info").html(content);
-        $("#featureModal").modal("show");
+        // $("#feature-title").html("Info:");
+        // $("#feature-info").html(content);
+        // $("#featureModal").modal("show");
+        popup
+            .setLatLng(e.latlng)
+            .setContent(content)
+            .openOn(map);
     }).fail(function () {
-        $("#feature-title").html("Error:");
-        $("#feature-info").html("Fail to load info");
-        $("#featureModal").modal("show");
+        popup
+            .setLatLng(e.latlng)
+            .setContent("Error with loading...")
+            .openOn(map);
     });
 }
 
-function openVideo(id){
-    $("#feature-info").html('loading...');
-    console.log(this);//this.options.id
+function openVideo(id, lat, long){
+    // $("#feature-info").html('loading...');
+    // console.log(this);//this.options.id
     jQuery.ajax({
-        url: '/home/ajax-video-info/'+id,
+        url: '/home/ajax-video-info-shared-small/'+id,
         method: 'GET'
     }).done(function (content) {
-        $("#feature-title").html("Info:");
-        $("#feature-info").html(content);
-        $("#featureModal").modal("show");
+        // console.log(content)
+        popup
+            .setLatLng({lat: lat, lng: long})
+            .setContent(content)
+            .openOn(map);
     }).fail(function () {
-        $("#feature-title").html("Error:");
-        $("#feature-info").html("Fail to load info");
-        $("#featureModal").modal("show");
+        popup
+            // .setLatLng(e.latlng)
+            .setContent("Error with loading...")
+            .openOn(map);
     });
 }
+
+// function openVideo(id){
+//     $("#feature-info").html('loading...');
+//     // console.log(this);//this.options.id
+//     jQuery.ajax({
+//         url: '/home/ajax-video-info/'+id,
+//         method: 'GET'
+//     }).done(function (content) {
+//         $("#feature-title").html("Info:");
+//         $("#feature-info").html(content);
+//         $("#featureModal").modal("show");
+//     }).fail(function () {
+//         $("#feature-title").html("Error:");
+//         $("#feature-info").html("Fail to load info");
+//         $("#featureModal").modal("show");
+//     });
+// }
 
 function openGroupProfile(id){
     $("#feature-info").html('loading...');
-    console.log(this);//this.options.id
+    // console.log(this);//this.options.id
     jQuery.ajax({
         url: '/home/ajax-group-info/'+id,
         method: 'GET'
@@ -106,7 +153,7 @@ function openGroupProfile(id){
 
 function openProfile(id){
     $("#feature-info").html('loading...');
-    console.log(this);//this.options.id
+    // console.log(this);//this.options.id
     jQuery.ajax({
         url: '/home/ajax-user-info/'+id,
         method: 'GET'
@@ -128,7 +175,7 @@ map.addLayer( markerClusters );
 function searchVideo(){
     $('#video_search_res').html('<i class="fa fa-spinner"></i> loading.....');
     $.get('/ajax/home/shared/group/'+$('#_token').val(), function( data ) {
-        console.log(data.json.original);
+        // console.log(data.json.original);
         if(data.content == '')
             $('#video_search_res').html('No result!');
 
@@ -167,8 +214,8 @@ function shareSearchVideo(){
 
     $('#video_search_res').html('<i class="fa fa-spinner"></i> loading.....');
     $.get('/ajax/home/shared/group/'+$('#_token').val()+'?categories='+$categories+'&primary_sub_tag='+$primary_sub_tag+'&s_o_p='+$s_o_p+'&gci='+$gci+'&user_id='+$user_id, function( data ) {
-        console.log('new content');
-        console.log(data.json.original);
+        // console.log('new content');
+        // console.log(data.json.original);
         if(data.content == '')
             $('#video_search_res').html('No result!');
 
@@ -208,10 +255,10 @@ function shareResetSearch(){
 }
 
 function searchByTag(id){
-    console.log('search gcs '+id);
+    // console.log('search gcs '+id);
     $('#video_search_res').html('<i class="fa fa-spinner"></i> loading.....');
     $.get( "/home/ajax/video-search/?gcs="+id, function( data ) {
-        console.log(data.json.original);
+        // console.log(data.json.original);
         if(data.content == '')
             $('#video_search_res').html('No result!');
 
@@ -235,7 +282,7 @@ function decode(str) {
 
 $(document).ready(function(){
     $("#content_search_cat").change(function(){
-        console.log('searching');
+        // console.log('searching');
         searchVideo();
     });
 

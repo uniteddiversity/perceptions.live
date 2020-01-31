@@ -7,6 +7,7 @@ use App\Category;
 use App\Content;
 use App\Group;
 use App\HomeSliderFeed;
+use App\Language;
 use App\MetaData;
 use App\ShearedContent;
 use App\ShearedContentAssociation;
@@ -62,9 +63,14 @@ class ContentService
      * @var HomeSliderFeed
      */
     private $homeSliderFeed;
+    /**
+     * @var Language
+     */
+    private $language;
 
     public function __construct(MetaData $metaData, Content $content, User $user, ShearedContent $shearedContent,
-                                ShearedContentAssociation $shearedContentAssociation, Attachment $attachment, Category $category, Group $group, SortingTag $sortingTag, HomeSliderFeed $homeSliderFeed)
+                                ShearedContentAssociation $shearedContentAssociation, Attachment $attachment,
+                                Category $category, Group $group, SortingTag $sortingTag, HomeSliderFeed $homeSliderFeed, Language $language)
     {
         $this->metaData = $metaData;
         $this->content = $content;
@@ -76,6 +82,7 @@ class ContentService
         $this->group = $group;
         $this->sortingTag = $sortingTag;
         $this->homeSliderFeed = $homeSliderFeed;
+        $this->language = $language;
     }
 
     public function getMetaListByKey($key = '')
@@ -98,7 +105,7 @@ class ContentService
         return $meta_array;
     }
 
-    public function getContentList($user_id, $filter = array(), $page = null, $page_size = 20)
+    public function getContentList($user_id, $filter = array(), $page = null, $page_size = 20, $only_my = false)
     {
         $user_info = $this->getUser($user_id);
 
@@ -119,6 +126,10 @@ class ContentService
             $videos->leftJoin('user_groups as created_by_user_groups', 'created_by_user_groups.group_id','group_content_associations.group_id');
         }else{//if user
             $videos->where('user_id', $user_info['id']);
+        }
+
+        if($only_my){
+            $videos->where('contents.user_id', $user_info['id']);
         }
 
         if(isset($filter['open_list'])){
@@ -153,6 +164,14 @@ class ContentService
         return $content->first()->toArray();
     }
 
+    public function getContentDataMinimum($id)
+    {
+        $content = $this->content;
+        $content = $content->where('id', $id);
+        $content->select('contents.*');
+        return $content->first()->toArray();
+    }
+
     public function getUser($user_id)
     {
         return $this->user->where('users.id', $user_id)->with('image','groups','actingRoles')
@@ -178,7 +197,7 @@ class ContentService
 //        return response()->json($ret, 200);
     }
 
-    public function getSearchableContents($user_id, $filter = array(), $limit = 10)
+    public function getSearchableContents($user_id, $filter = array(), $limit = 10, &$contents = '', $per_page = null)
     {
         $user_info = $this->getUser($user_id);
 
@@ -241,11 +260,17 @@ class ContentService
             $contents = $contents->where('group_content_associations.group_id', $filter['group_id']);
         }
 
-        $contents = $contents->select('contents.id', 'contents.description', 'contents.lat', 'contents.long', 'contents.title', 'contents.url',
-            'users.display_name','contents.created_at','contents.location','contents.user_id','contents.primary_subject_tag',
+        $contents = $contents->select('contents.id', 'contents.description', 'contents.brief_description as trim_description', 'contents.lat', 'contents.long', 'contents.title', 'contents.url',
+            'users.display_name','contents.created_at','contents.captured_date','contents.location','contents.user_id','contents.primary_subject_tag',
             DB::Raw("GROUP_CONCAT(DISTINCT (concat(sorting_tags.tag_color,'-',sorting_tags.id,'-',sorting_tags.tag)) SEPARATOR ', ') as tag_colors") )
-            ->groupBy('contents.id')->orderBy('contents.updated_at', 'DESC')->limit($limit)->get();
+            ->groupBy('contents.id')->orderBy('contents.updated_at', 'DESC');
         $r = array(); $i = 0;
+
+        if($per_page != null){
+            $contents = $contents->paginate($per_page);
+        }else{
+            $contents = $contents->limit($limit)->get();
+        }
 
         foreach($contents as $c){
             $r[$i] = $c;
@@ -317,6 +342,11 @@ class ContentService
     {
         $map = $this->shearedContent->with(['user'])
             ->leftJoin('shared_contents_associations as association', 'association.shared_content_id', 'shared_contents.id')
+            ->leftJoin('group_content_associations as groups', function($q){
+                $q->on('groups.group_id', 'association.fk_id')
+                    ->where('association.type', 'group')
+                    ->where('association.table', 'groups');
+            })
             ->leftJoin('tag_content_associations as gcs', function($q){
                 $q->on('gcs.content_tag_id', 'association.fk_id')
                     ->where('association.type', 'group')
@@ -337,17 +367,42 @@ class ContentService
                     ->where('association.type', 'group')
                     ->where('association.table', 'categories');
             })
+            ->leftJoin('contents as content', function($q){
+                $q->on('content.primary_subject_tag', 'shared_contents.primary_subject_tag');
+            })
             ->select(
                 'shared_contents.id',
+                DB::Raw("GROUP_CONCAT(DISTINCT groups.id SEPARATOR ',') as groups_content_ids"),
+                DB::Raw("GROUP_CONCAT(DISTINCT content.id SEPARATOR ',') as contents_content_ids"),
                 DB::Raw("GROUP_CONCAT(DISTINCT content_category.id SEPARATOR ',') as contents_category_ids"),
                 DB::Raw("GROUP_CONCAT(DISTINCT users_contents.content_id SEPARATOR ',') as user_contents_ids"),
                 DB::Raw("GROUP_CONCAT(DISTINCT contents_d.fk_id SEPARATOR ',') as contents_ids")
                 //,DB::Raw("concat(contents_category_ids,',',user_contents_ids,',',contents_ids) as all_videos")
                 );
 
+        if(isset($filter['groups']) && !empty($filter['groups'])){
+            $map = $map->whereIn('groups.group_id', $filter['groups']);
+        }
+
+        if(isset($filter['primary_sub_tag']) && !empty($filter['primary_sub_tag'])){
+            $map = $map->where('content.primary_subject_tag', 'LIKE', '%'.$filter['primary_sub_tag'].'%');
+        }
+
         $map = $map->where('shared_contents.public_token', $token)->groupBy('shared_contents.id')->get()->first();
 
         $ids = array();
+
+        if(isset($map['groups_content_ids'])){
+            foreach(explode(',',$map['groups_content_ids']) as $id){
+                $ids[$id] = $id;
+            }
+        }
+
+        if(isset($map['contents_content_ids'])){
+            foreach(explode(',',$map['contents_content_ids']) as $id){
+                $ids[$id] = $id;
+            }
+        }
 
         if(isset($map['contents_category_ids'])){
             foreach(explode(',',$map['contents_category_ids']) as $id){
@@ -373,12 +428,12 @@ class ContentService
         return $locations;
     }
 
-    public function getSharedMapFiltersListByToken($_token)
+    public function getSharedMapFiltersListByToken($_token, $table = 'filter_list')
     {
         $filters = $this->shearedContent
             ->leftJoin('shared_contents_associations as association', 'association.shared_content_id', 'shared_contents.id')
             ->where('shared_contents.public_token', $_token)
-            ->where('table', 'filter_list')->select('association.*')->get()->toArray();
+            ->where('table', $table)->select('association.*')->get()->toArray();
 
         return $filters;
     }
@@ -438,15 +493,18 @@ class ContentService
         return $uploaded_files;
     }
 
-    public function ajaxSearchContentGroup($text, $type = '')
+    public function ajaxSearchContentGroup($text, $types = [])
     {
         $content = [];
         $r = [];
-        if($type == ''){
-            $content['category'] = $this->category->where('name', 'like', '%'.$text.'%')->limit(10)->get()->toArray();
-            $content['group'] = $this->group->where('name', 'like', '%'.$text.'%')->limit(10)->get()->toArray();
-            $content['gci'] = $this->sortingTag->where('tag', 'like', '%'.$text.'%')->where('tag_for','gci')->limit(10)->get()->toArray();
-        }
+//        if($type == ''){
+            if(in_array('category', $types))
+                $content['category'] = $this->category->where('name', 'like', '%'.$text.'%')->limit(10)->get()->toArray();
+            if(in_array('group', $types))
+                $content['group'] = $this->group->where('name', 'like', '%'.$text.'%')->limit(10)->get()->toArray();
+            if(in_array('GCI', $types))
+                $content['gci'] = $this->sortingTag->where('tag', 'like', '%'.$text.'%')->where('tag_for','gci')->limit(10)->get()->toArray();
+//        }
 
         foreach($content as $type => $arrays){
             foreach($arrays as $value){
@@ -464,35 +522,90 @@ class ContentService
     public function listHomeSlider()
     {
         $slider = $this->homeSliderFeed->with('image')
-            ->leftJoin('groups','groups.id', 'home_slider_feeds.fk_id', function($q){
-                $q->where('home_slider_feeds.type', 'group');
+            ->leftJoin('home_slider_feed_settings', 'home_slider_feed_settings.feed_id','home_slider_feeds.id')
+            ->leftJoin('groups','groups.id', 'home_slider_feed_settings.fk_id', function($q){
+                $q->where('home_slider_feed_settings.type', 'group');
             })
-            ->leftJoin('categories','categories.id', 'home_slider_feeds.fk_id', function($q){
-                $q->where('home_slider_feeds.type', 'category');
-            })->leftJoin('sorting_tags','sorting_tags.id', 'home_slider_feeds.fk_id', function($q){
-                $q->where('home_slider_feeds.type', 'gci');
+            ->leftJoin('categories','categories.id', 'home_slider_feed_settings.fk_id', function($q){
+                $q->where('home_slider_feed_settings.type', 'category');
+            })->leftJoin('sorting_tags','sorting_tags.id', 'home_slider_feed_settings.fk_id', function($q){
+                $q->where('home_slider_feed_settings.type', 'gci');
             })
-            ->select('home_slider_feeds.*', 'groups.name', 'categories.name', 'categories.name', 'sorting_tags.tag')
+            ->select('home_slider_feeds.*', 'home_slider_feed_settings.type', 'home_slider_feed_settings.fk_id', 'groups.name', 'categories.name', 'categories.name', 'sorting_tags.tag')
             ->get()->toArray();
 
         $r = array();
         $i = 0;
+
         foreach($slider as $val){
+            $i = $val['id'];
             $r[$i]['id'] = $val['id'];
             $r[$i]['side'] = $val['side'];
             $r[$i]['title'] = $val['title'];
             $r[$i]['fk_title'] = isset($val['name'])?$val['name'] : $val['tag'];
-            $r[$i]['fk_id'] = $val['fk_id'];
-            $r[$i]['type'] = $val['type'];
+            $r[$i]['fk_id'][] = $val['fk_id'];
+            $r[$i]['type'][] = $val['type'];
+            $r[$i]['types'][$val['type']][] = $val['fk_id'];
+            $items = [];
+            foreach($r[$i]['types'] as $key => $v){
+                $items[] = $key .'-'. implode(',', $v);
+            }
+//            $r[$i]['type_id'][] = $items;
+            $r[$i]['type_ids'] = implode('|',$items);
             $r[$i]['icon'] = isset($val['image'][0]) && !empty($val['image'][0])? $val['image'][0]['url'] : 'default_icon.jpg';
-            $i++;
+//            $i++;
         }
-
+//        dd($r);
         return $r;
     }
 
     public function deleteHomeSlider($id)
     {
         return $this->homeSliderFeed->where('id', $id)->delete();
+    }
+
+    public function getLanguages()
+    {
+        return $this->language->get();
+    }
+
+    public function getContentIdsByFilter($filter, $limit = 200, $per_page = null)
+    {
+        $contents = $this->content
+            ->leftJoin('group_content_associations', 'group_content_associations.content_id', 'contents.id');
+
+        if(isset($filter['groups'])){
+            $contents = $contents->whereIn('group_content_associations.group_id', $filter['groups']);
+        }
+        $contents->select('contents.id')->groupBy('contents.id');
+
+        if($per_page != null){
+            $contents = $contents->paginate($per_page);
+        }else{
+            $contents = $contents->limit($limit)->get();
+        }
+
+        return $contents;
+    }
+
+    public function getCategories($filter, $limit = 200, $per_page = null)
+    {
+        $category = $this->category;
+
+        if(isset($filter['contents']))
+        {
+            $category = $category->leftJoin('contents', 'contents.category_id', 'categories.id');
+            $category = $category->whereIn('contents.id', $filter['contents']);
+        }
+
+        $category->select('categories.*')->groupBy('categories.id');
+
+        if($per_page != null){
+            $category = $category->paginate($per_page);
+        }else{
+            $category = $category->limit($limit)->get();
+        }
+
+        return $category;
     }
 }

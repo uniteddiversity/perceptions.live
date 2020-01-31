@@ -20,7 +20,8 @@ class Kernel extends HttpKernel
         \Illuminate\Foundation\Http\Middleware\ConvertEmptyStringsToNull::class,
         \App\Http\Middleware\TrustProxies::class,
         // appending custom middleware
-        \App\Http\Middleware\HttpsProtocol::class
+        \App\Http\Middleware\HttpsProtocol::class,
+//        \App\Http\Middleware\FrameHeadersMiddleware::class
     ];
 
     /**
@@ -53,7 +54,8 @@ class Kernel extends HttpKernel
      * @var array
      */
     protected $routeMiddleware = [
-        'auth' => \Illuminate\Auth\Middleware\Authenticate::class,
+        'auth' => \App\Http\Middleware\Authenticate::class,
+//        'auth' => \Illuminate\Auth\Middleware\Authenticate::class,
         'admin' => \App\Http\Middleware\Admin::class,
         'groupadmin' => \App\Http\Middleware\GroupAdmin::class,
         'moderator' => \App\Http\Middleware\GroupModerator::class,

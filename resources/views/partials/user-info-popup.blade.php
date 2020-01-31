@@ -6,11 +6,8 @@ $display = ($user_status == 'private' || $user_status == 'only-logged')? false :
     <button class="close" type="button" data-dismiss="modal" aria-hidden="true">&times;</button>
     <button class="model-back" onclick="modalBack()" aria-hidden="true">&lt;</button>
     <div class="modal-body">
-        <?php //dd(date_create()) ?>
         <div style="display: block; width:100%; text-align: left;">
-
             <div class="user_info">
-                <div style="float:left;">
                     <div class="user_img">
                         <span>
                             <img height="150" width="150" class="avatar profile_img_mini" src="<?php if(isset($info['image'][0])){ echo '/storage/'.$info['image'][0]->url; }else{ ?>/assets/img/face1.png<?php } ?>" alt="profile image">
@@ -23,23 +20,17 @@ $display = ($user_status == 'private' || $user_status == 'only-logged')? false :
                         <div style="float:left; width:100%;">
                             <h4 style="margin-bottom:5px;">{{$info['display_name']}}
                                 <?php
-                    if($user_status == 'public'){
-                        echo '<i class="fa fa-eye" style="display:none;"></i>';
-                    }elseif($user_status == 'private'){
-                        echo '<i class="fa fa-eye-slash" style="display:none;"></i>';
-                    }elseif($user_status == 'logged-in' || $user_status == 'only-logged'){
-                        echo '<i class="fa fa-lock"></i>';
-                    }
-                    ?>
-
+                                if($user_status == 'public'){
+                                    echo '<i class="fa fa-eye" style="display:none;"></i>';
+                                }elseif($user_status == 'private'){
+                                    echo '<i class="fa fa-eye-slash" style="display:none;"></i>';
+                                }elseif($user_status == 'logged-in' || $user_status == 'only-logged'){
+                                    echo '<i class="fa fa-lock"></i>';
+                                }
+                                ?>
                             </h4>
-
-
-
-
                             <?php /* ### If profile is inactive, add this div ?>
                             <div style="width:100%; text-align: center; color: #333333; font-style: italic; font-size: 12px; ">claim this profile</div>
-
                         </div>
 
                         <div style="display: block; width: 50%; padding-left: 5%; z-index: 99; float: left;">
@@ -80,127 +71,41 @@ $display = ($user_status == 'private' || $user_status == 'only-logged')? false :
                         <a class="btn white" href="/claim-profile" target="_blank">Claim this Profile</a>
                         <?php } ?>
                     </div>
-                </div>
             </div>
         </div>
     </div>
 
 
-
-    <div class="video_section">
-        <div class="video_inner">
-            <?php if($display){ ?>
-            <div style="display: block; width:100%; float: left; text-align: center; padding-top:15px;padding-bottom:10px;">
+    <?php if($display){ ?>
+    <div class="video_section row">
+        <div class="video_inner col-lg-9">
+            <div style="display: block; width:100%;  text-align: center; padding-top:15px;padding-bottom:10px;">
                 <span style="text-transform: none; font-style: italic;">
-                    <?php echo $info['description'] ?></span>
+                    <?php echo $info['description'] ?>
+                </span>
             </div>
             <div>
                 <h5><i class="fas fa-video"></i> Media Involvements</h5>
             </div>
-
-            <?php /* ### LIST OF ASSOCIATED VIDEOS - CLICK THUMBNAIL IMAGE TO OPEN VIDEO-INFO-BLADE */ ?>
-
-            <?php foreach($info['user_involvement_videos'] as $video){ //dd($video['user_association_tag_slug']);
-        preg_match("/^(?:http(?:s)?:\/\/)?(?:www\.)?(?:m\.)?(?:youtu\.be\/|youtube\.com\/(?:(?:watch)?\?(?:.*&)?v(?:i)?=|(?:embed|v|vi|user)\/))([^\?&\"'>]+)/", $video['url'], $matches);
-        $video_id = isset($matches[1])?$matches[1]:'';
-        ?>
-
-            <div class="video_thumb active_link" onclick="openVideo('<?php echo $video['id'] ?>')">
-                <span>
-                    <img width=100% height=100% src="https://img.youtube.com/vi/<?php echo $video_id ?>/maxresdefault.jpg">
-                </span>
-                <div class="placedetails">
-
-                    <?php /* ### this is "video producer" or "onscreen" or "co-creator" or "submitter" based on video profile */ ?>
-                    <span class="pull-left">
-
-                        <?php echo $video['user_association'] ?>
-                    </span>
-                    <?php /* <span class="pull-right"><i class="flaticon-avatar"></i> <span class="inactive_link" onclick="openProfile('<?php echo $video['user_id'] ?>')">
-                    <?php (isset($video['display_name']));echo $video['display_name'] ?></span></span> */ ?>
-                </div>
+            <div id="user-info-popup_video">
+                @include('partials.user-info-popup_video-info', ['contentInfo' => $info['user_involvement_videos'], 'paginationData' => $contents1])
             </div>
-
-            <div class="placedetails" style="display:none;">
-
-                <?php /* ### this is "video producer" or "onscreen" or "co-creator" or "submitter" based on video profile */ ?>
-                <span class="pull-left"><i class="fa fa-star-o"></i>
-                    <?php echo $video['user_association'] ?>
-                </span>
-                <?php /* <span class="pull-right"><i class="flaticon-avatar"></i> <span class="inactive_link" onclick="openProfile('<?php echo $video['user_id'] ?>')">
-                <?php (isset($video['display_name']));echo $video['display_name'] ?></span></span> */ ?>
-            </div>
-            <?php } ?>
         </div>
 
 
-        <div>
+        <div class="col-lg-3 group_association">
             <div>
                 <h5><i class="fas fa-users"></i> Group Associations</h5>
             </div>
-            <?php
-        $group_names=[];
-        $vid_ids = explode(',',$video['group_names_ids']);
-        foreach($vid_ids as $v){
-            $group_name_id = explode('-',$v);
-            $group_id = isset($group_name_id[1])?$group_name_id[1]:'';
-            $group_name = isset($group_name_id[0])?$group_name_id[0]:'';
-            $group_names[] = '<span class="inactive_link" onclick="openGroupProfile(\''. $group_id .'\')">'. $group_name .'</span>';
-        }
-        ?>
-            <?php /*
-        <span class="pull-right"><i class="fa fa-users"></i> <?php echo implode(', ', $group_names) ?>
-            <div style="clear: both;"></div>
-            </span>
-            */ ?>
-            <?php /* ### click group image to open group-info-blade */ ?>
-
-            <?php
-        if(isset($info->groups)){
-            foreach($info->groups as $group){  //dd($group->group);?>
-
-
-            <div style="width: 100%; text-align: center;">
-                <?php if(!isset($group->group->image[0]->url)){?>
-                <img class="active_link" onclick="openGroupProfile('<?php echo $group->group->id ?>')" style="margin-left: 25%;" height="150" width="150" src="/assets/img/face1.png">
-                <?php }else{ ?>
-                <img class="active_link" onclick="openGroupProfile('<?php echo $group->group->id ?>')" style="margin-left: 25%;" height="150" width="150" src="<?php echo '/storage/'.$group->group->image[0]->url; ?>">
-                <?php } ?>
-
-                <div style="clear: both"></div>
+            <div id="user-info-popup_group">
+                @include('partials.user-info-popup_group-info', ['groupsInfo' => $info['user_groups'], 'paginationData' => $contents2])
             </div>
-            <div style="display: block; width: 100%; text-align: center;">
-                <span style="color: #8d8d8d;"><i class="fa fa-user"></i> <span class="inactive_link" onclick="openGroupProfile('<?php echo $group->group->id ?>')">
-                        <?php echo $group->group->name ?></span></span>
-                <?php if(!empty($group->group->default_location)){ ?>
-                <div style="color: #8d8d8d;"><i class="flaticon-pin"></i>
-                    <?php echo $group->group->default_location ?>
-                </div>
-                <?php } ?>
-
-            </div>
-
-
-            <?php
-            }
-        }
-        /*foreach($info['group_involvement_videos'] as $video){ //dd($video['location']);
-        preg_match("/^(?:http(?:s)?:\/\/)?(?:www\.)?(?:m\.)?(?:youtu\.be\/|youtube\.com\/(?:(?:watch)?\?(?:.*&)?v(?:i)?=|(?:embed|v|vi|user)\/))([^\?&\"'>]+)/", $video['url'], $matches);
-        $video_id = isset($matches[1])?$matches[1]:'';
-        ?>
-            <div class="video_thumb active_link" onclick="openVideo('<?php echo $video['id'] ?>')">
-                <img width=100% height=100% src="https://img.youtube.com/vi/<?php echo $video_id ?>/maxresdefault.jpg" alt="">
-            </div>
-            <div style="clear: both;"></div>
-            <div class="placedetails">
-                <span class="pull-left"><i class="flaticon-pin"></i>
-                    <?php echo $video['location'] ?> </span>
-            </div>
-            <?php } */ ?>
         </div>
+
     </div>
     <?php } ?>
     <div style="clear: both;"></div>
+    <input type="hidden" id="popup_user_id" value="<?php echo $user_id ?>" />
 </div>
 
 <?php /*
@@ -304,3 +209,8 @@ $display = ($user_status == 'private' || $user_status == 'only-logged')? false :
 
 </style>
 */ ?>
+<style>
+#featureModal .modal-header {
+    display: none;
+}
+</style>

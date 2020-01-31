@@ -5,11 +5,13 @@ namespace App\Controllers;
 use App\Category;
 use App\Content;
 use App\Http\Controllers\Controller;
+use App\Mail\contactUs;
 use App\SiteSetting;
 use App\User;
 use Content\Services\ContentService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Validator;
 use User\Services\UserRepository;
@@ -40,6 +42,8 @@ class HomeController extends Controller
      * @var SiteSetting
      */
     private $siteSetting;
+
+    private $per_page = 4;
 
     public function __construct(Content $content, User $user, UserRepository $userRepository, ContentService $contentService,
                                 Category $category, SiteSetting $siteSetting)
@@ -99,9 +103,9 @@ class HomeController extends Controller
     {
         $user_id = (!isset(Auth::user()->id))? 0 : Auth::user()->id;
         $info = $this->userRepository->getContentsInfo($user_id, $video_id);
-
+        $comments = $this->userRepository->getArrangedComments($video_id, 'contents');
         return view('partials.video-info-popup')
-            ->with(compact('info'));
+            ->with(compact('info', 'comments'));
     }
 
     public function getVideoInfoMini($video_id)
@@ -110,6 +114,15 @@ class HomeController extends Controller
         $info = $this->userRepository->getContentsInfo($user_id, $video_id);
 
         return view('partials.video-info-popup-small')
+            ->with(compact('info'));
+    }
+
+    public function getVideoInfoSharedMini($video_id)
+    {
+        $user_id = (!isset(Auth::user()->id))? 0 : Auth::user()->id;
+        $info = $this->userRepository->getContentsInfo($user_id, $video_id);
+
+        return view('partials.video-info-popup-shared-small')
             ->with(compact('info'));
     }
 
@@ -126,23 +139,52 @@ class HomeController extends Controller
     {
         $user_associate_videos = $this->userRepository->getAssociatedVideosForUser($user_id);
         $info = $this->userRepository->getUser($user_id);
-        $info['user_involvement_videos'] = $this->userRepository->getPublicContents($user_id, array('user_involvement' => $user_id));
-        $info['group_involvement_videos'] = $this->userRepository->getPublicContents($user_id, array('group_involvement' => $user_id));
+        $info['user_groups'] = $this->userRepository->getUserGroups($user_id, $contents2, $this->per_page);
+        $info['user_involvement_videos'] = $this->userRepository->getPublicContents($user_id, array('user_involvement' => $user_id), $count, $contents1, $this->per_page);
+        $info['group_involvement_videos'] = $this->userRepository->getPublicContents($user_id, array('group_involvement' => $user_id), $count);
 
         $user_status = $this->userRepository->getUserStatus($user_id);
         $gci_tags = $this->userRepository->getGreaterCommunityIntentionTag();
-
         return view('partials.user-info-popup')
-            ->with(compact('info','user_associate_videos','gci_tags','user_status'));
+            ->with(compact('info','user_associate_videos','gci_tags','user_status', 'contents1', 'contents2', 'user_id'));
+    }
+
+    public function getUserInfoVideoPartial($user_id)
+    {
+        $contentInfo = $this->userRepository->getPublicContents($user_id, array('user_involvement' => $user_id), $count, $paginationData, $this->per_page);
+
+        return view('partials.user-info-popup_video-info')
+            ->with(compact('contentInfo', 'paginationData', 'user_id'));
+    }
+
+    public function getUserInfoGroupPartial($user_id)
+    {
+        $groupsInfo = $this->userRepository->getUserGroups($user_id, $paginationData, $this->per_page);
+        return view('partials.user-info-popup_group-info')
+            ->with(compact('groupsInfo', 'paginationData', 'user_id'));
     }
 
     public function getGroupInfo($group_id)
     {
         $info = $this->userRepository->getGroupInfo($group_id, true, true);
-        $group_contents = $this->contentService->getSearchableContents(0, array('group_id' => $group_id), 10);
-        $group_users = $this->userRepository->getUsers(array('group_id' => $group_id));
+        $group_contents = $this->contentService->getSearchableContents(0, array('group_id' => $group_id), 10, $contents1, $this->per_page);
+        $group_users = $this->userRepository->getUsers(array('group_id' => $group_id), null,$contents2, $this->per_page);
         return view('partials.group-info-popup')
-            ->with(compact('info','group_contents','group_users'));
+            ->with(compact('info','group_contents','group_users', 'contents1', 'contents2', 'group_id'));
+    }
+
+    public function getGroupInfoUsersPartial($group_id)
+    {
+        $groupUsers = $this->userRepository->getUsers(array('group_id' => $group_id), null,$paginationData, $this->per_page);
+        return view('partials.group-info-popup_user')
+            ->with(compact('groupUsers','paginationData'));
+    }
+
+    public function getGroupInfoVideoPartial($group_id)
+    {
+        $videos = $this->contentService->getSearchableContents(0, array('group_id' => $group_id), 10, $paginationData, $this->per_page );
+        return view('partials.group-info-popup_video')
+            ->with(compact('videos','paginationData'));
     }
 
     public function location($id)
@@ -156,19 +198,6 @@ class HomeController extends Controller
 
 
         $locations = $this->getSearchListInJson($uploaded_list);
-//        $ret = array(); $i = 0;
-//        foreach($uploaded_list as $u){
-//            $ret[$i]['id'] = $u['id'];
-//            $ret[$i]['lng'] = floatval($u['long']);
-//            $ret[$i]['lat'] = floatval($u['lat']);
-//            $ret[$i]['name'] = $u['title'];
-////            $ret[$i]['city'] = $u['city'];
-//            $i++;
-//        }
-//        $locations = response()->json($ret, 200);
-//
-
-
         $location_id = $id;
         return view('user.home2')
             ->with(compact('locations','location_id'));
@@ -222,6 +251,24 @@ class HomeController extends Controller
         return response()->json(array('total_count' => count($r), 'incomplete_results' => false, 'results' => $r), 200);
     }
 
+    public function searchUsersListByGroups($groups, Request $request)
+    {
+        $r = $request->all();
+        $user_id = (!isset(Auth::user()->id))? 0 : Auth::user()->id;
+        $filter['keyword'] = isset($r['q']['term'])?$r['q']['term']: '';
+        $filter['groups'] = is_array(explode(',', $groups))?explode(',', $groups): array();
+        $users_list = $this->userRepository->getUsersList($user_id, $filter);
+
+        $r = array(); $i = 0;
+        foreach($users_list as $val){
+            $r[$i]['text'] = '@'.$val['display_name'];
+            $r[$i]['id'] = $val['id'];
+            $i++;
+        }
+
+        return response()->json(array('total_count' => count($r), 'incomplete_results' => false, 'results' => $r), 200);
+    }
+
     public function searchGroupList(Request $request)
     {
         $r = $request->all();
@@ -256,6 +303,32 @@ class HomeController extends Controller
         return response()->json(array('total_count' => count($r), 'incomplete_results' => false, 'results' => $r), 200);
     }
 
+    public function showCurrentLocationVideos(Request $request)
+    {
+        $r = $request->all();
+        $result_count = 0;
+        $filter['category'] = isset($r['category'])?$r['category']: array();
+        $filter['keyword'] = isset($r['keyword'])?$r['keyword']: array();
+        $filter['gcs'] = isset($r['gcs'])?$r['gcs']: array();//great community service
+        $user_id = (!isset(Auth::user()->id))? 0 : Auth::user()->id;
+
+        $filter['category_id'] = isset($_GET['category_id'])?($_GET['category_id']):'';
+        $filter['keyword'] = isset($_GET['keyword'])?($_GET['keyword']):'';
+        $filter['gcs'] = isset($_GET['gcs'])?($_GET['gcs']):'';
+        $filter['video_id'] = isset($_GET['video_id'])?($_GET['video_id']):'';
+        $ids=isset($_GET['ids'])?($_GET['ids']):'';
+        $array=explode(',',$ids);
+        $new_ids_array=array_filter($array);
+        $filter['ids'] = $new_ids_array;
+
+        $uploaded_list = $this->userRepository->getCurrentContents($user_id, $filter, $result_count);
+        $json_output = $this->getSearchListInJson($uploaded_list);
+        $content = view('partials.video-search-result')
+            ->with(compact('uploaded_list','result_count'));
+        $content = (string)htmlspecialchars($content);
+        return array('content' => $content, 'json' => $json_output);
+        return array('json' => $json_output);
+    }
     public function searchVideos(Request $request)
     {
         $r = $request->all();
@@ -269,6 +342,15 @@ class HomeController extends Controller
         $filter['keyword'] = isset($_GET['keyword'])?($_GET['keyword']):'';
         $filter['gcs'] = isset($_GET['gcs'])?($_GET['gcs']):'';
         $filter['video_id'] = isset($_GET['video_id'])?($_GET['video_id']):'';
+
+        $filter['text'] = isset($_GET['text'])?($_GET['text']):'';
+        $filter['date_from'] = isset($_GET['date_from'])?($_GET['date_from']):'';
+        $filter['date_to'] = isset($_GET['date_to'])?($_GET['date_to']):'';
+        $filter['location_text'] = isset($_GET['location_text'])?($_GET['location_text']):'';
+        $filter['sorting_tag'] = isset($_GET['sorting_tag'])?($_GET['sorting_tag']):'';
+        $filter['service_or_opportunity'] = isset($_GET['exchange_for'])?($_GET['exchange_for']):'';
+        $filter['group_id'] = isset($_GET['group_id'])?($_GET['group_id']):'';
+        $filter['multi_search'] = isset($_GET['multi_search'])?($_GET['multi_search']):'';
 
         $uploaded_list = $this->userRepository->getPublicContents($user_id, $filter, $result_count);
         $json_output = $this->getSearchListInJson($uploaded_list);
@@ -301,21 +383,27 @@ class HomeController extends Controller
     {
         $filters_list = $this->contentService->getSharedMapFiltersListByToken($_token);
         $basic_info = $this->contentService->getSharedMapBasicInfo($_token);
-
+        $filters_group_list = $this->contentService->getSharedMapFiltersListByToken($_token, 'groups');
+        $within_groups = [];
+        foreach($filters_group_list as $group){
+            $within_groups[] = $group['fk_id'];
+        }
+        $content_ids = $this->contentService->getContentIdsByFilter( array('groups' => $within_groups))->toArray();
+        $content_ids = array_column($content_ids,'id');
         $search_elements = '';
         foreach($filters_list as $filter){
             switch($filter['fk_id']){
                 case 1:
                     //Category
                     $type = 'category';
-                    $categories = $this->category->get();
+                    $categories = $this->contentService->getCategories(array('contents' => $content_ids));
                     $search_elements .= view('partials.search-element')
                         ->with(compact('type','categories'));
                     break;
                 case 2:
                     //Greater Community Intention
                     $type = 'gci_tags';
-                    $gci_tags = $this->userRepository->getGreaterCommunityIntentionTag();
+                    $gci_tags = $this->userRepository->getGreaterCommunityIntentionTag(array('contents' => $content_ids));
                     $search_elements .= view('partials.search-element')
                         ->with(compact('type','gci_tags'));
                     break;
@@ -328,8 +416,22 @@ class HomeController extends Controller
                 case 4:
                     //Associated Users
                     $type = 'users';
+                    $filters_users_list = $this->contentService->getSharedMapFiltersListByToken($_token, 'users');
+                    $within_users = [];
+                    foreach($filters_users_list as $user){
+                        $within_users[] = $user['fk_id'];
+                    }
+                    $sub_filter['groups'] = $within_groups;
+                    $sub_filter['ids'] = $within_users;
+                    $users_list = $this->userRepository->getUsersList(0, $sub_filter);
+                    $i = 0; $users = [];
+                    foreach($users_list as $val){
+                        $users[$i]['text'] = '@'.$val['display_name'];
+                        $users[$i]['id'] = $val['id'];
+                        $i++;
+                    }
                     $search_elements .= view('partials.search-element')
-                        ->with(compact('type'));
+                        ->with(compact('type', 'users'));
                     break;
                 case 5:
                     //Service/Opportunity
@@ -352,23 +454,83 @@ class HomeController extends Controller
         }
 
         return view('partials.shared_content')
-            ->with(compact('_token', 'search_elements', 'filters_list','basic_info'));
+            ->with(compact('_token', 'search_elements', 'filters_list','basic_info','within_groups'));
     }
 
     public function shearedContentJson($_token,Request $request)
     {
         $filter = array();
+        $filters_group_list = $this->contentService->getSharedMapFiltersListByToken($_token, 'groups');
+        $basic_info = $this->contentService->getSharedMapBasicInfo($_token);
+        $within_groups = [];
+        foreach($filters_group_list as $group){
+            $within_groups[] = $group['fk_id'];
+        }
+
+        if(isset($basic_info['primary_subject_tag']) && !empty($basic_info['primary_subject_tag'])){
+            $filter['primary_sub_tag'] = $basic_info['primary_subject_tag'];
+        }else{
+            $filter['primary_sub_tag'] = '';
+        }
+
+        $filter['groups'] = $within_groups;
         $filter['category_id'] = isset($request['categories'])? $request['categories'] : '';
-        $filter['primary_sub_tag'] = isset($request['primary_sub_tag'])? $request['primary_sub_tag'] : '';
+//        $filter['primary_sub_tag'] = isset($request['primary_sub_tag'])? $request['primary_sub_tag'] : '';
         $filter['service_or_opportunity'] = isset($request['s_o_p'])? $request['s_o_p'] : '';//same table with different relationship name
         $filter['gcs'] = isset($request['gci'])? $request['gci'] : '';
         $filter['associate_user_id'] = isset($request['user_id'])? $request['user_id'] : '';
         $uploaded_list = $this->contentService->generateMap($_token, 0,$filter);
-
         $json_output = $this->getSearchListInJson($uploaded_list);
         $content = view('partials.shared_video-search-result')
             ->with(compact('uploaded_list'));
         $content = (string)htmlspecialchars($content);
         return array('content' => $content, 'json' => $json_output);
+    }
+
+    public function searchDisplayNames(Request $request)
+    {
+        $r = $request->all();
+        $data = $this->userRepository->ajaxSearchDisplayNames($r['q']['term']);
+        echo json_encode($data);
+    }
+
+    public function contactUs()
+    {
+        return view('user.contact-us');
+    }
+
+    public function contactUsPost(Request $request)
+    {
+        $r = $request->toArray();
+        $user_id = (!isset(Auth::user()->id))? 0 : Auth::user()->id;
+
+        $validator = Validator::make($request->all(),
+            [
+                'name' => 'required',
+                'email' => 'required|email',
+                'subject' => 'required',
+                'message' => 'required',
+                'g-recaptcha-response' => 'required|recaptcha'
+            ],
+            ['g-recaptcha-response.required' => 'Recaptcha must be clicked.']);
+
+        if ($validator->fails()) {
+            return Redirect::back()->withErrors($validator->messages())->withInput();
+        }
+
+        $to = [
+            [
+                'email' => env("ADMIN_MAIL"),
+                'name' => env("ADMIN_NAME"),
+            ]
+        ];
+        Mail::to($to)->send(new contactUs($request->all()));
+
+        return redirect()->back()->with('message', 'Successfully Sent!');
+    }
+
+    public function getComments($fk_id, $table)
+    {
+        $comments = $this->comment->where('table', $table)->where('fk_id', $fk_id)->get();
     }
 }

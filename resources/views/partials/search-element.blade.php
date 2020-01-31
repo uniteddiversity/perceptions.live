@@ -26,8 +26,11 @@ switch($type){
         break;
     case 'users':
         echo '<div class="search-form-element">';
-        echo '<select class="form-control select2-ajax-users" id="associated_users">';
+        echo '<select class="form-control" id="associated_users">';
         echo '<option value="">All Associated Users</option>';
+        foreach($users as $user){
+            echo '<option value="'.$user['id'].'">'.$user['text'].'</option>';
+        }
         echo '</select></div>';
         break;
     case 's_o_p':

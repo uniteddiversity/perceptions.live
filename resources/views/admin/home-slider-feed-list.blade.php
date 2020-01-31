@@ -32,7 +32,7 @@
                         </tr>
                         </thead>
                         <tbody>
-                        @foreach ($data as $d) <?php //dd($user); ?>
+                        @foreach ($data as $d)
                         <tr>
                             <td>
                                 <a onclick="return confirm('Are you sure you want to delete?')" href="/user/admin/delete-slider-feed/{{ uid($d['id']) }}" >Delete</a>
@@ -47,7 +47,7 @@
                                 {{ $d['fk_title'] }}
                             </td>
                             <td>
-                                {{ $d['type'] }}
+                                {{-- $d['type'] --}}
                             </td>
                             <td>
                                 <img src="/storage/{{ $d['icon'] }}" alt="Icon" height="42" width="42">

@@ -5,7 +5,8 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <title>PRCPTIONS.LIVE: exploring the world's perception</title>
-    <link rel="stylesheet" href="/assets/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="/assets/findgo/css/bootstrap-grid.css" />
+<!--    <link rel="stylesheet" href="/assets/css/bootstrap.min.css">-->
     <link rel="stylesheet" href="/assets/fontawesome/css/all.css">
     <link rel="stylesheet" type="text/css" href="/assets/css/leaflet_0.7.css" />
     {{--<link rel="stylesheet" href="/assets/css/leaflet.css">--}}
@@ -15,7 +16,129 @@
     <link rel="stylesheet" href="/assets/leaflet-groupedlayercontrol/leaflet.groupedlayercontrol.css">
     <link rel="stylesheet" href="/js/dist/css/select2.min.css" />
     <link rel="stylesheet" href="/assets/css/app.css">
-    <link rel="stylesheet" href="/assets/css/custom_common_styles.css">
+<!--    <link rel="stylesheet" href="/assets/css/custom_common_styles.css">-->
+
+
+
+    <link rel="stylesheet" type="text/css" href="/assets/findgo/css/style.css" />
+    <link rel="stylesheet" href="/assets/css/custom.css?version=1" />
+    <link rel="stylesheet" href="/assets/css/custom_shared.css" />
+<!--    <link rel="stylesheet" href="/assets/css/leaflet.css" />-->
+    <style>
+        #featureModal {
+            display: block;
+            padding-top: 0 !important;
+        }
+
+        #featureModal {
+            position: fixed;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 30;
+            background: rgba(36, 35, 35, 0.8);
+            overflow-x: hidden;
+            overflow-y: scroll;
+            display: none;
+        }
+
+        .search-form-element{
+            width: auto !important;
+        }
+
+        /*.btn{*/
+        /*    height: 20px;*/
+        /*    line-height: 0px !important;*/
+        /*}*/
+    </style>
+    <style>
+        /* Tooltip */
+        .tooltip {
+            position: absolute;
+            background: black;
+            color: #fff;
+            padding: 3px;
+            z-index: 1000000000;
+        }
+
+        .leaflet-popup-content {
+            margin: 0px;
+            width: 200px;
+        }
+
+        /* Geolocation Icon */
+        .fa-map-marker:before {
+            content: "\f0ac";
+        }
+
+        /*  Clustering color   */
+        .marker-cluster-small {
+            background-color: #8a88ff;
+        }
+
+        .marker-cluster-medium {
+            background-color: #8a88ff;
+        }
+
+        .marker-cluster-large {
+            background-color: #8a88ff;
+        }
+
+        .marker-cluster-small div {
+            background-color: #47489E;
+            color: white;
+        }
+
+        .marker-cluster-medium div {
+            background-color: #47489E;
+            color: white;
+        }
+
+        .marker-cluster-large div {
+            background-color: #47489E;
+            color: white;
+        }
+
+        /* Adding margins on zoom controls */
+        .leaflet-top {
+            top: 80%;
+        }
+
+        /* Adding Target icon */
+        .custom {
+            width: 25px;
+            height: 31px;
+            content: url(/assets/img/target.svg);
+        }
+
+        /* changin zoom in and out colors */
+        .leaflet-control-zoom-in {
+            color: #47489E !important;
+        }
+
+        .leaflet-control-zoom-out {
+            color: #47489E !important;
+        }
+
+        /* Participate Icon */
+        .participate {
+            top: 70%;
+            /* z-index: 10001; */
+            color: #1C1C8C;
+            position: absolute;
+            left: 50%;
+            font-size: 80px;
+
+        }
+
+        /* Left Magnifying Glass */
+        .maginify-glass {
+            font-size: 40px;
+            transform: rotate(180deg);
+        }
+
+    </style>
 </head>
 
 <body style="padding-top:0px;">
@@ -24,17 +147,16 @@
             @yield('content')
         </div>
     </div>
-    <div class="modal fade" id="featureModal" tabindex="-1" role="dialog">
-        <div class="modal-dialog">
+    <div class="modal fade" id="featureModal" tabindex="-1" role="dialog" style="display: none;">
+        <div class="modal-dialog big" style="position: relative;">
             <div class="modal-content">
                 <div class="modal-header" style="border-bottom: 0px solid #e5e5e5;">
-                    <button class="close" type="button" data-dismiss="modal" aria-hidden="true">&times;</button>
-                    {{--<h4 class="modal-title text-primary" id="feature-title"></h4>--}}
+                    <button class="close" type="button" data-dismiss="modal" aria-hidden="true" style="display:none;">&times;</button>
+
+                    <button class="model-back" onclick="modalBack()" aria-hidden="true" style="position: absolute;top: 10px;left: 10px;padding: 4px 15px; display:none;">&lt;</button>
+                    <button class="model-foward" onclick="modalFoward()" aria-hidden="true" style="position: absolute;top: 10px;left: 60px;padding: 4px 15px;">&gt;</button>
                 </div>
                 <div class="modal-body" id="feature-info"></div>
-                {{--<div class="modal-footer">--}}
-                {{--<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>--}}
-                {{--</div>--}}
             </div>
         </div>
     </div>
@@ -62,10 +184,32 @@
             float: left;
         }
 
+        .search-form-element-buttons .btn{
+            height: 20px;
+            line-height: 0px !important;
+        }
+
         .search-form-element .select2-selection--single {
             height: 34px;
         }
 
+        .btn_outer{
+            display: none;
+        }
+
+        .sh_watermark{
+            position: absolute;
+            background-color: transparent;
+            height: 50px;
+            width: 100px;
+            background-image: url('/assets/findgo/images/live-perceptions-shared-logo.png');
+            /*background: no-repeat;*/
+            right: 20px;
+            top: 10px;
+            -webkit-background-size: 100px;
+            background-size: 100px;
+            background-repeat: no-repeat;
+        }
     </style>
 
     <script src="/assets/js/jquery-2.1.4.min.js"></script>
@@ -79,6 +223,7 @@
     <script src="/assets/leaflet-groupedlayercontrol/leaflet.groupedlayercontrol.js"></script>
     <script src="/js//dist/js/select2.full.min.js"></script>
     <script src="/assets/js/app_share.js"></script>
+    <script src="/js/jquery.timeago.js"></script>
     <script>
         $(document).ready(function() {
             $('.select2-ajax-primary_sub_tag').select2({

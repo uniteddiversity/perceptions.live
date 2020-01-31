@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="page-admin-wrapper">
 
 <head>
     <title>PRCPTIONS.LIVE: exploring the world's perception</title>
@@ -59,12 +59,15 @@
     <link rel="stylesheet" href="/assets/js/datatable/datatables.min.css" />
 </head>
 
-<body>
+<body class="page-admin">
     <!-- Pre-loader start -->
-    <div class="theme-loader">
-        <div class="ball-scale">
-            <div></div>
-        </div>
+<!--    <div class="theme-loader">-->
+<!--        <div class="ball-scale">-->
+<!--            <div></div>-->
+<!--        </div>-->
+<!--    </div>-->
+    <div class="page-loading">
+        <img src="/assets/findgo/images/loader.gif" alt="" />
     </div>
     <!-- Pre-loader end -->
     <!-- Menu header start -->
@@ -683,18 +686,19 @@
 
     <!-- pcmenu js -->
     <script src="/assets/mashable/js/pcoded.min.js"></script>
+    <script src="/assets/js/notify.js"></script>
     <script src="/assets/mashable/js/demo-12.js"></script>
     <script src="/assets/mashable/js/jquery.mCustomScrollbar.concat.min.js"></script>
     <script src="/assets/mashable/js/jquery.mousewheel.min.js"></script>
     <script src="/js//dist/js/select2.full.min.js"></script>
     <script src="/assets/js/custom_common.js"></script>
     <script type="text/javascript" src="/assets/mashable/bower_components/bootstrap-datepicker/js/bootstrap-datepicker.min.js"></script>
+    <script src="/js/jquery.timeago.js"></script>
     <script src="/assets/js/app.js"></script>
     <script src="/assets/croppie/croppie.js"></script>
     <script src="/assets/js/datatable/datatables.min.js"></script>
 
     <script src="/assets/js/dropzone.js"></script>
-
     <script>
         $(document).ready(function() {
             // $('#users_llist').DataTable({"aaSorting": []});
@@ -815,9 +819,11 @@
             console.log('image path is ' + $('#preset_image_path').val());
             $('.cr-image').attr('src', $('#preset_image_path').val());
         });
-
     </script>
-
+    <script>
+        jQuery("time.timeago").timeago();
+    </script>
+    <script src='https://www.google.com/recaptcha/api.js'></script>
 </body>
 
 </html>

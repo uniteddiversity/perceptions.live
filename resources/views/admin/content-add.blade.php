@@ -39,13 +39,14 @@
     $data['content_set2'] = isset($video_data['content_set2'])?$video_data['content_set2']:array();
     $data['content_set3'] = isset($video_data['content_set3'])?$video_data['content_set3']:array();
     $data['status'] = isset($video_data['status'])?$video_data['status']:'';
+    $data['language'] = isset($video_data['language'])?$video_data['language']:'en';
 
     $data['id'] = isset($video_data['id'])?$video_data['id']:'';
 
 //dd($data);
 //    dd($data['service_or_opportunity']);
     ?>
-    <div class="col-lg-12 grid-margin stretch-card">
+    <div class="col-lg-12 grid-margin stretch-card" id="user_content_add">
         <div class="card">
             <div class="card-body">
                 <h4 class="card-title"><?php if(!empty($data['id'])){ ?>Edit Video<?php }else{ ?>Add Video<?php } ?> <span style="font-size: 12px;"><?php if(!empty($data['id'])){ ?><a class="btn btn-primary btn-xs" onclick="openVideo('<?php echo $data['id'] ?>')" href="#" >Video Profile</a><?php } ?></span></h4>
@@ -354,6 +355,15 @@
                                     @endforeach
                                 </select>
                                 <?php } ?>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="status">Language</label>
+                                <select class="form-control" id="language" name="language">
+                                    @foreach($languages as $lng)
+                                    <option value="{{$lng->code}}" <?php if(old('language',$data['language']) == $lng->code){ echo 'selected'; } ?> >{{$lng->language}}</option>
+                                    @endforeach
+                                </select>
                             </div>
 
                             <button type="button" onclick="submit_content()" class="btn btn-primary">Submit</button>

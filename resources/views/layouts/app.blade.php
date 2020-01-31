@@ -3,7 +3,7 @@
 
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <title>PRCPTIONS.LIVE: exploring the world's perception</title>
+    <title>Perceptions.Live: media communities getting stuff done</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="">
     <meta name="keywords" content="">
@@ -16,13 +16,36 @@
     <link rel="stylesheet" type="text/css" href="/assets/findgo/css/style.css" />
     <link rel="stylesheet" type="text/css" href="/assets/findgo/css/responsive.css" />
 
+    <!-- Favicons -->
+    <link rel="apple-touch-icon" sizes="57x57" href="/favicon/apple-icon-57x57.png">
+    <link rel="apple-touch-icon" sizes="60x60" href="/favicon/apple-icon-60x60.png">
+    <link rel="apple-touch-icon" sizes="72x72" href="/favicon/apple-icon-72x72.png">
+    <link rel="apple-touch-icon" sizes="76x76" href="/favicon/apple-icon-76x76.png">
+    <link rel="apple-touch-icon" sizes="114x114" href="/favicon/apple-icon-114x114.png">
+    <link rel="apple-touch-icon" sizes="120x120" href="/favicon/apple-icon-120x120.png">
+    <link rel="apple-touch-icon" sizes="144x144" href="/favicon/apple-icon-144x144.png">
+    <link rel="apple-touch-icon" sizes="152x152" href="/favicon/apple-icon-152x152.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="/favicon/apple-icon-180x180.png">
+    <link rel="icon" type="image/png" sizes="192x192" href="/favicon/android-icon-192x192.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="96x96" href="/favicon/favicon-96x96.png">
+
+    <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
+    <link rel="icon" href="/favicon.ico" type="image/x-icon">
+
+    <link rel="manifest" href="/favicon/manifest.json">
+    <meta name="msapplication-TileColor" content="#ffffff">
+    <meta name="msapplication-TileImage" content="/favicon/ms-icon-144x144.png">
+    <meta name="theme-color" content="#ffffff">
+
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
 
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,600,700" rel="stylesheet">
 
-    <link rel="stylesheet" type="text/css" href="/assets/css/leaflet_0.7.css" />
+    <link rel="stylesheet" type="text/css" href="/assets/css/leaflet.css" />
     {{--<link rel="stylesheet" href="/assets/css/leaflet.css">--}}
     {{--<link rel="stylesheet" href="/assets/css/MarkerCluster.css">--}}
+    <link rel="stylesheet" href="/assets/css/MarkerCluster.css">
     <link rel="stylesheet" href="/assets/css/MarkerCluster.Default.css">
     <link rel="stylesheet" href="/assets/css/L.Control.Locate.css">
     <link rel="stylesheet" href="/assets/leaflet-groupedlayercontrol/leaflet.groupedlayercontrol.css">
@@ -33,8 +56,9 @@
     <script src="/assets/js/jquery-2.1.4.min.js"></script>
     {{--<link rel="stylesheet" href="/assets/css/app.css">--}}
 
-    <link rel="stylesheet" href="/assets/css/thumbnail_slider.css">
-
+<!--    <link rel="stylesheet" href="/assets/css/thumbnail_slider.css">-->
+<link rel="stylesheet" href="/assets/js/slick_slider/slick.css">
+<link rel="stylesheet" href="/assets/css/thumbnail_slider.css">
 
 </head>
 
@@ -135,7 +159,7 @@
                                 </div>
 
                                 <p class="terms-label">
-                                    <input name="accept_tos" value="1" id="cb6" type="checkbox"><label for="cb6" style="color:black;">I’ve read and accept the terms &amp; conditions *</label>
+                                    <input name="accept_tos" value="1" id="cb6" type="checkbox"><label for="cb6" style="color:black;">I’ve read and accept the <a href="https://perceptiontravel.tv/terms-of-service/" target="_blank">terms &amp; conditions *</a></label>
                                 </p>
                                 <div class="btn_outer">
                                     <button type="button" class="register_button" onclick="userRegister()"><i class="disable_loading"></i>Sign Up</button>
@@ -151,6 +175,7 @@
 
 
     {{--<script src="/assets/findgo/js/jquery.min.js" type="text/javascript"></script>--}}
+    <script src="/assets/findgo/js/popper.min.js" type="text/javascript"></script>
 
     <script src="/assets/findgo/js/modernizr.js" type="text/javascript"></script>
     <script src="/assets/findgo/js/script.js" type="text/javascript"></script>
@@ -164,18 +189,27 @@
     {{--<script src="http://maps.googleapis.com/maps/api/js?key=AIzaSyCYc537bQom7ajFpWE5sQaVyz1SQa9_tuY&sensor=true&libraries=places"></script><!-- Maps -->--}}
     {{--<script type="text/javascript" src="/assets/findgo/js/map1.js"></script>--}}
     <script type="text/javascript" src="/assets/findgo/js/jq.aminoSlider.js"></script>
-    <script src="/assets/js/leaflet_0.7.js"></script>
-    <script src="/assets/js/leaflet.markercluster.js"></script>
-    <script src="/assets/js/L.Control.Locate.min.js"></script>
+    <script src="/assets/js/leaflet.js"></script>
+    <script src="/assets/js/leaflet.markercluster.new.js"></script>
+    <script src="/assets/js/leaflet.freeze.js"></script>
+    <script src="/assets/js//L.control.locate.new.js"></script>
     <script src="/assets/leaflet-groupedlayercontrol/leaflet.groupedlayercontrol.js"></script>
+    <script src="/assets/js/notify.js"></script>
 
-
+    <script src="/js/jquery.timeago.js"></script>
     <script src="/assets/js/bootstrap-tooltip.js"></script>
+    <script src="/js//dist/js/select2.full.min.js"></script>
     <script src="/assets/js/app.js"></script>
 
     <script src="/assets/js/datatable/datatables.min.js"></script>
     <script src="/assets/juery-confirm/jquery-confirm.js"></script>
+<!--    <script src="/assets/js/thumbnail_slider.js"></script>-->
+    <script src="/assets/js/slick_slider/slick.js"></script>
     <script src="/assets/js/thumbnail_slider.js"></script>
+    <script src="/assets/js/home-common.js"></script>
+
+
+    @include('partials.notify-messages')
     <style>
         #featureModal {
             position: fixed;
@@ -183,7 +217,7 @@
             top: 0;
             width: 100%;
             height: 100%;
-            z-index: 3;
+            z-index: 30;
             background: rgba(36, 35, 35, 0.8);
             overflow-x: hidden;
             overflow-y: scroll;
@@ -227,6 +261,77 @@
         .leaflet-popup-content {
             margin: 0px;
             width: 200px;
+        }
+
+        /* Geolocation Icon */
+        .fa-map-marker:before {
+            content: "\f0ac";
+        }
+
+        /*  Clustering color   */
+        .marker-cluster-small {
+            background-color: #8a88ff;
+        }
+
+        .marker-cluster-medium {
+            background-color: #8a88ff;
+        }
+
+        .marker-cluster-large {
+            background-color: #8a88ff;
+        }
+
+        .marker-cluster-small div {
+            background-color: #47489E;
+            color: white;
+        }
+
+        .marker-cluster-medium div {
+            background-color: #47489E;
+            color: white;
+        }
+
+        .marker-cluster-large div {
+            background-color: #47489E;
+            color: white;
+        }
+
+        /* Adding margins on zoom controls */
+        .leaflet-top {
+            top: 80%;
+        }
+
+        /* Adding Target icon */
+        .custom {
+            width: 25px;
+            height: 31px;
+            content: url(/assets/img/target.svg);
+        }
+
+        /* changin zoom in and out colors */
+        .leaflet-control-zoom-in {
+            color: #47489E !important;
+        }
+
+        .leaflet-control-zoom-out {
+            color: #47489E !important;
+        }
+
+        /* Participate Icon */
+        .participate {
+            top: 70%;
+            /* z-index: 10001; */
+            color: #1C1C8C;
+            position: absolute;
+            left: 50%;
+            font-size: 80px;
+
+        }
+
+        /* Left Magnifying Glass */
+        .maginify-glass {
+            font-size: 40px;
+            transform: rotate(180deg);
         }
 
     </style>

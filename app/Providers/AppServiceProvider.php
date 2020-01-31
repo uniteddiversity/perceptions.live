@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -17,6 +18,7 @@ class AppServiceProvider extends ServiceProvider
 ////            die('view');
 ////            view()->share('gci', array('a','b','c'));
 //        });
+        Validator::extend('recaptcha', 'App\\Validators\\ReCaptcha@validate');
     }
 
     /**

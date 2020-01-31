@@ -4,10 +4,12 @@ namespace User\Services;
 
 use App\Attachment;
 use App\ClaimProfileRequests;
+use App\Comment;
 use App\Content;
 use App\ContentAccessLevels;
 use App\Group;
 use App\GroupContentAssociation;
+use App\HomeSliderFeedSetting;
 use App\Invoice;
 use App\MediaPackage;
 use App\MediaPackageRules;
@@ -103,13 +105,21 @@ class UserRepository
      * @var TagGroupAssociation
      */
     private $tagGroupAssociation;
+    /**
+     * @var Comment
+     */
+    private $comment;
+    /**
+     * @var HomeSliderFeedSetting
+     */
+    private $homeSliderFeedSetting;
 
     public function __construct(User $user, Content $content,
                                 UserGroup $userGroup, Group $group, Role $role, UserContentAssociation $userContentAssociation,
                                 Attachment $attachment, SortingTag $sortingTag, GroupContentAssociation $groupContentAssociation,
                                 TagContentAssociation $tagContentAssociation, TagUserAssociation $tagUserAssociation, UserStatus $userStatus,
                                 ContentAccessLevels $contentAccessLevels, MetaData $metaData, UserSortingTag $userSortingTag, ClaimProfileRequests $claimProfileRequests,
-                                TagGroupAssociation $tagGroupAssociation)
+                                TagGroupAssociation $tagGroupAssociation, Comment $comment, HomeSliderFeedSetting $homeSliderFeedSetting)
     {
         $this->user = $user;
         $this->content = $content;
@@ -128,9 +138,11 @@ class UserRepository
         $this->userSortingTag = $userSortingTag;
         $this->claimProfileRequests = $claimProfileRequests;
         $this->tagGroupAssociation = $tagGroupAssociation;
+        $this->comment = $comment;
+        $this->homeSliderFeedSetting = $homeSliderFeedSetting;
     }
 
-    public function getUsers($filter = array(), $user_id = null)
+    public function getUsers($filter = array(), $user_id = null, &$r = '', $per_page = null)
     {
         $current_user = $this->getUser($user_id);
 
@@ -155,6 +167,10 @@ class UserRepository
             $r = $r->whereIn('user_groups.group_id', array($filter['group_id']));
         }
 
+        if(isset($filter['group_role_id'])){
+            $r = $r->whereIn('user_groups.role_id', array($filter['group_role_id']));
+        }
+
         if(isset($filter['filter_system_users'])){
             $r = $r->where('users.status_id', '5');
         }
@@ -163,7 +179,13 @@ class UserRepository
         $r->select('users.id','users.*',
             DB::Raw("COUNT(contents.id) as no_submission"));
         $r->groupBy('users.id')->orderBy('updated_at', 'DESC');
-        $r = $r->get();
+//        $r = $r->get();
+
+        if($per_page != null){
+            $r = $r->paginate($per_page);
+        }else{
+            $r = $r->get();
+        }
 
         return $r;
     }
@@ -187,6 +209,35 @@ class UserRepository
             ->leftJoin('user_groups', 'users.id', 'users.location', 'user_groups.user_id')
             ->select('users.*', 'user_groups.group_id', 'user_groups.role_id as group_role_id')
             ->first();
+    }
+
+    public function getUserGroups($user_id, &$contents = '', $per_page = null)
+    {
+        $contents = $this->user->where('users.id', $user_id)->with(['image',
+            'actingRoles' => function($q){
+                $q->with('tag');
+            },
+            'gci' => function($q){
+                $q->with('tag');
+            },
+            'skill' => function($q){
+                $q->with('tag');
+            }])
+            ->leftJoin('user_groups', 'users.id', '=', 'user_groups.user_id')
+            ->leftJoin('groups', 'groups.id', '=', 'user_groups.group_id')
+            ->leftJoin('attachments', function($q){
+              $q->on('attachments.fk_id', '=', 'groups.id');
+              $q->where('attachments.table', '=', 'groups');
+            })
+            ->select('users.*','groups.name as group_name','groups.id as group_id','groups.default_location as group_default_location','attachments.url as group_avatar', 'user_groups.group_id', 'user_groups.role_id as group_role_id');
+
+        if($per_page != null){
+            $contents = $contents->paginate($per_page);
+        }else{
+            $contents = $contents->get();
+        }
+
+        return $contents;
     }
 
     public function getUserStatus($user_id)
@@ -270,7 +321,7 @@ class UserRepository
         return $r;
     }
 
-    public function getPublicContents($user_id, $filter = array(), &$count = 0)
+    public function getCurrentContents($user_id, $filter = array(), &$count = 0)
     {
         $contents = $this->content->with(['videoProducer' => function($q){
             $q->with('user');
@@ -330,10 +381,156 @@ class UserRepository
             $contents = $contents->where('user_groups.user_id', $filter['group_involvement']);
         }
 
+        if(isset($filter['ids']) && !empty($filter['ids'])){
+            $contents = $contents->whereIn('contents.id', $filter['ids']);
+        }
+
         $contents = $contents->select('contents.id', DB::Raw("SUBSTRING(contents.brief_description, 1, 128) as trim_description"), 'contents.lat', 'contents.long', 'contents.title', 'contents.url',
                 'users.display_name','users.id as user_id','contents.created_at','contents.captured_date','contents.location','contents.user_id','contents.primary_subject_tag',DB::Raw("GROUP_CONCAT(DISTINCT (user_sorting_tags.name) SEPARATOR ', ') as user_association"), DB::Raw("GROUP_CONCAT(DISTINCT (groups.name) SEPARATOR ', ') as group_names"), DB::Raw("GROUP_CONCAT(DISTINCT concat(groups.name,'-',groups.id) SEPARATOR ',') as group_names_ids"),
                 DB::Raw("GROUP_CONCAT(DISTINCT (concat(sorting_tags.tag_color,'-',sorting_tags.id,'-',sorting_tags.tag)) SEPARATOR ', ') as tag_colors") )
             ->groupBy('contents.id')->orderBy('contents.captured_date', 'DESC')->limit(500)->get();
+        $r = array(); $i = 0;
+
+        foreach($contents as $c){
+            if(isset($c['lat']) && isset($c['long'])){
+                $r[$i] = $c;
+                $r[$i]['video'] = $c['url'];
+                $i++;
+            }
+        }
+
+        $count = $i;
+        return $r;
+    }
+
+    public function getPublicContents($user_id, $filter = array(), &$count = 0, &$contents = '', $per_page = null)
+    {
+        $contents = $this->content->with(['videoProducer' => function($q){
+            $q->with('user');
+        }])
+            ->leftJoin('users', 'contents.user_id', 'users.id')->where(function($q) use ($user_id){
+                $q->where(function($r) use ($user_id){
+                    $r->whereIn('users.id', array($user_id))->orWhere('contents.access_level_id', '1');
+                });
+            })->leftJoin('tag_content_associations', function($q){
+                $q->on( 'contents.id', 'tag_content_associations.content_id');
+                $q->where( 'tag_content_associations.tag_for', 'gci');
+            })->leftJoin('tag_content_associations as search_tag', function($q){
+                $q->on( 'contents.id', 'search_tag.content_id');
+                $q->where( 'search_tag.tag_for', 'gci');
+            })->leftJoin('tag_content_associations as exchange_for', function($q){
+                $q->on( 'contents.id', 'exchange_for.content_id');
+                $q->where( 'exchange_for.tag_for', 'exchange');
+            })
+            ->leftJoin('sorting_tags', function($q){
+                $q->on('sorting_tags.id', 'tag_content_associations.content_tag_id');
+            })
+            ->leftJoin('user_content_associations',
+                'user_content_associations.content_id', 'contents.id')
+            ->leftJoin('group_content_associations',
+                'group_content_associations.content_id', 'contents.id')
+            ->leftJoin('user_groups',
+                'user_groups.group_id', 'group_content_associations.group_id')
+            ->leftJoin('user_sorting_tags',
+                'user_content_associations.user_association_tag_slug', 'user_sorting_tags.slug')
+            ->leftJoin('groups',
+                'groups.id', 'user_groups.group_id')
+
+            ->where('contents.status', '=', 1);
+
+        if(isset($filter['keyword']) && !empty($filter['keyword'])){
+            $contents = $contents->where(function($q) use($filter){
+                $q->where('title', 'like', '%'.$filter['keyword'].'%');
+                $q->orWhere('brief_description', 'like', '%'.$filter['keyword'].'%');
+                $q->orWhere('primary_subject_tag', 'like', '%'.$filter['keyword'].'%');
+                $q->orWhere('contents.description', 'like', '%'.$filter['keyword'].'%');
+                $q->orWhere('contents.location', 'like', '%'.$filter['keyword'].'%');
+            });
+            $contents = $contents->orWhere('user_sorting_tags.name', 'like', '%'.$filter['keyword'].'%');
+            $contents = $contents->orWhere('groups.name', 'like', '%'.$filter['keyword'].'%');
+            $contents = $contents->orWhere('sorting_tags.tag', 'like', '%'.$filter['keyword'].'%');
+        }
+
+        if(isset($filter['text']) && !empty($filter['text'])){
+            $contents = $contents->where(function($q) use($filter){
+                $q->where('title', 'like', '%'.$filter['text'].'%');
+                $q->orWhere('brief_description', 'like', '%'.$filter['text'].'%');
+            });
+        }
+
+        if(isset($filter['gcs']) && !empty($filter['gcs'])){
+            $contents = $contents->where('search_tag.content_tag_id', $filter['gcs']);
+        }
+
+        if(isset($filter['category_id']) && !empty($filter['category_id'])){
+            $contents = $contents->where('contents.category_id', $filter['category_id']);
+        }
+
+        if(isset($filter['video_id']) && !empty($filter['video_id'])){
+            $contents = $contents->where('contents.id', $filter['video_id']);
+        }
+
+        if(isset($filter['user_involvement']) && !empty($filter['user_involvement'])){
+            $contents = $contents->where('user_content_associations.user_id', $filter['user_involvement']);
+        }
+
+        if(isset($filter['group_involvement']) && !empty($filter['group_involvement'])){
+            $contents = $contents->where('user_groups.user_id', $filter['group_involvement']);
+        }
+
+        if(isset($filter['date_from']) && !empty($filter['date_from'])){
+            $contents = $contents->where('contents.video_date', '>=', $filter['date_from']);
+        }
+
+        if(isset($filter['date_to']) && !empty($filter['date_to'])){
+            $contents = $contents->where('contents.video_date', '<=', $filter['date_to']);
+        }
+
+        if(isset($filter['location_text']) && !empty($filter['location_text'])){
+            $contents = $contents->where('contents.location', 'LIKE', '%'.$filter['location_text'].'%');
+        }
+
+        if(isset($filter['sorting_tag']) && !empty($filter['sorting_tag'])){
+            $contents = $contents->where('sorting_tags.tag', $filter['sorting_tag']);
+        }
+
+        if(isset($filter['service_or_opportunity']) && !empty($filter['service_or_opportunity'])){
+            $contents = $contents->whereIn('exchange_for.content_tag_id', explode(',',$filter['service_or_opportunity']));
+        }
+
+        if(isset($filter['group_id']) && !empty($filter['group_id'])){
+            $contents = $contents->where('user_groups.id', $filter['group_id']);
+        }
+
+        if(isset($filter['multi_search']) && !empty($filter['multi_search'])){
+            $cats = explode('|', $filter['multi_search']);
+            $search_by_groups = [];
+            foreach($cats as $v){
+                $ids = explode('-', $v);
+                $search_by_groups[$ids[0]] = $ids[1];
+            }
+//            dd($search_by_groups);
+            if(isset($search_by_groups['category'])){
+                $contents = $contents->whereIn('contents.category_id', explode(',',$search_by_groups['category']));
+            }
+            if(isset($search_by_groups['gci'])){
+                $contents = $contents->whereIn('search_tag.content_tag_id', explode(',',$search_by_groups['gci']) );
+            }
+            if(isset($search_by_groups['group'])){
+                $contents = $contents->whereIn('user_groups.id', explode(',',$search_by_groups['group']) );
+            }
+        }
+
+        $contents = $contents->select('contents.id', DB::Raw("SUBSTRING(contents.brief_description, 1, 128) as trim_description"), 'contents.lat', 'contents.long', 'contents.title', 'contents.url',
+                'users.display_name','users.id as user_id','contents.created_at','contents.captured_date','contents.location','contents.user_id','contents.primary_subject_tag',DB::Raw("GROUP_CONCAT(DISTINCT (user_sorting_tags.name) SEPARATOR ', ') as user_association"), DB::Raw("GROUP_CONCAT(DISTINCT (groups.name) SEPARATOR ', ') as group_names"), DB::Raw("GROUP_CONCAT(DISTINCT concat(groups.name,'-',groups.id) SEPARATOR ',') as group_names_ids"),
+                DB::Raw("GROUP_CONCAT(DISTINCT (concat(sorting_tags.tag_color,'-',sorting_tags.id,'-',sorting_tags.tag)) SEPARATOR ', ') as tag_colors") )
+            ->groupBy('contents.id')->orderBy('contents.captured_date', 'DESC')->limit(1000);
+
+        if($per_page != null){
+            $contents = $contents->paginate($per_page);
+        }else{
+            $contents = $contents->get();
+        }
         $r = array(); $i = 0;
 
         foreach($contents as $c){
@@ -410,7 +607,7 @@ class UserRepository
         return implode($pass); //turn the array into a string
     }
 
-    function groupList($user_id, $full = false, $group_id = 0)
+    function groupList($user_id, $full = false, $group_id = 0, $filter = [])
     {
         $user_info = $this->getUser($user_id);
 
@@ -437,10 +634,16 @@ class UserRepository
 
         }
 
+        foreach($filter as $f){
+            $user_group = $user_group->where($f[0], $f[1], $f[2]);
+        }
+
 //        $user_group->orderBy('groups.updated_at','DESC');
         if($group_id <> 0){
             $user_group = $user_group->where('groups.id', $group_id);
             $user_group->with(['proofOfGroup','groupAvatar','actingRoles','experienceKnowledge' => function($q){
+                $q->with('tag');
+            },'gci' => function($q){
                 $q->with('tag');
             }]);
             $user_group = $user_group->groupBy('groups.id')->first();
@@ -453,7 +656,7 @@ class UserRepository
                     $user_group = $user_group->leftJoin('user_groups', 'user_groups.group_id', 'groups.id');
                     $user_group = $user_group->where('user_groups.user_id', $user_info['id']);
                 }
-                $user_group = $user_group->groupBy('groups.id')->orderBy('groups.updated_at','DESC')->get();
+                $user_group = $user_group->groupBy('groups.id')->orderBy('groups.name')->orderBy('groups.updated_at','DESC')->get();
 
             }
         }
@@ -510,13 +713,24 @@ class UserRepository
         return $this->userGroup->where('group_id', $group_id)->delete();
     }
 
-    function addUserToGroup($user_id, $group_id, $role_id = 0)
+    function deleteUsersRoleFromGroup($group_id, $role_id, $user_id = 0)
+    {
+        $userGroup = $this->userGroup->where('group_id', $group_id)
+            ->where('role_id', $role_id);
+        if($user_id != 0){
+            $userGroup = $userGroup->where('user_id', $user_id);
+        }
+
+        return $userGroup->delete();
+    }
+
+    function addUserToGroup($user_id, $group_id, $role_id = 120)
     {
         return $this->userGroup->create(
             array(
                 'user_id' => $user_id,
                 'group_id' => $group_id,
-                'role_id' => 120
+                'role_id' => $role_id
             )
         );
     }
@@ -626,9 +840,17 @@ class UserRepository
         return $tag->get();
     }
 
-    public function getGreaterCommunityIntentionTag()
+    public function getGreaterCommunityIntentionTag($filter = array())
     {
-        $tag = $this->sortingTag->where('tag_for', 'gci');
+        $tag = $this->sortingTag->where('sorting_tags.tag_for', 'gci');
+        if(isset($filter['contents'])){
+            $tag = $tag->leftJoin('tag_content_associations', function($q){
+                $q->on('tag_content_associations.content_tag_id', 'sorting_tags.id')
+                    ->where('tag_content_associations.tag_for', 'gci');
+            });
+            $tag = $tag->whereIn('tag_content_associations.content_id', $filter['contents']);
+        }
+        $tag->select('sorting_tags.*')->groupBy('sorting_tags.id');
         return $tag->get();
     }
 
@@ -689,12 +911,18 @@ class UserRepository
                 }
                 break;
             case 'group':
-                return $this->group->create(
-                    array(
-                        'name' => $value,
-                        'status' => 5
-                    )
-                );
+                $group = $this->group->getGroupByName($value);
+                //look for groups in similar name, if exist, will return it instead of creating one
+                if(!$group) {
+                    return $this->group->create(
+                        array(
+                            'name' => $value,
+                            'status' => 5
+                        )
+                    );
+                }
+
+                return $group;
                 break;
             case 'tag':
                 $current_user = $this->getUser($user_id);
@@ -799,10 +1027,27 @@ class UserRepository
         },'requestedUser'])->where('fk_id', $user_id)->where('type', 'users')->get();
     }
 
+    public function getClaimRequests($id = 0, $user_id = 0)
+    {
+        $claim_requests = $this->claimProfileRequests->with(['proof', 'needUser', 'associatedContent' => function($q){
+            $q->with('content');
+        },'requestedUser'])->where('type', 'users');
+
+        if($id != 0){
+            $claim_requests = $claim_requests->where('id', $id);
+        }
+
+        if($user_id != 0){
+            $claim_requests = $claim_requests->where('user_id', $user_id);
+        }
+
+        $claim_requests = $claim_requests->orderBy('id', 'DESC')->get();
+        return $claim_requests;
+    }
+
     public function getUsersList($user_id, $filter, $limit = 30)
     {
         $users = $this->user;
-
         if(isset($filter['keyword']) && !empty($filter['keyword'])){
             $users = $users->where(function($q) use($filter){
                 $q->where('display_name', 'like', '%'.$filter['keyword'].'%');
@@ -811,18 +1056,24 @@ class UserRepository
         }
 
         if(isset($filter['ids'])){
-            $users = $users->whereIn('id', $filter['ids']);
+            $users = $users->whereIn('users.id', $filter['ids']);
+        }
+//        dd($filter);
+        if(isset($filter['groups'])){
+            $users = $users->leftJoin('user_groups', 'user_groups.user_id', 'users.id');
+            $users = $users->whereIn('user_groups.group_id', $filter['groups']);
         }
 
         $users = $users->where('access_level_id', '1')->where('status_id','<>','3');//only public and not deleted
-
-        $users = $users->select('users.*')->limit($limit);
+        $users = $users->groupBy('users.id')->select('users.*')->limit($limit);
         return $users->get();
     }
 
     public function getGroupList($user_id, $filter, $limit = 30)
     {
         $groups = $this->group;
+
+        $current_user = $this->getUser($user_id);
 
         if(isset($filter['keyword']) && !empty($filter['keyword'])){
             $groups = $groups->where(function($q) use($filter){
@@ -836,8 +1087,12 @@ class UserRepository
         }
 
         $groups = $groups->where('status','=','1');//only public and not deleted
-
-        $groups = $groups->select('groups.*')->limit($limit);
+        if($current_user['role_id'] != 1){
+            $groups = $groups->leftJoin('user_groups', 'user_groups.group_id', 'groups.id');
+            $groups = $groups->where('user_groups.user_id',$user_id)
+            ->where('user_groups.role_id','1');
+        }
+        $groups = $groups->select('groups.*')->groupBy('groups.id')->limit($limit);
         return $groups->get();
     }
 
@@ -970,6 +1225,105 @@ class UserRepository
 //        }
 
         return $return;
+    }
+
+    public function ajaxSearchDisplayNames($text)
+    {
+        $r = [];
+        $content = $this->user->where('display_name', 'like', '%'.$text.'%')->limit(10)->get()->toArray();
+
+        foreach($content as $user){
+            $r[] = array(
+                'id' => $user['id'],
+                'text' => !empty($user['display_name'])?$user['display_name']:$user['email'],
+                'email' => $user['email']
+            );
+        }
+
+        return $r;
+    }
+
+    public function getGroupsByUser($user_id, $filter = []){
+
+    }
+
+    public function updateClaimRequestStatus($id, $status, $_old_info = array())
+    {
+        return $this->claimProfileRequests->where('id', $id)->update(['status' => $status, 'old_email' => $_old_info['email'], 'info' => json_encode($_old_info)]);
+    }
+
+    public function updateClaimUser($id, $new_email, $status, $new_password)
+    {
+        if($status == 1){
+            return $this->user->where('id', $id)->update(array('email' => $new_email, 'status_id' => 4, 'password' => bcrypt($new_password)));
+        }
+    }
+
+    public function postComment($data)
+    {
+        return $this->comment->create($data);
+    }
+
+    public function getComments($fk_id, $table, $id = 0)
+    {
+        $comments = $this->comment->with(['user' => function($q){
+            return $q->with('image');
+        }
+        ])->where('table', $table)
+            ->where('fk_id', $fk_id)
+            ->where('comments.status', '1')
+            ->where('comments.parent_id', '0');
+
+        if($id != 0){
+            $comments = $this->comment->with('user')
+                ->where('comments.id', $id);
+        }
+
+        return $comments->orderBy('comments.id', 'ASC')->get();
+    }
+
+    public function getArrangedComments($fk_id, $table)
+    {
+        return $this->getComments($fk_id, $table);
+
+//        $c = $this->getComments($fk_id, $table)->toArray();
+//        $comments = []; $c1 = [];
+//        foreach($c as $comment){
+//            $c1[ $comment['id'] ] = $comment;
+//        }
+//
+//        foreach($c1 as $id => $comment){
+//            if($comment['parent_id'] == '0'){
+//                $comments[ $id ] = $comment;
+//            }else{
+////                $c2[ $comment['parent_id'] ] = $c1[$comment['parent_id']];
+//                $comments[ $comment['parent_id'] ]['sub'][] = $comment;
+//            }
+//        }
+//
+//
+//        return $comments;
+    }
+
+    public function deleteComment($id, $user_id)
+    {
+        return $this->comment->where('id',$id)->delete();
+    }
+
+    public function deleteSliderSettingsByFkId($fk_id)
+    {
+        $rec = $this->homeSliderFeedSetting->where('feed_id', $fk_id);
+        return $rec->delete();
+    }
+
+    public function saveHomeSliderSettings($feed_id, $type, $setting){
+        $this->homeSliderFeedSetting->create(
+            array(
+                'feed_id' => $feed_id,
+                'type' => $type,
+                'fk_id' => $setting,
+            )
+        );
     }
 }
 

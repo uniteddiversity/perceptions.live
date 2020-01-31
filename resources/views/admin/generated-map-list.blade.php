@@ -5,7 +5,7 @@
         <div class="col-lg-12 grid-margin stretch-card">
             <div class="card">
                 <div class="card-body">
-                    <h4 class="card-title">Uploaded Videos</h4>
+                    <h4 class="card-title">Sharable Maps</h4>
                     <div class="table-responsive">
                         <table class="table" id="users_llist">
                             <thead>
@@ -17,7 +17,7 @@
                                     {{--Id--}}
                                 {{--</th>--}}
                                 <th>
-                                    Group
+                                    Title
                                 </th>
                                 <th>
                                     Domain
@@ -25,23 +25,27 @@
                                 {{--<th>--}}
                                     {{--Date--}}
                                 {{--</th>--}}
-                                <th>
+                                <th class="d-none d-md-table-cell">
                                     Created By
                                 </th>
-                                <th>
+                                <th class="d-none d-md-table-cell">
                                     Created At
                                 </th>
-                                <th>
+                                <th class="d-none d-md-table-cell">
                                     Updated At
                                 </th>
 
                             </tr>
                             </thead>
                             <tbody>
-                            @foreach ($list as $video) <?php //dd($video) ?>
+                            @foreach ($list as $video)
                                 <tr>
                                     <td>
-                                        <a href="/user/admin/map-generate/{{ uid($video->id) }}" >Edit</a>&nbsp;&nbsp;
+                                        @if(Auth::user()->is('admin'))
+                                            <a href="/user/admin/map-generate/{{ uid($video->id) }}" >Edit</a>&nbsp;&nbsp;
+                                        @else
+                                            <a href="/user/group-admin/map-generate/{{ uid($video->id) }}" >Edit</a>&nbsp;&nbsp;
+                                        @endif
                                     </td>
                                     {{--<td>--}}
                                         {{--{{ $video->id }}--}}
@@ -55,13 +59,13 @@
                                     {{--<td>--}}
                                         {{--{{ $video->date }}--}}
                                     {{--</td>--}}
-                                    <td>
+                                    <td class="d-none d-md-table-cell">
                                         {{ isset($video->user)?'@'.$video->user->display_name:'' }}
                                     </td>
-                                    <td>
+                                    <td class="d-none d-md-table-cell">
                                         {{ $video->created_at }}
                                     </td>
-                                    <td>
+                                    <td class="d-none d-md-table-cell">
                                         {{ $video->updated_at }}
                                     </td>
 

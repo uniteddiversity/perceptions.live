@@ -12,12 +12,19 @@
                     <i class="fas fa-long-arrow-alt-right"></i>
                 </a>
             </li>
+            <li class="<?php if(in_array(Request::segment(3), array('list-profile-claim-request'))){ echo 'active'; } ?>">
+                <a class="nav-link" href="/user/user/list-profile-claim-request">
+                    <span class="pcoded-micon"><i class="far fa-user-circle"></i></span>
+                    <span class="pcoded-mtext" data-i18n="nav.dash.default">Claim Profile Request</span>
+                    <span class="pcoded-mcaret"></span>
+                </a>
+            </li>
         </ul>
         <ul class="pcoded-item pcoded-left-item">
             <li class="pcoded-hasmenu <?php if(in_array(Request::segment(3), array('content-add','content-list-open','content-list','location-list','sorting-tag-add'))){ echo 'active pcoded-trigger'; } ?> pcoded-trigger">
                 <a href="javascript:void(0)">
                     <span class="pcoded-micon"><i class="fas fa-video"></i></span>
-                    <span class="pcoded-mtext" data-i18n="nav.dash.main">Your Videos</span>
+                    <span class="pcoded-mtext" data-i18n="nav.dash.main">My Videos</span>
                     <span class="pcoded-mcaret"><i class="fas fa-sort-down"></i></span>
                 </a>
                 <ul class="pcoded-submenu">
@@ -31,39 +38,66 @@
                     </li>
                 </ul>
             </li>
-        </ul>
-        <ul class="pcoded-item pcoded-left-item">
-            <li class="pcoded-hasmenu">
-                <a href="/user/logout">
-                    <span class="pcoded-micon"><i class="fas fa-sign-out-alt"></i></span>
-                    <span class="pcoded-mtext" data-i18n="nav.page_layout.main">Log Out</span>
-                    <span class="pcoded-mcaret"></span>
-                    <i class="fas fa-long-arrow-alt-right"></i>
+
+
+
+            <li class="pcoded-hasmenu <?php if(in_array(Request::segment(3), array('group-list','user-to-group-add','user-group-add'))){ echo 'active pcoded-trigger'; } ?>">
+                <a href="javascript:void(0)">
+                    <span class="pcoded-micon"><i class="ti-list"></i></span>
+                    <span class="pcoded-mtext" data-i18n="nav.page_layout.main">Groups</span>
+                    <span class="pcoded-mcaret"><i class="fas fa-sort-down"></i></span>
                 </a>
-            </li>
-        </ul>
-    </div>
-</nav>
-<?php /* <nav class="sidebar sidebar-offcanvas" id="sidebar">
-    <ul class="nav">
-        <li class="nav-item nav-profile">
-            <div class="nav-link">
-                <div class="user-wrapper">
-                    <div class="profile-image">
-                        <?php $user_img = Auth::user()->image; ?>
-<img width="50" src="<?php if(isset($user_img[0])){ echo '/storage/'.$user_img[0]->url; }else{ ?>/assets/img/face1.png<?php } ?>" alt="profile image">
-</div>
-<div class="text-wrapper">
-    <p class="profile-name">{{Auth::user()->email}}</p>
-    <div>
-        <small class="designation text-muted">{{Auth::user()->role->name}}</small>
-        <span class="status-indicator online"></span>
-    </div>
-</div>
-</div>
-</div>
-</li>
-{{--<li class="nav-item">--}}
+                <ul class="pcoded-submenu">
+                    <li class="nav-item <?php if(in_array(Request::segment(3), array('user-group-add'))){ echo 'active'; } ?>">
+                        <a class="nav-link" href="/user/user-group-add">
+                            <span class="pcoded-micon"><i class="ti-angle-right"></i></span>
+                            <span class="pcoded-mtext" data-i18n="nav.dash.default">Create Group</span>
+                        </a>
+                    </li>
+                    {{--            <li class="nav-item <?php if(in_array(Request::segment(3), array('group-list'))){ echo 'active'; } ?>">
+                                   <a class="nav-link" href="/user/group-list">
+                                       <span class="pcoded-micon"><i class="ti-angle-right"></i></span>
+                                       <span class="pcoded-mcaret"></span>
+                                       <span class="pcoded-mtext" data-i18n="nav.dash.default">My Groups</span>
+                                       <span class="pcoded-mcaret"></span>
+                                   </a>
+                               </li> --}}
+
+                           </ul>
+                       </li>
+                   </ul>
+                   <ul class="pcoded-item pcoded-left-item">
+                       <li class="pcoded-hasmenu">
+                           <a href="/user/logout">
+                               <span class="pcoded-micon"><i class="fas fa-sign-out-alt"></i></span>
+                               <span class="pcoded-mtext" data-i18n="nav.page_layout.main">Log Out</span>
+                               <span class="pcoded-mcaret"></span>
+                               <i class="fas fa-long-arrow-alt-right"></i>
+                           </a>
+                       </li>
+                   </ul>
+               </div>
+           </nav>
+           <?php /* <nav class="sidebar sidebar-offcanvas" id="sidebar">
+               <ul class="nav">
+                   <li class="nav-item nav-profile">
+                       <div class="nav-link">
+                           <div class="user-wrapper">
+                               <div class="profile-image">
+                                   <?php $user_img = Auth::user()->image; ?>
+           <img width="50" src="<?php if(isset($user_img[0])){ echo '/storage/'.$user_img[0]->url; }else{ ?>/assets/img/face1.png<?php } ?>" alt="profile image">
+           </div>
+           <div class="text-wrapper">
+               <p class="profile-name">{{Auth::user()->email}}</p>
+               <div>
+                   <small class="designation text-muted">{{Auth::user()->role->name}}</small>
+                   <span class="status-indicator online"></span>
+               </div>
+           </div>
+           </div>
+           </div>
+           </li>
+           {{--<li class="nav-item">--}}
 {{--<a class="nav-link" href="index.html">--}}
 {{--<i class="menu-icon mdi mdi-television"></i>--}}
 {{--<span class="menu-title">Dashboard</span>--}}

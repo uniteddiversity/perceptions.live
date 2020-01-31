@@ -123,16 +123,16 @@ $video_id = isset($matches[1])?$matches[1]:'';
             <div class="listmetas_outer">
                 <span class="listmetas2">
                     <?php
-        $datas = [];
-        foreach($info->sortingTags as $tag){
-            if(isset($tag->content_tag_id) && isset($tag->tag->tag)){
-                $datas[] = ' <strong><i class="fa fa-tag"></i> '.$tag->tag->tag.'</strong> ';
-            }
-        }
-        if(!empty($datas)){
-            echo implode(' ', $datas);
-        }
-        ?>
+                    $datas = [];
+                    foreach($info->sortingTags as $tag){
+                        if(isset($tag->content_tag_id) && isset($tag->tag->tag)){
+                            $datas[] = ' <strong><i class="fa fa-tag"></i> '.$tag->tag->tag.'</strong> ';
+                        }
+                    }
+                    if(!empty($datas)){
+                        echo implode(' ', $datas);
+                    }
+                    ?>
                 </span>
             </div>
         </div>
@@ -146,47 +146,34 @@ $video_id = isset($matches[1])?$matches[1]:'';
         </div>
         <div class="comments_outer">
             <div class="comments_inner">
-                <div class="comment">
-                    <p class="com_user"><i class="far fa-user"></i><a href="#">@username</a></p>
-                    <div class="comment-inner">
-                        <p>Minim consectetur proident aute aute eu culpa incididunt dolor nisi cupidatat ad.</p>
+                @include('partials.commentsDisplay', ['comments' => $comments, 'fk_id' => $info->id, 'table' => 'contents'])
+                <?php if(count($comments) == 0){ ?>
+                    <div class="comment no-comment-yet-<?php echo uid($info->id) ?> no_comment_yet" >
+                        No comments yet. Start the discussion!
                     </div>
-                </div>
-                <div class="comment" style="padding-left: 20px;">
-                    <p class="com_user"><i class="far fa-user"></i><a href="#">@username</a></p>
-                    <div class="comment-inner">
-                        <p>Veniam excepteur voluptate exercitation ipsum minim non non adipisicing fugiat mollit.</p>
-                    </div>
-                </div>
-                <div class="comment" style="padding-left: 40px;">
-                    <p class="com_user"><i class="far fa-user"></i><a href="#">@username</a></p>
-                    <div class="comment-inner">
-                        <p>Laboris consectetur mollit irure Lorem dolor minim adipisicing anim.</p>
-                    </div>
-                </div>
-                <div class="comment">
-                    <p class="com_user"><i class="far fa-user"></i><a href="#">@username</a></p>
-                    <div class="comment-inner">
-                        <p>Lorem reprehenderit aliquip labore anim sunt sit dolor magna anim.</p>
-                    </div>
-                </div>
-                <div class="comment" style="padding-left: 20px;">
-                    <p class="com_user"><i class="far fa-user"></i><a href="#">@username</a></p>
-                    <div class="comment-inner">
-                        <p>Laboris consectetur mollit irure adipisicing anim.</p>
-                    </div>
-                </div>
+                <?php } ?>
             </div>
         </div>
+        <input type="hidden" name="_token" id="csrf-token" value="{{ Session::token() }}" />
         <div class="btn_outer">
-            <div class="btn_inner" style="border-bottom:1px solid rgb(31,31,31);">
-                <label>Message</label>
-                <textarea placeholder="Text goes here..."></textarea>
-                <a href="#" class="btn">Submit</a>
-            </div>
+            <?php if((Auth::user())){ ?>
+                <div class="btn_inner" style="border-bottom:1px solid rgb(31,31,31);">
+                    <label>Message</label>
+                    <?php /* <textarea id="comment_0" placeholder="Text goes here..."></textarea> */ ?>
+                    <input type="text" id="comment_text_0" placeholder="Text goes here..." />
+                    <a href="#" onclick="postComments('<?php echo uid($info->id) ?>', 'contents', 0, 'comment_text_0')" class="btn">Submit</a>
+                </div>
+            <?php }?>
+            <?php if((Auth::user())){ ?>
             <div class="btn_inner open">
                 <a href="#" id="add" class="btn">Add a Comment</a>
             </div>
+            <?php }?>
+            <?php if(!(Auth::user())){ ?>
+            <div class="open" style="padding: 20px;float: left;width: 100%;">
+                <a href="#" class="btn">Login to add comment</a>
+            </div>
+            <?php }?>
         </div>
     </div>
 
@@ -227,7 +214,9 @@ $video_id = isset($matches[1])?$matches[1]:'';
     })
 
 </script>
-
+<script>
+    jQuery("time.timeago").timeago();
+</script>
 <?php /* <div class="row" style="display: block;">
     <div class="col-lg-12 grid-margin stretch-card">
         <div class="card">
