@@ -2,7 +2,7 @@
 <html lang="en" class="page-admin-wrapper">
 
 <head>
-  <title>PRCPTIONS.LIVE: exploring the world's perception</title>
+  <title>Perceptions.Live - Media Communities Getting Stuff Done</title>
   <!-- HTML5 Shim and Respond.js IE9 support of HTML5 elements and media queries -->
   <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
   <!--[if lt IE 9]>
@@ -13,12 +13,28 @@
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=no">
-  <meta name="description" content="#">
+  <meta name="description" content="Perceptions.live is a place for media communities to collaborate and connect worldwide.">
   <meta name="keywords" content="flat ui, Admin , Responsive, Landing, Bootstrap, App, Template, Mobile, iOS, Android, apple, creative app">
   <meta name="author" content="#">
-  <!-- Favicon icon -->
-  <link rel="icon" href="/assets/mashable/images/favicon.ico" type="image/x-icon">
-  <!-- Google font-->
+
+    <!-- Favicons -->
+    <link rel="apple-touch-icon" sizes="57x57" href="/favicon/apple-icon-57x57.png">
+    <link rel="apple-touch-icon" sizes="60x60" href="/favicon/apple-icon-60x60.png">
+    <link rel="apple-touch-icon" sizes="72x72" href="/favicon/apple-icon-72x72.png">
+    <link rel="apple-touch-icon" sizes="76x76" href="/favicon/apple-icon-76x76.png">
+    <link rel="apple-touch-icon" sizes="114x114" href="/favicon/apple-icon-114x114.png">
+    <link rel="apple-touch-icon" sizes="120x120" href="/favicon/apple-icon-120x120.png">
+    <link rel="apple-touch-icon" sizes="144x144" href="/favicon/apple-icon-144x144.png">
+    <link rel="apple-touch-icon" sizes="152x152" href="/favicon/apple-icon-152x152.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="/favicon/apple-icon-180x180.png">
+    <link rel="icon" type="image/png" sizes="192x192" href="/favicon/android-icon-192x192.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="96x96" href="/favicon/favicon-96x96.png">
+
+    <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
+    <link rel="icon" href="/favicon.ico" type="image/x-icon">
+
+    <!-- Google font-->
   <link href="https://fonts.googleapis.com/css?family=Mada:300,400,500,600,700" rel="stylesheet">
   <!-- Required Fremwork -->
   <link rel="stylesheet" type="text/css" href="/assets/mashable/bower_components/bootstrap/css/bootstrap.min.css">
@@ -141,28 +157,22 @@
                       <i class="fas fa-sort-down"></i>
                   </a>
                   <ul class="show-notification profile-notification">
-                      <li>
-                          <!--  include search -->
-                          <a class="mobile-search morphsearch-search" href="#">
-                              <i class="fas fa-search"></i> Quick Search
-                          </a>
-                      </li>
-                      <li>
-                          <a href="/user/user-profile">
-                              <i class="fas fa-user-cog"></i>
-                              Control Panel
-                          </a>
-                      </li>
-                      <li>
-                          <a href="/user/group-admin/content-list">
-                              <i class="fas fa-video"></i>
-                              My Videos
-                          </a>
-                      </li>
-                      <li><a href="/claim-profile" target="_blank">
-                              <i class="fas fa-user-circle"></i>
-                              Claim A Profile</a></li>
-                      <li>
+                    <li>
+                      <a href="/user/user-profile">
+                        <i class="fas fa-user-cog"></i>
+                        My Profile
+                      </a>
+                    </li>
+                    <li>
+                      <a href="/user/group-admin/content-list">
+                        <i class="fas fa-video"></i>
+                        My Videos
+                      </a>
+                    </li>
+                    <li><a href="/claim-profile" target="_blank">
+                        <i class="fas fa-user-circle"></i>
+                        Claim A Profile</a></li>
+                    <li>
                           <a href="/user/logout">
                               <i class="fas fa-sign-out-alt"></i> Logout {{Auth::user()->first_name}}
                           </a>

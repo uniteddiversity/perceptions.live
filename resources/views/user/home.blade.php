@@ -39,9 +39,9 @@
 
 <div class="footer">
     <span style="display: block; padding-bottom: 7px; margin: auto;">
-        <a href="https://perceptiontravel.tv/privacy-policy" target="_blank">Privacy Policy</a> | <a href="https://perceptiontravel.tv/terms-of-service" target="_blank">Terms of Service</a> | <a href="https://perceptiontravel.tv/community/donations/" target="_blank">Make a Donation</a> | <a href="https://perceptiontravel.tv/community-feedback/" target="_blank">Submit Feedback</a> | <a href="https://perceptiontravel.tv/about/" target="_blank">About Us</a> | <a href="/contact-us" target="_blank">Contact Us</a></span>
-    <span>
-        <strong>&copy; 2018-2019 <a href="https://perceptiontravel.tv/" target="_blank">PRCPTION Travel, Inc.</a> - a non-profit, 501(c)3 organization.</strong></span>
+     <strong>   <a href="https://docs.perceptiontravel.tv/legal-docs/privacy-policy" target="_blank">Privacy Policy</a> | <a href="https://docs.perceptiontravel.tv/legal-docs/terms-of-service" target="_blank">Terms of Service</a> | <a href="https://perceptiontravel.tv/community/donations/" target="_blank">Make a Donation</a> | <a href="/contact-us" target="_blank">Submit Feedback</a> | <a href="https://docs.perceptiontravel.tv/" target="_blank">About Us</a> | <a href="/contact-us" target="_blank">Contact Us</a></strong></span>
+    <span style="color: #808080;">
+        <strong>&copy; 2017-2020 <a href="https://perceptiontravel.tv/" target="_blank">PRCPTION Travel, Inc.</a> - a non-profit, 501(c)3 organization.</strong></span>
 
 </div>
 @include('partials.group-info-popup_right');
@@ -50,5 +50,18 @@
         $('body').addClass('mapPageBody');
     })
 
+    /* max/min group popup */
+    $("#grouppop").click(function(){
+        if($(this).html() == "-"){
+            $(this).html("+");
+        }
+        else{
+            $(this).html("-");
+        }
+        $("#custom-popup").slideToggle();
+    });
 </script>
+
+
+
 @endsection

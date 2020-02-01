@@ -1,13 +1,13 @@
 // menu title
 // $menu-title: #2a394f,#624e89,#3c4fb1,#2C3E50,#0073aa,#fff;
-$menu-title: #ff5e3a,#0096b1,#e64056,#967adc,#0073aa,#FF5370,#F76D47,#FFB62C,#91B859,#39ADB5,#7C4DFF,#945EB8;
+$menu-title: #6844d4,#0096b1,#e64056,#967adc,#6844d4,#FF5370,#F76D47,#FFB62C,#91B859,#39ADB5,#7C4DFF,#945EB8;
  //  header theme color
 $header-theme: #fff;
 //  left navbar theme color
-$left-data-navbar-theme: #23282d;
+$left-data-navbar-theme: #6844d4;
 $left-navbar-light-theme: #fff;
 //  active item color
-$active-item: #ff5e3a,#0096b1,#e64056,#967adc,#0073aa,#FF5370,#F76D47,#FFB62C,#91B859,#39ADB5,#7C4DFF,#945EB8;
+$active-item: #6844d4,#0096b1,#e64056,#967adc,#6844d4,#FF5370,#F76D47,#FFB62C,#91B859,#39ADB5,#7C4DFF,#945EB8;
 
 .pcoded {
     .pcoded-container {
@@ -2690,7 +2690,7 @@ body {
 
             &[active-item-theme="theme#{$i}"] .pcoded-item {
                 > li.active > a{
-                    background: $value !important;
+                    background: #6844d4 !important;
                     color: #fff !important;
                 }
                 li {
@@ -2700,7 +2700,7 @@ body {
                         font-weight: 600;
                     }
                     &.pcoded-hasmenu.active > a {
-                        background: $value !important;
+                        background: #6844d4 !important;
                     }
 
                     &.pcoded-hasmenu:hover > a {
@@ -3548,15 +3548,15 @@ body {
         }
 
         &[sub-item-theme="theme1"] {
-            background: #70ca63;
+            background: #6844d4;
         }
 
         &[sub-item-theme="theme2"] {
-            background: #3498DB;
+            background: #6844d4;
         }
 
         &[sub-item-theme="theme3"] {
-            background: #485BBD;
+            background: #6844d4;
         }
 
         &[sub-item-theme="theme4"] {
@@ -3564,11 +3564,11 @@ body {
         }
 
         &[sub-item-theme="theme5"] {
-            background: #333843;
+            background: #6844d4;
         }
 
         &[sub-item-theme="theme6"] {
-            background: #624e89;
+            background: #6844d4;
         }
 
         &[sub-item-theme="theme7"] {

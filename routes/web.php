@@ -54,6 +54,8 @@ Route::post('/', function(){
 
     Route::get('/contact-us', '\App\Controllers\HomeController@contactUs');
     Route::post('/contact-us-post', '\App\Controllers\HomeController@contactUsPost');
+   // Route::get('/contact-us/{slug}', function ($subjectnum = null) { return $subjectnum; });
+   // Route::get('/contact-us', function () { $subjectnum = 1; });
 
     Route::get('/ajax/associated_videos_by_user_id/{_user_id}', '\App\Controllers\User\UserController@getAssociatedVideosByUserId');
     Route::get('/home/ajax/video-search-list', '\App\Controllers\HomeController@searchVideosList');

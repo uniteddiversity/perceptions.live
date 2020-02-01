@@ -5,7 +5,7 @@ $video_id = isset($matches[1])?$matches[1]:'';
 <div class="modal-body">
     <button class="close mobile_show" type="button" data-dismiss="modal" aria-hidden="true">&times;</button>
     <div class="youtube">
-        <iframe style="width: 100%;height: 506px" src="<?php echo str_replace( array('watch?v=','http://'), array('embed/','https://'),$info['url']) ?>" frameborder="0" allowfullscreen></iframe>
+        <iframe style="width: 100%;height: 422px" src="<?php echo str_replace( array('watch?v=','http://'), array('embed/','https://'),$info['url']) ?>" frameborder="0" allowfullscreen></iframe>
     </div>
 
     <div class="modal-inner">

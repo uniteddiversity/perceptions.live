@@ -6,7 +6,7 @@ $data = array();
 $data['proof_images'] = array();
 ?>
 <div class="card form-card">
-  <div class="card-body">
+  <div class="card-body" style="min-width: 400px; max-width: 800px; margin-left: auto; margin-right: auto; padding-bottom: 60px;">
     <div class="table-responsive">
       <div class="form-header">
         <h2 class="card-title">Contact Us</h2>
@@ -26,6 +26,8 @@ $data['proof_images'] = array();
         {{ session()->get('message') }}
       </div>
       @endif
+
+
       <form action="/contact-us-post" method="post" enctype='multipart/form-data'>
         <input type="hidden" name="_token" id="csrf-token" value="{{ Session::token() }}" />
         <div class="form-group">
@@ -41,8 +43,8 @@ $data['proof_images'] = array();
           <label for="Subject">Subject </label>
           <div class="custom_select">
             <select class="form-control" name="subject">
-              <option @if(old('subject')=='general message' ) selected='selected' @endif value="general message">General message</option>
-              <option @if(old('subject')=='feature request' ) selected='selected' @endif value="feature request">Feature request</option>
+              <option @if(old('subject')=='general message' ) selected='selected' @endif value="general message">General Message</option>
+              <option @if(old('subject')=='feature request' ) selected='selected' @endif value="feature request">Feature Request</option>
               <option @if(old('subject')=='feedback' ) selected='selected' @endif value="feedback">Feedback</option>
               <option @if(old('subject')=='questions' ) selected='selected' @endif value="questions">Questions</option>
               <option @if(old('subject')=='partnerships' ) selected='selected' @endif value="partnerships">Partnerships</option>

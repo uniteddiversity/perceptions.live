@@ -8,15 +8,19 @@
         <div class="search-box">
           <div class="search-box-content">
             <input type="text" placeholder="Quick Search" name="header_search_text" id="header_search_text" />
-            <button class="btn-search" onclick="toggleSearchbar()"><i class="fas fa-search"></i></button>
+            <button class="btn-search""><i class="fas fa-search"></i></button>
           </div>
         </div>
       </div>
       <h5 class="header-title">"{{$settings['home_centered_title'] or ""}}"</h5>
       <div class="top-bar__right">
-        <a class="btn-create-community" data-toggle="modal" data-target="/user/admin/user-group-add">
+          <a class="btn-create-community" href="/claim-profile">
+              <i class="fas fa-user-circle"></i>
+              Claim a Profile
+          </a>
+        <a class="btn-create-community" href="/user/user-group-add">
           <i class="fas fa-users"></i>
-          Create Community
+          Create a Community
         </a>
         @if (Route::has('login'))
         @auth
@@ -26,24 +30,17 @@
             <li class="user-profile header-notification">
                 <a href="#!">
                     <span class="uimg" style="display:block;">
-                        <img src="<?php if(isset($user_img[0])){ echo '/storage/'.$user_img[0]->url; }else{ ?>/assets/img/face1.png<?php } ?>" alt="profile image">
+                        <img src="<?php if(isset($user_img[0])){ echo '/storage/'.$user_img[0]->url; }else{ ?>/assets/img/face1.png<?php } ?>" alt="Avatar of <?php echo Auth::user()->display_name ?>">
                     </span>
-
                     <span>
                         <?php echo Auth::user()->display_name ?></span>
                     <i class="fas fa-sort-down"></i>
                 </a>
                 <ul class="show-notification profile-notification">
                     <li>
-                        <!--  include search -->
-                        <a class="mobile-search morphsearch-search" href="#">
-                            <i class="fas fa-search"></i> Quick Search
-                        </a>
-                    </li>
-                    <li>
                         <a href="/user/user-profile">
                             <i class="fas fa-user-cog"></i>
-                            Control Panel
+                            My Profile
                         </a>
                     </li>
                     <li>
@@ -96,11 +93,10 @@
           </div>
         </div>
       </div>
-      <div class="header-toolbar__center">
-        <a class="btn-near-me" onclick="nearByMeFunc()">
-          <img src="/assets/img/map_center_icon.svg" alt="">
-        </a>
-      </div>
+         <div class="near_me_icon">
+              <i class="map_center_icon" ></i>
+          </div>
+
       <div class="header-toolbar__right header-slider">
         <p class="slider-title">{{$settings['right_feed_name'] or ""}}</p>
         <div class="thumbs-container bottom">
@@ -148,14 +144,20 @@
 
         <ul>
             @if (Route::has('login'))
+                @auth
+                <li>
+                    <a href="/user/user-profile">
+                        <i class="fas fa-user-cog"></i>
+                        My Profile
+                    </a>
+                </li>
+                <li>
+                    <a href="/user/group-admin/content-list">
+                        <i class="fas fa-video"></i>
+                        My Videos
+                    </a>
+                </li>
 
-            <li class="important">
-                <a href="/claim-profile" target="_blank"><i class="fas fa-user-circle"></i> Claim A Profile</a>
-            </li>
-            <li class="important">
-                <a href="https://perceptiontravel.tv/about-perceptions-live" target="_blank"><i class="fas fa-info-circle"></i>&nbsp;About</a>
-            </li>
-            @auth
             <li class="important">
                 <a href="/user/logout">
                     <i class="fas fa-sign-out-alt"></i> Logout {{Auth::user()->first_name}}
@@ -165,17 +167,31 @@
 
             @endauth
             <li style="min-height:12px; background:#fff;"></li>
+                <li class="important">
+                <a href="/claim-profile">
+                    <i class="fas fa-user-circle"></i>
+                    Claim Profile
+                </a>
+                </li><li class="important">
+                <a href="/user/user-group-add">
+                    <i class="fas fa-users"></i>
+                    Create A Community
+                </a>
+                </li>
+                <li>
+                    <a href="https://docs.perceptiontravel.tv/" target="_blank"><i class="fas fa-info-circle"></i>&nbsp;About</a>
+                </li>
             <li>
-                <a href="#"><i class="fas fa-user-secret"></i>Privacy Policy</a>
+                <a href="https://docs.perceptiontravel.tv/legal-docs/privacy-policy" target="_blank""><i class="fas fa-user-secret"></i>Privacy Policy</a>
             </li>
             <li>
-                <a href="#"><i class="far fa-file-alt"></i>Terms of Service</a>
+                <a href="https://docs.perceptiontravel.tv/legal-docs/terms-of-service"><i class="far fa-file-alt"></i>Terms of Service</a>
             </li>
             <li>
-                <a href="#"><i class="fas fa-hand-holding-usd"></i>Make a Donation</a>
+                <a href="https://perceptiontravel.tv/community/donations/"><i class="fas fa-hand-holding-usd"></i>Make a Donation</a>
             </li>
             <li>
-                <a href="#"><i class="fas fa-pencil-alt"></i>Submit Feedback</a>
+                <a href="/contact-us"><i class="fas fa-pencil-alt"></i>Submit Feedback</a>
             </li>
             <li>
                 <a href="/contact-us"><i class="fas fa-pencil-alt"></i>Contact Us</a>

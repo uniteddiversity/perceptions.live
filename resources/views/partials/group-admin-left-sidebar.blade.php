@@ -6,7 +6,28 @@
 
 
         <ul class="pcoded-item pcoded-left-item">
-            <li class="pcoded-hasmenu <?php if(in_array(Request::segment(3), array('content-add','content-list-open','content-list','location-list','sorting-tag-add'))){ echo 'active pcoded-trigger'; } ?> pcoded-trigger">
+            <li class="pcoded-hasmenu <?php if(in_array(Request::segment(2), array('user-profile','list-profile-claim-request'))){ echo 'active pcoded-trigger'; } ?>">
+                <a href="javascript:void(0)">
+                    <span class="pcoded-micon"> <i class="far fa-user"></i></span>
+                    <span class="pcoded-mtext" data-i18n="nav.page_layout.main">Me</span>
+                    <span class="pcoded-mcaret"></span>
+                </a>
+            <ul class="pcoded-submenu">
+            <li class="nav-item <?php if(in_array(Request::segment(2), array('user-profile'))){ echo 'active'; } ?>">
+                <a class="nav-link" href="/user/user-profile">
+                    <span class="pcoded-mtext" data-i18n="nav.page_layout.main">Edit My Profile</span>
+                </a>
+            </li>
+            <li class="nav-item <?php if(in_array(Request::segment(2), array('list-profile-claim-request'))){ echo 'active'; } ?>">
+                <a class="nav-link" href="/user/user/list-profile-claim-request">
+                    <span class="pcoded-mtext" data-i18n="nav.dash.default">Claim Profile Request</span>
+                    <span class="pcoded-mcaret"></span>
+                </a>
+            </li>
+            </ul>
+        </ul>
+        <ul class="pcoded-item pcoded-left-item">
+            <li class="pcoded-hasmenu <?php if(in_array(Request::segment(3), array('content-add','content-list-open','content-list','location-list','sorting-tag-add'))){ echo 'active pcoded-trigger'; } ?>">
                 <a href="javascript:void(0)">
                     <span class="pcoded-micon"><i class="ti-video-camera"></i></span>
                     <span class="pcoded-mtext" data-i18n="nav.dash.main">Videos</span>
@@ -30,7 +51,7 @@
 
                 </ul>
             </li>
-
+        </ul>
             <?php /*<li class="pcoded-hasmenu <?php if(in_array(Request::segment(3), array('user-list','user-add'))){ echo 'active pcoded-trigger'; } ?> pcoded-trigger">
                 <a href="javascript:void(0)">
                     <span class="pcoded-micon"><i class="ti-user"></i></span>
@@ -54,7 +75,7 @@
                     </li>
                 </ul>
             </li>*/ ?>
-
+            <ul class="pcoded-item pcoded-left-item">
             <li class="pcoded-hasmenu <?php if(in_array(Request::segment(3), array('group-list','user-to-group-add','content-list-group','group-edit'))){ echo 'active pcoded-trigger'; } ?>">
                 <a href="javascript:void(0)">
                     <span class="pcoded-micon"><i class="ti-list"></i></span>
@@ -93,7 +114,8 @@
 --!>
                 </ul>
             </li>
-
+            </ul>
+                <ul class="pcoded-item pcoded-left-item">
             <li class="pcoded-hasmenu <?php if(in_array(Request::segment(3), array('map-generate-list','map-generate'))){ echo 'active pcoded-trigger'; } ?>">
                 <a href="javascript:void(0)">
                     <span class="pcoded-micon"><i class="ti-share"></i></span>

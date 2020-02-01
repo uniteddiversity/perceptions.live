@@ -5,7 +5,7 @@
         <div class="col-lg-12 grid-margin stretch-card">
             <div class="card">
                 <div class="card-body">
-                    <h4 class="card-title">My Claim Requests</h4>
+                    <h4 class="card-title">My Profile Claim Request</h4>
                     @include('partials.admin-notification-partial')
                     <div class="table-responsive">
                         <table class="table" id="users_llist">
