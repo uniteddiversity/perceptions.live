@@ -1344,7 +1344,7 @@ input[type="text"]:focus::placeholder {
   width: 700px !important;
   background: none !important;
   margin-top: 40px !Important;
-  margin-left:160px !important;
+  margin-left:130px !important;
   max-height: 100vh;
 
 }
@@ -4280,11 +4280,12 @@ nav.two .header-notification .profile-notification li {
   .modal-dialog.big {
     width: 100% !Important;
     padding: 20px !Important;
+    margin-left: 0px !important;
   }
 
   #feature-info {
     margin: 0;
-    width: 320px !important;
+    width: 85% !important;
     margin: 0 auto;
   }
 
@@ -5467,10 +5468,10 @@ header.s4.dark #slider_feed .near_me_icon {
     padding-top: 30px !important;
   }
 
-  #feature-info {
+  /* #feature-info {
     width: 80% !important;
     max-width: 800px;
-  }
+  } */
 
   .modal-dialog .youtube {
     position: relative;
@@ -5842,10 +5843,10 @@ header.s4.dark #slider_feed .near_me_icon {
     padding-top: 30px !important;
   }
 
-  #feature-info {
+  /* #feature-info {
     width: 80% !important;
     max-width: 800px;
-  }
+  } */
 
   .modal-dialog .youtube {
     position: relative;
@@ -6729,7 +6730,7 @@ margin-bottom: -48px;
   box-shadow: 0 4px 10px rgba(30, 30, 30, 0.3);
   max-width: 300px;
   z-index: 3;
-  opacity: .75;
+  opacity: .85;
 }
 
 .custom-popup .announce {
