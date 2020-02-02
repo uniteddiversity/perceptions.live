@@ -1344,7 +1344,7 @@ input[type="text"]:focus::placeholder {
   width: 700px !important;
   background: none !important;
   margin-top: 40px !Important;
-  margin-left:130px !important;
+  margin-left:13% !important;
   max-height: 100vh;
 
 }
@@ -1418,6 +1418,7 @@ input[type="text"]:focus::placeholder {
   background: #4214c7;
   z-index: 3;
   margin-top: -20px;
+  margin-left: -12px;
   position: relative;
   -webkit-box-shadow: 0px 10px 58px 4px rgba(0, 0, 0, 0.46);
   -moz-box-shadow: 0px 10px 58px 4px rgba(0, 0, 0, 0.46);
@@ -5854,6 +5855,18 @@ header.s4.dark #slider_feed .near_me_icon {
     overflow: hidden;
     padding-bottom: 56%;
     min-height: inherit !important;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: -5px;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    border-radius: 5px;
+    border: 8px solid #4214c7;
+    background: #4214c7;
+    -webkit-box-shadow: 0px 10px 58px 4px rgba(0, 0, 0, 0.46);
+    -moz-box-shadow: 0px 10px 58px 4px rgba(0, 0, 0, 0.46);
+    box-shadow: 0px 10px 58px 4px rgba(0, 0, 0, 0.46);
+
   }
 
   .modal-dialog .youtube iframe {
