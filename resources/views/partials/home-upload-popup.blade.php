@@ -1,5 +1,5 @@
 
-<div class="custom-popup-upload" id="custom-popup-upload" style="display:none;">
+<div class="custom-popup-upload" id="custom-popup-upload">
     <div class="collapse">
     <div class="logo-wrapper">
         <h4 class="title">SHARE YOUR VIDEO</h4>

@@ -196,6 +196,9 @@
             <li>
                 <a href="/contact-us"><i class="fas fa-pencil-alt"></i>Contact Us</a>
             </li>
+                <div style="padding: 20px; margin-top: 40px; max-width: 75%; font-size: 10px; text-align: center; margin: auto;">
+                    <strong>&copy; 2017-2020 <a href="https://perceptiontravel.tv/" target="_blank">PRCPTION Travel, Inc.</a> - a non-profit, 501(c)3 organization.</strong>
+        </div>
             @endif
 
 
