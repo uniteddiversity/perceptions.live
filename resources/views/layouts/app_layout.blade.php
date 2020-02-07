@@ -221,6 +221,7 @@
 
   <!-- Warning Section Ends -->
   <!-- Required Jqurey -->
+
   <script type="text/javascript" src="/assets/mashable/bower_components/jquery/js/jquery.min.js"></script>
   <script src="/assets/mashable/bower_components/jquery-ui/js/jquery-ui.min.js"></script>
   <script type="text/javascript" src="/assets/mashable/bower_components/popper.js/js/popper.min.js"></script>

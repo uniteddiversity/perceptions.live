@@ -16,11 +16,17 @@
                             @include('partials.home-left-side-bar')
                         </div>
                         @include('partials.nav-bar')
+                    <div id="custom-popup-upload-close">
+                        <a href="#" class="participate" style="height:100%;">
+                            <i class="fas fa-cloud-upload-alt pointer" style="cursor:pointer"></i>
+                        </a>
+                    </div>
+                   {{--
                         <a href="/user/content-add" class="participate" style="height: 100%;">
                             <i class="fas fa-cloud-upload-alt pointer" style="cursor:pointer" onclick="window.location='/user/content-add'"></i>
                         </a>
                     </div>
-
+                        --}}
                     <div class="half-map" style="height: 100%;">
                         <div id="map" class="map" style="height: 100%;margin-left:30px;">&nbsp;</div>
                     </div>
@@ -44,24 +50,15 @@
         <strong>&copy; 2017-2020 <a href="https://perceptiontravel.tv/" target="_blank">PRCPTION Travel, Inc.</a> - a non-profit, 501(c)3 organization.</strong></span>
 
 </div>
+
 @include('partials.group-info-popup_right');
+@include('partials.home-upload-popup');
+
 <script>
     $(window).load(function() {
         $('body').addClass('mapPageBody');
     })
 
-    /* max/min group popup */
-    $("#grouppop").click(function(){
-        if($(this).html() == "-"){
-            $(this).html("+");
-        }
-        else{
-            $(this).html("-");
-        }
-        $("#custom-popup").slideToggle();
-    });
 </script>
-
-
 
 @endsection

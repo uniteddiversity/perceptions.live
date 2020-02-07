@@ -6708,28 +6708,77 @@ nav>ul>li>a i.fas {
 .new-mobile-header {
   display: none;
 }
+
+/* Custom upload popup */
+
+#custom-popup-upload-close {
+  float: right;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  padding: 0;
+  text-align: center;
+  background: rgba(86, 41, 214, 0.85);
+  color: #fff;
+  z-index: 9999;
+  position: relative;
+  border: 0px solid #000;
+  font-size: 22px;
+  font-weight: bold;
+  font-family: 'Open Sans', sans-serif;
+  margin-bottom: -48px;
+  margin-top: -70px;
+  margin-right: -30px;
+  cursor: pointer;
+}
+
+
+.custom-popup-upload {
+    position: fixed;
+    top: 50%;
+    right: 450px;
+    text-align: center;
+    transform: translateY(-50%);
+    padding: 10px 20px;
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(30, 30, 30, 0.3);
+    max-width: 500px;
+    z-index: 3;
+    opacity: 1;
+
+}
+
+.custom-popup-upload .logo-wrapper {
+  margin-bottom: 10px;
+  margin-right: auto;
+  margin-left: auto;
+}
+
+
 /* Custom popup for right of home page */
 
 #custom-popup-close {
-float: right;
-width: 32px;
-height: 32px;
-border-radius: 50%;
-padding: 0;
-text-align: center;
-background: rgba(86, 41, 214, 0.85);
+  float: right;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  padding: 0;
+  text-align: center;
+  background: rgba(86, 41, 214, 0.85);
   color: #fff;
-z-index: 9999;
-position: relative;
-border: 0px solid #000;
-font-size: 22px;
-font-weight: bold;
-font-family: 'Open Sans', sans-serif;
-margin-bottom: -48px;
+  z-index: 9999;
+  position: relative;
+  border: 0px solid #000;
+  font-size: 22px;
+  font-weight: bold;
+  font-family: 'Open Sans', sans-serif;
+  margin-bottom: -48px;
   margin-top: -20px;
   margin-right: -30px;
   cursor: pointer;
 }
+
 
 .custom-popup {
   position: fixed;

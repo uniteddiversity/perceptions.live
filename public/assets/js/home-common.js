@@ -190,3 +190,7 @@ $("#custom-popup-close").click(function(){
     }
     $("#desc").slideToggle();
 });
+
+$("#custom-popup-upload-close").click(function(){
+    $("#custom-popup-upload").slideToggle("slow");
+});

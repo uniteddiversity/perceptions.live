@@ -30,7 +30,7 @@
                   <strong> <a href="https://docs.perceptiontravel.tv/" target="new">Check out our documentation to learn more about the project.</a></strong></p>
           </div>
 
-      </div>
+</div>
       {{--}}<div class="custom-popup">
   <div class="logo-wrapper">
     <img src="/assets/img/logo_2.png" alt="">
