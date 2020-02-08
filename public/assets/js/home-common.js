@@ -194,3 +194,6 @@ $("#custom-popup-close").click(function(){
 $("#custom-popup-upload-close").click(function(){
     $("#custom-popup-upload").slideToggle("slow");
 });
+$("#custom-popup-upload-close2").click(function(){
+    $("#custom-popup-upload").slideToggle("slow");
+});
