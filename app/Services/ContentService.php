@@ -344,8 +344,8 @@ class ContentService
             ->leftJoin('shared_contents_associations as association', 'association.shared_content_id', 'shared_contents.id')
             ->leftJoin('group_content_associations as groups', function($q){
                 $q->on('groups.group_id', 'association.fk_id')
-                    ->where('association.type', 'group')
-                    ->where('association.table', 'groups');
+                    ->where('association.type', DB::raw("'group'"))
+                    ->where('association.table', DB::raw("'groups'"));
             })
             ->leftJoin('tag_content_associations as gcs', function($q){
                 $q->on('gcs.content_tag_id', 'association.fk_id')
@@ -372,7 +372,7 @@ class ContentService
             })
             ->select(
                 'shared_contents.id',
-                DB::Raw("GROUP_CONCAT(DISTINCT groups.id SEPARATOR ',') as groups_content_ids"),
+                DB::Raw("GROUP_CONCAT(DISTINCT groups.content_id SEPARATOR ',') as groups_content_ids"),
                 DB::Raw("GROUP_CONCAT(DISTINCT content.id SEPARATOR ',') as contents_content_ids"),
                 DB::Raw("GROUP_CONCAT(DISTINCT content_category.id SEPARATOR ',') as contents_category_ids"),
                 DB::Raw("GROUP_CONCAT(DISTINCT users_contents.content_id SEPARATOR ',') as user_contents_ids"),
@@ -389,7 +389,7 @@ class ContentService
         }
 
         $map = $map->where('shared_contents.public_token', $token)->groupBy('shared_contents.id')->get()->first();
-
+        // dd($map->toArray());die();
         $ids = array();
 
         if(isset($map['groups_content_ids'])){
