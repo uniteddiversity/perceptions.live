@@ -1,4 +1,11 @@
 <?php return array (
+  'fideloper/proxy' => 
+  array (
+    'providers' => 
+    array (
+      0 => 'Fideloper\\Proxy\\TrustedProxyServiceProvider',
+    ),
+  ),
   'beyondcode/laravel-confirm-email' => 
   array (
     'providers' => 
@@ -6,11 +13,11 @@
       0 => 'BeyondCode\\EmailConfirmation\\EmailConfirmationServiceProvider',
     ),
   ),
-  'fideloper/proxy' => 
+  'laravel/tinker' => 
   array (
     'providers' => 
     array (
-      0 => 'Fideloper\\Proxy\\TrustedProxyServiceProvider',
+      0 => 'Laravel\\Tinker\\TinkerServiceProvider',
     ),
   ),
   'intervention/image' => 
@@ -24,31 +31,6 @@
       'Image' => 'Intervention\\Image\\Facades\\Image',
     ),
   ),
-  'laracasts/flash' => 
-  array (
-    'providers' => 
-    array (
-      0 => 'Laracasts\\Flash\\FlashServiceProvider',
-    ),
-    'aliases' => 
-    array (
-      'Flash' => 'Laracasts\\Flash\\Flash',
-    ),
-  ),
-  'laravel/tinker' => 
-  array (
-    'providers' => 
-    array (
-      0 => 'Laravel\\Tinker\\TinkerServiceProvider',
-    ),
-  ),
-  'nesbot/carbon' => 
-  array (
-    'providers' => 
-    array (
-      0 => 'Carbon\\Laravel\\ServiceProvider',
-    ),
-  ),
   'shawnsandy/img-fly' => 
   array (
     'providers' => 
@@ -58,6 +40,17 @@
     'aliases' => 
     array (
       'Imgfly' => 'ShawnSandy\\ImgFly\\Classes\\ImgflyFacade',
+    ),
+  ),
+  'laracasts/flash' => 
+  array (
+    'providers' => 
+    array (
+      0 => 'Laracasts\\Flash\\FlashServiceProvider',
+    ),
+    'aliases' => 
+    array (
+      'Flash' => 'Laracasts\\Flash\\Flash',
     ),
   ),
 );
