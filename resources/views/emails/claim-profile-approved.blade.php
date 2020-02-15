@@ -1,18 +1,20 @@
+<div>Greetings from Perceptions.Live!<br><br></div>
 <div>
-    Following Claim request has been approved, that has been requested by {{$data['email']}}!
+    The following Claim Profile request, requested by {{$data['email']}}, has been approved!
 </div>
 <div>
-    First name: {{ $data->needUser['first_name'] }}
+    First Name:<strong> {{ $data->needUser['first_name'] }}</strong><br><br>
 </div>
 <div>
-    First name: {{ $data->needUser['display_name'] }}
+    Display Name: <strong>{{ $data->needUser['display_name'] }}</strong><br><br>
 </div>
 <div>
-    First name: {{ $data->needUser['email'] }}
+    E-mail: <strong>{{ $data->needUser['email'] }}</strong><br><br>
 </div>
 <div>
-    Please Use following auto generated password to login
+    Please use the following auto-generated password to login--and then be sure to change it!:<br>
     <div>
-        Password : <b>{{ $new_password }}</b>
+        Password : <strong>{{ $new_password }}</strong>
     </div>
 </div>
+<div>See you soon!<br><br></div>
