@@ -5634,6 +5634,17 @@ header.s4.dark #slider_feed .near_me_icon {
   z-index: 10;
 }
 
+.slider-title {
+    text-transform: uppercase;
+    color: #4214c7;
+    margin-bottom: 0px;
+    text-align: center;
+  margin-top: 6px;
+  /* margin-right: auto; */
+  font-weight: 600;
+  letter-spacing: 2px;
+}
+
 .participate {
   position: fixed !important;
   background: #0e1281 url(/assets/img/upload.svg) no-repeat center center / 90px;
@@ -5650,8 +5661,9 @@ header.s4.dark #slider_feed .near_me_icon {
   transform: translateX(-50%);
   transition: all .3s ease-in-out;
   cursor: pointer;
-  z-index: 10;
+  z-index: 1000;
 }
+
 
 .participate:hover {
   background-color: #4214c7;
@@ -5660,6 +5672,13 @@ header.s4.dark #slider_feed .near_me_icon {
 .participate i {
   display: none;
 }
+
+@media screen and (max-width: 1199.99px) {
+  .participate {
+    top: auto !important;
+  }
+}
+
 
 .half-map .map .leaflet-control-locate .leaflet-bar-part-single .custom {
   width: 24px;
@@ -7161,6 +7180,14 @@ nav>ul>li>a i.fas {
   }
 }
 
+.center-intro {
+  position:absolute;
+  top:50%;
+  left:50%;
+  margin-top:-50px; /* this is half the height of your div*/
+  margin-left:-100px; /*this is half of width of your div*/
+
+}
 
 @media only screen and (max-width: 768px) {
   #pcoded .sidebar_toggle {
@@ -7192,6 +7219,65 @@ nav>ul>li>a i.fas {
     font-size: 2.2em;
     margin-left: 8px;
   }
+
+  .tooltip3 {
+    color: #FFF;
+    outline: none;
+    cursor: help;
+    text-decoration: none;
+    position: relative;
+    font-family: ralewaybold;
+    font-size: 2.2em;
+    margin-left: 8px;
+  }
+
+  /* 	ip container */
+  .tooltipinstr {
+    position: relative;
+    display: inline-block;
+    border-bottom: 1px dotted black; /* If you want dots under the hoverable text */
+  }
+
+  /* tooltipinstr text */
+  .tooltipinstr .tooltipinstrtext {
+    visibility: hidden;
+    width: 120px;
+    background-color: #555;
+    color: #fff;
+    text-align: center;
+    padding: 5px 0;
+    border-radius: 6px;
+
+    /* Position the tooltipinstr text */
+    position: absolute;
+    z-index: 1;
+    bottom: 125%;
+    left: 50%;
+    margin-left: -60px;
+
+    /* Fade in tooltipinstr */
+    opacity: 0;
+    transition: opacity 0.3s;
+  }
+
+  /* tooltipinstr arrow */
+  .tooltipinstr .tooltipinstrtext::after {
+    content: "";
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    margin-left: -5px;
+    border-width: 5px;
+    border-style: solid;
+    border-color: #555 transparent transparent transparent;
+  }
+
+  /* Show the tooltipinstr text when you mouse over the tooltipinstr container */
+  .tooltipinstr:hover .tooltipinstrtext {
+    visibility: visible;
+    opacity: 1;
+  }
+
   .responsiveheader .toolbar {
     box-shadow: 0px 6px 7px rgba(0, 0, 0, 0.4);
   }

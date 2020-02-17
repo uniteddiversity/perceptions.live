@@ -7,7 +7,50 @@
     <div class="logo_mobile">
 
     </div>
+    <div class="header-toolbar__left header-slider">
+        <p class="slider-title">{{$settings['left_feed_name'] or ""}}</p>
+        <div class="thumbs-container bottom">
+            <div class="thumb_wrapper">
+                <div class="left_slide">
+                    <?php $i = 0; ?>
+                    @foreach($top_slider_feed as $feed)
+                        @if($feed['side'] == 'left')
+                            <?php $i++; ?>
+                            <div class="slick-tile">
+                                <div onclick="loadFilters('{{ $feed['type_ids'] }}','')" data-thumb-id="<?php echo $i ?>"
+                                     class="slider-image thumb <?php if($i) echo 'active' ?>"
+                                     style="cursor:pointer !important; background-image: url('{{ Imgfly::imgFly('../public/'.$feed['icon'].'?h=65' ) }}')">
+                                </div>
+                                <div class="slider-text">{{$feed['title']}}</div>
+                            </div>
+                        @endif
+                    @endforeach
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="header-toolbar__right header-slider">
+        <p class="slider-title">{{$settings['right_feed_name'] or ""}}</p>
+        <div class="thumbs-container bottom">
+            <div class="thumb_wrapper">
+                <div class="right_slide">
+                    <?php $i = 0; ?>
+                    @foreach($top_slider_feed as $feed)
+                        @if($feed['side'] == 'right')
+                            <?php $i++; ?>
+                            <div class="slick-tile">
+                                <div class="slider-image" onclick="loadFilters( '{{$feed['type_ids']}}' ,'')" data-thumb-id="<?php echo $i ?>" class="thumb <?php if($i) echo 'active' ?>" style="background-image: url('{{ Imgfly::imgFly('../public/'.$feed['icon'].'?h=65' ) }}')">
+                                </div>
+                                <div class="slider-text">{{$feed['title']}}</div>
+                            </div>
+                        @endif
+                    @endforeach
+                </div>
+            </div>
+        </div>
+    </div>
     <div class="cats">
+        <div style="margin-left: auto; margin-right: auto; text-align: center;">
         <div style="display: block; float: left;"> <span title="What are Greater Community Intentions?" style="background: rebeccapurple; background: -webkit-linear-gradient(left, orange , yellow, green, cyan, blue, violet); background: -o-linear-gradient(right, orange, yellow, green, cyan, blue, violet); background: -moz-linear-gradient(right, orange, yellow, green, cyan, blue, violet); background: linear-gradient(to right, orange , yellow, green, cyan, blue, violet);" class="dot">
                 <a class="tooltip2" style="padding-left: 7px; color: #ffffff; text-shadow: 2px 2px 4px #000;" href="#"> ? <span class="aboutgci"><em>Greater Community Intentions</em> Use the colored dots to sort through the different styles of community gathering around the world.</span></a>
             </span></div>
@@ -15,6 +58,7 @@
         foreach($gci_tags as $tag){
             echo '<span data-toggle="tooltip" data-animation="true" data-placement="bottom" title="'.$tag['tag'].'" onclick="searchByTag(\''.$tag['id'].'\')" style="background-color: '.$tag['tag_color'].'" class="dot"></span>';
         } ?>
+    </div>
     </div>
     <div style="width:100%; float:left; position:relative;">
         <a href="#" class="btn">Random</a>

@@ -15,19 +15,27 @@
                         <div class="ml-listings fakeScroll fakeScrolls">
                             @include('partials.home-left-side-bar')
                         </div>
-                        @include('partials.nav-bar')
-                    <div id="custom-popup-upload-close">
-                        <a href="#" class="participate" style="height:100%;">
-                            <i class="fas fa-cloud-upload-alt pointer" style="cursor:pointer"></i>
-                        </a>
-                    </div>
-                   {{--
-                        <a href="/user/content-add" class="participate" style="height: 100%;">
-                            <i class="fas fa-cloud-upload-alt pointer" style="cursor:pointer" onclick="window.location='/user/content-add'"></i>
-                        </a>
 
-                        --}}
+
+                        <div id="custom-popup-upload-close">
+                            <a href="#" class="participate" id="step2">
+                                <i class="fas fa-cloud-upload-alt pointer" style="cursor:pointer"></i>
+                            </a>
+                        </div>
+
+                      <div class="center-intro" id="step1"></div>
+
+                        @include('partials.nav-bar')
+
+
+                        {{--
+                                                         <a href="/user/content-add" class="participate" style="height: 100%;">
+                                                             <i class="fas fa-cloud-upload-alt pointer" style="cursor:pointer" onclick="window.location='/user/content-add'"></i>
+                                                         </a>
+
+                                      --}}
                     </div>
+
                     <div class="half-map" style="height: 100%;">
                         <div id="map" class="map" style="height: 100%;margin-left:30px;">&nbsp;</div>
                     </div>

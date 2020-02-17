@@ -5,10 +5,12 @@
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <title>Perceptions.Live: media communities getting stuff done</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="">
-    <meta name="keywords" content="">
-    <meta name="author" content="CreativeLayers">
-
+    <meta name="description" content="Perceptions.live is a place for media communities to collaborate and connect worldwide">
+    <meta name="keywords" content="Community building, community, media, video editing, frontline communities, grassroots, grassroots organizations">
+    <meta name="author" content="PRCPTION Travel, Inc">
+    <script src="/assets/js/intro.js"></script>
+    <link rel="stylesheet" type="text/css" href="/assets/css/introjs.css">
+    <link href="/assets/css/themes/introjs-modern.css" rel="stylesheet">
     <!-- Styles -->
     <link rel="stylesheet" type="text/css" href="/assets/findgo/css/bootstrap-grid.css" />
     <link rel="stylesheet" href="/assets/findgo/css/icons.css">
@@ -96,6 +98,44 @@
         </div>
     </div>
 
+    <script type="text/javascript">
+
+        // create an array with objects describing each step in the guided tour
+        var Steps = [
+            {
+                element: '#step1',
+                intro: "Welcome to Perceptions.Live! There's a lot you can do here, so let's give you a quick tour!",
+                position: 'bottom'
+            },
+            {
+                element: '#step2',
+                intro: "Click this button to quickly upload your video--a testimony, a perspective, a word of wisdom to share.",
+                position: 'top'
+            },
+            {
+                element: '#step3',
+                intro: "Register a new account if you want to build a community, make a map, or leave comments.",
+                position: 'bottom'
+            },
+        ];
+
+        // initialize an introjs instance
+        var intro = introJs();
+
+
+        // load data
+        intro.setOptions({steps: Steps });
+
+        introJs().setOptions(
+            {skipLabel: "Exit", tooltipPosition: "auto", showStepNumbers: "false"}
+        );
+
+        // start intro.js
+        $(document).ready(function() {
+            intro.start();
+        });
+
+    </script>
 
 
     <div class="popupsec">

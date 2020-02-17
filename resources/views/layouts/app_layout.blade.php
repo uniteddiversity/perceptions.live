@@ -14,8 +14,9 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=no">
   <meta name="description" content="Perceptions.live is a place for media communities to collaborate and connect worldwide.">
-  <meta name="keywords" content="flat ui, Admin , Responsive, Landing, Bootstrap, App, Template, Mobile, iOS, Android, apple, creative app">
-  <meta name="author" content="#">
+  <meta name="keywords" content="Community building, community, media, video editing, frontline communities, grassroots, grassroots organizations">
+  <meta name="author" content="PRCPTION Travel, Inc">
+
 
     <!-- Favicons -->
     <link rel="apple-touch-icon" sizes="57x57" href="/favicon/apple-icon-57x57.png">
@@ -63,6 +64,7 @@
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
   <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,600,700" rel="stylesheet">
   <link rel="stylesheet" type="text/css" href="/assets/mashable/css/linearicons.css">
+
   <link rel="stylesheet" type="text/css" href="/assets/mashable/css/simple-line-icons.css">
   <link rel="stylesheet" type="text/css" href="/assets/mashable/css/ionicons.css">
   <link rel="stylesheet" type="text/css" href="/assets/mashable/css/jquery.mCustomScrollbar.css">
@@ -340,9 +342,6 @@
       $(this).select();
     })
   </script>
-
-
-
 
   <script type="text/javascript">
     $(document).ready(function() {
