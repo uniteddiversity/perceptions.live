@@ -278,6 +278,23 @@ header .extras .submitprcp i {
   font-size: 16px;
 }
 
+.btn2 {
+  background: #1c1c8e;
+  background: #4214c7;
+  color: #fff;
+  padding: 0 30px;
+  font-size: 13px;
+  font-weight: 600;
+  height: 50px;
+  line-height: 25px;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  border-radius: 5px;
+  cursor: pointer;
+  box-shadow: 0 30px 60px 0 rgba(32, 35, 68, 0.1);
+}
+
+
 .btn {
   float: left;
 }
