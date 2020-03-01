@@ -22,6 +22,7 @@
                             </a>
                         </div>
 
+
                         @include('partials.nav-bar')
 
 
@@ -37,8 +38,6 @@
                         <div id="map" class="map" style="height: 100%;margin-left:30px;">&nbsp;</div>
                     </div>
 
-
-                    <div class="introTEST" id="step1">Hello Now</div>
 
 
                 </div>

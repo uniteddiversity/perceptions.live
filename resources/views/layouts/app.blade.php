@@ -103,9 +103,7 @@
         // create an array with objects describing each step in the guided tour
         var Steps = [
             {
-                element: '#step1',
-                intro: "Welcome to Perceptions.Live! There's a lot you can do here, so let's give you a quick tour!",
-                position: 'bottom'
+                intro: "Welcome to Perceptions.Live! There's a lot you can do here, so let's give you a quick tour!"
             },
             {
                 element: '#step2',
@@ -116,12 +114,11 @@
                 element: '#step3',
                 intro: "Register a new account if you want to build a community, make a map, or leave comments.",
                 position: 'bottom'
-            },
-        ];
+            }
+            ];
 
         // initialize an introjs instance
         var intro = introJs();
-
 
         // load data
         intro.setOptions({steps: Steps, skipLabel: "Exit", tooltipPosition: "auto", showStepNumbers: "false", exitOnEsc: "true", });
