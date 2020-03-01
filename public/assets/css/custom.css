@@ -6875,6 +6875,13 @@ nav>ul>li>a i.fas {
   justify-content: space-between;
   margin-bottom: 10px;
 }
+
+.custom-popup .controls .btn {
+  display: flex;
+  align-items: center;
+  margin: auto;
+}
+
 .custom-popup .controls button {
   background-color: #0000;
   float: none;

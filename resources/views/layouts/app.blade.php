@@ -118,12 +118,12 @@
             {
                 element: '#step4',
                 intro: "Use the feed buttons to sift through content in different ways.",
-                position: 'bottom'
+                position: 'right'
             }
             {
                 element: '#step5',
                 intro: "Finally, optimize your world exploration by minimizing the announcement screen after reading.",
-                position: 'bottom'
+                position: 'left'
             }
             ];
 
@@ -152,7 +152,7 @@
         // tour button
         document.getElementById("StartTour").onclick = function()
         {
-            intro.start(#step2);
+            intro.start("#step2");
         };
 
 
