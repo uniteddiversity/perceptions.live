@@ -64,8 +64,8 @@
 
         @else
 
-      <span>
-          <button id="step3" class="btn-sign-up accountbtn">
+      <span id="step3" style="position: absolute;">
+          <button class="btn-sign-up accountbtn">
               Sign Up / Log In
           </button>
       </span>

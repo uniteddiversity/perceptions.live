@@ -2,7 +2,7 @@
 
     <div class="logo-wrapper">
         <a href="https://perceptiontravel.tv" target="new"></a><img src="/assets/img/logo_2.png" alt="Visit Perception Travel TV"></a>
-        <div id="custom-popup-close"><div style="font-size: 32px; margin-top: -5px;">-</div></div>
+        <div id="custom-popup-close" style="position: absolute;"><div style="font-size: 32px; margin-top: -5px;">-</div></div>
     </div>
     <div class="controls">
         {{--      <div class="controls-left">

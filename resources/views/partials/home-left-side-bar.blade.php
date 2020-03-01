@@ -51,7 +51,7 @@
     </div>
 
     <div class="cats">
-        <div style="margin-left: auto; margin-right: auto; text-align: center;" id="step4">
+        <div style="position: absolute; margin-left: auto; margin-right: auto; text-align: center;" id="step4">
         <div style="display: block; float: left;"> <span title="What are Greater Community Intentions?" style="background: rebeccapurple; background: -webkit-linear-gradient(left, orange , yellow, green, cyan, blue, violet); background: -o-linear-gradient(right, orange, yellow, green, cyan, blue, violet); background: -moz-linear-gradient(right, orange, yellow, green, cyan, blue, violet); background: linear-gradient(to right, orange , yellow, green, cyan, blue, violet);" class="dot">
                 <a class="tooltip2" style="padding-left: 7px; color: #ffffff; text-shadow: 2px 2px 4px #000;" href="#">? <span class="aboutgci"><em>Greater Community Intentions</em> Use the colored dots to sort through the different styles of community gathering around the world.</span></a>
             </span></div>
