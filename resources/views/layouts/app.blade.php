@@ -124,11 +124,7 @@
 
 
         // load data
-        intro.setOptions({steps: Steps });
-
-        introJs().setOptions(
-            {skipLabel: "Exit", tooltipPosition: "auto", showStepNumbers: "false"}
-        );
+        intro.setOptions({steps: Steps, skipLabel: "Exit", tooltipPosition: "auto", showStepNumbers: "false" });
 
         // start intro.js
         $(document).ready(function() {
