@@ -282,11 +282,11 @@ header .extras .submitprcp i {
   background: #1c1c8e;
   background: #4214c7;
   color: #fff;
-  padding: 0 30px;
-  font-size: 13px;
+  padding: 10px 30px;
+  font-size: 16px;
   font-weight: 600;
   height: 50px;
-  line-height: 25px;
+  line-height: 50px;
   -webkit-border-radius: 5px;
   -moz-border-radius: 5px;
   border-radius: 5px;

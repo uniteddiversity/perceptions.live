@@ -134,7 +134,7 @@
         intro.setOptions(
             {
                 steps: Steps,
-                overlayOpacity: ".7",
+                overlayOpacity: "1",
                 skipLabel: "Exit",
                 tooltipPosition: "auto",
                 showStepNumbers: false,
