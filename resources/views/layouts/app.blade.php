@@ -107,7 +107,7 @@
             },
             {
                 element: '#step2',
-                intro: "Click this button to quickly upload your video--a testimony, a perspective, a word of wisdom to share.",
+                intro: "Click this button to quickly upload your video--a testimony, a perspective, a word of wisdom to share. No registration required!",
                 position: 'top'
             },
             {
@@ -119,11 +119,6 @@
                 element: '#step4',
                 intro: "Use the feed buttons to sift through content in different ways.",
                 position: 'right'
-            },
-            {
-                element: '#custom-popup-close',
-                intro: "Finally, optimize your world exploration by minimizing the announcement screen after reading.",
-                position: 'left'
             }
             ];
 
@@ -141,6 +136,7 @@
                 exitOnEsc: true,
                 hidePrev: true,
                 hideNext: true,
+                keyboardNavigation: true,
                 scrollToElement: false
             }
             );
@@ -181,6 +177,10 @@
             });
         };
 
+        public scrollTop() {
+            window.scrollTo(0, 0);
+        }
+        introJs().onafterchange(this.scrollTop.bind(this));
     </script>
 
 
