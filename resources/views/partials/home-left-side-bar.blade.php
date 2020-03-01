@@ -17,7 +17,7 @@
             } ?>
         </div>
     </div>
-    <div class="header-toolbar__left header-slider">
+    <div class="header-toolbar__left header-slider" style="margin-top:55px;">
         <p class="slider-title">{{$settings['left_feed_name'] or ""}}</p>
         <div class="thumbs-container bottom">
             <div class="thumb_wrapper">
