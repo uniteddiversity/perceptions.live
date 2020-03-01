@@ -152,35 +152,6 @@
             intro.start("#step2");
         };
 
-        fixToolbar = function (el) {
-            if (el == undefined) {
-                return;
-            }
-            var elTop = el.getBoundingClientRect().top - document.body.getBoundingClientRect().top;
-
-            window.addEventListener('scroll', function () {
-                if (document.documentElement.scrollTop > elTop) {
-                    el.style.position = 'fixed';
-                    el.style.top = '0px';
-                    el.style["z-index"] = '3';
-                    if(window.intro != undefined) {
-                        window.intro.refresh();
-                    }
-                } else {
-                    el.style.position = 'static';
-                    el.style.top = 'auto';
-                    el.style["z-index"] = '3';
-                    if(window.intro != undefined) {
-                        window.intro.refresh();
-                    }
-                }
-            });
-        };
-
-        public scrollTop() {
-            window.scrollTo(0, 0);
-        }
-        introJs().onafterchange(this.scrollTop.bind(this));
     </script>
 
 
