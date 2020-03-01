@@ -5645,6 +5645,26 @@ header.s4.dark #slider_feed .near_me_icon {
   letter-spacing: 2px;
 }
 
+
+.introTEST {
+  position: fixed !important;
+  background: #fff;
+  border-radius: 10px;
+  top: auto !important;
+  bottom: 100px;
+  left: 50%;
+  background-size: 80%;
+  width: 90px;
+  height: 90px !important;
+  -webkit-box-shadow: 0px 0px 20px 10px white;
+  -moz-box-shadow: 0px 0px 20px 10px white;
+  box-shadow: 0px 0px 20px 10px white;
+  transform: translateX(-50%);
+  transition: all .3s ease-in-out;
+  cursor: pointer;
+  z-index: 1000;
+}
+
 .participate {
   position: fixed !important;
   background: #0e1281 url(/assets/img/upload.svg) no-repeat center center / 90px;
