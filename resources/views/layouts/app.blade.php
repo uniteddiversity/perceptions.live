@@ -132,9 +132,9 @@
         });
 
         // tour button
-        $(document).getElementById("StartTour").onclick = function()
+        document.getElementById("StartTour").onclick = function()
         {
-            intro().start();
+            intro.start();
         };
 
 
