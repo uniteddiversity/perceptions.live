@@ -23,6 +23,9 @@
 .introjs-fixParent {
   z-index: auto !important;
   opacity: 1.0 !important;
+
+    -moz-transform-style: inherit !important;
+    -webkit-transform-style: inherit !important;
   -webkit-transform: none !important;
      -moz-transform: none !important;
       -ms-transform: none !important;

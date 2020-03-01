@@ -1,7 +1,7 @@
 <header class="new-header">
   <div class="header-content">
     <div class="top-bar">
-      <div class="top-bar__left"><div style="position: relative;">
+      <div class="top-bar__left"><div style="position:relative;">
         <a href="/" class="navbar-logo" onclick="resetSearch()">
           <img src="/assets/findgo/images/live-perceptions-logo.png" id="step1" alt="Perceptions.Live - media communities getting stuff done" >
         </a></div>
