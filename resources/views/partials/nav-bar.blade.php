@@ -65,11 +65,11 @@
         @else
 
       <span>
-          <div style="position: absolute;">
+
           <button id="step3" class="btn-sign-up accountbtn">
               Sign Up / Log In
           </button>
-              </div>
+
       </span>
 
 
@@ -96,7 +96,7 @@
 <div class="responsiveheader">
 <div class="rheader">
 <img src="/assets/findgo/images/ricon.png" alt="" style="display:none;" />
-<span class="menubt">
+<span class="menubt" id="step3">
     <i class="fas fa-bars"></i>
 </span>
 
