@@ -2,7 +2,7 @@
 
     <div class="logo-wrapper">
         <a href="https://perceptiontravel.tv" target="new"></a><img src="/assets/img/logo_2.png" alt="Visit Perception Travel TV"></a>
-        ><div id="#step5"><div id="custom-popup-close" style="font-size: 32px; margin-top: -5px;">-</div></div>
+        <div id="custom-popup-close" style="font-size: 32px; margin-top: -5px;">-</div>
     </div>
     <div class="controls">
         {{--      <div class="controls-left">
@@ -26,8 +26,8 @@
               <p>People crave authentic connection, but the current social networking giants create interactions only in service of their market domination.</p>
               <p style="margin-top:8px;"><strong>The Solution</strong></p>
               <p>Creators can produce content with the support of their audiences, interact with their communities using innovative discussion tools, and work with consumers to plan, fund, and source the continuation of a series.</p>
-              <div style="margin-left: auto; margin-right: auto;"><a href="#" id="StartTour" class="btn2">Launch the Tour!</a></div><br><br>
-               <div style="margin-right: auto; margin-left: auto; margin-top: 16px; max-width: 80%; font-size: 11px;"> <strong> <a href="https://docs.perceptiontravel.tv/" target="new">Check out our documentation to learn more about the project.</a></strong></div>
+              <div style="margin-left: auto; margin-right: auto;"><a href="#" id="StartTour" class="btn2">Launch the Tour!</a></div>
+               <div style="margin-right: auto; margin-left: auto; margin-top: 10px; max-width: 80%; font-size: 12px;"> <strong> <a href="https://docs.perceptiontravel.tv/" target="new">or check out our documentation to learn more about the project.</a></strong></div>
 
           </div>
 

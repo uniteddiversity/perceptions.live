@@ -121,7 +121,7 @@
                 position: 'right'
             },
             {
-                element: '#step5',
+                element: '#custom-popup-close',
                 intro: "Finally, optimize your world exploration by minimizing the announcement screen after reading.",
                 position: 'left'
             }
