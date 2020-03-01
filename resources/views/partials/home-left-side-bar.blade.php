@@ -49,6 +49,7 @@
             </div>
         </div>
     </div>
+    <div id="step4">
     <div class="cats">
         <div style="margin-left: auto; margin-right: auto; text-align: center;">
         <div style="display: block; float: left;"> <span title="What are Greater Community Intentions?" style="background: rebeccapurple; background: -webkit-linear-gradient(left, orange , yellow, green, cyan, blue, violet); background: -o-linear-gradient(right, orange, yellow, green, cyan, blue, violet); background: -moz-linear-gradient(right, orange, yellow, green, cyan, blue, violet); background: linear-gradient(to right, orange , yellow, green, cyan, blue, violet);" class="dot">
@@ -91,7 +92,7 @@
         </div>
     </div>
 
-
+    </div>
 
 </div>
 

@@ -2,7 +2,7 @@
 
     <div class="logo-wrapper">
         <a href="https://perceptiontravel.tv" target="new"></a><img src="/assets/img/logo_2.png" alt="Visit Perception Travel TV"></a>
-        <div id="custom-popup-close">-</div>
+        <div id="custom-popup-close"><div id="#step5" style="font-size: 32px; margin-bottom: -10px;">-</div></div>
     </div>
     <div class="controls">
         {{--      <div class="controls-left">
@@ -17,7 +17,7 @@
         <div class="announce"><i class="fa fa-tag"></i> ANNOUNCEMENTS</div>
           </div>
 
-          <div id="desc" class="desc">
+          <div id="desc" class="desc" style="text-align: center;">
               <h4 class="title">Welcome to Perceptions.Live!</h4>
               <p style="margin-top:8px; line-height: 16px; font-size: 12px; font-style: italic;">
                   Our mission is to make a world full of authentic stories discoverable online, self-curated and free of soft censorship.
@@ -26,7 +26,7 @@
               <p>People crave authentic connection, but the current social networking giants create interactions only in service of their market domination.</p>
               <p style="margin-top:8px;"><strong>The Solution</strong></p>
               <p>Creators can produce content with the support of their audiences, interact with their communities using innovative discussion tools, and work with consumers to plan, fund, and source the continuation of a series.</p>
-              <div style="text-align: center;"><a href="#" id="StartTour" class="page-scroll btn btn-xl" style="margin: 0 auto;">Take The Tour!</a></div><br><br>
+              <div style="margin-left: auto; margin-right: auto;"><a href="#" id="StartTour" class="page-scroll btn btn-xl">Take The Tour!</a></div><br><br>
                <div style="margin-right: auto; margin-left: auto; margin-top: 16px; max-width: 80%; font-size: 11px;"> <strong> <a href="https://docs.perceptiontravel.tv/" target="new">Check out our documentation to learn more about the project.</a></strong></div>
 
           </div>
