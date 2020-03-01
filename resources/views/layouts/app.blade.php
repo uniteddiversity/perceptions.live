@@ -131,6 +131,13 @@
             intro.start();
         });
 
+        // tour button
+        $(document).getElementById("StartTour").onclick = function()
+        {
+            intro().start();
+        };
+
+
     </script>
 
 
