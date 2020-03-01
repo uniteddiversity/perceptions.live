@@ -140,7 +140,8 @@
                 showStepNumbers: false,
                 exitOnEsc: true,
                 hidePrev: true,
-                hideNext: true
+                hideNext: true,
+                scrollToElement: false
             }
             );
 
