@@ -131,6 +131,8 @@
             intro.start();
         });
 
+        $('.introjs-fixParent').css('position', 'absolute');
+
     </script>
 
 
