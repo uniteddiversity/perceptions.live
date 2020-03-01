@@ -16,8 +16,6 @@
                             @include('partials.home-left-side-bar')
                         </div>
 
-                        <div class="center-intro" id="step1">&nbsp;</div>
-
                         <div id="custom-popup-upload-close">
                             <a href="#" class="participate" id="step2">
                                 <i class="fas fa-cloud-upload-alt pointer" style="cursor:pointer"></i>

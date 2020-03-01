@@ -3,7 +3,7 @@
     <div class="top-bar">
       <div class="top-bar__left">
         <a href="/" class="navbar-logo" onclick="resetSearch()">
-          <img src="/assets/findgo/images/live-perceptions-logo.png" alt="">
+          <img src="/assets/findgo/images/live-perceptions-logo.png" alt="" id="step1">
         </a>
         <div class="search-box">
           <div class="search-box-content">
