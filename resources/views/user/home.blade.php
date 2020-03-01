@@ -22,7 +22,7 @@
                             </a>
                         </div>
 
-
+                        <div style="background-color: #FFFFFF; width: 100px;height: 100px; margin: 0 auto;" id="step1"></div>
 
                         @include('partials.nav-bar')
 

@@ -1,10 +1,10 @@
 <header class="new-header">
   <div class="header-content">
     <div class="top-bar">
-      <div class="top-bar__left"><div style="position:relative;">
+      <div class="top-bar__left">
         <a href="/" class="navbar-logo" onclick="resetSearch()">
-          <img src="/assets/findgo/images/live-perceptions-logo.png" id="step1" alt="Perceptions.Live - media communities getting stuff done" >
-        </a></div>
+          <img src="/assets/findgo/images/live-perceptions-logo.png" alt="Perceptions.Live - media communities getting stuff done" >
+        </a>
         <div class="search-box">
           <div class="search-box-content">
             <input type="text" placeholder="Quick Search" name="header_search_text" id="header_search_text" />
