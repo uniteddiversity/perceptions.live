@@ -2,7 +2,7 @@
   <div class="header-content">
     <div class="top-bar">
       <div class="top-bar__left">
-        <a href="/" class="navbar-logo" onclick="resetSearch()">
+        <a href="/" class="navbar-logo" onclick="resetSearch()" id="step1">
           <img src="/assets/findgo/images/live-perceptions-logo.png" alt="Perceptions.Live - media communities getting stuff done" >
         </a>
         <div class="search-box">
@@ -12,7 +12,7 @@
           </div>
         </div>
       </div>
-      <h5 class="header-title" id="step1">"{{$settings['home_centered_title'] or ""}}"</h5>
+      <h5 class="header-title">"{{$settings['home_centered_title'] or ""}}"</h5>
       <div class="top-bar__right">
           <a class="btn-create-community" href="/claim-profile">
               <i class="fas fa-user-circle"></i>
