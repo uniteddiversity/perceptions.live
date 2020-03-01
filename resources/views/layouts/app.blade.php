@@ -127,10 +127,10 @@
                 overlayOpacity: ".7",
                 skipLabel: "Exit",
                 tooltipPosition: "auto",
-                showStepNumbers: "false",
-                exitOnEsc: "true",
-                hidePrev,
-                hideNext
+                showStepNumbers: false,
+                exitOnEsc: true,
+                hidePrev: true,
+                hideNext: true
             }
             );
 
@@ -142,7 +142,7 @@
         // tour button
         document.getElementById("StartTour").onclick = function()
         {
-            intro.start(#step2);
+            intro.start(step2);
         };
 
 
