@@ -40,6 +40,15 @@
 }
 
 .greaterdots {
+  position: absolute;
+  margin-left: auto;
+  margin-right: auto;
+  text-align: center;
+
+}
+
+
+.randomcategories {
   margin-top:25px;
   width:100%;
   float:left;
@@ -7245,8 +7254,12 @@ nav>ul>li>a i.fas {
 
 @media only screen and (max-width: 768px) {
 
+  .randomcategories {
+    margin-top: 65px !important;
+  }
+
   .greaterdots {
-    margin-top: 45px !important;
+    margin-top: 20px !important;
   }
 
   #pcoded .sidebar_toggle {
