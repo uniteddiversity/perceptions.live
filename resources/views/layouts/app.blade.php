@@ -121,7 +121,7 @@
         var intro = introJs();
 
         // load data
-        intro.setOptions({steps: Steps, skipLabel: "Exit", tooltipPosition: "auto", showStepNumbers: "false", exitOnEsc: "true", });
+        intro.setOptions({steps: Steps, skipLabel: "Exit", tooltipPosition: "auto", showStepNumbers: "false", exitOnEsc: "true", hidePrev: "true", hideNext: "true"});
 
         // start intro.js
         $(document).ready(function() {
@@ -131,7 +131,7 @@
         // tour button
         document.getElementById("StartTour").onclick = function()
         {
-            intro.start();
+            intro.start("#step2");
         };
 
 
