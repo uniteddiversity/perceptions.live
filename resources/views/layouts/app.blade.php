@@ -121,7 +121,18 @@
         var intro = introJs();
 
         // load data
-        intro.setOptions({steps: Steps, skipLabel: "Exit", tooltipPosition: "auto", showStepNumbers: "false", exitOnEsc: "true", hidePrev: "true", hideNext: "true"});
+        intro.setOptions(
+            {
+                steps: Steps,
+                overlayOpacity: ".7",
+                skipLabel: "Exit",
+                tooltipPosition: "auto",
+                showStepNumbers: "false",
+                exitOnEsc: "true",
+                hidePrev,
+                hideNext
+            }
+            );
 
         // start intro.js
         $(document).ready(function() {
@@ -131,7 +142,7 @@
         // tour button
         document.getElementById("StartTour").onclick = function()
         {
-            intro.start("#step2");
+            intro.start(#step2);
         };
 
 
