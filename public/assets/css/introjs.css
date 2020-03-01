@@ -368,7 +368,7 @@ tr.introjs-showElement > th {
 }
 
 .introjs-fixedTooltip {
-  position: fixed;
+    position:absolute;
 }
 
 .introjs-hint {
