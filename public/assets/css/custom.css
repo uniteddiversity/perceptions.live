@@ -13,8 +13,8 @@
 }
 
 .dot {
-  height: 20px;
-  width: 20px;
+  height: 28px;
+  width: 28px;
   border-radius: 50%;
   display: inline-block;
   margin: 2px;
@@ -4223,8 +4223,8 @@ nav.two .header-notification .profile-notification li {
   }
 
   .ml-listings .cats .dot {
-    width: 36px;
-    height: 36px;
+    width: 42px;
+    height: 42px;
     margin-right: 5px;
     margin-left: 0px;
   }
