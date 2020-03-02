@@ -5746,9 +5746,10 @@ header.s4.dark #slider_feed .near_me_icon {
     top: auto !important;
   }
   .dot {
-    height: 28px !important;
-    width: 28px !important;
+    height: 28px;
+    width: 28px;
   }
+
 
 }
 
