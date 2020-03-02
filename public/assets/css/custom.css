@@ -1106,6 +1106,7 @@ input[type="text"]:focus::placeholder {
   width: 100%;
   float: left;
   margin-top: 10px;
+  padding-left: 20px;
 }
 
 .cats .dot {
@@ -1116,6 +1117,7 @@ input[type="text"]:focus::placeholder {
   border: 2px solid #000;
 }
 
+.leftsliders { margin-top: 55px; }
 
 /* Map */
 .half-map {
@@ -4220,6 +4222,15 @@ nav.two .header-notification .profile-notification li {
     width: 100%;
   }
 
+  .ml-listings .cats .dot {
+    width: 36px;
+    height: 36px;
+    margin-right: 5px;
+    margin-left: 0px;
+  }
+
+  .leftsliders { margin-top: 100px; !important }
+
   .searchbox .dot {
     margin-right: 15px;
     margin-top: 10px;
@@ -5734,6 +5745,11 @@ header.s4.dark #slider_feed .near_me_icon {
   .participate {
     top: auto !important;
   }
+  .dot {
+    height: 28px;
+    width: 28px;
+  }
+
 }
 
 
@@ -6184,8 +6200,8 @@ nav>ul>li>a i.fas {
   } */
   
   .ml-listings .cats .dot {
-    width: 48px;
-    height: 48px;
+    width: 44px;
+    height: 44px;
     margin-right: 5px;
     margin-left: 0px;
   }
@@ -7390,8 +7406,8 @@ nav>ul>li>a i.fas {
     line-height: 40px;
   }
   .ml-listings .cats .dot {
-    width: 32px !important;
-    height: 32px !important;
+    width: 26px !important;
+    height: 26px !important;
   }
     .tooltip2 {
         color: #13054D;
