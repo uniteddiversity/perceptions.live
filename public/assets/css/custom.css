@@ -4216,7 +4216,7 @@ nav.two .header-notification .profile-notification li {
 
 
   .cats {
-    margin-top: 0;
+    margin-top: 25px;
     width: 100%;
   }
 
@@ -5336,6 +5336,10 @@ header.s4.dark #slider_feed .near_me_icon {
     overflow: hidden;
   }
 
+
+  .scrollWrap {
+    margin-top: -90px
+  }
   .logo_mobile {
     position: fixed;
     left: 50%;

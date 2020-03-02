@@ -137,7 +137,8 @@
                 hidePrev: true,
                 hideNext: true,
                 keyboardNavigation: true,
-                scrollToElement: false
+                scrollToElement: false,
+                exitOnOverlayClick: true
             }
             );
 
