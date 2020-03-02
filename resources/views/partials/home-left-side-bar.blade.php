@@ -192,14 +192,6 @@
 
 
 <style>
-    .dot {
-        height: 22px;
-        width: 22px;
-        border-radius: 50%;
-        display: inline-block;
-        margin: 2px;
-        cursor: pointer;
-    }
 
     .dot-small {
         height: 10px;
