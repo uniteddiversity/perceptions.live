@@ -493,26 +493,41 @@ class ContentService
         return $uploaded_files;
     }
 
-    public function ajaxSearchContentGroup($text, $types = [])
+    public function ajaxSearchContentGroup($key, $types = [], $mode = 'text')
     {
         $content = [];
         $r = [];
-//        if($type == ''){
+        if($mode == 'text'){
             if(in_array('category', $types))
-                $content['category'] = $this->category->where('name', 'like', '%'.$text.'%')->limit(10)->get()->toArray();
+                $content['category'] = $this->category->where('name', 'like', '%'.$key.'%')->limit(10)->get()->toArray();
             if(in_array('group', $types))
-                $content['group'] = $this->group->where('name', 'like', '%'.$text.'%')->limit(10)->get()->toArray();
+                $content['group'] = $this->group->where('name', 'like', '%'.$key.'%')->limit(10)->get()->toArray();
             if(in_array('GCI', $types))
-                $content['gci'] = $this->sortingTag->where('tag', 'like', '%'.$text.'%')->where('tag_for','gci')->limit(10)->get()->toArray();
-//        }
+                $content['gci'] = $this->sortingTag->where('tag', 'like', '%'.$key.'%')->where('tag_for','gci')->limit(10)->get()->toArray();
+        }else{
+            if(in_array('category', $types))
+                $content['category'] = $this->category->where('id', $key)->limit(10)->get()->toArray();
+            if(in_array('group', $types))
+                $content['group'] = $this->group->where('id', $key)->limit(10)->get()->toArray();
+            if(in_array('GCI', $types))
+                $content['gci'] = $this->sortingTag->where('id', $key)->where('tag_for','gci')->limit(10)->get()->toArray();
+        }
 
         foreach($content as $type => $arrays){
             foreach($arrays as $value){
-                $r[] = array(
-                    'id' => $value['id'],
-                    'text' => empty($value['tag'])?$value['name']:$value['tag'],
-                    'type' => $type,
-                );
+                if($mode == 'text'){
+                    $r[] = array(
+                        'id' => $value['id'],
+                        'text' => empty($value['tag'])?$value['name']:$value['tag'],
+                        'type' => $type,
+                    );
+                }else{
+                    $r = array(
+                        'id' => $value['id'],
+                        'text' => empty($value['tag'])?$value['name']:$value['tag'],
+                        'type' => $type,
+                    );
+                }
             }
         }
 
@@ -559,9 +574,19 @@ class ContentService
         return $r;
     }
 
+    public function getHomeSliderFeed($id)
+    {
+        return $this->homeSliderFeed->where('id', $id)->with('setting', 'image')->get()->first();
+    }
+
     public function deleteHomeSlider($id)
     {
         return $this->homeSliderFeed->where('id', $id)->delete();
+    }
+
+    public function deleteContent($id)
+    {
+        return $this->content->where('id', $id)->update(array('status' => 3));
     }
 
     public function getLanguages()

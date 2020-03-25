@@ -35,7 +35,8 @@
                         @foreach ($data as $d)
                         <tr>
                             <td>
-                                <a onclick="return confirm('Are you sure you want to delete?')" href="/user/admin/delete-slider-feed/{{ uid($d['id']) }}" >Delete</a>
+                                <a onclick="return confirm('Are you sure you want to delete?')" href="/user/admin/delete-slider-feed/{{ uid($d['id']) }}" >Delete</a>&nbsp;&nbsp;
+                                <a href="/user/admin/edit-slider-feed/{{ uid($d['id']) }}" >Edit</a>
                             </td>
                             <td>
                                 {{ $d['side'] }}

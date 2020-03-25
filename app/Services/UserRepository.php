@@ -628,11 +628,15 @@ class UserRepository
             });
 
             $user_group = $user_group->select('groups.*', DB::Raw('GROUP_CONCAT(DISTINCT users_in_group.display_name SEPARATOR ", ") as group_admin'),
-                DB::Raw("count(DISTINCT contents.id) as active_video_count"), 'user_groups.users_count');
+                DB::Raw("count(DISTINCT contents.id) as active_video_count"), 'user_groups.users_count', 'attachments.url', 'attachments.name as attachment_name');
 //            $user_group->select('groups.*', DB::Raw("count(contents.id) as active_video_count"));
-
-
         }
+
+        $user_group = $user_group->leftJoin('attachments', function($q){
+            $q->on('attachments.fk_id', '=', 'groups.id');
+            $q->where('attachments.table', '=', 'groups');
+            $q->where('attachments.status', '=', '1');
+        });
 
         foreach($filter as $f){
             $user_group = $user_group->where($f[0], $f[1], $f[2]);
@@ -1324,6 +1328,10 @@ class UserRepository
                 'fk_id' => $setting,
             )
         );
+    }
+
+    public function deleteHomeSliderSettings($feed_id){
+        $this->homeSliderFeedSetting->where('feed_id', $feed_id)->delete();
     }
 }
 

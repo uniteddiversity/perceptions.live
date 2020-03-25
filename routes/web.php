@@ -147,6 +147,7 @@ Route::group(['prefix' => 'user', 'middleware' => ['auth', 'web', 'admin']], fun
     Route::get('/admin/user-add', '\App\Controllers\User\AdminController@userAdd');
     Route::get('/admin/user-edit/{_user_id}', '\App\Controllers\User\AdminController@adminUserEdit');
     Route::get('/admin/video-edit/{_content_id}', '\App\Controllers\User\AdminController@contentEdit');
+    Route::get('/admin/video-delete/{_content_id}', '\App\Controllers\User\AdminController@contentDelete');
     Route::post('/admin/post-user-add', '\App\Controllers\User\AdminController@adminUserAdd');
     Route::get('/admin/content-list', '\App\Controllers\User\AdminController@contentList');
     Route::get('/admin/content-list-open', '\App\Controllers\User\AdminController@contentOpenList');
@@ -185,6 +186,7 @@ Route::group(['prefix' => 'user', 'middleware' => ['auth', 'web', 'admin']], fun
     Route::post('/admin/post-home-slider-feed', '\App\Controllers\User\AdminController@postHomeSliderFeed');
     Route::get('/admin/list-slider-feed', '\App\Controllers\User\AdminController@listHomeSliderFeed');
     Route::get('/admin/delete-slider-feed/{_id}', '\App\Controllers\User\AdminController@deleteHomeSliderFeed');
+    Route::get('/admin/edit-slider-feed/{_id}', '\App\Controllers\User\AdminController@editHomeSliderFeed');
     Route::get('/admin/search-content-type/ajax/type/{_types}', '\App\Controllers\User\AdminController@searchContentTypes');
     Route::get('/admin/list-profile-claim-request', '\App\Controllers\User\AdminController@listClaimProfileRequest');
     Route::get('/admin/view-profile-claim-request/{_id}', '\App\Controllers\User\AdminController@viewClaimProfileRequest');

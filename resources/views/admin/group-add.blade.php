@@ -10,6 +10,7 @@
     $data['default_location'] = isset($group['default_location'])?$group['default_location']:'';
     $data['category_id'] = isset($group['category_id'])?$group['category_id']:'';
     $data['learn_more_url'] = isset($group['learn_more_url'])?$group['learn_more_url']:'';
+    $data['url'] = isset($group['url'])?$group['url']:'';
 
     $group['gci_tags'] = isset($group['gci'])?$group['gci']->toArray():[];
     $data['grater_community_intention_ids'] = isset($group['gci_tags'])?array_column($group['gci_tags'],'group_tag_id'):array();
@@ -133,10 +134,7 @@
                                     <li><a target="_blank" href="/storage/<?php echo $img->url ?>"><?php echo $img->name ?></a> </li>
                                 <?php } ?>
                             </div>
-                            <div class="form-group">
-                                <label for="accept_tos">Group Avatar</label>
-                                <input class="form-control" type="file" name="group_avatar" />
-                            </div>
+
 
                             <?php foreach($data['avatar_images'] as $img){ ?>
                             <li><a target="_blank" href="/storage/<?php echo $img->url ?>"><?php echo $img->name ?></a> </li>
@@ -150,6 +148,30 @@
                             <?php } ?>
 
 
+                            <div class="form-group">
+                                <label for="accept_tos">Group Avatar</label>
+                                <input id="upload" class="form-control" type="file" name="group_avatar" />
+                            </div>
+
+                            <div class="form-group">
+                                {{--
+                                <input type="file" id="upload" value="Choose a file">--}}
+                                <div id="upload-profile" data-url="/storage/<?php echo $data['url'] ?>">
+                                </div>
+                                <input type="hidden" id="imagebase64" name="group_image">
+                                {{--
+                                <a href="#" class="upload-result">Send
+                                </a>--}}
+
+                                <?php //foreach ($data['image'] as $img) { ?>
+                                <input type="hidden" value="/storage/<?php echo $data['url'] ?>" id="preset_image_path" />
+                                <center>
+                                    <a target="_blank" href="/storage/<?php echo $data['url'] ?>">
+                                        <img src="/storage/<?php echo $data['url'] ?>" alt="Avatar" class="avatar profile_img_mini">
+                                    </a>
+                                </center>
+                                <?php //} ?>
+                            </div>
 
                             <div class="form-group">
                                 <?php if(Auth::user()->is('admin')){ ?>

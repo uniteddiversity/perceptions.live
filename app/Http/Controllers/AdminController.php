@@ -385,6 +385,13 @@ class AdminController extends Controller
                 'video_data','status', 'gci_tags', 'uploaded_files','languages'));
     }
 
+    public function contentDelete($id)
+    {
+        $id = UID::translator($id);
+        $this->contentService->deleteContent($id);
+        return Redirect::back()->with('message', "Successfully Deleted!");
+    }
+
     public function comments($fk_id, $table){
         $id = UID::translator($fk_id);
         $comments = $this->userRepository->getComments($id, $table);
@@ -655,9 +662,12 @@ class AdminController extends Controller
             }
         }
 
-        if(isset($r['group_avatar'])){
+        if(isset($r['group_image'])){
             $this->userRepository->deleteAttachmentByFkId(Auth::user()->id, $new_group->id, 'group-avatar', 'groups');
-            $this->userRepository->uploadAttachment($r['group_avatar'],Auth::user()->id, $new_group->id,
+//            $this->userRepository->uploadAttachment($r['group_avatar'],Auth::user()->id, $new_group->id,
+//                'group-avatar', 'groups',1);
+
+            $this->userRepository->uploadAttachmentBase64($r['group_image'],Auth::user()->id, $new_group->id,
                 'group-avatar', 'groups',1);
         }
 
@@ -924,19 +934,20 @@ class AdminController extends Controller
         $user_id = (!isset(Auth::user()->id))? 0 : Auth::user()->id;
         $page = round($start_rec/$page_size);
         $videos = $this->contentService->getContentList($user_id, array('group_id' => $id), $page + 1, $page_size)->toArray();
-
+        $content_status = array('1' => 'Approved', '2' => 'Open', '3' => 'Deleted', '4' => 'User Claimed', '5' => 'System Created');
         $processed = [];
         $i = 0;
         $processed = $videos;
         $processed['data'] = [];
         foreach($videos['data'] as $video){
             $processed['data'][$i]['action'] = '<a href="/user/admin/video-edit/'.uid($video['id']).'" data-toggle="tooltip" title="Edit"  ><i class="ti-pencil"></i></a>';
-            if($video['status'] != '1')
+            $processed['data'][$i]['action'] .= '&nbsp;&nbsp;<a onclick="return confirm(\'Are you sure you want to delete?\')" href="/user/admin/video-delete/'.uid($video['id']).'" data-toggle="tooltip" title="Delete"  ><i class="ti-trash"></i></a>';
+            if($video['status'] == '1')
                 $processed['data'][$i]['action'] .= '<a class="approve-video inactive_link" id="approve_'.uid($video['id']).'" data-value="'.$video['id'].'" onclick="testFunction('.$video['id'].')" >Approve</span>';
 
             $processed['data'][$i]['title'] = $video['title'];
             $processed['data'][$i]['submitted_by'] = isset($video['user']['display_name'])?$video['user']['display_name']:'-';
-            $processed['data'][$i]['status'] = ($video['status'] == '1')?'Approved' : 'Open';
+            $processed['data'][$i]['status'] = (isset($content_status[$video['status']]))?$content_status[$video['status']] : 'Unknown';
             $processed['data'][$i]['url'] = $video['url'];
             $processed['data'][$i]['email'] = isset($video['user']['email'])?$video['user']['email']:'-';
             $processed['data'][$i]['location'] = $video['location'];
@@ -1032,6 +1043,29 @@ class AdminController extends Controller
         return Redirect::back()->with('message', "Successfully Deleted!");
     }
 
+    public function editHomeSliderFeed($id)
+    {
+        $id = UID::translator($id);
+        $data = $this->contentService->getHomeSliderFeed($id);//dd($data);
+        $saved_types = [];
+        $content_id = [];
+        $saved_contents = [];
+
+        foreach($data->setting as $type => $d){
+            $type = $d['type'] == 'gci'? strtoupper($d['type']) : $d['type'];
+            $saved_types[$type] = $type;
+            $content_id[] = $this->contentService->ajaxSearchContentGroup($d['fk_id'], array($type), 'id');
+        }
+
+        foreach($content_id as $items){
+            if(isset($items['id'])){
+                $saved_contents[$items['type'].'-'.$items['id']] = $items['text'];
+            }
+        }
+
+        return view('admin.home-slider-feed-add')->with(compact('data','saved_types','saved_contents'));
+    }
+
     public function listHomeSliderFeed()
     {
         $data = $this->contentService->listHomeSlider();
@@ -1062,31 +1096,39 @@ class AdminController extends Controller
         }
         $r = $request->toArray();
         if(is_array($r['type']) && count($r['type']) > 0 && count($r['fk_id']) > 0 && count($r['fk_id']) > 0){
-            $new = $this->homeSliderFeed->create(
-                array(
-                    'side' => $r['side'],
-                    'title' => $r['title'],
-                    'type' => '',//not use anymore
-                    'fk_id' => '0',//not use anymore
-                )
+            $id = '';
+            $data = array(
+                'side' => $r['side'],
+                'title' => $r['title'],
+                'type' => '',//not use anymore
+                'fk_id' => '0',//not use anymore
+            );
+            if(!empty($r['id'])){
+                $id = UID::translator($r['id']);
+            }
+
+            $new = $this->homeSliderFeed->updateOrCreate(
+                array('id' => $id),
+                $data
             );
 
-//            foreach($r['type'] as $t){
-//                $this->userRepository->saveHomeSliderSettings($new->id, 'type-'.$t, $t);
-//            }
+            if(isset($new->id)){
+                $this->userRepository->deleteHomeSliderSettings($new->id);
+            }
 
-            foreach($r['fk_id'] as $t){
+            foreach($r['fk_id'] as $t){ //echo $new->id; dd($r['fk_id']);
                 $p = explode('-', $t);
                 $this->userRepository->saveHomeSliderSettings($new->id, $p[0], $p[1]);
             }
         }
 
         if(isset($new['id']) && isset($r['icon'])){
+            $this->userRepository->deleteAttachmentByFkId(Auth::user()->id, $new['id'], 'home_slider_feeds', 'home_slider_feeds');
             $this->userRepository->uploadAttachment($r['icon'],Auth::user()->id, $new['id'],
                 'home_slider_feeds ', 'home_slider_feeds',1);
         }
 
-        return Redirect::back()->with('message', "Successfully Added!");
+        return Redirect('/user/admin/list-slider-feed')->with('message', "Successfully Added!");
     }
 
     public function searchContentTypes($type, Request $request)

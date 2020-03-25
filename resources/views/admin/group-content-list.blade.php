@@ -49,50 +49,7 @@
                             </tr>
                             </thead>
                             <tbody>
-                            @foreach ($videos as $video)
-                                <tr>
-                                    <td>
-                                        <a href="/user/admin/video-edit/{{ uid($video->id) }}" data-toggle="tooltip" title="Edit"  ><i class="ti-pencil"></i></a>&nbsp;&nbsp;
-                                        <?php if($video->status != '1'){ ?>
-                                         <span id="approve_<?php echo $video->id ?>" class="approve-video inactive_link" data-value="<?php echo $video->id ?>" onclick="testFunction('<?php echo $video->id ?>')" >Approve</span>
-                                        <?php } ?>
-                                    </td>
-                                    {{--<td>--}}
-                                        {{--{{ $video->id }}--}}
-                                    {{--</td>--}}
-                                    <td>
-                                        {{ $video->title }}
-                                    </td>
-                                    <td>
-                                        <?php
-                                        if(isset($video->user) && isset($video->user)){
-                                            echo '@'.$video->user['display_name'];
-                                        }else{
-                                            echo '-';
-                                        }
-                                        ?>
-                                    </td>
-                                    <td>
-                                        <?php if($video->status == '1'){ echo 'Approved'; }else{ echo 'Open'; } ?>
-                                    </td>
-                                    {{--<td>--}}
-                                        {{--{{ $video->date }}--}}
-                                    {{--</td>--}}
-                                    <td>
-                                        {{ $video->url }}
-                                    </td>
-                                    <td>
-                                        {{ isset($video->user)?$video->user->email:'' }}
-                                    </td>
-                                    <td>
-                                        {{ $video->location }}
-                                    </td>
-                                    <td>
-                                        {{ $video->updated_at }}
-                                    </td>
 
-                                </tr>
-                            @endforeach
 
 
                             </tbody>
