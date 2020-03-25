@@ -17,8 +17,23 @@
         } ?>
     </div>
     <div style="width:100%; float:left; position:relative;">
-        <a href="#" class="btn">Random</a>
-        <div class="searchchat">
+{{--        <a href="#" class="btn">Random</a>--}}
+        <div class="filters" style="float: left; width: 55%; position: relative;">
+            <select id="content_sorting">
+                <option value="">Sort By</option>
+                <option value="comments">Recent comments</option>
+                <option value="videos">Recent videos</option>
+                <option value="random">Random</option>
+            </select>
+        </div>
+{{--		<div id="select-dropdown" class="closed">--}}
+{{--			<div id="select-default" class="select default">All Categories <i class="far fa-arrow-alt-circle-down"></i></div>--}}
+{{--			@foreach($categories as $cat)--}}
+{{--				<div class="select option" data-id="{{$cat->id}}">{{$cat->name}}</div>--}}
+{{--			@endforeach--}}
+{{--		</div>--}}
+
+        <div class="searchchat" style="width: 48%; position: relative;">
 
             <div id="select-dropdown" class="closed">
                 <div id="select-default" class="select default">All Categories <i class="far fa-arrow-alt-circle-down"></i></div>
@@ -28,59 +43,10 @@
             </div>
         </div>
     </div>
-
-    <div class="mlfield s2 searchcat" style="display:none;">
-        <select class="selectbox" id="content_search_cat">
-            <option class="first" value="">All Categories</option>
-            @foreach($categories as $cat)
-            <option value="{{$cat->id}}">{{$cat->name}}</option>
-            @endforeach
-        </select>
-
-    </div>
-    <div class="mlfield searchchat" style="display:none;">
-        <div id="select-dropdown" class="closed">
-            <div id="select-default" class="select default">All Categories <i class="far fa-arrow-alt-circle-down"></i></div>
-            @foreach($categories as $cat)
-            <div class="select option" data-id="{{$cat->id}}">{{$cat->name}}</div>
-            @endforeach
-        </div>
-    </div>
-
-
+	<input type="hidden" id="content_search_cat" value="" />
 
 </div>
 
-
-
-{{--<div class="ml-filterbar">--}}
-{{--<ul>--}}
-{{--<li><a id="finddo-geolocate" class="theme-btn2" href="#"><em class="fa fa-crosshairs"></em> Geolocate</a></li>--}}
-{{--<li><a id="finddo-target" class="theme-btn2" href="#"><i class="fa fa-bullseye"></i> Target </a></i></span></li>--}}
-{{--</ul>--}}
-{{--</div>--}}
-{{--<div class="col-lg-12">--}}
-{{--<div class="mlradius">--}}
-{{--<span>Radius :</span>--}}
-{{--<div class="mlfield s2">--}}
-{{--<select class="selectbox">--}}
-{{--<option>Kilometer</option>--}}
-{{--<option>Miles</option>--}}
-{{--</select>--}}
-{{--</div>--}}
-{{--<div class="rslider">--}}
-{{--<amino-slider class="slider" data-min="0" data-max="100" data-value="10"></amino-slider>--}}
-{{--</div>--}}
-{{--</div>--}}
-{{--</div>--}}
-{{--<div class="ml-filterbar">--}}
-{{--<h3>4 Results Found</h3>--}}
-{{--<ul>--}}
-{{--<li class="singleplaces active"><span><i class="fa fa-exchange"></i></span></li>--}}
-{{--<li class="doubleplaces"><span><i class="fa fa-th-large"></i></span></li>--}}
-{{--<li class="listingplaces"><span><i class="fa fa-th-list"></i></span></li>--}}
-{{--</ul>--}}
-{{--</div>--}}
 <div class="ml-placessec">
     <div class="row" id="video_search_res">
         ...
@@ -88,7 +54,61 @@
 </div>
 
 <script>
+	$('.filters select').each(function() {
+		var $this = $(this),
+				numberOfOptions = $(this).children('option').length;
+
+		$this.addClass('select-hidden');
+		$this.wrap('<div class="select"></div>');
+		$this.after('<div class="select-styled"></div>');
+
+		var $styledSelect = $this.next('div.select-styled');
+		$styledSelect.text($this.children('option').eq(0).text());
+
+		var $list = $('<ul />', {
+			'class': 'select-options'
+		}).insertAfter($styledSelect);
+
+		for (var i = 0; i < numberOfOptions; i++) {
+			$('<li />', {
+				text: $this.children('option').eq(i).text(),
+				rel: $this.children('option').eq(i).val()
+			}).appendTo($list);
+		}
+
+		var $listItems = $list.children('li');
+
+		$styledSelect.click(function(e) {
+			e.stopPropagation();
+			$('div.select-styled.active').not(this).each(function() {
+				$(this).removeClass('active').next('ul.select-options').hide();
+			});
+			$(this).toggleClass('active').next('ul.select-options').toggle();
+		});
+
+		$listItems.click(function(e) {
+			e.stopPropagation();
+			$styledSelect.text($(this).text()).removeClass('active');
+			$this.val($(this).attr('rel'));
+			$list.hide();
+			// console.log($this.val());
+            searchVideo();
+		});
+
+		$(document).click(function() {
+			$styledSelect.removeClass('active');
+			$list.hide();
+		});
+
+	});
+
     $(document).ready(function() {
+
+    	// $("#content_sorting").change(function(){
+    	// 	console.log('sorting...')
+		// 	searchVideo();
+		// })
+
 
 	$('#select-default').bind("click", toggle);
 
@@ -134,7 +154,9 @@
 			var data = $(this).data("id");
 
 			window.dropdown = data;
-			console.log(window.dropdown);
+			console.log('searching cat.. ', window.dropdown);
+            $('#content_search_cat').val(window.dropdown);
+            searchVideo();
 
 			collapse();
 		} else {

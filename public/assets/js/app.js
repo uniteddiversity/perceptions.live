@@ -295,6 +295,7 @@ function searchVideo() {
 
     var $search_text = $('#search_text').val();
     var $search_cat = $('#content_search_cat').val();
+    var $content_sorting = $('#content_sorting').val();
     var $video_id = $('#video_id').val();
     if ($search_text == undefined)
         $search_text = '';
@@ -302,8 +303,10 @@ function searchVideo() {
         $search_cat = '';
     if ($video_id == undefined)
         $video_id = '';
+    if ($content_sorting == undefined)
+        $content_sorting = '';
 
-    $.get("/home/ajax/video-search/?keyword=" + $search_text + "&category_id=" + $search_cat
+    $.get("/home/ajax/video-search/?keyword=" + $search_text + "&category_id=" + $search_cat+ "&sorting=" + $content_sorting
         + "&video_id=" + $video_id, function (data) {
             // console.log(data.json.original);
             if (data.content == '')
