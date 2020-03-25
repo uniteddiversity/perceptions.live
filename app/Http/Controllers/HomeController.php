@@ -385,12 +385,20 @@ class HomeController extends Controller
         $filters_list = $this->contentService->getSharedMapFiltersListByToken($_token);
         $basic_info = $this->contentService->getSharedMapBasicInfo($_token);
         $filters_group_list = $this->contentService->getSharedMapFiltersListByToken($_token, 'groups');
+        $filters_contents_list = $this->contentService->getSharedMapFiltersListByToken($_token, 'contents');
+
         $within_groups = [];
         foreach($filters_group_list as $group){
             $within_groups[] = $group['fk_id'];
         }
+
+        //adding additional contents
+        $other_contents = array_column($filters_contents_list, 'fk_id');//manually selected content ids
+
         $content_ids = $this->contentService->getContentIdsByFilter( array('groups' => $within_groups))->toArray();
         $content_ids = array_column($content_ids,'id');
+        $content_ids = array_merge($content_ids, $other_contents);
+
         $search_elements = '';
         foreach($filters_list as $filter){
             switch($filter['fk_id']){
@@ -462,6 +470,10 @@ class HomeController extends Controller
     {
         $filter = array();
         $filters_group_list = $this->contentService->getSharedMapFiltersListByToken($_token, 'groups');
+        $filters_contents_list = $this->contentService->getSharedMapFiltersListByToken($_token, 'contents');
+        //adding additional contents
+        $other_contents = array_column($filters_contents_list, 'fk_id');//manually selected content ids
+
         $basic_info = $this->contentService->getSharedMapBasicInfo($_token);
         $within_groups = [];
         foreach($filters_group_list as $group){
@@ -474,6 +486,7 @@ class HomeController extends Controller
             $filter['primary_sub_tag'] = '';
         }
 
+        $filter['other_ids'] = $other_contents;
         $filter['groups'] = $within_groups;
         $filter['category_id'] = isset($request['categories'])? $request['categories'] : '';
 //        $filter['primary_sub_tag'] = isset($request['primary_sub_tag'])? $request['primary_sub_tag'] : '';

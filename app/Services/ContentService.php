@@ -322,6 +322,11 @@ class ContentService
                 $this->shearedContentAssociation->create(array('shared_content_id' => $groupShare->id,
                     'table' => 'filter_list', 'fk_id' => $id, 'slug' => '', 'type' => 'group'));
             }
+
+            foreach($data['associations']['associated_contents'] as $id){
+                $this->shearedContentAssociation->create(array('shared_content_id' => $groupShare->id,
+                    'table' => 'contents', 'fk_id' => $id, 'slug' => '', 'type' => 'group'));
+            }
         }
 
         return $groupShare;
@@ -422,6 +427,7 @@ class ContentService
             }
         }
 
+        $ids = array_merge($filter['other_ids'], $ids);
         $filter = array_merge(array('ids' => $ids), $filter);
         //get contents from id
         $locations = $this->getSearchableContents($user_id, $filter, 300);

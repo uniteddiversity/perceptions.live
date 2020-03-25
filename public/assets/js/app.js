@@ -795,6 +795,14 @@ $('.display-name-select-ajax').on('select2:select', function (e) {
     videosForUser(data.id)
 });
 
+$('.select2-ajax-content').select2({
+    ajax: {
+        url: '/home/ajax/video-search-list',
+        dataType: 'json'
+        // Additional AJAX parameters go here; see the end of this chapter for the full code of this example
+    }
+});
+
 // if($('.display-name-select-ajax').val() != ''){
 //     // videosForUser($('.display-name-select-ajax').val())
 // }

@@ -169,7 +169,14 @@ if (isset($edit_data)) {
               </select>
             </div>
 
-
+              <div class="form-group">
+                  <label for="associated_users">Extra videos</label>
+                  <select class="form-control select2-ajax-content" id="other_contents" multiple name="associated_contents[]">
+                      <?php foreach($selected_videos as $int_data){
+                      echo '<option value="'.$int_data['id'].'" selected >'.$int_data['text'].'</option>';
+                      } ?>
+                  </select>
+              </div>
             <?php /*
                             {{--<hr/>--}}
                             {{--<div class="form-group">--}}

@@ -871,6 +871,7 @@ class AdminController extends Controller
         $data['associations']['categories'] = isset($r['categories'])?$r['categories']: array();
         $data['associations']['groups'] = isset($r['groups'])?$r['groups']: array();
         $data['associations']['filter_list'] = isset($r['filter_list'])?$r['filter_list']: array();
+        $data['associations']['associated_contents'] = isset($r['associated_contents'])?$r['associated_contents']: array();
 
         $data['basic'] = array(
             'group' => $r['group'],
