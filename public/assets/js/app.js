@@ -2,6 +2,17 @@ var model_links = [];
 var model_links_current_pos = 0;
 var showed_markers = null;
 
+var model_first_url = window.location.href
+$('#featureModal').on('hidden.bs.modal', function () {
+    console.log('first url ',model_first_url)
+    window.history.pushState("object or string", "Title", model_first_url);
+})
+
+$('#featureModal').on('shown.bs.modal', function (e) {
+    // model_first_url = window.location.href
+    // console.log('first url ',model_first_url)
+})
+
 if (typeof (L) != "undefined") {
     var southWest = L.latLng(-89.98155760646617, -180),
         northEast = L.latLng(89.99346179538875, 180);

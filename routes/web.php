@@ -69,6 +69,10 @@ Route::post('/', function(){
     Route::get('/home/list-display-names/ajax', '\App\Controllers\HomeController@searchDisplayNames');
     Route::get('/home/list-comments/{_id}/{_type}', '\App\Controllers\HomeController@getComments');
 
+
+Route::get('/communities/{_category_name}/discussion/{_date}/{_video_title}/{_video_uid}', '\App\Controllers\HomeController@getVideoInfoPage')->name('video.page.show');//video info
+Route::get('/communities/user/{_user_name}/{_user_id}', '\App\Controllers\HomeController@getUserInfoPage')->name('user.page.show');
+Route::get('/communities/group/{_group_name}/{_group_id}', '\App\Controllers\HomeController@getGroupInfoPage')->name('group.page.show');
 //Route::get('/home/post-comment', '\App\Controllers\User\UserController@postComment');
 //});
 

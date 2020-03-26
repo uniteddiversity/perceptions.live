@@ -14,6 +14,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Validator;
+use System\UID\UID;
 use User\Services\UserRepository;
 
 class HomeController extends Controller
@@ -104,7 +105,19 @@ class HomeController extends Controller
         $user_id = (!isset(Auth::user()->id))? 0 : Auth::user()->id;
         $info = $this->userRepository->getContentsInfo($user_id, $video_id);
         $comments = $this->userRepository->getArrangedComments($video_id, 'contents');
+        $with_layout = true;
+
         return view('partials.video-info-popup')
+            ->with(compact('info', 'comments', 'with_layout'));
+    }
+
+    public function getVideoInfoPage($category, $date, $title, $video_id)
+    {
+        $video_id = UID::translator($video_id);
+        $user_id = (!isset(Auth::user()->id))? 0 : Auth::user()->id;
+        $info = $this->userRepository->getContentsInfo($user_id, $video_id);
+        $comments = $this->userRepository->getArrangedComments($video_id, 'contents');
+        return view('user.video-info-popup')
             ->with(compact('info', 'comments'));
     }
 
@@ -149,6 +162,21 @@ class HomeController extends Controller
             ->with(compact('info','user_associate_videos','gci_tags','user_status', 'contents1', 'contents2', 'user_id'));
     }
 
+    public function getUserInfoPage($user_name, $user_id)
+    {
+        $user_id = UID::translator($user_id);
+        $user_associate_videos = $this->userRepository->getAssociatedVideosForUser($user_id);
+        $info = $this->userRepository->getUser($user_id);
+        $info['user_groups'] = $this->userRepository->getUserGroups($user_id, $contents2, $this->per_page);
+        $info['user_involvement_videos'] = $this->userRepository->getPublicContents($user_id, array('user_involvement' => $user_id), $count, $contents1, $this->per_page);
+        $info['group_involvement_videos'] = $this->userRepository->getPublicContents($user_id, array('group_involvement' => $user_id), $count);
+
+        $user_status = $this->userRepository->getUserStatus($user_id);
+        $gci_tags = $this->userRepository->getGreaterCommunityIntentionTag();
+        return view('user.user-info')
+            ->with(compact('info','user_associate_videos','gci_tags','user_status', 'contents1', 'contents2', 'user_id'));
+    }
+
     public function getUserInfoVideoPartial($user_id)
     {
         $contentInfo = $this->userRepository->getPublicContents($user_id, array('user_involvement' => $user_id), $count, $paginationData, $this->per_page);
@@ -170,6 +198,16 @@ class HomeController extends Controller
         $group_contents = $this->contentService->getSearchableContents(0, array('group_id' => $group_id), 10, $contents1, $this->per_page);
         $group_users = $this->userRepository->getUsers(array('group_id' => $group_id), null,$contents2, $this->per_page);
         return view('partials.group-info-popup')
+            ->with(compact('info','group_contents','group_users', 'contents1', 'contents2', 'group_id'));
+    }
+
+    public function getGroupInfoPage($group_name, $group_id)
+    {
+        $group_id = UID::translator($group_id);
+        $info = $this->userRepository->getGroupInfo($group_id, true, true);
+        $group_contents = $this->contentService->getSearchableContents(0, array('group_id' => $group_id), 10, $contents1, $this->per_page);
+        $group_users = $this->userRepository->getUsers(array('group_id' => $group_id), null,$contents2, $this->per_page);
+        return view('user.group-info')
             ->with(compact('info','group_contents','group_users', 'contents1', 'contents2', 'group_id'));
     }
 
