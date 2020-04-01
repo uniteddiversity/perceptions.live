@@ -27,6 +27,17 @@ $data['group_acting_roles'] = isset($group['actingRoles']) ? array_column(($grou
 <div class="col-lg-12 grid-margin stretch-card">
   <div class="card form-card">
     <div class="card-body">
+      <div class="submitprcption">
+        <h4 class="card-title" style="margin-bottom: 10px; text-align: center;">Group Profile & Settings
+        </h4>
+        <div class="pagedesc" align="center">
+          <p>Present your community to the world.
+          </p>
+          <p>
+            <em>Should you encounter any errors we encourage you to
+              <a href="/contact-us">let us know</a>. Thanks!
+            </em>
+          </p>
       <div class="table-responsive">
         <?php /*
                         @if ($errors->any())
@@ -46,15 +57,20 @@ $data['group_acting_roles'] = isset($group['actingRoles']) ? array_column(($grou
                         @endif
                         */ ?>
         @include('partials.admin-notification-partial')
-        <div class="form-header">
-          <h4 class="card-title m-0">Group Add/Edit</h4>
-        </div>
+       {{-- <div class="form-header">
+          <h4 class="card-title m-0">Create a Group</h4>
+      </div> --}}
+
         <form action="/user/post-group-add" method="post" enctype='multipart/form-data'>
           <input type="hidden" name="_token" id="csrf-token" value="{{ Session::token() }}" />
           <?php if (!empty($data['id'])) { ?>
             <input type="hidden" name="id" id="id" value="{{ uid($data['id']) }}" />
           <?php } ?>
-
+            <div class="formdesctext">
+                <strong>Community Information</strong>
+                Painting a brief picture of what your group offers the network.
+            </div>
+            <div class="form-content">
           <div class="form-group">
             <label for="exampleInputEmail1">Greeting Message to PRCPTION community</label>
             <input type="text" class="form-control" aria-describedby="nameHelp" name="greeting_message_to_community" placeholder="Greeting Message to PRCPTION community" value="{{ old('greeting_message_to_community',$data['greeting_message_to_community']) }}">
@@ -67,34 +83,51 @@ $data['group_acting_roles'] = isset($group['actingRoles']) ? array_column(($grou
             <label for="exampleInputEmail1">Description</label>
             <textarea class="form-control" placeholder="Description" rows="5" name="description">{{ old('description',$data['description']) }}</textarea>
           </div>
-          <div class="form-group">
-            <label for="exampleInputEmail1">Current Mission</label>
-            <textarea class="form-control" placeholder="Current Mission" rows="5" name="current_mission">{{ old('current_mission',$data['current_mission']) }}</textarea>
-          </div>
-          {{--<div class="form-group">--}}
-          {{--<label for="exampleInputEmail1">Experience Knowledge Interests</label>--}}
-          {{--<textarea class="form-control" placeholder="Experience Knowledge Interests" rows="5" name="experience_knowledge_interests">{{ old('experience_knowledge_interests',$data['experience_knowledge_interests']) }}</textarea>--}}
-          {{--</div>--}}
 
-
-          <div class="form-group">
-            <label for="skills">Experience knowledge interests (add if not exist)</label>
-            <select class="form-control multi-select2-with-tags-max5" id="experience_kno" multiple name="experience_kno[]">
-              @foreach($experience_knowledge_tags as $m)
-              <option value="{{base64_encode($m['id'])}}" <?php if (in_array($m['id'], old('experience_kno', $data['experience_kno']))) {
-                                                            echo 'selected';
-                                                          } ?>>{{$m['tag']}}</option>
-              @endforeach
-            </select>
-          </div>
           <div class="form-group">
             <label for="exampleInputEmail1">Default Location</label>
             <input type="text" class="form-control" placeholder="Default Location" aria-describedby="nameHelp" name="default_location" placeholder="First Name" value="{{ old('default_location',$data['default_location']) }}">
           </div>
           <div class="form-group">
-            <label for="exampleInputEmail1">Learn More Url</label>
+            <label for="exampleInputEmail1">URL to Your Project</label>
             <input type="text" class="form-control" placeholder="Learn More Url" aria-describedby="nameHelp" name="learn_more_url" placeholder="Learn More Url" value="{{ old('learn_more_url',$data['learn_more_url']) }}">
           </div>
+            <div class="form-group">
+                <label for="accept_tos">Group Avatar</label>
+                <input class="form-control" type="file" name="group_avatar" />
+            </div>
+
+            <?php foreach ($data['avatar_images'] as $img) { ?>
+            <li><a target="_blank" href="/storage/<?php echo $img->url ?>"><?php echo $img->name ?></a> </li>
+            <?php } ?>
+
+
+            <div class="formdesctext">
+                <strong>Connections and Collaborations
+                </strong>
+                What is your group all about? What does it offer?
+            </div>
+            <div class="form-content">
+            <div class="form-group">
+                <label for="exampleInputEmail1">Current Mission</label>
+                <textarea class="form-control" placeholder="Current Mission" rows="5" name="current_mission">{{ old('current_mission',$data['current_mission']) }}</textarea>
+            </div>
+            {{--<div class="form-group">--}}
+            {{--<label for="exampleInputEmail1">Experience Knowledge Interests</label>--}}
+            {{--<textarea class="form-control" placeholder="Experience Knowledge Interests" rows="5" name="experience_knowledge_interests">{{ old('experience_knowledge_interests',$data['experience_knowledge_interests']) }}</textarea>--}}
+            {{--</div>--}}
+
+
+            <div class="form-group">
+                <label for="skills">Experience knowledge interests (add if not exist)</label>
+                <select class="form-control multi-select2-with-tags-max5" id="experience_kno" multiple name="experience_kno[]">
+                    @foreach($experience_knowledge_tags as $m)
+                        <option value="{{base64_encode($m['id'])}}" <?php if (in_array($m['id'], old('experience_kno', $data['experience_kno']))) {
+                            echo 'selected';
+                        } ?>>{{$m['tag']}}</option>
+                    @endforeach
+                </select>
+            </div>
           <div class="form-group">
             <label for="category_id">Category</label>
             <select class="form-control  multi-select2" id="category_id" name="category_id">
@@ -117,18 +150,16 @@ $data['group_acting_roles'] = isset($group['actingRoles']) ? array_column(($grou
             </select>
 
           </div>
-          <div class="form-group">
-            <label for="exampleSelect1">Contact User</label>
-            <select class="form-control  multi-select2" id="exampleSelect1" name="contact_user_id">
-              <option value="">Select</option>
-              @foreach($user_list as $user)
-              <option value="{{$user->id}}" <?php if (old('contact_user_id', $data['contact_user_id']) == $user->id) {
-                                              echo 'selected';
-                                            } ?>>{{$user->first_name}} ({{$user->email}})</option>
-              @endforeach
-            </select>
-          </div>
-          <div class="form-group">
+
+
+              <div class="formdesctext">
+                <strong>Proof & Verification
+                </strong>
+                When applicable, the documentation you provide here will help the community determine your group's authenticity.
+              </div>
+
+
+              <div class="form-group">
             <label for="accept_tos">Proof of Group Involvement</label>
             <input class="form-control" type="file" name="proof_of_group[]" />
             <input class="form-control" type="file" name="proof_of_group[]" />
@@ -138,20 +169,24 @@ $data['group_acting_roles'] = isset($group['actingRoles']) ? array_column(($grou
               <li><a target="_blank" href="/storage/<?php echo $img->url ?>"><?php echo $img->name ?></a> </li>
             <?php } ?>
           </div>
-          <div class="form-group">
-            <label for="accept_tos">Group Avatar</label>
-            <input class="form-control" type="file" name="group_avatar" />
-          </div>
 
-          <?php foreach ($data['avatar_images'] as $img) { ?>
-            <li><a target="_blank" href="/storage/<?php echo $img->url ?>"><?php echo $img->name ?></a> </li>
-          <?php } ?>
+              <div class="form-group">
+                <label for="exampleSelect1">Contact User</label>
+                <select class="form-control  multi-select2" id="exampleSelect1" name="contact_user_id">
+                  <option value="">Select</option>
+                  @foreach($user_list as $user)
+                    <option value="{{$user->id}}" <?php if (old('contact_user_id', $data['contact_user_id']) == $user->id) {
+                      echo 'selected';
+                    } ?>>{{$user->first_name}} ({{$user->email}})</option>
+                  @endforeach
+                </select>
+              </div>
 
           <?php if (!empty($data['id'])) { ?>
-            <div class="form-group">
-              <label for="accept_tos">Accept Terms of Service?</label>
-              &nbsp;&nbsp;<input type="checkbox" name="accept_tos" id="accept_tos" value="1" checked />
-            </div>
+              <div class="form-group">
+                <label for="accept_tos">By checking this box, I confirm that I have read and I agree to the <a href="https://docs.perceptiontravel.tv/legal-docs/terms-of-service" target="_blank">Terms of Service</a>:  </label>
+                &nbsp;&nbsp;<input style="height:22px; margin-left:5px;" type="checkbox" name="accept_tos" id="accept_tos" value="1"/>
+              </div>
           <?php } ?>
 
 
@@ -182,46 +217,111 @@ $data['group_acting_roles'] = isset($group['actingRoles']) ? array_column(($grou
     </div>
   </div>
 </div>
-<style>
-  
-  form {
-    margin-bottom: 0
-  }
+    <style>
+      .table-responsive .card-title {
+        padding: 20px 40px;
+        margin-bottom: 30px;
+        border-bottom: 2px solid #e6defc;
+      }
+      form {
+        margin-bottom: 0;
+      }
+      .table-responsive .form-group {
+        float: none !important;
+      }
 
-  .form-header {
-    margin-bottom: 20px;
-    padding: 20px 40px;
-    border-bottom: 2px solid #e6defc;
-    font-family: 'Open Sans', sans-serif;
-  }
-  .table-responsive form .form-group {
-    float: none;
-  }
-  .form-footer {
-    padding: 20px 40px;
-    background: #e6defc;
-    text-align: left;
-  }
+      .form-footer {
+        padding: 20px 40px;
+        background: #e6defc;
+        text-align: left;
+      }
 
-  .form-footer button {
-    margin: 0 !important;
-    float: none
-  }
-  
-  .select2-container--default .select2-selection--single {
-    border: none;
-  }
-  .select2-container--default .select2-selection--single .select2-selection__arrow {
-    display: none;
-  }
+      .form-footer button {
+        margin: 0 !important;
+        float: none
+      }
+      .pagedesc {
+        font-size: 20px;
+        font-family: 'Open Sans', sans-serif;
+        line-height: 1em;
+        padding-bottom: 20px;
+      }
 
-  @media only screen and (max-width: 576px) {
-    .main-body .card {
-      width: 100%;
-    }
-  }
-</style>
+      div.formdesctext {
+        font-size: 14.4px !important;;
+        line-height: 20px !important;;
+        font-family: 'Open Sans', sans-serif !important;
+        font-style: normal !important;;
+        text-align: left;
+        color: #797979;
+        margin-bottom: 20px;
+        padding: 20px 40px;
+        border-bottom: 2px solid #e6defc;
+      }
 
+      div.formdesctext strong {
+        margin: auto;
+        font-family: 'Open Sans', sans-serif;
+        font-size: 26px;
+        font-weight: 600;
+        line-height: 1.1;
+        color: #4214c7;
+        display: block;
+        margin-bottom: 10px
+      }
+
+      div.submitprcption {
+        width: 50%;
+        margin: auto;
+      }
+
+      form {
+        margin-bottom: 0
+      }
+
+      .form-content {
+        padding-bottom: 20px;
+        border-bottom: 2px solid #e6defc;
+      }
+
+      .form-content .form-group {
+        float: none;
+      }
+
+      .form-footer {
+        padding: 20px 40px;
+        background: #e6defc;
+        text-align: left;
+      }
+
+      .form-footer button {
+        margin: 0 !important;
+        float: none
+      }
+
+      .form-group .custom_select {
+        height: auto;
+        float: none;
+      }
+
+      .form-group .custom_select::before {
+        bottom: 18px;
+        top: auto
+      }
+
+      a {
+        color: #2B0D82 !important;
+      }
+
+      a:hover {
+        color: #2b0bae !important;
+      }
+      @media only screen and (max-width: 576px) {
+        .main-body .card {
+          width: 100%;
+        }
+      }
+    </style>
 
 @endsection
 <script>

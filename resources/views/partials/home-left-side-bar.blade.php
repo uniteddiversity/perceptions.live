@@ -5,48 +5,126 @@
     </div>
     <!-- test -->
     <div class="logo_mobile">
-
     </div>
     <div class="cats">
-        <div style="display: block; float: left;"> <span title="What are Greater Community Intentions?" style="background: rebeccapurple; background: -webkit-linear-gradient(left, orange , yellow, green, cyan, blue, violet); background: -o-linear-gradient(right, orange, yellow, green, cyan, blue, violet); background: -moz-linear-gradient(right, orange, yellow, green, cyan, blue, violet); background: linear-gradient(to right, orange , yellow, green, cyan, blue, violet);" class="dot">
-                <a class="tooltip2" style="padding-left: 7px; color: #ffffff; text-shadow: 2px 2px 4px #000;" href="#"> ? <span class="aboutgci"><em>Greater Community Intentions</em> Use the colored dots to sort through the different styles of community gathering around the world.</span></a>
-            </span></div>
-        <?php
-        foreach($gci_tags as $tag){
-            echo '<span data-toggle="tooltip" data-animation="true" data-placement="bottom" title="'.$tag['tag'].'" onclick="searchByTag(\''.$tag['id'].'\')" style="background-color: '.$tag['tag_color'].'" class="dot"></span>';
-        } ?>
-    </div>
-    <div style="width:100%; float:left; position:relative;">
-{{--        <a href="#" class="btn">Random</a>--}}
-        <div class="filters" style="float: left; width: 55%; position: relative;">
-            <select id="content_sorting">
-                <option value="">Sort By</option>
-                <option value="comments">Recent comments</option>
-                <option value="videos">Recent videos</option>
-                <option value="random">Random</option>
-            </select>
+        <div class="greaterdots" id="step4">
+            {{--<div style="display: block; float: left;"><span title="What are Greater Community Intentions?" style="background: rebeccapurple; background: -webkit-linear-gradient(left, orange , yellow, green, cyan, blue, violet); background: -o-linear-gradient(right, orange, yellow, green, cyan, blue, violet); background: -moz-linear-gradient(right, orange, yellow, green, cyan, blue, violet); background: linear-gradient(to right, orange , yellow, green, cyan, blue, violet);" class="dot">
+                    <a class="tooltip2" style="padding-left: 7px; color: #ffffff; text-shadow: 2px 2px 4px #000;" href="#">? <span class="aboutgci"><em>Greater Community Intentions</em> Use the colored dots to sort through the different styles of community gathering around the world.</span></a>
+                </span></div>--}}
+            <?php
+            foreach($gci_tags as $tag){
+                echo '<span data-toggle="tooltip" data-animation="true" data-placement="bottom" title="'.$tag['tag'].'" onclick="searchByTag(\''.$tag['id'].'\')" style="background-color: '.$tag['tag_color'].'" class="dot"></span>';
+            } ?>
         </div>
-{{--		<div id="select-dropdown" class="closed">--}}
-{{--			<div id="select-default" class="select default">All Categories <i class="far fa-arrow-alt-circle-down"></i></div>--}}
-{{--			@foreach($categories as $cat)--}}
-{{--				<div class="select option" data-id="{{$cat->id}}">{{$cat->name}}</div>--}}
-{{--			@endforeach--}}
-{{--		</div>--}}
+    </div>
+    <div class="header-toolbar__left header-slider leftsliders">
+        <p class="slider-title">{{$settings['left_feed_name'] or ""}}</p>
+        <div class="thumbs-container bottom">
+            <div class="thumb_wrapper">
+                <div class="left_slide">
+                    <?php $i = 0; ?>
+                    @foreach($top_slider_feed as $feed)
+                        @if($feed['side'] == 'left')
+                            <?php $i++; ?>
+                            <div class="slick-tile">
+                                <div onclick="loadFilters('{{ $feed['type_ids'] }}','')" data-thumb-id="<?php echo $i ?>"
+                                     class="slider-image thumb <?php if($i) echo 'active' ?>"
+                                     style="cursor:pointer !important; background-image: url('{{ Imgfly::imgFly('../public/'.$feed['icon'].'?h=65' ) }}')">
+                                </div>
+                                <div class="slider-text">{{$feed['title']}}</div>
+                            </div>
+                        @endif
+                    @endforeach
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="header-toolbar__right header-slider">
+        <p class="slider-title">{{$settings['right_feed_name'] or ""}}</p>
+        <div class="thumbs-container bottom">
+            <div class="thumb_wrapper">
+                <div class="right_slide">
+                    <?php $i = 0; ?>
+                    @foreach($top_slider_feed as $feed)
+                        @if($feed['side'] == 'right')
+                            <?php $i++; ?>
+                            <div class="slick-tile">
+                                <div class="slider-image" onclick="loadFilters( '{{$feed['type_ids']}}' ,'')" data-thumb-id="<?php echo $i ?>" class="thumb <?php if($i) echo 'active' ?>" style="background-image: url('{{ Imgfly::imgFly('../public/'.$feed['icon'].'?h=65' ) }}')">
+                                </div>
+                                <div class="slider-text">{{$feed['title']}}</div>
+                            </div>
+                        @endif
+                    @endforeach
+                </div>
+            </div>
+        </div>
+    </div>
 
-        <div class="searchchat" style="width: 48%; position: relative;">
+
+    <div class="randomcategories">
+        <a href="#" class="btn">Random</a>
+        <div class="searchchat">
 
             <div id="select-dropdown" class="closed">
                 <div id="select-default" class="select default">All Categories <i class="far fa-arrow-alt-circle-down"></i></div>
                 @foreach($categories as $cat)
-                <div class="select option" data-id="{{$cat->id}}">{{$cat->name}}</div>
+                    <div class="select option" data-id="{{$cat->id}}">{{$cat->name}}</div>
                 @endforeach
             </div>
         </div>
     </div>
-	<input type="hidden" id="content_search_cat" value="" />
+
+    <div class="mlfield s2 searchcat" style="display:none;">
+        <select class="selectbox" id="content_search_cat">
+            <option class="first" value="">All Categories</option>
+            @foreach($categories as $cat)
+                <option value="{{$cat->id}}">{{$cat->name}}</option>
+            @endforeach
+        </select>
+
+    </div>
+    <div class="mlfield searchchat" style="display:none;">
+        <div id="select-dropdown" class="closed">
+            <div id="select-default" class="select default">All Categories <i class="far fa-arrow-alt-circle-down"></i></div>
+            @foreach($categories as $cat)
+                <div class="select option" data-id="{{$cat->id}}">{{$cat->name}}</div>
+            @endforeach
+        </div>
+    </div>
+
 
 </div>
 
+
+
+{{--<div class="ml-filterbar">--}}
+{{--<ul>--}}
+{{--<li><a id="finddo-geolocate" class="theme-btn2" href="#"><em class="fa fa-crosshairs"></em> Geolocate</a></li>--}}
+{{--<li><a id="finddo-target" class="theme-btn2" href="#"><i class="fa fa-bullseye"></i> Target </a></i></span></li>--}}
+{{--</ul>--}}
+{{--</div>--}}
+{{--<div class="col-lg-12">--}}
+{{--<div class="mlradius">--}}
+{{--<span>Radius :</span>--}}
+{{--<div class="mlfield s2">--}}
+{{--<select class="selectbox">--}}
+{{--<option>Kilometer</option>--}}
+{{--<option>Miles</option>--}}
+{{--</select>--}}
+{{--</div>--}}
+{{--<div class="rslider">--}}
+{{--<amino-slider class="slider" data-min="0" data-max="100" data-value="10"></amino-slider>--}}
+{{--</div>--}}
+{{--</div>--}}
+{{--</div>--}}
+{{--<div class="ml-filterbar">--}}
+{{--<h3>4 Results Found</h3>--}}
+{{--<ul>--}}
+{{--<li class="singleplaces active"><span><i class="fa fa-exchange"></i></span></li>--}}
+{{--<li class="doubleplaces"><span><i class="fa fa-th-large"></i></span></li>--}}
+{{--<li class="listingplaces"><span><i class="fa fa-th-list"></i></span></li>--}}
+{{--</ul>--}}
+{{--</div>--}}
 <div class="ml-placessec">
     <div class="row" id="video_search_res">
         ...
@@ -54,131 +132,66 @@
 </div>
 
 <script>
-	$('.filters select').each(function() {
-		var $this = $(this),
-				numberOfOptions = $(this).children('option').length;
-
-		$this.addClass('select-hidden');
-		$this.wrap('<div class="select"></div>');
-		$this.after('<div class="select-styled"></div>');
-
-		var $styledSelect = $this.next('div.select-styled');
-		$styledSelect.text($this.children('option').eq(0).text());
-
-		var $list = $('<ul />', {
-			'class': 'select-options'
-		}).insertAfter($styledSelect);
-
-		for (var i = 0; i < numberOfOptions; i++) {
-			$('<li />', {
-				text: $this.children('option').eq(i).text(),
-				rel: $this.children('option').eq(i).val()
-			}).appendTo($list);
-		}
-
-		var $listItems = $list.children('li');
-
-		$styledSelect.click(function(e) {
-			e.stopPropagation();
-			$('div.select-styled.active').not(this).each(function() {
-				$(this).removeClass('active').next('ul.select-options').hide();
-			});
-			$(this).toggleClass('active').next('ul.select-options').toggle();
-		});
-
-		$listItems.click(function(e) {
-			e.stopPropagation();
-			$styledSelect.text($(this).text()).removeClass('active');
-			$this.val($(this).attr('rel'));
-			$list.hide();
-			// console.log($this.val());
-            searchVideo();
-		});
-
-		$(document).click(function() {
-			$styledSelect.removeClass('active');
-			$list.hide();
-		});
-
-	});
-
     $(document).ready(function() {
 
-    	// $("#content_sorting").change(function(){
-    	// 	console.log('sorting...')
-		// 	searchVideo();
-		// })
+        $('#select-default').bind("click", toggle);
 
+        function toggle() {
+            if ($('#select-dropdown').hasClass('open')) {
+                collapse();
+            } else {
+                expand();
+            }
+        }
+        function expand() {
+            $('#select-dropdown').removeClass('closed').addClass('open');
 
-	$('#select-default').bind("click", toggle);
+            options = $('.searchchat .select');
 
-	function toggle() {
-		if ($('#select-dropdown').hasClass('open')) {
-			collapse();
-		} else {
-			expand();
-		}
-	}
-	function expand() {
-		$('#select-dropdown').removeClass('closed').addClass('open');
+            options.each(function(index) {
+                var layer = options.length - index;
+                $(this).css("top", 50 * index + "px");
+                $(this).css("width", 200);
+                $(this).css("margin-left", 0);
+            });
+        }
+        function collapse() {
+            $('#select-dropdown').removeClass('open').addClass('closed');
 
-		options = $('.searchchat .select');
+            options = $('.searchchat .select');
 
-		options.each(function(index) {
-			var layer = options.length - index;
-			$(this).css("top", 50 * index + "px");
-			$(this).css("width", 200);
-			$(this).css("margin-left", 0);
-		});
-	}
-	function collapse() {
-		$('#select-dropdown').removeClass('open').addClass('closed');
+            options.each(function(index) {
+                var layer = options.length - index;
+                $(this).css("z-index", layer);
+                $(this).css("top", 0 * index + "px");
+                $(this).css("width", 200 - 2 * index);
+                $(this).css("margin-left", 0 + index);
+            });
+        }
 
-		options = $('.searchchat .select');
+        $('.option').bind("click", select);
 
-		options.each(function(index) {
-			var layer = options.length - index;
-			$(this).css("z-index", layer);
-			$(this).css("top", 0 * index + "px");
-			$(this).css("width", 200 - 2 * index);
-			$(this).css("margin-left", 0 + index);
-		});
-	}
+        function select() {
+            if ($('#select-dropdown').hasClass('open')) {
+                var selection = $(this).text();
+                $('#select-default').text(selection);
+                var data = $(this).data("id");
 
-	$('.option').bind("click", select);
+                window.dropdown = data;
+                console.log(window.dropdown);
 
-	function select() {
-		if ($('#select-dropdown').hasClass('open')) {
-			var selection = $(this).text();
-			$('#select-default').text(selection);
-			var data = $(this).data("id");
+                collapse();
+            } else {
+                expand();
+            }
+        }
 
-			window.dropdown = data;
-			console.log('searching cat.. ', window.dropdown);
-            $('#content_search_cat').val(window.dropdown);
-            searchVideo();
-
-			collapse();
-		} else {
-			expand();
-		}
-	}
-
-	collapse();
-});
+        collapse();
+    });
 </script>
 
 
 <style>
-    .dot {
-        height: 22px;
-        width: 22px;
-        border-radius: 50%;
-        display: inline-block;
-        margin: 2px;
-        cursor: pointer;
-    }
-
     .dot-small {
         height: 10px;
         width: 10px;

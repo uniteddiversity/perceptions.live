@@ -10,7 +10,7 @@ $data['experience_knowledge_interests'] = isset($group['experience_knowledge_int
 $data['default_location'] = isset($group['default_location']) ? $group['default_location'] : '';
 $data['category_id'] = isset($group['category_id']) ? $group['category_id'] : '';
 $data['learn_more_url'] = isset($group['learn_more_url']) ? $group['learn_more_url'] : '';
-
+$group['gci_tags'] = isset($group['gci']) ? $group['gci']->toArray() : [];
 $data['contact_user_id'] = isset($group['contact_user_id']) ? $group['contact_user_id'] : '';
 $data['status'] = isset($group['status']) ? $group['status'] : '';
 $data['proof_images'] = isset($group['proofOfGroup']) ? $group['proofOfGroup'] : array();

@@ -78,7 +78,7 @@
         ?>
         <div class="form-group">
           <label for="exampleSelect1">Users in Group</label>
-          <select class="form-control multi-select2" id="exampleSelect1" multiple name="users_in_groups[{{$group_id}}][]">
+          <select style="height: 120px;" class="form-control multi-select2" id="exampleSelect1" multiple name="users_in_groups[{{$group_id}}][]">
             @foreach($user_list as $user)
             <option value="{{$user->id}}" <?php if (isset($user_ids[$user->id])) {
                                             echo 'selected';
@@ -86,7 +86,7 @@
             @endforeach
           </select>
         </div>
-        <button type="submit" class="btn btn-primary btn-submit">Save</button>
+        <button type="submit" style="margin-top: 100px;" class="btn btn-primary btn-submit">Save</button>
 
       </form>
     </div>

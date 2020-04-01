@@ -100,7 +100,7 @@
               <li>
                 <a href="/user/user-profile">
                   <i class="fas fa-user-cog"></i>
-                  Control Panel
+                  My Profile
                 </a>
               </li>
               <li>

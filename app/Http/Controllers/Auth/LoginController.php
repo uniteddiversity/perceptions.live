@@ -28,7 +28,7 @@ class LoginController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = '/home';
+    protected $redirectTo = '/';
 
     /**
      * Create a new controller instance.
@@ -58,9 +58,9 @@ class LoginController extends Controller
                 Auth::logout();
                 return response()->json(array('error' => array('user' => 'Inactive Login!')), 200);
             }
-            return response()->json(array('success' => 'Logged in!'), 200);
+            return response()->json(array('success' => 'Logged In!'), 200);
         } else {
-            return response()->json(array('error' => array('user' => 'Invalid login!')), 200);
+            return response()->json(array('error' => array('user' => 'Invalid Login!')), 200);
         }
     }
 

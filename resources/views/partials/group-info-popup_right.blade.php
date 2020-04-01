@@ -1,32 +1,38 @@
 <div class="custom-popup">
+
     <div class="logo-wrapper">
         <a href="https://perceptiontravel.tv" target="new"></a><img src="/assets/img/logo_2.png" alt="Visit Perception Travel TV"></a>
+        <div id="custom-popup-close"><div style="font-size: 32px; margin-top: -5px;">-</div></div>
     </div>
     <div class="controls">
-        <div class="controls-left">
-            <button class="btn-tip"><i class="fas fa-lightbulb"></i></button>
-            <button class="btn-video"><i class="fas fa-video"></i></button>
-        </div>
-        <div class="controls-right">
-            <button class="btn-color btn-skyblue"></button>
-            <button class="btn-color btn-purple"></button>
-            <button class="btn-color btn-darkorange"></button>
-        </div>
-    </div>
-    <h4 class="title">Welcome to Perceptions.Live!</h4>
-    <div class="desc">
-        <p style="margin-top:8px; line-height: 16px; font-size: 12px; font-style: italic;">
-            Our mission is to make a world full of authentic stories discoverable online, self-curated and free of censorship.
-        </p>
-        <p style="margin-top:8px;"><strong>The Problem</strong></p>
-        <p>People crave authentic connection, but the current social networking giants create interactions only in service of their market domination.</p>
-        <p style="margin-top:8px;"><strong>The Solution</strong></p>
-        <p>Creators can produce content with the support of their audiences, interact with their communities using innovative discussion tools, and work with consumers to plan, fund, and source the continuation of a series.</p>
-        <p style="margin-top:8px; font-style: italic;"><strong>This project is still in beta, so we appreciate your patience and feedback when you encounter any errors. <a href="https://docs.perceptiontravel.tv/" target="new">Check out our documentation to learn more.</a> Thanks!</strong></p>
-    </div>
-</div>
+        {{--      <div class="controls-left">
+                  <button class="btn-tip"><i class="fas fa-lightbulb"></i></button>
+                  <button class="btn-video"><i class="fas fa-video"></i></button>
+              </div>
+              <div class="controls-right">
+                  <button class="btn-color btn-skyblue"></button>
+                  <button class="btn-color btn-purple"></button>
+                  <button class="btn-color btn-darkorange"></button>
+              </div>--}}
+        <div class="announce"><i class="fa fa-tag"></i> ANNOUNCEMENTS</div>
+          </div>
 
-{{--}}<div class="custom-popup">
+          <div id="desc" class="desc" style="text-align: center;">
+              <h4 class="title">Welcome to Perceptions.Live!</h4>
+              <p style="margin-top:8px; line-height: 16px; font-size: 12px; font-style: italic;">
+                  Our mission is to make a world full of authentic stories discoverable online, self-curated and free of soft censorship.
+              </p>
+              <p style="margin-top:8px;"><strong>The Problem</strong></p>
+              <p>People crave authentic connection, but the current social networking giants create interactions only in service of their market domination.</p>
+              <p style="margin-top:8px;"><strong>The Solution</strong></p>
+              <p>Creators can produce content with the support of their audiences, interact with their communities using innovative discussion tools, and work with consumers to plan, fund, and source the continuation of a series.</p>
+              <div style="margin-left: auto; margin-right: auto;"><a href="#" id="StartTour" class="btn2">Launch the Tour!</a></div>
+               <div style="margin-right: auto; margin-left: auto; margin-top: 10px; max-width: 80%; font-size: 12px;"> <strong> <a href="https://docs.perceptiontravel.tv/" target="new">or check out our documentation to learn more about the project.</a></strong></div>
+
+          </div>
+
+</div>
+      {{--}}<div class="custom-popup">
   <div class="logo-wrapper">
     <img src="/assets/img/logo_2.png" alt="">
   </div>

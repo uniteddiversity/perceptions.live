@@ -96,6 +96,20 @@
                             <span class="pcoded-mcaret"></span>
                         </a>
                     </li>
+                    <li class="<?php if(in_array(Request::segment(3), array('content-list-group'))){ echo 'active'; } ?>">
+                        <a class="nav-link" href="/user/group-admin/content-list-group">
+                            <span class="pcoded-micon"><i class="ti-angle-right"></i></span>
+                            <span class="pcoded-mtext" data-i18n="nav.dash.default">My Group's Videos</span>
+                            <span class="pcoded-mcaret"></span>
+                        </a>
+                    </li>
+                    <li class="nav-item <?php if(in_array(Request::segment(3), array('user-to-group-add'))){ echo 'active'; } ?>">
+                        <a class="nav-link" href="/user/group-admin/user-to-group-add/1">
+                            <span class="pcoded-micon"><i class="ti-angle-right"></i></span>
+                            <span class="pcoded-mtext" data-i18n="nav.dash.default">My Group's Users</span>
+                            <span class="pcoded-mcaret"></span>
+                        </a>
+                    </li>
                     <li class="nav-item <?php if(in_array(Request::segment(3), array('user-to-group-add'))){ echo 'active'; } ?>">
                         <a class="nav-link" href="/user/admin/user-to-group-add">
                             <span class="pcoded-micon"><i class="ti-angle-right"></i></span>

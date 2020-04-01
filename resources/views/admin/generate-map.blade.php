@@ -205,14 +205,14 @@ if (isset($edit_data)) {
               <div class="form-group">
                 <label for="public_videos">Copy & Paste This To Your Website:</label>
                 <p style="background-color: #cccccc;color: black;">
-                  <textarea id="shearable_code" class="form-control">&lt;iframe border="0" frameBorder="0" src="<?php echo env('APP_DOMAIN', $_SERVER['SERVER_NAME']) ?>/home/shared/group/<?php echo $data['_token'] ?>?output=embed" width="100%" height="600" &gt; &lt;/iframe&gt;</textarea>
+                  <textarea id="shearable_code" class="form-control">&lt;iframe border="0" frameborder="0" src="<?php echo env('APP_DOMAIN', $_SERVER['SERVER_NAME']) ?>/home/shared/group/<?php echo $data['_token'] ?>?output=embed" width="100%" height="600" &gt; &lt;/iframe&gt;</textarea>
 
                 </p>
               </div>
 
               <div class="form-group">
                 <label for="exampleSelect1">Preview Map</label>
-                <iframe border="0" frameBorder="0" src="<?php echo env('APP_DOMAIN', $_SERVER['SERVER_NAME']) ?>/home/shared/group/<?php echo $data['_token'] ?>?output=embed" width="100%" height="600"></iframe>
+                <iframe border="0" frameborder="0" src="<?php echo env('APP_DOMAIN', $_SERVER['SERVER_NAME']) ?>/home/shared/group/<?php echo $data['_token'] ?>?output=embed" width="100%" height="600"></iframe>
               </div>
             <?php } ?>
           </form>

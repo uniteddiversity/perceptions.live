@@ -172,11 +172,28 @@ function collapseComments($id, obj){
 }
 
 // Toggle Search bar when click search icon in header
-function toggleSearchbar() {
-    $('.new-header .search-box-content').toggleClass('active');
-}
+// function toggleSearchbar() {
+//    $('.new-header .search-box-content').toggleClass('active');
+// }
 
 // Near by me 
 function nearByMe() {
     
 }
+
+$("#custom-popup-close").click(function(){
+    if($(this).html() == "-"){
+        $(this).html("+");
+    }
+    else{
+        $(this).html("-");
+    }
+    $("#desc").slideToggle();
+});
+
+$("#custom-popup-upload-close").click(function(){
+    $("#custom-popup-upload").slideToggle("slow");
+});
+$("#custom-popup-upload-close2").click(function(){
+    $("#custom-popup-upload").slideToggle("slow");
+});
