@@ -62,7 +62,14 @@
 
 
     <div class="randomcategories">
-        <a href="#" class="btn">Random</a>
+        <div class="filters" style="width:40%; float:left; position:relative;">
+            <select id="content_sorting">
+                <option value="">Sort By</option>
+                <option value="comments">Recent comments</option>
+                <option value="videos">Recent videos</option>
+                <option value="random">Random</option>
+            </select>
+        </div>
         <div class="searchchat">
 
             <div id="select-dropdown" class="closed">
@@ -132,6 +139,54 @@
 </div>
 
 <script>
+    $('.filters select').each(function() {
+        var $this = $(this),
+            numberOfOptions = $(this).children('option').length;
+
+        $this.addClass('select-hidden');
+        $this.wrap('<div class="select"></div>');
+        $this.after('<div class="select-styled"></div>');
+
+        var $styledSelect = $this.next('div.select-styled');
+        $styledSelect.text($this.children('option').eq(0).text());
+
+        var $list = $('<ul />', {
+            'class': 'select-options'
+        }).insertAfter($styledSelect);
+
+        for (var i = 0; i < numberOfOptions; i++) {
+            $('<li />', {
+                text: $this.children('option').eq(i).text(),
+                rel: $this.children('option').eq(i).val()
+            }).appendTo($list);
+        }
+
+        var $listItems = $list.children('li');
+
+        $styledSelect.click(function(e) {
+            e.stopPropagation();
+            $('div.select-styled.active').not(this).each(function() {
+                $(this).removeClass('active').next('ul.select-options').hide();
+            });
+            $(this).toggleClass('active').next('ul.select-options').toggle();
+        });
+
+        $listItems.click(function(e) {
+            e.stopPropagation();
+            $styledSelect.text($(this).text()).removeClass('active');
+            $this.val($(this).attr('rel'));
+            $list.hide();
+            // console.log($this.val());
+            searchVideo();
+        });
+
+        $(document).click(function() {
+            $styledSelect.removeClass('active');
+            $list.hide();
+        });
+
+    });
+
     $(document).ready(function() {
 
         $('#select-default').bind("click", toggle);
@@ -179,7 +234,9 @@
 
                 window.dropdown = data;
                 console.log(window.dropdown);
-
+                console.log('searching cat.. ', window.dropdown);
+                $('#content_search_cat').val(window.dropdown);
+                searchVideo();
                 collapse();
             } else {
                 expand();
