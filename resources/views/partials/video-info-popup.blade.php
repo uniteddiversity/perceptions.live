@@ -59,8 +59,9 @@ $video_id = isset($matches[1])?$matches[1]:'';
                         <strong><i class="far fa-user"></i> Co-Creators: </strong>
                         <?php if(isset($info->coCreators)){
 
-                    $datas = array();
+                    $datas = array(); $users_count = 0;
                     foreach($info->coCreators as $user){
+                        $users_count++;
                         $datas[] = '@'.'<span class="inactive_link" onclick="openProfile('.$user->user->id.')">'.$user->user->display_name.'</span>';
                     }
 
@@ -72,7 +73,7 @@ $video_id = isset($matches[1])?$matches[1]:'';
 
                         <span class="pull-right">
 
-                            <?php foreach($info->videoProducer as $key => $users){ if(isset($info->videoProducer[$key])){ echo '<span class="inactive_link" onclick="openProfile(\''. $info->videoProducer[$key]->user->id .'\')">@'.$info->videoProducer[$key]->user->display_name.'</span>'; break; } }?>
+                            <?php foreach($info->videoProducer as $key => $users){ if(isset($info->videoProducer[$key])){ echo ($users_count>0)?',':''.'@<span class="inactive_link" onclick="openProfile(\''. $info->videoProducer[$key]->user->id .'\')">'.$info->videoProducer[$key]->user->display_name.'</span>'; break; } }?>
                         </span>
                     </div>
                 </div>
@@ -190,7 +191,7 @@ $video_id = isset($matches[1])?$matches[1]:'';
         <a href="#" class="btn mobile_show"><i class="fas fa-hand-holding-usd"></i>Donate</a>
     </div>
 </div>
-<input type="hidden" id="page_url" value="<?php echo route('video.page.show', ['_category_name' => isset($info->category)?$info->category:'category', '_date' => date('Y-m-d', strtotime($info['captured_date'])), '_video_title' => $info['title'], '_video_uid' => uid($info->id)]); ?>" />
+<input type="hidden" id="page_url" value="<?php echo route('video.page.show', ['_category_name' => isset($info->category)?str_replace(' ', '-', $info->category->name):'category', '_date' => date('Y-m-d', strtotime($info['captured_date'])), '_video_title' => str_replace(' ', '-', $info['title']), '_video_uid' => uid($info->id)]); ?>" />
 <div style="clear: both;"></div>
 
 <script>

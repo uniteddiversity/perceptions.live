@@ -118,7 +118,7 @@
         <input id="popup_group_id" type="hidden" value="{{$group_id}}" />
     </div>
     <div style="clear: both;"></div>
-    <input type="hidden" id="page_url" value="<?php echo route('group.page.show', ['_group_name' => $info['name'], '_group_id' => uid($info['id'])]); ?>" />
+    <input type="hidden" id="page_url" value="<?php echo route('group.page.show', ['_group_name' => str_replace(' ', '-', $info['name']), '_group_id' => uid($info['id'])]); ?>" />
 </div>
 
 <style>

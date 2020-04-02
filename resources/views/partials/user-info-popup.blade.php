@@ -106,7 +106,7 @@ $display = ($user_status == 'private' || $user_status == 'only-logged')? false :
     <?php } ?>
     <div style="clear: both;"></div>
     <input type="hidden" id="popup_user_id" value="<?php echo $user_id ?>" />
-    <input type="hidden" id="page_url" value="<?php echo route('group.page.show', ['_user_name' => $info['first_name'].' '.$info['last_name'], '_user_id' => uid($user_id)]); ?>" />
+    <input type="hidden" id="page_url" value="<?php echo route('group.page.show', ['_user_name' => str_replace(' ', '-', $info['first_name'].' '.$info['last_name']), '_user_id' => uid($user_id)]); ?>" />
 </div>
 
 <?php /*
