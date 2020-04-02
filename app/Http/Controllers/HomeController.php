@@ -121,6 +121,72 @@ class HomeController extends Controller
             ->with(compact('info', 'comments'));
     }
 
+    public function infoVideoPopupByUrl($category, $date, $title, $video_id){
+        $video_profile_id = UID::translator($video_id);
+
+        $user_id = (!isset(Auth::user()->id))? 0 : Auth::user()->id;
+        $filter = array();
+        $data = $this->siteSetting->getAll()->toArray();
+        $settings = [];
+        foreach($data as $d){
+            $settings[$d['key']] = $d['value'];
+        }
+        $top_slider_feed = $this->contentService->listHomeSlider();
+
+
+        $uploaded_list = $this->userRepository->getPublicContents($user_id, $filter);
+        $user_acting_role = $this->userRepository->getUserActingRoles();
+        $gci_tags = $this->userRepository->getGreaterCommunityIntentionTag();
+        $sorting_tags = $this->userRepository->getSortingTags($user_id, true);
+        $categories = $this->category->get();
+        return view('user.home')
+            ->with(compact('uploaded_list','user_acting_role','categories','gci_tags','sorting_tags', 'top_slider_feed','settings', 'video_profile_id'));
+    }
+
+    public function infoGroupPopupByUrl($group_name, $group_id){
+        $group_profile_id = UID::translator($group_id);
+
+        $user_id = (!isset(Auth::user()->id))? 0 : Auth::user()->id;
+        $filter = array();
+        $data = $this->siteSetting->getAll()->toArray();
+        $settings = [];
+        foreach($data as $d){
+            $settings[$d['key']] = $d['value'];
+        }
+        $top_slider_feed = $this->contentService->listHomeSlider();
+
+
+        $uploaded_list = $this->userRepository->getPublicContents($user_id, $filter);
+        $user_acting_role = $this->userRepository->getUserActingRoles();
+        $gci_tags = $this->userRepository->getGreaterCommunityIntentionTag();
+        $sorting_tags = $this->userRepository->getSortingTags($user_id, true);
+        $categories = $this->category->get();
+        return view('user.home')
+            ->with(compact('uploaded_list','user_acting_role','categories','gci_tags','sorting_tags', 'top_slider_feed','settings', 'group_profile_id'));
+    }
+
+    public function infoUserPopupByUrl($user_name, $user_id){
+        $user_profile_id = UID::translator($user_id);
+
+        $user_id = (!isset(Auth::user()->id))? 0 : Auth::user()->id;
+        $filter = array();
+        $data = $this->siteSetting->getAll()->toArray();
+        $settings = [];
+        foreach($data as $d){
+            $settings[$d['key']] = $d['value'];
+        }
+        $top_slider_feed = $this->contentService->listHomeSlider();
+
+
+        $uploaded_list = $this->userRepository->getPublicContents($user_id, $filter);
+        $user_acting_role = $this->userRepository->getUserActingRoles();
+        $gci_tags = $this->userRepository->getGreaterCommunityIntentionTag();
+        $sorting_tags = $this->userRepository->getSortingTags($user_id, true);
+        $categories = $this->category->get();
+        return view('user.home')
+            ->with(compact('uploaded_list','user_acting_role','categories','gci_tags','sorting_tags', 'top_slider_feed','settings', '$user_profile_id'));
+    }
+
     public function getVideoInfoMini($video_id)
     {
         $user_id = (!isset(Auth::user()->id))? 0 : Auth::user()->id;

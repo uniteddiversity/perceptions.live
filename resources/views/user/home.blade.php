@@ -63,6 +63,27 @@
 @include('partials.group-info-popup_right');
 @include('partials.home-upload-popup');
 
+@if(isset($video_profile_id) && $video_profile_id)
+<script>
+    $(document).ready(function(){
+        openVideo('{{$video_profile_id}}')
+    })
+</script>
+@endif
+@if(isset($user_profile_id) && $user_profile_id)
+    <script>
+        $(document).ready(function(){
+            openProfile('{{$user_profile_id}}')
+        })
+    </script>
+@endif
+@if(isset($group_profile_id) && $group_profile_id)
+    <script>
+        $(document).ready(function(){
+            openGroupProfile('{{$group_profile_id}}')
+        })
+    </script>
+@endif
 <script>
     $(window).load(function() {
         $('body').addClass('mapPageBody');
