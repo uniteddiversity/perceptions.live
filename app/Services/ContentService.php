@@ -108,7 +108,6 @@ class ContentService
     public function getContentList($user_id, $filter = array(), $page = null, $page_size = 20, $only_my = false)
     {
         $user_info = $this->getUser($user_id);
-
         $videos = $this->content->with('user');
         if($user_info['role_id'] <> '1' && $user_info['role_id'] <= 110){// not for admin, but for group admins and moderators
             //group admin get all the content related to all group members(who is the uploader) or group
@@ -142,6 +141,10 @@ class ContentService
 
         if(isset($filter['group_id'])){
             $videos = $videos->where('user_groups.group_id',$filter['group_id']);
+        }
+
+        if(isset($filter['status'])){
+            $videos = $videos->whereIn('contents.status',$filter['status']);
         }
 
         $videos = $videos->select('contents.*');
