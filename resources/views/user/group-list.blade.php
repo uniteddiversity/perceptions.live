@@ -40,6 +40,10 @@
             </thead>
             <tbody>
               @foreach ($groups as $group)
+                <?php
+                if(empty($group->id)){
+                  continue;
+                }?>
               <tr>
                 <td style="width: 20px">
                   <a class="custom-badge badge-{{ (isset($group->groupStatus))? $group->groupStatus->name:'' }}" data-toggle="tooltip" title="{{ (isset($group->groupStatus))? $group->groupStatus->name:'' }}"></a>
