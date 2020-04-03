@@ -541,7 +541,7 @@ class UserRepository
                 $contents = $contents->orderBy(DB::raw('RAND()'))->limit(1000);
                 break;
             default:
-                $contents = $contents->orderBy('contents.captured_date', 'DESC')->limit(1000);
+                $contents = $contents->orderBy('contents.created_at', 'DESC')->limit(1000);
                 break;
         }
 

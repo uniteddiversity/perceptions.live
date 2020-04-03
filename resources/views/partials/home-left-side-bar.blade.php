@@ -66,7 +66,7 @@
             <select id="content_sorting">
                 <option value="">Sort By</option>
                 <option value="comments">Recent comments</option>
-                <option value="videos">Recent videos</option>
+                <option value="videos">Recently captured</option>
                 <option value="random">Random</option>
             </select>
         </div>
@@ -74,6 +74,7 @@
 
             <div id="select-dropdown" class="closed">
                 <div id="select-default" class="select default">All Categories <i class="far fa-arrow-alt-circle-down"></i></div>
+                <div class="select option" data-id="">All Categories</div>
                 @foreach($categories as $cat)
                     <div class="select option" data-id="{{$cat->id}}">{{$cat->name}}</div>
                 @endforeach
