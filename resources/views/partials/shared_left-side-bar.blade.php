@@ -1,4 +1,4 @@
-<div style="padding-right: 0px;overflow: scroll;height: 600px; width:90%;">
+<div style="padding-right: 0px;overflow-y: scroll;overflow-x: hidden;font-family: ralewayregular, sans-serif;height: 600px; width:90%;">
     <div class="info-box-left">
         <h3 class="main_map_title" >{{$basic_info['group']}}</h3>
         <div class="ml-placessec">

@@ -62,7 +62,7 @@
 
 
     <div class="randomcategories">
-        <div class="filters" style="width:40%; float:left; position:relative;">
+        <div class="filters" style="width:100%;height: 50px;">
             <select id="content_sorting">
                 <option value="">Sort By</option>
                 <option value="comments">Recent comments</option>
@@ -70,10 +70,10 @@
                 <option value="random">Random</option>
             </select>
         </div>
-        <div class="searchchat">
+        <div class="searchchat" style="width:100%;height: 50px;">
 
             <div id="select-dropdown" class="closed">
-                <div id="select-default" class="select default">All Categories <i class="far fa-arrow-alt-circle-down"></i></div>
+                <div style="width: 100%;" id="select-default" class="select default">All Categories <i class="far fa-arrow-alt-circle-down"></i></div>
                 <div class="select option" data-id="">All Categories</div>
                 @foreach($categories as $cat)
                     <div class="select option" data-id="{{$cat->id}}">{{$cat->name}}</div>
@@ -207,7 +207,7 @@
             options.each(function(index) {
                 var layer = options.length - index;
                 $(this).css("top", 50 * index + "px");
-                $(this).css("width", 200);
+                // $(this).css("width", 200);
                 $(this).css("margin-left", 0);
             });
         }
@@ -220,7 +220,7 @@
                 var layer = options.length - index;
                 $(this).css("z-index", layer);
                 $(this).css("top", 0 * index + "px");
-                $(this).css("width", 200 - 2 * index);
+                // $(this).css("width", 200 - 2 * index);
                 $(this).css("margin-left", 0 + index);
             });
         }

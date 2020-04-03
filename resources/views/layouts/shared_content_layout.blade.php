@@ -102,7 +102,15 @@
 
         /* Adding margins on zoom controls */
         .leaflet-top {
-            top: 80%;
+            top: 88%;
+        }
+
+        .leaflet-right {
+            right: 11px !important;
+        }
+
+        .leaflet-control-attribution.leaflet-control {
+            margin-bottom: 0px; !important
         }
 
         /* Adding Target icon */
