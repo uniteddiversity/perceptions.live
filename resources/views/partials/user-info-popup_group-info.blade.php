@@ -18,8 +18,9 @@
 
 <?php
 if(isset($groupsInfo)){
-    foreach($groupsInfo as $group){  //dd($group);
-        if(empty($group->id)){
+    foreach($groupsInfo as $group){
+//continue;
+        if(empty($group['group_id'])){
             continue;
         }
         ?>
