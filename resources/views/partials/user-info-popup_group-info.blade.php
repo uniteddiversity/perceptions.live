@@ -18,7 +18,11 @@
 
 <?php
 if(isset($groupsInfo)){
-    foreach($groupsInfo as $group){  //dd($group); ?>
+    foreach($groupsInfo as $group){  //dd($group);
+        if(empty($group->id)){
+            continue;
+        }
+        ?>
         <div style="width: 100%; text-align: center;">
             <?php if(!isset($group['group_avatar']) || empty($group['group_avatar'])){?>
                 <img class="active_link" onclick="openGroupProfile('<?php echo $group['group_id'] ?>')" style="margin-left: 10%;" height="150" width="150" src="/assets/img/face1.png">
