@@ -64,7 +64,7 @@
     <div class="randomcategories">
         <div class="filters custom_dropdown_1" style="width:100%;height: 55px;">
             <select id="content_sorting">
-                <option value="">Recent added</option>
+                <option value="">Recently added</option>
                 <option value="comments">Recent comments</option>
                 <option value="videos">Recently captured</option>
                 <option value="random">Random</option>
