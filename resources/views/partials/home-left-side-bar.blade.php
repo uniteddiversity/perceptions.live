@@ -62,7 +62,7 @@
 
 
     <div class="randomcategories">
-        <div class="filters" style="width:100%;height: 50px;">
+        <div class="filters custom_dropdown_1" style="width:100%;height: 55px;">
             <select id="content_sorting">
                 <option value="">Sort By</option>
                 <option value="comments">Recent comments</option>
@@ -70,7 +70,7 @@
                 <option value="random">Random</option>
             </select>
         </div>
-        <div class="searchchat" style="width:100%;height: 50px;">
+        <div class="searchchat" style="width:100%;height: 55px;">
 
             <div id="select-dropdown" class="closed">
                 <div style="width: 100%;" id="select-default" class="select default">All Categories <i class="far fa-arrow-alt-circle-down"></i></div>

@@ -7480,3 +7480,17 @@ nav>ul>li>a i.fas {
 .s_margin-left{
   margin-left: 4px;
 }
+
+.custom_dropdown_1 .select .select-styled{
+  background-color: white;
+}
+
+.custom_dropdown_1 .select{
+  background-color: white;
+  border-color: black;
+  border-bottom: 2px black solid;
+}
+
+.custom_dropdown_1 .select-styled{
+  height: 45px;
+}
