@@ -1,8 +1,12 @@
+@extends('layouts.app')
+@section('content')
+
 <?php
 $display = ($user_status == 'private' || $user_status == 'only-logged')? false : true;
 ?>
+<div class="modal-dialog big" style="margin-top: 0px !important;">
 
-<div class="modal-inner two">
+    <div class="modal-inner two">
     <button class="close" type="button" data-dismiss="modal" aria-hidden="true">&times;</button>
     <button class="model-back" onclick="modalBack()" aria-hidden="true">&lt;</button>
     <div class="modal-body">
@@ -106,9 +110,9 @@ $display = ($user_status == 'private' || $user_status == 'only-logged')? false :
     <?php } ?>
     <div style="clear: both;"></div>
     <input type="hidden" id="popup_user_id" value="<?php echo $user_id ?>" />
-    <input type="hidden" id="page_url" value="<?php echo route('group.page.show', ['_user_name' => str_replace(' ', '-', $info['first_name'].' '.$info['last_name']), '_user_id' => uid($user_id)]); ?>" />
 </div>
 
+</div>
 <?php /*
 <div class="row" style="display: block;">
     <div class="col-lg-12 grid-margin stretch-card">
@@ -211,12 +215,8 @@ $display = ($user_status == 'private' || $user_status == 'only-logged')? false :
 </style>
 */ ?>
 <style>
-#featureModal .modal-header {
-    display: none;
-}
+/*#featureModal .modal-header {*/
+/*    display: none;*/
+/*}*/
 </style>
-<script>
-    $(document).ready(function(){
-        window.history.pushState("object or string", "Title", $('#page_url').val());
-    })
-</script>
+@endsection

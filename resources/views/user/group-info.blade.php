@@ -1,4 +1,9 @@
+@extends('layouts.app')
+@section('content')
+
 <?php //dd($group_users) ?>
+<div class="modal-dialog big" style="margin-top: 0px !important;">
+
 <div class="modal-inner two">
     <button class="close" type="button" data-dismiss="modal" aria-hidden="true">&times;</button>
     <button class="model-back" onclick="modalBack()" aria-hidden="true">&lt;</button>
@@ -118,16 +123,11 @@
         <input id="popup_group_id" type="hidden" value="{{$group_id}}" />
     </div>
     <div style="clear: both;"></div>
-    <input type="hidden" id="page_url" value="<?php echo route('group.page.show', ['_group_name' => str_replace(' ', '-', $info['name']), '_group_id' => uid($info['id'])]); ?>" />
 </div>
-
+</div>
 <style>
     #featureModal .modal-header {
         display: none;
     }
 </style>
-<script>
-    $(document).ready(function(){
-        window.history.pushState("object or string", "Title", $('#page_url').val());
-    })
-</script>
+@endsection

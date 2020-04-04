@@ -71,6 +71,14 @@ Route::post('/', function(){
     Route::get('/home/list-display-names/ajax', '\App\Controllers\HomeController@searchDisplayNames');
     Route::get('/home/list-comments/{_id}/{_type}', '\App\Controllers\HomeController@getComments');
 
+
+//Route::get('/communities/{_category_name}/discussion/{_date}/{_video_title}/{_video_uid}', '\App\Controllers\HomeController@getVideoInfoPage')->name('video.page.show');//video info
+//Route::get('/communities/user/{_user_name}/{_user_id}', '\App\Controllers\HomeController@getUserInfoPage')->name('user.page.show');
+//Route::get('/communities/group/{_group_name}/{_group_id}', '\App\Controllers\HomeController@getGroupInfoPage')->name('group.page.show');
+
+Route::get('/communities/{_category_name}/discussion/{_date}/{_video_title}/{_video_uid}', '\App\Controllers\HomeController@infoVideoPopupByUrl')->name('video.page.show');//video info
+Route::get('/communities/user/{_user_name}/{_user_id}', '\App\Controllers\HomeController@infoUserPopupByUrl')->name('user.page.show');
+Route::get('/communities/group/{_group_name}/{_group_id}', '\App\Controllers\HomeController@infoGroupPopupByUrl')->name('group.page.show');
 //Route::get('/home/post-comment', '\App\Controllers\User\UserController@postComment');
 //});
 
@@ -149,6 +157,7 @@ Route::group(['prefix' => 'user', 'middleware' => ['auth', 'web', 'admin']], fun
     Route::get('/admin/user-add', '\App\Controllers\User\AdminController@userAdd');
     Route::get('/admin/user-edit/{_user_id}', '\App\Controllers\User\AdminController@adminUserEdit');
     Route::get('/admin/video-edit/{_content_id}', '\App\Controllers\User\AdminController@contentEdit');
+    Route::get('/admin/video-delete/{_content_id}', '\App\Controllers\User\AdminController@contentDelete');
     Route::post('/admin/post-user-add', '\App\Controllers\User\AdminController@adminUserAdd');
     Route::get('/admin/content-list', '\App\Controllers\User\AdminController@contentList');
     Route::get('/admin/content-list-open', '\App\Controllers\User\AdminController@contentOpenList');
@@ -187,6 +196,7 @@ Route::group(['prefix' => 'user', 'middleware' => ['auth', 'web', 'admin']], fun
     Route::post('/admin/post-home-slider-feed', '\App\Controllers\User\AdminController@postHomeSliderFeed');
     Route::get('/admin/list-slider-feed', '\App\Controllers\User\AdminController@listHomeSliderFeed');
     Route::get('/admin/delete-slider-feed/{_id}', '\App\Controllers\User\AdminController@deleteHomeSliderFeed');
+    Route::get('/admin/edit-slider-feed/{_id}', '\App\Controllers\User\AdminController@editHomeSliderFeed');
     Route::get('/admin/search-content-type/ajax/type/{_types}', '\App\Controllers\User\AdminController@searchContentTypes');
     Route::get('/admin/list-profile-claim-request', '\App\Controllers\User\AdminController@listClaimProfileRequest');
     Route::get('/admin/view-profile-claim-request/{_id}', '\App\Controllers\User\AdminController@viewClaimProfileRequest');
@@ -228,6 +238,8 @@ Route::group(['prefix' => 'user', 'middleware' => ['auth', 'web', 'groupadmin']]
     Route::get('/group-admin/map-generate-list', '\App\Controllers\User\AdminController@mapGeneratedList');
     Route::post('/group-admin/post-map-generate', '\App\Controllers\User\AdminController@postMapGenerate');
     Route::get('/group-admin/map-generate/{_id}', '\App\Controllers\User\AdminController@editMapGenerate')->name('map-sharing.edit');
+
+    Route::get('/group-admin/video-delete/{_content_id}', '\App\Controllers\User\AdminController@contentDelete');
 });
 
 Route::group(['prefix' => 'user', 'middleware' => ['auth', 'web', 'moderator']], function () {

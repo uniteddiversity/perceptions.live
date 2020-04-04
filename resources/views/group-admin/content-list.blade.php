@@ -68,7 +68,9 @@
                 <td>
                   {{--<a href="/user/group-admin/video-edit/{{ uid($video->id) }}" >Edit</a>--}}
                   <a class="btn btn-icon-tooltip" href="/contact-us"><i class="fas fa-edit"></i></a>
+                  <a class="btn btn-icon-tooltip s_margin-left" onclick="return confirm('Are you sure you want to delete?')" href="/user/group-admin/video-delete/{{ uid($video['id']) }}"><i class="fas fa-trash"></i></a>
                 </td>
+
               </tr>
               @endforeach
             </tbody>

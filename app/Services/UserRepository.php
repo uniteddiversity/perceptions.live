@@ -435,6 +435,9 @@ class UserRepository
                 'user_content_associations.user_association_tag_slug', 'user_sorting_tags.slug')
             ->leftJoin('groups',
                 'groups.id', 'user_groups.group_id')
+            ->leftJoin(DB::raw('(SELECT max(id) as id, fk_id from comments group by fk_id)
+               commentss'),
+                'contents.id', 'commentss.fk_id')
 
             ->where('contents.status', '=', 1);
 
@@ -509,7 +512,6 @@ class UserRepository
                 $ids = explode('-', $v);
                 $search_by_groups[$ids[0]] = $ids[1];
             }
-//            dd($search_by_groups);
             if(isset($search_by_groups['category'])){
                 $contents = $contents->whereIn('contents.category_id', explode(',',$search_by_groups['category']));
             }
@@ -524,7 +526,24 @@ class UserRepository
         $contents = $contents->select('contents.id', DB::Raw("SUBSTRING(contents.brief_description, 1, 128) as trim_description"), 'contents.lat', 'contents.long', 'contents.title', 'contents.url',
                 'users.display_name','users.id as user_id','contents.created_at','contents.captured_date','contents.location','contents.user_id','contents.primary_subject_tag',DB::Raw("GROUP_CONCAT(DISTINCT (user_sorting_tags.name) SEPARATOR ', ') as user_association"), DB::Raw("GROUP_CONCAT(DISTINCT (groups.name) SEPARATOR ', ') as group_names"), DB::Raw("GROUP_CONCAT(DISTINCT concat(groups.name,'-',groups.id) SEPARATOR ',') as group_names_ids"),
                 DB::Raw("GROUP_CONCAT(DISTINCT (concat(sorting_tags.tag_color,'-',sorting_tags.id,'-',sorting_tags.tag)) SEPARATOR ', ') as tag_colors") )
-            ->groupBy('contents.id')->orderBy('contents.captured_date', 'DESC')->limit(1000);
+            ->groupBy('contents.id');
+
+        $filter['sorting'] = !isset($filter['sorting'])? '' : $filter['sorting'];
+        $sort = array();
+        switch($filter['sorting']){
+            case 'comments':
+                $contents = $contents->orderBy('commentss.id', 'DESC')->limit(1000);
+                break;
+            case 'videos':
+                $contents = $contents->orderBy('contents.captured_date', 'DESC')->limit(1000);
+                break;
+            case 'random':
+                $contents = $contents->orderBy(DB::raw('RAND()'))->limit(1000);
+                break;
+            default:
+                $contents = $contents->orderBy('contents.created_at', 'DESC')->limit(1000);
+                break;
+        }
 
         if($per_page != null){
             $contents = $contents->paginate($per_page);
@@ -628,11 +647,15 @@ class UserRepository
             });
 
             $user_group = $user_group->select('groups.*', DB::Raw('GROUP_CONCAT(DISTINCT users_in_group.display_name SEPARATOR ", ") as group_admin'),
-                DB::Raw("count(DISTINCT contents.id) as active_video_count"), 'user_groups.users_count');
+                DB::Raw("count(DISTINCT contents.id) as active_video_count"), 'user_groups.users_count', 'attachments.url', 'attachments.name as attachment_name');
 //            $user_group->select('groups.*', DB::Raw("count(contents.id) as active_video_count"));
-
-
         }
+
+        $user_group = $user_group->leftJoin('attachments', function($q){
+            $q->on('attachments.fk_id', '=', 'groups.id');
+            $q->where('attachments.table', '=', 'groups');
+            $q->where('attachments.status', '=', '1');
+        });
 
         foreach($filter as $f){
             $user_group = $user_group->where($f[0], $f[1], $f[2]);
@@ -1324,6 +1347,10 @@ class UserRepository
                 'fk_id' => $setting,
             )
         );
+    }
+
+    public function deleteHomeSliderSettings($feed_id){
+        $this->homeSliderFeedSetting->where('feed_id', $feed_id)->delete();
     }
 }
 

@@ -2,6 +2,17 @@ var model_links = [];
 var model_links_current_pos = 0;
 var showed_markers = null;
 
+var model_first_url = window.location.href
+$('#featureModal').on('hidden.bs.modal', function () {
+    console.log('first url ',model_first_url)
+    window.history.pushState("object or string", "Title", model_first_url);
+})
+
+$('#featureModal').on('shown.bs.modal', function (e) {
+    // model_first_url = window.location.href
+    // console.log('first url ',model_first_url)
+})
+
 if (typeof (L) != "undefined") {
     var southWest = L.latLng(-89.98155760646617, -180),
         northEast = L.latLng(89.99346179538875, 180);
@@ -295,6 +306,7 @@ function searchVideo() {
 
     var $search_text = $('#search_text').val();
     var $search_cat = $('#content_search_cat').val();
+    var $content_sorting = $('#content_sorting').val();
     var $video_id = $('#video_id').val();
     if ($search_text == undefined)
         $search_text = '';
@@ -302,8 +314,10 @@ function searchVideo() {
         $search_cat = '';
     if ($video_id == undefined)
         $video_id = '';
+    if ($content_sorting == undefined)
+        $content_sorting = '';
 
-    $.get("/home/ajax/video-search/?keyword=" + $search_text + "&category_id=" + $search_cat
+    $.get("/home/ajax/video-search/?keyword=" + $search_text + "&category_id=" + $search_cat+ "&sorting=" + $content_sorting
         + "&video_id=" + $video_id, function (data) {
             // console.log(data.json.original);
             if (data.content == '')
@@ -790,6 +804,14 @@ $('.display-name-select-ajax').select2({
 $('.display-name-select-ajax').on('select2:select', function (e) {
     let data = e.params.data;
     videosForUser(data.id)
+});
+
+$('.select2-ajax-content').select2({
+    ajax: {
+        url: '/home/ajax/video-search-list',
+        dataType: 'json'
+        // Additional AJAX parameters go here; see the end of this chapter for the full code of this example
+    }
 });
 
 // if($('.display-name-select-ajax').val() != ''){

@@ -20,6 +20,7 @@ $group['experience_kno'] = isset($group['experienceKnowledge']) ? $group['experi
 $data['experience_kno'] = isset($group['experience_kno']) ? array_column($group['experience_kno'], 'group_tag_id') : array();
 $data['group_acting_roles'] = isset($group['actingRoles']) ? array_column(($group['actingRoles'])->toArray(), 'group_tag_id') : array();
 
+$data['url'] = isset($group['url'])?$group['url']:'';
 //    dd($data);
 ?>
 <div class="col-lg-12 grid-margin stretch-card">
@@ -52,6 +53,7 @@ $data['group_acting_roles'] = isset($group['actingRoles']) ? array_column(($grou
                   {{ session()->get('message') }}
                 </div>
               @endif
+                  <form action="/user/group-admin/post-group-add" method="post" enctype='multipart/form-data'>
           <input type="hidden" name="_token" id="csrf-token" value="{{ Session::token() }}" />
           <?php if (!empty($data['id'])) { ?>
             <input type="hidden" name="id" id="id" value="{{ uid($data['id']) }}" />
@@ -80,8 +82,29 @@ $data['group_acting_roles'] = isset($group['actingRoles']) ? array_column(($grou
           </div>
           <div class="form-group">
               <label for="accept_tos">Group Avatar</label>
-              <input class="form-control" type="file" name="group_avatar" />
+              <input id="upload" class="form-control" type="file" name="group_avatar" />
           </div>
+
+          <div class="form-group">
+              {{--
+              <input type="file" id="upload" value="Choose a file">--}}
+              <div id="upload-profile" data-url="/storage/<?php echo $data['url'] ?>">
+              </div>
+              <input type="hidden" id="imagebase64" name="group_image">
+              {{--
+              <a href="#" class="upload-result">Send
+              </a>--}}
+
+              <?php //foreach ($data['image'] as $img) { ?>
+              <input type="hidden" value="/storage/<?php echo $data['url'] ?>" id="preset_image_path" />
+              <center>
+                  <a target="_blank" href="/storage/<?php echo $data['url'] ?>">
+                      <img src="/storage/<?php echo $data['url'] ?>" alt="Avatar" class="avatar profile_img_mini">
+                  </a>
+              </center>
+              <?php //} ?>
+          </div>
+
       </div>
           <div class="formdesctext">
             <strong>Connections and Collaborations

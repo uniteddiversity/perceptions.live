@@ -1,11 +1,15 @@
-<?php
+@extends('layouts.app')
+@section('content')
+
+    <?php
 preg_match("/^(?:http(?:s)?:\/\/)?(?:www\.)?(?:m\.)?(?:youtu\.be\/|youtube\.com\/(?:(?:watch)?\?(?:.*&)?v(?:i)?=|(?:embed|v|vi|user)\/))([^\?&\"'>]+)/", $info['url'], $matches);
 $video_id = isset($matches[1])?$matches[1]:'';
 ?>
+    <div class="modal-dialog big" style="margin-top: 0px !important;">
 <div class="modal-body">
     <button class="close mobile_show" type="button" data-dismiss="modal" aria-hidden="true">&times;</button>
     <div class="youtube">
-        <iframe style="width: 100%;height: 422px" src="<?php echo str_replace( array('watch?v=','http://'), array('embed/','https://'),$info['url']) ?>" frameborder="0" allowfullscreen></iframe>
+        <iframe style="width: 100%;height: 506px" src="<?php echo str_replace( array('watch?v=','http://'), array('embed/','https://'),$info['url']) ?>" frameborder="0" allowfullscreen></iframe>
     </div>
 
     <div class="modal-inner">
@@ -59,9 +63,8 @@ $video_id = isset($matches[1])?$matches[1]:'';
                         <strong><i class="far fa-user"></i> Co-Creators: </strong>
                         <?php if(isset($info->coCreators)){
 
-                    $datas = array(); $users_count = 0;
+                    $datas = array();
                     foreach($info->coCreators as $user){
-                        $users_count++;
                         $datas[] = '@'.'<span class="inactive_link" onclick="openProfile('.$user->user->id.')">'.$user->user->display_name.'</span>';
                     }
 
@@ -73,7 +76,7 @@ $video_id = isset($matches[1])?$matches[1]:'';
 
                         <span class="pull-right">
 
-                            <?php foreach($info->videoProducer as $key => $users){ if(isset($info->videoProducer[$key])){ echo ($users_count>0)?',':''.'@<span class="inactive_link" onclick="openProfile(\''. $info->videoProducer[$key]->user->id .'\')">'.$info->videoProducer[$key]->user->display_name.'</span>'; break; } }?>
+                            <?php foreach($info->videoProducer as $key => $users){ if(isset($info->videoProducer[$key])){ echo '<span class="inactive_link" onclick="openProfile(\''. $info->videoProducer[$key]->user->id .'\')">@'.$info->videoProducer[$key]->user->display_name.'</span>'; break; } }?>
                         </span>
                     </div>
                 </div>
@@ -141,7 +144,7 @@ $video_id = isset($matches[1])?$matches[1]:'';
     </div>
 
     <div class="right-comments">
-        <button class="close" type="button" data-dismiss="modal" aria-hidden="true">&times;</button>
+{{--        <button class="close" type="button" data-dismiss="modal" aria-hidden="true">&times;</button>--}}
         <div class="donate mobile_hide">
             <a href="#" class="btn"><i class="fas fa-hand-holding-usd"></i>Donate</a>
         </div>
@@ -191,14 +194,9 @@ $video_id = isset($matches[1])?$matches[1]:'';
         <a href="#" class="btn mobile_show"><i class="fas fa-hand-holding-usd"></i>Donate</a>
     </div>
 </div>
-<input type="hidden" id="page_url" value="<?php echo route('video.page.show', ['_category_name' => isset($info->category)?str_replace(' ', '-', $info->category->name):'category', '_date' => date('Y-m-d', strtotime($info['captured_date'])), '_video_title' => str_replace(' ', '-', $info['title']), '_video_uid' => uid($info->id)]); ?>" />
 <div style="clear: both;"></div>
-
+    </div>
 <script>
-    $(document).ready(function(){
-        window.history.pushState("object or string", "Title", $('#page_url').val());
-    })
-
     $('.btn').on('click', function(e) {
         $('.right-comments .btn_inner').addClass("open");
         $(this).parent().removeClass("open");
@@ -342,3 +340,18 @@ $video_id = isset($matches[1])?$matches[1]:'';
 
 </div>
 */ ?>
+@endsection
+<style>
+    .theme-layout{
+        padding: 0px !important;
+    }
+
+    .modal-dialog.big{
+        padding-top: 0px !important;
+    }
+
+    .right-comments{
+        right: 184px !important;
+        top: 20px !important;
+    }
+</style>

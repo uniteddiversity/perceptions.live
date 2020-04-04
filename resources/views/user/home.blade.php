@@ -15,23 +15,31 @@
                         <div class="ml-listings fakeScroll fakeScrolls">
                             @include('partials.home-left-side-bar')
                         </div>
-                        @include('partials.nav-bar')
-                    <div id="custom-popup-upload-close">
-                        <a href="#" class="participate" style="height:100%;">
-                            <i class="fas fa-cloud-upload-alt pointer" style="cursor:pointer"></i>
-                        </a>
-                    </div>
-                   {{--
-                        <a href="/user/content-add" class="participate" style="height: 100%;">
-                            <i class="fas fa-cloud-upload-alt pointer" style="cursor:pointer" onclick="window.location='/user/content-add'"></i>
-                        </a>
 
-                        --}}
+                        <div id="custom-popup-upload-close">
+                            <a href="#" class="participate" id="step2">
+                                <i class="fas fa-cloud-upload-alt pointer" style="cursor:pointer"></i>
+                            </a>
+                        </div>
+
+
+                        @include('partials.nav-bar')
+
+
+                        {{--
+                                                         <a href="/user/content-add" class="participate" style="height: 100%;">
+                                                             <i class="fas fa-cloud-upload-alt pointer" style="cursor:pointer" onclick="window.location='/user/content-add'"></i>
+                                                         </a>
+
+                                      --}}
                     </div>
+
                     <div class="half-map" style="height: 100%;">
                         <div id="map" class="map" style="height: 100%;margin-left:30px;">&nbsp;</div>
                     </div>
-                   
+
+
+
                 </div>
             </div>
         </div>
@@ -55,6 +63,27 @@
 @include('partials.group-info-popup_right');
 @include('partials.home-upload-popup');
 
+@if(isset($video_profile_id) && $video_profile_id)
+<script>
+    $(document).ready(function(){
+        openVideo('{{$video_profile_id}}')
+    })
+</script>
+@endif
+@if(isset($user_profile_id) && $user_profile_id)
+    <script>
+        $(document).ready(function(){
+            openProfile('{{$user_profile_id}}')
+        })
+    </script>
+@endif
+@if(isset($group_profile_id) && $group_profile_id)
+    <script>
+        $(document).ready(function(){
+            openGroupProfile('{{$group_profile_id}}')
+        })
+    </script>
+@endif
 <script>
     $(window).load(function() {
         $('body').addClass('mapPageBody');

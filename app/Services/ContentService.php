@@ -108,7 +108,6 @@ class ContentService
     public function getContentList($user_id, $filter = array(), $page = null, $page_size = 20, $only_my = false)
     {
         $user_info = $this->getUser($user_id);
-
         $videos = $this->content->with('user');
         if($user_info['role_id'] <> '1' && $user_info['role_id'] <= 110){// not for admin, but for group admins and moderators
             //group admin get all the content related to all group members(who is the uploader) or group
@@ -142,6 +141,10 @@ class ContentService
 
         if(isset($filter['group_id'])){
             $videos = $videos->where('user_groups.group_id',$filter['group_id']);
+        }
+
+        if(isset($filter['status'])){
+            $videos = $videos->whereIn('contents.status',$filter['status']);
         }
 
         $videos = $videos->select('contents.*');
@@ -322,6 +325,11 @@ class ContentService
                 $this->shearedContentAssociation->create(array('shared_content_id' => $groupShare->id,
                     'table' => 'filter_list', 'fk_id' => $id, 'slug' => '', 'type' => 'group'));
             }
+
+            foreach($data['associations']['associated_contents'] as $id){
+                $this->shearedContentAssociation->create(array('shared_content_id' => $groupShare->id,
+                    'table' => 'contents', 'fk_id' => $id, 'slug' => '', 'type' => 'group'));
+            }
         }
 
         return $groupShare;
@@ -422,6 +430,7 @@ class ContentService
             }
         }
 
+        $ids = array_merge($filter['other_ids'], $ids);
         $filter = array_merge(array('ids' => $ids), $filter);
         //get contents from id
         $locations = $this->getSearchableContents($user_id, $filter, 300);
@@ -493,26 +502,41 @@ class ContentService
         return $uploaded_files;
     }
 
-    public function ajaxSearchContentGroup($text, $types = [])
+    public function ajaxSearchContentGroup($key, $types = [], $mode = 'text')
     {
         $content = [];
         $r = [];
-//        if($type == ''){
+        if($mode == 'text'){
             if(in_array('category', $types))
-                $content['category'] = $this->category->where('name', 'like', '%'.$text.'%')->limit(10)->get()->toArray();
+                $content['category'] = $this->category->where('name', 'like', '%'.$key.'%')->limit(10)->get()->toArray();
             if(in_array('group', $types))
-                $content['group'] = $this->group->where('name', 'like', '%'.$text.'%')->limit(10)->get()->toArray();
+                $content['group'] = $this->group->where('name', 'like', '%'.$key.'%')->limit(10)->get()->toArray();
             if(in_array('GCI', $types))
-                $content['gci'] = $this->sortingTag->where('tag', 'like', '%'.$text.'%')->where('tag_for','gci')->limit(10)->get()->toArray();
-//        }
+                $content['gci'] = $this->sortingTag->where('tag', 'like', '%'.$key.'%')->where('tag_for','gci')->limit(10)->get()->toArray();
+        }else{
+            if(in_array('category', $types))
+                $content['category'] = $this->category->where('id', $key)->limit(10)->get()->toArray();
+            if(in_array('group', $types))
+                $content['group'] = $this->group->where('id', $key)->limit(10)->get()->toArray();
+            if(in_array('GCI', $types))
+                $content['gci'] = $this->sortingTag->where('id', $key)->where('tag_for','gci')->limit(10)->get()->toArray();
+        }
 
         foreach($content as $type => $arrays){
             foreach($arrays as $value){
-                $r[] = array(
-                    'id' => $value['id'],
-                    'text' => empty($value['tag'])?$value['name']:$value['tag'],
-                    'type' => $type,
-                );
+                if($mode == 'text'){
+                    $r[] = array(
+                        'id' => $value['id'],
+                        'text' => empty($value['tag'])?$value['name']:$value['tag'],
+                        'type' => $type,
+                    );
+                }else{
+                    $r = array(
+                        'id' => $value['id'],
+                        'text' => empty($value['tag'])?$value['name']:$value['tag'],
+                        'type' => $type,
+                    );
+                }
             }
         }
 
@@ -559,9 +583,19 @@ class ContentService
         return $r;
     }
 
+    public function getHomeSliderFeed($id)
+    {
+        return $this->homeSliderFeed->where('id', $id)->with('setting', 'image')->get()->first();
+    }
+
     public function deleteHomeSlider($id)
     {
         return $this->homeSliderFeed->where('id', $id)->delete();
+    }
+
+    public function deleteContent($id)
+    {
+        return $this->content->where('id', $id)->update(array('status' => 3));
     }
 
     public function getLanguages()

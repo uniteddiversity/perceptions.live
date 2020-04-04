@@ -13,8 +13,8 @@
 }
 
 .dot {
-  height: 20px;
-  width: 20px;
+  height: 28px;
+  width: 28px;
   border-radius: 50%;
   display: inline-block;
   margin: 2px;
@@ -37,6 +37,22 @@
 
 .SumoSelect {
   width: 96%;
+}
+
+.greaterdots {
+  position: absolute;
+  margin-left: auto;
+  margin-right: auto;
+  text-align: center;
+  margin-top: 10px;
+}
+
+
+.randomcategories {
+  margin-top:15px;
+  width:100%;
+  float:left;
+  position:relative;
 }
 
 .gci_dot_container .dot {
@@ -277,6 +293,24 @@ header .extras .submitprcp i {
   margin-right: 8px;
   font-size: 16px;
 }
+
+.btn2 {
+  background: #1c1c8e;
+  background: #4214c7;
+  color: #fff;
+  margin-top:13px;
+  padding: 10px 30px;
+  font-size: 16px;
+  font-weight: 600;
+  height: 50px;
+  line-height: 50px;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  border-radius: 5px;
+  cursor: pointer;
+  box-shadow: 0 30px 60px 0 rgba(32, 35, 68, 0.1);
+}
+
 
 .btn {
   float: left;
@@ -1072,6 +1106,7 @@ input[type="text"]:focus::placeholder {
   width: 100%;
   float: left;
   margin-top: 10px;
+  padding-left: 20px;
 }
 
 .cats .dot {
@@ -1082,6 +1117,7 @@ input[type="text"]:focus::placeholder {
   border: 2px solid #000;
 }
 
+.leftsliders { margin-top: 55px; }
 
 /* Map */
 .half-map {
@@ -4182,9 +4218,18 @@ nav.two .header-notification .profile-notification li {
 
 
   .cats {
-    margin-top: 0;
+    margin-top: 25px;
     width: 100%;
   }
+
+  .ml-listings .cats .dot {
+    width: 42px;
+    height: 42px;
+    margin-right: 5px;
+    margin-left: 0px;
+  }
+
+  .leftsliders { margin-top: 100px; !important }
 
   .searchbox .dot {
     margin-right: 15px;
@@ -5302,6 +5347,10 @@ header.s4.dark #slider_feed .near_me_icon {
     overflow: hidden;
   }
 
+
+  .scrollWrap {
+    margin-top: -90px
+  }
   .logo_mobile {
     position: fixed;
     left: 50%;
@@ -5634,6 +5683,36 @@ header.s4.dark #slider_feed .near_me_icon {
   z-index: 10;
 }
 
+.slider-title {
+    text-transform: uppercase;
+    color: #4214c7;
+    margin-bottom: 0px;
+    text-align: center;
+  margin-top: 6px;
+  /* margin-right: auto; */
+  font-weight: 600;
+  letter-spacing: 2px;
+}
+
+
+.introTEST {
+  position: fixed !important;
+  background: #fff;
+  border-radius: 10px;
+  top: auto !important;
+  bottom: 100px;
+  left: 50%;
+  background-size: 80%;
+  width: 90px;
+  height: 90px !important;
+  -webkit-box-shadow: 0px 0px 20px 10px white;
+  -moz-box-shadow: 0px 0px 20px 10px white;
+  box-shadow: 0px 0px 20px 10px white;
+  transition: all .3s ease-in-out;
+  cursor: pointer;
+  z-index: 1000;
+}
+
 .participate {
   position: fixed !important;
   background: #0e1281 url(/assets/img/upload.svg) no-repeat center center / 90px;
@@ -5650,8 +5729,9 @@ header.s4.dark #slider_feed .near_me_icon {
   transform: translateX(-50%);
   transition: all .3s ease-in-out;
   cursor: pointer;
-  z-index: 10;
+  z-index: 1000;
 }
+
 
 .participate:hover {
   background-color: #4214c7;
@@ -5660,6 +5740,19 @@ header.s4.dark #slider_feed .near_me_icon {
 .participate i {
   display: none;
 }
+
+@media screen and (max-width: 1199.99px) {
+  .participate {
+    top: auto !important;
+  }
+  .dot {
+    height: 28px;
+    width: 28px;
+  }
+
+
+}
+
 
 .half-map .map .leaflet-control-locate .leaflet-bar-part-single .custom {
   width: 24px;
@@ -6108,8 +6201,8 @@ nav>ul>li>a i.fas {
   } */
   
   .ml-listings .cats .dot {
-    width: 48px;
-    height: 48px;
+    width: 44px;
+    height: 44px;
     margin-right: 5px;
     margin-left: 0px;
   }
@@ -6837,6 +6930,13 @@ nav>ul>li>a i.fas {
   justify-content: space-between;
   margin-bottom: 10px;
 }
+
+.custom-popup .controls .btn {
+  display: flex;
+  align-items: center;
+  margin: auto;
+}
+
 .custom-popup .controls button {
   background-color: #0000;
   float: none;
@@ -7161,8 +7261,25 @@ nav>ul>li>a i.fas {
   }
 }
 
+.center-intro {
+  position:absolute;
+  width:32px;
+  height:32px;
+  border-radius:50%;
+  top:50%;
+  left:50%;
+  margin-top:-50px; /* this is half the height of your div*/
+  margin-left:-100px; /*this is half of width of your div*/
+
+}
 
 @media only screen and (max-width: 768px) {
+
+
+  .greaterdots {
+    margin-top: -30px !important;
+  }
+
   #pcoded .sidebar_toggle {
     top: 15px;
   }
@@ -7192,6 +7309,65 @@ nav>ul>li>a i.fas {
     font-size: 2.2em;
     margin-left: 8px;
   }
+
+  .tooltip3 {
+    color: #FFF;
+    outline: none;
+    cursor: help;
+    text-decoration: none;
+    position: relative;
+    font-family: ralewaybold;
+    font-size: 2.2em;
+    margin-left: 8px;
+  }
+
+  /* 	ip container */
+  .tooltipinstr {
+    position: relative;
+    display: inline-block;
+    border-bottom: 1px dotted black; /* If you want dots under the hoverable text */
+  }
+
+  /* tooltipinstr text */
+  .tooltipinstr .tooltipinstrtext {
+    visibility: hidden;
+    width: 120px;
+    background-color: #555;
+    color: #fff;
+    text-align: center;
+    padding: 5px 0;
+    border-radius: 6px;
+
+    /* Position the tooltipinstr text */
+    position: absolute;
+    z-index: 1;
+    bottom: 125%;
+    left: 50%;
+    margin-left: -60px;
+
+    /* Fade in tooltipinstr */
+    opacity: 0;
+    transition: opacity 0.3s;
+  }
+
+  /* tooltipinstr arrow */
+  .tooltipinstr .tooltipinstrtext::after {
+    content: "";
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    margin-left: -5px;
+    border-width: 5px;
+    border-style: solid;
+    border-color: #555 transparent transparent transparent;
+  }
+
+  /* Show the tooltipinstr text when you mouse over the tooltipinstr container */
+  .tooltipinstr:hover .tooltipinstrtext {
+    visibility: visible;
+    opacity: 1;
+  }
+
   .responsiveheader .toolbar {
     box-shadow: 0px 6px 7px rgba(0, 0, 0, 0.4);
   }
@@ -7231,8 +7407,8 @@ nav>ul>li>a i.fas {
     line-height: 40px;
   }
   .ml-listings .cats .dot {
-    width: 32px !important;
-    height: 32px !important;
+    width: 26px !important;
+    height: 26px !important;
   }
     .tooltip2 {
         color: #13054D;
@@ -7299,4 +7475,22 @@ nav>ul>li>a i.fas {
   .responsiveheader .toolbar .thumb_wrapper::before,.responsiveheader .toolbar .thumb_wrapper::after {
     content: none;
   }
+}
+
+.s_margin-left{
+  margin-left: 4px;
+}
+
+.custom_dropdown_1 .select .select-styled{
+  background-color: white;
+}
+
+.custom_dropdown_1 .select{
+  background-color: white;
+  border-color: black;
+  border-bottom: 2px black solid;
+}
+
+.custom_dropdown_1 .select-styled{
+  height: 45px;
 }

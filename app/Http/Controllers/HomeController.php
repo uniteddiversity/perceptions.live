@@ -14,6 +14,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Validator;
+use System\UID\UID;
 use User\Services\UserRepository;
 
 class HomeController extends Controller
@@ -104,8 +105,86 @@ class HomeController extends Controller
         $user_id = (!isset(Auth::user()->id))? 0 : Auth::user()->id;
         $info = $this->userRepository->getContentsInfo($user_id, $video_id);
         $comments = $this->userRepository->getArrangedComments($video_id, 'contents');
+        $with_layout = true;
+
         return view('partials.video-info-popup')
+            ->with(compact('info', 'comments', 'with_layout'));
+    }
+
+    public function getVideoInfoPage($category, $date, $title, $video_id)
+    {
+        $video_id = UID::translator($video_id);
+        $user_id = (!isset(Auth::user()->id))? 0 : Auth::user()->id;
+        $info = $this->userRepository->getContentsInfo($user_id, $video_id);
+        $comments = $this->userRepository->getArrangedComments($video_id, 'contents');
+        return view('user.video-info-popup')
             ->with(compact('info', 'comments'));
+    }
+
+    public function infoVideoPopupByUrl($category, $date, $title, $video_id){
+        $video_profile_id = UID::translator($video_id);
+
+        $user_id = (!isset(Auth::user()->id))? 0 : Auth::user()->id;
+        $filter = array();
+        $data = $this->siteSetting->getAll()->toArray();
+        $settings = [];
+        foreach($data as $d){
+            $settings[$d['key']] = $d['value'];
+        }
+        $top_slider_feed = $this->contentService->listHomeSlider();
+
+
+        $uploaded_list = $this->userRepository->getPublicContents($user_id, $filter);
+        $user_acting_role = $this->userRepository->getUserActingRoles();
+        $gci_tags = $this->userRepository->getGreaterCommunityIntentionTag();
+        $sorting_tags = $this->userRepository->getSortingTags($user_id, true);
+        $categories = $this->category->get();
+        return view('user.home')
+            ->with(compact('uploaded_list','user_acting_role','categories','gci_tags','sorting_tags', 'top_slider_feed','settings', 'video_profile_id'));
+    }
+
+    public function infoGroupPopupByUrl($group_name, $group_id){
+        $group_profile_id = UID::translator($group_id);
+
+        $user_id = (!isset(Auth::user()->id))? 0 : Auth::user()->id;
+        $filter = array();
+        $data = $this->siteSetting->getAll()->toArray();
+        $settings = [];
+        foreach($data as $d){
+            $settings[$d['key']] = $d['value'];
+        }
+        $top_slider_feed = $this->contentService->listHomeSlider();
+
+
+        $uploaded_list = $this->userRepository->getPublicContents($user_id, $filter);
+        $user_acting_role = $this->userRepository->getUserActingRoles();
+        $gci_tags = $this->userRepository->getGreaterCommunityIntentionTag();
+        $sorting_tags = $this->userRepository->getSortingTags($user_id, true);
+        $categories = $this->category->get();
+        return view('user.home')
+            ->with(compact('uploaded_list','user_acting_role','categories','gci_tags','sorting_tags', 'top_slider_feed','settings', 'group_profile_id'));
+    }
+
+    public function infoUserPopupByUrl($user_name, $user_id){
+        $user_profile_id = UID::translator($user_id);
+
+        $user_id = (!isset(Auth::user()->id))? 0 : Auth::user()->id;
+        $filter = array();
+        $data = $this->siteSetting->getAll()->toArray();
+        $settings = [];
+        foreach($data as $d){
+            $settings[$d['key']] = $d['value'];
+        }
+        $top_slider_feed = $this->contentService->listHomeSlider();
+
+
+        $uploaded_list = $this->userRepository->getPublicContents($user_id, $filter);
+        $user_acting_role = $this->userRepository->getUserActingRoles();
+        $gci_tags = $this->userRepository->getGreaterCommunityIntentionTag();
+        $sorting_tags = $this->userRepository->getSortingTags($user_id, true);
+        $categories = $this->category->get();
+        return view('user.home')
+            ->with(compact('uploaded_list','user_acting_role','categories','gci_tags','sorting_tags', 'top_slider_feed','settings', '$user_profile_id'));
     }
 
     public function getVideoInfoMini($video_id)
@@ -149,6 +228,21 @@ class HomeController extends Controller
             ->with(compact('info','user_associate_videos','gci_tags','user_status', 'contents1', 'contents2', 'user_id'));
     }
 
+    public function getUserInfoPage($user_name, $user_id)
+    {
+        $user_id = UID::translator($user_id);
+        $user_associate_videos = $this->userRepository->getAssociatedVideosForUser($user_id);
+        $info = $this->userRepository->getUser($user_id);
+        $info['user_groups'] = $this->userRepository->getUserGroups($user_id, $contents2, $this->per_page);
+        $info['user_involvement_videos'] = $this->userRepository->getPublicContents($user_id, array('user_involvement' => $user_id), $count, $contents1, $this->per_page);
+        $info['group_involvement_videos'] = $this->userRepository->getPublicContents($user_id, array('group_involvement' => $user_id), $count);
+
+        $user_status = $this->userRepository->getUserStatus($user_id);
+        $gci_tags = $this->userRepository->getGreaterCommunityIntentionTag();
+        return view('user.user-info')
+            ->with(compact('info','user_associate_videos','gci_tags','user_status', 'contents1', 'contents2', 'user_id'));
+    }
+
     public function getUserInfoVideoPartial($user_id)
     {
         $contentInfo = $this->userRepository->getPublicContents($user_id, array('user_involvement' => $user_id), $count, $paginationData, $this->per_page);
@@ -170,6 +264,16 @@ class HomeController extends Controller
         $group_contents = $this->contentService->getSearchableContents(0, array('group_id' => $group_id), 10, $contents1, $this->per_page);
         $group_users = $this->userRepository->getUsers(array('group_id' => $group_id), null,$contents2, $this->per_page);
         return view('partials.group-info-popup')
+            ->with(compact('info','group_contents','group_users', 'contents1', 'contents2', 'group_id'));
+    }
+
+    public function getGroupInfoPage($group_name, $group_id)
+    {
+        $group_id = UID::translator($group_id);
+        $info = $this->userRepository->getGroupInfo($group_id, true, true);
+        $group_contents = $this->contentService->getSearchableContents(0, array('group_id' => $group_id), 10, $contents1, $this->per_page);
+        $group_users = $this->userRepository->getUsers(array('group_id' => $group_id), null,$contents2, $this->per_page);
+        return view('user.group-info')
             ->with(compact('info','group_contents','group_users', 'contents1', 'contents2', 'group_id'));
     }
 
@@ -351,6 +455,7 @@ class HomeController extends Controller
         $filter['service_or_opportunity'] = isset($_GET['exchange_for'])?($_GET['exchange_for']):'';
         $filter['group_id'] = isset($_GET['group_id'])?($_GET['group_id']):'';
         $filter['multi_search'] = isset($_GET['multi_search'])?($_GET['multi_search']):'';
+        $filter['sorting'] = isset($_GET['sorting'])?($_GET['sorting']):'';
 
         $uploaded_list = $this->userRepository->getPublicContents($user_id, $filter, $result_count);
         $json_output = $this->getSearchListInJson($uploaded_list);
@@ -384,12 +489,20 @@ class HomeController extends Controller
         $filters_list = $this->contentService->getSharedMapFiltersListByToken($_token);
         $basic_info = $this->contentService->getSharedMapBasicInfo($_token);
         $filters_group_list = $this->contentService->getSharedMapFiltersListByToken($_token, 'groups');
+        $filters_contents_list = $this->contentService->getSharedMapFiltersListByToken($_token, 'contents');
+
         $within_groups = [];
         foreach($filters_group_list as $group){
             $within_groups[] = $group['fk_id'];
         }
+
+        //adding additional contents
+        $other_contents = array_column($filters_contents_list, 'fk_id');//manually selected content ids
+
         $content_ids = $this->contentService->getContentIdsByFilter( array('groups' => $within_groups))->toArray();
         $content_ids = array_column($content_ids,'id');
+        $content_ids = array_merge($content_ids, $other_contents);
+
         $search_elements = '';
         foreach($filters_list as $filter){
             switch($filter['fk_id']){
@@ -461,6 +574,10 @@ class HomeController extends Controller
     {
         $filter = array();
         $filters_group_list = $this->contentService->getSharedMapFiltersListByToken($_token, 'groups');
+        $filters_contents_list = $this->contentService->getSharedMapFiltersListByToken($_token, 'contents');
+        //adding additional contents
+        $other_contents = array_column($filters_contents_list, 'fk_id');//manually selected content ids
+
         $basic_info = $this->contentService->getSharedMapBasicInfo($_token);
         $within_groups = [];
         foreach($filters_group_list as $group){
@@ -473,6 +590,7 @@ class HomeController extends Controller
             $filter['primary_sub_tag'] = '';
         }
 
+        $filter['other_ids'] = $other_contents;
         $filter['groups'] = $within_groups;
         $filter['category_id'] = isset($request['categories'])? $request['categories'] : '';
 //        $filter['primary_sub_tag'] = isset($request['primary_sub_tag'])? $request['primary_sub_tag'] : '';

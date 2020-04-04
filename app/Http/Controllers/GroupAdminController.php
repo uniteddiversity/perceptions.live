@@ -91,7 +91,7 @@ class GroupAdminController extends Controller
     public function contentList()
     {
         $user_id = (!isset(Auth::user()->id))? 0 : Auth::user()->id;
-        $videos = $this->contentService->getContentList($user_id, [], null, 20, true);
+        $videos = $this->contentService->getContentList($user_id, array('status' => array('status' => array('2', '1'))), null, 20, true);
         return view('group-admin.content-list')
             ->with(compact('videos'));
     }
@@ -99,7 +99,7 @@ class GroupAdminController extends Controller
     public function groupContentListNew()
     {
         $user_id = (!isset(Auth::user()->id))? 0 : Auth::user()->id;
-        $videos = $this->contentService->getContentList($user_id);
+        $videos = $this->contentService->getContentList($user_id, array('status' => array('2', '1')));
         return view('group-admin.content-list')
             ->with(compact('videos'));
     }
@@ -378,9 +378,18 @@ class GroupAdminController extends Controller
             }
         }
 
-        if(isset($r['group_avatar'])){
+//        if(isset($r['group_avatar'])){
+//            $this->userRepository->deleteAttachmentByFkId(Auth::user()->id, $new_group->id, 'group-avatar', 'groups');
+//            $this->userRepository->uploadAttachment($r['group_avatar'],Auth::user()->id, $new_group->id,
+//                'group-avatar', 'groups',1);
+//        }
+
+        if(isset($r['group_image'])){
             $this->userRepository->deleteAttachmentByFkId(Auth::user()->id, $new_group->id, 'group-avatar', 'groups');
-            $this->userRepository->uploadAttachment($r['group_avatar'],Auth::user()->id, $new_group->id,
+//            $this->userRepository->uploadAttachment($r['group_avatar'],Auth::user()->id, $new_group->id,
+//                'group-avatar', 'groups',1);
+
+            $this->userRepository->uploadAttachmentBase64($r['group_image'],Auth::user()->id, $new_group->id,
                 'group-avatar', 'groups',1);
         }
 
