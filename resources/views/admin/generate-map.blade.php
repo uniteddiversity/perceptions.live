@@ -39,8 +39,8 @@ if (isset($edit_data)) {
   <div class="card form-card">
     <div class="card-body">
         <div class="submitprcption">
-          <h4 class="card-title" style="margin-bottom: 10px; text-align: center;"><?php if (!empty($data['id'])) { ?>Edit Map<?php } else { ?>Generate A New Map<?php } ?> <span style="font-size: 12px;"><?php if (!empty($data['id'])) { ?><a class="btn btn-primary btn-xs" onclick="openVideo('<?php echo $data['id'] ?>')" href="#">Video Profile</a><?php } ?></span>
-          </h4>
+          <?php /* <h4 class="card-title" style="margin-bottom: 10px; text-align: center;"><?php if (!empty($data['id'])) { ?>Edit Map<?php } else { ?>Generate A New Map<?php } ?> <span style="font-size: 12px;"><?php if (!empty($data['id'])) { ?><a class="btn btn-primary btn-xs" onclick="openVideo('<?php echo $data['id'] ?>')" href="#">Video Profile</a><?php } ?></span>
+          </h4>*/ ?>
           <div class="pagedesc" align="center">
             <p>Build a group map that you can embed on your community's website.
             </p>
