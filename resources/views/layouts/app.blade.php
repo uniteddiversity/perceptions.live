@@ -122,6 +122,33 @@
             }
             ];
 
+        // $(window).resize(function() {
+        //     console.log('width is ', window.screen.availWidth);
+            if(window.screen.availWidth < 1206){
+                $('.responsiveheader').css({display:'block'});
+                Steps = [
+                    {
+                        intro: "Welcome to Perceptions.Live! There's a lot you can do here, so let's give you a quick tour!"
+                    },
+                    {
+                        element: '#step2',
+                        intro: "Click this button to quickly upload your video--a testimony, a perspective, a word of wisdom to share. No registration required!",
+                        position: 'top'
+                    },
+                    {
+                        element: '#step3_mobile',
+                        intro: "Register a new account if you want to build a community, make a map, or leave comments.",
+                        position: 'bottom'
+                    },
+                    {
+                        element: '#arrowMapWrapper',
+                        intro: "Use the feed buttons to sift through content in different ways.",
+                        position: 'right'
+                    }
+                ];
+            }
+        // });
+
         // initialize an introjs instance
         var intro = introJs();
 
@@ -164,7 +191,8 @@
         });
 
         intro.onexit(function () {
-            document.cookie = "intro_exited=true; path=/";
+            let maxAge = "; max-age=" + 3650*24*60*60;
+            document.cookie = "intro_exited=true; path=/" +  maxAge;
         });
 
         function getCookie(name) {
@@ -186,6 +214,8 @@
             // Return null if not found
             return null;
         }
+
+
     </script>
 
 
@@ -252,6 +282,20 @@
                                 <p class="terms-label">
                                     <input name="accept_tos" value="1" id="cb6" type="checkbox"><label for="cb6" style="color:black;">I’ve read and accept the <a href="https://perceptiontravel.tv/terms-of-service/" target="_blank">terms &amp; conditions *</a></label>
                                 </p>
+
+                                @foreach(Consent::treatments() as $treatment)
+                                    <p class="terms-label">
+                                        <input name="consent_{{ $treatment->id }}" id="cb6{{ $treatment->id }}" type="checkbox"><label for="cb6{{ $treatment->id }}" style="color:black;">{{ trans($treatment->description) }}</label>
+                                    </p>
+{{--                                    <div class="checkbox">--}}
+{{--                                        <label>--}}
+{{--                                            <input id="checkbox123123" name="consent_{{ $treatment->id }}" type="checkbox" value="1">--}}
+{{--                                            {{ trans($treatment->description) }}--}}
+{{--                                        </label>--}}
+{{--                                    </div>--}}
+                                @endforeach
+
+
                                 <div class="btn_outer">
                                     <button type="button" class="register_button" onclick="userRegister()"><i class="disable_loading"></i>Sign Up</button>
                                 </div>
