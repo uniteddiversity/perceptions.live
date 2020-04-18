@@ -23,6 +23,8 @@
     <link rel="stylesheet" type="text/css" href="/assets/findgo/css/style.css" />
     <link rel="stylesheet" href="/assets/css/custom.css?version=1" />
     <link rel="stylesheet" href="/assets/css/custom_shared.css" />
+
+{{--    <link rel="stylesheet" href="/assets/js/slick_slider/slick.css">--}}
 <!--    <link rel="stylesheet" href="/assets/css/leaflet.css" />-->
     <style>
         #featureModal {
@@ -202,7 +204,7 @@
         }
 
         .btn_outer{
-            display: none;
+            /*display: none;*/
         }
 
         .sh_watermark{
@@ -230,8 +232,52 @@
     <script src="/assets/js/L.Control.Locate.min.js"></script>
     <script src="/assets/leaflet-groupedlayercontrol/leaflet.groupedlayercontrol.js"></script>
     <script src="/js//dist/js/select2.full.min.js"></script>
+    <script src="/assets/js/slick_slider/slick.js"></script>
     <script src="/assets/js/app_share.js"></script>
     <script src="/js/jquery.timeago.js"></script>
+
+    <script>
+        function addSlider(){
+            console.log('adding slider')
+            $('.single-item').not('.slick-initialized').slick();
+            // $('.single-item').slick('refresh')
+            // $(".single-item").not('.slick-initialized').slick({
+            //     dots: false,
+            //     infinite: false,
+            //     speed: 300,
+            //     slidesToShow: 1,
+            //     slidesToScroll: 1,
+            //     responsive: [
+            //         {
+            //             breakpoint: 1024,
+            //             settings: {
+            //                 slidesToShow: 3,
+            //                 slidesToScroll: 3,
+            //                 infinite: true,
+            //                 dots: true
+            //             }
+            //         },
+            //         {
+            //             breakpoint: 600,
+            //             settings: {
+            //                 slidesToShow: 2,
+            //                 slidesToScroll: 2
+            //             }
+            //         },
+            //         {
+            //             breakpoint: 480,
+            //             settings: {
+            //                 slidesToShow: 1,
+            //                 slidesToScroll: 1
+            //             }
+            //         }
+            //         // You can unslick at a given breakpoint now by adding:
+            //         // settings: "unslick"
+            //         // instead of a settings object
+            //     ]
+            // });
+        }
+    </script>
     <script>
         $(document).ready(function() {
             $('.select2-ajax-primary_sub_tag').select2({
@@ -249,6 +295,65 @@
             });
         })
 
+    </script>
+
+    <script>
+        var two_row_width = 700
+        var s_height = screen.height
+        function twoRowSetup(){
+            if(window.screen.availWidth < two_row_width){
+                $('.right').css('width', 'auto')
+                // $('.right').css('height', (s_height/2)+'px')
+
+                $('.right').css('float', 'none')
+                $('.right div').css('width', '100%')
+                $('.right').addClass('shared_vertical_row')
+                $('#video_search_res').addClass('single-item')
+
+
+                $('.left').css('width', '100%')
+                // $('.left').css('height', (s_height/2)+'px')
+                $('.left').addClass('shared_vertical_row')
+
+                // addSlider();
+                console.log('changing val')
+            }
+        }
+
+        function oneRowSetup(){
+            if(window.screen.availWidth >= two_row_width){
+                $('.right').css('width', '370px')
+                // $('.right').css('height', '600px')
+                // $('.ml-placessec').css('height', s_height+'px')
+                $('.ml-placessec').css('height', '600px')
+
+                $('.right').css('float', 'left')
+                $('.right').removeClass('shared_vertical_row')
+                $('#video_search_res').removeClass('single-item')
+
+                $('.left').css('width', 'auto')
+                $('.left').css('height', (s_height)+'px')
+                $('.left').removeClass('shared_vertical_row')
+                console.log('changing val')
+            }
+        }
+
+        $(window).resize(function() {
+            console.log('changing width', window.screen.availWidth )
+            twoRowSetup()
+            oneRowSetup()
+        })
+
+
+        $(document).ready(function(){
+            $('.left_side_container').bind('resize', function(){
+                alert('xxx');
+            });
+            console.log('event bound')
+        })
+
+        twoRowSetup()
+        oneRowSetup()
     </script>
 </body>
 

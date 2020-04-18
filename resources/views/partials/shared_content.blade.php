@@ -1,8 +1,6 @@
 @extends('layouts.shared_content_layout')
 
 @section('content')
-
-
 <div class="sh_container">
     <div class="right">
         @include('partials.shared_left-side-bar')
@@ -10,28 +8,13 @@
     <div class="left" style="position: relative">
         <div id="map" style="width: 100%;height: 100%;">Loading..</div>
         <a target="_blank" href="https://www.perceptions.live"><div class="sh_watermark" ></div></a>
-        <div class="form-groupx" style="position: absolute;z-index: 2; height: 38px;padding:2px;background-color: transparent;bottom: 12px;">
+        <div class="form-groupx" style="left: 40px;position: absolute;z-index: 2; height: 38px;padding:2px;background-color: transparent;bottom: 12px;">
         <?php echo $search_elements ?>
     </div>
 
 </div>
 <style>
-    .sh_container {
-        width:100%;
-        height:600px;
-        border:1px solid;
-    }
-    .left {
-        width:auto;
-        height:600px;
-        overflow:hidden;
-    }
-    .right {
-        height:600px;
-        width:370px;
-        float:left;
-        overflow: hidden;
-    }
+
 </style>
     <style>
         .dot {

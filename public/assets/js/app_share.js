@@ -181,7 +181,8 @@ function searchVideo(){
 
         updateMarkers(data.json.original);
         $('#video_search_res').html(decode(data.content));
-
+        // addSlider();
+        setTimeout(function(){addSlider()}, 1000)
     });
 }
 
@@ -221,7 +222,7 @@ function shareSearchVideo(){
 
         updateMarkers(data.json.original);
         $('#video_search_res').html(decode(data.content));
-
+        setTimeout(function(){addSlider()}, 1000)
     });
 }
 

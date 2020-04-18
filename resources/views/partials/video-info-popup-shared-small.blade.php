@@ -30,7 +30,8 @@ $video_id = isset($matches[1])?$matches[1]:'';
         </p>
     </div>
 
+
 </div>
-<div class="btn_outer"><a class="btn" href="#" onclick="openVideo('<?php echo $info['id'] ?>')">
+<div class="btn_outer"><a class="btn" target="_blank" href="{{route('video.page.show', ['_category_name' => isset($info->category)?str_replace(' ', '-', $info->category->name):'category', '_date' => date('Y-m-d', strtotime($info['captured_date'])), '_video_title' => str_replace(' ', '-', $info['title']), '_video_uid' => uid($info->id)])}}" onclick="openVideo('<?php echo $info['id'] ?>')">
         Open Video
     </a></div>

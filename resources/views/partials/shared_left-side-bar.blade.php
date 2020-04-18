@@ -1,6 +1,7 @@
-<div style="padding-right: 0px;overflow-y: scroll;overflow-x: hidden;font-family: ralewayregular, sans-serif;height: 600px; width:90%;">
+<div class="left_side_container">
     <div class="info-box-left">
         <h3 class="main_map_title" >{{$basic_info['group']}}</h3>
+        <p class="shared_map_description">{{$basic_info['description']}}</p>
         <div class="ml-placessec">
             <div class="row" id="video_search_res">
                 ...
@@ -9,6 +10,14 @@
     </div>
 </div>
 <style>
+    {{$basic_info['extra_css']}}
+</style>
+<style>
+    .shared_map_description{
+        margin: 5px;
+        text-align: center;
+    }
+
     .dot {
         height: 10px;
         width: 10px;

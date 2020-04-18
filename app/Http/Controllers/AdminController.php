@@ -838,7 +838,7 @@ class AdminController extends Controller
                 $selected_groups[$i]['id'] = $val['id'];
                 $i++;
             }
-        }//dd($selected_groups);
+        }
 
         $gci_tags = $this->userRepository->getGreaterCommunityIntentionTag();
         $categories = $this->category->get();
@@ -884,6 +884,8 @@ class AdminController extends Controller
             'long' => $r['long'],
             'default_location' => $r['default_location'],
             'public_token' => $this->createToken(date('Y-m-d H:i:s')),
+            'description' => $r['description'],
+            'extra_css' => $r['extra_css'],
         );
 
         if(is_numeric($id) && $id != 0){
