@@ -373,7 +373,8 @@ class UserController extends Controller
             }
         ////////////////////end video upload//////////////////
 
-        return redirect()->to('/')->with('message', 'Successfully Added!');
+//        return redirect()->to('/')->with('message', 'Successfully Added!');
+        return redirect()->back()->with('message', 'Successfully Added!');
     }
 
     public function profileSettings()

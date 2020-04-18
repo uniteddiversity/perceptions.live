@@ -10,9 +10,15 @@
         <a target="_blank" href="https://www.perceptions.live"><div class="sh_watermark" ></div></a>
         <div class="form-groupx" style="left: 40px;position: absolute;z-index: 2; height: 38px;padding:2px;background-color: transparent;bottom: 12px;">
         <?php echo $search_elements ?>
+            <div id="custom-popup-upload-close">
+                <a href="#" class="participate" id="step2">
+                    <i class="fas fa-cloud-upload-alt pointer" style="cursor:pointer"></i>
+                </a>
+            </div>
     </div>
 
 </div>
+    @include('partials.home-upload-popup');
 <style>
 
 </style>

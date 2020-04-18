@@ -294,3 +294,22 @@ $(document).ready(function(){
     searchVideo();
 
 })
+
+
+//upload popup
+$("#custom-popup-close").click(function(){
+    if($(this).html() == "-"){
+        $(this).html("+");
+    }
+    else{
+        $(this).html("-");
+    }
+    $("#desc").slideToggle();
+});
+
+$("#custom-popup-upload-close").click(function(){
+    $("#custom-popup-upload").slideToggle("slow");
+});
+$("#custom-popup-upload-close2").click(function(){
+    $("#custom-popup-upload").slideToggle("slow");
+});

@@ -106,3 +106,8 @@ iframe{
         width: 97% !important;
     }
 }
+
+.left .participate{
+    width: 60px !important;
+    height: 60px !important;
+}
