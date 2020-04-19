@@ -301,7 +301,10 @@
         var two_row_width = 700
         var s_height = screen.height
         function twoRowSetup(){
-            if(window.screen.availWidth < two_row_width){
+            const vw = Math.max(document.documentElement.clientWidth, window.innerWidth || 0);
+            const vh = Math.max(document.documentElement.clientHeight, window.innerHeight || 0);
+            if(vw < two_row_width){
+                console.log('two row setup')
                 $('.right').css('width', 'auto')
                 // $('.right').css('height', (s_height/2)+'px')
 
@@ -321,7 +324,11 @@
         }
 
         function oneRowSetup(){
-            if(window.screen.availWidth >= two_row_width){
+            const vw = Math.max(document.documentElement.clientWidth, window.innerWidth || 0);
+            const vh = Math.max(document.documentElement.clientHeight, window.innerHeight || 0);
+            console.log('max width and height ', vw, vh)
+            if(vw >= two_row_width){
+                console.log('one row setup')
                 $('.right').css('width', '370px')
                 // $('.right').css('height', '600px')
                 // $('.ml-placessec').css('height', s_height+'px')
@@ -338,7 +345,7 @@
             }
         }
 
-        $(window).resize(function() {
+        $(window).parent().resize(function() {
             console.log('changing width', window.screen.availWidth )
             twoRowSetup()
             oneRowSetup()
