@@ -152,7 +152,7 @@
 </head>
 
 <body style="padding-top:0px;">
-    <div class="container" style="width: 100%;max-width: 100%;max-height: 400px;">
+    <div class="container" style="width: 100%;max-width: 100%;">
         <div class="row-container">
             @yield('content')
         </div>
@@ -343,8 +343,9 @@
                 $('#video_search_res').removeClass('single-item')
 
                 $('.left').css('width', 'auto')
-                $('.left').css('height', (s_height)+'px')
+                // $('.left').css('height', (s_height)+'px')
                 $('.left').removeClass('shared_vertical_row')
+                $('.ml-placessec').css('max-height', (vh - 88)+'px')
                 console.log('changing val')
             }
         }

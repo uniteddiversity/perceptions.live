@@ -22,6 +22,7 @@ iframe{
 
 .shared_vertical_row div{
     height: auto;
+    overflow: hidden;
 }
 .single-item{
     padding-bottom: 0px !important;
