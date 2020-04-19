@@ -153,7 +153,7 @@
 
 <body style="padding-top:0px;">
     <div class="container" style="width: 100%;max-width: 100%;max-height: 400px;">
-        <div class="row">
+        <div class="row-container">
             @yield('content')
         </div>
     </div>
@@ -239,6 +239,10 @@
     <script>
         function addSlider(){
             console.log('adding slider')
+            // $('.single-item').not('.slick-initialized').unslick();
+            $('.single-item').on('init', function(event, slick){
+                // $('.single-item').unslick();
+            });
             $('.single-item').not('.slick-initialized').slick();
             // $('.single-item').slick('refresh')
             // $(".single-item").not('.slick-initialized').slick({

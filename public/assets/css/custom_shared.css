@@ -64,17 +64,17 @@ iframe{
 
 .slick-next{
      top: 125px;
-    left: -webkit-calc(100% - 50px);
-    left:    -moz-calc(100% - 50px);
-    left:         calc(100% - 50px);
+    left: -webkit-calc(100% - 58px);
+    left:    -moz-calc(100% - 58px);
+    left:         calc(100% - 58px);
     background: white !important;
  }
 
 .slick-prev{
     top: 125px;
-    left: -webkit-calc(40px);
-    left:    -moz-calc(40px);
-    left:         calc(40px);
+    left: -webkit-calc(16px);
+    left:    -moz-calc(16px);
+    left:         calc(16px);
     z-index: 10000;
     background: white !important;
 }
@@ -93,7 +93,7 @@ iframe{
 
 @media screen and (max-width: 700px) {
     .ml-placessec .places {
-        margin-left: 14px;
+        margin-left: 5px;
         padding-left: 5px;
 
         margin-right: 14px;
@@ -114,4 +114,8 @@ iframe{
 
 .left .form-groupx{
     left: 35px;
+}
+
+#video_search_res .col-lg-12{
+    padding-left: 0px !important;
 }

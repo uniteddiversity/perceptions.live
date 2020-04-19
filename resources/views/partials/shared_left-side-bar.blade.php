@@ -3,7 +3,7 @@
         <h3 class="main_map_title" >{{$basic_info['group']}}</h3>
         <p class="shared_map_description">{{$basic_info['description']}}</p>
         <div class="ml-placessec">
-            <div class="row" id="video_search_res">
+            <div class="rowx" id="video_search_res">
                 ...
             </div>
         </div>
