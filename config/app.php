@@ -177,7 +177,7 @@ return [
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
         Foothing\Laravel\Consent\ConsentServiceProvider::class,
-        Spatie\CookieConsent\CookieConsentServiceProvider::class
+        Statikbe\CookieConsent\CookieConsentServiceProvider::class
     ],
 
     /*
