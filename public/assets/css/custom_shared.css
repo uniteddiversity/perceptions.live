@@ -20,9 +20,9 @@ iframe{
     overflow: none;
 }
 
-.shared_vertical_row div{
-    /*height: auto;*/
-    /*overflow: hidden;*/
+.shared_vertical_row .left_side_container{
+    height: auto;
+    overflow: hidden;
 }
 .single-item{
     padding-bottom: 0px !important;
