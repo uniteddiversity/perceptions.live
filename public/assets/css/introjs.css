@@ -26,11 +26,11 @@
  position: absolute;
     -moz-transform-style: inherit !important;
     -webkit-transform-style: inherit !important;
-  -webkit-transform: none !important;
-     -moz-transform: none !important;
-      -ms-transform: none !important;
-       -o-transform: none !important;
-          transform: none !important;
+  /*-webkit-transform: none !important;*/
+  /*   -moz-transform: none !important;*/
+  /*    -ms-transform: none !important;*/
+  /*     -o-transform: none !important;*/
+  /*        transform: none !important;*/
 }
 
 .introjs-showElement,

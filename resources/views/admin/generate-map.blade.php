@@ -181,6 +181,7 @@ if (isset($edit_data)) {
               </select>
             </div>
 
+          @if(Auth::user()->is('admin'))
               <div class="form-group">
                   <label for="associated_users">Extra videos</label>
                   <select class="form-control select2-ajax-content" id="other_contents" multiple name="associated_contents[]">
@@ -189,6 +190,7 @@ if (isset($edit_data)) {
                       } ?>
                   </select>
               </div>
+          @endif
             <?php /*
                             {{--<hr/>--}}
                             {{--<div class="form-group">--}}

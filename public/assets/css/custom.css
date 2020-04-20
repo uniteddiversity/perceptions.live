@@ -6517,17 +6517,17 @@ nav>ul>li>a i.fas {
 
 @media screen and (max-width: 320px) {
   .logo_mobile {
-    margin-left: -100px;
-    width: 200px;
+    margin-left: -90px;
+    width: 180px;
     background-size: 200px;
   }
 
   .rheader>span.menubt {
-    margin-left: -153px;
+    margin-left: -143px;
   }
 
   .half-map .map .leaflet-control-locate {
-    margin-right: -152px;
+    margin-right: -142px;
   }
 
   .arrowWrapper .arrow.arrowleft {
