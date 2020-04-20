@@ -2,7 +2,7 @@
 
 use Illuminate\Database\Seeder;
 
-class ContentAccessLevelSeeder extends Seeder
+class ConsentSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -12,22 +12,19 @@ class ContentAccessLevelSeeder extends Seeder
     public function run()
     {
         DB::statement('SET FOREIGN_KEY_CHECKS=0;');
-        DB::table('content_access_levels')->truncate();
-        DB::table('content_access_levels')->insert([
+        DB::table('gdpr_treatment')->truncate();
+        DB::table('gdpr_treatment')->insert([
             [
                 'id' => '1',
-                'name' => 'Public: Anyone.',
-                'slug' => 'public'
-            ],
-            [
-                'id' => '2',
-                'name' => 'Logged In: Only members of the PRCPTION network.',
-                'slug' => 'only-logged'
-            ],
-            [
-                'id' => '3',
-                'name' => 'Private: Only users of a certain group or community.',
-                'slug' => 'private'
+                'active' => '1',
+                'required' => '1',
+                'name' => 'Consent',
+                'documentVersion' => '1',
+                'description' => 'Consent description',
+                'documentUrl' => 'https://docs.perceptiontravel.tv/legal-docs/terms-of-service',
+                'weight' => '1',
+                'created_at' => '2020-04-21',
+                'updated_at' => '2020-04-21',
             ]
         ]);
     }

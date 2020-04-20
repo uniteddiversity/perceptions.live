@@ -60,4 +60,22 @@
       'Imgfly' => 'ShawnSandy\\ImgFly\\Classes\\ImgflyFacade',
     ),
   ),
+  'statikbe/laravel-cookie-consent' => 
+  array (
+    'providers' => 
+    array (
+      0 => 'Statikbe\\CookieConsent\\CookieConsentServiceProvider',
+    ),
+  ),
+  'webpatser/laravel-uuid' => 
+  array (
+    'providers' => 
+    array (
+      0 => 'Webpatser\\Uuid\\UuidServiceProvider',
+    ),
+    'aliases' => 
+    array (
+      'Uuid' => 'Webpatser\\Uuid\\Uuid',
+    ),
+  ),
 );

@@ -120,12 +120,19 @@ class RegisterController extends Controller
         if (! $treatments = Consent::validate($request->all())) {
             // User didn't accept all the mandatory checkboxes.
 //            throw new \Exception("Consent is mandatory in order to proceed.");
-            return response()->json(array('error' => "Consent is mandatory in order to proceed."), 200);
+            return response()->json(array('error' => array('consent_error' => "Consent is mandatory in order to proceed.")), 200);
         }
 
         event(new Registered($user = $this->create( $request->toArray() )));
 
         $this->sendConfirmationToUser($user);
+
+        // omitted
+
+        // This will register a record with the
+        // user's consent along with an event log.
+//        Auth::loginUsingId($user->id);
+        Consent::grant($treatments, $user);
 
 //        if($this->create($request->toArray())){
             return response()->json(array('success' => 'Please check your email for confirmation URL'), 200);

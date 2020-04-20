@@ -499,6 +499,8 @@
     {{--})--}}
     {{--});--}}
     {{--</script>--}}
+
+    <a href="#" class="js-cookie-settings">{{ trans('cookieConsent::texts.settings_notice_gdpr') }}</a>
 </body>
 
 </html>
