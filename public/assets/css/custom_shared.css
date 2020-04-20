@@ -21,7 +21,7 @@ iframe{
 }
 
 .shared_vertical_row .left_side_container{
-    height: auto;
+    /*height: auto;*/
     overflow: hidden;
 }
 .single-item{
