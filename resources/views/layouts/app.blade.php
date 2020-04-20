@@ -191,7 +191,7 @@
         });
 
         intro.onexit(function () {
-            let maxAge = "; max-age=" + 3650*24*60*60;
+            let maxAge = "; max-age=" + 3*24*60*60;
             document.cookie = "intro_exited=true; path=/" +  maxAge;
         });
 
