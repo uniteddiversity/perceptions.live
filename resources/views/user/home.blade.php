@@ -52,6 +52,20 @@
     <span class="arrow arrowright" onclick="closeSideBarMenu(this)"><i class="icon"></i></span>
 </div>
 
+
+<div class="footer cookie_footer cookiebanner" id="cookiebanner">
+    <span class="footer1">
+     <strong>&nbsp;</strong>
+    </span>
+    <span class="footer2">
+        <strong>{{ trans('cookieConsent::texts.title_cookiebanner') }}
+
+{{--            <a href="#" class="inline__item cookiemonster__settings js-cookie-settings">{{ trans('cookieConsent::texts.settings_notice_gdpr') }}</a>--}}
+        </strong>
+        <a href="#" class="btn btn--brand cookiemonster__accept js-cookie-accept cookie-button">{{ trans('cookieConsent::texts.accept_notice_gdpr') }}</a>
+    </span>
+</div>
+
 <div class="footer">
     <span class="footer1">
      <strong>   <a href="https://docs.perceptiontravel.tv/legal-docs/privacy-policy" target="_blank">Privacy Policy</a> | <a href="https://docs.perceptiontravel.tv/legal-docs/terms-of-service" target="_blank">Terms of Service</a> | <a href="https://perceptiontravel.tv/community/donations/" target="_blank">Make a Donation</a> | <a href="/contact-us" target="_blank">Submit Feedback</a> | <a href="https://docs.perceptiontravel.tv/" target="_blank">About Us</a> | <a href="/contact-us" target="_blank">Contact Us</a></strong></span>

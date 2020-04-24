@@ -191,8 +191,11 @@
         });
 
         intro.onexit(function () {
-            let maxAge = "; max-age=" + 3*24*60*60;
-            document.cookie = "intro_exited=true; path=/" +  maxAge;
+            let if_cookie_consent = getCookie('__cookie_consent');
+            if(if_cookie_consent !== null){
+                let maxAge = "; max-age=" + 3*24*60*60;
+                document.cookie = "intro_exited=true; path=/" +  maxAge;
+            }
         });
 
         function getCookie(name) {
@@ -500,7 +503,26 @@
     {{--});--}}
     {{--</script>--}}
 
-    <a href="#" class="js-cookie-settings">{{ trans('cookieConsent::texts.settings_notice_gdpr') }}</a>
+{{--    <a href="#" class="js-cookie-settings">{{ trans('cookieConsent::texts.settings_notice_gdpr') }}</a>--}}
+
+
+{{--    <div class="cookiebanner" id="cookiebanner">--}}
+{{--        <div class="section section--light section--sml">--}}
+{{--            <div class="container">--}}
+{{--                <div class="cookie__wrapper">--}}
+{{--                    <h2 class="cookie__title">{{ trans('cookieConsent::texts.title_gdpr') }}</h2>--}}
+{{--                    <div class="cookie__body">--}}
+{{--                        {{ trans('cookieConsent::texts.title_cookiebanner') }}--}}
+{{--                    </div>--}}
+{{--                    <div class="cookie__cta">--}}
+{{--                        <a href="#" class="btn btn--brand cookiemonster__accept js-cookie-accept">{{ trans('cookieConsent::texts.accept_notice_gdpr') }}</a>--}}
+{{--                        <a href="#" class="inline__item cookiemonster__settings js-cookie-settings">{{ trans('cookieConsent::texts.settings_notice_gdpr') }}</a>--}}
+{{--                    </div>--}}
+{{--                </div>--}}
+{{--            </div>--}}
+{{--        </div>--}}
+{{--    </div>--}}
+
 </body>
 
 </html>

@@ -8,7 +8,7 @@
             var shouldRun = _getCookie(consentCookie) ? false : true;
             if (shouldRun) {
                 document.getElementById("cookiebanner").style.display = "block";
-                document.getElementById("cookiebanner-overlay").style.display = "block";
+                // document.getElementById("cookiebanner-overlay").style.display = "block";
             } else {
                 document.body.addEventListener("click", _listener);
                 return;
@@ -31,7 +31,9 @@
                 document
                     .getElementById("cookiebanner-overlay")
                     .classList.toggle("superhidden");
-                location.reload();
+                document.getElementById("cookiebanner").style.display = "none";;
+
+                // location.reload();
             } else if (_hasClass(element, "js-modal-close")) {
                 event.preventDefault();
                 _closeCookieModal();

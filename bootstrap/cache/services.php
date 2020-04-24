@@ -37,6 +37,7 @@
     33 => 'App\\Providers\\EventServiceProvider',
     34 => 'App\\Providers\\RouteServiceProvider',
     35 => 'Foothing\\Laravel\\Consent\\ConsentServiceProvider',
+    36 => 'Statikbe\\CookieConsent\\CookieConsentServiceProvider',
   ),
   'eager' => 
   array (
@@ -63,6 +64,7 @@
     20 => 'App\\Providers\\EventServiceProvider',
     21 => 'App\\Providers\\RouteServiceProvider',
     22 => 'Foothing\\Laravel\\Consent\\ConsentServiceProvider',
+    23 => 'Statikbe\\CookieConsent\\CookieConsentServiceProvider',
   ),
   'deferred' => 
   array (
