@@ -24,8 +24,10 @@
     <link rel="stylesheet" href="/assets/css/custom.css?version=1" />
     <link rel="stylesheet" href="/assets/css/custom_shared.css" />
 
-{{--    <link rel="stylesheet" href="/assets/js/slick_slider/slick.css">--}}
+    <link rel="stylesheet" href="/assets/js/slick_slider/slick.css">
 <!--    <link rel="stylesheet" href="/assets/css/leaflet.css" />-->
+
+    <link rel="stylesheet" href="/assets/findgo/css/icons.css">
     <style>
         #featureModal {
             display: block;
@@ -154,6 +156,7 @@
 <body style="padding-top:0px;">
     <div class="container" style="width: 100%;max-width: 100%;">
         <div class="row-container">
+            <div class="show_feed"><a href="#" class="expand_button"><i class="fa fa-expand pointer" style="cursor:pointer"></i></a></div>
             @yield('content')
         </div>
     </div>
@@ -237,50 +240,95 @@
     <script src="/js/jquery.timeago.js"></script>
 
     <script>
+        var right_height = 300;//just assume
         function addSlider(){
-            console.log('adding slider')
-            // $('.single-item').not('.slick-initialized').unslick();
-            $('.single-item').on('init', function(event, slick){
-                // $('.single-item').unslick();
-            });
-            $('.single-item').not('.slick-initialized').slick();
-            // $('.single-item').slick('refresh')
-            // $(".single-item").not('.slick-initialized').slick({
-            //     dots: false,
-            //     infinite: false,
-            //     speed: 300,
-            //     slidesToShow: 1,
-            //     slidesToScroll: 1,
-            //     responsive: [
-            //         {
-            //             breakpoint: 1024,
-            //             settings: {
-            //                 slidesToShow: 3,
-            //                 slidesToScroll: 3,
-            //                 infinite: true,
-            //                 dots: true
-            //             }
-            //         },
-            //         {
-            //             breakpoint: 600,
-            //             settings: {
-            //                 slidesToShow: 2,
-            //                 slidesToScroll: 2
-            //             }
-            //         },
-            //         {
-            //             breakpoint: 480,
-            //             settings: {
-            //                 slidesToShow: 1,
-            //                 slidesToScroll: 1
-            //             }
-            //         }
-            //         // You can unslick at a given breakpoint now by adding:
-            //         // settings: "unslick"
-            //         // instead of a settings object
-            //     ]
-            // });
+            const vw = Math.max(document.documentElement.clientWidth, window.innerWidth || 0);
+
+            if(vw < two_row_width){
+                console.log('adding slider')
+                // $('.single-item').not('.slick-initialized').unslick();
+                $('.single-item').on('init', function(event, slick){
+                    // $('.single-item').unslick();
+                });
+                $('.single-item').not('.slick-initialized').slick();
+                // $('.single-item').slick('refresh')
+                // $(".single-item").not('.slick-initialized').slick({
+                //     dots: false,
+                //     infinite: false,
+                //     speed: 300,
+                //     slidesToShow: 1,
+                //     slidesToScroll: 1,
+                //     responsive: [
+                //         {
+                //             breakpoint: 1024,
+                //             settings: {
+                //                 slidesToShow: 3,
+                //                 slidesToScroll: 3,
+                //                 infinite: true,
+                //                 dots: true
+                //             }
+                //         },
+                //         {
+                //             breakpoint: 600,
+                //             settings: {
+                //                 slidesToShow: 2,
+                //                 slidesToScroll: 2
+                //             }
+                //         },
+                //         {
+                //             breakpoint: 480,
+                //             settings: {
+                //                 slidesToShow: 1,
+                //                 slidesToScroll: 1
+                //             }
+                //         }
+                //         // You can unslick at a given breakpoint now by adding:
+                //         // settings: "unslick"
+                //         // instead of a settings object
+                //     ]
+                // });
+
+                var $slider = $(".single-item");
+                $slider.slick('refresh');
+
+                right_height = $('.right').height();
+                var left_height = $('.left').height();
+                $('.left').css('height','calc(100% - '+right_height+'px)');
+            }
+
+
+
+            // $('.left').css('height','calc(100%)');
         }
+
+        $(document).ready(function(){
+            $('#map').click(function(){
+                const vw = Math.max(document.documentElement.clientWidth, window.innerWidth || 0);
+                if(vw < two_row_width){
+                    if($('.right').height() > 0){
+                        $('.left').css('height','100%');
+                        $('.right').css('height','0px');
+                        $('.show_feed').css('display','block');
+                    }else{
+                        // console.log('expanding')
+                        // $('.left').css('height','calc(100% - '+right_height+'px)');
+                        // $('.right').css('height',right_height+'px');
+                        // console.log('click working ',right_height)
+
+                        // $('.show_feed').css('display','none');
+                    }
+                }
+            })
+
+            $('.show_feed').click(function(){
+                if($('.right').height() == 0){
+                    $('.left').css('height','calc(100% - '+right_height+'px)');
+                    $('.right').css('height',right_height+'px');
+                    $('.show_feed').css('display','none');
+                }
+            })
+        })
+
     </script>
     <script>
         $(document).ready(function() {
@@ -297,6 +345,11 @@
                     dataType: 'json'
                 }
             });
+
+            // console.log('binding...')
+            // $('.shared_vertical_row').on('resize', function(){
+            //     alert('xxx');
+            // });
         })
 
     </script>
@@ -308,7 +361,6 @@
             const vw = Math.max(document.documentElement.clientWidth, window.innerWidth || 0);
             const vh = Math.max(document.documentElement.clientHeight, window.innerHeight || 0);
             if(vw < two_row_width){
-                console.log('two row setup')
                 $('.right').css('width', 'auto')
                 // $('.right').css('height', (s_height/2)+'px')
 
@@ -322,8 +374,10 @@
                 // $('.left').css('height', (s_height/2)+'px')
                 $('.left').addClass('shared_vertical_row')
 
+                // console.log('hengith is ',$('.right').height());
+                // $('#map').css('height', (s_height/2)+'px')
+
                 // addSlider();
-                console.log('changing val')
             }
         }
 
@@ -332,7 +386,6 @@
             const vh = Math.max(document.documentElement.clientHeight, window.innerHeight || 0);
             console.log('max width and height ', vw, vh)
             if(vw >= two_row_width){
-                console.log('one row setup')
                 $('.right').css('width', '370px')
                 // $('.right').css('height', '600px')
                 // $('.ml-placessec').css('height', s_height+'px')
@@ -351,18 +404,20 @@
         }
 
         $(window).parent().resize(function() {
-            console.log('changing width', window.screen.availWidth )
             twoRowSetup()
             oneRowSetup()
         })
 
 
-        $(document).ready(function(){
-            $('.left_side_container').bind('resize', function(){
-                alert('xxx');
-            });
-            console.log('event bound')
-        })
+
+        // $(document).ready(function(){
+        //     $('.left_side_container').bind('resize', function(){
+        //         alert('xxx');
+        //     });
+        //     console.log('event bound')
+        // })
+
+
 
         twoRowSetup()
         oneRowSetup()

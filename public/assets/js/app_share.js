@@ -1,17 +1,26 @@
 var default_zoom = $('#default_zoom').val();
 var default_lat = parseFloat($('#default_lat').val());
 var default_long = parseFloat($('#default_long').val());
-var map = L.map( 'map', {
-    center: [default_lat, default_long],
-    minZoom: 2,
-    zoom: parseFloat(default_zoom)
-});
 
+var bounds = null
 if (typeof (L) != "undefined") {
     var southWest = L.latLng(-89.98155760646617, -180),
         northEast = L.latLng(89.99346179538875, 180);
-    var bounds = L.latLngBounds(southWest, northEast);
+    bounds = L.latLngBounds(southWest, northEast);
 }
+
+console.log('center is ',bounds.getCenter(), 'bounds are ',bounds)
+var map = L.map( 'map', {
+    // center: [default_lat, default_long],
+    // center: bounds.getCenter(),
+    minZoom: 2,
+    // zoom:5,
+    zoom: parseFloat(default_zoom),
+    maxBounds: bounds,
+    maxBoundsViscosity: 1.0
+});
+
+
 
 var popup = L.popup();
 // L.tileLayer( 'https://stamen-tiles-{s}.a.ssl.fastly.net/watercolor/{z}/{x}/{y}.{ext}', {
@@ -182,6 +191,7 @@ function searchVideo(){
         updateMarkers(data.json.original);
         $('#video_search_res').html(decode(data.content));
         // addSlider();
+
         setTimeout(function(){addSlider()}, 1000)
     });
 }
@@ -222,6 +232,7 @@ function shareSearchVideo(){
 
         updateMarkers(data.json.original);
         $('#video_search_res').html(decode(data.content));
+        console.log('refreshing..')
         setTimeout(function(){addSlider()}, 1000)
     });
 }

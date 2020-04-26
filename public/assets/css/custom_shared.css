@@ -120,3 +120,54 @@ iframe{
 #video_search_res .col-lg-12{
     padding-left: 0px !important;
 }
+
+.slick-arrow{
+    background-color: transparent !important;
+}
+
+.slick-prev:before, .slick-next:before {
+    font-size: 30px !important;
+}
+/*.slick-prev:before { content: "\f137"; }*/
+/*[dir="rtl"] .slick-prev:before { content: "\f137"; }*/
+
+
+
+
+/*experiment styles*/
+
+@media screen and (max-width: 700px){
+    .container, .row-container, .sh_container{
+        height: 100%;
+    }
+
+
+    .sh_container .left{
+        position: absolute !important;
+    }
+
+    .show_feed{
+        position: absolute;
+        background: rgba(71, 54, 54, 0.1);
+        top: 10px;
+        left: 10px;
+        width: 24px;
+        height: 24px;
+        z-index: 10000000;
+        cursor: pointer;
+        padding: 4px;
+    }
+
+    .expand_button{
+
+    }
+
+    .show_feed:hover{
+        background: rgba(71, 54, 54, 0.5);
+    }
+}
+
+.show_feed{
+    display: none;
+}
+/*end experiment styles*/
