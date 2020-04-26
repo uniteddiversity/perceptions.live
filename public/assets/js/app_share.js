@@ -50,6 +50,10 @@ searchVideo();
 
 var m;
 function updateMarkers(markers){
+    var southWest = L.latLng(-89.98155760646617, -180),
+        northEast = L.latLng(89.99346179538875, 180);
+    bounds = L.latLngBounds(southWest, northEast);
+
     map.removeLayer(markerClusters);
 
     markerClusters = L.markerClusterGroup();
