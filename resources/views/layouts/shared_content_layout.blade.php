@@ -156,7 +156,7 @@
 <body style="padding-top:0px;">
     <div class="container" style="width: 100%;max-width: 100%;">
         <div class="row-container">
-            <div class="show_feed"><a href="#" class="expand_button"><i class="fa fa-expand pointer" style="cursor:pointer"></i></a></div>
+            <div class="show_feed"><a href="#" class="expand_button"><i class="fa fa-window-restore pointer fa-2x" style="cursor:pointer"></i></a></div>
             @yield('content')
         </div>
     </div>
@@ -294,6 +294,7 @@
                 right_height = $('.right').height();
                 var left_height = $('.left').height();
                 $('.left').css('height','calc(100% - '+right_height+'px)');
+
             }
 
 
@@ -305,26 +306,44 @@
             $('#map').click(function(){
                 const vw = Math.max(document.documentElement.clientWidth, window.innerWidth || 0);
                 if(vw < two_row_width){
-                    if($('.right').height() > 0){
-                        $('.left').css('height','100%');
-                        $('.right').css('height','0px');
-                        $('.show_feed').css('display','block');
-                    }else{
-                        // console.log('expanding')
-                        // $('.left').css('height','calc(100% - '+right_height+'px)');
-                        // $('.right').css('height',right_height+'px');
-                        // console.log('click working ',right_height)
-
-                        // $('.show_feed').css('display','none');
-                    }
+                    fullscreenView()
                 }
             })
 
+            $('.hide_feed').click(function(){
+                const vw = Math.max(document.documentElement.clientWidth, window.innerWidth || 0);
+                if(vw < two_row_width){
+                    fullscreenView()
+                }
+            })
+
+            function fullscreenView(){
+                if($('.right').height() > 0){
+                    $('.left').css('height','100%');
+                    $('.right').css('height','0px');
+                    $('.show_feed').css('display','block');
+                    $('.hide_feed').css('display','none');
+
+                    //.form-groupx, #step2, .leaflet-bottom, .sh_watermark
+                    $('.form-groupx').css('display','block');
+                    $('#step2').css('display','block');
+                    $('.leaflet-bottom').css('display','block');
+                    $('.sh_watermark').css('display','block');
+                    $('.leaflet-top').css('display','block');
+                }
+            }
             $('.show_feed').click(function(){
                 if($('.right').height() == 0){
                     $('.left').css('height','calc(100% - '+right_height+'px)');
                     $('.right').css('height',right_height+'px');
                     $('.show_feed').css('display','none');
+
+                    $('.hide_feed').css('display','block');
+                    $('.form-groupx').css('display','none');
+                    $('#step2').css('display','none');
+                    $('.leaflet-bottom').css('display','none');
+                    $('.sh_watermark').css('display','none');
+                    $('.leaflet-top').css('display','none');
                 }
             })
         })

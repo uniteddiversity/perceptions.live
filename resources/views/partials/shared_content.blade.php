@@ -12,6 +12,7 @@
         <?php echo $search_elements ?>
 
     </div>
+        <div class="hide_feed"><a href="#" class="expand_button"><i class="fa fa-window-restore pointer fa-2x white" style="cursor:pointer"></i></a></div>
         <div id="custom-popup-upload-close">
             <a href="#" class="participate" id="step2">
                 <i class="fas fa-cloud-upload-alt pointer" style="cursor:pointer"></i>
