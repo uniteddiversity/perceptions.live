@@ -17,6 +17,7 @@ body{
 }
 
 .overlay{
+.overlay{
 	background:rgba(255,255,255,.85);
 	position:absolute;
 	left:0;

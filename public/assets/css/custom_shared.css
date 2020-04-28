@@ -8,3 +8,207 @@
 iframe{
     border: 0px;
 }
+
+.shared_vertical_row .ml-placessec .col-lg-12{
+    float: left;
+    /*height: 160px;*/
+    width: 260px;
+}
+
+.shared_vertical_row{
+    /*height: 55% !important;*/
+    overflow: none;
+}
+
+.shared_vertical_row .left_side_container{
+    /*height: auto;*/
+    overflow: hidden;
+}
+.single-item{
+    padding-bottom: 0px !important;
+}
+
+.shared_vertical_row #video_search_res{
+    padding-bottom: 0px !important;
+    padding: 10px;
+}
+
+.shared_vertical_row .form-groupx{
+    top: 10px;
+}
+
+.left_side_container{
+    padding-right: 0px;
+    overflow-y: scroll;
+    overflow-x: hidden;
+    font-family: ralewayregular, sans-serif;
+    /*height: 600px;*/
+    width:90%;
+}
+
+.sh_container {
+    width:100%;
+    /*height:600px;*/
+    border:1px solid;
+}
+.left {
+    width:auto;
+    height:600px;
+    overflow:hidden;
+}
+.right {
+    /*height:600px;*/
+    width:370px;
+    float:left;
+    overflow: hidden;
+}
+
+.slick-next{
+     top: 125px;
+    left: -webkit-calc(100% - 62px);
+    left:    -moz-calc(100% - 62px);
+    left:         calc(100% - 62px);
+    background: white !important;
+ }
+
+.slick-prev{
+    top: 125px;
+    left: -webkit-calc(16px);
+    left:    -moz-calc(16px);
+    left:         calc(16px);
+    z-index: 10000;
+    background: white !important;
+}
+
+.slick-prev::before {
+    content: '←';
+}
+
+.slick-next::before {
+    content: '→';
+}
+
+.single-item{
+    padding: 0px !important;
+}
+
+@media screen and (max-width: 700px) {
+    .ml-placessec .places {
+        margin-left: 5px;
+        padding-left: 5px;
+
+        margin-right: 14px;
+        padding-right: 5px;
+    }
+}
+
+@media screen and (max-width: 700px){
+    .ml-placessec .places {
+        width: 97% !important;
+    }
+}
+
+.left .participate{
+    width: 60px !important;
+    height: 60px !important;
+}
+
+.left .form-groupx{
+    left: 35px;
+}
+
+#video_search_res .col-lg-12{
+    padding-left: 0px !important;
+}
+
+.slick-arrow{
+    background-color: transparent !important;
+}
+
+.slick-prev:before, .slick-next:before {
+    font-size: 50px !important;
+}
+/*.slick-prev:before { content: "\f137"; }*/
+/*[dir="rtl"] .slick-prev:before { content: "\f137"; }*/
+
+
+
+
+/*experiment styles*/
+
+@media screen and (max-width: 700px){
+    .container, .row-container, .sh_container{
+        height: 100%;
+    }
+
+
+    .sh_container .left{
+        position: absolute !important;
+    }
+
+    .show_feed{
+        position: absolute;
+        background: rgba(71, 54, 54, 0.1);
+        top: 10px;
+        left: 10px;
+        width: 46px;
+        height: 40px;
+        z-index: 10000000;
+        cursor: pointer;
+        padding: 4px;
+    }
+
+    .expand_button{
+
+    }
+
+    .show_feed:hover, .hide_feed:hover{
+        background: rgba(71, 54, 54, 0.5);
+    }
+
+    /*hide these from half screen mode*/
+    .form-groupx, #step2, .leaflet-bottom, .sh_watermark, .leaflet-top{
+        display: none;
+    }
+
+    .hide_feed {
+        position: fixed !important;
+        background-size: 90px;
+        bottom: 40px;
+        left: calc(50% - 20px);
+        background-size: 80%;
+        width: 46px;
+        height: 40px;
+        cursor: pointer;
+        z-index: 1000;
+        padding: 5px;
+    }
+
+    .sh_watermark {
+        position: absolute;
+        background-color: transparent;
+        height: 50px;
+        width: 100px;
+        background-image: url(/assets/findgo/images/live-perceptions-shared-logo.png);
+        /* background: no-repeat; */
+        right: 10px;
+        bottom: 20px;
+        -webkit-background-size: 100px;
+        background-size: 100px;
+        background-repeat: no-repeat;
+        top: auto !important;
+    }
+
+    .leaflet-control-attribution{
+        text-align: center;
+    }
+
+    .leaflet-top {
+        top: 84% !important;
+    }
+}
+
+.show_feed{
+    display: none;
+}
+/*end experiment styles*/

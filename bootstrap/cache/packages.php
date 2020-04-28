@@ -1,11 +1,4 @@
 <?php return array (
-  'fideloper/proxy' => 
-  array (
-    'providers' => 
-    array (
-      0 => 'Fideloper\\Proxy\\TrustedProxyServiceProvider',
-    ),
-  ),
   'beyondcode/laravel-confirm-email' => 
   array (
     'providers' => 
@@ -13,11 +6,11 @@
       0 => 'BeyondCode\\EmailConfirmation\\EmailConfirmationServiceProvider',
     ),
   ),
-  'laravel/tinker' => 
+  'fideloper/proxy' => 
   array (
     'providers' => 
     array (
-      0 => 'Laravel\\Tinker\\TinkerServiceProvider',
+      0 => 'Fideloper\\Proxy\\TrustedProxyServiceProvider',
     ),
   ),
   'intervention/image' => 
@@ -31,6 +24,31 @@
       'Image' => 'Intervention\\Image\\Facades\\Image',
     ),
   ),
+  'laracasts/flash' => 
+  array (
+    'providers' => 
+    array (
+      0 => 'Laracasts\\Flash\\FlashServiceProvider',
+    ),
+    'aliases' => 
+    array (
+      'Flash' => 'Laracasts\\Flash\\Flash',
+    ),
+  ),
+  'laravel/tinker' => 
+  array (
+    'providers' => 
+    array (
+      0 => 'Laravel\\Tinker\\TinkerServiceProvider',
+    ),
+  ),
+  'nesbot/carbon' => 
+  array (
+    'providers' => 
+    array (
+      0 => 'Carbon\\Laravel\\ServiceProvider',
+    ),
+  ),
   'shawnsandy/img-fly' => 
   array (
     'providers' => 
@@ -42,15 +60,22 @@
       'Imgfly' => 'ShawnSandy\\ImgFly\\Classes\\ImgflyFacade',
     ),
   ),
-  'laracasts/flash' => 
+  'statikbe/laravel-cookie-consent' => 
   array (
     'providers' => 
     array (
-      0 => 'Laracasts\\Flash\\FlashServiceProvider',
+      0 => 'Statikbe\\CookieConsent\\CookieConsentServiceProvider',
+    ),
+  ),
+  'webpatser/laravel-uuid' => 
+  array (
+    'providers' => 
+    array (
+      0 => 'Webpatser\\Uuid\\UuidServiceProvider',
     ),
     'aliases' => 
     array (
-      'Flash' => 'Laracasts\\Flash\\Flash',
+      'Uuid' => 'Webpatser\\Uuid\\Uuid',
     ),
   ),
 );

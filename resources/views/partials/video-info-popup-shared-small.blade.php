@@ -15,10 +15,10 @@ $video_id = isset($matches[1])?$matches[1]:'';
             src="https://www.youtube.com/embed/<?php echo $video_id ?>">
     </iframe>
 </a>
-<div class="row" style="display: block;margin: 5px;">
+<div class="row" style="display: block;margin: 5px;">in
     <div>
-
-        <h3>{{$info['title']}}</h3>
+<?php //dd($info->id) ?>
+        <a target="_blank" href="{{route('video.page.show', ['_category_name' => isset($info->category)?str_replace(' ', '-', $info->category->name):'category', '_date' => date('Y-m-d', strtotime($info['captured_date'])), '_video_title' => str_replace(' ', '-', $info['title']), '_video_uid' => uid($info->id)])}}"><h3>{{$info['title']}}</h3></a>
 
     </div>
     <p><i class="fas fa-map-marker-alt"></i>
@@ -26,11 +26,12 @@ $video_id = isset($matches[1])?$matches[1]:'';
     <div style="float:right;">
         <p> <i class="far fa-user"></i>
 
-            <?php foreach($info->videoProducer as $key => $users){ if(isset($info->videoProducer[$key])){ echo '<span class="inactive_link" onclick="openProfile(\''. $info->videoProducer[$key]->user->id .'\')">@'.$info->videoProducer[$key]->user->display_name.'</span>'; break; } }?>
+            <?php foreach($info->videoProducer as $key => $users){ if(isset($info->videoProducer[$key])){ echo '<a class="inactive_link" target="_blank" href="'.route('group.page.show', ['_user_name' => str_replace(' ', '-', $info->videoProducer[$key]->user->first_name.' '.$info->videoProducer[$key]->user->last_name), '_user_id' => uid($info->videoProducer[$key]->user->id)]).'" >@'.$info->videoProducer[$key]->user->display_name.'</a>'; break; } }?>
         </p>
     </div>
 
+
 </div>
-<div class="btn_outer"><a class="btn" href="#" onclick="openVideo('<?php echo $info['id'] ?>')">
+<div class="btn_outer"><a class="btn" target="_blank" href="{{route('video.page.show', ['_category_name' => isset($info->category)?str_replace(' ', '-', $info->category->name):'category', '_date' => date('Y-m-d', strtotime($info['captured_date'])), '_video_title' => str_replace(' ', '-', $info['title']), '_video_uid' => uid($info->id)])}}" onclick="openVideo('<?php echo $info['id'] ?>')">
         Open Video
     </a></div>

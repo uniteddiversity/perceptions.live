@@ -838,7 +838,7 @@ class AdminController extends Controller
                 $selected_groups[$i]['id'] = $val['id'];
                 $i++;
             }
-        }//dd($selected_groups);
+        }
 
         $gci_tags = $this->userRepository->getGreaterCommunityIntentionTag();
         $categories = $this->category->get();
@@ -852,7 +852,7 @@ class AdminController extends Controller
         $id = (isset($r['id']))?UID::translator($r['id']):0;
         $user_id = (!isset(Auth::user()->id))? 0 : Auth::user()->id;
         $map_list = $this->contentService->groupShareableContentsList($user_id);
-        if(count($map_list) >= 1 && !Auth::user()->is('admin')){
+        if(count($map_list) >= 1 && !Auth::user()->is('admin') && (empty($id) || $id == 0)){
             return Redirect::back()->withErrors('Maximum one map allowed!')->withInput();
         }
         $validator = Validator::make($request->all(), [
@@ -871,7 +871,12 @@ class AdminController extends Controller
         $data['associations']['categories'] = isset($r['categories'])?$r['categories']: array();
         $data['associations']['groups'] = isset($r['groups'])?$r['groups']: array();
         $data['associations']['filter_list'] = isset($r['filter_list'])?$r['filter_list']: array();
-        $data['associations']['associated_contents'] = isset($r['associated_contents'])?$r['associated_contents']: array();
+
+        if(Auth::user()->is('admin'))//only admin can add extra videos
+        {
+            $data['associations']['associated_contents'] = isset($r['associated_contents'])?$r['associated_contents']: array();
+        }
+
 
         $data['basic'] = array(
             'group' => $r['group'],
@@ -884,6 +889,8 @@ class AdminController extends Controller
             'long' => $r['long'],
             'default_location' => $r['default_location'],
             'public_token' => $this->createToken(date('Y-m-d H:i:s')),
+            'description' => $r['description'],
+            'extra_css' => $r['extra_css'],
         );
 
         if(is_numeric($id) && $id != 0){

@@ -2,12 +2,17 @@
 
 namespace App;
 
+use Foothing\Laravel\Consent\Contracts\ConsentSubject;
+use Foothing\Laravel\Consent\Traits\HasConsents;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use App\Role;
 
-class User extends Authenticatable
+class User extends Authenticatable implements ConsentSubject
 {
+    // This trait will implement the relation to the consent table.
+    use HasConsents;
+
     use Notifiable;
 
     /**
@@ -86,5 +91,15 @@ class User extends Authenticatable
     public function userAssociatedContent()
     {
 
+    }
+
+    /**
+     * Returns the subject id.
+     *
+     * @return mixed
+     */
+    public function getSubjectId()
+    {
+        return $this->id;
     }
 }

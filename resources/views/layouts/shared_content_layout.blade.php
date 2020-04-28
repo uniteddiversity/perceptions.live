@@ -23,7 +23,11 @@
     <link rel="stylesheet" type="text/css" href="/assets/findgo/css/style.css" />
     <link rel="stylesheet" href="/assets/css/custom.css?version=1" />
     <link rel="stylesheet" href="/assets/css/custom_shared.css" />
+
+    <link rel="stylesheet" href="/assets/js/slick_slider/slick.css">
 <!--    <link rel="stylesheet" href="/assets/css/leaflet.css" />-->
+
+    <link rel="stylesheet" href="/assets/findgo/css/icons.css">
     <style>
         #featureModal {
             display: block;
@@ -150,8 +154,9 @@
 </head>
 
 <body style="padding-top:0px;">
-    <div class="container" style="width: 100%;max-width: 100%;max-height: 400px;">
-        <div class="row">
+    <div class="container" style="width: 100%;max-width: 100%;">
+        <div class="row-container">
+            <div class="show_feed"><a href="#" class="expand_button"><i class="fa fa-window-restore pointer fa-2x" style="cursor:pointer"></i></a></div>
             @yield('content')
         </div>
     </div>
@@ -202,7 +207,7 @@
         }
 
         .btn_outer{
-            display: none;
+            /*display: none;*/
         }
 
         .sh_watermark{
@@ -230,8 +235,120 @@
     <script src="/assets/js/L.Control.Locate.min.js"></script>
     <script src="/assets/leaflet-groupedlayercontrol/leaflet.groupedlayercontrol.js"></script>
     <script src="/js//dist/js/select2.full.min.js"></script>
+    <script src="/assets/js/slick_slider/slick.js"></script>
     <script src="/assets/js/app_share.js"></script>
     <script src="/js/jquery.timeago.js"></script>
+
+    <script>
+        var right_height = 300;//just assume
+        function addSlider(){
+            const vw = Math.max(document.documentElement.clientWidth, window.innerWidth || 0);
+
+            if(vw < two_row_width){
+                console.log('adding slider')
+                // $('.single-item').not('.slick-initialized').unslick();
+                $('.single-item').on('init', function(event, slick){
+                    // $('.single-item').unslick();
+                });
+                $('.single-item').not('.slick-initialized').slick();
+                // $('.single-item').slick('refresh')
+                // $(".single-item").not('.slick-initialized').slick({
+                //     dots: false,
+                //     infinite: false,
+                //     speed: 300,
+                //     slidesToShow: 1,
+                //     slidesToScroll: 1,
+                //     responsive: [
+                //         {
+                //             breakpoint: 1024,
+                //             settings: {
+                //                 slidesToShow: 3,
+                //                 slidesToScroll: 3,
+                //                 infinite: true,
+                //                 dots: true
+                //             }
+                //         },
+                //         {
+                //             breakpoint: 600,
+                //             settings: {
+                //                 slidesToShow: 2,
+                //                 slidesToScroll: 2
+                //             }
+                //         },
+                //         {
+                //             breakpoint: 480,
+                //             settings: {
+                //                 slidesToShow: 1,
+                //                 slidesToScroll: 1
+                //             }
+                //         }
+                //         // You can unslick at a given breakpoint now by adding:
+                //         // settings: "unslick"
+                //         // instead of a settings object
+                //     ]
+                // });
+
+                var $slider = $(".single-item");
+                $slider.slick('refresh');
+
+                right_height = $('.right').height();
+                var left_height = $('.left').height();
+                $('.left').css('height','calc(100% - '+right_height+'px)');
+
+            }
+
+
+
+            // $('.left').css('height','calc(100%)');
+        }
+
+        $(document).ready(function(){
+            $('#map').click(function(){
+                const vw = Math.max(document.documentElement.clientWidth, window.innerWidth || 0);
+                if(vw < two_row_width){
+                    fullscreenView()
+                }
+            })
+
+            $('.hide_feed').click(function(){
+                const vw = Math.max(document.documentElement.clientWidth, window.innerWidth || 0);
+                if(vw < two_row_width){
+                    fullscreenView()
+                }
+            })
+
+            function fullscreenView(){
+                if($('.right').height() > 0){
+                    $('.left').css('height','100%');
+                    $('.right').css('height','0px');
+                    $('.show_feed').css('display','block');
+                    $('.hide_feed').css('display','none');
+
+                    //.form-groupx, #step2, .leaflet-bottom, .sh_watermark
+                    $('.form-groupx').css('display','block');
+                    $('#step2').css('display','block');
+                    $('.leaflet-bottom').css('display','block');
+                    $('.sh_watermark').css('display','block');
+                    $('.leaflet-top').css('display','block');
+                }
+            }
+            $('.show_feed').click(function(){
+                if($('.right').height() == 0){
+                    $('.left').css('height','calc(100% - '+right_height+'px)');
+                    $('.right').css('height',right_height+'px');
+                    $('.show_feed').css('display','none');
+
+                    $('.hide_feed').css('display','block');
+                    $('.form-groupx').css('display','none');
+                    $('#step2').css('display','none');
+                    $('.leaflet-bottom').css('display','none');
+                    $('.sh_watermark').css('display','none');
+                    $('.leaflet-top').css('display','none');
+                }
+            })
+        })
+
+    </script>
     <script>
         $(document).ready(function() {
             $('.select2-ajax-primary_sub_tag').select2({
@@ -247,8 +364,82 @@
                     dataType: 'json'
                 }
             });
+
+            // console.log('binding...')
+            // $('.shared_vertical_row').on('resize', function(){
+            //     alert('xxx');
+            // });
         })
 
+    </script>
+
+    <script>
+        var two_row_width = 700
+        var s_height = screen.height
+        function twoRowSetup(){
+            const vw = Math.max(document.documentElement.clientWidth, window.innerWidth || 0);
+            const vh = Math.max(document.documentElement.clientHeight, window.innerHeight || 0);
+            if(vw < two_row_width){
+                $('.right').css('width', 'auto')
+                // $('.right').css('height', (s_height/2)+'px')
+
+                $('.right').css('float', 'none')
+                $('.right div').css('width', '100%')
+                $('.right').addClass('shared_vertical_row')
+                $('#video_search_res').addClass('single-item')
+
+
+                $('.left').css('width', '100%')
+                // $('.left').css('height', (s_height/2)+'px')
+                $('.left').addClass('shared_vertical_row')
+
+                // console.log('hengith is ',$('.right').height());
+                // $('#map').css('height', (s_height/2)+'px')
+
+                // addSlider();
+            }
+        }
+
+        function oneRowSetup(){
+            const vw = Math.max(document.documentElement.clientWidth, window.innerWidth || 0);
+            const vh = Math.max(document.documentElement.clientHeight, window.innerHeight || 0);
+            console.log('max width and height ', vw, vh)
+            if(vw >= two_row_width){
+                $('.right').css('width', '370px')
+                // $('.right').css('height', '600px')
+                // $('.ml-placessec').css('height', s_height+'px')
+                $('.ml-placessec').css('height', '600px')
+
+                $('.right').css('float', 'left')
+                $('.right').removeClass('shared_vertical_row')
+                $('#video_search_res').removeClass('single-item')
+
+                $('.left').css('width', 'auto')
+                // $('.left').css('height', (s_height)+'px')
+                $('.left').removeClass('shared_vertical_row')
+                $('.ml-placessec').css('max-height', (vh - 88)+'px')
+                console.log('changing val')
+            }
+        }
+
+        $(window).parent().resize(function() {
+            twoRowSetup()
+            oneRowSetup()
+        })
+
+
+
+        // $(document).ready(function(){
+        //     $('.left_side_container').bind('resize', function(){
+        //         alert('xxx');
+        //     });
+        //     console.log('event bound')
+        // })
+
+
+
+        twoRowSetup()
+        oneRowSetup()
     </script>
 </body>
 

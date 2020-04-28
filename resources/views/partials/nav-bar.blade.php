@@ -95,17 +95,17 @@
 
 <div class="responsiveheader">
 <div class="rheader">
-<img src="/assets/findgo/images/ricon.png" alt="" style="display:none;" />
-<span class="menubt" id="step3">
-    <i class="fas fa-bars"></i>
-</span>
+    <img src="/assets/findgo/images/ricon.png" alt="" style="display:none;" />
+    <span class="menubt" id="step3_mobile">
+        <i class="fas fa-bars"></i>
+    </span>
 
-<div class="logo_mobile">
+    <div class="logo_mobile">
 
-</div>
-<div class="extras" style="display:none;">
-    <span class="accountbtn"><i class="flaticon-avatar"></i></span>
-</div>
+    </div>
+    <div class="extras" style="display:none;">
+        <span class="accountbtn"><i class="flaticon-avatar"></i></span>
+    </div>
 </div>
 <div class="rnaver">
 <div class="topb">

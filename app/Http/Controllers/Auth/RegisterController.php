@@ -6,6 +6,7 @@ use App\User;
 use App\Http\Controllers\Controller;
 use BeyondCode\EmailConfirmation\Events\Confirmed;
 use BeyondCode\EmailConfirmation\Traits\RegistersUsers;
+use Foothing\Laravel\Consent\Facades\Consent;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -116,9 +117,22 @@ class RegisterController extends Controller
             return response()->json(array('error' => $validator->messages()), 200);
         }
 
+        if (! $treatments = Consent::validate($request->all())) {
+            // User didn't accept all the mandatory checkboxes.
+//            throw new \Exception("Consent is mandatory in order to proceed.");
+            return response()->json(array('error' => array('consent_error' => "Consent is mandatory in order to proceed.")), 200);
+        }
+
         event(new Registered($user = $this->create( $request->toArray() )));
 
         $this->sendConfirmationToUser($user);
+
+        // omitted
+
+        // This will register a record with the
+        // user's consent along with an event log.
+//        Auth::loginUsingId($user->id);
+        Consent::grant($treatments, $user);
 
 //        if($this->create($request->toArray())){
             return response()->json(array('success' => 'Please check your email for confirmation URL'), 200);

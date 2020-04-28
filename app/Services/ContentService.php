@@ -326,9 +326,11 @@ class ContentService
                     'table' => 'filter_list', 'fk_id' => $id, 'slug' => '', 'type' => 'group'));
             }
 
-            foreach($data['associations']['associated_contents'] as $id){
-                $this->shearedContentAssociation->create(array('shared_content_id' => $groupShare->id,
-                    'table' => 'contents', 'fk_id' => $id, 'slug' => '', 'type' => 'group'));
+            if(isset($data['associations']['associated_contents'])){
+                foreach($data['associations']['associated_contents'] as $id){
+                    $this->shearedContentAssociation->create(array('shared_content_id' => $groupShare->id,
+                        'table' => 'contents', 'fk_id' => $id, 'slug' => '', 'type' => 'group'));
+                }
             }
         }
 

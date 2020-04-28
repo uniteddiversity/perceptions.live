@@ -19,6 +19,8 @@ $data['lat'] = isset($edit_data[0]['lat']) ? $edit_data[0]['lat'] : '';
 $data['long'] = isset($edit_data[0]['long']) ? $edit_data[0]['long'] : '';
 $data['default_location'] = isset($edit_data[0]['default_location']) ? $edit_data[0]['default_location'] : '';
 $data['filter_list'] = isset($edit_data['filter_list']) ? $edit_data['filter_list'] : array();
+$data['description'] = isset($edit_data[0]['description']) ? $edit_data[0]['description'] : '';
+$data['extra_css'] = isset($edit_data[0]['extra_css']) ? $edit_data[0]['extra_css'] : '';
 //dd($data['_token']);
 $data["sorting_tags"] = array();
 $data["contents"] = array();
@@ -90,6 +92,11 @@ if (isset($edit_data)) {
               <label for="domain">Domain</label>
               <input type="text" class="form-control" id="domain" aria-describedby="nameHelp" name="domain" placeholder="Domain" value="{{ old('domain',$data['domain']) }}">
             </div>
+
+            <div class="form-group">
+                <label for="description">Description</label>
+                <textarea type="text" class="form-control" id="description" aria-describedby="nameHelp" name="description" placeholder="Description" >{{ old('description',$data['description']) }}</textarea>
+            </div>
             </div>
             <div class="formdesctext">
               <strong>Map Look & Feel
@@ -119,6 +126,11 @@ if (isset($edit_data)) {
                 @endforeach
               </select>
             </div>
+
+              <div class="form-group">
+                  <label for="extra_css">Custom CSS</label>
+                  <textarea type="text" class="form-control" id="extra_css" aria-describedby="nameHelp" name="extra_css" placeholder="Custom CSS">{{ old('extra_css',$data['extra_css']) }}</textarea>
+              </div>
           </div>
           <div class="formdesctext">
             <strong>Content
@@ -169,6 +181,7 @@ if (isset($edit_data)) {
               </select>
             </div>
 
+          @if(Auth::user()->is('admin'))
               <div class="form-group">
                   <label for="associated_users">Extra videos</label>
                   <select class="form-control select2-ajax-content" id="other_contents" multiple name="associated_contents[]">
@@ -177,6 +190,7 @@ if (isset($edit_data)) {
                       } ?>
                   </select>
               </div>
+          @endif
             <?php /*
                             {{--<hr/>--}}
                             {{--<div class="form-group">--}}
