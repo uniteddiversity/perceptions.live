@@ -484,12 +484,29 @@ class HomeController extends Controller
         return response()->json($ret, 200);
     }
 
-    public function sharedGroup($_token)
+    public function sharedGroup($_token, Request $request)
     {
         $filters_list = $this->contentService->getSharedMapFiltersListByToken($_token);
         $basic_info = $this->contentService->getSharedMapBasicInfo($_token);
         $filters_group_list = $this->contentService->getSharedMapFiltersListByToken($_token, 'groups');
         $filters_contents_list = $this->contentService->getSharedMapFiltersListByToken($_token, 'contents');
+
+        $reffer_url = $request->headers->get('referer');
+        $reffer_parse_url = parse_url($reffer_url);
+
+        $user_id = (!isset(Auth::user()->id))? 0 : Auth::user()->id;
+        if($user_id == 0 && !empty($basic_info['allowed_domain'])){
+            $allow_url = parse_url($basic_info['allowed_domain']);
+            if(isset($reffer_parse_url['host'])){
+                if($reffer_parse_url['host'] != $allow_url['host']){
+                    die('Abort: Unauthorized domain.');
+                }
+            }else{
+                die('Abort: Unauthorized.');
+            }
+        }
+
+
 
         $within_groups = [];
         foreach($filters_group_list as $group){
