@@ -3,7 +3,7 @@
     <div class="top-bar">
       <div class="top-bar__left">
         <a href="/" class="navbar-logo" onclick="resetSearch()">
-          <img src="/assets/findgo/images/live-perceptions-logo.png" alt="{{env('APP_NAME')}}" >
+          <img src="/assets/front-theme/images/live-perceptions-logo.png" alt="{{env('APP_NAME')}}" >
         </a>
         <div class="search-box">
           <div class="search-box-content">
@@ -82,7 +82,7 @@
 
 <div class="responsiveheader">
 <div class="rheader">
-    <img src="/assets/findgo/images/ricon.png" alt="" style="display:none;" />
+    <img src="/assets/front-theme/images/ricon.png" alt="" style="display:none;" />
     <span class="menubt" id="step3_mobile">
         <i class="fas fa-bars"></i>
     </span>

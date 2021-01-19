@@ -12,11 +12,11 @@
     <link rel="stylesheet" type="text/css" href="/assets/css/introjs.css">
     <link href="/assets/css/themes/introjs-modern.css" rel="stylesheet">
     <!-- Styles -->
-    <link rel="stylesheet" type="text/css" href="/assets/findgo/css/bootstrap-grid.css" />
-    <link rel="stylesheet" href="/assets/findgo/css/icons.css">
-    <link rel="stylesheet" href="/assets/findgo/css/animate.min.css">
-    <link rel="stylesheet" type="text/css" href="/assets/findgo/css/style.css" />
-    <link rel="stylesheet" type="text/css" href="/assets/findgo/css/responsive.css" />
+    <link rel="stylesheet" type="text/css" href="/assets/front-theme/css/bootstrap-grid.css" />
+    <link rel="stylesheet" href="/assets/front-theme/css/icons.css">
+    <link rel="stylesheet" href="/assets/front-theme/css/animate.min.css">
+    <link rel="stylesheet" type="text/css" href="/assets/front-theme/css/style.css" />
+    <link rel="stylesheet" type="text/css" href="/assets/front-theme/css/responsive.css" />
 
     <!-- Favicons -->
     <link rel="apple-touch-icon" sizes="57x57" href="/favicon/apple-icon-57x57.png">
@@ -60,7 +60,7 @@
 <body class="full-height" id="scrollup">
 
     <div class="page-loading">
-        <img src="/assets/findgo/images/loader.gif" alt="" />
+        <img src="/assets/front-theme/images/loader.gif" alt="" />
     </div>
 
     <div class="theme-layout">
@@ -295,18 +295,18 @@
         </div>
     </div>
 
-    <script src="/assets/findgo/js/popper.min.js" type="text/javascript"></script>
+    <script src="/assets/front-theme/js/popper.min.js" type="text/javascript"></script>
 
-    <script src="/assets/findgo/js/modernizr.js" type="text/javascript"></script>
-    <script src="/assets/findgo/js/script.js" type="text/javascript"></script>
-    <script src="/assets/findgo/js/bootstrap.min.js" type="text/javascript"></script>
-    <script src="/assets/findgo/js/wow.min.js" type="text/javascript"></script>
-    <script src="/assets/findgo/js/slick.min.js" type="text/javascript"></script>
-    <script src="/assets/findgo/js/sumoselect.js" type="text/javascript"></script>
-    <script src="/assets/findgo/js/isotop.js" type="text/javascript"></script>
-    <script src="/assets/findgo/js/jquery.nicescroll.min.js" type="text/javascript"></script>
-    <script src="/assets/findgo/js/date-time-picker.min.js" type="text/javascript"></script>
-    <script type="text/javascript" src="/assets/findgo/js/jq.aminoSlider.js"></script>
+    <script src="/assets/front-theme/js/modernizr.js" type="text/javascript"></script>
+    <script src="/assets/front-theme/js/script.js" type="text/javascript"></script>
+    <script src="/assets/front-theme/js/bootstrap.min.js" type="text/javascript"></script>
+    <script src="/assets/front-theme/js/wow.min.js" type="text/javascript"></script>
+    <script src="/assets/front-theme/js/slick.min.js" type="text/javascript"></script>
+    <script src="/assets/front-theme/js/sumoselect.js" type="text/javascript"></script>
+    <script src="/assets/front-theme/js/isotop.js" type="text/javascript"></script>
+    <script src="/assets/front-theme/js/jquery.nicescroll.min.js" type="text/javascript"></script>
+    <script src="/assets/front-theme/js/date-time-picker.min.js" type="text/javascript"></script>
+    <script type="text/javascript" src="/assets/front-theme/js/jq.aminoSlider.js"></script>
     <script src="/assets/js/leaflet.js"></script>
     <script src="/assets/js/leaflet.markercluster.new.js"></script>
     <script src="/assets/js/leaflet.freeze.js"></script>

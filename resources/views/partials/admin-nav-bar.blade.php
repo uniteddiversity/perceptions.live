@@ -17,7 +17,7 @@
         </li>
       </ul>
       <a href="/" class="nav-logo">
-        <img src="/assets/findgo/images/live-perceptions-logo.png" alt="">
+        <img src="/assets/front-theme/images/live-perceptions-logo.png" alt="">
       </a>
       <a class="mobile-options" style="display:none;">
         <i class="fas fa-ellipsis-h"></i>
