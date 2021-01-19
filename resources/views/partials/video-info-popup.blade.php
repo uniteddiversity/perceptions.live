@@ -143,14 +143,14 @@ $video_id = isset($matches[1])?$matches[1]:'';
     <div class="right-comments">
         <button class="close" type="button" data-dismiss="modal" aria-hidden="true">&times;</button>
         <div class="donate mobile_hide">
-            <a href="#" class="btn"><i class="fas fa-hand-holding-usd"></i>Donate</a>
+            <a href="#" class="btn"><i class="fas fa-hand-holding-usd"></i>{{__('backend.donate')}}</a>
         </div>
         <div class="comments_outer">
             <div class="comments_inner">
                 @include('partials.commentsDisplay', ['comments' => $comments, 'fk_id' => $info->id, 'table' => 'contents'])
                 <?php if(count($comments) == 0){ ?>
                     <div class="comment no-comment-yet-<?php echo uid($info->id) ?> no_comment_yet" >
-                        No comments yet. Start the discussion!
+                        {{__('backend.no_comment_yet')}}
                     </div>
                 <?php } ?>
             </div>
@@ -159,20 +159,20 @@ $video_id = isset($matches[1])?$matches[1]:'';
         <div class="btn_outer">
             <?php if((Auth::user())){ ?>
                 <div class="btn_inner" style="border-bottom:1px solid rgb(31,31,31);">
-                    <label>Message</label>
+                    <label>{{__('backend.message')}}</label>
                     <?php /* <textarea id="comment_0" placeholder="Text goes here..."></textarea> */ ?>
                     <input type="text" id="comment_text_0" placeholder="Text goes here..." />
-                    <a href="#" onclick="postComments('<?php echo uid($info->id) ?>', 'contents', 0, 'comment_text_0')" class="btn">Submit</a>
+                    <a href="#" onclick="postComments('<?php echo uid($info->id) ?>', 'contents', 0, 'comment_text_0')" class="btn">{{__('backend.submit')}}</a>
                 </div>
             <?php }?>
             <?php if((Auth::user())){ ?>
             <div class="btn_inner open">
-                <a href="#" id="add" class="btn">Add a Comment</a>
+                <a href="#" id="add" class="btn">{{__('backend.add_a_comment')}}</a>
             </div>
             <?php }?>
             <?php if(!(Auth::user())){ ?>
             <div class="open" style="padding: 20px;float: left;width: 100%;">
-                <a href="#" class="btn">Login to add comment</a>
+                <a href="#" class="btn">{{__('backend.login_to_comment')}}</a>
             </div>
             <?php }?>
         </div>
@@ -180,15 +180,15 @@ $video_id = isset($matches[1])?$matches[1]:'';
 
     <div class="mobile_btns">
         <a href="#" id="details">
-            <span><i class="fas fa-info"></i>View Video Details</span>
-            <span><i class="far fa-times-circle"></i>Hide Video Details</span>
+            <span><i class="fas fa-info"></i>{{__('backend.view_video_details', ['name'=>__('video')])}}</span>
+            <span><i class="far fa-times-circle"></i>{{__('backend.hide_video_details', ['name'=>__('video')])}}</span>
         </a>
         <a href="#" id="comments">
             <span> <i class="far fa-comment-dots">
                 </i>View Comments <strong>(12)</strong></span>
-            <span> <i class="far fa-times-circle"></i>Close Comments</span>
+            <span> <i class="far fa-times-circle"></i>{{__('backend.close_comments')}}Close Comments</span>
         </a>
-        <a href="#" class="btn mobile_show"><i class="fas fa-hand-holding-usd"></i>Donate</a>
+        <a href="#" class="btn mobile_show"><i class="fas fa-hand-holding-usd"></i>{{__('backend.donate')}}</a>
     </div>
 </div>
 <input type="hidden" id="page_url" value="<?php echo route('video.page.show', ['_category_name' => isset($info->category)?str_replace(' ', '-', $info->category->name):'category', '_date' => date('Y-m-d', strtotime($info['captured_date'])), '_video_title' => str_replace(' ', '-', $info['title']), '_video_uid' => uid($info->id)]); ?>" />

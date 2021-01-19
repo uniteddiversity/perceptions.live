@@ -1,15 +1,42 @@
 <?php
-$output_is = exec('composer install');
+require_once('../../vendor/autoload.php');
+//$output_is = exec('composer install');
 //echo 'out put is '.$output_is;
 
 require_once('env_editor.php');
 
-//exec('whoami', $output, $retval);
+$action = isset($_POST['action'])?$_POST['action']:'';
 
-//copy inv file
-$file = './index.php';
-$newfile = '../.inv2';
+switch($action){
+    case 'validate':
+        $return = validateInputs();
+        if(!empty($return)){
+//            print_r($return);
+            die(json_response(400, array('data' => $return)));
+        }
 
-if (!copy($file, $newfile)) {
-    echo "failed to copy";
+        $connection_output = checkDBConnection();
+        if($connection_output !== true){
+//            die($connection_output);
+//            die(json_response(400, array('data' => ['asdfadsf' => 'adfadf'])));
+            die(json_response(400, array('data' => $connection_output)));
+        }
+
+        break;
+    case 'install':
+        $message = createEnv();
+        if($message !== true){
+            die(json_response(400, array('data' => $message)));
+        }
+        sleep(1);
+        installComposer();
+        sleep(2);
+        $return = validateInputs();
+        if(!empty($return)){
+            echo json_response(400, array('data' => $return));
+        }
+        break;
+    default:
+
+        break;
 }

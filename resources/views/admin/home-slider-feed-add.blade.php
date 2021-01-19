@@ -63,8 +63,6 @@ $data['image_url'] = isset($data->image) && isset($data->image[0])? $data->image
                                 <option <?php echo 'selected="selected"'; ?> value="<?php echo $key ?>" >{{$text}}</option>
                             @endforeach
                         </select>
-<!--                        <input type="hidden" id="type" name="type" />-->
-<!--                        <input type="hidden" id="fk_id" name="fk_id" />-->
                     </div>
                     <div class="form-group">
                         <label for="exampleInputEmail1">Icon</label>
@@ -75,7 +73,7 @@ $data['image_url'] = isset($data->image) && isset($data->image[0])? $data->image
                         <img src="<?php echo '/storage/'.$data['image_url'] ?>" width="100" />
                     </div>
                     <?php } ?>
-                    <button type="submit" class="btn btn-primary">Submit</button>
+                    <button type="submit" class="btn btn-primary">{{__('backend.submit')}}</button>
                 </form>
             </div>
         </div>

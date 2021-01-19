@@ -16,34 +16,28 @@
             <thead>
               <tr>
                 <th>
-                  Action
-                </th>
-                {{--<th>--}}
-                {{--Id--}}
-                {{--</th>--}}
-                <th>
-                  Title
+                  {{__('backend.action')}}
                 </th>
                 <th>
-                  Submitted By
+                  {{__('backend.title')}}
                 </th>
                 <th>
-                  Approved/Open
-                </th>
-                {{--<th>--}}
-                {{--Date--}}
-                {{--</th>--}}
-                <th>
-                  URL
+                  {{__('backend.submitted_by')}}
                 </th>
                 <th>
-                  Email
+                  {{__('backend.approve_open')}}
                 </th>
                 <th>
-                  Location
+                  {{__('backend.url')}}
+                </th>
+                <th>
+                  {{__('backend.email')}}
+                </th>
+                <th>
+                  {{__('backend.location')}}
                 </th>
                 <th class="d-none d-md-table-cell">
-                  Last Updated Time
+                  {{__('backend.last_update_time')}}
                 </th>
 
               </tr>

@@ -5,34 +5,31 @@
         <div class="col-lg-12 grid-margin stretch-card">
             <div class="card">
                 <div class="card-body">
-                    <h4 class="card-title">Uploaded Videos</h4>
+                    <h4 class="card-title">{{__('backend.uploaded_videos', ['name', __('video')])}}</h4>
                     <div class="table-responsive">
                         <table class="table" id="users_llist">
                             <thead>
                             <tr>
                                 <th>
-                                    Id
+                                    {{__('backend.id')}}
                                 </th>
                                 <th>
-                                    Title
-                                </th>
-                                {{--<th>--}}
-                                    {{--Date--}}
-                                {{--</th>--}}
-                                <th>
-                                    URL
+                                    {{__('backend.title')}}
                                 </th>
                                 <th>
-                                    Email
+                                    {{__('backend.url')}}
                                 </th>
                                 <th>
-                                    Location
+                                    {{__('backend.email')}}
                                 </th>
                                 <th>
-                                    Last Updated Time
+                                    {{__('backend.location')}}
                                 </th>
                                 <th>
-                                    Action
+                                    {{__('backend.last_update_time')}}
+                                </th>
+                                <th>
+                                    {{__('backend.action')}}
                                 </th>
                             </tr>
                             </thead>
@@ -61,7 +58,7 @@
                                         {{ $video->updated_at }}
                                     </td>
                                     <td>
-                                        <a href="/user/user/video-edit/{{ uid($video->id) }}" >Edit</a>
+                                        <a href="/user/user/video-edit/{{ uid($video->id) }}" >{{__('backend.edit')}}</a>
                                     </td>
                                 </tr>
                             @endforeach

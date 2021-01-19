@@ -64,17 +64,17 @@
     <div class="randomcategories">
         <div class="filters custom_dropdown_1" style="width:100%;height: 55px;">
             <select id="content_sorting">
-                <option value="">Recently added</option>
-                <option value="comments">Recent comments</option>
-                <option value="videos">Recently captured</option>
-                <option value="random">Random</option>
+                <option value="">{{__('backend.recently_added')}}</option>
+                <option value="comments">{{__('backend.recently_comments')}}</option>
+                <option value="videos">{{__('backend.recently_captured')}}</option>
+                <option value="random">{{__('backend.random')}}</option>
             </select>
         </div>
         <div class="searchchat" style="width:100%;height: 55px;">
 
             <div id="select-dropdown" class="closed">
-                <div style="width: 100%;" id="select-default" class="select default">All Categories <i class="far fa-arrow-alt-circle-down"></i></div>
-                <div class="select option" data-id="">All Categories</div>
+                <div style="width: 100%;" id="select-default" class="select default">{{__('backend.all_categories')}} <i class="far fa-arrow-alt-circle-down"></i></div>
+                <div class="select option" data-id="">{{__('backend.all_categories')}}</div>
                 @foreach($categories as $cat)
                     <div class="select option" data-id="{{$cat->id}}">{{$cat->name}}</div>
                 @endforeach
@@ -84,7 +84,7 @@
 
     <div class="mlfield s2 searchcat" style="display:none;">
         <select class="selectbox" id="content_search_cat">
-            <option class="first" value="">All Categories</option>
+            <option class="first" value="">{{__('backend.all_categories')}}</option>
             @foreach($categories as $cat)
                 <option value="{{$cat->id}}">{{$cat->name}}</option>
             @endforeach
@@ -93,7 +93,7 @@
     </div>
     <div class="mlfield searchchat" style="display:none;">
         <div id="select-dropdown" class="closed">
-            <div id="select-default" class="select default">All Categories <i class="far fa-arrow-alt-circle-down"></i></div>
+            <div id="select-default" class="select default">{{__('backend.all_categories')}} <i class="far fa-arrow-alt-circle-down"></i></div>
             @foreach($categories as $cat)
                 <div class="select option" data-id="{{$cat->id}}">{{$cat->name}}</div>
             @endforeach
@@ -103,36 +103,6 @@
 
 </div>
 
-
-
-{{--<div class="ml-filterbar">--}}
-{{--<ul>--}}
-{{--<li><a id="finddo-geolocate" class="theme-btn2" href="#"><em class="fa fa-crosshairs"></em> Geolocate</a></li>--}}
-{{--<li><a id="finddo-target" class="theme-btn2" href="#"><i class="fa fa-bullseye"></i> Target </a></i></span></li>--}}
-{{--</ul>--}}
-{{--</div>--}}
-{{--<div class="col-lg-12">--}}
-{{--<div class="mlradius">--}}
-{{--<span>Radius :</span>--}}
-{{--<div class="mlfield s2">--}}
-{{--<select class="selectbox">--}}
-{{--<option>Kilometer</option>--}}
-{{--<option>Miles</option>--}}
-{{--</select>--}}
-{{--</div>--}}
-{{--<div class="rslider">--}}
-{{--<amino-slider class="slider" data-min="0" data-max="100" data-value="10"></amino-slider>--}}
-{{--</div>--}}
-{{--</div>--}}
-{{--</div>--}}
-{{--<div class="ml-filterbar">--}}
-{{--<h3>4 Results Found</h3>--}}
-{{--<ul>--}}
-{{--<li class="singleplaces active"><span><i class="fa fa-exchange"></i></span></li>--}}
-{{--<li class="doubleplaces"><span><i class="fa fa-th-large"></i></span></li>--}}
-{{--<li class="listingplaces"><span><i class="fa fa-th-list"></i></span></li>--}}
-{{--</ul>--}}
-{{--</div>--}}
 <div class="ml-placessec">
     <div class="row" id="video_search_res">
         ...

@@ -30,7 +30,7 @@
 
                 <?php if(isset($info['acting_roles']) && count($info['acting_roles']) > 0){ ?>
                 <div style="padding-top: 10px; font-size: .9em; line-height: 1.3em;">
-                    <span>COLLABORATION ROLES: </span>
+                    <span>{{__('backend.collaboration_roles')}}: </span>
                     <?php foreach($info['acting_roles'] as $tag){ //dd($tag['tag']['icon']); ?>
                     <span data-toggle="tooltip" data-animation="true" data-placement="bottom" data-original-title="<?php echo $tag['tag']['name'] ?>" title="<?php echo $tag['tag']['name'] ?>"><i class="fa <?php echo $tag['tag']['icon'] ?>"></i></span>
                     <?php } ?>
@@ -57,25 +57,13 @@
 
                     <div style="font-size: 12px; text-transform: uppercase; font-family: ralewaymedium; color: #6060D5;"><i class="flaticon-pin"></i> <em>
                             <?php echo $info['default_location'] ?></em></div>
-
-                    <?php /*
-                <div style="padding-top: 20px; font-size: .9em; line-height: 1.3em;"><i class="fa fa-clipboard"></i> SKILLS 1, <i class="fa fa-clipboard"></i> SKILL 2, etc</div>
-
-                <div style="padding-top: 10px; font-size: .9em; line-height: 1.3em;">
-                    <span>COLLABORATION ROLES: </span>
-                    <span><i class="fa fa-file-audio-o"></i> </span>
-                    <span><i class="fa fa-video-camera"></i> </span>
-                    <span><i class="fa fa-film"></i> </span>
-
-                </div>
-                */?>
                 </div>
             </div>
 
             <?php /* ### If Inactive, add link: CLAIM THIS PROFILE */ ?>
             <?php if($info['status'] == '5' ){ ?>
             <div class="btn_top">
-                <a class="btn white" href="/claim-profile" target="_blank">claim this group</a>
+                <a class="btn white" href="/claim-profile" target="_blank">{{__('backend.claim_this_group', ['name' => __('group')])}}</a>
             </div>
             <?php } ?>
 
@@ -100,7 +88,7 @@
         <div class="video_inner col-9">
 
             <div>
-                <h5><i class="fas fa-video"></i> Media Involvements</h5>
+                <h5><i class="fas fa-video"></i> {{__('backend.media_involvement')}}</h5>
             </div>
             <div id="group-info-popup_video">
                 @include('partials.group-info-popup_video', ['videos' => $group_contents, 'paginationData' => $contents1])
@@ -108,7 +96,7 @@
         </div>
         <div class="col-3">
             <div>
-                <h5><i class="fas fa-users"></i> Users</h5>
+                <h5><i class="fas fa-users"></i> {{__('backend.users', ['name' => __('user')])}}</h5>
             </div>
             <div id="group-info-popup_user">
                 @include('partials.group-info-popup_user', ['groupUsers' => $group_users, 'paginationData' => $contents2])

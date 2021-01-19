@@ -183,7 +183,7 @@ $video_id = isset($matches[1])?$matches[1]:'';
 
     <div class="mobile_btns">
         <a href="#" id="details">
-            <span><i class="fas fa-info"></i>View Video Details</span>
+            <span><i class="fas fa-info"></i>{{__('backend.view_video_details', ['name' => __('video')])}}</span>
             <span><i class="far fa-times-circle"></i>Hide Video Details</span>
         </a>
         <a href="#" id="comments">

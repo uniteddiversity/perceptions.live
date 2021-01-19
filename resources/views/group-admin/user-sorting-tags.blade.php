@@ -4,7 +4,7 @@
     <div class="col-lg-12 grid-margin stretch-card">
         <div class="card">
             <div class="card-body">
-                <h4 class="card-title">Add Tag</h4>
+                <h4 class="card-title">{{__('backend.add_tag')}}</h4>
                 <div class="table-responsive">
                     @if ($errors->any())
                         <div class="alert alert-danger">
@@ -24,19 +24,19 @@
                     <form action="/user/group-admin/post-sorting-tag-add" method="post" enctype='multipart/form-data'>
                         <input type="hidden" name="_token" id="csrf-token" value="{{ Session::token() }}" />
                         <div class="form-group">
-                            <label for="exampleInputEmail1">Tag</label>
+                            <label for="exampleInputEmail1">{{__('backend.tag')}}</label>
                             <input type="text" class="form-control" aria-describedby="nameHelp" name="tag" placeholder="Tag" value="{{ old('tag') }}">
                         </div>
                         <div class="form-group">
-                            <label for="exampleInputEmail1">Short des</label>
+                            <label for="exampleInputEmail1">{{__('backend.short_des')}}</label>
                             <input type="text" class="form-control" aria-describedby="nameHelp" name="description" placeholder="Description" value="{{ old('description') }}">
                         </div>
 
-                        <button type="submit" class="btn btn-primary">Submit</button>
+                        <button type="submit" class="btn btn-primary">{{__('backend.submit')}}</button>
 
                         <br/><br/>
                         <div class="form-group">
-                            <label for="exampleInputEmail1">Public Tags</label>
+                            <label for="exampleInputEmail1">{{__('backend.public_tags')}}</label>
                             <hr/>
                             @foreach($existing_tags as $tag)
                                 <?php if($tag->group_id == 0){?>
@@ -46,7 +46,7 @@
                         </div>
 
                         <div class="form-group">
-                            <label for="exampleInputEmail1">Private Tags</label>
+                            <label for="exampleInputEmail1">{{__('backend.private_tags')}}</label>
                             <hr/>
                             @foreach($existing_tags as $tag)
                                 <?php if($tag->group_id <> 0){?>

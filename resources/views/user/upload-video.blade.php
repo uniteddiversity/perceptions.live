@@ -43,13 +43,6 @@
                                     <option value="3">Private</option>
                                 </select>
                             </div>
-                            {{--<div class="form-group">--}}
-                                {{--<label for="exampleSelect1">Type</label>--}}
-                                {{--<select class="form-control" id="exampleSelect1" name="type">--}}
-                                    {{--<option value="2">Youtube Video</option>--}}
-                                    {{--<option value="1">Uploaded Video</option>--}}
-                                    {{--</select>--}}
-                                {{--</div>--}}
 
                             <div class="form-group">
                                 <label for="exampleTextarea">Brief Description</label>
@@ -61,8 +54,8 @@
                             </div>
 
                             <div class="form-group">
-                                <label for="exampleTextarea">Video Producer</label>
-                                <input type="text" class="form-control" aria-describedby="nameHelp" name="video_producer" placeholder="Video Producer" value="{{ old('video_producer') }}">
+                                <label for="exampleTextarea">{{__('backend.video_producer',['name', __('video')])}}</label>
+                                <input type="text" class="form-control" aria-describedby="nameHelp" name="video_producer" placeholder="{{__('backend.video_producer',['name', __('video')])}}" value="{{ old('video_producer') }}">
                             </div>
                             <div class="form-group">
                                 <label for="exampleTextarea">Onscreen</label>
@@ -155,43 +148,21 @@
                                 <textarea name="full_embed_code" class="form-control" id="full_embed_code" rows="3">{{ old('full_embed_code') }}</textarea>
                             </div>
                             <div class="form-group">
-                                <label for="video_id">Video Id</label>
-                                <input type="text" class="form-control" aria-describedby="nameHelp" name="video_id" placeholder="Video Id" value="{{ old('video_id') }}">
+                                <label for="video_id">{{__('backend.video_id', ['name' => __('video')])}}</label>
+                                <input type="text" class="form-control" aria-describedby="nameHelp" name="video_id" placeholder="{{__('backend.video_id', ['name' => __('video')])}}<" value="{{ old('video_id') }}">
                             </div>
                             <div class="form-group">
-                                <label for="video_id">Video Id Old</label>
-                                <input type="text" class="form-control" aria-describedby="nameHelp" name="video_id_old" placeholder="Video Id Old" value="{{ old('video_id_old') }}">
+                                <label for="video_id">{{__('backend.video_old_id', ['name' => __('video')])}}</label>
+                                <input type="text" class="form-control" aria-describedby="nameHelp" name="video_id_old" placeholder="Video{{__('backend.video_old_id', ['name' => __('video')])}}" value="{{ old('video_id_old') }}">
                             </div>
 
                             <div class="form-group">
-                                <label for="video_id">Captured Date</label>
+                                <label for="video_id">{{__('backend.captured_date')}}</label>
                                 <input type="text" class="form-control datepicker" aria-describedby="nameHelp" name="captured_date" placeholder="Captured Date" value="{{ old('captured_date','2018-01-01') }}">
                             </div>
 
-                            {{--<div class="form-group">--}}
-                                {{--<label for="video_id">Video Date</label>--}}
-                                {{--<input type="text" class="form-control datepicker" aria-describedby="nameHelp" name="video_date" placeholder="Video Date" value="{{ old('video_date','2018-01-01') }}">--}}
-                            {{--</div>--}}
                             <input type="hidden" value="<?php echo date('Y-m-d') ?>" name="video_date" />
 
-                            {{--<div class="form-group">--}}
-                                {{--<label for="exampleInputEmail1">Youtube URL</label>--}}
-                                {{--<input type="text" class="form-control" aria-describedby="nameHelp" name="url" placeholder="URL" value="{{ old('url') }}">--}}
-                                {{--<small id="nameHelp" class="form-text text-muted">Youtube URL</small>--}}
-                                {{--</div>--}}
-                            {{--<fieldset class="form-group">--}}
-                                {{--<legend>Location</legend>--}}
-                                {{--<div class="form-check">--}}
-                                    {{--<label class="form-check-label">--}}
-                                        {{--<input type="text" class="form-check-input" name="lat" placeholder="Lat" value="{{ old('lat') }}">--}}
-                                        {{--</label>--}}
-                                    {{--</div>--}}
-                                {{--<div class="form-check">--}}
-                                    {{--<label class="form-check-label">--}}
-                                        {{--<input type="text" class="form-check-input" name="long" placeholder="Long" value="{{ old('long') }}">--}}
-                                        {{--</label>--}}
-                                    {{--</div>--}}
-                                {{--</fieldset>--}}
                             <button type="submit" class="btn btn-primary">Submit My PRCPTION!</button>
                         </form>
                 </div>

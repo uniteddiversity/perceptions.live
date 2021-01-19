@@ -25,13 +25,6 @@
 
                         @include('partials.nav-bar')
 
-
-                        {{--
-                                                         <a href="/user/content-add" class="participate" style="height: 100%;">
-                                                             <i class="fas fa-cloud-upload-alt pointer" style="cursor:pointer" onclick="window.location='/user/content-add'"></i>
-                                                         </a>
-
-                                      --}}
                     </div>
 
                     <div class="half-map" style="height: 100%;">
@@ -70,7 +63,7 @@
     <span class="footer1">
      <strong>   <a href="https://docs.perceptiontravel.tv/legal-docs/privacy-policy" target="_blank">Privacy Policy</a> | <a href="https://docs.perceptiontravel.tv/legal-docs/terms-of-service" target="_blank">Terms of Service</a> | <a href="https://perceptiontravel.tv/community/donations/" target="_blank">Make a Donation</a> | <a href="/contact-us" target="_blank">Submit Feedback</a> | <a href="https://docs.perceptiontravel.tv/" target="_blank">About Us</a> | <a href="/contact-us" target="_blank">Contact Us</a></strong></span>
     <span class="footer2">
-        <strong>&copy; 2017-2020 <a href="https://perceptiontravel.tv/" target="_blank">PRCPTION Travel, Inc.</a> - a non-profit, 501(c)3 organization.</strong></span>
+        <strong>&copy; 2017-2020 <a href="https://perceptiontravel.tv/" target="_blank">{{env('APP_CREDIT')}}</a> - a non-profit, 501(c)3 organization.</strong></span>
 
 </div>
 

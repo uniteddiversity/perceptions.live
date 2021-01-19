@@ -4,29 +4,20 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>PRCPTIONS.LIVE: exploring the world's perception</title>
+    <title>{{env('APP_NAME')}}</title>
     <link rel="stylesheet" type="text/css" href="/assets/findgo/css/bootstrap-grid.css" />
-<!--    <link rel="stylesheet" href="/assets/css/bootstrap.min.css">-->
     <link rel="stylesheet" href="/assets/fontawesome/css/all.css">
     <link rel="stylesheet" type="text/css" href="/assets/css/leaflet_0.7.css" />
-    {{--<link rel="stylesheet" href="/assets/css/leaflet.css">--}}
-    {{--<link rel="stylesheet" href="/assets/css/MarkerCluster.css">--}}
     <link rel="stylesheet" href="/assets/css/MarkerCluster.Default.css">
     <link rel="stylesheet" href="/assets/css/L.Control.Locate.css">
     <link rel="stylesheet" href="/assets/leaflet-groupedlayercontrol/leaflet.groupedlayercontrol.css">
     <link rel="stylesheet" href="/js/dist/css/select2.min.css" />
     <link rel="stylesheet" href="/assets/css/app.css">
-<!--    <link rel="stylesheet" href="/assets/css/custom_common_styles.css">-->
-
-
-
     <link rel="stylesheet" type="text/css" href="/assets/findgo/css/style.css" />
     <link rel="stylesheet" href="/assets/css/custom.css?version=1" />
     <link rel="stylesheet" href="/assets/css/custom_shared.css" />
 
     <link rel="stylesheet" href="/assets/js/slick_slider/slick.css">
-<!--    <link rel="stylesheet" href="/assets/css/leaflet.css" />-->
-
     <link rel="stylesheet" href="/assets/findgo/css/icons.css">
     <style>
         #featureModal {
@@ -173,11 +164,6 @@
             </div>
         </div>
     </div>
-    <!-- container-scroller -->
-
-    <!-- plugins:js -->
-
-    {{--<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>--}}
     <style>
         #featureModal .modal-dialog {
             width: 950px;
@@ -251,42 +237,6 @@
                     // $('.single-item').unslick();
                 });
                 $('.single-item').not('.slick-initialized').slick();
-                // $('.single-item').slick('refresh')
-                // $(".single-item").not('.slick-initialized').slick({
-                //     dots: false,
-                //     infinite: false,
-                //     speed: 300,
-                //     slidesToShow: 1,
-                //     slidesToScroll: 1,
-                //     responsive: [
-                //         {
-                //             breakpoint: 1024,
-                //             settings: {
-                //                 slidesToShow: 3,
-                //                 slidesToScroll: 3,
-                //                 infinite: true,
-                //                 dots: true
-                //             }
-                //         },
-                //         {
-                //             breakpoint: 600,
-                //             settings: {
-                //                 slidesToShow: 2,
-                //                 slidesToScroll: 2
-                //             }
-                //         },
-                //         {
-                //             breakpoint: 480,
-                //             settings: {
-                //                 slidesToShow: 1,
-                //                 slidesToScroll: 1
-                //             }
-                //         }
-                //         // You can unslick at a given breakpoint now by adding:
-                //         // settings: "unslick"
-                //         // instead of a settings object
-                //     ]
-                // });
 
                 var $slider = $(".single-item");
                 $slider.slick('refresh');
@@ -296,10 +246,6 @@
                 $('.left').css('height','calc(100% - '+right_height+'px)');
 
             }
-
-
-
-            // $('.left').css('height','calc(100%)');
         }
 
         $(document).ready(function(){
@@ -364,11 +310,6 @@
                     dataType: 'json'
                 }
             });
-
-            // console.log('binding...')
-            // $('.shared_vertical_row').on('resize', function(){
-            //     alert('xxx');
-            // });
         })
 
     </script>
@@ -392,11 +333,6 @@
                 $('.left').css('width', '100%')
                 // $('.left').css('height', (s_height/2)+'px')
                 $('.left').addClass('shared_vertical_row')
-
-                // console.log('hengith is ',$('.right').height());
-                // $('#map').css('height', (s_height/2)+'px')
-
-                // addSlider();
             }
         }
 
@@ -426,17 +362,6 @@
             twoRowSetup()
             oneRowSetup()
         })
-
-
-
-        // $(document).ready(function(){
-        //     $('.left_side_container').bind('resize', function(){
-        //         alert('xxx');
-        //     });
-        //     console.log('event bound')
-        // })
-
-
 
         twoRowSetup()
         oneRowSetup()

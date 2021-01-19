@@ -68,7 +68,7 @@ $display = ($user_status == 'private' || $user_status == 'only-logged')? false :
                         <?php } //only visible true ?>
 
                         <?php if($info['status_id'] == '5' ){ ?>
-                        <a class="btn white" href="/claim-profile" target="_blank">Claim this Profile</a>
+                        <a class="btn white" href="/claim-profile" target="_blank">{{__('backend.claim_this_profile')}}</a>
                         <?php } ?>
                     </div>
             </div>
@@ -85,7 +85,7 @@ $display = ($user_status == 'private' || $user_status == 'only-logged')? false :
                 </span>
             </div>
             <div>
-                <h5><i class="fas fa-video"></i> Media Involvements</h5>
+                <h5><i class="fas fa-video"></i> {{__('backend.media_involvements')}}</h5>
             </div>
             <div id="user-info-popup_video">
                 @include('partials.user-info-popup_video-info', ['contentInfo' => $info['user_involvement_videos'], 'paginationData' => $contents1])
@@ -95,7 +95,7 @@ $display = ($user_status == 'private' || $user_status == 'only-logged')? false :
 
         <div class="col-lg-3 group_association">
             <div>
-                <h5><i class="fas fa-users"></i> Group Associations</h5>
+                <h5><i class="fas fa-users"></i> {{__('backend.group_associations', ['name' => __('group')])}}</h5>
             </div>
             <div id="user-info-popup_group">
                 @include('partials.user-info-popup_group-info', ['groupsInfo' => $info['user_groups'], 'paginationData' => $contents2])

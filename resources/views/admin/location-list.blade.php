@@ -5,28 +5,28 @@
         <div class="col-lg-12 grid-margin stretch-card">
             <div class="card">
                 <div class="card-body">
-                    <h4 class="card-title">Location List</h4>
+                    <h4 class="card-title">{{__('backend.location_list')}}</h4>
                     <div class="table-responsive">
                         <table class="table" id="users_llist">
                             <thead>
                             <tr>
                                 <th>
-                                    Location
+                                    {{__('backend.location')}}
                                 </th>
                                 <th>
-                                    Active Users
+                                    {{__('backend.active_users', ['name' => __('user')])}}
                                 </th>
                                 <th>
-                                    Videos (open)
+                                    {{__('backend.videos_open', ['name' => __('video')])}}
                                 </th>
                                 <th>
-                                    Associated Users
+                                    {{__('backend.associated_users', ['name' => __('user')])}}
                                 </th>
                                 <th>
-                                    Associated Groups
+                                    {{__('backend.associated_groups', ['name' => __('group')])}}
                                 </th>
                                 <th>
-                                    Moderator
+                                    {{__('backend.moderator')}}
                                 </th>
                             </tr>
                             </thead>

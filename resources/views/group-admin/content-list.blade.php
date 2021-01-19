@@ -5,29 +5,19 @@
   <div class="col-lg-12 grid-margin stretch-card">
     <div class="card">
       <div class="card-body">
-        <h4 class="card-title">Group Videos</h4>
+        <h4 class="card-title">{{__('backend.group_videos', ['name1' => __('group'), 'name2' => __('video')])}}</h4>
         <div class="table-responsive">
           <table class="table" id="users_llist">
             <thead>
               <tr>
                 <th>
-                  ID
+                  {{__('backend.id')}}
                 </th>
                 <th>
-                  Title
+                  {{__('backend.title')}}
                 </th>
-                {{--<th>--}}
-                {{--Date--}}
-                {{--</th>--}}
-
-                <!-- <th>
-                  Email
-                </th> -->
-                <!-- <th>
-                  Location
-                </th> -->
                 <th class="d-none d-lg-table-cell">
-                  Last Updated
+                  {{__('backend.last_update_time')}}
                 </th>
                 <th class="d-none d-md-table-cell"></th>
                 <th>

@@ -5,36 +5,29 @@
         <div class="col-lg-12 grid-margin stretch-card">
             <div class="card">
                 <div class="card-body">
-                    <h4 class="card-title">Sharable Maps</h4>
+                    <h4 class="card-title">{{__('backend.sharable_maps')}}</h4>
                     <div class="table-responsive">
                         <table class="table" id="users_llist">
                             <thead>
                             <tr>
                                 <th>
-                                    Action
-                                </th>
-                                {{--<th>--}}
-                                    {{--Id--}}
-                                {{--</th>--}}
-                                <th>
-                                    Title
+                                    {{__('backend.action')}}
                                 </th>
                                 <th>
-                                    Domain
+                                    {{__('backend.title')}}
                                 </th>
-                                {{--<th>--}}
-                                    {{--Date--}}
-                                {{--</th>--}}
-                                <th class="d-none d-md-table-cell">
-                                    Created By
+                                <th>
+                                    {{__('backend.domain')}}
                                 </th>
                                 <th class="d-none d-md-table-cell">
-                                    Created At
+                                    {{__('backend.created_by')}}
                                 </th>
                                 <th class="d-none d-md-table-cell">
-                                    Updated At
+                                    {{__('backend.created_at')}}
                                 </th>
-
+                                <th class="d-none d-md-table-cell">
+                                    {{__('backend.updated_at')}}
+                                </th>
                             </tr>
                             </thead>
                             <tbody>
@@ -42,23 +35,17 @@
                                 <tr>
                                     <td>
                                         @if(Auth::user()->is('admin'))
-                                            <a href="/user/admin/map-generate/{{ uid($video->id) }}" >Edit</a>&nbsp;&nbsp;
+                                            <a href="/user/admin/map-generate/{{ uid($video->id) }}" >{{__('backend.edit')}}</a>&nbsp;&nbsp;
                                         @else
-                                            <a href="/user/group-admin/map-generate/{{ uid($video->id) }}" >Edit</a>&nbsp;&nbsp;
+                                            <a href="/user/group-admin/map-generate/{{ uid($video->id) }}" >{{__('backend.edit')}}</a>&nbsp;&nbsp;
                                         @endif
                                     </td>
-                                    {{--<td>--}}
-                                        {{--{{ $video->id }}--}}
-                                    {{--</td>--}}
                                     <td>
                                         {{ $video->group }}
                                     </td>
                                     <td>
                                         <?php if($video->status == '1'){ echo 'Approved'; }else{ echo 'Open'; } ?>
                                     </td>
-                                    {{--<td>--}}
-                                        {{--{{ $video->date }}--}}
-                                    {{--</td>--}}
                                     <td class="d-none d-md-table-cell">
                                         {{ isset($video->user)?'@'.$video->user->display_name:'' }}
                                     </td>
@@ -68,7 +55,6 @@
                                     <td class="d-none d-md-table-cell">
                                         {{ $video->updated_at }}
                                     </td>
-
                                 </tr>
                             @endforeach
 

@@ -4,64 +4,34 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>PRCPTIONS.LIVE: exploring the world's perception</title>
+    <title>{{env('APP_NAME')}}</title>
     <link rel="stylesheet" href="/assets/admin-temp/vendors/iconfonts/mdi/css/materialdesignicons.min.css">
     <link rel="stylesheet" href="/assets/admin-temp/vendors/css/vendor.bundle.base.css">
     <link rel="stylesheet" href="/assets/admin-temp/css/style.css">
     <link rel="stylesheet" href="/assets/admin-temp/vendors/css/vendor.bundle.addons.css">
     <link rel="stylesheet" href="/js/dist/css/select2.min.css" />
-
-    {{--<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">--}}
 </head>
 
 <body>
     <div class="container-scroller">
-        <!-- partial:partials/_navbar.html -->
-
-        <!-- partial -->
         <div class="container-fluid page-body-wrapperx">
-
-
-            {{--@include('partials.admin-left-sidebar')--}}
-
-
-            <!-- partial -->
             <div class="row">
                 <div class="content-wrapper">
 
                     @yield('content')
-                    <!-- content-wrapper ends -->
-                    <!-- partial:partials/_footer.html -->
                     <footer class="footer">
 
                     </footer>
-                    <!-- partial -->
                 </div>
-                <!-- main-panel ends -->
             </div>
-            <!-- page-body-wrapper ends -->
         </div>
-
-
-
-
-
-
-        <!-- container-scroller -->
-
-        <!-- plugins:js -->
-
-        {{--<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>--}}
 
         <script src="/assets/admin-temp/vendors/js/vendor.bundle.base.js"></script>
         <script src="/assets/admin-temp/vendors/js/vendor.bundle.addons.js"></script>
         <script src="/assets/admin-temp/js/off-canvas.js"></script>
         <script src="/assets/admin-temp/js/misc.js"></script>
         <script src="/assets/js/custom_common.js"></script>
-        <!-- endinject -->
-        <!-- Custom js for this page-->
         <script src="/assets/admin-temp/js/dashboard.js"></script>
-
         <script src="/js//dist/js/select2.full.min.js"></script>
         <script src="/assets/js/app.js"></script>
 
@@ -76,9 +46,6 @@
                     autoclose: true,
                     keepOpen: false,
                 });
-                //        $('.datepicker').on('changeDate', function(ev){
-                //            $(this).datepicker('hide');
-                //        });
             });
 
             $(document).ready(function() {
@@ -129,7 +96,6 @@
 
         </script>
         <script src='https://www.google.com/recaptcha/api.js'></script>
-        <!-- End custom js for this page-->
 </body>
 <style>
     .datepicker>div {

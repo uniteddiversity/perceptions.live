@@ -172,7 +172,7 @@ if (isset($edit_data)) {
             </div>
 
             <div class="form-group">
-              <label for="associated_users">Associated Users</label>
+              <label for="associated_users">{{__('backend.associated_users', ['name' => __('user')])}}</label>
               <select class="form-control map-sharing-ajax-users" id="associated_users" multiple name="associated_users[]">
                 <?php foreach ($selected_users as $int_data) {
                   echo '<option value="' . $int_data['id'] . '" selected >' . $int_data['text'] . '</option>';
@@ -183,7 +183,7 @@ if (isset($edit_data)) {
 
           @if(Auth::user()->is('admin'))
               <div class="form-group">
-                  <label for="associated_users">Extra videos</label>
+                  <label for="associated_users">{{__('backend.extra_videos', ['name' => __('video')])}}</label>
                   <select class="form-control select2-ajax-content" id="other_contents" multiple name="associated_contents[]">
                       <?php foreach($selected_videos as $int_data){
                       echo '<option value="'.$int_data['id'].'" selected >'.$int_data['text'].'</option>';

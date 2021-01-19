@@ -193,20 +193,83 @@ require_once('./installer/index.php');
                       password: $('input[name ="db_password"]').val()
                   },
                   success: function (response) {
-                      // jQuery("#usergrid").trigger("reloadGrid");
-                      // clear();
                       alert("Database connection success!!");
                   },
                   error: function (xhr, ajaxOptions, thrownError) {
-                      // alert(xhr.status);
+                      let err = eval("(" + xhr.responseText + ")");
                       console.log('error is ',xhr.responseText)
-                      alert(xhr.responseText.message);
+                      alert(err.message);
                   }
               }).done(function( msg ) {
                   // alert( "Connection status: " + msg );
               });
           })
+
+
+          $("#submit_all").click(function(event){
+              event.preventDefault(); //prevent default action
+              // var post_url = $(this).attr("action"); //get form action url
+              var post_url = "./installer/index.php?action=validate";
+              var request_method = $('#form_data').attr("method"); //get form GET/POST method
+              var form_data = $('#form_data').serialize(); //Encode form elements for submission
+              $('#notifications').html('');
+              $.ajax({
+                  url : post_url,
+                  type: request_method,
+                  data : form_data,
+                  success: function (response) {
+                      $('#notifications').append('<div class="alert alert-success">\n' +
+                          '        <strong>Info!</strong> Installing...\n' +
+                          '      </div>')
+
+                      installScript();
+                  },
+                  error: function (xhr, ajaxOptions, thrownError) {
+                      let err = eval("(" + xhr.responseText + ")");
+                      console.log('err is ',err);
+                      for (let key in err.message.data) {
+                          $('#notifications').append('<div class="alert alert-warning">\n' +
+                              '        <strong>Warning!</strong> '+err.message.data[key]+'.\n' +
+                              '      </div>')
+                      }
+                  }
+              }).done(function(response){ //
+                  // $("#server-results").html(response);
+              });
+          });
+
       });
+
+      function installScript()
+      {
+          // event.preventDefault(); //prevent default action
+          // var post_url = $(this).attr("action"); //get form action url
+          var post_url = "./installer/index.php?action=validate";
+          var request_method = $('#form_data').attr("method"); //get form GET/POST method
+          var form_data = $('#form_data').serialize(); //Encode form elements for submission
+          $('#action').val('install');
+          $('#notifications').html('');
+          $.ajax({
+              url : post_url,
+              type: request_method,
+              data : form_data,
+              success: function (response) {
+                  $('#notifications').append('<div class="alert alert-success">\n' +
+                      '        <strong>Info!</strong> Installation complete!!!</div>')
+              },
+              error: function (xhr, ajaxOptions, thrownError) {
+                  let err = eval("(" + xhr.responseText + ")");
+                  console.log('err is ',err);
+                  for (let key in err.message.data) {
+                      $('#notifications').append('<div class="alert alert-warning">\n' +
+                          '        <strong>Warning!</strong> '+err.message.data[key]+'.\n' +
+                          '      </div>')
+                  }
+              }
+          }).done(function(response){ //
+              // $("#server-results").html(response);
+          });
+      }
 
       function nextTab(elem) {
           $(elem).next().find('a[data-toggle="tab"]').click();
@@ -219,6 +282,19 @@ require_once('./installer/index.php');
 <body>
 <div class="container">
   <div class="row">
+    <div id="notifications">
+<!--      <div class="alert alert-success">-->
+<!--        <strong>Success!</strong> Indicates a successful or positive action.-->
+<!--      </div>-->
+<!---->
+<!--      <div class="alert alert-info">-->
+<!--        <strong>Info!</strong> Indicates a neutral informative change or action.-->
+<!--      </div>-->
+<!---->
+<!--      <div class="alert alert-warning">-->
+<!--        <strong>Warning!</strong> Indicates a warning that might need attention.-->
+<!--      </div>-->
+    </div>
     <section>
       <div class="wizard">
         <div class="wizard-inner">
@@ -258,12 +334,12 @@ require_once('./installer/index.php');
           </ul>
         </div>
 
-        <form role="form" name="form_data" method="post" >
+        <form role="form" name="form_data" id="form_data" method="post" >
           <div class="tab-content">
             <div class="tab-pane active" role="tabpanel" id="step1">
               <h3>Site configurations</h3>
               <p>Site settings</p>
-
+                <input type="hidden" name="action" id="action" value="validate">
                 <div class="form-group">
                   <label for="exampleInputEmail1">Site name</label>
                   <input type="text" class="form-control" name="app_name" aria-describedby="emailHelp" placeholder="Site name">
@@ -366,7 +442,7 @@ require_once('./installer/index.php');
               <ul class="list-inline pull-right">
                 <li><button type="button" class="btn btn-default prev-step">Previous</button></li>
                 <!--                <li><button type="button" class="btn btn-default next-step">Skip</button></li>-->
-                <li><button name="submit_all" type="submit" class="btn btn-primary btn-info-full next-step">Submit</button></li>
+                <li><button name="submit_all" id="submit_all" type="button" class="btn btn-primary btn-info-full next-step">Submit</button></li>
               </ul>
 
             </div>

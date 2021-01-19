@@ -2,7 +2,7 @@
     <div class="sidebar-wrapper">
         <div class="panel panel-default" id="features">
             <div class="panel-heading">
-                <h3 class="panel-title">Uploaded Videos
+                <h3 class="panel-title">{{__('backend.uploaded_videos', ['name'=>__('video')])}}
                 {{--<button type="button" class="btn btn-xs btn-default pull-right" id="sidebar-hide-btn"><i class="fa fa-chevron-left"></i></button></h3>--}}
             </div>
             <div class="panel-body">
@@ -11,7 +11,7 @@
                         <input type="text" class="form-control search" placeholder="Filter" />
                     </div>
                     <div class="col-xs-4 col-md-4">
-                        <button type="button" class="btn btn-primary pull-right sort" data-sort="feature-name" id="sort-btn"><i class="fa fa-sort"></i>&nbsp;&nbsp;Sort</button>
+                        <button type="button" class="btn btn-primary pull-right sort" data-sort="feature-name" id="sort-btn"><i class="fa fa-sort"></i>&nbsp;&nbsp;{{__('backend.sort')}}</button>
                     </div>
                 </div>
             </div>
@@ -19,13 +19,13 @@
                 <table class="table table-hover" id="feature-list">
                     <thead class="hidden">
                     <tr>
-                        <th>Icon</th>
+                        <th>{{__('backend.icon')}}</th>
                     <tr>
                     <tr>
-                        <th>Name</th>
+                        <th>{{__('backend.name')}}</th>
                     <tr>
                     <tr>
-                        <th>Chevron</th>
+                        <th>{{__('backend.chevron')}}</th>
                     <tr>
                     </thead>
                     <tbody class="list"></tbody>

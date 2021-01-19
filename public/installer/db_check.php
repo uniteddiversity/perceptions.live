@@ -45,44 +45,18 @@ try
     }
     else
     {
-        echo json_response(500, 'Server connection error');
-        die();
+        die(json_response(500, 'Server connection error'));
     }
 }
 catch(Exception $e)
 {
 //    echo $e->getMessage();
-    echo json_response(500, 'Server error');
-    die();
+    die(json_response(500, 'Server error'));
 }
 
 if (mysqli_select_db($db, $dbname)){
-    die('www');
+    die(json_response(200, 'Connection ok! Db ok!'));
 }else{
-    echo json_response(400, 'Server connection Ok. Db connection error!');
+    die(json_response(500, 'Server connection Ok. Db connection error!'));
 }
-
-//try{
-//    $link = mysqli_connect($dbhost, $dbuser, $dbpass);
-//    mysqli_select_db($link, $dbname);
-//}catch (Exception $e){
-//    die('error in connect');
-//}
-
-
-$test_query = "SHOW TABLES FROM $dbname";
-$result = mysqli_query($link, $test_query);
-
-$tblCnt = 0;
-while($tbl = mysqli_fetch_array($result)) {
-    $tblCnt++;
-    #echo $tbl[0]."<br />\n";
-}
-
-if (!$tblCnt) {
-    echo "There are no tables<br />\n";
-} else {
-    echo "There are $tblCnt tables<br />\n";
-}
-
-die(json_encode(array('data'=>'success')));
+die(json_response(200, 'Connection ok! Db ok!'));

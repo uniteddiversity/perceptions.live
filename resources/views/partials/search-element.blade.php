@@ -45,7 +45,7 @@ switch($type){
     case 'search_buttons':
 //        echo '<button class="btn btn-primary" onclick="shareSearchVideo()">Search</button>';
         echo '<div class="search-form-element-buttons">
-                <button class="btn btn-primary" onclick="shareResetSearch()">Reset</button>
+                <button class="btn btn-primary" onclick="shareResetSearch()">{{__('backend.reset')}}</button>
             </div>';
         break;
 }

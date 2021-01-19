@@ -3,12 +3,10 @@
 
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <title>PERCEPTIONS.LIVE: exploring the world's perception</title>
+    <title>{{env('APP_NAME')}}</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="">
     <meta name="keywords" content="">
-    <meta name="author" content="CreativeLayers">
-
     <!-- Styles -->
     <link rel="stylesheet" type="text/css" href="/assets/findgo/css/bootstrap-grid.css" />
     <link rel="stylesheet" href="/assets/findgo/css/icons.css">
@@ -21,17 +19,13 @@
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,600,700" rel="stylesheet">
 
     <link rel="stylesheet" type="text/css" href="/assets/css/leaflet_0.7.css" />
-    {{--<link rel="stylesheet" href="/assets/css/leaflet.css">--}}
-    {{--<link rel="stylesheet" href="/assets/css/MarkerCluster.css">--}}
     <link rel="stylesheet" href="/assets/css/MarkerCluster.Default.css">
     <link rel="stylesheet" href="/assets/css/L.Control.Locate.css">
     <link rel="stylesheet" href="/assets/leaflet-groupedlayercontrol/leaflet.groupedlayercontrol.css">
     <link rel="stylesheet" href="/js/dist/css/select2.min.css" />
     <link rel="stylesheet" href="/assets/css/custom.css?version=1" />
     <link rel="stylesheet" href="/assets/juery-confirm/jquery-confirm.css" />
-    {{--<link rel="stylesheet" href="/assets/js/datatable/datatables.min.css" />--}}
     <script src="/assets/js/jquery-2.1.4.min.js"></script>
-    {{--<link rel="stylesheet" href="/assets/css/app.css">--}}
 
     <link rel="stylesheet" href="/assets/admin-temp/css/style.css">
 
@@ -51,16 +45,6 @@
         @yield('content')
     </div>
 
-
-
-
-    {{--<div class="popupsecs">--}}
-    {{--<div class="popup">--}}
-    {{--<div class="info_content">--}}
-    {{--testtt--}}
-    {{--</div>--}}
-    {{--</div>--}}
-    {{--</div>--}}
     <div class="modal fade" id="featureModal" tabindex="-1" role="dialog">
         <div class="modal-dialog big" style="position: relative;">
             <div class="modal-content">
@@ -161,17 +145,9 @@
     <script src="/assets/findgo/js/wow.min.js" type="text/javascript"></script>
     <script src="/assets/findgo/js/slick.min.js" type="text/javascript"></script>
     <script src="/assets/findgo/js/sumoselect.js" type="text/javascript"></script>
-    {{--<script src="/assets/findgo/js/isotop.js" type="text/javascript"></script>--}}
     <script src="/assets/findgo/js/jquery.nicescroll.min.js" type="text/javascript"></script>
-    {{--<script src="/assets/findgo/js/date-time-picker.min.js" type="text/javascript"></script>--}}
     <script type="text/javascript" src="/assets/mashable/bower_components/bootstrap-datepicker/js/bootstrap-datepicker.min.js"></script>
-    {{--<script src="http://maps.googleapis.com/maps/api/js?key=AIzaSyCYc537bQom7ajFpWE5sQaVyz1SQa9_tuY&sensor=true&libraries=places"></script><!-- Maps -->--}}
-    {{--<script type="text/javascript" src="/assets/findgo/js/map1.js"></script>--}}
     <script type="text/javascript" src="/assets/findgo/js/jq.aminoSlider.js"></script>
-    {{--<script src="/assets/js/leaflet_0.7.js"></script>--}}
-    {{--<script src="/assets/js/leaflet.markercluster.js"></script>--}}
-    {{--<script src="/assets/js/L.Control.Locate.min.js"></script>--}}
-    {{--<script src="/assets/leaflet-groupedlayercontrol/leaflet.groupedlayercontrol.js"></script>--}}
 
 
     <script src="/assets/js/bootstrap-tooltip.js"></script>
@@ -250,29 +226,6 @@
             });
         });
     </script>
-    {{--<script>--}}
-    {{--$(document).ready(function() {--}}
-    {{--$('.multi-select2').select2();--}}
-
-    {{--$('.multi-select2-with-tags').select2({tags: true});--}}
-
-    {{--$('.multi-select2-max3').select2({maximumSelectionLength: 3});--}}
-
-    {{--$('.multi-select2-with-tags-max3').select2({tags: true, maximumSelectionLength: 3});--}}
-
-    {{--$('#user-assign-group').change(function(){console.log('vl '+$(this).val());--}}
-    {{--document.location.href = '/user/admin/user-to-group-add/'+$(this).val();--}}
-    {{--})--}}
-
-    {{--$("#is_exchange").change(function(){ console.log('changing..');--}}
-    {{--if($(this).is(':checked')){console.log('checked..');--}}
-    {{--$('#exchange_enabled').css('visibility','visible');--}}
-    {{--}else{--}}
-    {{--$('#exchange_enabled').css('visibility','hidden');--}}
-    {{--}--}}
-    {{--})--}}
-    {{--});--}}
-    {{--</script>--}}
 </body>
 
 </html>

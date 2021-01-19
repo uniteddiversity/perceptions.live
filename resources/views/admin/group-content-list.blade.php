@@ -1,7 +1,3 @@
-<?php
-
-//dd($videos);
-?>
 @extends('layouts.app_inside')
 
 @section('content')
@@ -9,48 +5,39 @@
         <div class="col-lg-12 grid-margin stretch-card">
             <div class="card">
                 <div class="card-body">
-                    <h4 class="card-title">Uploaded Videos</h4>
+                    <h4 class="card-title">{{__('backend.uploaded_videos', ['name' => __('video')])}}</h4>
                     <div class="table-responsive group-videos-list">
                         <input type="hidden" id="data_list_id" value="{{$group_id}}" />
                         <table class="table" id="lazy-loaded-table" data-page-length='10'>
                             <thead>
                             <tr>
                                 <th>
-                                    Action
-                                </th>
-                                {{--<th>--}}
-                                    {{--Id--}}
-                                {{--</th>--}}
-                                <th>
-                                    Title
+                                    {{__('backend.action')}}
                                 </th>
                                 <th>
-                                    Submitted By
+                                    {{__('backend.title')}}
                                 </th>
                                 <th>
-                                    Approved/Open
-                                </th>
-                                {{--<th>--}}
-                                    {{--Date--}}
-                                {{--</th>--}}
-                                <th>
-                                    URL
+                                    {{__('backend.submitted_by')}}
                                 </th>
                                 <th>
-                                    Email
+                                    {{__('backend.approved_open')}}
                                 </th>
                                 <th>
-                                    Location
+                                    {{__('backend.url')}}
                                 </th>
                                 <th>
-                                    Last Updated Time
+                                    {{__('backend.email')}}
                                 </th>
-
+                                <th>
+                                    {{__('backend.location')}}
+                                </th>
+                                <th>
+                                    {{__('backend.last_update_time')}}
+                                </th>
                             </tr>
                             </thead>
                             <tbody>
-
-
 
                             </tbody>
                         </table>
@@ -61,9 +48,7 @@
     </div>
 
     <style>
-        /*.group-videos-list .dataTables_scrollBody{*/
-            /*height: 400px;*/
-        /*}*/
+
     </style>
 
 @endsection

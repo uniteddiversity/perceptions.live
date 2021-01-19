@@ -5,13 +5,11 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="initial-scale=1,user-scalable=no,maximum-scale=1,width=device-width">
-    <title>PRCPTIONS.LIVE: exploring the world's perception</title>
+    <title>{{env('APP_NAME')}}</title>
 
     <link rel="stylesheet" href="/assets/css/bootstrap.min.css">
     <link rel="stylesheet" href="/assets/fontawesome/css/all.css">
     <link rel="stylesheet" type="text/css" href="/assets/css/leaflet_0.7.css" />
-    {{--<link rel="stylesheet" href="/assets/css/leaflet.css">--}}
-    {{--<link rel="stylesheet" href="/assets/css/MarkerCluster.css">--}}
     <link rel="stylesheet" href="/assets/css/MarkerCluster.Default.css">
     <link rel="stylesheet" href="/assets/css/L.Control.Locate.css">
     <link rel="stylesheet" href="/assets/leaflet-groupedlayercontrol/leaflet.groupedlayercontrol.css">

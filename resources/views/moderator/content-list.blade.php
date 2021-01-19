@@ -11,28 +11,28 @@
                             <thead>
                             <tr>
                                 <th>
-                                    Id
+                                    {{__('backend.id')}}
                                 </th>
                                 <th>
-                                    Title
+                                    {{__('backend.title')}}
                                 </th>
                                 {{--<th>--}}
                                     {{--Date--}}
                                 {{--</th>--}}
                                 <th>
-                                    URL
+                                    {{__('backend.url')}}
                                 </th>
                                 <th>
-                                    Email
+                                    {{__('backend.email')}}
                                 </th>
                                 <th>
-                                    Location
+                                    {{__('backend.location')}}
                                 </th>
                                 <th>
-                                    Last Updated Time
+                                    {{__('backend.last_update_time')}}
                                 </th>
                                 <th>
-                                    Action
+                                    {{__('backend.action')}}
                                 </th>
                             </tr>
                             </thead>
@@ -61,7 +61,7 @@
                                         {{ $video->updated_at }}
                                     </td>
                                     <td>
-                                        <a href="/user/moderator/video-edit/{{ uid($video->id) }}" >Edit</a>
+                                        <a href="/user/moderator/video-edit/{{ uid($video->id) }}" >{{__('backend.edit')}}</a>
                                     </td>
                                 </tr>
                             @endforeach

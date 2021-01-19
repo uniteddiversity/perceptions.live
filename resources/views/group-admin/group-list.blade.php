@@ -12,26 +12,20 @@
               <tr>
                 <th></th>
                 <th>
-                  Name
+                    {{__('backend.name')}}
                 </th>
                 <th class="d-none d-lg-table-cell">
-                Category
+                    {{__('backend.category')}}
                 </th>
-                {{--      <th>--}}
-                {{--        Admin--}}
-                {{--      </th>--}}
                      <th>
-                       Videos
+                         {{__('backend.videos', ['name' => __('video')])}}
                      </th>
                      <th>
-                       Users
+                         {{__('backend.users', ['name' => __('user')])}}
                      </th>
                      <th class="d-none d-md-table-cell">
-                       Location
+                         {{__('backend.location')}}
                      </th>
-                {{--           <th class="d-none d-lg-table-cell">--}}
-               {{--              Date Created--}}
-                {{--           </th>--}}
                       <th>
                        &nbsp;
                       </th>
@@ -49,9 +43,6 @@
                       <td class="d-none d-lg-table-cell">
                  {{ $group->category->name }}
                  </td>
- {{-- <td>--}}
- {{--   {{ $group->group_admin }}--}}
- {{-- </td>--}}
  <td>
    {{ $group->active_video_count }}
  </td>
@@ -63,9 +54,6 @@
  <td class="d-none d-md-table-cell">
    {{ $group->default_location }}
  </td>
-{{--     <td class="d-none d-lg-table-cell">--}}
- {{--      {{ date('Y-m-d', strtotime($group->created_at)) }}--}}
-{{--     </td>--}}
 <td style="width: 150px">
 
   <a class="btn btn-icon-tooltip mr-2" href="/user/group-admin/group-edit/{{ uid($group->id) }}" data-toggle="tooltip" title="Edit"><i class="ti-pencil"></i></a>&nbsp;

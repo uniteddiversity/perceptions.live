@@ -9,7 +9,7 @@ $data['proof_images'] = array();
   <div class="card-body" style="min-width: 400px; max-width: 800px; margin-left: auto; margin-right: auto; padding-bottom: 60px;">
     <div class="table-responsive">
       <div class="form-header">
-        <h2 class="card-title">Contact Us</h2>
+        <h2 class="card-title">{{__('backend.contact_us')}}</h2>
         <p class="page-desc">Feel free to contact us here.</p>
       </div>
       @if ($errors->any())
@@ -31,16 +31,16 @@ $data['proof_images'] = array();
       <form action="/contact-us-post" method="post" enctype='multipart/form-data'>
         <input type="hidden" name="_token" id="csrf-token" value="{{ Session::token() }}" />
         <div class="form-group">
-          <label for="display_name">Name </label>
+          <label for="display_name">{{__('backend.name')}} </label>
           <input type="text" class="form-control" placeholder="Name" name="name" value="{{ old('name') }}" />
         </div>
 
         <div class="form-group">
-          <label for="display_name">Email </label>
+          <label for="display_name">{{__('backend.email')}} </label>
           <input type="email" class="form-control" placeholder="Email" name="email" value="{{ old('email') }}" />
         </div>
         <div class="form-group">
-          <label for="Subject">Subject </label>
+          <label for="Subject">{{__('backend.subject')}} </label>
           <div class="custom_select">
             <select class="form-control" name="subject">
               <option @if(old('subject')=='general message' ) selected='selected' @endif value="general message">General Message</option>
@@ -55,7 +55,7 @@ $data['proof_images'] = array();
         </div>
 
         <div class="form-group">
-          <label for="additional_comments">Message</label>
+          <label for="additional_comments">{{__('backend.message')}}</label>
           <textarea class="form-control" placeholder="Message" rows="5" name="message">{{ old('message') }}</textarea>
         </div>
 
@@ -67,7 +67,7 @@ $data['proof_images'] = array();
         </div>
 
         <div class="form-footer">
-          <button type="submit" class="btn btn-submit">Submit</button>
+          <button type="submit" class="btn btn-submit">{{__('backend.submit')}}</button>
         </div>
       </form>
     </div>
