@@ -1,5 +1,6 @@
 {
-  "content": "Video",
-  "user": "User",
-  "groups": "Groups"
+    "content": "Video",
+    "user": "User",
+    "groups": "Groups",
+    "group": "Group"
 }

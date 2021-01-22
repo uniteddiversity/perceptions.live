@@ -1,10 +1,68 @@
 <?php
-//error_reporting(0);
-use Illuminate\Support\Facades\Artisan;
+error_reporting(1);
 
 if(isset($_POST['submit_all'])){
     print_r($_POST);
     die();
+}
+
+function moveIcons(){
+
+    dd($_FILES);
+
+    $target_dir = "/public/assets/img/";
+    $target_dir = "./";
+    $target_file = $target_dir . 'moved_image.png';
+    $uploadOk = 1;
+    $imageFileType = strtolower(pathinfo($target_file,PATHINFO_EXTENSION));
+
+// Check if image file is a actual image or fake image
+    if(isset($_POST["submit"])) {
+        $check = getimagesize($_FILES["site_logo"]["tmp_name"]);
+        if($check !== false) {
+            echo "File is an image - " . $check["mime"] . ".";
+            $uploadOk = 1;
+        } else {
+            echo "File is not an image.";
+            $uploadOk = 0;
+        }
+    }
+
+//// Check if file already exists
+//    if (file_exists($target_file)) {
+//        echo "Sorry, file already exists.";
+//        $uploadOk = 0;
+//    }
+//
+//// Check file size
+//    if ($_FILES["fileToUpload"]["size"] > 500000) {
+//        echo "Sorry, your file is too large.";
+//        $uploadOk = 0;
+//    }
+//
+//// Allow certain file formats
+//    if($imageFileType != "jpg" && $imageFileType != "png" && $imageFileType != "jpeg"
+//        && $imageFileType != "gif" ) {
+//        echo "Sorry, only JPG, JPEG, PNG & GIF files are allowed.";
+//        $uploadOk = 0;
+//    }
+
+// Check if $uploadOk is set to 0 by an error
+    if ($uploadOk == 0) {
+        echo "Sorry, your file was not uploaded.";
+// if everything is ok, try to upload file
+    } else {
+        if(isset($_FILES["site_logo"])){
+            die('www');
+            if (move_uploaded_file($_FILES["site_logo"]["tmp_name"], $target_file)) {
+                echo "The file ". htmlspecialchars( basename( $_FILES["fileToUpload"]["name"])). " has been uploaded.";
+            } else {
+                echo "Sorry, there was an error uploading your file.";
+            }
+        }
+
+    }
+
 }
 
 function installComposer(){
@@ -14,6 +72,52 @@ function installComposer(){
 //    $output_is = shell_exec('php artisan migrate');
 //    Artisan::call('migrate', array('--path' => 'app/migrations'));
     echo $output_is;
+}
+
+function createAdminAccount(){
+    $dbhost = $_POST['db_host'];
+    $dbuser = $_POST['db_user'];
+    $dbpass = $_POST['db_password'];
+    $dbname = $_POST['db_name'];
+    $conn = new mysqli($dbhost, $dbuser, $dbpass, $dbname);
+//    $pass = app('hash')->make('abc', []);
+    $pass = password_hash($_POST['admin_password'], PASSWORD_DEFAULT);
+
+
+    $sql = "INSERT INTO users (first_name, display_name, email, password, status_id, role_id, access_level_id)
+            VALUES ('admin', 'admin', '".$_POST['admin_email']."', '".$pass."', '1', '1', '1')";
+    $conn->query($sql);
+    $conn->close();
+}
+
+function updateTerms(){
+    $jsonString = file_get_contents('../../resources/lang/en.json');
+    $data = json_decode($jsonString, true);
+    $data_new = [];
+    $data_new = $data;
+    foreach ($data as $key => $entry) {
+        if($key == 'video' && !empty($_POST['term_content'])){
+            $data_new[$key] = $_POST['term_content'];
+        }else{
+            $data_new[$key] = $entry;
+        }
+
+        if($key == 'user' && !empty($_POST['term_user'])){
+            $data_new[$key] = $_POST['term_user'];
+        }else{
+            $data_new[$key] = $entry;
+        }
+//dd($_POST['term_group']);
+        if($key == 'group' && !empty($_POST['term_group'])){
+            $data_new[$key] = $_POST['term_group'];
+        }else{
+            $data_new[$key] = $entry;
+        }
+    }
+
+    $newJsonString = json_encode($data_new, JSON_PRETTY_PRINT);
+    file_put_contents('../../resources/lang/en.json', $newJsonString);
+//    $data[0]['activity_name'] = "TENNIS";
 }
 
 function validateInputs(){
@@ -36,6 +140,18 @@ function validateInputs(){
 
     if(!isset($_POST['db_user']) || empty($_POST['db_user'])){
         $errors['db_user'] = 'DB user cannot be null';
+    }
+
+    if(!isset($_POST['admin_email']) || empty($_POST['admin_email'])){
+        $errors['admin_email'] = 'Admin account email cannot be empty';
+    }
+
+    if(!isset($_POST['admin_password']) || empty($_POST['admin_password'])){
+        $errors['admin_password'] = 'Admin account password cannot be empty';
+    }
+
+    if(!isset($_POST['admin_password_confirm']) || (($_POST['admin_password_confirm'] != $_POST['admin_password']) )){
+        $errors['admin_password_confirm'] = 'Admin confirm password not match!';
     }
 
     return $errors;
@@ -67,11 +183,11 @@ function createEnv(){
     $terms_of_service = isset($_POST['terms_of_service'])?$_POST['terms_of_service']:'';
     $feedback = isset($_POST['feedback'])?$_POST['feedback']:'';
     $app_credit = isset($_POST['app_credit'])?$_POST['app_credit']:'';
-
+    $app_key = 'base64:'.base64_encode(generateRandomString(32));
     $env_data =
-        "APP_NAME=$app_name
+        "APP_NAME='$app_name'
 APP_ENV=local
-APP_KEY=
+APP_KEY=$app_key
 APP_DEBUG=true
 APP_LOG_LEVEL=debug
 APP_URL=$app_url
@@ -115,21 +231,21 @@ ADMIN_MAIL=$admin_email
 MAIL_FROM_ADDRESS=$outgoing_email_address
 MAIL_FROM_NAME=$outgoing_email_name
 
-PRIVACY_POLICY=$privacy_policy_external_url
+PRIVACY_POLICY='$privacy_policy_external_url'
 
-APP_MISSION=$app_mission
-APP_MISSION_DESCRIPTION=$app_mission_description
-GUIDE_LINE_URL=$guide_line_url
-TERMS_OF_SERVICE=$terms_of_service
-FEEDBACK=$feedback
-APP_CREDIT=$app_credit";
+APP_MISSION='$app_mission'
+APP_MISSION_DESCRIPTION='$app_mission_description'
+GUIDE_LINE_URL='$guide_line_url'
+TERMS_OF_SERVICE='$terms_of_service'
+FEEDBACK='$feedback'
+APP_CREDIT='$app_credit'";
 
 
     $envFile = fopen("./env.backup", "w");
     fwrite($envFile, $env_data);
 
     $file = './env.backup"';
-    $newFile = '../.env';
+    $newFile = '../../.env';
 
     if (!copy($file, $newFile)) {
         $errors['error'] = 'Error in env file creation';
@@ -202,4 +318,14 @@ function checkDBConnection()
     }
 
     return true;
+}
+
+function generateRandomString($length = 10) {
+    $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+    $charactersLength = strlen($characters);
+    $randomString = '';
+    for ($i = 0; $i < $length; $i++) {
+        $randomString .= $characters[rand(0, $charactersLength - 1)];
+    }
+    return $randomString;
 }
