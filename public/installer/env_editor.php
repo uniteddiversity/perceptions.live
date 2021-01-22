@@ -7,59 +7,43 @@ if(isset($_POST['submit_all'])){
 }
 
 function moveIcons(){
-    $target_dir = "/public/assets/img/";
-    $target_dir = "./";
-    $logo = $target_dir . 'moved_image.png';
-    $logo_small = $target_dir . 'moved_image_small.png';
-    $uploadOk = 1;
-    $imageFileType = strtolower(pathinfo($logo,PATHINFO_EXTENSION));
+    $target_dir = "./../assets/front-theme/images/";
+    $logo = $target_dir . 'live-perceptions-shared-logo.png';
+    $logo_small = $target_dir . 'live-perceptions-logo.png';
+    $uploadOk_logo = 1;
+    $uploadOk_logo_small = 1;
 
-// Check if image file is a actual image or fake image
-    if(isset($_POST["submit"])) {
-        $check = getimagesize($_FILES["site_logo"]["tmp_name"]);
-        if($check !== false) {
-            echo "File is an image - " . $check["mime"] . ".";
-            $uploadOk = 1;
+    $name_logo = $_FILES["site_logo"]["name"];
+    $ext_logo = pathinfo($name_logo, PATHINFO_EXTENSION);
+
+    $name_logo_small = $_FILES["site_logo"]["name"];
+    $ext_logo_small = pathinfo($name_logo_small, PATHINFO_EXTENSION);
+
+    if($ext_logo && !(in_array($name_logo, ['png', 'jpg', 'jpeg']))){
+        //extension not supported
+        $uploadOk_logo = 0;
+    }
+
+    if($ext_logo_small && !(in_array($ext_logo_small, ['png', 'jpg', 'jpeg']))){
+        //extension not supported
+        $uploadOk_logo_small = 0;
+    }
+
+    // Check if $uploadOk is set to 0 by an error
+    if($uploadOk_logo && isset($_FILES["site_logo"])){
+        if (move_uploaded_file($_FILES["site_logo"]["tmp_name"], $logo)) {
+//                echo "The file ". htmlspecialchars( basename( $_FILES["fileToUpload"]["name"])). " has been uploaded.";
         } else {
-            echo "File is not an image.";
-            $uploadOk = 0;
+//            echo "Sorry, there was an error uploading your file.";
         }
     }
 
-//// Check if file already exists
-//    if (file_exists($target_file)) {
-//        echo "Sorry, file already exists.";
-//        $uploadOk = 0;
-//    }
-//
-//// Check file size
-//    if ($_FILES["fileToUpload"]["size"] > 500000) {
-//        echo "Sorry, your file is too large.";
-//        $uploadOk = 0;
-//    }
-//
-//// Allow certain file formats
-//    if($imageFileType != "jpg" && $imageFileType != "png" && $imageFileType != "jpeg"
-//        && $imageFileType != "gif" ) {
-//        echo "Sorry, only JPG, JPEG, PNG & GIF files are allowed.";
-//        $uploadOk = 0;
-//    }
-
-// Check if $uploadOk is set to 0 by an error
-    if ($uploadOk == 0) {
-        echo "Sorry, your file was not uploaded.";
-    } else {
-        if(isset($_FILES["site_logo"])){
-            if (move_uploaded_file($_FILES["site_logo"]["tmp_name"], $logo_small)) {
-                echo "The file ". htmlspecialchars( basename( $_FILES["fileToUpload"]["name"])). " has been uploaded.";
-            } else {
-                die('SORRY');
-                echo "Sorry, there was an error uploading your file.";
-            }
-        }
-
-        if(isset($_FILES["site_logo"])){
-
+    if($uploadOk_logo_small && isset($_FILES["site_logo_small"])){
+        if (move_uploaded_file($_FILES["site_logo_small"]["tmp_name"], $logo_small)) {
+//                echo "The file ". htmlspecialchars( basename( $_FILES["fileToUpload"]["name"])). " has been uploaded.";
+        } else {
+//                die('SORRY');
+//            echo "Sorry, there was an error uploading your file.";
         }
     }
 

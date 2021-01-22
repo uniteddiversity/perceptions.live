@@ -1,7 +1,23 @@
 <?php
 //require_once('../vendor/autoload.php');
-//require_once('./installer/index.php');
+$error = 0;
+$errors = [];
+if(file_exists( '../../.env')){
+  $error = 1;
+    $errors[] = ('Installation already complete. Please delete "/public/installer" directory');
+}
 
+if(!file_exists('../vendor/autoload.php')){
+    $error = 1;
+    $errors[] = ('Please run "composer install && php artisan migrate" to install and update the db');
+}
+
+if($error == 1){
+  foreach($errors as $err){
+     echo '<br/>***'.$err;
+  }
+  die();
+}
 ?>
 <html>
 <head>
@@ -207,19 +223,22 @@
 
 
           $("#submit_all").click(function(event){
-              event.preventDefault(); //prevent default action
-              // var post_url = $(this).attr("action"); //get form action url
               var post_url = "./request.php?action=validate";
-              var request_method = $('#form_data').attr("method"); //get form GET/POST method
-              var form_data = $('#form_data').serialize(); //Encode form elements for submission
+
+              var form_data = new FormData(document.getElementById('form_data'));
+              form_data.append('site_logo', $('#site_logo')[0].files[0]);
+              form_data.append('site_logo_small', $('#site_logo_small')[0].files[0]);
+
               $('#notifications').html('');
               // $('#submit_all').hide();
               $('#ajax_loading').show();
 
               $.ajax({
                   url : post_url,
-                  type: request_method,
+                  type: 'POST',
                   data : form_data,
+                  contentType: false, // NEEDED, DON'T OMIT THIS (requires jQuery 1.6+)
+                  processData: false, // NEEDED, DON'T OMIT THIS
                   success: function (response) {
                       $('#notifications').append('<div class="alert alert-success">\n' +
                           '        <strong>Info!</strong> Installing...\n' +
@@ -247,24 +266,35 @@
 
       function installScript()
       {
-          // event.preventDefault(); //prevent default action
-          // var post_url = $(this).attr("action"); //get form action url
           var post_url = "./request.php?action=install";
-          var request_method = $('#form_data').attr("method"); //get form GET/POST method
-          var form_data = $('#form_data').serialize(); //Encode form elements for submission
           $('#action').val('install');
+
+          var form_data = new FormData(document.getElementById('form_data'));
+          form_data.append('section', 'general');
+          form_data.append('action', 'previewImg');
+          form_data.append('site_logo', $('#site_logo')[0].files[0]);
+          form_data.append('site_logo_small', $('#site_logo_small')[0].files[0]);
+
+          // var request_method = $('#form_data').attr("method"); //get form GET/POST method
+          // var form_data = $('#form_data').serialize(); //Encode form elements for submission
+
           $('#notifications').html('');
+
           $.ajax({
               url : post_url,
-              type: request_method,
+              type: 'POST',
               data : form_data,
+              contentType: false, // NEEDED, DON'T OMIT THIS (requires jQuery 1.6+)
+              processData: false, // NEEDED, DON'T OMIT THIS
               success: function (response) {
                   $('#notifications').append('<div class="alert alert-success">\n' +
                       '        <strong>Info!</strong> Installation complete!!!</div>')
 
-                  $('#submit_all').show();
+                  setTimeout(function(){
+                      document.location.href="/index.php"
+                  }, 3000);
 
-                  //need to hide everything
+                  $('#submit_all').show();
               },
               error: function (xhr, ajaxOptions, thrownError) {
                   let err = eval("(" + xhr.responseText + ")");
@@ -361,11 +391,11 @@
                 </div>
                 <div class="form-group">
                   <label for="exampleInputEmail1">Site logo (1200px X 320px .png format) </label>
-                  <input type="file" class="form-control" name="site_logo" placeholder="Site logo">
+                  <input type="file" class="form-control" id="site_logo" name="site_logo" placeholder="Site logo">
                 </div>
                 <div class="form-group">
                   <label for="exampleInputEmail1">Site logo(small) (1200px X 320px .png format)</label>
-                  <input type="file" class="form-control" name="site_logo_small" placeholder="Site logo(small)">
+                  <input type="file" class="form-control" id="site_logo_small" name="site_logo_small" placeholder="Site logo(small)">
                 </div>
 
 

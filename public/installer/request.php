@@ -11,16 +11,12 @@ $action = isset($_GET['action'])?$_GET['action']:'';
 switch($action){
     case 'validate':
         $return = validateInputs();
-        moveIcons();
         if(!empty($return)){
-//            print_r($return);
             die(json_response(400, array('data' => $return)));
         }
 
         $connection_output = checkDBConnection();
         if($connection_output !== true){
-//            die($connection_output);
-//            die(json_response(400, array('data' => ['asdfadsf' => 'adfadf'])));
             die(json_response(400, array('data' => $connection_output)));
         }
 
