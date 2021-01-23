@@ -7,7 +7,7 @@ if(file_exists( '../../.env')){
     $errors[] = ('Installation already complete. Please delete "/public/installer" directory');
 }
 
-if(!file_exists('../vendor/autoload.php')){
+if(!file_exists('../../vendor/autoload.php')){
     $error = 1;
     $errors[] = ('Please run "composer install && php artisan migrate" to install and update the db');
 }
