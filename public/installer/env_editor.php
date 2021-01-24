@@ -225,10 +225,8 @@ FEEDBACK='$feedback'
 APP_CREDIT='$app_credit'";
 
 
-    $envFile = fopen("./env.backup", "w");
-    fwrite($envFile, $env_data);
-
-    $file = './env.backup"';
+    $file = 'env.backup_new';
+    file_put_contents($file, $env_data, FILE_APPEND | LOCK_EX);
     $newFile = '../../.env';
 
     if (!copy($file, $newFile)) {
