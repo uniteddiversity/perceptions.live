@@ -213,7 +213,7 @@ GOOGLE_RECAPTCHA_SECRET=$google_recaptcha_secret
 ADMIN_NAME=$admin_name
 ADMIN_MAIL=$admin_email
 MAIL_FROM_ADDRESS=$outgoing_email_address
-MAIL_FROM_NAME=$outgoing_email_name
+MAIL_FROM_NAME='$outgoing_email_name'
 
 PRIVACY_POLICY='$privacy_policy_external_url'
 
