@@ -1,13 +1,14 @@
 <?php
 error_reporting(1);
-
+error_reporting(E_ALL);
+ini_set('display_errors', '1');
 if(isset($_POST['submit_all'])){
     print_r($_POST);
     die();
 }
 
 function moveIcons(){
-    $target_dir = "./../assets/front-theme/images/";
+    $target_dir = "./../assets/frontend/images/";
     $logo = $target_dir . 'live-perceptions-shared-logo.png';
     $logo_small = $target_dir . 'live-perceptions-logo.png';
     $uploadOk_logo = 1;
@@ -32,18 +33,18 @@ function moveIcons(){
     // Check if $uploadOk is set to 0 by an error
     if($uploadOk_logo && isset($_FILES["site_logo"])){
         if (move_uploaded_file($_FILES["site_logo"]["tmp_name"], $logo)) {
-//                echo "The file ". htmlspecialchars( basename( $_FILES["fileToUpload"]["name"])). " has been uploaded.";
+//                echo "The envFile ". htmlspecialchars( basename( $_FILES["fileToUpload"]["name"])). " has been uploaded.";
         } else {
-//            echo "Sorry, there was an error uploading your file.";
+//            echo "Sorry, there was an error uploading your envFile.";
         }
     }
 
     if($uploadOk_logo_small && isset($_FILES["site_logo_small"])){
         if (move_uploaded_file($_FILES["site_logo_small"]["tmp_name"], $logo_small)) {
-//                echo "The file ". htmlspecialchars( basename( $_FILES["fileToUpload"]["name"])). " has been uploaded.";
+//                echo "The envFile ". htmlspecialchars( basename( $_FILES["fileToUpload"]["name"])). " has been uploaded.";
         } else {
 //                die('SORRY');
-//            echo "Sorry, there was an error uploading your file.";
+//            echo "Sorry, there was an error uploading your envFile.";
         }
     }
 
@@ -184,8 +185,8 @@ DB_USERNAME=$db_user
 DB_PASSWORD=$db_password
 
 BROADCAST_DRIVER=log
-CACHE_DRIVER=file
-SESSION_DRIVER=file
+CACHE_DRIVER=envFile
+SESSION_DRIVER=envFile
 QUEUE_DRIVER=sync
 
 REDIS_HOST=127.0.0.1
@@ -213,7 +214,7 @@ GOOGLE_RECAPTCHA_SECRET=$google_recaptcha_secret
 ADMIN_NAME=$admin_name
 ADMIN_MAIL=$admin_email
 MAIL_FROM_ADDRESS=$outgoing_email_address
-MAIL_FROM_NAME='$outgoing_email_name'
+MAIL_FROM_NAME=$outgoing_email_name
 
 PRIVACY_POLICY='$privacy_policy_external_url'
 
@@ -225,14 +226,38 @@ FEEDBACK='$feedback'
 APP_CREDIT='$app_credit'";
 
 
-    $file = 'env.backup_new';
-    file_put_contents($file, $env_data, FILE_APPEND | LOCK_EX);
+
+error_reporting(1);
+error_reporting(E_ALL);
+ini_set('display_errors', '1');
+
+
+
+
+
+$file = 'env.backup_new';
+file_put_contents($file, $env_data, FILE_APPEND | LOCK_EX);
+
+
+    //$envFile = fopen("./env.backup", "w");
+    //fwrite($envFile, $env_data);
+    //fclose($envFile);
+    $envFile = 'env.txt"';
     $newFile = '../../.env';
 
-    if (!copy($file, $newFile)) {
-        $errors['error'] = 'Error in env file creation';
-        return $errors;
+    $output = copy($file, $newFile);
+    die('out is '.$output); artisan 
+
+    
+    try{
+        if (!copy($envFile, $newFile)) {
+            $errors['error'] = 'Error in envFile creation';
+            return $errors;
+        }
+    }catch(Exception $e){
+echo ('Error '.$e->getMessage());
     }
+    
 
     return true;
 }
