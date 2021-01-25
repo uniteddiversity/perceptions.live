@@ -5,14 +5,14 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <title>{{env('APP_NAME')}}</title>
-    <link rel="stylesheet" type="text/css" href="/assets/front-theme/css/bootstrap-grid.css" />
-    <link rel="stylesheet" href="/assets/front-theme/css/icons.css">
-    <link rel="stylesheet" href="/assets/front-theme/css/animate.min.css">
-    <link rel="stylesheet" type="text/css" href="/assets/front-theme/css/style.css" />
-    <link rel="stylesheet" type="text/css" href="/assets/front-theme/css/responsive.css" />
+    <link rel="stylesheet" type="text/css" href="/assets/frontend/css/bootstrap-grid.css" />
+    <link rel="stylesheet" href="/assets/frontend/css/icons.css">
+    <link rel="stylesheet" href="/assets/frontend/css/animate.min.css">
+    <link rel="stylesheet" type="text/css" href="/assets/frontend/css/style.css" />
+    <link rel="stylesheet" type="text/css" href="/assets/frontend/css/responsive.css" />
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,600,700" rel="stylesheet">
-    <link rel="stylesheet" type="text/css" href="/front-theme/css/leaflet_0.7.css" />
+    <link rel="stylesheet" type="text/css" href="/frontend/css/leaflet_0.7.css" />
     <link rel="stylesheet" href="/assets/css/MarkerCluster.Default.css">
     <link rel="stylesheet" href="/assets/css/L.Control.Locate.css">
     <link rel="stylesheet" href="/assets/leaflet-groupedlayercontrol/leaflet.groupedlayercontrol.css">
@@ -35,16 +35,16 @@
             </div>
         </div>
 
-        <script src="/assets/front-theme/js/modernizr.js" type="text/javascript"></script>
-        <script src="/assets/front-theme/js/script.js" type="text/javascript"></script>
-        <script src="/assets/front-theme/js/bootstrap.min.js" type="text/javascript"></script>
-        <script src="/assets/front-theme/js/wow.min.js" type="text/javascript"></script>
-        <script src="/assets/front-theme/js/slick.min.js" type="text/javascript"></script>
-        <script src="/assets/front-theme/js/sumoselect.js" type="text/javascript"></script>
-        <script src="/assets/front-theme/js/isotop.js" type="text/javascript"></script>
-        <script src="/assets/front-theme/js/jquery.nicescroll.min.js" type="text/javascript"></script>
-        <script src="/assets/front-theme/js/date-time-picker.min.js" type="text/javascript"></script>
-        <script type="text/javascript" src="/assets/front-theme/js/jq.aminoSlider.js"></script>
+        <script src="/assets/frontend/js/modernizr.js" type="text/javascript"></script>
+        <script src="/assets/frontend/js/script.js" type="text/javascript"></script>
+        <script src="/assets/frontend/js/bootstrap.min.js" type="text/javascript"></script>
+        <script src="/assets/frontend/js/wow.min.js" type="text/javascript"></script>
+        <script src="/assets/frontend/js/slick.min.js" type="text/javascript"></script>
+        <script src="/assets/frontend/js/sumoselect.js" type="text/javascript"></script>
+        <script src="/assets/frontend/js/isotop.js" type="text/javascript"></script>
+        <script src="/assets/frontend/js/jquery.nicescroll.min.js" type="text/javascript"></script>
+        <script src="/assets/frontend/js/date-time-picker.min.js" type="text/javascript"></script>
+        <script type="text/javascript" src="/assets/frontend/js/jq.aminoSlider.js"></script>
         <script src="/assets/js/leaflet_0.7.js"></script>
         <script src="/assets/js/leaflet.markercluster.js"></script>
         <script src="/assets/js/L.Control.Locate.min.js"></script>

@@ -39,7 +39,7 @@ $video_id = isset($matches[1])?$matches[1]:'';
                                     <div class="slbtns">
                                         <h1 style="float: left;color: white;width: auto;">{{$info['title']}}&nbsp;&nbsp;</h1>
                                         <div style="float: left;" class="watchvideo" onclick="openVideoOnly()" data-videolink="<?php echo str_replace( 'watch?v=', 'embed/',$info['url']) ?>">
-                                            <a href="#" title=""><img src="/assets/front-theme/images/play2.png" alt="">{{__('backend.watch_video', ['name' => __('video')])}}</a>
+                                            <a href="#" title=""><img src="/assets/frontend/images/play2.png" alt="">{{__('backend.watch_video', ['name' => __('video')])}}</a>
                                         </div>
                                     </div>
 
