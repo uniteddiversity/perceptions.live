@@ -63,7 +63,7 @@
     <span class="footer1">
      <strong>   <a href="https://docs.perceptiontravel.tv/legal-docs/privacy-policy" target="_blank">Privacy Policy</a> | <a href="https://docs.perceptiontravel.tv/legal-docs/terms-of-service" target="_blank">Terms of Service</a> | <a href="https://perceptiontravel.tv/community/donations/" target="_blank">Make a Donation</a> | <a href="/contact-us" target="_blank">Submit Feedback</a> | <a href="https://docs.perceptiontravel.tv/" target="_blank">About Us</a> | <a href="/contact-us" target="_blank">Contact Us</a></strong></span>
     <span class="footer2">
-        <strong>&copy; 2017-2020 <a href="https://perceptiontravel.tv/" target="_blank">{{env('APP_CREDIT')}}</a> - a non-profit, 501(c)3 organization.</strong></span>
+        <a href="https://perceptiontravel.tv/" target="_blank">{{env('APP_CREDIT')}}</a> Powered by Perceptions.Live &copy; 2017-2021 PRCPTION Travel, Inc.</span>
 
 </div>
 

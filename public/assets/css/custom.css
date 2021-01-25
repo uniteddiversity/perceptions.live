@@ -404,13 +404,12 @@ header .topsearch #search_text {}
 .footer2 { color: #808080; }
 
 .footer {
-  background: rgb(21, 21, 21);
   background: #fff;
-  color: #c8c8c8;
   line-height: 50px;
   height: 50px;
   padding: 0 45px;
   padding-right: 0px;
+  font-size: 12px;
   border-top: 2px solid #161672;
   border: none;
   -webkit-box-shadow: 0px -12px 47px -15px rgba(0, 0, 0, 0.5);
@@ -425,13 +424,9 @@ header .topsearch #search_text {}
   line-height: 50px;
   float: left;
   color: #4214c7;
-  font-size: 13px;
-  font-weight: 600;
+  font: ralewaymedium;
   padding: 0 10px;
-}
-
-.footer a:hover {
-  color: #8d8d8d;
+  letter-spacing: 1px;
 }
 
 .footer span {
@@ -439,10 +434,6 @@ header .topsearch #search_text {}
   width: auto;
 }
 
-.footer span strong {
-  font-weight: 400;
-  font-size: 13px !important;
-}
 
 .footer span:first-child {
   float: right;
