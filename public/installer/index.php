@@ -81,11 +81,11 @@ if($error == 1){
       }
       .wizard li.active span.round-tab {
           background: #fff;
-          border: 2px solid #5bc0de;
+          border: 2px solid #4214c7;
 
       }
       .wizard li.active span.round-tab i{
-          color: #5bc0de;
+          color: #4214c7;
       }
 
       span.round-tab:hover {
@@ -97,6 +97,16 @@ if($error == 1){
           width: 25%;
       }
 
+      .btn-primary {
+        background-color: #4214c7 !important;
+        border-color: #4214c7 !important;
+      }     
+      
+      .btn-primary:hover {
+        background-color: #1c1c8e !important;
+        border-color: #1c1c8e !important;
+      }
+
       .wizard li:after {
           content: " ";
           position: absolute;
@@ -105,7 +115,7 @@ if($error == 1){
           margin: 0 auto;
           bottom: 0px;
           border: 5px solid transparent;
-          border-bottom-color: #5bc0de;
+          border-bottom-color: #4214c7;
           transition: 0.1s ease-in-out;
       }
 
@@ -117,7 +127,7 @@ if($error == 1){
           margin: 0 auto;
           bottom: 0px;
           border: 10px solid transparent;
-          border-bottom-color: #5bc0de;
+          border-bottom-color: #4214c7;
       }
 
       .wizard .nav-tabs > li a {
