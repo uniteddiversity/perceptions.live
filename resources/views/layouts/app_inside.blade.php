@@ -73,6 +73,7 @@
 
     <link rel="stylesheet" href="/assets/croppie/croppie.css" />
     <link rel="stylesheet" href="/assets/js/datatable/datatables.min.css" />
+    @yield('styles')
 </head>
 
 <body class="page-admin">
@@ -298,6 +299,7 @@
         jQuery("time.timeago").timeago();
     </script>
     <script src='https://www.google.com/recaptcha/api.js'></script>
+    @yield('scripts')
 </body>
 
 </html>

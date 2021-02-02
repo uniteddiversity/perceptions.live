@@ -457,7 +457,7 @@ function userLogin() {
                 $('#login-form #messages').html('<div class="alert alert-success" role="alert">' + val + '</div>');
                 let $redirect_to = $('#redirect_to').val();
                 if ($redirect_to == '' || typeof $redirect_to === "undefined") {
-                    window.location.href = "/user/profile";
+                    window.location.href = "/user/user-profile";
                 } else {
                     window.location.href = $redirect_to;
                 }

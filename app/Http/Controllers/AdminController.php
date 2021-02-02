@@ -1267,4 +1267,44 @@ class AdminController extends Controller
         $d = $this->userRepository->deleteComment($id, $user_id);
         echo json_encode(array('data' => $id));
     }
+
+    public function terms(Request $request)
+    {
+        if($request->method() == 'GET'){
+            $jsonString = file_get_contents('../resources/lang/en.json');
+            $data = [];
+            $data['terms'] = json_decode($jsonString, true);
+            return view('admin.terms-settings')->with(compact('data'));
+        }
+
+        if($request->method() == 'POST'){
+            if(is_array($request->term)){
+                $newJsonString = json_encode($request->term, JSON_PRETTY_PRINT);
+                file_put_contents('../resources/lang/en.json', $newJsonString);
+            }
+            return Redirect::back()->withMessage('Updated');
+        }
+    }
+
+    public function appearance(Request $request)
+    {
+        if($request->method() == 'GET'){
+            $css = file_get_contents('../public/assets/css/frontend-override.css');
+            return view('admin.appearance-settings')->with(compact('css'));
+        }
+
+        if($request->method() == 'POST'){
+            if(isset($request->front_css)){
+//                die('css is '.$request->front_css);
+                file_put_contents('../public/assets/css/frontend-override.css', $request->front_css);
+
+            }
+            return Redirect::back()->withMessage('Updated');
+        }
+    }
+
+    public function platformConfig(Request $request)
+    {
+
+    }
 }

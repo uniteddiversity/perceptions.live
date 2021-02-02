@@ -2,11 +2,11 @@
 /**** CUSTOM CSS/ FIXES / NEW STYLE ****/
 @font-face {
   font-family: 'ralewayregular';
-  src: url('../findgo/css/fonts/raleway-regular-webfont.eot');
-  src: url('../findgo/css/fonts/raleway-regular-webfont.eot?#iefix') format('embedded-opentype'),
-      url('../findgo/css/fonts/raleway-regular-webfont.woff2') format('woff2'),
-      url('../findgo/css/fonts/raleway-regular-webfont.woff') format('woff'),
-      url('../findgo/css/fonts/raleway-regular-webfont.ttf') format('truetype');
+  src: url('../front-theme/css/fonts/raleway-regular-webfont.eot');
+  src: url('../front-theme/css/fonts/raleway-regular-webfont.eot?#iefix') format('embedded-opentype'),
+      url('../front-theme/css/fonts/raleway-regular-webfont.woff2') format('woff2'),
+      url('../front-theme/css/fonts/raleway-regular-webfont.woff') format('woff'),
+      url('../front-theme/css/fonts/raleway-regular-webfont.ttf') format('truetype');
   font-weight: normal;
   font-style: normal;
 
@@ -364,7 +364,7 @@ header .extras .accountbtn i {
 
 /* header #logo_overlay {
     margin: 0;
-    background: url(/assets/findgo/images/live-perceptions-logo.png) center center no-repeat;
+    background: url(/assets/front-theme/images/live-perceptions-logo.png) center center no-repeat;
     background-size: 100%;
     height: 70px;
     width: 240px;
@@ -2483,7 +2483,7 @@ body[themebg-pattern="pattern2"] {
 }
 
 #pcoded .logo {
-  background: url(/assets/findgo/images/live-perceptions-logo.png) center center no-repeat;
+  background: url(/assets/front-theme/images/live-perceptions-logo.png) center center no-repeat;
   background-size: 100%;
   min-width: 240px !important;
   height: 70px;
@@ -3993,7 +3993,7 @@ nav.two .header-notification .profile-notification li {
   
   .rnaver {
     background: #fff;
-    background: url(/assets/findgo/images/menu_bk.jpg) center center no-repeat #fff;
+    background: url(/assets/front-theme/images/menu_bk.jpg) center center no-repeat #fff;
     padding-top: 0px;
     padding-bottom: 20px;
     border-right: 1px solid rgb(241, 241, 241);
@@ -4188,7 +4188,7 @@ nav.two .header-notification .profile-notification li {
 
   .logo_mobile {
     display: block;
-    background: url(/assets/findgo/images/live-perceptions-logo.png) center center no-repeat;
+    background: url(/assets/front-theme/images/live-perceptions-logo.png) center center no-repeat;
     background-size: 100%;
     width: 100%;
     height: 60px;
@@ -5012,7 +5012,7 @@ nav.two .header-notification .profile-notification li {
 }
 
 .disable_loading {
-  background: url("/assets/findgo/images/button_loading.svg") no-repeat;
+  background: url("/assets/front-theme/images/button_loading.svg") no-repeat;
   float: left;
   width: 30px;
   height: 25px;
@@ -5816,7 +5816,7 @@ header.s4.dark #slider_feed .near_me_icon {
 
   .responsiveheader .logo_mobile {
     display: block;
-    background: url(/assets/findgo/images/live-perceptions-logo.png) center center no-repeat;
+    background: url(/assets/front-theme/images/live-perceptions-logo.png) center center no-repeat;
     background-color: white;
     background-size: 80%;
     height: 70px;

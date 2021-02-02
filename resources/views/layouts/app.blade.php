@@ -8,7 +8,7 @@
     <meta name="description" content="Perceptions.live is a place for media communities to collaborate and connect worldwide">
     <meta name="keywords" content="Community building, community, media, video editing, frontline communities, grassroots, grassroots organizations">
     <meta name="author" content="{{env('APP_CREDIT')}}">
-    <script src="/assets/js/intro.js"></script>
+
     <link rel="stylesheet" type="text/css" href="/assets/css/introjs.css">
     <link href="/assets/css/themes/introjs-modern.css" rel="stylesheet">
     <!-- Styles -->
@@ -52,9 +52,9 @@
     <link rel="stylesheet" href="/assets/css/custom.css?version=1" />
     <link rel="stylesheet" href="/assets/juery-confirm/jquery-confirm.css" />
     <script src="/assets/js/jquery-2.1.4.min.js"></script>
-<link rel="stylesheet" href="/assets/js/slick_slider/slick.css">
-<link rel="stylesheet" href="/assets/css/thumbnail_slider.css">
-
+    <link rel="stylesheet" href="/assets/js/slick_slider/slick.css">
+    <link rel="stylesheet" href="/assets/css/thumbnail_slider.css">
+    <link rel="stylesheet" href="/assets/css/frontend-override.css">
 </head>
 
 <body class="full-height" id="scrollup">
@@ -81,130 +81,6 @@
             </div>
         </div>
     </div>
-
-    <script type="text/javascript">
-
-        // create an array with objects describing each step in the guided tour
-        var Steps = [
-            {
-                intro: "Welcome to Perceptions.Live! There's a lot you can do here, so let's give you a quick tour!"
-            },
-            {
-                element: '#step2',
-                intro: "Click this button to quickly upload your video--a testimony, a perspective, a word of wisdom to share. No registration required!",
-                position: 'top'
-            },
-            {
-                element: '#step3',
-                intro: "Register a new account if you want to build a community, make a map, or leave comments.",
-                position: 'bottom'
-            },
-            {
-                element: '#step4',
-                intro: "Use the feed buttons to sift through content in different ways.",
-                position: 'right'
-            }
-            ];
-
-        // $(window).resize(function() {
-        //     console.log('width is ', window.screen.availWidth);
-            if(window.screen.availWidth < 1206){
-                $('.responsiveheader').css({display:'block'});
-                Steps = [
-                    {
-                        intro: "Welcome to Perceptions.Live! There's a lot you can do here, so let's give you a quick tour!"
-                    },
-                    {
-                        element: '#step2',
-                        intro: "Click this button to quickly upload your video--a testimony, a perspective, a word of wisdom to share. No registration required!",
-                        position: 'top'
-                    },
-                    {
-                        element: '#step3_mobile',
-                        intro: "Register a new account if you want to build a community, make a map, or leave comments.",
-                        position: 'bottom'
-                    },
-                    {
-                        element: '#arrowMapWrapper',
-                        intro: "Use the feed buttons to sift through content in different ways.",
-                        position: 'right'
-                    }
-                ];
-            }
-        // });
-
-        // initialize an introjs instance
-        var intro = introJs();
-
-        // load data
-        intro.setOptions(
-            {
-                steps: Steps,
-                overlayOpacity: "1",
-                skipLabel: "Exit",
-                tooltipPosition: "auto",
-                showStepNumbers: false,
-                exitOnEsc: true,
-                hidePrev: true,
-                hideNext: true,
-                keyboardNavigation: true,
-                scrollToElement: false,
-                exitOnOverlayClick: true
-            }
-            );
-
-        // start intro.js
-        $(document).ready(function() {
-            let intro_exited = getCookie('intro_exited');
-
-            let home_url = window.location.pathname;
-            if(home_url == '/' && intro_exited == null){
-                intro.start();
-            }
-        });
-
-        // tour button
-        document.getElementById("StartTour").onclick = function()
-        {
-            intro.start("#step2");
-        };
-
-        intro.onchange(function () {
-            // console.log(this);
-            // document.cookie = "intro_exited=true; user-id=0; date="+Date.now();
-        });
-
-        intro.onexit(function () {
-            let if_cookie_consent = getCookie('__cookie_consent');
-            if(if_cookie_consent !== null){
-                let maxAge = "; max-age=" + 3*24*60*60;
-                document.cookie = "intro_exited=true; path=/" +  maxAge;
-            }
-        });
-
-        function getCookie(name) {
-            // Split cookie string and get all individual name=value pairs in an array
-            var cookieArr = document.cookie.split(";");
-
-            // Loop through the array elements
-            for(var i = 0; i < cookieArr.length; i++) {
-                var cookiePair = cookieArr[i].split("=");
-
-                /* Removing whitespace at the beginning of the cookie name
-                and compare it with the given string */
-                if(name == cookiePair[0].trim()) {
-                    // Decode the cookie value and return
-                    return decodeURIComponent(cookiePair[1]);
-                }
-            }
-
-            // Return null if not found
-            return null;
-        }
-
-
-    </script>
-
 
     <div class="popupsec">
         <div class="popup">
@@ -324,7 +200,7 @@
     <script src="/assets/js/slick_slider/slick.js"></script>
     <script src="/assets/js/thumbnail_slider.js"></script>
     <script src="/assets/js/home-common.js"></script>
-
+    @yield('scripts')
 
     @include('partials.notify-messages')
     <style>

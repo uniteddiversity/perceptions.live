@@ -172,6 +172,30 @@
                 </ul>
             </li>
 
+            <li class="pcoded-hasmenu <?php if(in_array(Request::segment(3), array('global-settings','list-slider-feed','home-slider-feed'))){ echo 'active pcoded-trigger'; } ?>">
+                <a href="javascript:void(0)">
+                    <span class="pcoded-micon"><i class="ti-share"></i></span>
+                    <span class="pcoded-mtext" data-i18n="nav.page_layout.main">{{__('backend.global_settings')}}</span>
+                    <span class="pcoded-mcaret"></span>
+                </a>
+                <ul class="pcoded-submenu">
+                    <li class="nav-item <?php if(in_array(Request::segment(3), array('global-settings'))){ echo 'active'; } ?>">
+                        <a class="nav-link" href="/user/admin/setting/terms">
+                            Terms
+                        </a>
+                    </li>
+                    <li class="nav-item <?php if(in_array(Request::segment(3), array('list-slider-feed'))){ echo 'active'; } ?>">
+                        <a class="nav-link" href="/user/admin/setting/appearance">
+                            Appearance
+                        </a>
+                    </li>
+                    <li class="nav-item <?php if(in_array(Request::segment(3), array('home-slider-feed'))){ echo 'active'; } ?>">
+                        <a class="nav-link" href="/user/admin/setting/platform-config">
+                            platform configuration
+                        </a>
+                    </li>
+                </ul>
+            </li>
         </ul>
 
         <?php /*<ul class="pcoded-item pcoded-left-item">

@@ -24,7 +24,7 @@ return [
     'add_user' => 'Add :name',
     'profile_claim_request' => 'Profile Claim Request\'s',
     'groups' => ':name\'s',
-    'all_groups' => 'All :name',
+    'all_groups' => 'All :names',
     'my_group_videos' => 'My :name1\'s :name2',
     'my_group_users' => 'My :name1\'s :name2',
     'assign_users_to_group' => 'Assign :name1 to :name2',
@@ -207,5 +207,5 @@ return [
     'user_list' => ':name List',
     'video_package_manage' => ':name Edit Packages',
 
-    'xxxxxx' => 'xxxxxx',
+    'global_settings' => 'Global settings',
 ];
