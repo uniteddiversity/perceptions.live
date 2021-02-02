@@ -78,7 +78,7 @@
 
 <body class="page-admin">
     <div class="page-loading">
-        <img src="/assets/front-theme/images/loader.gif" alt="" />
+        <img src="/assets/frontend/images/loader.gif" alt="" />
     </div>
     <!-- Pre-loader end -->
     <!-- Menu header start -->

@@ -122,14 +122,14 @@
 
 <body class="page-admin">
   <div class="page-loading">
-    <img src="/assets/front-theme/images/loader.gif" alt="" />
+    <img src="/assets/frontend/images/loader.gif" alt="" />
   </div>
   <header class="new-header" >
     <div class="header-content">
       <div class="top-bar">
         <div class="top-bar__left">
           <a href="/" class="navbar-logo" onclick="resetSearch()">
-            <img src="/assets/front-theme/images/live-perceptions-logo.png" alt="">
+            <img src="/assets/frontend/images/live-perceptions-logo.png" alt="">
           </a>
         </div>
         <div class="top-bar__right">

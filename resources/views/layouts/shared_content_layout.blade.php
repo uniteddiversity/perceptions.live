@@ -5,7 +5,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <title>{{env('APP_NAME')}}</title>
-    <link rel="stylesheet" type="text/css" href="/assets/front-theme/css/bootstrap-grid.css" />
+    <link rel="stylesheet" type="text/css" href="/assets/frontend/css/bootstrap-grid.css" />
     <link rel="stylesheet" href="/assets/fontawesome/css/all.css">
     <link rel="stylesheet" type="text/css" href="/assets/css/leaflet_0.7.css" />
     <link rel="stylesheet" href="/assets/css/MarkerCluster.Default.css">
@@ -13,12 +13,12 @@
     <link rel="stylesheet" href="/assets/leaflet-groupedlayercontrol/leaflet.groupedlayercontrol.css">
     <link rel="stylesheet" href="/js/dist/css/select2.min.css" />
     <link rel="stylesheet" href="/assets/css/app.css">
-    <link rel="stylesheet" type="text/css" href="/assets/front-theme/css/style.css" />
+    <link rel="stylesheet" type="text/css" href="/assets/frontend/css/style.css" />
     <link rel="stylesheet" href="/assets/css/custom.css?version=1" />
     <link rel="stylesheet" href="/assets/css/custom_shared.css" />
 
     <link rel="stylesheet" href="/assets/js/slick_slider/slick.css">
-    <link rel="stylesheet" href="/assets/front-theme/css/icons.css">
+    <link rel="stylesheet" href="/assets/frontend/css/icons.css">
     <style>
         #featureModal {
             display: block;
@@ -201,7 +201,7 @@
             background-color: transparent;
             height: 50px;
             width: 100px;
-            background-image: url('/assets/front-theme/images/live-perceptions-shared-logo.png');
+            background-image: url('/assets/frontend/images/live-perceptions-shared-logo.png');
             /*background: no-repeat;*/
             right: 20px;
             top: 10px;
