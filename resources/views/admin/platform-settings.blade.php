@@ -21,14 +21,45 @@
                             {{ session()->get('message') }}
                         </div>
                         @endif
-                        <form action="/user/admin/setting/terms" method="post" id="submit_content" enctype='multipart/form-data'>
+                        <form action="/user/admin/setting/platform-config" method="post" id="submit_content" enctype='multipart/form-data'>
                             <input type="hidden" name="_token" id="csrf-token" value="{{ Session::token() }}" />
-                            @foreach($data['terms'] as $key => $term)
                             <div class="form-group">
-                                <label for="exampleInputEmail1">Term - {{ucfirst($key)}}</label>
-                                <input type="text" class="form-control" aria-describedby="nameHelp" name="term[{{$key}}]" placeholder="Title" value="{{$term}}">
+                                <label for="exampleInputEmail1">Site title</label>
+                                <input type="text" class="form-control" aria-describedby="nameHelp" name="site_title" placeholder="Title" value="{{$site_title}}">
                             </div>
-                            @endforeach
+                            <div class="form-group">
+                                <label for="exampleInputEmail1">Site URL</label>
+                                <input type="text" class="form-control" aria-describedby="nameHelp" name="site_url" placeholder="Site URL" value="{{$site_url}}">
+                            </div>
+                            <div class="form-group">
+                                <label for="exampleInputEmail1">Site logo</label>
+                                <input type="file" class="form-control" aria-describedby="nameHelp" name="site_logo" placeholder="Logo" >
+                            </div>
+                            <div class="form-group">
+                                <label for="exampleInputEmail1">Site icon</label>
+                                <input type="file" class="form-control" aria-describedby="nameHelp" name="site_icon" placeholder="Icon" >
+                            </div>
+                            <div class="form-group">
+                                <label for="exampleInputEmail1">Site mission</label>
+                                <input type="text" class="form-control" aria-describedby="nameHelp" name="site_mission" placeholder="Mission" value="{{$site_mission}}">
+                            </div>
+                            <div class="form-group">
+                                <label for="exampleInputEmail1">Site mission description</label>
+                                <textarea type="text" class="form-control" aria-describedby="nameHelp" name="site_mission_description" placeholder="Mission description" >{{$site_mission_description}}</textarea>
+                            </div>
+                            <div class="form-group">
+                                <label for="exampleInputEmail1">Site mission image</label>
+                                <input type="file" class="form-control" aria-describedby="nameHelp" name="site_mission_image" placeholder="Mission image" >
+                            </div>
+                            <div class="form-group">
+                                <label for="exampleInputEmail1">Google recaptcha key</label>
+                                <input type="text" class="form-control" aria-describedby="nameHelp" name="g_recaptcha_key" placeholder="Recaptcha key" value="{{$g_recaptcha_key}}">
+                            </div>
+                            <div class="form-group">
+                                <label for="exampleInputEmail1">Google recaptcha secret</label>
+                                <input type="text" class="form-control" aria-describedby="nameHelp" name="g_recaptcha_secret" placeholder="Recaptcha secret" value="{{$g_recaptcha_secret}}">
+                            </div>
+
                             <button type="submit" class="btn btn-primary">{{__('backend.submit')}}</button>
                         </form>
                 </div>
@@ -38,7 +69,3 @@
 
 
     @endsection
-    <script>
-//        var el = document.getElementById('loading');
-//        el.remove(); // Removes the div with the 'div-02' id
-    </script>

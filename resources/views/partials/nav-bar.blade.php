@@ -3,12 +3,12 @@
     <div class="top-bar">
       <div class="top-bar__left">
         <a href="/" class="navbar-logo" onclick="resetSearch()">
-          <img src="/assets/frontend/images/live-perceptions-logo.png" alt="{{env('APP_NAME')}}" >
+          <img src="/uploaded_settings/main_logo_1.png" alt="{{config('app.name')}}" >
         </a>
         <div class="search-box">
           <div class="search-box-content">
             <input type="text" placeholder="Quick Search" name="header_search_text" id="header_search_text" />
-            <button class="btn-search""><i class="fas fa-search"></i></button>
+            <button class="btn-search"><i class="fas fa-search"></i></button>
           </div>
         </div>
       </div>
@@ -156,7 +156,7 @@
         <a href="/contact-us"><i class="fas fa-pencil-alt"></i>{{__('backend.contact_us')}}</a>
     </li>
         <div style="padding: 20px; margin-top: 40px; max-width: 75%; font-size: 10px; text-align: center; margin: auto;">
-            <strong>&copy; <a href="https://perceptiontravel.tv/" target="_blank">{{env('APP_NAME')}}.</a>.</strong>
+            <strong>&copy; <a href="https://perceptiontravel.tv/" target="_blank">{{config('app.name')}}.</a>.</strong>
 </div>
     @endif
 

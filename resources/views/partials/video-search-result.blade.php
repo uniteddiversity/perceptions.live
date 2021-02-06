@@ -1,7 +1,7 @@
 <input type="hidden" id="result_count" value="{{$result_count}}" />
 <div class="ml-filterbar" style="margin-left: 18px;margin-right: 10px;">
     <a href="#" onclick="resetSearch()"><i class="fas fa-redo"></i> {{__('backend.reset_search')}}</a>
-    <h3><b>{{$result_count}} {{env('APP_NAME')}}</b><i class="fas fa-list"></i></h3>
+    <h3><b>{{$result_count}} {{config('app.name')}}</b><i class="fas fa-list"></i></h3>
 
 </div>
 <?php foreach($uploaded_list as $info){

@@ -26,6 +26,7 @@ use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Validator;
 //use System\Request;
+use JanisKelemen\Setting\Facades\Setting;
 use System\UID\UID;
 use User\Services\UserRepository;
 
@@ -1289,15 +1290,29 @@ class AdminController extends Controller
     public function appearance(Request $request)
     {
         if($request->method() == 'GET'){
+//            Setting::lang(App::getLocale())->langResetting(false);
             $css = file_get_contents('../public/assets/css/frontend-override.css');
-            return view('admin.appearance-settings')->with(compact('css'));
+            $default_zoom = Setting::get('site_settings.default_zoom');
+            $default_location = Setting::get('site_settings.default_location');
+            $default_location_lat = Setting::get('site_settings.default_location_lat');
+//            die('location '.$default_location_lat);
+            $default_location_long = Setting::get('site_settings.default_location_long');
+            return view('admin.appearance-settings')->with(compact('css', 'default_location', 'default_zoom', 'default_location_lat', 'default_location_long'));
         }
 
         if($request->method() == 'POST'){
-            if(isset($request->front_css)){
-//                die('css is '.$request->front_css);
-                file_put_contents('../public/assets/css/frontend-override.css', $request->front_css);
+            $validated = $request->validate([
+                'default_zoom' => 'integer|max:12|min:1',
+            ]);
 
+            if(isset($request->front_css)){
+                file_put_contents('../public/assets/css/frontend-override.css', $request->front_css);
+                Setting::set('site_settings.default_location', $request->default_location);
+                Setting::set('site_settings.default_location_lat', $request->lat);
+                Setting::set('site_settings.default_location_long', $request->long);
+                Setting::set('site_settings.default_zoom', $request->default_zoom);
+
+//                die('zoom is '.Setting::get('site_settings.default_zoom'));
             }
             return Redirect::back()->withMessage('Updated');
         }
@@ -1305,6 +1320,50 @@ class AdminController extends Controller
 
     public function platformConfig(Request $request)
     {
+        if($request->method() == 'GET'){
+            $site_title = Setting::get('site_settings.name');
+            $site_url = Setting::get('site_settings.url');
+            $site_logo = Setting::get('site_settings.site_logo');
+            $site_icon = Setting::get('site_settings.site_icon');
+            $site_mission = Setting::get('site_settings.site_mission');
+            $site_mission_description = Setting::get('site_settings.site_mission_description');
+            $g_recaptcha_key = Setting::get('site_settings.g_recaptcha_key');
+            $g_recaptcha_secret = Setting::get('site_settings.g_recaptcha_secret');
 
+            return view('admin.platform-settings')->with(compact('site_title', 'site_url', 'site_logo', 'site_icon'
+                , 'site_mission', 'site_mission_description', 'g_recaptcha_key', 'g_recaptcha_secret'));
+        }
+
+        if($request->method() == 'POST'){
+//            $validated = $request->validate([
+//                'default_zoom' => 'required|integer|max:22|min:1',
+//            ]);
+
+            $site_logo = $request->file('site_logo');
+            $site_icon = $request->file('site_icon');
+            $site_mission_image = $request->file('site_mission_image');
+
+//            $destinationPath = 'uploads';
+            if(isset($site_icon)){
+                $site_icon->move('uploaded_settings','fav_apple-icon-57x57.png');
+            }
+            if(isset($site_mission_image)){
+//                $site_mission_image->move('uploaded_settings','fav_apple-icon-57x57.png');
+            }
+            if(isset($site_logo)){
+                $site_logo->move('uploaded_settings','main_logo_1.png');
+            }
+
+
+            if(isset($request->site_title)){
+                Setting::set('site_settings.name', $request->site_title);
+                Setting::set('site_settings.url', $request->site_url);
+                Setting::set('site_settings.site_mission', $request->site_mission);
+                Setting::set('site_settings.site_mission_description', $request->site_mission_description);
+                Setting::set('site_settings.g_recaptcha_key', $request->g_recaptcha_key);
+                Setting::set('site_settings.g_recaptcha_secret', $request->g_recaptcha_secret);
+            }
+            return Redirect::back()->withMessage('Updated');
+        }
     }
 }

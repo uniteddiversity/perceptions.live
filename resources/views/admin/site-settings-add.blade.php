@@ -54,7 +54,9 @@ $data['right_feed_name'] = isset($settings['right_feed_name'])?$settings['right_
 
 
 @endsection
-<script>
-    var el = document.getElementById('loading');
-    el.remove(); // Removes the div with the 'div-02' id
-</script>
+@section('scripts')
+    <script>
+        var el = document.getElementById('loading');
+        el.remove(); // Removes the div with the 'div-02' id
+    </script>
+@endsection

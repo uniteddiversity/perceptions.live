@@ -60,8 +60,8 @@ $data['proof_images'] = array();
         </div>
 
         <div class="form-group">
-          @if(env('GOOGLE_RECAPTCHA_KEY'))
-          <div class="g-recaptcha" data-sitekey="{{env('GOOGLE_RECAPTCHA_KEY')}}">
+          @if(config('app.g_recaptcha_key'))
+          <div class="g-recaptcha" data-sitekey="{{config('app.g_recaptcha_key')}}">
           </div>
           @endif
         </div>

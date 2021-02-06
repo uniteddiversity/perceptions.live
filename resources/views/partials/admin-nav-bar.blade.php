@@ -17,7 +17,7 @@
         </li>
       </ul>
       <a href="/" class="nav-logo">
-        <img src="/assets/frontend/images/live-perceptions-logo.png" alt="">
+        <img src="/uploaded_settings/main_logo_1.png" alt="">
       </a>
       <a class="mobile-options" style="display:none;">
         <i class="fas fa-ellipsis-h"></i>

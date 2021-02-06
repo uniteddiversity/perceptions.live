@@ -171,7 +171,9 @@
 
 
     @endsection
+@section('scripts')
     <script>
         var el = document.getElementById('loading');
         el.remove(); // Removes the div with the 'div-02' id
     </script>
+@endsection

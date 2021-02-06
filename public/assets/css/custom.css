@@ -362,7 +362,7 @@ header .extras .accountbtn i {
 
 /* header #logo_overlay {
     margin: 0;
-    background: url(/assets/front-theme/images/live-perceptions-logo.png) center center no-repeat;
+    background: url(/uploaded_settings/main_logo_1.png) center center no-repeat;
     background-size: 100%;
     height: 70px;
     width: 240px;
@@ -2472,7 +2472,7 @@ body[themebg-pattern="pattern2"] {
 }
 
 #pcoded .logo {
-  background: url(/assets/front-theme/images/live-perceptions-logo.png) center center no-repeat;
+  background: url(/uploaded_settings/main_logo_1.png) center center no-repeat;
   background-size: 100%;
   min-width: 240px !important;
   height: 70px;
@@ -4177,7 +4177,7 @@ nav.two .header-notification .profile-notification li {
 
   .logo_mobile {
     display: block;
-    background: url(/assets/front-theme/images/live-perceptions-logo.png) center center no-repeat;
+    background: url(/uploaded_settings/main_logo_1.png) center center no-repeat;
     background-size: 100%;
     width: 100%;
     height: 60px;
@@ -5805,7 +5805,7 @@ header.s4.dark #slider_feed .near_me_icon {
 
   .responsiveheader .logo_mobile {
     display: block;
-    background: url(/assets/front-theme/images/live-perceptions-logo.png) center center no-repeat;
+    background: url(/uploaded_settings/main_logo_1.png) center center no-repeat;
     background-color: white;
     background-size: 80%;
     height: 70px;

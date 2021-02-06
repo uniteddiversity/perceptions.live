@@ -83,10 +83,7 @@ $data['image_url'] = isset($data->image) && isset($data->image[0])? $data->image
 
 
 @endsection
-<script>
-    // var el = document.getElementById('loading');
-    // el.remove(); // Removes the div with the 'div-02' id
-</script>
+
 <style>
     .select2-container .select2-selection--single {
         height: 46px !important;

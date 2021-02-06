@@ -18,8 +18,12 @@ if (typeof (L) != "undefined") {
         northEast = L.latLng(89.99346179538875, 180);
     var bounds = L.latLngBounds(southWest, northEast);
 }
-
+$(document).ready(function(){
+    var default_zoom = $('#default_zoom').val();
+    console.log('zoom 222222222222222 ',default_zoom);
+})
 if (typeof (L) != "undefined") {
+
     if ($('#video_id').val() != undefined) {
         var lat = $('#video_lat').val();
         var long = $('#video_long').val();
@@ -32,12 +36,28 @@ if (typeof (L) != "undefined") {
             maxBoundsViscosity: 1.0
         });
     } else {
+        var default_zoom = $('#default_zoom').val();
+        var default_location_lat = $('#default_location_lat').val();
+        var default_location_long = $('#default_location_long').val();
+
+        if(default_zoom == ''){
+            default_zoom = 5
+        }
+
+        if(default_location_lat == '' || default_location_long == ''){
+            default_location = [10.0, 5.0]
+        }else{
+            default_location = [default_location_lat, default_location_long]
+        }
+
         var map = L.map('map', {
-            center: [10.0, 5.0],
+            center: default_location,
             minZoom: 3,
-            zoom: 2,
+            zoom: parseInt(default_zoom),//needs to chanage
             maxBoundsViscosity: 1.0
         });
+
+        // map.panTo(new L.LatLng(default_location_lat, default_location_long));
     }
 
 

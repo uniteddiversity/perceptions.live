@@ -370,9 +370,9 @@ $data['language'] = isset($video_data['language'])?$video_data['language']:'en';
     <input type="text" class="form-control" aria-describedby="nameHelp" id="learn_more_url" name="learn_more_url" placeholder="Learn More Url" value="{{ old('learn_more_url',$data['learn_more_url']) }}">
   </div>
   <div class="form-group">
-    @if(env('GOOGLE_RECAPTCHA_KEY'))
+    @if(config('app.g_recaptcha_key'))
     <div class="g-recaptcha"
-         data-sitekey="{{env('GOOGLE_RECAPTCHA_KEY')}}">
+         data-sitekey="{{config('app.g_recaptcha_key')}}">
     </div>
     @endif
   </div>
@@ -851,7 +851,3 @@ $data['language'] = isset($video_data['language'])?$video_data['language']:'en';
   }
 </style>
 @endsection
-<script>
-  //        var el = document.getElementById('loading');
-  //        el.remove(); // Removes the div with the 'div-02' id
-</script>

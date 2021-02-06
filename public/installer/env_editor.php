@@ -10,7 +10,7 @@ if(isset($_POST['submit_all'])){
 function moveIcons(){
     $target_dir = "./../assets/frontend/images/";
     $logo = $target_dir . 'live-perceptions-shared-logo.png';
-    $logo_small = $target_dir . 'live-perceptions-logo.png';
+    $logo_small = $target_dir . 'main_logo_1.png';
     $uploadOk_logo = 1;
     $uploadOk_logo_small = 1;
 

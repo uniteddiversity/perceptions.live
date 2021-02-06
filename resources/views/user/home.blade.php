@@ -2,6 +2,10 @@
 
 @section('content')
 <?php //dd($gci_tags); ?>
+<input type="hidden" id="default_location" value="<?php echo Setting::get('site_settings.default_location') ?>" />
+<input type="hidden" id="default_location_lat" value="<?php echo Setting::get('site_settings.default_location_lat') ?>" />
+<input type="hidden" id="default_location_long" value="<?php echo Setting::get('site_settings.default_location_long') ?>" />
+<input type="hidden" id="default_zoom" value="<?php echo Setting::get('site_settings.default_zoom') ?>" />
 @include('partials.nav-bar')
 <section class="customContainer">
     <div class="block no-padding">

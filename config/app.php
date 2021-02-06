@@ -136,6 +136,24 @@ return [
     |
     */
 
+//    custom variables
+    'auto_gen_email_domain' => env('AUTO_GENERATED_EMAIL_DOMAIN', ''),
+    'app_domain' => env('APP_DOMAIN', ''),
+    'paypal_mode' => env('PAYPAL_MODE', ''),
+    'g_recaptcha_key' => env('GOOGLE_RECAPTCHA_KEY', ''),//
+    'g_recaptcha_secret' => env('GOOGLE_RECAPTCHA_SECRET', ''),//
+    'email_admin_name' => env('ADMIN_NAME', ''),
+    'email_admin_email' => env('ADMIN_MAIL', ''),
+    'mail_from_address' => env('MAIL_FROM_ADDRESS', ''),
+    'mail_from_name' => env('MAIL_FROM_NAME', ''),
+    'privacy_policy_url' => env('PRIVACY_POLICY', ''),
+    'site_mission' => env('APP_MISSION', ''),//
+    'site_mission_description' => env('APP_MISSION_DESCRIPTION', ''),//
+    'guide_line_url' => env('GUIDE_LINE_URL', ''),
+    'terms_of_service' => env('TERMS_OF_SERVICE', ''),
+    'feedback' => env('FEEDBACK', ''),
+    'app_credit' => env('APP_CREDIT', ''),
+
     'providers' => [
 
         /*

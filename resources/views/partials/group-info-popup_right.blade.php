@@ -18,12 +18,12 @@
           </div>
 
           <div id="desc" class="desc" style="text-align: center;">
-              <h4 class="title">{{__('backend.welcome_to_site', ['name' => env('APP_NAME')])}}</h4>
+              <h4 class="title">{{__('backend.welcome_to_site', ['name' => config('app.name')])}}</h4>
               <p style="margin-top:8px; line-height: 16px; font-size: 12px; font-style: italic;">
-                  {{__('backend.site_mission', ['name' => env('APP_MISSION')])}}
+                  {{__('backend.site_mission', ['name' => config('app.site_mission')])}}
               </p>
               <p>
-                  {{__('backend.site_mission_description', ['name' => env('APP_MISSION_DESCRIPTION')])}}
+                  {{__('backend.site_mission_description', ['name' => config('app.site_mission_description')])}}
               </p>
 {{--              <p style="margin-top:8px;"><strong>The Problem</strong></p>--}}
 {{--              <p>People crave authentic connection, but the current social networking giants create interactions only in service of their market domination.</p>--}}

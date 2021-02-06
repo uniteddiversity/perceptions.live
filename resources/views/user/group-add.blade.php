@@ -204,8 +204,8 @@ $data['group_acting_roles'] = isset($group['actingRoles']) ? array_column(($grou
           </div>
 
           <div class="form-group">
-            @if(env('GOOGLE_RECAPTCHA_KEY'))
-            <div class="g-recaptcha" data-sitekey="{{env('GOOGLE_RECAPTCHA_KEY')}}">
+            @if(config('app.g_recaptcha_key'))
+            <div class="g-recaptcha" data-sitekey="{{config('app.g_recaptcha_key')}}">
             </div>
             @endif
           </div>
@@ -324,7 +324,9 @@ $data['group_acting_roles'] = isset($group['actingRoles']) ? array_column(($grou
     </style>
 
 @endsection
-<script>
-  var el = document.getElementById('loading');
-  el.remove(); // Removes the div with the 'div-02' id
-</script>
+@section('scripts')
+  <script>
+      var el = document.getElementById('loading');
+      el.remove(); // Removes the div with the 'div-02' id
+  </script>
+@endsection
