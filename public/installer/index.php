@@ -427,10 +427,10 @@ if($error == 1){
                 <label for="exampleInputEmail1">Terms of service</label>
                 <input type="text" class="form-control" name="terms_of_service" aria-describedby="emailHelp" placeholder="https://">
               </div>
-              <div class="form-group">
-                <label for="exampleInputEmail1">Feedback URL</label>
-                <input type="text" class="form-control" name="feedback" aria-describedby="emailHelp" placeholder="https://">
-              </div>
+<!--              <div class="form-group">-->
+<!--                <label for="exampleInputEmail1">Feedback URL</label>-->
+<!--                <input type="text" class="form-control" name="feedback" aria-describedby="emailHelp" placeholder="https://">-->
+<!--              </div>-->
               <div class="form-group">
                 <label for="exampleInputEmail1">App credit</label>
                 <input type="text" class="form-control" name="app_credit" aria-describedby="emailHelp" placeholder="PRCPTION Travel, Inc.">

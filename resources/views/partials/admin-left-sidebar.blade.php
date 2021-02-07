@@ -191,7 +191,12 @@
                     </li>
                     <li class="nav-item <?php if(in_array(Request::segment(3), array('home-slider-feed'))){ echo 'active'; } ?>">
                         <a class="nav-link" href="/user/admin/setting/platform-config">
-                            platform configuration
+                            Platform configuration
+                        </a>
+                    </li>
+                    <li class="nav-item <?php if(in_array(Request::segment(3), array('home-slider-feed'))){ echo 'active'; } ?>">
+                        <a class="nav-link" href="/user/admin/setting/organization-contact">
+                            Organization and contact
                         </a>
                     </li>
                 </ul>

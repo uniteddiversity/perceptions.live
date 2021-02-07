@@ -1366,4 +1366,39 @@ class AdminController extends Controller
             return Redirect::back()->withMessage('Updated');
         }
     }
+
+    public function organizationContact(Request $request)
+    {
+        if($request->method() == 'GET'){
+            $about_us = Setting::get('site_links.about_us');
+            $about_us_url = Setting::get('site_links.about_us_url');
+            $community_guidelines = Setting::get('site_links.community_guidelines');
+            $community_guidelines_url = Setting::get('site_links.community_guidelines_url');
+            $terms_of_service = Setting::get('site_links.terms_of_service');
+            $terms_of_service_url = Setting::get('site_links.terms_of_service_url');
+            $privacy_policy = Setting::get('site_links.privacy_policy');
+            $privacy_policy_url= Setting::get('site_links.privacy_policy_url');
+            $contribute = Setting::get('site_links.contribute');
+            $contribute_url= Setting::get('site_links.contribute_url');
+            $contact = Setting::get('site_links.contact');
+            $contact_url= Setting::get('site_links.contact_url');
+            return view('admin.organization-contact ')->with(compact('about_us','about_us_url','community_guidelines','community_guidelines_url'
+                ,'terms_of_service','terms_of_service_url','privacy_policy_url','privacy_policy','contribute','contribute_url','contact','contact_url' ));
+        }
+        if($request->method() == 'POST'){
+            Setting::set('site_links.about_us', $request->about_us);
+            Setting::set('site_links.about_us_url', $request->about_us_url);
+            Setting::set('site_links.community_guidelines', $request->community_guidelines);
+            Setting::set('site_links.community_guidelines_url', $request->community_guidelines_url);
+            Setting::set('site_links.terms_of_service', $request->terms_of_service);
+            Setting::set('site_links.terms_of_service_url', $request->terms_of_service_url);
+            Setting::set('site_links.privacy_policy', $request->privacy_policy);
+            Setting::set('site_links.privacy_policy_url', $request->privacy_policy_url);
+            Setting::set('site_links.contribute', $request->contribute);
+            Setting::set('site_links.contribute_url', $request->contribute_url);
+            Setting::set('site_links.contact', $request->contact);
+            Setting::set('site_links.contact_url', $request->contact_url);
+            return Redirect::back()->withMessage('Updated');
+        }
+    }
 }

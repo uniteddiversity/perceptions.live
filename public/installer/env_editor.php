@@ -166,7 +166,7 @@ function createEnv(){
     $app_mission_description = isset($_POST['app_mission_description'])?$_POST['app_mission_description']:'';
     $guide_line_url = isset($_POST['guide_line_url'])?$_POST['guide_line_url']:'';
     $terms_of_service = isset($_POST['terms_of_service'])?$_POST['terms_of_service']:'';
-    $feedback = isset($_POST['feedback'])?$_POST['feedback']:'';
+//    $feedback = isset($_POST['feedback'])?$_POST['feedback']:'';
     $app_credit = isset($_POST['app_credit'])?$_POST['app_credit']:'';
     $app_key = 'base64:'.base64_encode(generateRandomString(32));
     $env_data =
@@ -222,7 +222,6 @@ APP_MISSION='$app_mission'
 APP_MISSION_DESCRIPTION='$app_mission_description'
 GUIDE_LINE_URL='$guide_line_url'
 TERMS_OF_SERVICE='$terms_of_service'
-FEEDBACK='$feedback'
 APP_CREDIT='$app_credit'";
 
 
@@ -246,7 +245,7 @@ file_put_contents($file, $env_data, FILE_APPEND | LOCK_EX);
     $newFile = '../../.env';
 
     $output = copy($file, $newFile);
-    die('out is '.$output); artisan 
+    die('out is '.$output);
 
     
     try{

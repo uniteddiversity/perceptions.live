@@ -203,7 +203,8 @@
     </div>
     <div class="footer">
       <span style="display: block; padding-bottom: 7px; margin: auto;">
-        <a href="https://perceptiontravel.tv/privacy-policy" target="_blank">Privacy Policy</a> | <a href="https://perceptiontravel.tv/terms-of-service" target="_blank">Terms of Service</a> | <a href="https://perceptiontravel.tv/community/donations/" target="_blank">Make a Donation</a> | <a href="https://perceptiontravel.tv/community-feedback/" target="_blank">Submit Feedback</a> | <a href="https://perceptiontravel.tv/about/" target="_blank">About Us</a> | <a href="/contact-us" target="_blank">Contact Us</a></span>
+        <a href="{{Setting::get('site_links.privacy_policy_url')}}" target="_blank">{{Setting::get('site_links.privacy_policy')}}</a> | <a href="{{Setting::get('site_links.community_guidelines_url')}}" target="_blank">{{Setting::get('site_links.community_guidelines')}}</a> | <a href="{{Setting::get('site_links.terms_of_service_url')}}" target="_blank">{{Setting::get('site_links.terms_of_service')}}</a> | <a href="{{Setting::get('site_links.contribute_url')}}" target="_blank">{{Setting::get('site_links.contribute')}}</a> | <a href="{{Setting::get('site_links.about_us_url')}}" target="_blank">{{Setting::get('site_links.about_us')}}</a> | <a href="{{Setting::get('site_links.contact_url')}}" target="_blank">{{Setting::get('site_links.contact')}}</a>
+      </span>
       <span>
         <strong>© 2018-2019 <a href="https://perceptiontravel.tv/" target="_blank">PRCPTION Travel, Inc.</a> - a non-profit, 501(c)3 organization.</strong></span>
 

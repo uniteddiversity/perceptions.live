@@ -62,10 +62,14 @@
         <a href="#" class="btn btn--brand cookiemonster__accept js-cookie-accept cookie-button">{{ trans('cookieConsent::texts.accept_notice_gdpr') }}</a>
     </span>
 </div>
-
+<?php //echo 'xxxxx'.Setting::get('site_links.about_us').'aaaaa' ?>
+<?php //die('is i '.Setting::get('site_settings.url')); ?>
 <div class="footer">
     <span class="footer1">
-     <strong>   <a href="https://docs.perceptiontravel.tv/legal-docs/privacy-policy" target="_blank">Privacy Policy</a> | <a href="https://docs.perceptiontravel.tv/legal-docs/terms-of-service" target="_blank">Terms of Service</a> | <a href="https://perceptiontravel.tv/community/donations/" target="_blank">Make a Donation</a> | <a href="/contact-us" target="_blank">Submit Feedback</a> | <a href="https://docs.perceptiontravel.tv/" target="_blank">About Us</a> | <a href="/contact-us" target="_blank">Contact Us</a></strong></span>
+     <strong>
+         <a href="{{Setting::get('site_links.privacy_policy_url')}}" target="_blank">{{Setting::get('site_links.privacy_policy')}}</a> | <a href="{{Setting::get('site_links.community_guidelines_url')}}" target="_blank">{{Setting::get('site_links.community_guidelines')}}</a> | <a href="{{Setting::get('site_links.terms_of_service_url')}}" target="_blank">{{Setting::get('site_links.terms_of_service')}}</a> | <a href="{{Setting::get('site_links.contribute_url')}}" target="_blank">{{Setting::get('site_links.contribute')}}</a> | <a href="{{Setting::get('site_links.about_us_url')}}" target="_blank">{{Setting::get('site_links.about_us')}}</a> | <a href="{{Setting::get('site_links.contact_url')}}" target="_blank">{{Setting::get('site_links.contact')}}</a>
+
+     </strong></span>
     <span class="footer2">
         <a href="https://perceptiontravel.tv/" target="_blank">{{env('APP_CREDIT')}}</a> Powered by Perceptions.Live &copy; 2017-2021 PRCPTION Travel, Inc.</span>
 
