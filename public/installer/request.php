@@ -1,4 +1,23 @@
 <?php
+$error = 0;
+$errors = [];
+if(file_exists( '../../.env')){
+    $error = 1;
+    $errors[] = ('Installation already complete. Please delete "/public/installer" directory');
+}
+
+if(!file_exists('../../vendor/autoload.php')){
+    $error = 1;
+    $errors[] = ('Please run "composer install && php artisan migrate" to install and update the db');
+}
+
+if($error == 1){
+    foreach($errors as $err){
+        echo '<br/>***'.$err;
+    }
+    die();
+}
+
 require_once('../../vendor/autoload.php');
 //require_once('../index.php');
 //$output_is = exec('composer install');
@@ -26,6 +45,8 @@ switch($action){
         if($message !== true){
             die(json_response(400, array('data' => $message)));
         }
+        sleep(1);
+        runMigrations();
         sleep(1);
         installComposer();
         createAdminAccount();

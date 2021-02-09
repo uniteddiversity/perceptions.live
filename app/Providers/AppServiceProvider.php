@@ -19,17 +19,21 @@ class AppServiceProvider extends ServiceProvider
 ////            die('view');
 ////            view()->share('gci', array('a','b','c'));
 //        });
-        $db_settings = Setting::all(['site_settings'])->transform(function ($setting) {
-            return json_decode($setting, true);
-        })->toArray();
+        try{
+            $db_settings = Setting::all(['site_settings'])->transform(function ($setting) {
+                return json_decode($setting, true);
+            })->toArray();
+        }catch (\Exception $e){
+
+        }
+
         $db_settings = isset($db_settings['site_settings'])?$db_settings['site_settings']:[];
         $app_config = config('app');
 
         config([
             'app' => array_merge($app_config, $db_settings)
         ]);
-//        dd($db_settings);
-//        dd(config('app'));
+
         Validator::extend('recaptcha', 'App\\Validators\\ReCaptcha@validate');
     }
 

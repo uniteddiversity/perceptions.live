@@ -240,7 +240,7 @@ if($error == 1){
               form_data.append('site_logo_small', $('#site_logo_small')[0].files[0]);
 
               $('#notifications').html('');
-              // $('#submit_all').hide();
+              $('#submit_all').hide();
               $('#ajax_loading').show();
 
               $.ajax({
@@ -552,7 +552,7 @@ if($error == 1){
               <ul class="list-inline pull-right">
                 <li><button type="button" class="btn btn-default prev-step">Previous</button></li>
                 <!--                <li><button type="button" class="btn btn-default next-step">Skip</button></li>-->
-                <li><button name="submit_all" id="submit_all" type="button" class="btn btn-primary btn-info-full next-step">Submit</button><img id="ajax_loading" style="display: none" src="/assets/frontend/images/ajax-loader.gif" alt="" /></li>
+                <li><button name="submit_all" id="submit_all" type="button" class="btn btn-primary btn-info-full next-step">Submit</button><img id="ajax_loading" style="display: none" src="../assets/frontend/css/ajax-loader.gif" alt="" /></li>
               </ul>
 
             </div>

@@ -1,10 +1,33 @@
 <?php
+
+use Illuminate\Support\Facades\Artisan;
+
 error_reporting(1);
 error_reporting(E_ALL);
 ini_set('display_errors', '1');
+
+require '../../vendor/autoload.php';
+
 if(isset($_POST['submit_all'])){
     print_r($_POST);
     die();
+}
+
+function runMigrations(){
+    $app = require_once '../../bootstrap/app.php';
+    $kernel = $app->make(Illuminate\Contracts\Console\Kernel::class);
+    $status = $kernel->handle(
+        $input = new Symfony\Component\Console\Input\ArrayInput(['command' => 'migrate']),
+        new Symfony\Component\Console\Output\ConsoleOutput
+    );
+
+    try{
+        Artisan::call('migrate');
+    }catch (Exception $e){
+
+    }
+
+//    exit($status);
 }
 
 function moveIcons(){
@@ -143,50 +166,55 @@ function validateInputs(){
 }
 
 function createEnv(){
-    $app_name = isset($_POST['app_name'])?$_POST['app_name']:'';
-    $app_url = isset($_POST['app_url'])?$_POST['app_url']:'';
+    $array_search = ["'"];
+    $array_replace = [""];
+    $app_name = isset($_POST['app_name'])?str_replace($array_search, $array_replace, $_POST['app_name']):'';
+    $app_url = isset($_POST['app_url'])?str_replace($array_search, $array_replace, $_POST['app_url']):'';
 
-    $db_host = isset($_POST['db_host'])?$_POST['db_host']:'';
-    $db_name = isset($_POST['db_name'])?$_POST['db_name']:'';
-    $db_user = isset($_POST['db_user'])?$_POST['db_user']:'';
-    $db_password = isset($_POST['db_password'])?$_POST['db_password']:'';
-    $db_port = isset($_POST['db_port'])?$_POST['db_port']:'';
+    $db_host = isset($_POST['db_host'])?str_replace($array_search, $array_replace, $_POST['db_host']):'';
+    $db_name = isset($_POST['db_name'])?str_replace($array_search, $array_replace, $_POST['db_name']):'';
+    $db_user = isset($_POST['db_user'])?str_replace($array_search, $array_replace, $_POST['db_user']):'';
+    $db_password = isset($_POST['db_password'])?str_replace($array_search, $array_replace, $_POST['db_password']):'';
+    $db_port = isset($_POST['db_port'])?str_replace($array_search, $array_replace, $_POST['db_port']):'';
 
-    $google_recaptcha_key = isset($_POST['google_recaptcha_key'])?$_POST['google_recaptcha_key']:'';
-    $google_recaptcha_secret = isset($_POST['google_recaptcha_secret'])?$_POST['google_recaptcha_secret']:'';
+    $google_recaptcha_key = isset($_POST['google_recaptcha_key'])?str_replace($array_search, $array_replace, $_POST['google_recaptcha_key']):'';
+    $google_recaptcha_secret = isset($_POST['google_recaptcha_secret'])?str_replace($array_search, $array_replace, $_POST['google_recaptcha_secret']):'';
 
-    $outgoing_email_address = isset($_POST['outgoing_email_address'])?$_POST['outgoing_email_address']:'';
-    $outgoing_email_name = isset($_POST['outgoing_email_name'])?$_POST['outgoing_email_name']:'';
-    $privacy_policy_external_url = isset($_POST['privacy_policy_external_url'])?$_POST['privacy_policy_external_url']:'';
+    $outgoing_email_address = isset($_POST['outgoing_email_address'])?str_replace($array_search, $array_replace, $_POST['outgoing_email_address']):'';
+    $outgoing_email_name = isset($_POST['outgoing_email_name'])?str_replace($array_search, $array_replace, $_POST['outgoing_email_name']):'';
+    $privacy_policy_external_url = isset($_POST['privacy_policy_external_url'])?str_replace($array_search, $array_replace, $_POST['privacy_policy_external_url']):'';
 
-    $admin_name = isset($_POST['admin_name'])?$_POST['admin_name']:'';
-    $admin_email = isset($_POST['admin_email'])?$_POST['admin_email']:'';
+    $admin_name = isset($_POST['admin_name'])?str_replace($array_search, $array_replace, $_POST['admin_name']):'';
+    $admin_email = isset($_POST['admin_email'])?str_replace($array_search, $array_replace, $_POST['admin_email']):'';
 
-    $app_mission = isset($_POST['app_mission'])?$_POST['app_mission']:'';
-    $app_mission_description = isset($_POST['app_mission_description'])?$_POST['app_mission_description']:'';
-    $guide_line_url = isset($_POST['guide_line_url'])?$_POST['guide_line_url']:'';
-    $terms_of_service = isset($_POST['terms_of_service'])?$_POST['terms_of_service']:'';
+    $app_mission = isset($_POST['app_mission'])?str_replace($array_search, $array_replace, $_POST['app_mission']):'';
+    $app_mission_description = isset($_POST['app_mission_description'])?str_replace($array_search, $array_replace, $_POST['app_mission_description']):'';
+    $guide_line_url = isset($_POST['guide_line_url'])?str_replace($array_search, $array_replace, $_POST['guide_line_url']):'';
+    $terms_of_service = isset($_POST['terms_of_service'])?str_replace($array_search, $array_replace, $_POST['terms_of_service']):'';
 //    $feedback = isset($_POST['feedback'])?$_POST['feedback']:'';
-    $app_credit = isset($_POST['app_credit'])?$_POST['app_credit']:'';
+    $app_credit = isset($_POST['app_credit'])?str_replace($array_search, $array_replace, $_POST['app_credit']):'';
     $app_key = 'base64:'.base64_encode(generateRandomString(32));
+
+
+
     $env_data =
         "APP_NAME='$app_name'
 APP_ENV=local
 APP_KEY=$app_key
 APP_DEBUG=true
 APP_LOG_LEVEL=debug
-APP_URL=$app_url
+APP_URL='$app_url'
 
 DB_CONNECTION=mysql
-DB_HOST=$db_host
-DB_PORT=$db_port
-DB_DATABASE=$db_name
-DB_USERNAME=$db_user
-DB_PASSWORD=$db_password
+DB_HOST='$db_host'
+DB_PORT='$db_port'
+DB_DATABASE='$db_name'
+DB_USERNAME='$db_user'
+DB_PASSWORD='$db_password'
 
 BROADCAST_DRIVER=log
-CACHE_DRIVER=envFile
-SESSION_DRIVER=envFile
+CACHE_DRIVER=file
+SESSION_DRIVER=file
 QUEUE_DRIVER=sync
 
 REDIS_HOST=127.0.0.1
@@ -208,13 +236,13 @@ APP_DOMAIN=http://prcptions2.lk
 
 PAYPAL_MODE=sandbox
 
-GOOGLE_RECAPTCHA_KEY=$google_recaptcha_key
-GOOGLE_RECAPTCHA_SECRET=$google_recaptcha_secret
+GOOGLE_RECAPTCHA_KEY='$google_recaptcha_key'
+GOOGLE_RECAPTCHA_SECRET='$google_recaptcha_secret'
 
-ADMIN_NAME=$admin_name
-ADMIN_MAIL=$admin_email
-MAIL_FROM_ADDRESS=$outgoing_email_address
-MAIL_FROM_NAME=$outgoing_email_name
+ADMIN_NAME='$admin_name'
+ADMIN_MAIL='$admin_email'
+MAIL_FROM_ADDRESS='$outgoing_email_address'
+MAIL_FROM_NAME='$outgoing_email_name'
 
 PRIVACY_POLICY='$privacy_policy_external_url'
 
@@ -225,37 +253,25 @@ TERMS_OF_SERVICE='$terms_of_service'
 APP_CREDIT='$app_credit'";
 
 
-
-error_reporting(1);
-error_reporting(E_ALL);
-ini_set('display_errors', '1');
-
+    error_reporting(1);
+    error_reporting(E_ALL);
+    ini_set('display_errors', '1');
 
 
-
-
-$file = 'env.backup_new';
-file_put_contents($file, $env_data, FILE_APPEND | LOCK_EX);
-
-
-    //$envFile = fopen("./env.backup", "w");
-    //fwrite($envFile, $env_data);
-    //fclose($envFile);
-    $envFile = 'env.txt"';
+    $file = 'env.backup_new';
+    file_put_contents($file, $env_data, LOCK_EX);
     $newFile = '../../.env';
-
     $output = copy($file, $newFile);
-    die('out is '.$output);
 
     
-    try{
-        if (!copy($envFile, $newFile)) {
-            $errors['error'] = 'Error in envFile creation';
-            return $errors;
-        }
-    }catch(Exception $e){
-echo ('Error '.$e->getMessage());
-    }
+//    try{
+//        if (!copy($envFile, $newFile)) {
+//            $errors['error'] = 'Error in envFile creation';
+//            return $errors;
+//        }
+//    }catch(Exception $e){
+//echo ('Error '.$e->getMessage());
+//    }
     
 
     return true;
