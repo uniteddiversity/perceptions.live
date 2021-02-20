@@ -60,6 +60,28 @@
                                 <input type="text" class="form-control" aria-describedby="nameHelp" name="g_recaptcha_secret" placeholder="Recaptcha secret" value="{{$g_recaptcha_secret}}">
                             </div>
 
+                            <hr/>
+                            <h5 class="card-title">Email settings</h5>
+                            <div class="form-group">
+                                <label for="exampleInputEmail1">Mail host</label>
+                                <input type="text" class="form-control" aria-describedby="nameHelp" name="mail_host" placeholder="Host" value="{{$mail_host}}">
+                            </div>
+                            <div class="form-group">
+                                <label for="exampleInputEmail1">Mail port</label>
+                                <input type="text" class="form-control" aria-describedby="nameHelp" name="mail_port" placeholder="port" value="{{$mail_port}}">
+                            </div>
+                            <div class="form-group">
+                                <label for="exampleInputEmail1">Mail username</label>
+                                <input type="text" class="form-control" aria-describedby="nameHelp" name="mail_username" placeholder="username" value="{{$mail_username}}">
+                            </div>
+                            <div class="form-group">
+                                <label for="exampleInputEmail1">Mail password</label>
+                                <input type="text" class="form-control" aria-describedby="nameHelp" name="mail_password" placeholder="password" value="{{$mail_password}}">
+                            </div>
+                            <div class="form-group">
+                                <label for="exampleInputEmail1">Mail encryption</label>
+                                <input type="text" class="form-control" aria-describedby="nameHelp" name="mail_encryption" placeholder="Encryption" value="{{$mail_encryption}}">
+                            </div>
                             <button type="submit" class="btn btn-primary">{{__('backend.submit')}}</button>
                         </form>
                 </div>

@@ -1,7 +1,7 @@
 <div class="custom-popup">
 
     <div class="logo-wrapper">
-        <a href="https://perceptiontravel.tv" target="new"></a><img src="/assets/img/logo_2.png" alt="Visit Perception Travel TV"></a>
+        <a href="https://perceptiontravel.tv" target="new"></a><img src="/uploaded_settings/mission_image_1.png" alt="Visit Perception Travel TV"></a>
         <div id="custom-popup-close"><div style="font-size: 32px; margin-top: -5px;">-</div></div>
     </div>
     <div class="controls">

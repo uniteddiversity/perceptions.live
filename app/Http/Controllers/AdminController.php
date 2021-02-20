@@ -1330,8 +1330,14 @@ class AdminController extends Controller
             $g_recaptcha_key = Setting::get('site_settings.g_recaptcha_key');
             $g_recaptcha_secret = Setting::get('site_settings.g_recaptcha_secret');
 
+            $mail_host = Setting::get('mail_settings.host');
+            $mail_port = Setting::get('mail_settings.port');
+            $mail_username = Setting::get('mail_settings.username');
+            $mail_password = Setting::get('mail_settings.password');
+            $mail_encryption = Setting::get('mail_settings.encryption');
+
             return view('admin.platform-settings')->with(compact('site_title', 'site_url', 'site_logo', 'site_icon'
-                , 'site_mission', 'site_mission_description', 'g_recaptcha_key', 'g_recaptcha_secret'));
+                , 'site_mission', 'site_mission_description', 'g_recaptcha_key', 'g_recaptcha_secret', 'mail_host', 'mail_port', 'mail_username', 'mail_password', 'mail_encryption'));
         }
 
         if($request->method() == 'POST'){
@@ -1349,20 +1355,27 @@ class AdminController extends Controller
             }
             if(isset($site_mission_image)){
 //                $site_mission_image->move('uploaded_settings','fav_apple-icon-57x57.png');
+                $site_mission_image->move('uploaded_settings','mission_image_1.png');
             }
             if(isset($site_logo)){
                 $site_logo->move('uploaded_settings','main_logo_1.png');
             }
 
 
-            if(isset($request->site_title)){
+//            if(isset($request->site_title)){
                 Setting::set('site_settings.name', $request->site_title);
                 Setting::set('site_settings.url', $request->site_url);
                 Setting::set('site_settings.site_mission', $request->site_mission);
                 Setting::set('site_settings.site_mission_description', $request->site_mission_description);
                 Setting::set('site_settings.g_recaptcha_key', $request->g_recaptcha_key);
                 Setting::set('site_settings.g_recaptcha_secret', $request->g_recaptcha_secret);
-            }
+
+                Setting::set('mail_settings.host', $request->mail_host);
+                Setting::set('mail_settings.port', $request->mail_port);
+                Setting::set('mail_settings.username', $request->mail_username);
+                Setting::set('mail_settings.password', $request->mail_password);
+                Setting::set('mail_settings.encryption', $request->mail_encryption);
+//            }
             return Redirect::back()->withMessage('Updated');
         }
     }
