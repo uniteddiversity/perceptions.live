@@ -1335,9 +1335,11 @@ class AdminController extends Controller
             $mail_username = Setting::get('mail_settings.username');
             $mail_password = Setting::get('mail_settings.password');
             $mail_encryption = Setting::get('mail_settings.encryption');
+            $outgoing_email_name = Setting::get('mail_settings.outgoing_email_name');
+            $outgoing_email_address = Setting::get('mail_settings.outgoing_email_address');
 
             return view('admin.platform-settings')->with(compact('site_title', 'site_url', 'site_logo', 'site_icon'
-                , 'site_mission', 'site_mission_description', 'g_recaptcha_key', 'g_recaptcha_secret', 'mail_host', 'mail_port', 'mail_username', 'mail_password', 'mail_encryption'));
+                , 'site_mission', 'site_mission_description', 'g_recaptcha_key', 'g_recaptcha_secret', 'mail_host', 'mail_port', 'mail_username', 'mail_password', 'mail_encryption','outgoing_email_name','outgoing_email_address'));
         }
 
         if($request->method() == 'POST'){
@@ -1375,6 +1377,8 @@ class AdminController extends Controller
                 Setting::set('mail_settings.username', $request->mail_username);
                 Setting::set('mail_settings.password', $request->mail_password);
                 Setting::set('mail_settings.encryption', $request->mail_encryption);
+                Setting::set('mail_settings.outgoing_email_name', $request->outgoing_email_name);
+                Setting::set('mail_settings.outgoing_email_address', $request->outgoing_email_address);
 //            }
             return Redirect::back()->withMessage('Updated');
         }

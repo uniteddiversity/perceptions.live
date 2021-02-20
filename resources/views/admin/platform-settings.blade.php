@@ -82,6 +82,14 @@
                                 <label for="exampleInputEmail1">Mail encryption</label>
                                 <input type="text" class="form-control" aria-describedby="nameHelp" name="mail_encryption" placeholder="Encryption" value="{{$mail_encryption}}">
                             </div>
+                            <div class="form-group">
+                                <label for="exampleInputEmail1">Outgoing email name</label>
+                                <input type="text" class="form-control" aria-describedby="nameHelp" name="outgoing_email_name" placeholder="Outgoing email name" value="{{$outgoing_email_name}}">
+                            </div>
+                            <div class="form-group">
+                                <label for="exampleInputEmail1">Outgoing email address</label>
+                                <input type="text" class="form-control" aria-describedby="nameHelp" name="outgoing_email_address" placeholder="Outgoing email address" value="{{$outgoing_email_address}}">
+                            </div>
                             <button type="submit" class="btn btn-primary">{{__('backend.submit')}}</button>
                         </form>
                 </div>
