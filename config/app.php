@@ -153,7 +153,7 @@ return [
     'terms_of_service' => env('TERMS_OF_SERVICE', ''),
     'feedback' => env('FEEDBACK', ''),
     'app_credit' => env('APP_CREDIT', ''),
-    'donate_url' => 'http://google.com',
+    'donate_url' => '',
 
     'providers' => [
 

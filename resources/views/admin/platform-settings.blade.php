@@ -59,7 +59,10 @@
                                 <label for="exampleInputEmail1">Google recaptcha secret</label>
                                 <input type="text" class="form-control" aria-describedby="nameHelp" name="g_recaptcha_secret" placeholder="Recaptcha secret" value="{{$g_recaptcha_secret}}">
                             </div>
-
+                            <div class="form-group">
+                                <label for="exampleInputEmail1">Donate Url</label>
+                                <input type="text" class="form-control" aria-describedby="nameHelp" name="donate_url" placeholder="Donate url" value="{{$donate_url}}">
+                            </div>
                             <hr/>
                             <h5 class="card-title">Email settings</h5>
                             <div class="form-group">

@@ -1329,7 +1329,7 @@ class AdminController extends Controller
             $site_mission_description = Setting::get('site_settings.site_mission_description');
             $g_recaptcha_key = Setting::get('site_settings.g_recaptcha_key');
             $g_recaptcha_secret = Setting::get('site_settings.g_recaptcha_secret');
-
+            $donate_url = Setting::get('site_settings.donate_url');
             $mail_host = Setting::get('mail_settings.host');
             $mail_port = Setting::get('mail_settings.port');
             $mail_username = Setting::get('mail_settings.username');
@@ -1339,7 +1339,8 @@ class AdminController extends Controller
             $outgoing_email_address = Setting::get('mail_settings.outgoing_email_address');
 
             return view('admin.platform-settings')->with(compact('site_title', 'site_url', 'site_logo', 'site_icon'
-                , 'site_mission', 'site_mission_description', 'g_recaptcha_key', 'g_recaptcha_secret', 'mail_host', 'mail_port', 'mail_username', 'mail_password', 'mail_encryption','outgoing_email_name','outgoing_email_address'));
+                , 'site_mission', 'site_mission_description', 'g_recaptcha_key', 'g_recaptcha_secret', 'mail_host', 'mail_port',
+                'mail_username', 'mail_password', 'mail_encryption','outgoing_email_name','outgoing_email_address', 'donate_url'));
         }
 
         if($request->method() == 'POST'){
@@ -1363,7 +1364,6 @@ class AdminController extends Controller
                 $site_logo->move('uploaded_settings','main_logo_1.png');
             }
 
-
 //            if(isset($request->site_title)){
                 Setting::set('site_settings.name', $request->site_title);
                 Setting::set('site_settings.url', $request->site_url);
@@ -1371,7 +1371,7 @@ class AdminController extends Controller
                 Setting::set('site_settings.site_mission_description', $request->site_mission_description);
                 Setting::set('site_settings.g_recaptcha_key', $request->g_recaptcha_key);
                 Setting::set('site_settings.g_recaptcha_secret', $request->g_recaptcha_secret);
-
+                Setting::set('site_settings.donate_url', $request->donate_url);
                 Setting::set('mail_settings.host', $request->mail_host);
                 Setting::set('mail_settings.port', $request->mail_port);
                 Setting::set('mail_settings.username', $request->mail_username);
