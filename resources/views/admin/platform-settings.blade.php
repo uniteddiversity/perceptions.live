@@ -80,7 +80,10 @@
                             </div>
                             <div class="form-group">
                                 <label for="exampleInputEmail1">Mail encryption</label>
-                                <input type="text" class="form-control" aria-describedby="nameHelp" name="mail_encryption" placeholder="Encryption" value="{{$mail_encryption}}">
+                                <select class="form-control" name="mail_encryption">
+                                    <option value="" @if($mail_encryption == '') selected @endif >Not set</option>
+                                    <option value="tls" @if($mail_encryption == 'tls') selected @endif >tls</option>
+                                </select>
                             </div>
                             <div class="form-group">
                                 <label for="exampleInputEmail1">Outgoing email name</label>

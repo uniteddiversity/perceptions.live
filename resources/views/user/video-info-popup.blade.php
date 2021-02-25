@@ -146,14 +146,14 @@ $video_id = isset($matches[1])?$matches[1]:'';
     <div class="right-comments">
 {{--        <button class="close" type="button" data-dismiss="modal" aria-hidden="true">&times;</button>--}}
         <div class="donate mobile_hide">
-            <a href="#" class="btn"><i class="fas fa-hand-holding-usd"></i>Donate</a>
+            <a href="{{config('app.donate_url')}}" target="_blank" class="btn"><i class="fas fa-hand-holding-usd"></i>{{__('donate')}}</a>
         </div>
         <div class="comments_outer">
             <div class="comments_inner">
                 @include('partials.commentsDisplay', ['comments' => $comments, 'fk_id' => $info->id, 'table' => 'contents'])
                 <?php if(count($comments) == 0){ ?>
                     <div class="comment no-comment-yet-<?php echo uid($info->id) ?> no_comment_yet" >
-                        No comments yet. Start the discussion!
+                        {{__('backend.no_comment_yet', ['name' => __('comment')])}}
                     </div>
                 <?php } ?>
             </div>
@@ -175,7 +175,7 @@ $video_id = isset($matches[1])?$matches[1]:'';
             <?php }?>
             <?php if(!(Auth::user())){ ?>
             <div class="open" style="padding: 20px;float: left;width: 100%;">
-                <a href="#" class="btn">Login to add comment</a>
+                <a href="#" class="btn">{{__('backend.login_to_add_comment', ['name' => __('comment')])}}</a>
             </div>
             <?php }?>
         </div>
@@ -191,7 +191,7 @@ $video_id = isset($matches[1])?$matches[1]:'';
                 </i>View Comments <strong>(12)</strong></span>
             <span> <i class="far fa-times-circle"></i>Close Comments</span>
         </a>
-        <a href="#" class="btn mobile_show"><i class="fas fa-hand-holding-usd"></i>Donate</a>
+        <a href="#" class="btn mobile_show"><i class="fas fa-hand-holding-usd"></i>{{__('donate')}}</a>
     </div>
 </div>
 <div style="clear: both;"></div>

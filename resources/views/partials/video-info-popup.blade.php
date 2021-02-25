@@ -143,7 +143,7 @@ $video_id = isset($matches[1])?$matches[1]:'';
     <div class="right-comments">
         <button class="close" type="button" data-dismiss="modal" aria-hidden="true">&times;</button>
         <div class="donate mobile_hide">
-            <a href="#" class="btn"><i class="fas fa-hand-holding-usd"></i>{{__('backend.donate')}}</a>
+            <a onclick="location.href='{{config('app.donate_url')}}'" href="{{config('app.donate_url')}}" target="_blank" class="btn"><i class="fas fa-hand-holding-usd"></i>{{__('donate')}}</a>
         </div>
         <div class="comments_outer">
             <div class="comments_inner">

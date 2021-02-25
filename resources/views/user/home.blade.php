@@ -71,7 +71,7 @@
 
      </strong></span>
     <span class="footer2">
-        <a href="https://perceptiontravel.tv/" target="_blank">{{env('APP_CREDIT')}}</a> Powered by Perceptions.Live &copy; 2017-2021 PRCPTION Travel, Inc.</span>
+        Powered by Perceptions.Live &copy; 2017-2021 PRCPTION Travel, Inc.</span>
 
 </div>
 
