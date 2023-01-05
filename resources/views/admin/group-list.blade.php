@@ -5,39 +5,35 @@
         <div class="col-lg-12 grid-margin stretch-card">
             <div class="card">
                 <div class="card-body">
-                    <h4 class="card-title">Group List</h4>
+                    <h4 class="card-title">{{__('backend.group_list', ['name' => __('group')])}}</h4>
                     <div class="table-responsive">
                         <table class="table" id="users_llist">
                             <thead>
                             <tr>
                                 <th>
-                                    Action
+                                    {{__('backend.action')}}
                                 </th>
                                 <th>
-                                    Date Created
+                                    {{__('backend.date_created')}}
                                 </th>
                                 <th>
-                                    Name
+                                    {{__('backend.name')}}
                                 </th>
                                 <th>
-                                    Active Status
+                                    {{__('backend.active_status')}}
                                 </th>
                                 <th>
-                                    Default Location
-                                </th>
-                                {{--<th>--}}
-                                    {{--Category--}}
-                                {{--</th>--}}
-                                <th>
-                                    Admin
+                                    {{__('backend.default_location')}}
                                 </th>
                                 <th>
-                                    Videos(open)
+                                    {{__('backend.admin')}}
                                 </th>
                                 <th>
-                                    Users in Group
+                                    {{__('backend.video_open', ['name'=>__('video')])}}
                                 </th>
-
+                                <th>
+                                    {{__('backend.users_in_group', ['name1' => __('user'), 'name2' => __('group')])}}
+                                </th>
                             </tr>
                             </thead>
                             <tbody>
@@ -57,9 +53,6 @@
                                     <td>
                                         {{ (isset($group->groupStatus))? $group->groupStatus->name:'' }}
                                     </td>
-                                    {{--<td>--}}
-                                        {{--{{ $group->category }}--}}
-                                    {{--</td>--}}
                                     <td>
                                         {{ $group->default_location }}
                                     </td>

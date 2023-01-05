@@ -60,7 +60,7 @@ $display = ($user_status == 'private' || $user_status == 'only-logged')? false :
 
                         <?php if(isset($info->actingRoles) && count($info->actingRoles) > 0){ ?>
                         <div class="roles" style="padding-top: 10px; font-size: .9em; line-height: 1.3em; float:left;">
-                            <span style="margin:0;">COLLABORATION ROLES: </span>
+                            <span style="margin:0;">{{__('backend.collaboration_role')}}: </span>
                             <?php foreach($info->actingRoles as $tag){ ?>
                             <span data-toggle="tooltip" data-animation="true" data-placement="bottom" data-original-title="<?php echo $tag->tag->name ?>"><i class="fa <?php echo $tag->tag->icon ?>"></i></span>
                             <?php } ?>
@@ -72,7 +72,7 @@ $display = ($user_status == 'private' || $user_status == 'only-logged')? false :
                         <?php } //only visible true ?>
 
                         <?php if($info['status_id'] == '5' ){ ?>
-                        <a class="btn white" href="/claim-profile" target="_blank">Claim this Profile</a>
+                        <a class="btn white" href="/claim-profile" target="_blank">{{__('backend.claim_this_profile')}}</a>
                         <?php } ?>
                     </div>
             </div>

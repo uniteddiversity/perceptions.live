@@ -26,6 +26,7 @@ use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Validator;
 //use System\Request;
+use JanisKelemen\Setting\Facades\Setting;
 use System\UID\UID;
 use User\Services\UserRepository;
 
@@ -1266,5 +1267,155 @@ class AdminController extends Controller
 
         $d = $this->userRepository->deleteComment($id, $user_id);
         echo json_encode(array('data' => $id));
+    }
+
+    public function terms(Request $request)
+    {
+        if($request->method() == 'GET'){
+            $jsonString = file_get_contents('../resources/lang/en.json');
+            $data = [];
+            $data['terms'] = json_decode($jsonString, true);
+            return view('admin.terms-settings')->with(compact('data'));
+        }
+
+        if($request->method() == 'POST'){
+            if(is_array($request->term)){
+                $newJsonString = json_encode($request->term, JSON_PRETTY_PRINT);
+                file_put_contents('../resources/lang/en.json', $newJsonString);
+            }
+            return Redirect::back()->withMessage('Updated');
+        }
+    }
+
+    public function appearance(Request $request)
+    {
+        if($request->method() == 'GET'){
+//            Setting::lang(App::getLocale())->langResetting(false);
+            $css = file_get_contents('../public/assets/css/frontend-override.css');
+            $default_zoom = Setting::get('site_settings.default_zoom');
+            $default_location = Setting::get('site_settings.default_location');
+            $default_location_lat = Setting::get('site_settings.default_location_lat');
+//            die('location '.$default_location_lat);
+            $default_location_long = Setting::get('site_settings.default_location_long');
+            return view('admin.appearance-settings')->with(compact('css', 'default_location', 'default_zoom', 'default_location_lat', 'default_location_long'));
+        }
+
+        if($request->method() == 'POST'){
+            $validated = $request->validate([
+                'default_zoom' => 'integer|max:12|min:1',
+            ]);
+
+            if(isset($request->front_css)){
+                file_put_contents('../public/assets/css/frontend-override.css', $request->front_css);
+                Setting::set('site_settings.default_location', $request->default_location);
+                Setting::set('site_settings.default_location_lat', $request->lat);
+                Setting::set('site_settings.default_location_long', $request->long);
+                Setting::set('site_settings.default_zoom', $request->default_zoom);
+
+//                die('zoom is '.Setting::get('site_settings.default_zoom'));
+            }
+            return Redirect::back()->withMessage('Updated');
+        }
+    }
+
+    public function platformConfig(Request $request)
+    {
+        if($request->method() == 'GET'){
+            $site_title = Setting::get('site_settings.name');
+            $site_url = Setting::get('site_settings.url');
+            $site_logo = Setting::get('site_settings.site_logo');
+            $site_icon = Setting::get('site_settings.site_icon');
+            $site_mission = Setting::get('site_settings.site_mission');
+            $site_mission_description = Setting::get('site_settings.site_mission_description');
+            $g_recaptcha_key = Setting::get('site_settings.g_recaptcha_key');
+            $g_recaptcha_secret = Setting::get('site_settings.g_recaptcha_secret');
+            $donate_url = Setting::get('site_settings.donate_url');
+            $mail_host = Setting::get('mail_settings.host');
+            $mail_port = Setting::get('mail_settings.port');
+            $mail_username = Setting::get('mail_settings.username');
+            $mail_password = Setting::get('mail_settings.password');
+            $mail_encryption = Setting::get('mail_settings.encryption');
+            $outgoing_email_name = Setting::get('mail_settings.outgoing_email_name');
+            $outgoing_email_address = Setting::get('mail_settings.outgoing_email_address');
+
+            return view('admin.platform-settings')->with(compact('site_title', 'site_url', 'site_logo', 'site_icon'
+                , 'site_mission', 'site_mission_description', 'g_recaptcha_key', 'g_recaptcha_secret', 'mail_host', 'mail_port',
+                'mail_username', 'mail_password', 'mail_encryption','outgoing_email_name','outgoing_email_address', 'donate_url'));
+        }
+
+        if($request->method() == 'POST'){
+//            $validated = $request->validate([
+//                'default_zoom' => 'required|integer|max:22|min:1',
+//            ]);
+
+            $site_logo = $request->file('site_logo');
+            $site_icon = $request->file('site_icon');
+            $site_mission_image = $request->file('site_mission_image');
+
+//            $destinationPath = 'uploads';
+            if(isset($site_icon)){
+                $site_icon->move('uploaded_settings','fav_apple-icon-57x57.png');
+            }
+            if(isset($site_mission_image)){
+//                $site_mission_image->move('uploaded_settings','fav_apple-icon-57x57.png');
+                $site_mission_image->move('uploaded_settings','mission_image_1.png');
+            }
+            if(isset($site_logo)){
+                $site_logo->move('uploaded_settings','main_logo_1.png');
+            }
+
+//            if(isset($request->site_title)){
+                Setting::set('site_settings.name', $request->site_title);
+                Setting::set('site_settings.url', $request->site_url);
+                Setting::set('site_settings.site_mission', $request->site_mission);
+                Setting::set('site_settings.site_mission_description', $request->site_mission_description);
+                Setting::set('site_settings.g_recaptcha_key', $request->g_recaptcha_key);
+                Setting::set('site_settings.g_recaptcha_secret', $request->g_recaptcha_secret);
+                Setting::set('site_settings.donate_url', $request->donate_url);
+                Setting::set('mail_settings.host', $request->mail_host);
+                Setting::set('mail_settings.port', $request->mail_port);
+                Setting::set('mail_settings.username', $request->mail_username);
+                Setting::set('mail_settings.password', $request->mail_password);
+                Setting::set('mail_settings.encryption', $request->mail_encryption);
+                Setting::set('mail_settings.outgoing_email_name', $request->outgoing_email_name);
+                Setting::set('mail_settings.outgoing_email_address', $request->outgoing_email_address);
+//            }
+            return Redirect::back()->withMessage('Updated');
+        }
+    }
+
+    public function organizationContact(Request $request)
+    {
+        if($request->method() == 'GET'){
+            $about_us = Setting::get('site_links.about_us');
+            $about_us_url = Setting::get('site_links.about_us_url');
+            $community_guidelines = Setting::get('site_links.community_guidelines');
+            $community_guidelines_url = Setting::get('site_links.community_guidelines_url');
+            $terms_of_service = Setting::get('site_links.terms_of_service');
+            $terms_of_service_url = Setting::get('site_links.terms_of_service_url');
+            $privacy_policy = Setting::get('site_links.privacy_policy');
+            $privacy_policy_url= Setting::get('site_links.privacy_policy_url');
+            $contribute = Setting::get('site_links.contribute');
+            $contribute_url= Setting::get('site_links.contribute_url');
+            $contact = Setting::get('site_links.contact');
+            $contact_url= Setting::get('site_links.contact_url');
+            return view('admin.organization-contact ')->with(compact('about_us','about_us_url','community_guidelines','community_guidelines_url'
+                ,'terms_of_service','terms_of_service_url','privacy_policy_url','privacy_policy','contribute','contribute_url','contact','contact_url' ));
+        }
+        if($request->method() == 'POST'){
+            Setting::set('site_links.about_us', $request->about_us);
+            Setting::set('site_links.about_us_url', $request->about_us_url);
+            Setting::set('site_links.community_guidelines', $request->community_guidelines);
+            Setting::set('site_links.community_guidelines_url', $request->community_guidelines_url);
+            Setting::set('site_links.terms_of_service', $request->terms_of_service);
+            Setting::set('site_links.terms_of_service_url', $request->terms_of_service_url);
+            Setting::set('site_links.privacy_policy', $request->privacy_policy);
+            Setting::set('site_links.privacy_policy_url', $request->privacy_policy_url);
+            Setting::set('site_links.contribute', $request->contribute);
+            Setting::set('site_links.contribute_url', $request->contribute_url);
+            Setting::set('site_links.contact', $request->contact);
+            Setting::set('site_links.contact_url', $request->contact_url);
+            return Redirect::back()->withMessage('Updated');
+        }
     }
 }

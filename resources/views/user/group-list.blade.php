@@ -5,7 +5,7 @@
   <div class="col-lg-12 grid-margin stretch-card" id="user_group_list">
     <div class="card">
       <div class="card-body">
-        <h4 class="card-title">Group List</h4>
+        <h4 class="card-title">{{__('backend.group_list', ['name'=>__('group')])}}</h4>
         <div class="table-responsive">
           <table class="table" id="users_llist">
             <thead>
@@ -13,28 +13,25 @@
                 <th>
                 </th>
                 <th>
-                  Name
-                </th>
-                {{--<th>--}}
-                {{--Category--}}
-                {{--</th>--}}
+                {{__('backend.group_name')}}
+              </th>
                 <th>
-                  Admin
+                  {{__('backend.group_admin')}}
                 </th>
                 <th class="d-none d-md-table-cell">
-                  Videos(open)
+                  {{__('backend.group_videos_pending', ['name'=>__('video')])}}
                 </th>
                 <th class="d-none d-md-table-cell">
-                  Users in Group
+                  {{__('backend.users_in_group', ['name1'=>__('user'), 'name2'=>__('group')])}}
                 </th>
                 <th class="d-none d-lg-table-cell">
-                  Default Location
+                  {{__('backend.default_location')}}
                 </th>
-                </th>
+
                 <th class="d-none d-lg-table-cell">
-                  Date Created
+                  {{__('backend.date_created')}}
                 <th>
-                  Action
+                  {{__('backend.action')}}
                 </th>
               </tr>
             </thead>

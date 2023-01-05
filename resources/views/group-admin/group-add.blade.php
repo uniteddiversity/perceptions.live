@@ -27,13 +27,13 @@ $data['url'] = isset($group['url'])?$group['url']:'';
   <div class="card form-card">
     <div class="card-body">
         <div class="submitprcption">
-          <h4 class="card-title" style="margin-bottom: 10px; text-align: center;">Group Profile & Settings
+          <h4 class="card-title" style="margin-bottom: 10px; text-align: center;">{{__('backend.group_profile_settings', ['name' => __('group')])}}
           </h4>
           <div class="pagedesc" align="center">
-            <p>Present your community to the world.
+            <p>{{__('backend.present_your_community_to_world')}}
             </p>
             <p>
-              <em>Should you encounter any errors we encourage you to
+              <em>{{__('backend.should_encounter_any_errors_encourage')}}
                 <a href="/contact-us">let us know</a>. Thanks!
               </em>
             </p>

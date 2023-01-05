@@ -29,7 +29,7 @@
 
 
                 <div class="status">
-                    <?php echo ($info['status'] == '1' )? '<span style="color:green">Active</span>': 'Inactive'; ?>
+                    <?php echo ($info['status'] == '1' )? '<span style="color:green">{{__('backend.active')}}</span>': 'Inactive'; ?>
                 </div>
 
 
@@ -62,18 +62,6 @@
 
                     <div style="font-size: 12px; text-transform: uppercase; font-family: ralewaymedium; color: #6060D5;"><i class="flaticon-pin"></i> <em>
                             <?php echo $info['default_location'] ?></em></div>
-
-                    <?php /*
-                <div style="padding-top: 20px; font-size: .9em; line-height: 1.3em;"><i class="fa fa-clipboard"></i> SKILLS 1, <i class="fa fa-clipboard"></i> SKILL 2, etc</div>
-
-                <div style="padding-top: 10px; font-size: .9em; line-height: 1.3em;">
-                    <span>COLLABORATION ROLES: </span>
-                    <span><i class="fa fa-file-audio-o"></i> </span>
-                    <span><i class="fa fa-video-camera"></i> </span>
-                    <span><i class="fa fa-film"></i> </span>
-
-                </div>
-                */?>
                 </div>
             </div>
 

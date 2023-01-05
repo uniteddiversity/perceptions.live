@@ -9,9 +9,9 @@ $data['proof_images'] = array();
   <div class="card-body">
     <div class="table-responsive">
       <div class="form-header">
-        <h2 class="card-title">Claim A Group or User Profile</h2>
+        <h2 class="card-title">{{__('backend.claim_group_or_user_profile', ['name1' => __('group'), 'name2' => __('user')])}}</h2>
         <p class="page-desc">
-          In order to effectively network the communities of the world, the PRCPTIONS.LIVE platform automatically creates 'shadow profiles' of users and groups who are featured in media yet not yet registered in the system.<br>
+          In order to effectively network the communities of the world, the {{config('app.name')}} platform automatically creates 'shadow profiles' of users and groups who are featured in media yet not yet registered in the system.<br>
           If you happen upon a shadow profile that is you, please fill out this form to claim it and activate your account.
         </p>
       </div>
@@ -79,15 +79,15 @@ $data['proof_images'] = array();
         </div>
 
         <div class="form-group">
-          @if(env('GOOGLE_RECAPTCHA_KEY'))
-          <div class="g-recaptcha" data-sitekey="{{env('GOOGLE_RECAPTCHA_KEY')}}">
+          @if(config('app.g_recaptcha_key'))
+          <div class="g-recaptcha" data-sitekey="{{config('app.g_recaptcha_key')}}">
           </div>
           @endif
         </div>
 
         <div class="form-group">
           <input type="checkbox" name="accept_tos" id="accept_tos" value="1" />
-          <label for="password" style="float: none"> I have read and understand PRCPTION Travel's <a target="_blank" href="https://perceptiontravel.tv/terms-of-service/">Terms of Service</a>.</label>
+          <label for="password" style="float: none"> I have read and understand {{config('app.name')}} <a target="_blank" href="https://perceptiontravel.tv/terms-of-service/">Terms of Service</a>.</label>
         </div>
         <div class="form-footer">
           <button type="submit" class="btn btn-submit">Submit</button>

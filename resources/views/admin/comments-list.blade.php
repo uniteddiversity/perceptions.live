@@ -5,7 +5,7 @@
         <div class="col-lg-12 grid-margin stretch-card">
             <div class="card">
                 <div class="card-body">
-                    <h4 class="card-title">Comments</h4>
+                    <h4 class="card-title">{{__('backend.comments', ['name' => __('comment')])}}</h4>
                     <div class="table-responsive">
                         <input type="hidden" name="_token" id="csrf-token" value="{{ Session::token() }}" />
                         <div class="comments_outer admin_comments">

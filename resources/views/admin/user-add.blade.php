@@ -18,7 +18,7 @@
     <div class="col-lg-12 grid-margin stretch-card">
         <div class="card">
             <div class="card-body">
-                <h4 class="card-title">Add/Edit User</h4>
+                <h4 class="card-title">{{__('backend.add_edit_user', ['name' => __('user')])}}</h4>
                 <div class="table-responsive">
                     @if ($errors->any())
                         <div class="alert alert-danger">
@@ -59,7 +59,7 @@
                             </div>
 
                             <div class="form-group">
-                                <label for="video_producer">User Roles</label>
+                                <label for="video_producer">{{__('backend.user_roles', ['name', __('user')])}}</label>
                                 {{--<input type="text" class="form-control" aria-describedby="nameHelp" name="video_producer" placeholder="Video Producer" value="{{ old('video_producer') }}">--}}
                                 <select class="form-control multi-select2" id="video_producer" multiple searchable="Search here.." name="user_acting_roles[]" >
                                     @foreach($user_acting_role as $role)
@@ -70,7 +70,7 @@
 
                             <div class="form-group">
                                 <?php if(Auth::user()->is('admin')){ ?>
-                                <label for="status_id">Status</label>
+                                <label for="status_id">{{__('backend.status')}}</label>
                                 <select class="form-control" id="status_id" name="status_id">
                                     @foreach($status as $st)
                                         <option value="{{$st->id}}" <?php if(old('status_id',$data['status_id']) == $st->id){ echo 'selected'; } ?> >{{$st->name}}</option>
@@ -79,7 +79,7 @@
                                 <?php } ?>
                             </div>
                             <div class="form-group">
-                                <label for="exampleSelect1">Role</label>
+                                <label for="exampleSelect1">{{__('backend.role')}}</label>
                                 <select class="form-control" id="exampleSelect1" name="role_id">
                                     @foreach($user_roles as $role)
                                     <option <?php if($data['role_id'] == $role->id){ echo 'selected'; } ?> value="{{$role->id}}">{{$role->name}}</option>
@@ -88,17 +88,15 @@
                             </div>
 
                                 <div class="form-group">
-                                    <label for="location">Location</label>
+                                    <label for="location">{{__('backend.location')}}</label>
                                     <input type="text" class="form-control" aria-describedby="nameHelp" name="location" placeholder="Location" value="{{ old('location',$data['location']) }}">
                                 </div>
 
                             <div class="form-group">
-                                {{--<input type="file" id="upload" value="Choose a file">--}}
                                 <div id="upload-profile"></div>
                                 <input type="hidden" id="imagebase64" name="profile_image">
-                                {{--<a href="#" class="upload-result">Send</a>--}}
 
-                                <label for="user_avatar">User Avatar</label>
+                                <label for="user_avatar">{{__('backend.user_avatar', ['name' => __('user')])}}</label>
                                 <input id="upload" class="form-control" type="file" name="user_avatar" />
                                 <?php foreach($data['image'] as $img){ ?>
                                 <a target="_blank" href="/storage/<?php echo $img['url'] ?>"><img width="150" src="/storage/<?php echo $img['url'] ?>" alt="Avatar" class="avatar"></a>
@@ -108,9 +106,9 @@
 
                             <?php if(Auth::user()->is('admin')){ ?>
                             <div class="form-group">
-                                <label for="group_id">Group</label>
+                                <label for="group_id">{{__('backend.group', ['name' => __('group')])}}</label>
                                 <select class="form-control" id="group_id" name="group_id">
-                                    <option value="">Select Group</option>
+                                    <option value="">{{__('backend.select_group', ['name' => __('group')])}}</option>
                                     @foreach($user_groups as $group)
                                         <option value="{{$group->id}}" <?php if(in_array($group->id,$data['group'])){ echo 'selected'; } ?> >{{$group->name}} ({{$group->email}})</option>
                                     @endforeach
@@ -130,7 +128,7 @@
                                             <th>Comment</th>
                                             <th>Requester</th>
                                             <th>Proof</th>
-                                            <th>Associated Videos</th>
+                                            <th>{{__('backend.associated_videos', ['name' => __('video')])}}</th>
                                         </tr>
                                         <?php foreach($claim_request as $request){
                                         $user_data = isset($request->requestedUser->id)? '@'.$request->requestedUser->display_name:'';
@@ -173,7 +171,9 @@
 
 
     @endsection
+@section('scripts')
     <script>
         var el = document.getElementById('loading');
         el.remove(); // Removes the div with the 'div-02' id
     </script>
+@endsection

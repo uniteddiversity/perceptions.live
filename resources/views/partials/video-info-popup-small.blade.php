@@ -27,5 +27,5 @@ $video_id = isset($matches[1])?$matches[1]:'';
 
 </div>
 <div class="btn_outer"><a class="btn" href="#" onclick="openVideo('<?php echo $info['id'] ?>')">
-        Open Video
+        {{__('backend.open_video', ['name'=>__('video')])}}
     </a></div>

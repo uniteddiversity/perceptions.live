@@ -1,7 +1,7 @@
 <input type="hidden" id="result_count" value="{{$result_count}}" />
 <div class="ml-filterbar" style="margin-left: 18px;margin-right: 10px;">
-    <a href="#" onclick="resetSearch()"><i class="fas fa-redo"></i> Reset Search</a>
-    <h3><b>{{$result_count}} PRCPTIONs</b><i class="fas fa-list"></i></h3>
+    <a href="#" onclick="resetSearch()"><i class="fas fa-redo"></i> {{__('backend.reset_search')}}</a>
+    <h3><b>{{$result_count}} {{config('app.name')}}</b><i class="fas fa-list"></i></h3>
 
 </div>
 <?php foreach($uploaded_list as $info){
@@ -46,7 +46,7 @@ $video_id = isset($matches[1])?$matches[1]:'';
         <div class="placethumb active_link" onclick="openVideo('<?php echo $info['id'] ?>')">
             <img src="https://img.youtube.com/vi/<?php echo $video_id ?>/mqdefault.jpg">
             <?php /*<iframe frameborder="0" showinfo="0" controls="0" autohide="1" style="width: 100%;" src="<?php echo str_replace( 'watch?v=', 'embed/',$info['url']) ?>" frameborder="0" allowfullscreen></iframe> */ ?>
-            <div class="watchicon2" onclick="openVideo('<?php echo $info['id'] ?>')"> <a href="#" title=""><img src="/assets/findgo/images/play3.png" alt=""> </a>
+            <div class="watchicon2" onclick="openVideo('<?php echo $info['id'] ?>')"> <a href="#" title=""><img src="/assets/frontend/images/play3.png" alt=""> </a>
             </div>
         </div>
         <div class="boxplaces">
@@ -72,7 +72,7 @@ $video_id = isset($matches[1])?$matches[1]:'';
                 </div>
                 <?php if(!empty($info['trim_description'])){ ?>
                 <p>
-                    <?php echo $info['trim_description'] ?>...<a href="#" onclick="openVideo('<?php echo $info['id'] ?>')"> Read more →</a> </p>
+                    <?php echo $info['trim_description'] ?>...<a href="#" onclick="openVideo('<?php echo $info['id'] ?>')"> {{__('backend.read_more')}} →</a> </p>
                 <?php } ?>
                 <div class="placedetails">
 

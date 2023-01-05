@@ -3,7 +3,7 @@
         <i class="fas fa-search maginify-glass" ></i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></div>
 <div class="mlfilter-sec fakeScroll fakeScroll--inside" style="background: #d5d5ed;">
     <div class="mltitle">
-        <h3>Advanced Search</h3>
+        <h3>{{__('backend.advance_search')}}</h3>
         <i class="far fa-times-circle closefilter"></i>
     </div>
 
@@ -20,7 +20,7 @@
                 <div class="col-lg-6">
                     <div class="mlfield half">
                         <select class="selectbox" id="ads_category">
-                            <option value="">All Categories</option>
+                            <option value="">{{__('backend.all_categories')}}</option>
                             @foreach($categories as $cat)
                             <option value="{{$cat->id}}">{{$cat->name}}</option>
                             @endforeach
@@ -83,12 +83,12 @@
                         <div class="mltags">
                             <div class="row">
                                 <div class="col-lg-6">
-                                    <p class="c-label"><input class="exchange_for" value="2" name="cb" id="1" type="checkbox"><label for="1">Service</label></p>
-                                    <p class="c-label"><input class="exchange_for" value="1" name="cb" id="2" type="checkbox"><label for="2">Opportunity</label></p>
+                                    <p class="c-label"><input class="exchange_for" value="2" name="cb" id="1" type="checkbox"><label for="1">{{__('backend.service')}}</label></p>
+                                    <p class="c-label"><input class="exchange_for" value="1" name="cb" id="2" type="checkbox"><label for="2">{{__('backend.opportunity')}}</label></p>
                                 </div>
                                 <div class="col-lg-6">
-                                    <p class="c-label"><input class="exchange_for" value="service" name="cb" id="4" type="checkbox"><label for="4">Sponsored</label></p>
-                                    <p class="c-label"><input class="exchange_for" value="service" name="cb" id="3" type="checkbox"><label for="3">User-Submitted</label></p>
+                                    <p class="c-label"><input class="exchange_for" value="service" name="cb" id="4" type="checkbox"><label for="4">{{__('backend.sponsored')}}</label></p>
+                                    <p class="c-label"><input class="exchange_for" value="service" name="cb" id="3" type="checkbox"><label for="3">{{__('backend.user_submitted')}}</label></p>
                                 </div>
                             </div>
                         </div>
@@ -97,7 +97,7 @@
 
 
             </div>
-            <button type="button" onclick="advance_search()">Search <i class="flaticon-magnifying-glass"></i></button>
+            <button type="button" onclick="advance_search()">{{__('backend.search')}} <i class="flaticon-magnifying-glass"></i></button>
         </form>
     </div>
 </div>

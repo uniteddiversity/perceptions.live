@@ -112,71 +112,7 @@ $step_1_data['brief_description'] = isset($step_1_data['brief_description'])? $s
                                 echo '<input type="hidden" value="'.$val.'" name="'.$key.'" />';
                             }?>
                             <div class="step" id="st2">
-                                <?php /*
-                                <div>
-                                    <form class="loginform" id="login-form" action="/user/login">
-                                        <input type="hidden" name="_token" value="{{ Session::token() }}" />
-                                        <div class="text_top">
-                                            <span><i class="far fa-file-video"></i><b>2</b></span>
-                                            <h4>Media Info</h4>
-                                            <p>Login or register.</p>
-                                        </div>
 
-                                        <div id="messages"></div>
-
-                                        <div class="form-group">
-                                            <label for="exampleInputEmail1">Username or Email Address *</label>
-                                            <input type="text" class="form-control" aria-describedby="nameHelp" name="email" placeholder="Email" value="{{ old('email') }}">
-                                        </div>
-                                        <div class="form-group">
-                                            <label for="Password">Password</label>
-                                            <input class="form-control" type="password" placeholder="Password" name="password" />
-                                        </div>
-                                        <div class="btn_outer">
-                                            <button type="button" onclick="userLogin()">Sign In</button>
-                                        </div>
-                                    </form>
-                                </div>
-                                <div>
-                                    <form id="register-form" action="/user/register">
-                                        <div id="messages"></div>
-                                        <input type="hidden" name="_token" id="csrf-token" value="{{ Session::token() }}" />
-                                        <div class="form-group">
-                                            <label>Email *</label>
-                                            <input type="text" id="email" name="email" placeholder="Email" />
-                                            <i class="fas fa-envelope"></i>
-                                        </div>
-                                        <div class="form-group">
-                                            <label>Display Name *</label>
-                                            <input type="text" id="display_name" name="display_name" placeholder="Display Name" />
-                                            <i class="fas fa-user"></i>
-                                        </div>
-                                        <div class="form-group">
-                                            <label>Location</label>
-                                            <input type="text" id="location" name="location" placeholder="Location">
-                                            <i class="fas fa-map-marker-alt"></i>
-                                        </div>
-                                        <div class="form-group">
-                                            <label>Password</label>
-                                            <input type="password" id="password" name="password" placeholder="Password" />
-                                            <i class="fas fa-unlock-alt"></i>
-                                        </div>
-                                        <div class="form-group">
-                                            <label>Retype Password</label>
-                                            <input type="password" id="password_confirmation" name="password_confirmation" placeholder="Retype Password" />
-                                            <i class="fas fa-unlock-alt"></i>
-                                        </div>
-
-                                        <p class="terms-label">
-                                            <input name="accept_tos" value="1" id="cb6" type="checkbox"><label for="cb6" style="color:black;">I’ve read and accept the terms &amp; conditions *</label>
-                                        </p>
-                                        <div class="btn_outer">
-                                            <button type="button" onclick="userRegister()">Sign Up</button>
-                                        </div>
-
-                                    </form>
-                                </div>
-                                */ ?>
                                 <div class="container package_list">
                                     <div class="row">
                                         <div class="text_top">
@@ -205,43 +141,7 @@ $step_1_data['brief_description'] = isset($step_1_data['brief_description'])? $s
                                                 </div>
                                             </div>
                                         <?php } ?>
-                                        {{--<div class="col-sm-3 package pak1">--}}
-                                            {{--<div>--}}
-                                                {{--<h3>Free</h3>--}}
-                                                {{--<span>$10 per row minute</span>--}}
-                                            {{--</div>--}}
-                                            {{--<div>--}}
-                                                {{--<ul>--}}
-                                                    {{--<li>720p/1080p</li>--}}
-                                                    {{--<li><=3 minutes final video</li>--}}
-                                                    {{--<li>7 minute raw footage</li>--}}
-                                                {{--</ul>--}}
-                                            {{--</div>--}}
-                                        {{--</div>--}}
-                                        {{--<div class="col-sm-3 package pak1">--}}
-                                            {{--<div>--}}
-                                                {{--<h3>Basic</h3>--}}
-                                            {{--</div>--}}
-                                            {{--<div>--}}
-                                                {{--<ul>--}}
-                                                    {{--<li>720p/1080p</li>--}}
-                                                    {{--<li><=5 minutes final video</li>--}}
-                                                    {{--<li>20 minute raw footage</li>--}}
-                                                {{--</ul>--}}
-                                            {{--</div>--}}
-                                        {{--</div>--}}
-                                        {{--<div class="col-sm-3 package pak1">--}}
-                                            {{--<div>--}}
-                                                {{--<h3>Plus</h3>--}}
-                                            {{--</div>--}}
-                                            {{--<div>--}}
-                                                {{--<ul>--}}
-                                                    {{--<li>720p/1080p</li>--}}
-                                                    {{--<li><=15 minutes final video</li>--}}
-                                                    {{--<li>45 minute raw footage</li>--}}
-                                                {{--</ul>--}}
-                                            {{--</div>--}}
-                                        {{--</div>--}}
+
                                         <div class="col-sm-3 package pak1">
                                             <div>
                                                 <h3>Pro</h3>
@@ -414,8 +314,3 @@ $step_1_data['brief_description'] = isset($step_1_data['brief_description'])? $s
 
 </style>
 @endsection
-<script>
-    //        var el = document.getElementById('loading');
-    //        el.remove(); // Removes the div with the 'div-02' id
-
-</script>

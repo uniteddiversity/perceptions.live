@@ -2,8 +2,7 @@
 <html lang="en" class="page-admin-wrapper">
 
 <head>
-  <title>Perceptions.Live - Media Communities Getting Stuff Done</title>
-  <!-- HTML5 Shim and Respond.js IE9 support of HTML5 elements and media queries -->
+  <title>{{config('app.name')}}</title>
   <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
   <!--[if lt IE 9]>
     <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
@@ -15,22 +14,20 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=no">
   <meta name="description" content="Perceptions.live is a place for media communities to collaborate and connect worldwide.">
   <meta name="keywords" content="Community building, community, media, video editing, frontline communities, grassroots, grassroots organizations">
-  <meta name="author" content="PRCPTION Travel, Inc">
-
 
     <!-- Favicons -->
-    <link rel="apple-touch-icon" sizes="57x57" href="/favicon/apple-icon-57x57.png">
-    <link rel="apple-touch-icon" sizes="60x60" href="/favicon/apple-icon-60x60.png">
-    <link rel="apple-touch-icon" sizes="72x72" href="/favicon/apple-icon-72x72.png">
-    <link rel="apple-touch-icon" sizes="76x76" href="/favicon/apple-icon-76x76.png">
-    <link rel="apple-touch-icon" sizes="114x114" href="/favicon/apple-icon-114x114.png">
-    <link rel="apple-touch-icon" sizes="120x120" href="/favicon/apple-icon-120x120.png">
-    <link rel="apple-touch-icon" sizes="144x144" href="/favicon/apple-icon-144x144.png">
-    <link rel="apple-touch-icon" sizes="152x152" href="/favicon/apple-icon-152x152.png">
-    <link rel="apple-touch-icon" sizes="180x180" href="/favicon/apple-icon-180x180.png">
-    <link rel="icon" type="image/png" sizes="192x192" href="/favicon/android-icon-192x192.png">
-    <link rel="icon" type="image/png" sizes="32x32" href="/favicon/favicon-32x32.png">
-    <link rel="icon" type="image/png" sizes="96x96" href="/favicon/favicon-96x96.png">
+    <link rel="apple-touch-icon" sizes="57x57" href="/uploaded_settings/fav_apple-icon-57x57.png">
+    <link rel="apple-touch-icon" sizes="60x60" href="/uploaded_settings/fav_apple-icon-60x60.png">
+    <link rel="apple-touch-icon" sizes="72x72" href="/uploaded_settings/fav_apple-icon-72x72.png">
+    <link rel="apple-touch-icon" sizes="76x76" href="/uploaded_settings/fav_apple-icon-76x76.png">
+    <link rel="apple-touch-icon" sizes="114x114" href="/uploaded_settings/fav_apple-icon-114x114.png">
+    <link rel="apple-touch-icon" sizes="120x120" href="/uploaded_settings/fav_apple-icon-120x120.png">
+    <link rel="apple-touch-icon" sizes="144x144" href="/uploaded_settings/fav_apple-icon-144x144.png">
+    <link rel="apple-touch-icon" sizes="152x152" href="/uploaded_settings/fav_apple-icon-152x152.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="/uploaded_settings/fav_apple-icon-180x180.png">
+    <link rel="icon" type="image/png" sizes="192x192" href="/uploaded_settings/fav_android-icon-192x192.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/uploaded_settings/fav_favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="96x96" href="/uploaded_settings/fav_favicon-96x96.png">
 
     <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
     <link rel="icon" href="/favicon.ico" type="image/x-icon">
@@ -124,23 +121,15 @@
 </head>
 
 <body class="page-admin">
-  <!-- Pre-loader start -->
-  <!--    <div class="theme-loader">-->
-  <!--        <div class="ball-scale">-->
-  <!--            <div></div>-->
-  <!--        </div>-->
-  <!--    </div>-->
   <div class="page-loading">
-    <img src="/assets/findgo/images/loader.gif" alt="" />
+    <img src="/assets/frontend/images/loader.gif" alt="" />
   </div>
-  <!-- Pre-loader end -->
-  <!-- Menu header start -->
   <header class="new-header" >
     <div class="header-content">
       <div class="top-bar">
         <div class="top-bar__left">
           <a href="/" class="navbar-logo" onclick="resetSearch()">
-            <img src="/assets/findgo/images/live-perceptions-logo.png" alt="">
+            <img src="/uploaded_settings/main_logo_1.png" alt="">
           </a>
         </div>
         <div class="top-bar__right">
@@ -214,62 +203,46 @@
     </div>
     <div class="footer">
       <span style="display: block; padding-bottom: 7px; margin: auto;">
-        <a href="https://perceptiontravel.tv/privacy-policy" target="_blank">Privacy Policy</a> | <a href="https://perceptiontravel.tv/terms-of-service" target="_blank">Terms of Service</a> | <a href="https://perceptiontravel.tv/community/donations/" target="_blank">Make a Donation</a> | <a href="https://perceptiontravel.tv/community-feedback/" target="_blank">Submit Feedback</a> | <a href="https://perceptiontravel.tv/about/" target="_blank">About Us</a> | <a href="/contact-us" target="_blank">Contact Us</a></span>
+        <a href="{{Setting::get('site_links.privacy_policy_url')}}" target="_blank">{{Setting::get('site_links.privacy_policy')}}</a> | <a href="{{Setting::get('site_links.community_guidelines_url')}}" target="_blank">{{Setting::get('site_links.community_guidelines')}}</a> | <a href="{{Setting::get('site_links.terms_of_service_url')}}" target="_blank">{{Setting::get('site_links.terms_of_service')}}</a> | <a href="{{Setting::get('site_links.contribute_url')}}" target="_blank">{{Setting::get('site_links.contribute')}}</a> | <a href="{{Setting::get('site_links.about_us_url')}}" target="_blank">{{Setting::get('site_links.about_us')}}</a> | <a href="{{Setting::get('site_links.contact_url')}}" target="_blank">{{Setting::get('site_links.contact')}}</a>
+      </span>
       <span>
         <strong>© 2018-2019 <a href="https://perceptiontravel.tv/" target="_blank">PRCPTION Travel, Inc.</a> - a non-profit, 501(c)3 organization.</strong></span>
 
     </div>
   </div>
 
-  <!-- Warning Section Ends -->
-  <!-- Required Jqurey -->
-
   <script type="text/javascript" src="/assets/mashable/bower_components/jquery/js/jquery.min.js"></script>
   <script src="/assets/mashable/bower_components/jquery-ui/js/jquery-ui.min.js"></script>
   <script type="text/javascript" src="/assets/mashable/bower_components/popper.js/js/popper.min.js"></script>
   <script type="text/javascript" src="/assets/mashable/bower_components/bootstrap/js/bootstrap.min.js"></script>
-  <!-- jquery slimscroll js -->
   <script type="text/javascript" src="/assets/mashable/bower_components/jquery-slimscroll/js/jquery.slimscroll.js"></script>
-  <!-- modernizr js -->
   <script type="text/javascript" src="/assets/mashable/bower_components/modernizr/js/modernizr.js"></script>
   <script type="text/javascript" src="/assets/mashable/bower_components/modernizr/js/css-scrollbars.js"></script>
-  <!-- Calender js -->
   <script type="text/javascript" src="/assets/mashable/bower_components/moment/js/moment.min.js"></script>
   <script type="text/javascript" src="/assets/mashable/pages/widget/calender/pignose.calendar.min.js"></script>
-  <!-- classie js -->
-  <!-- c3 chart js -->
   <script src="/assets/mashable/bower_components/c3/js/c3.js"></script>
   <script type="text/javascript" src="/assets/mashable/bower_components/classie/js/classie.js"></script>
-  <!-- knob js -->
   <script src="/assets/mashable/pages/chart/knob/jquery.knob.js"></script>
   <script type="text/javascript" src="/assets/mashable/pages/widget/jquery.sparkline.js"></script>
-  <!-- Rickshow Chart js -->
   <script src="/assets/mashable/bower_components/d3/js/d3.js"></script>
   <script src="/assets/mashable/bower_components/rickshaw/js/rickshaw.js"></script>
-  <!-- Morris Chart js -->
   <script src="/assets/mashable/bower_components/raphael/js/raphael.min.js"></script>
   <script src="/assets/mashable/bower_components/morris.js/js/morris.js"></script>
-  <!-- Float Chart js -->
   <script src="/assets/mashable/pages/chart/float/jquery.flot.js"></script>
   <script src="/assets/mashable/pages/chart/float/jquery.flot.categories.js"></script>
   <script src="/assets/mashable/pages/chart/float/jquery.flot.pie.js"></script>
-  <!-- Horizontal-Timeline js -->
   <script type="text/javascript" src="/assets/mashable/pages/dashboard/horizontal-timeline/js/main.js"></script>
-  <!-- amchart js -->
   <script type="text/javascript" src="/assets/mashable/pages/dashboard/amchart/js/amcharts.js"></script>
   <script type="text/javascript" src="/assets/mashable/pages/dashboard/amchart/js/serial.js"></script>
   <script type="text/javascript" src="/assets/mashable/pages/dashboard/amchart/js/light.js"></script>
   <script type="text/javascript" src="/assets/mashable/pages/dashboard/amchart/js/custom-amchart.js"></script>
-  <!-- i18next.min.js -->
   <script type="text/javascript" src="/assets/mashable/bower_components/i18next/js/i18next.min.js"></script>
   <script type="text/javascript" src="/assets/mashable/bower_components/i18next-xhr-backend/js/i18nextXHRBackend.min.js"></script>
   <script type="text/javascript" src="/assets/mashable/bower_components/i18next-browser-languagedetector/js/i18nextBrowserLanguageDetector.min.js"></script>
   <script type="text/javascript" src="/assets/mashable/bower_components/jquery-i18next/js/jquery-i18next.min.js"></script>
-  <!-- Custom js -->
   <script type="text/javascript" src="/assets/mashable/pages/dashboard/custom-dashboard.js"></script>
   <script type="text/javascript" src="/assets/mashable/js/script.js"></script>
 
-  <!-- pcmenu js -->
   <script src="/assets/mashable/js/pcoded.min.js"></script>
   <script src="/assets/js/notify.js"></script>
   <script src="/assets/mashable/js/demo-12.js"></script>

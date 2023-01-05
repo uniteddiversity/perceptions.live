@@ -9,6 +9,7 @@
         "beyondcode/laravel-confirm-email": "^1.4",
         "fideloper/proxy": "~3.3",
         "foothing/laravel-gdpr-consent": "^0.2.0",
+        "janiskelemen/laravel-setting": "^1.2",
         "laracasts/flash": "^3.0",
         "laravel/framework": "5.5.*",
         "laravel/tinker": "~1.0",

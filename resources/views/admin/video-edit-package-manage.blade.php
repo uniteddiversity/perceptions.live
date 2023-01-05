@@ -10,19 +10,15 @@
     $data['free_storage'] = isset($edit_data['free_storage'])?$edit_data['free_storage']: '';
     $data['charge_per_minute'] = isset($edit_data['charge_per_minute'])?$edit_data['charge_per_minute']: '0';
     $data['discount'] = isset($edit_data['discount'])?$edit_data['discount']:'';
-
-//dd($data);
-//    dd($data['service_or_opportunity']);
     ?>
     <div class="col-lg-12 grid-margin stretch-card">
         <div class="card">
             <div class="card-body">
-                <h4 class="card-title">Video Edit Packages</h4>
+                <h4 class="card-title">{{__('backend.video_package_manage', ['name' => __('video')])}}</h4>
                 <div class="table-responsive">
                     @if ($errors->any())
                         <div class="alert alert-danger">
                             <ul>
-                                <?php //dd($errors) ?>
                                 @foreach ($errors->all() as $error)
                                 <li>{{ $error }}</li>
                                 @endforeach
@@ -102,7 +98,3 @@
 
 
     @endsection
-    <script>
-//        var el = document.getElementById('loading');
-//        el.remove(); // Removes the div with the 'div-02' id
-    </script>

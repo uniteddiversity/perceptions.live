@@ -24,6 +24,17 @@
       'Image' => 'Intervention\\Image\\Facades\\Image',
     ),
   ),
+  'janiskelemen/laravel-setting' => 
+  array (
+    'providers' => 
+    array (
+      0 => 'JanisKelemen\\Setting\\Providers\\SettingServiceProvider',
+    ),
+    'aliases' => 
+    array (
+      'Setting' => 'JanisKelemen\\Setting\\Facades\\Setting',
+    ),
+  ),
   'laracasts/flash' => 
   array (
     'providers' => 

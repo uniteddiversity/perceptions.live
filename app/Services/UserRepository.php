@@ -851,7 +851,7 @@ class UserRepository
         if($only_selectable){
             $tag = $tag->where('not_selectable', '0');
         }
-        if($current_user['role_id'] != 1){
+        if(isset($current_user['role_id']) && $current_user['role_id'] != 1){
             $tag = $tag->where(function($q) use($current_user){
                 $q->where('group_id', $current_user['group_id'])
                     ->orWhere('created_by', $current_user['id'])

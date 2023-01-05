@@ -14,7 +14,7 @@
                 <?php echo $comment['comment'] ?>
                 <div class="actions">
                 <?php if($comment['parent_id'] == 0 && (Auth::user())){ ?>
-                    <span class="reply_comment_link link" id="comment_<?php echo uid($comment['id']) ?>" onclick="showTextbox('forcomment_<?php echo uid($comment['id']) ?>')" href="#">reply&nbsp;<i class="fas fa-arrow-circle-right"></i></span>
+                    <span class="reply_comment_link link" id="comment_<?php echo uid($comment['id']) ?>" onclick="showTextbox('forcomment_<?php echo uid($comment['id']) ?>')" href="#">{{__('backend.reply')}}&nbsp;<i class="fas fa-arrow-circle-right"></i></span>
                 <?php } ?>
                 <?php /*
                 <span class="link"><i onclick="deleteComment('<?php echo uid($comment['id']) ?>')"  class="fas fa-trash"></i>&nbsp;&nbsp;</span>
@@ -30,10 +30,10 @@
     <?php if($comment['parent_id'] == 0){ ?>
         <div id="forcomment_<?php echo uid($comment['id']) ?>" class="reply_comment">
             <div style="width: 65%;">
-                <input class="comment_box" type="text" id="comment_text_<?php echo uid($comment['id']) ?>" placeholder="Text goes here..." />
+                <input class="comment_box" type="text" id="comment_text_<?php echo uid($comment['id']) ?>" placeholder="{{__('backend.text_goes_here')}}" />
             </div>
             <div style="float: left;">
-                <a href="#" onclick="postComments('<?php echo uid($fk_id) ?>', '<?php echo ($table) ?>', '<?php echo uid($comment['id']) ?>', 'comment_text_<?php echo uid($comment['id']) ?>')" class="btn btn-primary">Submit</a>
+                <a href="#" onclick="postComments('<?php echo uid($fk_id) ?>', '<?php echo ($table) ?>', '<?php echo uid($comment['id']) ?>', 'comment_text_<?php echo uid($comment['id']) ?>')" class="btn btn-primary">{{__('backend.submit')}}</a>
             </div>
         </div>
     <?php } ?>

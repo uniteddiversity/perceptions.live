@@ -3,12 +3,12 @@
     <div class="top-bar">
       <div class="top-bar__left">
         <a href="/" class="navbar-logo" onclick="resetSearch()">
-          <img src="/assets/findgo/images/live-perceptions-logo.png" alt="Perceptions.Live - media communities getting stuff done" >
+          <img src="/uploaded_settings/main_logo_1.png" alt="{{config('app.name')}}" >
         </a>
         <div class="search-box">
           <div class="search-box-content">
             <input type="text" placeholder="Quick Search" name="header_search_text" id="header_search_text" />
-            <button class="btn-search""><i class="fas fa-search"></i></button>
+            <button class="btn-search"><i class="fas fa-search"></i></button>
           </div>
         </div>
       </div>
@@ -40,21 +40,21 @@
                     <li>
                         <a href="/user/user-profile">
                             <i class="fas fa-user-cog"></i>
-                            My Profile
+                            {{__('backend.my_profile')}}
                         </a>
                     </li>
                     <li>
                         <a href="/user/group-admin/content-list">
                             <i class="fas fa-video"></i>
-                            My Videos
+                            {{__('backend.my_videos', ['name'=>__('video')])}}
                         </a>
                     </li>
                     <li><a href="/claim-profile" target="_blank">
                             <i class="fas fa-user-circle"></i>
-                            Claim A Profile</a></li>
+                            {{__('backend.claim_a_profile')}}</a></li>
                     <li>
                         <a href="/user/logout">
-                            <i class="fas fa-sign-out-alt"></i> Logout {{Auth::user()->first_name}}
+                            <i class="fas fa-sign-out-alt"></i> {{__('backend.logout')}} {{Auth::user()->first_name}}
                         </a>
                     </li>
                 </ul>
@@ -67,7 +67,7 @@
       <span>
 
           <button id="step3" class="btn-sign-up accountbtn">
-              Sign Up / Log In
+              {{__('backend.sign_up_log_in')}}
           </button>
 
       </span>
@@ -78,24 +78,11 @@
       </div>
     </div>
   </div>
- {{-- <div class="header-toolbar">
-    <div class="header-toolbar__content">
-
-         <div class="near_me_icon">
-             <i class="map_center_icon" ></i>
-         </div>
-
-
-
-</div>
-</div>
-
---}}
 </header>
 
 <div class="responsiveheader">
 <div class="rheader">
-    <img src="/assets/findgo/images/ricon.png" alt="" style="display:none;" />
+    <img src="/assets/frontend/images/ricon.png" alt="" style="display:none;" />
     <span class="menubt" id="step3_mobile">
         <i class="fas fa-bars"></i>
     </span>
@@ -110,7 +97,7 @@
 <div class="rnaver">
 <div class="topb">
     <span class="closeresmenu"><i>x</i></span>
-    <P>Navigation</P>
+    <P>{{__('backend.navigation')}}</P>
 </div>
 
 
@@ -120,19 +107,19 @@
         <li>
             <a href="/user/user-profile">
                 <i class="fas fa-user-cog"></i>
-                My Profile
+                {{__('backend.my_profile')}}
             </a>
         </li>
         <li>
             <a href="/user/group-admin/content-list">
                 <i class="fas fa-video"></i>
-                My Videos
+                {{__('backend.my_videos', ['name'=>__('video')])}}
             </a>
         </li>
 
     <li class="important">
         <a href="/user/logout">
-            <i class="fas fa-sign-out-alt"></i> Logout {{Auth::user()->first_name}}
+            <i class="fas fa-sign-out-alt"></i> {{__('backend.logout')}} {{Auth::user()->first_name}}
         </a>
     </li>
     @else
@@ -142,34 +129,34 @@
         <li class="important">
         <a href="/claim-profile">
             <i class="fas fa-user-circle"></i>
-            Claim a Profile
+            {{__('backend.claim_a_profile')}}
         </a>
         </li><li class="important">
         <a href="/user/user-group-add">
             <i class="fas fa-users"></i>
-            Create a Community
+            {{__('backend.create_a_community')}}
         </a>
         </li>
         <li>
-            <a href="https://docs.perceptiontravel.tv/" target="_blank"><i class="fas fa-info-circle"></i>&nbsp;About</a>
+            <a href="https://docs.perceptiontravel.tv/" target="_blank"><i class="fas fa-info-circle"></i>&nbsp;{{__('backend.about')}}</a>
         </li>
     <li>
-        <a href="https://docs.perceptiontravel.tv/legal-docs/privacy-policy" target="_blank""><i class="fas fa-user-secret"></i>Privacy Policy</a>
+        <a href="https://docs.perceptiontravel.tv/legal-docs/privacy-policy" target="_blank"><i class="fas fa-user-secret"></i>{{__('backend.privacy_policy')}}</a>
     </li>
     <li>
-        <a href="https://docs.perceptiontravel.tv/legal-docs/terms-of-service"><i class="far fa-file-alt"></i>Terms of Service</a>
+        <a href="https://docs.perceptiontravel.tv/legal-docs/terms-of-service"><i class="far fa-file-alt"></i>{{__('backend.terms_of_service')}}</a>
     </li>
     <li>
-        <a href="https://perceptiontravel.tv/community/donations/"><i class="fas fa-hand-holding-usd"></i>Make a Donation</a>
+        <a href="https://perceptiontravel.tv/community/donations/"><i class="fas fa-hand-holding-usd"></i>{{__('backend.make_a_donation')}}</a>
     </li>
     <li>
-        <a href="/contact-us"><i class="fas fa-pencil-alt"></i>Submit Feedback</a>
+        <a href="/contact-us"><i class="fas fa-pencil-alt"></i>{{__('backend.submit_feedback')}}</a>
     </li>
     <li>
-        <a href="/contact-us"><i class="fas fa-pencil-alt"></i>Contact Us</a>
+        <a href="/contact-us"><i class="fas fa-pencil-alt"></i>{{__('backend.contact_us')}}</a>
     </li>
         <div style="padding: 20px; margin-top: 40px; max-width: 75%; font-size: 10px; text-align: center; margin: auto;">
-            <strong>&copy; 2017-2020 <a href="https://perceptiontravel.tv/" target="_blank">PRCPTION Travel, Inc.</a> - a non-profit, 501(c)3 organization.</strong>
+            <strong>&copy; <a href="https://perceptiontravel.tv/" target="_blank">{{config('app.name')}}.</a>.</strong>
 </div>
     @endif
 
@@ -181,7 +168,7 @@
 @auth
 <div class="extras">
     <a class="accountbtn two" href="/user/content-add" title="">
-        <i class="fas fa-video"></i> Submit PRCPTION</a>
+        <i class="fas fa-video"></i> {{__('backend.submit')}}</a>
 </div>
 @else
 <div class="extras">
@@ -274,17 +261,3 @@
 
 
 </div>
-<!-- <div class="new-mobile-header">
-<div class="new-mobile-inner">
-<div class="mobile-header-content">
-<button class="menubtn btn-toggle-menubar">
-<span></span>
-<span></span>
-<span></span>
-</button>
-<div class="logo-wrapper">
-<a href=""><img src="/assets/img/logo_2.png" alt=""></a>
-</div>
-</div>
-</div>
-</div> -->

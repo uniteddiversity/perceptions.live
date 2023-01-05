@@ -36,23 +36,12 @@ $video_id = isset($matches[1])?$matches[1]:'';
 
                             <div class="col-lg-5">
                                 <div class="sltitle light">
-                                    {{--<div class="row">--}}
-                                        {{--<h1 style="float: left;">{{$info['title']}}</h1>--}}
-                                        {{--<div class="col-lg-5" style="float: left;">--}}
-                                            {{--<div class="watchvideo">--}}
-                                                {{--<a href="#" title=""><img src="images/play2.png" alt="">Watch Video</a>--}}
-                                            {{--</div>--}}
-                                        {{--</div>--}}
-                                    {{--</div>--}}
-
                                     <div class="slbtns">
                                         <h1 style="float: left;color: white;width: auto;">{{$info['title']}}&nbsp;&nbsp;</h1>
                                         <div style="float: left;" class="watchvideo" onclick="openVideoOnly()" data-videolink="<?php echo str_replace( 'watch?v=', 'embed/',$info['url']) ?>">
-                                            <a href="#" title=""><img src="/assets/findgo/images/play2.png" alt="">Watch Video</a>
+                                            <a href="#" title=""><img src="/assets/frontend/images/play2.png" alt="">{{__('backend.watch_video', ['name' => __('video')])}}</a>
                                         </div>
                                     </div>
-
-
 
                                     <span><i class="flaticon-heart"></i>
                                         <?php
@@ -120,7 +109,7 @@ $video_id = isset($matches[1])?$matches[1]:'';
                                     </ul>
                                     <div class="slbtns">
                                         <div class="sharelisting">
-                                            <a href="#" title=""><i class="flaticon-share"></i>Share</a>
+                                            <a href="#" title=""><i class="flaticon-share"></i>{{__('backend.share')}}</a>
                                             <div class="sharebtns">
                                                 <a href="#" title=""><i class="fa fa-facebook"></i></a>
                                                 <a href="#" title=""><i class="fa fa-twitter"></i></a>
@@ -130,11 +119,8 @@ $video_id = isset($matches[1])?$matches[1]:'';
                                                 <a href="#" title=""><i class="fa fa-google"></i></a>
                                             </div>
                                         </div>
-                                        <a href="#" title=""><i class="flaticon-heart"></i>Save</a>
-                                        <a href="#" title=""><i class="flaticon-note"></i>Add comment</a>
-                                        <?php /*<div class="watchvideo" onclick="openVideoOnly()" data-videolink="<?php echo str_replace( 'watch?v=', 'embed/',$info['url']) ?>">
-                                            <a href="#" title=""><img src="/assets/findgo/images/play2.png" alt="">Watch Video</a>
-                                        </div>*/?>
+                                        <a href="#" title=""><i class="flaticon-heart"></i>{{__('backend.save')}}</a>
+                                        <a href="#" title=""><i class="flaticon-note"></i>{{__('backend.add_comment')}}</a>
                                     </div>
                                 </div>
                             </div>
@@ -228,11 +214,10 @@ $video_id = isset($matches[1])?$matches[1]:'';
 
                     <div class="single_map">
                         <div class="ad map" id="map" style="height: 250px">...</div>
-                        {{--<div class="ad"><img src="http://placehold.it/360x220" alt="" /></div>--}}
                     </div>
 
                     <div class="cbusiness">
-                        <h3>Contact Video Users</h3>
+                        <h3>{{__('backend.contact_video_users', ['name1' => __('video')])}}</h3>
                         <form>
                             <label>Your Name *</label>
                             <input type="text" placeholder="Ali TUF..." />
@@ -254,7 +239,6 @@ $video_id = isset($matches[1])?$matches[1]:'';
         <div class="modal-content">
             <div class="modal-header" style="border-bottom: 0px solid #e5e5e5;">
                 <button class="close" type="button" data-dismiss="modal" aria-hidden="true">&times;</button>
-                {{--<h4 class="modal-title text-primary" id="feature-title"></h4>--}}
             </div>
             <div class="modal-body" id="feature-info"></div>
         </div>

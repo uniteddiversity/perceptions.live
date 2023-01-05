@@ -49,15 +49,15 @@ $data['language'] = isset($video_data['language'])?$video_data['language']:'en';
             </span>
             <div class="more" style="margin-top:20px;">
               <p>To keep our community thriving, and so there are no misunderstandings should your submission be rejected, we kindly ask that you refresh yourself with our 
-                <a href="https://perceptiontravel.tv/user-guidelines">User Guidelines
+                <a href="{{env('GUIDE_LINE_URL')}}">User Guidelines
                 </a> and 
-                <a href="https://perceptiontravel.tv/terms-of-service">Terms of Service
+                <a href="{{env('TERMS_OF_SERVICE')}}">Terms of Service
                 </a> before using this form.
               </p>
               <hr />
               <p style="color:#4214c7;">
                 <b>Should you encounter any errors we encourage you to 
-                  <a href="https://perceptiontravel.tv/community-feedback">let us know
+                  <a href="{{env('FEEDBACK')}}">let us know
                   </a>. Thanks!
                 </b>
               </p>
@@ -93,9 +93,7 @@ $data['language'] = isset($video_data['language'])?$video_data['language']:'en';
                   </b>
                 </span>
               </li>
-              <!--                            <li id="st4">-->
-              <!--                                <span style="left:100%; margin-left:-104px;"><i class="fas fa-filter"></i><b>4</b></span>-->
-              <!--                            </li>-->
+
             </ul>
           </div>
           <div class="pagedesc">
@@ -150,39 +148,14 @@ $data['language'] = isset($video_data['language'])?$video_data['language']:'en';
                     </label>
                     <input type="text" autocomplete="off" class="form-control datepicker" aria-describedby="nameHelp" name="captured_date" placeholder="Captured Date" value="{{ old('captured_date',$data['captured_date']) }}">
                   </div>
-                  {{--
-                  <div class="form-group">--}}
-                    {{--
-                    <label for="exampleSelect1">Type
-                    </label>--}}
-                    {{--
-                    <select class="form-control" id="exampleSelect1" name="type">--}}
-                      {{--
-                      <option value="2">Youtube Video
-                      </option>--}}
-                      {{--
-                      <option value="1">Uploaded Video
-                      </option>--}}
-                      {{--
-                    </select>--}}
-                    {{--
-                  </div>--}}
+
                   <div class="form-group">
                     <label for="exampleTextarea">Brief Description
                     </label>
                     <textarea name="brief_description" class="form-control" id="exampleTextarea" rows="3">{{ old('brief_description',$data['brief_description']) }}
                     </textarea>
                   </div>
-                  {{--
-                  <div class="form-group">--}}
-                    {{--
-                    <label for="description">Description
-                    </label>--}}
-                    {{--
-                    <textarea name="description" class="form-control" id="description" rows="3">{{ old('description') }}
-                    </textarea>--}}
-                    {{--
-                  </div>--}}
+
                   <!-- btns -->
                   <div class="btn_outer">
                     <a href="#" class="btn">
@@ -397,9 +370,9 @@ $data['language'] = isset($video_data['language'])?$video_data['language']:'en';
     <input type="text" class="form-control" aria-describedby="nameHelp" id="learn_more_url" name="learn_more_url" placeholder="Learn More Url" value="{{ old('learn_more_url',$data['learn_more_url']) }}">
   </div>
   <div class="form-group">
-    @if(env('GOOGLE_RECAPTCHA_KEY'))
+    @if(config('app.g_recaptcha_key'))
     <div class="g-recaptcha"
-         data-sitekey="{{env('GOOGLE_RECAPTCHA_KEY')}}">
+         data-sitekey="{{config('app.g_recaptcha_key')}}">
     </div>
     @endif
   </div>
@@ -520,44 +493,7 @@ $data['language'] = isset($video_data['language'])?$video_data['language']:'en';
 </select>
 </span>
 </div>
-{{--
-<div class="form-group">--}}
-  {{--
-  <label for="exampleSelect1">Secondary Subject Tag
-  </label>--}}
-  {{--
-  <select class="form-control" id="secondary_subject_tag_id" name="secondary_subject_tag_id">--}}
-    {{--
-    <option value="0">Select
-    </option>--}}
-    {{--@foreach($meta_array['sst'] as $m)--}}
-    {{--
-    <option value="{{$m['id']}}">{{$m['value']}}
-    </option>--}}
-    {{--@endforeach--}}
-    {{--
-  </select>--}}
-  {{--
-</div>--}}
-{{--
-<div class="form-group">--}}
-  {{--
-  <label for="exampleTextarea">Lat/Long
-  </label>--}}
-  {{--
-  <div class="row">--}}
-    {{--
-    <div class="col-2">
-      <input type="text" class="form-control" aria-describedby="nameHelp" id="lat_val" name="lat" placeholder="Lat" value="{{ old('lat') }}">
-    </div>--}}
-    {{--
-    <div class="col-2">
-      <input type="text" class="form-control" aria-describedby="nameHelp" id="long_val" name="long" placeholder="Long" value="{{ old('long') }}">
-    </div>--}}
-    {{--
-  </div>--}}
-  {{--
-</div>--}}
+
 <?php if(!empty($data['id']) && !Auth::user()->is('admin')){?>
 <input type="hidden" value="0" id="lat_val" name="lat" value="{{ old('lat',$data['lat']) }}">
 <input type="hidden" value="0" id="long_val" name="long" value="{{ old('long',$data['long']) }}">
@@ -578,112 +514,9 @@ $data['language'] = isset($video_data['language'])?$video_data['language']:'en';
 <input type="hidden" value="0" id="lat_val" name="lat" value="{{ old('lat',$data['lat']) }}">
 <input type="hidden" value="0" id="long_val" name="long" value="{{ old('long',$data['long']) }}">
 <?php } ?>
-{{--
-<div class="form-group">--}}
-  {{--
-  <label for="exampleTextarea">Url Split
-  </label>--}}
-  {{--
-  <input type="text" class="form-control" aria-describedby="nameHelp" name="url_split" placeholder="Url Split" value="{{ old('url_split') }}">--}}
-  {{--
-</div>--}}
-{{--
-<div class="form-group">--}}
-  {{--
-  <label for="exampleTextarea">Full Embed Code
-  </label>--}}
-  {{--
-  <textarea name="full_embed_code" class="form-control" id="full_embed_code" rows="3">{{ old('full_embed_code') }}
-  </textarea>--}}
-  {{--
-</div>--}}
-{{--
-<div class="form-group">--}}
-  {{--
-  <label for="video_id">Video Id
-  </label>--}}
-  {{--
-  <input type="text" class="form-control" aria-describedby="nameHelp" name="video_id" placeholder="Video Id" value="{{ old('video_id') }}">--}}
-  {{--
-</div>--}}
-{{--
-<div class="form-group">--}}
-  {{--
-  <label for="video_id">Video Id Old
-  </label>--}}
-  {{--
-  <input type="text" class="form-control" aria-describedby="nameHelp" name="video_id_old" placeholder="Video Id Old" value="{{ old('video_id_old') }}">--}}
-  {{--
-</div>--}}
-{{--
-<div class="form-group">--}}
-  {{--
-  <label for="video_id">Video Date
-  </label>--}}
-  {{--
-  <input type="text" class="form-control datepicker" aria-describedby="nameHelp" name="video_date" placeholder="Video Date" value="{{ old('video_date',$data['video_date']) }}">--}}
-  {{--
-</div>--}}
+
 <input type="hidden" value="<?php echo date('Y-m-d') ?>" name="video_date" />
-{{--
-<div class="form-group">--}}
-  {{--
-  <label for="exampleInputEmail1">Youtube URL
-  </label>--}}
-  {{--
-  <input type="text" class="form-control" aria-describedby="nameHelp" name="url" placeholder="URL" value="{{ old('url') }}">--}}
-  {{--
-  <small id="nameHelp" class="form-text text-muted">Youtube URL
-  </small>--}}
-  {{--
-</div>--}}
-{{--
-<fieldset class="form-group">--}}
-  {{--
-  <legend>Location
-  </legend>--}}
-  {{--
-  <div class="form-check">--}}
-    {{--
-    <label class="form-check-label">--}}
-      {{--
-      <input type="text" class="form-check-input" name="lat" placeholder="Lat" value="{{ old('lat') }}">--}}
-      {{--
-    </label>--}}
-    {{--
-  </div>--}}
-  {{--
-  <div class="form-check">--}}
-    {{--
-    <label class="form-check-label">--}}
-      {{--
-      <input type="text" class="form-check-input" name="long" placeholder="Long" value="{{ old('long') }}">--}}
-      {{--
-    </label>--}}
-    {{--
-  </div>--}}
-  {{--
-</fieldset>--}}
-{{--users only items--}}
-{{--
-<div class="form-group">--}}
-  {{--
-  <label for="exampleSelect1">Roles
-  </label>--}}
-  {{--
-  <select class="form-control multi-select2" multiple id="c_roles" name="c_roles[]">--}}
-    {{--
-    <option value="0">Select
-    </option>--}}
-    {{--@foreach($meta_array['c-role'] as $m)--}}
-    {{--
-    <option value="{{$m['id']}}">{{$m['value']}}
-    </option>--}}
-    {{--@endforeach--}}
-    {{--
-  </select>--}}
-  {{--
-</div>--}}
+
 <!-- btns -->
 <div class="btn_outer">
   <a href="#" class="btn click" rel="st3">
@@ -1018,7 +851,3 @@ $data['language'] = isset($video_data['language'])?$video_data['language']:'en';
   }
 </style>
 @endsection
-<script>
-  //        var el = document.getElementById('loading');
-  //        el.remove(); // Removes the div with the 'div-02' id
-</script>

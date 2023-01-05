@@ -206,6 +206,17 @@ Route::group(['prefix' => 'user', 'middleware' => ['auth', 'web', 'admin']], fun
 
     Route::get('/admin/comment-list/{_fk_id}/{_table}', '\App\Controllers\User\AdminController@comments');
     Route::post('/admin/delete-comment', '\App\Controllers\User\AdminController@deleteComment');
+
+
+    Route::get('/admin/setting/terms', '\App\Controllers\User\AdminController@terms');
+    Route::get('/admin/setting/appearance', '\App\Controllers\User\AdminController@appearance');
+    Route::get('/admin/setting/platform-config', '\App\Controllers\User\AdminController@platformConfig');
+    Route::get('/admin/setting/organization-contact', '\App\Controllers\User\AdminController@organizationContact');
+
+    Route::post('/admin/setting/terms', '\App\Controllers\User\AdminController@terms');
+    Route::post('/admin/setting/appearance', '\App\Controllers\User\AdminController@appearance');
+    Route::post('/admin/setting/platform-config', '\App\Controllers\User\AdminController@platformConfig');
+    Route::post('/admin/setting/organization-contact', '\App\Controllers\User\AdminController@organizationContact');
 });
 
 Route::group(['prefix' => 'user', 'middleware' => ['auth', 'web', 'groupadmin']], function () {

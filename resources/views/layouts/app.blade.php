@@ -3,34 +3,33 @@
 
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <title>Perceptions.Live: media communities getting stuff done</title>
+    <title>{{config('app.name')}}</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Perceptions.live is a place for media communities to collaborate and connect worldwide">
     <meta name="keywords" content="Community building, community, media, video editing, frontline communities, grassroots, grassroots organizations">
-    <meta name="author" content="PRCPTION Travel, Inc">
-    <script src="/assets/js/intro.js"></script>
+
     <link rel="stylesheet" type="text/css" href="/assets/css/introjs.css">
-    <link href="/assets/css/themes/introjs-modern.css" rel="stylesheet">
+    <link href="/assets/css/introjs-modern.css" rel="stylesheet">
     <!-- Styles -->
-    <link rel="stylesheet" type="text/css" href="/assets/findgo/css/bootstrap-grid.css" />
-    <link rel="stylesheet" href="/assets/findgo/css/icons.css">
-    <link rel="stylesheet" href="/assets/findgo/css/animate.min.css">
-    <link rel="stylesheet" type="text/css" href="/assets/findgo/css/style.css" />
-    <link rel="stylesheet" type="text/css" href="/assets/findgo/css/responsive.css" />
+    <link rel="stylesheet" type="text/css" href="/assets/frontend/css/bootstrap-grid.css" />
+    <link rel="stylesheet" href="/assets/frontend/css/icons.css">
+    <link rel="stylesheet" href="/assets/frontend/css/animate.min.css">
+    <link rel="stylesheet" type="text/css" href="/assets/frontend/css/style.css" />
+    <link rel="stylesheet" type="text/css" href="/assets/frontend/css/responsive.css" />
 
     <!-- Favicons -->
-    <link rel="apple-touch-icon" sizes="57x57" href="/favicon/apple-icon-57x57.png">
-    <link rel="apple-touch-icon" sizes="60x60" href="/favicon/apple-icon-60x60.png">
-    <link rel="apple-touch-icon" sizes="72x72" href="/favicon/apple-icon-72x72.png">
-    <link rel="apple-touch-icon" sizes="76x76" href="/favicon/apple-icon-76x76.png">
-    <link rel="apple-touch-icon" sizes="114x114" href="/favicon/apple-icon-114x114.png">
-    <link rel="apple-touch-icon" sizes="120x120" href="/favicon/apple-icon-120x120.png">
-    <link rel="apple-touch-icon" sizes="144x144" href="/favicon/apple-icon-144x144.png">
-    <link rel="apple-touch-icon" sizes="152x152" href="/favicon/apple-icon-152x152.png">
-    <link rel="apple-touch-icon" sizes="180x180" href="/favicon/apple-icon-180x180.png">
-    <link rel="icon" type="image/png" sizes="192x192" href="/favicon/android-icon-192x192.png">
-    <link rel="icon" type="image/png" sizes="32x32" href="/favicon/favicon-32x32.png">
-    <link rel="icon" type="image/png" sizes="96x96" href="/favicon/favicon-96x96.png">
+    <link rel="apple-touch-icon" sizes="57x57" href="/uploaded_settings/fav_apple-icon-57x57.png">
+    <link rel="apple-touch-icon" sizes="60x60" href="/uploaded_settings/fav_apple-icon-60x60.png">
+    <link rel="apple-touch-icon" sizes="72x72" href="/uploaded_settings/fav_apple-icon-72x72.png">
+    <link rel="apple-touch-icon" sizes="76x76" href="/uploaded_settings/fav_apple-icon-76x76.png">
+    <link rel="apple-touch-icon" sizes="114x114" href="/uploaded_settings/fav_apple-icon-114x114.png">
+    <link rel="apple-touch-icon" sizes="120x120" href="/uploaded_settings/fav_apple-icon-120x120.png">
+    <link rel="apple-touch-icon" sizes="144x144" href="/uploaded_settings/fav_apple-icon-144x144.png">
+    <link rel="apple-touch-icon" sizes="152x152" href="/uploaded_settings/fav_apple-icon-152x152.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="/uploaded_settings/fav_apple-icon-180x180.png">
+    <link rel="icon" type="image/png" sizes="192x192" href="/uploaded_settings/fav_android-icon-192x192.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/uploaded_settings/fav_favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="96x96" href="/uploaded_settings/fav_favicon-96x96.png">
 
     <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
     <link rel="icon" href="/favicon.ico" type="image/x-icon">
@@ -43,10 +42,7 @@
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
 
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,600,700" rel="stylesheet">
-
     <link rel="stylesheet" type="text/css" href="/assets/css/leaflet.css" />
-    {{--<link rel="stylesheet" href="/assets/css/leaflet.css">--}}
-    {{--<link rel="stylesheet" href="/assets/css/MarkerCluster.css">--}}
     <link rel="stylesheet" href="/assets/css/MarkerCluster.css">
     <link rel="stylesheet" href="/assets/css/MarkerCluster.Default.css">
     <link rel="stylesheet" href="/assets/css/L.Control.Locate.css">
@@ -54,20 +50,16 @@
     <link rel="stylesheet" href="/js/dist/css/select2.min.css" />
     <link rel="stylesheet" href="/assets/css/custom.css?version=1" />
     <link rel="stylesheet" href="/assets/juery-confirm/jquery-confirm.css" />
-    {{--<link rel="stylesheet" href="/assets/js/datatable/datatables.min.css" />--}}
     <script src="/assets/js/jquery-2.1.4.min.js"></script>
-    {{--<link rel="stylesheet" href="/assets/css/app.css">--}}
-
-<!--    <link rel="stylesheet" href="/assets/css/thumbnail_slider.css">-->
-<link rel="stylesheet" href="/assets/js/slick_slider/slick.css">
-<link rel="stylesheet" href="/assets/css/thumbnail_slider.css">
-
+    <link rel="stylesheet" href="/assets/js/slick_slider/slick.css">
+    <link rel="stylesheet" href="/assets/css/thumbnail_slider.css">
+    <link rel="stylesheet" href="/assets/css/frontend-override.css">
 </head>
 
 <body class="full-height" id="scrollup">
 
     <div class="page-loading">
-        <img src="/assets/findgo/images/loader.gif" alt="" />
+        <img src="/assets/frontend/images/loader.gif" alt="" />
     </div>
 
     <div class="theme-layout">
@@ -75,15 +67,6 @@
     </div>
 
 
-
-
-    {{--<div class="popupsecs">--}}
-    {{--<div class="popup">--}}
-    {{--<div class="info_content">--}}
-    {{--testtt--}}
-    {{--</div>--}}
-    {{--</div>--}}
-    {{--</div>--}}
     <div class="modal fade" id="featureModal" tabindex="-1" role="dialog">
         <div class="modal-dialog big" style="position: relative;">
             <div class="modal-content">
@@ -97,130 +80,6 @@
             </div>
         </div>
     </div>
-
-    <script type="text/javascript">
-
-        // create an array with objects describing each step in the guided tour
-        var Steps = [
-            {
-                intro: "Welcome to Perceptions.Live! There's a lot you can do here, so let's give you a quick tour!"
-            },
-            {
-                element: '#step2',
-                intro: "Click this button to quickly upload your video--a testimony, a perspective, a word of wisdom to share. No registration required!",
-                position: 'top'
-            },
-            {
-                element: '#step3',
-                intro: "Register a new account if you want to build a community, make a map, or leave comments.",
-                position: 'bottom'
-            },
-            {
-                element: '#step4',
-                intro: "Use the feed buttons to sift through content in different ways.",
-                position: 'right'
-            }
-            ];
-
-        // $(window).resize(function() {
-        //     console.log('width is ', window.screen.availWidth);
-            if(window.screen.availWidth < 1206){
-                $('.responsiveheader').css({display:'block'});
-                Steps = [
-                    {
-                        intro: "Welcome to Perceptions.Live! There's a lot you can do here, so let's give you a quick tour!"
-                    },
-                    {
-                        element: '#step2',
-                        intro: "Click this button to quickly upload your video--a testimony, a perspective, a word of wisdom to share. No registration required!",
-                        position: 'top'
-                    },
-                    {
-                        element: '#step3_mobile',
-                        intro: "Register a new account if you want to build a community, make a map, or leave comments.",
-                        position: 'bottom'
-                    },
-                    {
-                        element: '#arrowMapWrapper',
-                        intro: "Use the feed buttons to sift through content in different ways.",
-                        position: 'right'
-                    }
-                ];
-            }
-        // });
-
-        // initialize an introjs instance
-        var intro = introJs();
-
-        // load data
-        intro.setOptions(
-            {
-                steps: Steps,
-                overlayOpacity: "1",
-                skipLabel: "Exit",
-                tooltipPosition: "auto",
-                showStepNumbers: false,
-                exitOnEsc: true,
-                hidePrev: true,
-                hideNext: true,
-                keyboardNavigation: true,
-                scrollToElement: false,
-                exitOnOverlayClick: true
-            }
-            );
-
-        // start intro.js
-        $(document).ready(function() {
-            let intro_exited = getCookie('intro_exited');
-
-            let home_url = window.location.pathname;
-            if(home_url == '/' && intro_exited == null){
-                intro.start();
-            }
-        });
-
-        // tour button
-        document.getElementById("StartTour").onclick = function()
-        {
-            intro.start("#step2");
-        };
-
-        intro.onchange(function () {
-            // console.log(this);
-            // document.cookie = "intro_exited=true; user-id=0; date="+Date.now();
-        });
-
-        intro.onexit(function () {
-            let if_cookie_consent = getCookie('__cookie_consent');
-            if(if_cookie_consent !== null){
-                let maxAge = "; max-age=" + 3*24*60*60;
-                document.cookie = "intro_exited=true; path=/" +  maxAge;
-            }
-        });
-
-        function getCookie(name) {
-            // Split cookie string and get all individual name=value pairs in an array
-            var cookieArr = document.cookie.split(";");
-
-            // Loop through the array elements
-            for(var i = 0; i < cookieArr.length; i++) {
-                var cookiePair = cookieArr[i].split("=");
-
-                /* Removing whitespace at the beginning of the cookie name
-                and compare it with the given string */
-                if(name == cookiePair[0].trim()) {
-                    // Decode the cookie value and return
-                    return decodeURIComponent(cookiePair[1]);
-                }
-            }
-
-            // Return null if not found
-            return null;
-        }
-
-
-    </script>
-
 
     <div class="popupsec">
         <div class="popup">
@@ -311,22 +170,18 @@
         </div>
     </div>
 
+    <script src="/assets/frontend/js/popper.min.js" type="text/javascript"></script>
 
-    {{--<script src="/assets/findgo/js/jquery.min.js" type="text/javascript"></script>--}}
-    <script src="/assets/findgo/js/popper.min.js" type="text/javascript"></script>
-
-    <script src="/assets/findgo/js/modernizr.js" type="text/javascript"></script>
-    <script src="/assets/findgo/js/script.js" type="text/javascript"></script>
-    <script src="/assets/findgo/js/bootstrap.min.js" type="text/javascript"></script>
-    <script src="/assets/findgo/js/wow.min.js" type="text/javascript"></script>
-    <script src="/assets/findgo/js/slick.min.js" type="text/javascript"></script>
-    <script src="/assets/findgo/js/sumoselect.js" type="text/javascript"></script>
-    <script src="/assets/findgo/js/isotop.js" type="text/javascript"></script>
-    <script src="/assets/findgo/js/jquery.nicescroll.min.js" type="text/javascript"></script>
-    <script src="/assets/findgo/js/date-time-picker.min.js" type="text/javascript"></script>
-    {{--<script src="http://maps.googleapis.com/maps/api/js?key=AIzaSyCYc537bQom7ajFpWE5sQaVyz1SQa9_tuY&sensor=true&libraries=places"></script><!-- Maps -->--}}
-    {{--<script type="text/javascript" src="/assets/findgo/js/map1.js"></script>--}}
-    <script type="text/javascript" src="/assets/findgo/js/jq.aminoSlider.js"></script>
+    <script src="/assets/frontend/js/modernizr.js" type="text/javascript"></script>
+    <script src="/assets/frontend/js/script.js" type="text/javascript"></script>
+    <script src="/assets/frontend/js/bootstrap.min.js" type="text/javascript"></script>
+    <script src="/assets/frontend/js/wow.min.js" type="text/javascript"></script>
+    <script src="/assets/frontend/js/slick.min.js" type="text/javascript"></script>
+    <script src="/assets/frontend/js/sumoselect.js" type="text/javascript"></script>
+    <script src="/assets/frontend/js/isotop.js" type="text/javascript"></script>
+    <script src="/assets/frontend/js/jquery.nicescroll.min.js" type="text/javascript"></script>
+    <script src="/assets/frontend/js/date-time-picker.min.js" type="text/javascript"></script>
+    <script type="text/javascript" src="/assets/frontend/js/jq.aminoSlider.js"></script>
     <script src="/assets/js/leaflet.js"></script>
     <script src="/assets/js/leaflet.markercluster.new.js"></script>
     <script src="/assets/js/leaflet.freeze.js"></script>
@@ -341,11 +196,10 @@
 
     <script src="/assets/js/datatable/datatables.min.js"></script>
     <script src="/assets/juery-confirm/jquery-confirm.js"></script>
-<!--    <script src="/assets/js/thumbnail_slider.js"></script>-->
     <script src="/assets/js/slick_slider/slick.js"></script>
     <script src="/assets/js/thumbnail_slider.js"></script>
     <script src="/assets/js/home-common.js"></script>
-
+    @yield('scripts')
 
     @include('partials.notify-messages')
     <style>
@@ -479,278 +333,4 @@
         });
 
     </script>
-    {{--<script>--}}
-    {{--$(document).ready(function() {--}}
-    {{--$('.multi-select2').select2();--}}
-
-    {{--$('.multi-select2-with-tags').select2({tags: true});--}}
-
-    {{--$('.multi-select2-max3').select2({maximumSelectionLength: 3});--}}
-
-    {{--$('.multi-select2-with-tags-max3').select2({tags: true, maximumSelectionLength: 3});--}}
-
-    {{--$('#user-assign-group').change(function(){console.log('vl '+$(this).val());--}}
-    {{--document.location.href = '/user/admin/user-to-group-add/'+$(this).val();--}}
-    {{--})--}}
-
-    {{--$("#is_exchange").change(function(){ console.log('changing..');--}}
-    {{--if($(this).is(':checked')){console.log('checked..');--}}
-    {{--$('#exchange_enabled').css('visibility','visible');--}}
-    {{--}else{--}}
-    {{--$('#exchange_enabled').css('visibility','hidden');--}}
-    {{--}--}}
-    {{--})--}}
-    {{--});--}}
-    {{--</script>--}}
-
-{{--    <a href="#" class="js-cookie-settings">{{ trans('cookieConsent::texts.settings_notice_gdpr') }}</a>--}}
-
-
-{{--    <div class="cookiebanner" id="cookiebanner">--}}
-{{--        <div class="section section--light section--sml">--}}
-{{--            <div class="container">--}}
-{{--                <div class="cookie__wrapper">--}}
-{{--                    <h2 class="cookie__title">{{ trans('cookieConsent::texts.title_gdpr') }}</h2>--}}
-{{--                    <div class="cookie__body">--}}
-{{--                        {{ trans('cookieConsent::texts.title_cookiebanner') }}--}}
-{{--                    </div>--}}
-{{--                    <div class="cookie__cta">--}}
-{{--                        <a href="#" class="btn btn--brand cookiemonster__accept js-cookie-accept">{{ trans('cookieConsent::texts.accept_notice_gdpr') }}</a>--}}
-{{--                        <a href="#" class="inline__item cookiemonster__settings js-cookie-settings">{{ trans('cookieConsent::texts.settings_notice_gdpr') }}</a>--}}
-{{--                    </div>--}}
-{{--                </div>--}}
-{{--            </div>--}}
-{{--        </div>--}}
-{{--    </div>--}}
-
 </body>
-
-</html>
-
-
-
-
-
-
-
-
-
-
-<?php /*
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="initial-scale=1,user-scalable=no,maximum-scale=1,width=device-width">
-    <title>{{ config('app.name') }}</title>
-
-    <link rel="stylesheet" href="/assets/css/bootstrap.min.css">
-    <link rel="stylesheet" href="/assets/fontawesome/css/all.css">
-    <link rel="stylesheet" type="text/css" href="/assets/css/leaflet_0.7.css" />
-    {{--<link rel="stylesheet" href="/assets/css/leaflet.css">--}}
-    {{--<link rel="stylesheet" href="/assets/css/MarkerCluster.css">--}}
-    <link rel="stylesheet" href="/assets/css/MarkerCluster.Default.css">
-    <link rel="stylesheet" href="/assets/css/L.Control.Locate.css">
-    <link rel="stylesheet" href="/assets/leaflet-groupedlayercontrol/leaflet.groupedlayercontrol.css">
-    <link rel="stylesheet" href="/js/dist/css/select2.min.css" />
-    <link rel="stylesheet" href="/assets/css/app.css">
-    <link rel="stylesheet" href="/assets/css/custom_common_styles.css">
-</head>
-
-<body>
-@include('partials.nav-bar')
-
-
-<div class="container">
-    <div class="row">
-        @include('partials.home-left-side-bar')
-        @yield('content')
-        @if($user = Auth::user())
-            @include('partials.home-right-side-bar')
-        @endif
-    </div>
-</div>
-
-
-<div class="modal fade" id="loginModal" tabindex="-1" role="dialog">
-    <div class="modal-dialog modal-sm">
-        <div class="modal-content">
-            <form id="login-form" action="/user/login" method="post">
-                <input type="hidden" name="_token" id="csrf-token" value="{{ Session::token() }}" />
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                    <h4 class="modal-title">Login</h4>
-                </div>
-                <div class="modal-body">
-                    <div id="messages"></div>
-                    <fieldset>
-                        <div class="form-group">
-                            <label for="username">Email:</label>
-                            <input type="text" class="form-control" id="email" name="email">
-                        </div>
-                        <div class="form-group">
-                            <label for="password">Password:</label>
-                            <input type="password" class="form-control" id="password" name="password">
-                        </div>
-                    </fieldset>
-
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
-                    <input type="button"  onclick="userLogin()" class="btn btn-primary" value="Login" />
-                </div>
-            </form>
-        </div>
-    </div>
-</div>
-
-
-<div class="modal fade" id="registerModal" tabindex="-1" role="dialog">
-    <div class="modal-dialog modal-sm">
-        <div class="modal-content">
-            <form id="register-form" action="/user/register" method="post">
-                <input type="hidden" name="_token" id="csrf-token" value="{{ Session::token() }}" />
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                    <h4 class="modal-title">Register</h4>
-                </div>
-                <div class="modal-body">
-                    <div id="messages"></div>
-                    <fieldset>
-                        <div class="form-group">
-                            <label for="username">Display Name:</label>
-                            <input type="text" class="form-control" id="display_name" name="display_name">
-                        </div>
-                        <div class="form-group">
-                            <label for="username">Email:</label>
-                            <input type="text" class="form-control" id="email" name="email">
-                        </div>
-                        <div class="form-group">
-                            <label for="username">Location:</label>
-                            <input type="text" class="form-control" id="email" name="location">
-                        </div>
-
-
-
-                        <div class="form-group">
-                            <label for="password">Password:</label>
-                            <input type="password" class="form-control" id="password" name="password">
-                        </div>
-                        <div class="form-group">
-                            <label for="password">Retype Password:</label>
-                            <input type="password" class="form-control" id="password_confirmation" name="password_confirmation">
-                        </div>
-                        <div class="form-group">
-                            <label for="password">Terms of Service:</label>
-                            <input type="checkbox" name="accept_tos" id="accept_tos" value="1" />
-                        </div>
-                    </fieldset>
-
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
-                    <input type="button" onclick="userRegister()" class="btn btn-primary" value="Register" />
-                </div>
-            </form>
-        </div>
-    </div>
-</div>
-
-
-<div class="modal fade" id="featureModal" tabindex="-1" role="dialog">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header" style="border-bottom: 0px solid #e5e5e5;">
-                <button class="close" type="button" data-dismiss="modal" aria-hidden="true">&times;</button>
-            </div>
-            <div class="modal-body" id="feature-info"></div>
-        </div>
-    </div>
-</div>
-
-<style>
-    html,body,.container {
-        height:100%;
-    }
-    .container {
-        display:table;
-        width: 100%;
-        padding: 0 0 0 0;
-
-    }
-
-    .row {
-        height: 100%;
-        display: table-row;
-    }
-
-    .col-md-2 {
-        padding: 0px;
-    }
-    .col-md-9 {
-
-    }
-
-    .row .no-float {
-        display: table-cell;
-        float: none;
-    }
-</style>
-<style>
-    .info-box-left {
-        background-color: white;
-        margin-left: 0px !important;
-        margin-right: 0px !important;
-        position: relative;
-        height: 100%;
-    }
-    .info-box-right {
-        background-color: white;
-        margin-left: 0px;
-        position: relative;
-        height: 100%;
-    }
-
-    #featureModal .modal-dialog{
-        width: 950px;
-    }
-</style>
-<script src="/assets/js/jquery-2.1.4.min.js"></script>
-<script src="/assets/js/bootstrap.min.js"></script>
-<script src="/assets/js/typeahead.bundle.min.js"></script>
-<script src="/assets/js/handlebars.min.js"></script>
-<script src="/assets/js/list.min.js"></script>
-<script src="/assets/js/leaflet_0.7.js"></script>
-<script src="/assets/js/leaflet.markercluster.js"></script>
-<script src="/assets/js/L.Control.Locate.min.js"></script>
-<script src="/assets/leaflet-groupedlayercontrol/leaflet.groupedlayercontrol.js"></script>
-<script src="/js//dist/js/select2.full.min.js"></script>
-<script src="/assets/js/app.js"></script>
-
-<script>
-    $(document).ready(function() {
-        $('.multi-select2').select2();
-
-        $('.multi-select2-with-tags').select2({tags: true});
-
-        $('.multi-select2-max3').select2({maximumSelectionLength: 3});
-
-        $('.multi-select2-with-tags-max3').select2({tags: true, maximumSelectionLength: 3});
-
-        $('#user-assign-group').change(function(){console.log('vl '+$(this).val());
-            document.location.href = '/user/admin/user-to-group-add/'+$(this).val();
-        })
-
-        $("#is_exchange").change(function(){ console.log('changing..');
-            if($(this).is(':checked')){console.log('checked..');
-                $('#exchange_enabled').css('visibility','visible');
-            }else{
-                $('#exchange_enabled').css('visibility','hidden');
-            }
-        })
-    });
-</script>
-</body>
-</html>
-*/ ?>

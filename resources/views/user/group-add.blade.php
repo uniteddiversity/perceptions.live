@@ -28,7 +28,7 @@ $data['group_acting_roles'] = isset($group['actingRoles']) ? array_column(($grou
   <div class="card form-card">
     <div class="card-body">
       <div class="submitprcption">
-        <h4 class="card-title" style="margin-bottom: 10px; text-align: center;">Group Profile & Settings
+        <h4 class="card-title" style="margin-bottom: 10px; text-align: center;">{{__('backend.group_profile_settings', ['name', __('group')])}}
         </h4>
         <div class="pagedesc" align="center">
           <p>Present your community to the world.
@@ -93,7 +93,7 @@ $data['group_acting_roles'] = isset($group['actingRoles']) ? array_column(($grou
             <input type="text" class="form-control" placeholder="Learn More Url" aria-describedby="nameHelp" name="learn_more_url" placeholder="Learn More Url" value="{{ old('learn_more_url',$data['learn_more_url']) }}">
           </div>
             <div class="form-group">
-                <label for="accept_tos">Group Avatar</label>
+                <label for="accept_tos">{{__('backend.group_avatar', ['name', __('group')])}}</label>
                 <input class="form-control" type="file" name="group_avatar" />
             </div>
 
@@ -204,13 +204,13 @@ $data['group_acting_roles'] = isset($group['actingRoles']) ? array_column(($grou
           </div>
 
           <div class="form-group">
-            @if(env('GOOGLE_RECAPTCHA_KEY'))
-            <div class="g-recaptcha" data-sitekey="{{env('GOOGLE_RECAPTCHA_KEY')}}">
+            @if(config('app.g_recaptcha_key'))
+            <div class="g-recaptcha" data-sitekey="{{config('app.g_recaptcha_key')}}">
             </div>
             @endif
           </div>
           <div class="form-footer">
-            <button type="submit" class="btn btn-primary">Submit</button>
+            <button type="submit" class="btn btn-primary">{{__('backend.submit')}}</button>
           </div>
         </form>
       </div>
@@ -324,7 +324,9 @@ $data['group_acting_roles'] = isset($group['actingRoles']) ? array_column(($grou
     </style>
 
 @endsection
-<script>
-  var el = document.getElementById('loading');
-  el.remove(); // Removes the div with the 'div-02' id
-</script>
+@section('scripts')
+  <script>
+      var el = document.getElementById('loading');
+      el.remove(); // Removes the div with the 'div-02' id
+  </script>
+@endsection

@@ -17,7 +17,7 @@
         </li>
       </ul>
       <a href="/" class="nav-logo">
-        <img src="/assets/findgo/images/live-perceptions-logo.png" alt="">
+        <img src="/uploaded_settings/main_logo_1.png" alt="">
       </a>
       <a class="mobile-options" style="display:none;">
         <i class="fas fa-ellipsis-h"></i>
@@ -94,27 +94,27 @@
               <li>
                 <!--  include search -->
                 <a class="mobile-search morphsearch-search" href="#">
-                  <i class="fas fa-search"></i> Quick Search
+                  <i class="fas fa-search"></i>{{__('backend.quick_search')}}
                 </a>
               </li>
               <li>
                 <a href="/user/user-profile">
                   <i class="fas fa-user-cog"></i>
-                  My Profile
+                  {{__('backend.my_profile')}}
                 </a>
               </li>
               <li>
                 <a href="/user/group-admin/content-list">
                   <i class="fas fa-video"></i>
-                  My Videos
+                  {{__('backend.my_videos', ['name' => __('content')])}}
                 </a>
               </li>
               <li><a href="/claim-profile" target="_blank">
                   <i class="fas fa-user-circle"></i>
-                  Claim A Profile</a></li>
+                  {{__('backend.claim_profile')}}</a></li>
               <li>
                 <a href="/user/logout">
-                  <i class="fas fa-sign-out-alt"></i> Logout {{Auth::user()->first_name}}
+                  <i class="fas fa-sign-out-alt"></i> {{__('backend.logout')}} {{Auth::user()->first_name}}
                 </a>
               </li>
             </ul>
@@ -124,7 +124,7 @@
             <a class="mobile-search morphsearch-search" href="#">
               <i class="fas fa-search"></i>
             </a>
-            <p>Search</p>
+            <p>{{__('backend.search')}}</p>
           </li>
         </ul>
 
@@ -133,42 +133,10 @@
         <div id="morphsearch" class="morphsearch">
           <form class="morphsearch-form">
             <input class="morphsearch-input" type="search" placeholder="Search..." />
-            <button class="morphsearch-submit" type="submit">Search</button>
+            <button class="morphsearch-submit" type="submit">{{__('backend.search')}}</button>
           </form>
           <div class="morphsearch-content">
-            <div class="dummy-column">
-              <h2>People</h2>
-              <a class="dummy-media-object" href="#!">
-                <img class="round" src="http://0.gravatar.com/avatar/81b58502541f9445253f30497e53c280?s=50&d=identicon&r=G" alt="Sara Soueidan" />
-                <h3>Sara Soueidan</h3>
-              </a>
-              <a class="dummy-media-object" href="#!">
-                <img class="round" src="http://1.gravatar.com/avatar/9bc7250110c667cd35c0826059b81b75?s=50&d=identicon&r=G" alt="Shaun Dona" />
-                <h3>Shaun Dona</h3>
-              </a>
-            </div>
-            <div class="dummy-column">
-              <h2>Popular</h2>
-              <a class="dummy-media-object" href="#!">
-                <img src="assets/images/avatar-1.png" alt="PagePreloadingEffect" />
-                <h3>Page Preloading Effect</h3>
-              </a>
-              <a class="dummy-media-object" href="#!">
-                <img src="assets/images/avatar-1.png" alt="DraggableDualViewSlideshow" />
-                <h3>Draggable Dual-View Slideshow</h3>
-              </a>
-            </div>
-            <div class="dummy-column">
-              <h2>Recent</h2>
-              <a class="dummy-media-object" href="#!">
-                <img src="assets/images/avatar-1.png" alt="TooltipStylesInspiration" />
-                <h3>Tooltip Styles Inspiration</h3>
-              </a>
-              <a class="dummy-media-object" href="#!">
-                <img src="assets/images/avatar-1.png" alt="NotificationStyles" />
-                <h3>Notification Styles Inspiration</h3>
-              </a>
-            </div>
+
           </div>
           <!-- /morphsearch-content -->
           <span class="morphsearch-close"><i class="icofont icofont-search-alt-1"></i></span>

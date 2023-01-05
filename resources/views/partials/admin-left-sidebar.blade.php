@@ -2,49 +2,49 @@
     <div class="sidebar_toggle"><a href="#"><i class="icon-close icons"></i></a></div>
     <div class="pcoded-inner-navbar main-menu">
 
-        <div class="pcoded-navigatio-lavel" data-i18n="nav.category.navigation" >Navigation</div>
+        <div class="pcoded-navigatio-lavel" data-i18n="nav.category.navigation" >{{__('backend.navigation')}}</div>
 
 
         <ul class="pcoded-item pcoded-left-item">
             <li class="pcoded-hasmenu <?php if(in_array(Request::segment(3), array('content-add','content-list-open','content-list','location-list','sorting-tag-add'))){ echo 'active pcoded-trigger'; } ?> ">
                 <a href="javascript:void(0)">
                     <span class="pcoded-micon"><i class="ti-video-camera"></i></span>
-                    <span class="pcoded-mtext" data-i18n="nav.dash.main">Video</span>
+                    <span class="pcoded-mtext" data-i18n="nav.dash.main">{{__('content')}}</span>
                     <span class="pcoded-mcaret"></span>
                 </a>
                 <ul class="pcoded-submenu">
                     <li class="<?php if(in_array(Request::segment(3), array('content-add'))){ echo 'active'; } ?>">
                         <a class="nav-link" href="/user/admin/content-add">
                             <span class="pcoded-micon"><i class="ti-angle-right"></i></span>
-                            <span class="pcoded-mtext" data-i18n="nav.dash.default">Add Video</span>
+                            <span class="pcoded-mtext" data-i18n="nav.dash.default">{{__('backend.add_video', ['name' => __('content')])}}</span>
                             <span class="pcoded-mcaret"></span>
                         </a>
                     </li>
                     <li class="<?php if(in_array(Request::segment(3), array('content-list-open'))){ echo 'active'; } ?>">
                         <a class="nav-link" href="/user/admin/content-list-open">
                             <span class="pcoded-micon"><i class="ti-angle-right"></i></span>
-                            <span class="pcoded-mtext" data-i18n="nav.dash.default">Open Videos</span>
+                            <span class="pcoded-mtext" data-i18n="nav.dash.default">{{__('backend.open_video', ['name' => __('content')])}}</span>
                             <span class="pcoded-mcaret"></span>
                         </a>
                     </li>
                     <li class="<?php if(in_array(Request::segment(3), array('content-list'))){ echo 'active'; } ?>">
                         <a class="nav-link" href="/user/admin/content-list">
                             <span class="pcoded-micon"><i class="ti-angle-right"></i></span>
-                            <span class="pcoded-mtext" data-i18n="nav.dash.default">All Videos</span>
+                            <span class="pcoded-mtext" data-i18n="nav.dash.default">{{__('backend.all_videos', ['name' => __('content')])}}</span>
                             <span class="pcoded-mcaret"></span>
                         </a>
                     </li>
                     <li class="<?php if(in_array(Request::segment(3), array('location-list'))){ echo 'active'; } ?>">
                         <a class="nav-link" href="/user/admin/location-list">
                             <span class="pcoded-micon"><i class="ti-angle-right"></i></span>
-                            <span class="pcoded-mtext" data-i18n="nav.dash.default">Locations</span>
+                            <span class="pcoded-mtext" data-i18n="nav.dash.default">{{__('backend.content_locations')}}</span>
                             <span class="pcoded-mcaret"></span>
                         </a>
                     </li>
                     <li class="<?php if(in_array(Request::segment(3), array('sorting-tag-add'))){ echo 'active'; } ?>">
                         <a class="nav-link" href="/user/admin/sorting-tag-add">
                             <span class="pcoded-micon"><i class="ti-angle-right"></i></span>
-                            <span class="pcoded-mtext" data-i18n="nav.dash.default">Tags</span>
+                            <span class="pcoded-mtext" data-i18n="nav.dash.default">{{__('backend.content_tags')}}</span>
                             <span class="pcoded-mcaret"></span>
                         </a>
                     </li>
@@ -54,28 +54,28 @@
             <li class="pcoded-hasmenu <?php if(in_array(Request::segment(3), array('user-list','user-add'))){ echo 'active pcoded-trigger'; } ?>">
                 <a href="javascript:void(0)">
                     <span class="pcoded-micon"><i class="ti-user"></i></span>
-                    <span class="pcoded-mtext" data-i18n="nav.page_layout.main">User Manage</span>
+                    <span class="pcoded-mtext" data-i18n="nav.page_layout.main">{{__('backend.user_manage', ['name' => __('user')] )}}</span>
                     <span class="pcoded-mcaret"></span>
                 </a>
                 <ul class="pcoded-submenu">
                     <li class="<?php if(in_array(Request::segment(3), array('user-list'))){ echo 'active'; } ?>" >
                         <a href="/user/admin/user-list">
                             <span class="pcoded-micon"><i class="ti-angle-right"></i></span>
-                            <span class="pcoded-mtext" data-i18n="nav.dash.default">All Users</span>
+                            <span class="pcoded-mtext" data-i18n="nav.dash.default">{{__('backend.all_users', ['name' => __('user')])}}</span>
                             <span class="pcoded-mcaret"></span>
                         </a>
                     </li>
                     <li class="<?php if(in_array(Request::segment(3), array('user-add'))){ echo 'active'; } ?>" >
                         <a href="/user/admin/user-add">
                             <span class="pcoded-micon"><i class="ti-angle-right"></i></span>
-                            <span class="pcoded-mtext" data-i18n="nav.dash.default">Add User</span>
+                            <span class="pcoded-mtext" data-i18n="nav.dash.default">{{__('backend.add_user', ['name' => __('user')])}}</span>
                             <span class="pcoded-mcaret"></span>
                         </a>
                     </li>
                     <li class="<?php if(in_array(Request::segment(3), array('list-profile-claim-request'))){ echo 'active'; } ?>">
                         <a class="nav-link" href="/user/admin/list-profile-claim-request">
                             <span class="pcoded-micon"><i class="ti-angle-right"></i></span>
-                            <span class="pcoded-mtext" data-i18n="nav.dash.default">Profile Claim Request's</span>
+                            <span class="pcoded-mtext" data-i18n="nav.dash.default">{{__('backend.profile_claim_request')}}</span>
                             <span class="pcoded-mcaret"></span>
                         </a>
                     </li>
@@ -85,42 +85,42 @@
             <li class="pcoded-hasmenu <?php if(in_array(Request::segment(3), array('group-list','user-to-group-add','user-group-add'))){ echo 'active pcoded-trigger'; } ?>">
                 <a href="javascript:void(0)">
                     <span class="pcoded-micon"><i class="ti-list"></i></span>
-                    <span class="pcoded-mtext" data-i18n="nav.page_layout.main">Groups</span>
+                    <span class="pcoded-mtext" data-i18n="nav.page_layout.main">{{__('backend.groups', ['name' => __('group')] )}}</span>
                     <span class="pcoded-mcaret"></span>
                 </a>
                 <ul class="pcoded-submenu">
                     <li class="nav-item <?php if(in_array(Request::segment(3), array('group-list'))){ echo 'active'; } ?>">
                         <a class="nav-link" href="/user/admin/group-list">
                             <span class="pcoded-micon"><i class="ti-angle-right"></i></span>
-                            <span class="pcoded-mtext" data-i18n="nav.dash.default">All Groups</span>
+                            <span class="pcoded-mtext" data-i18n="nav.dash.default">{{__('backend.all_groups', ['name' => __('group')] )}}</span>
                             <span class="pcoded-mcaret"></span>
                         </a>
                     </li>
                     <li class="<?php if(in_array(Request::segment(3), array('content-list-group'))){ echo 'active'; } ?>">
                         <a class="nav-link" href="/user/group-admin/content-list-group">
                             <span class="pcoded-micon"><i class="ti-angle-right"></i></span>
-                            <span class="pcoded-mtext" data-i18n="nav.dash.default">My Group's Videos</span>
+                            <span class="pcoded-mtext" data-i18n="nav.dash.default">{{__('backend.my_group_videos', ['name1' => __('group'), 'name2' => __('video')] )}}</span>
                             <span class="pcoded-mcaret"></span>
                         </a>
                     </li>
                     <li class="nav-item <?php if(in_array(Request::segment(3), array('user-to-group-add'))){ echo 'active'; } ?>">
                         <a class="nav-link" href="/user/group-admin/user-to-group-add/1">
                             <span class="pcoded-micon"><i class="ti-angle-right"></i></span>
-                            <span class="pcoded-mtext" data-i18n="nav.dash.default">My Group's Users</span>
+                            <span class="pcoded-mtext" data-i18n="nav.dash.default">{{__('backend.my_group_users', ['name1' => __('group'), 'name2' => __('user')] )}}</span>
                             <span class="pcoded-mcaret"></span>
                         </a>
                     </li>
                     <li class="nav-item <?php if(in_array(Request::segment(3), array('user-to-group-add'))){ echo 'active'; } ?>">
                         <a class="nav-link" href="/user/admin/user-to-group-add">
                             <span class="pcoded-micon"><i class="ti-angle-right"></i></span>
-                            <span class="pcoded-mtext" data-i18n="nav.dash.default">Assign User to Group</span>
+                            <span class="pcoded-mtext" data-i18n="nav.dash.default">{{__('backend.assign_users_to_group', ['name1' => __('user'), 'name2' => __('group')] )}}</span>
                             <span class="pcoded-mcaret"></span>
                         </a>
                     </li>
                     <li class="nav-item <?php if(in_array(Request::segment(3), array('user-group-add'))){ echo 'active'; } ?>">
                         <a class="nav-link" href="/user/admin/user-group-add">
                             <span class="pcoded-micon"><i class="ti-angle-right"></i></span>
-                            <span class="pcoded-mtext" data-i18n="nav.dash.default">Create Group</span>
+                            <span class="pcoded-mtext" data-i18n="nav.dash.default">{{__('backend.create_group', ['name' => __('group')] )}}</span>
                             <span class="pcoded-mcaret"></span>
                         </a>
                     </li>
@@ -130,18 +130,18 @@
             <li class="pcoded-hasmenu <?php if(in_array(Request::segment(3), array('map-generate-list','map-generate'))){ echo 'active pcoded-trigger'; } ?>">
                 <a href="javascript:void(0)">
                     <span class="pcoded-micon"><i class="ti-share"></i></span>
-                    <span class="pcoded-mtext" data-i18n="nav.page_layout.main">Sharing</span>
+                    <span class="pcoded-mtext" data-i18n="nav.page_layout.main">{{__('backend.sharing')}}</span>
                     <span class="pcoded-mcaret"></span>
                 </a>
                 <ul class="pcoded-submenu">
                     <li class="nav-item <?php if(in_array(Request::segment(3), array('map-generate-list'))){ echo 'active'; } ?>">
                         <a class="nav-link" href="/user/admin/map-generate-list">
-                            All Maps
+                            {{__('backend.all_maps')}}
                         </a>
                     </li>
                     <li class="nav-item <?php if(in_array(Request::segment(3), array('map-generate'))){ echo 'active'; } ?>">
                         <a class="nav-link" href="/user/admin/map-generate">
-                            Generate Map
+                            {{__('backend.generate_map')}}
                         </a>
                     </li>
                 </ul>
@@ -150,31 +150,60 @@
             <li class="pcoded-hasmenu <?php if(in_array(Request::segment(3), array('site-settings','list-slider-feed','home-slider-feed'))){ echo 'active pcoded-trigger'; } ?>">
                 <a href="javascript:void(0)">
                     <span class="pcoded-micon"><i class="ti-share"></i></span>
-                    <span class="pcoded-mtext" data-i18n="nav.page_layout.main">Page Settings</span>
+                    <span class="pcoded-mtext" data-i18n="nav.page_layout.main">{{__('backend.page_settings')}}</span>
                     <span class="pcoded-mcaret"></span>
                 </a>
                 <ul class="pcoded-submenu">
                     <li class="nav-item <?php if(in_array(Request::segment(3), array('site-settings'))){ echo 'active'; } ?>">
                         <a class="nav-link" href="/user/admin/site-settings">
-                            Site Settings
+                            {{__('backend.site_settings')}}
                         </a>
                     </li>
                     <li class="nav-item <?php if(in_array(Request::segment(3), array('list-slider-feed'))){ echo 'active'; } ?>">
                         <a class="nav-link" href="/user/admin/list-slider-feed">
-                            List Home Slider
+                            {{__('backend.list_home_slider')}}
                         </a>
                     </li>
                     <li class="nav-item <?php if(in_array(Request::segment(3), array('home-slider-feed'))){ echo 'active'; } ?>">
                         <a class="nav-link" href="/user/admin/home-slider-feed">
-                            Add Home Slider
+                            {{__('backend.add_home_slider')}}
                         </a>
                     </li>
                 </ul>
             </li>
 
+            <li class="pcoded-hasmenu <?php if(in_array(Request::segment(3), array('global-settings','list-slider-feed','home-slider-feed'))){ echo 'active pcoded-trigger'; } ?>">
+                <a href="javascript:void(0)">
+                    <span class="pcoded-micon"><i class="ti-share"></i></span>
+                    <span class="pcoded-mtext" data-i18n="nav.page_layout.main">{{__('backend.global_settings')}}</span>
+                    <span class="pcoded-mcaret"></span>
+                </a>
+                <ul class="pcoded-submenu">
+                    <li class="nav-item <?php if(in_array(Request::segment(3), array('global-settings'))){ echo 'active'; } ?>">
+                        <a class="nav-link" href="/user/admin/setting/terms">
+                            Terms
+                        </a>
+                    </li>
+                    <li class="nav-item <?php if(in_array(Request::segment(3), array('list-slider-feed'))){ echo 'active'; } ?>">
+                        <a class="nav-link" href="/user/admin/setting/appearance">
+                            Appearance
+                        </a>
+                    </li>
+                    <li class="nav-item <?php if(in_array(Request::segment(3), array('home-slider-feed'))){ echo 'active'; } ?>">
+                        <a class="nav-link" href="/user/admin/setting/platform-config">
+                            Platform configuration
+                        </a>
+                    </li>
+                    <li class="nav-item <?php if(in_array(Request::segment(3), array('home-slider-feed'))){ echo 'active'; } ?>">
+                        <a class="nav-link" href="/user/admin/setting/organization-contact">
+                            Organization and contact
+                        </a>
+                    </li>
+                </ul>
+            </li>
         </ul>
 
-        <ul class="pcoded-item pcoded-left-item">
+        <?php /*<ul class="pcoded-item pcoded-left-item">
             <li class="pcoded-hasmenu">
                 <a href="/user/movie-editor">
                     <span class="pcoded-micon"><i class="ti-layout-sidebar-left"></i></span>
@@ -192,13 +221,13 @@
                     <span class="pcoded-mcaret"></span>
                 </a>
             </li>
-        </ul>
+        </ul>*/ ?>
 
         <ul class="pcoded-item pcoded-left-item">
             <li class="pcoded-hasmenu">
                 <a href="/user/logout">
                     <span class="pcoded-micon"><i class="ti-layout-sidebar-left"></i></span>
-                    <span class="pcoded-mtext" data-i18n="nav.page_layout.main">Log Out</span>
+                    <span class="pcoded-mtext" data-i18n="nav.page_layout.main">{{__('backend.logout')}}</span>
                     <span class="pcoded-mcaret"></span>
                 </a>
             </li>
