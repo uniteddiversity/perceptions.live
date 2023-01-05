@@ -19,6 +19,7 @@ It has an onscreen installer for simple setting up based on .env variables.
 
 ## Ideas & Roadmap
 
+- Re-design theme to be proprietary
 - Federation with ActivityPub
 - BTC/LN donations
 - DAO integration
